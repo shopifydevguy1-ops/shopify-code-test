@@ -1,0 +1,201 @@
+.shipping-progress-wrapper {
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.shipping-progress {
+  background: rgba(var(--color-foreground), 0.04);
+  border-radius: 1.2rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.shipping-progress__message {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.shipping-progress__message--success {
+  color: rgb(var(--color-success, 0, 128, 96));
+}
+
+.shipping-progress__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.shipping-progress__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.shipping-progress__text {
+  flex: 1;
+}
+
+.shipping-progress__text strong {
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.shipping-progress__bar-container {
+  position: relative;
+  width: 100%;
+  height: 0.8rem;
+  background: rgba(var(--color-foreground), 0.1);
+  border-radius: 0.4rem;
+  overflow: visible;
+}
+
+.shipping-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgb(var(--color-success, 0, 128, 96)) 0%, 
+    rgb(var(--color-success, 0, 128, 96)) 100%
+  );
+  border-radius: 0.4rem;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  will-change: width;
+}
+
+/* Standard shipping progress state */
+.shipping-progress.standard-progress .shipping-progress__bar {
+  background: linear-gradient(90deg, 
+    hsl(210, 100%, 50%) 0%, 
+    hsl(210, 100%, 60%) 100%
+  );
+}
+
+/* Standard unlocked, working toward express */
+.shipping-progress.standard-unlocked .shipping-progress__bar {
+  background: linear-gradient(90deg, 
+    hsl(160, 70%, 45%) 0%, 
+    hsl(200, 80%, 50%) 100%
+  );
+}
+
+/* Express unlocked */
+.shipping-progress.express-unlocked .shipping-progress__bar {
+  background: linear-gradient(90deg, 
+    hsl(140, 70%, 45%) 0%, 
+    hsl(160, 70%, 50%) 100%
+  );
+}
+
+/* Progress bar glow effect */
+.shipping-progress__bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+  border-radius: 0.4rem;
+  opacity: 0;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.shipping-progress__milestone {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.2rem;
+  height: 1.2rem;
+  background: rgb(var(--color-background));
+  border: 0.2rem solid rgba(var(--color-foreground), 0.3);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.shipping-progress__milestone--standard {
+  border-color: hsl(210, 100%, 50%);
+}
+
+.shipping-progress__milestone--express {
+  border-color: hsl(160, 70%, 45%);
+}
+
+.shipping-progress__milestone-label {
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: rgb(var(--color-foreground));
+  opacity: 0.7;
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 749px) {
+  .shipping-progress {
+    padding: 1.2rem;
+  }
+  
+  .shipping-progress__message {
+    font-size: 1.3rem;
+    gap: 0.6rem;
+  }
+  
+  .shipping-progress__icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  
+  .shipping-progress__milestone-label {
+    font-size: 1.1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .shipping-progress {
+    border: 0.1rem solid rgb(var(--color-foreground));
+  }
+  
+  .shipping-progress__bar {
+    border: 0.1rem solid rgb(var(--color-foreground));
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .shipping-progress__bar {
+    transition: none;
+  }
+  
+  .shipping-progress__bar::after {
+    animation: none;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .shipping-progress {
+    background: rgba(var(--color-foreground), 0.08);
+  }
+  
+  .shipping-progress__bar-container {
+    background: rgba(var(--color-foreground), 0.15);
+  }
+}

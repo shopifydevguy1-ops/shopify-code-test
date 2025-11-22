@@ -1,0 +1,48 @@
+{% comment %}
+  Renders complementary products carousel for cart drawer
+  
+  Accepts:
+  - product_id: number - ID of the product to get recommendations for
+  - limit: number - maximum number of products to show (default: 4)
+  - section: section object - for accessing settings
+  
+  Usage:
+  {% render 'cart-complementary-products',
+    product_id: product.id,
+    limit: 4,
+    section: section
+  %}
+{% endcomment %}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-complementary.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart-complementary-products.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign limit = limit | default: 4
+  if section.settings.complementary_products_limit
+    assign limit = section.settings.complementary_products_limit
+  endif
+-%}
+
+<cart-complementary-products
+  class="cart-complementary"
+  data-product-id="{{ product_id }}"
+  data-limit="{{ limit }}"
+  data-url="{{ routes.product_recommendations_url }}?product_id={{ product_id }}&limit={{ limit }}&intent=complementary"
+>
+  <div class="cart-complementary__container">
+    <h3 class="cart-complementary__heading h4">
+      {{ 'sections.cart.you_may_also_like' | t | default: 'You may also like' }}
+    </h3>
+    
+    <div class="cart-complementary__loading">
+      {%- render 'loading-spinner' -%}
+      <span class="visually-hidden">{{ 'accessibility.loading' | t }}</span>
+    </div>
+    
+    <div class="cart-complementary__products" role="list">
+      {%- comment -%} Products will be loaded via JavaScript {%- endcomment -%}
+    </div>
+  </div>
+</cart-complementary-products>

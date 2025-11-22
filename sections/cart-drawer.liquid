@@ -1,0 +1,56 @@
+{%- render 'cart-drawer',
+  section: section
+-%}
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Free Shipping Progress Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shipping_progress",
+      "label": "Enable shipping progress bar",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_standard_threshold",
+      "label": "Free Standard Shipping Threshold (USD)",
+      "default": 100,
+      "info": "Amount in dollars (e.g., 100 for $100.00)"
+    },
+    {
+      "type": "number",
+      "id": "free_express_threshold",
+      "label": "Free Express Shipping Threshold (USD)",
+      "default": 250,
+      "info": "Amount in dollars (e.g., 250 for $250.00)"
+    },
+    {
+      "type": "header",
+      "content": "Complementary Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_complementary_products",
+      "label": "Show \"You may also like\" products",
+      "default": true,
+      "info": "Displays complementary products for the last item added to cart"
+    },
+    {
+      "type": "range",
+      "id": "complementary_products_limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Number of products to show",
+      "default": 4
+    }
+  ]
+}
+{% endschema %}
+
