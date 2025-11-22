@@ -21,77 +21,65 @@
   assign standard_threshold = standard_threshold | default: 100
   assign express_threshold = express_threshold | default: 250
   
-  # Calculate progress percentage
+  # Calculate progress percentage and state
   if cart_total_dollars >= express_threshold
     assign progress_state = 'express-unlocked'
     assign progress_percent = 100
     assign amount_remaining = 0
+    assign message = 'Free Express Shipping Unlocked!'
+    assign icon = '🎉'
   elsif cart_total_dollars >= standard_threshold
     assign progress_state = 'standard-unlocked'
     assign amount_to_express = express_threshold | minus: cart_total_dollars
     assign progress_range = express_threshold | minus: standard_threshold
     assign progress_from_standard = cart_total_dollars | minus: standard_threshold
-    assign progress_percent = progress_from_standard | divided_by: progress_range | times: 100 | at_most: 100
+    assign progress_percent = progress_from_standard | divided_by: progress_range | times: 50 | plus: 50 | at_most: 100
     assign amount_remaining = amount_to_express
+    assign message = amount_to_express | money | append: ' to unlock Free Express Shipping!'
+    assign icon = '✓'
   else
     assign progress_state = 'standard-progress'
     assign amount_to_standard = standard_threshold | minus: cart_total_dollars
-    assign progress_percent = cart_total_dollars | divided_by: standard_threshold | times: 100 | at_most: 100
+    assign progress_percent = cart_total_dollars | divided_by: standard_threshold | times: 50 | at_most: 50
     assign amount_remaining = amount_to_standard
+    assign message = amount_to_standard | money | append: ' to unlock Free Express Shipping!'
+    assign icon = ''
   endif
 -%}
 
 <div class="shipping-progress-wrapper" data-cart-total="{{ cart_total_dollars }}">
   <div class="shipping-progress {{ progress_state }}">
     {%- if progress_state == 'express-unlocked' -%}
-      <div class="shipping-progress__message shipping-progress__message--success">
-        <span class="shipping-progress__icon">
-          {{- 'icon-checkmark.svg' | inline_asset_content -}}
-        </span>
-        <span class="shipping-progress__text">
-          🎉 <strong>Free Express Shipping Unlocked!</strong>
-        </span>
-      </div>
-    {%- elsif progress_state == 'standard-unlocked' -%}
       <div class="shipping-progress__message">
-        <span class="shipping-progress__icon">
-          {{- 'icon-checkmark.svg' | inline_asset_content -}}
-        </span>
-        <span class="shipping-progress__text">
-          ✓ Free Standard Shipping! Add <strong>{{ amount_remaining | money }}</strong> for Free Express Shipping
-        </span>
+        <span class="shipping-progress__icon">{{ icon }}</span>
+        <strong>{{ message }}</strong>
       </div>
     {%- else -%}
       <div class="shipping-progress__message">
-        <span class="shipping-progress__icon">
-          {{- 'icon-truck.svg' | inline_asset_content -}}
-        </span>
-        <span class="shipping-progress__text">
-          Add <strong>{{ amount_remaining | money }}</strong> for Free Standard Shipping
-        </span>
+        {%- if icon != '' -%}<span class="shipping-progress__icon">{{ icon }}</span>{%- endif -%}
+        Add <strong>{{ message }}</strong>
       </div>
     {%- endif -%}
     
-    <div class="shipping-progress__bar-container">
-      <div 
-        class="shipping-progress__bar" 
-        style="width: {{ progress_percent }}%;"
-        role="progressbar"
-        aria-valuenow="{{ progress_percent | round }}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-label="Shipping progress: {{ progress_percent | round }}% complete"
-      ></div>
+    <div class="shipping-progress__bar-wrapper">
+      <div class="shipping-progress__bar-container">
+        <div 
+          class="shipping-progress__bar" 
+          style="width: {{ progress_percent }}%;"
+          role="progressbar"
+          aria-valuenow="{{ progress_percent | round }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Shipping progress: {{ progress_percent | round }}% complete"
+        >
+          <span class="shipping-progress__indicator">🚢</span>
+        </div>
+      </div>
       
-      {%- if progress_state == 'standard-progress' -%}
-        <div class="shipping-progress__milestone shipping-progress__milestone--standard" style="left: 100%;">
-          <span class="shipping-progress__milestone-label">{{ standard_threshold | money }}</span>
-        </div>
-      {%- elsif progress_state == 'standard-unlocked' -%}
-        <div class="shipping-progress__milestone shipping-progress__milestone--express" style="left: 100%;">
-          <span class="shipping-progress__milestone-label">{{ express_threshold | money }}</span>
-        </div>
-      {%- endif -%}
+      <div class="shipping-progress__labels">
+        <span class="shipping-progress__label">Free Standard Shipping</span>
+        <span class="shipping-progress__label">Free Express Shipping</span>
+      </div>
     </div>
   </div>
 </div>

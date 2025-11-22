@@ -7,6 +7,7 @@
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'custom-cart-drawer.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -62,7 +63,7 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <h2 class="drawer__heading">SHOPPING BAG ({{ cart.item_count }})</h2>
         <button
           class="drawer__close"
           type="button"
@@ -593,8 +594,14 @@
               disabled
             {% endif %}
           >
-            {{ 'sections.cart.checkout' | t }}
+            SECURE CHECKOUT
           </button>
+          
+          <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+          
+          <p class="cart-drawer__returns-message">Easy 60-Day Returns</p>
         </div>
       </div>
     </div>
