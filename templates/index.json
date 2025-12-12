@@ -15,7 +15,7 @@
         "heading_Frp6hp": {
           "type": "heading",
           "settings": {
-            "heading": "BENTO GRID #3",
+            "heading": "BENTO GRID #4",
             "heading_size": "h1"
           }
         }
@@ -36,59 +36,131 @@
     "mockup_pEEdb7": {
       "type": "mockup",
       "blocks": {
+        "big_card_94Bf3B": {
+          "type": "big_card",
+          "settings": {
+            "heading": "<p>2M+</p>",
+            "sub_heading": "<p>Followers</p>",
+            "text": "<p><strong>Description</strong> text.</p>"
+          }
+        },
+        "card_zXLiRW": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/japanese-food.png",
+            "heading": "<p>Heading</p>",
+            "text": "<p>Text</p>"
+          }
+        },
         "card_WEBT6F": {
           "type": "card",
           "settings": {
-            "bg_image": "shopify://shop_images/bento-image.png",
-            "icon": "shop",
-            "text": "<p>Tell your story</p>",
-            "url": "",
-            "icon_color": "#121212",
-            "text_color": "#121212",
-            "card_bg_color": "#F3F3F3",
-            "card_bg_gradient": "",
-            "card_border_color": "#121212"
+            "image": "shopify://shop_images/bento-image.png",
+            "heading": "<p>Heading</p>",
+            "text": "<p>Tell your story</p>"
           }
         },
         "card_wPiTz9": {
           "type": "card",
           "settings": {
-            "bg_image": "shopify://shop_images/japanese-food.png",
-            "icon": "atc",
-            "text": "<p>Tell your story</p>",
-            "url": "",
-            "icon_color": "#ffffff",
-            "text_color": "#ffffff",
-            "card_bg_color": "#4d4d4d",
-            "card_bg_gradient": "",
-            "card_border_color": "#121212"
+            "image": "shopify://shop_images/japanese-food.png",
+            "heading": "<p>Heading</p>",
+            "text": "<p>Tell your story</p>"
+          }
+        },
+        "card_QkGiQd": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/bento-image.png",
+            "heading": "<p>Heading</p>",
+            "text": "<p>Tell your story</p>"
           }
         }
       },
       "block_order": [
+        "big_card_94Bf3B",
+        "card_zXLiRW",
         "card_WEBT6F",
-        "card_wPiTz9"
+        "card_wPiTz9",
+        "card_QkGiQd"
       ],
       "name": "SG-Bento grid #3",
       "settings": {
-        "cards_per_view": 2,
         "cards_gap": 16,
         "cards_gap_mobile": 16,
-        "slider_on_mobile": false,
-        "card_height": 530,
-        "card_height_mobile": 340,
+        "big_card_radius": 10,
+        "big_card_border_thickness": 0,
+        "big_card_align": "left",
+        "big_card_align_mobile": "left",
+        "big_card_advanced": false,
+        "big_card_padding_vertical": 18,
+        "big_card_padding_vertical_mobile": 12,
+        "big_card_padding_horizontal": 18,
+        "big_card_padding_horizontal_mobile": 12,
+        "big_card_heading_custom": false,
+        "big_card_heading_font": "josefin_sans_n4",
+        "big_card_heading_size": 90,
+        "big_card_heading_size_mobile": 56,
+        "big_card_heading_advanced": false,
+        "big_card_heading_height": 130,
+        "big_card_sub_heading_custom": false,
+        "big_card_sub_heading_font": "josefin_sans_n4",
+        "big_card_sub_heading_size": 36,
+        "big_card_sub_heading_size_mobile": 20,
+        "big_card_sub_heading_advanced": false,
+        "big_card_sub_heading_height": 130,
+        "big_card_sub_heading_mt": 0,
+        "big_card_sub_heading_mt_mobile": 0,
+        "big_card_text_custom": false,
+        "big_card_text_font": "josefin_sans_n4",
+        "big_card_text_size": 36,
+        "big_card_text_size_mobile": 24,
+        "big_card_text_advanced": false,
+        "big_card_text_height": 130,
+        "card_gap_radius": 10,
         "card_border_thickness": 0,
-        "card_radius": 48,
-        "card_content_align": "center",
-        "card_content_align_mobile": "center",
-        "icon_size": 50,
-        "icon_size_mobile": 50,
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
-        "text_size": 40,
-        "text_size_mobile": 24,
-        "text_height": 150,
-        "background_color": "#FFFFFF",
+        "card_align": "center",
+        "card_align_mobile": "center",
+        "card_advanced": false,
+        "card_padding_vertical": 24,
+        "card_padding_vertical_mobile": 12,
+        "card_padding_horizontal": 24,
+        "card_padding_horizontal_mobile": 12,
+        "card_gap": 6,
+        "card_gap_mobile": 6,
+        "card_image_ratio": "landscape",
+        "card_image_ratio_mobile": "landscape",
+        "card_heading_custom": false,
+        "card_heading_font": "josefin_sans_n4",
+        "card_heading_size": 18,
+        "card_heading_size_mobile": 20,
+        "card_heading_advanced": false,
+        "card_heading_height": 130,
+        "card_text_custom": false,
+        "card_text_font": "josefin_sans_n4",
+        "card_text_size": 14,
+        "card_text_size_mobile": 14,
+        "card_text_advanced": false,
+        "card_text_height": 150,
+        "card_text_mt": 0,
+        "card_text_mt_mobile": 0,
+        "big_card_heading_color": "#ffffff",
+        "big_card_sub_heading_color": "#ffffff",
+        "big_card_text_color": "#ffffff",
+        "big_card_text_highlight": "#afafaf",
+        "big_card_bg_style": "solid",
+        "big_card_bg_color": "#c72323",
+        "big_card_bg_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "big_card_overlay_color": "#000000",
+        "big_card_overlay_opacity": 0,
+        "big_card_use_overlay": false,
+        "big_card_border_color": "#f0f0f0",
+        "card_heading_color": "#121212",
+        "card_text_color": "#121212",
+        "card_bg_color": "#f9f9f9",
+        "card_border_color": "#f0f0f0",
+        "background_style": "solid",
+        "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#121212",
         "margin_top": 0,
@@ -99,7 +171,7 @@
         "padding_bottom": 36,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
-        "full_width": true,
+        "width": "page",
         "content_width": 1200,
         "border_thickness": 0,
         "section_radius": 0,
