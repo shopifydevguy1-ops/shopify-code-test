@@ -9,71 +9,6 @@
  */
 {
   "sections": {
-    "featured_collection_nCeqkH": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
-      "settings": {
-        "collection": "",
-        "products_to_show": 4,
-        "title": "Featured collection",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "mockup_YpnKDx": {
-      "type": "mockup",
-      "name": "SG-Back to top #3",
-      "settings": {
-        "independent": false,
-        "independent_distance": 0,
-        "hide_on_mobile": false,
-        "show_when_precent_of_page": 30,
-        "position": "right",
-        "horizontal_dst_to_edge": 30,
-        "vertical_dst_to_edge": 50,
-        "button_border_thickness": 0,
-        "button_shadow": true,
-        "image_size": 60,
-        "image_size_mobile": 50,
-        "image_border_radius": 0,
-        "text": "BACK TO TOP.",
-        "text_distance": 25,
-        "text_distance_mobile": 25,
-        "text_duplicate": 3,
-        "text_custom": true,
-        "text_font": "assistant_n4",
-        "text_size": 12,
-        "text_size_mobile": 12,
-        "image_animate": "never",
-        "image_direction": "right",
-        "image_speed": 5,
-        "text_animate": "hover",
-        "text_direction": "right",
-        "text_speed": 10,
-        "button_bg_color": "#ffffff",
-        "button_border_color": "#000000",
-        "image_bg_color": "#ffffff",
-        "text_color": "#000000"
-      }
-    },
     "rich_text_E7gF9H": {
       "type": "rich-text",
       "blocks": {
@@ -88,6 +23,7 @@
       "block_order": [
         "heading_Frp6hp"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -97,11 +33,137 @@
         "padding_top": 0,
         "padding_bottom": 52
       }
+    },
+    "mockup_YpnKDx": {
+      "type": "mockup",
+      "blocks": {
+        "item_PiHiEr": {
+          "type": "item",
+          "settings": {
+            "icon": "atc",
+            "title": "Key feature",
+            "text": "Describe a key feature in detail.",
+            "column": "2"
+          }
+        },
+        "item_KwLAAG": {
+          "type": "item",
+          "settings": {
+            "icon": "atc",
+            "title": "Key feature",
+            "text": "Describe a key feature in detail.",
+            "column": "2"
+          }
+        },
+        "item_M9EYL4": {
+          "type": "item",
+          "settings": {
+            "icon": "atc",
+            "title": "Key feature",
+            "text": "Describe a key feature in detail.",
+            "column": "1"
+          }
+        },
+        "item_zTUy7F": {
+          "type": "item",
+          "settings": {
+            "icon": "atc",
+            "title": "Key feature",
+            "text": "Describe a key feature in detail.",
+            "column": "1"
+          }
+        }
+      },
+      "block_order": [
+        "item_PiHiEr",
+        "item_KwLAAG",
+        "item_M9EYL4",
+        "item_zTUy7F"
+      ],
+      "name": "SG-Back to top #3",
+      "settings": {
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "title": "<h2>Before/after heading</h2>",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 36,
+        "title_size_mobile": 26,
+        "title_height": 130,
+        "text": "<p>BACK TO TOP.</p>",
+        "text_custom": true,
+        "text_font": "assistant_n4",
+        "text_size": 12,
+        "text_size_mobile": 12,
+        "text_height": 130,
+        "text_margin_top": 20,
+        "text_margin_top_mobile": 16,
+        "body_gap": 100,
+        "body_gap_mobile": 24,
+        "body_margin_top": 50,
+        "body_margin_top_mobile": 30,
+        "items_gap": 30,
+        "items_gap_mobile": 30,
+        "item_content_align": "center",
+        "item_content_align_mobile": "center",
+        "icon_size": 44,
+        "icon_size_mobile": 36,
+        "item_title_custom": false,
+        "item_title_font": "josefin_sans_n4",
+        "item_title_size": 18,
+        "item_title_size_mobile": 14,
+        "item_title_height": 130,
+        "item_title_margin_top": 10,
+        "item_title_margin_top_mobile": 10,
+        "item_text_custom": false,
+        "item_text_font": "josefin_sans_n4",
+        "item_text_size": 16,
+        "item_text_size_mobile": 13,
+        "item_text_height": 150,
+        "item_text_margin_top": 10,
+        "item_text_margin_top_mobile": 10,
+        "left_image": "shopify://shop_images/f79d70a3-d4f6-47c9-8cc5-a6da90ad51b1.jpg",
+        "right_image": "shopify://shop_images/61505abe-63a1-4da2-96cb-cd95417a46e2.jpg",
+        "image_radius": 500,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "btn_size": 56,
+        "btn_size_mobile": 56,
+        "btn_arrow_size": 80,
+        "btn_arrow_size_mobile": 80,
+        "btn_border_thickness": 0,
+        "title_color": "#2e2a39",
+        "text_color": "#000000",
+        "icon_color": "#000000",
+        "item_title_color": "#2e2a39",
+        "item_text_color": "#625f6b",
+        "btn_bg_color": "#ffffff",
+        "btn_arrow_color": "#000000",
+        "btn_border_color": "#000000",
+        "line_color": "#ffffff",
+        "image_border_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
     }
   },
   "order": [
-    "featured_collection_nCeqkH",
-    "mockup_YpnKDx",
-    "rich_text_E7gF9H"
+    "rich_text_E7gF9H",
+    "mockup_YpnKDx"
   ]
 }
