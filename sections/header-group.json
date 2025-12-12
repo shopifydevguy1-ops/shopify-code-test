@@ -11,45 +11,99 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "mockup_aKrUiC": {
+    "mockup_wKDQ7U": {
       "type": "mockup",
       "blocks": {
-        "item_4KxWTx": {
-          "type": "item",
+        "review_item_WxdMJf": {
+          "type": "review_item",
           "settings": {
-            "icon": "airplane",
-            "text": "WORLD WIDE SHIPPING"
+            "stars_count": 5,
+            "stars_size": 16,
+            "stars_size_mobile": 16,
+            "text": "4.9 out of 5",
+            "url": "",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 12,
+            "text_size_mobile": 12,
+            "text_height": 100,
+            "stars_bg_color": "#00B67A",
+            "stars_color": "#FFFFFF",
+            "text_color": "#000000"
           }
         },
-        "item_6dR3Yb": {
-          "type": "item",
+        "left_item_c9dJCV": {
+          "type": "left_item",
           "settings": {
-            "icon": "pin",
-            "text": "MADE IN DENMARK"
+            "icon": "atc",
+            "text": "Announcement",
+            "url": ""
           }
         },
-        "item_dCWgdQ": {
-          "type": "item",
+        "left_item_XLFnp7": {
+          "type": "left_item",
           "settings": {
-            "icon": "mobile",
-            "text": "3-YEAR WARRANTY"
+            "icon": "atc",
+            "text": "Announcement",
+            "url": ""
+          }
+        },
+        "left_item_KUt8Gk": {
+          "type": "left_item",
+          "settings": {
+            "icon": "atc",
+            "text": "Announcement",
+            "url": ""
+          }
+        },
+        "left_item_dCL7BM": {
+          "type": "left_item",
+          "settings": {
+            "icon": "atc",
+            "text": "Announcement",
+            "url": ""
+          }
+        },
+        "right_item_4apQxn": {
+          "type": "right_item",
+          "settings": {
+            "icon": "atc",
+            "text": "Link",
+            "url": "",
+            "hide_mobile": false
+          }
+        },
+        "right_item_WNz4z4": {
+          "type": "right_item",
+          "settings": {
+            "icon": "atc",
+            "text": "Link",
+            "url": "",
+            "hide_mobile": false
           }
         }
       },
       "block_order": [
-        "item_4KxWTx",
-        "item_6dR3Yb",
-        "item_dCWgdQ"
+        "review_item_WxdMJf",
+        "left_item_c9dJCV",
+        "left_item_XLFnp7",
+        "left_item_KUt8Gk",
+        "left_item_dCL7BM",
+        "right_item_4apQxn",
+        "right_item_WNz4z4"
       ],
-      "name": "SG-Scrolling Announcement Bar #2",
+      "name": "SG- Scrolling announcement bar #3",
       "settings": {
         "insert_css_class_target": "",
-        "url": "",
-        "layout_gap": 50,
-        "layout_gap_mobile": 30,
-        "animate_speed": 40,
-        "animate_direction": "right",
+        "show_right_mobile": false,
+        "animate_speed": 0,
+        "animate_speed_mobile": 35,
+        "animate_direction": "left",
         "animate_pause": true,
+        "items_gap": 20,
+        "items_gap_mobile": 20,
+        "item_gap": 10,
+        "item_gap_mobile": 10,
         "icon_size": 20,
         "icon_size_mobile": 20,
         "text_custom": false,
@@ -57,19 +111,19 @@
         "text_size": 12,
         "text_size_mobile": 12,
         "text_height": 100,
-        "text_color": "#FFFFFF",
-        "icon_color": "#FFFFFF",
-        "background_color": "#000000",
+        "icon_color": "#000000",
+        "text_color": "#000000",
+        "background_color": "#EEEADB",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
         "margin_bottom": 0,
         "padding_top": 12,
         "padding_bottom": 12,
-        "padding_horizontal": 0,
-        "padding_horizontal_mobile": 0,
+        "padding_horizontal": 2,
+        "padding_horizontal_mobile": 1,
         "full_width": true,
-        "content_width": 120,
+        "content_width": 1200,
         "border_thickness": 0
       }
     },
@@ -118,7 +172,7 @@
     }
   },
   "order": [
-    "mockup_aKrUiC",
+    "mockup_wKDQ7U",
     "announcement-bar",
     "header"
   ]
