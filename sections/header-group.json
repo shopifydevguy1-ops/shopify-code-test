@@ -11,47 +11,6 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "mockup_mMb3Ry": {
-      "type": "mockup",
-      "blocks": {
-        "text_VL8Fqk": {
-          "type": "text",
-          "settings": {
-            "heading": "New Years Eve sale! 100% OFF ends in:",
-            "color": "#ffffff",
-            "font_size": 24
-          }
-        },
-        "timer_eCGdNm": {
-          "type": "timer",
-          "settings": {
-            "year": "2026",
-            "month": "01",
-            "day": "01",
-            "hour": "00",
-            "minute": "00",
-            "hide_timer_on_completed": false,
-            "color": "#FFFFFF",
-            "font_size_number": 20,
-            "font_size_text": 10
-          }
-        }
-      },
-      "block_order": [
-        "text_VL8Fqk",
-        "timer_eCGdNm"
-      ],
-      "name": "SG-Countdown timer bar",
-      "settings": {
-        "target_selector": "",
-        "use_cross": false,
-        "days_text": "Days",
-        "hours_text": "Hrs",
-        "mins_text": "Mins",
-        "seconds_text": "Secs",
-        "background-color": "#000000"
-      }
-    },
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
@@ -66,7 +25,6 @@
       "block_order": [
         "announcement-bar-0"
       ],
-      "disabled": true,
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
@@ -98,7 +56,6 @@
     }
   },
   "order": [
-    "mockup_mMb3Ry",
     "announcement-bar",
     "header"
   ]
