@@ -11,60 +11,45 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "mockup_xTfJeh": {
+    "mockup_mMb3Ry": {
       "type": "mockup",
       "blocks": {
-        "item_nVcFtV": {
-          "type": "item",
+        "text_VL8Fqk": {
+          "type": "text",
           "settings": {
-            "text": "<p>Welcome to our store</p>"
+            "heading": "Mothers day sale! 70% OFF ends in:",
+            "color": "#ffffff",
+            "font_size": 24
           }
         },
-        "item_QLMCa9": {
-          "type": "item",
+        "timer_eCGdNm": {
+          "type": "timer",
           "settings": {
-            "text": "<p>Welcome to our store</p>"
-          }
-        },
-        "item_naC76h": {
-          "type": "item",
-          "settings": {
-            "text": "<p>Welcome to our store</p>"
+            "year": "2026",
+            "month": "01",
+            "day": "01",
+            "hour": "00",
+            "minute": "00",
+            "hide_timer_on_completed": false,
+            "color": "#FFFFFF",
+            "font_size_number": 20,
+            "font_size_text": 10
           }
         }
       },
       "block_order": [
-        "item_nVcFtV",
-        "item_QLMCa9",
-        "item_naC76h"
+        "text_VL8Fqk",
+        "timer_eCGdNm"
       ],
-      "name": "SG-Announcement bar (slideshow)",
+      "name": "SG-Countdown timer bar",
       "settings": {
-        "insert_css_class_target": "",
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
-        "text_size": 13,
-        "text_size_mobile": 12,
-        "text_height": 150,
-        "text_align": "center",
-        "text_align_mobile": "center",
-        "text_color": "#121212",
-        "progress_default_color": "#AFAFAF",
-        "progress_color": "#121212",
-        "play_icon_color": "#121212",
-        "play_border_color": "#121212",
-        "background_color": "#F3F3F3",
-        "background_gradient": "",
-        "border_color": "#121212",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 12,
-        "padding_bottom": 12,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 0,
-        "full_width": false,
-        "content_width": 1200,
-        "border_thickness": 0
+        "target_selector": "",
+        "use_cross": false,
+        "days_text": "Days",
+        "hours_text": "Hrs",
+        "mins_text": "Mins",
+        "seconds_text": "Secs",
+        "background-color": "#000000"
       }
     },
     "announcement-bar": {
@@ -113,7 +98,7 @@
     }
   },
   "order": [
-    "mockup_xTfJeh",
+    "mockup_mMb3Ry",
     "announcement-bar",
     "header"
   ]
