@@ -1,8 +1,3 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
-
 {%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
@@ -21,13 +16,29 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
-  assign slider_gap = section.settings.slider_gap
-  assign slider_gap_mobile = section.settings.slider_gap_mobile
+  assign body_gap = section.settings.body_gap
+
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align_mobile = section.settings.heading_align_mobile
+  assign heading_align = section.settings.heading_align
+
+  assign items_mt_mobile = section.settings.items_mt_mobile
+  assign items_mt = section.settings.items_mt
+  assign items_gap_mobile = section.settings.items_gap_mobile
+  assign items_gap = section.settings.items_gap
+  assign items_align_mobile = section.settings.items_align_mobile
+  assign items_align = section.settings.items_align
 
   assign text_size = section.settings.text_size
   assign text_size_mobile = section.settings.text_size_mobile
   assign text_color = section.settings.text_color
-  assign text_active_color = section.settings.text_active_color
+  assign text_hover_color = section.settings.text_hover_color
   assign text_custom = section.settings.text_custom
   assign text_font = section.settings.text_font
   assign text_height = section.settings.text_height
@@ -36,39 +47,13 @@
   assign image_border_thickness = section.settings.image_border_thickness
   assign image_border_color = section.settings.image_border_color
   assign image_ratio = section.settings.image_ratio
-  assign image_ratio_mobile = section.settings.image_ratio_mobile
-  assign image_width = section.settings.image_width
-  assign image_width_mobile = section.settings.image_width_mobile
-
-  assign button_size = section.settings.button_size
-  assign button_size_mobile = section.settings.button_size_mobile
-  assign button_color = section.settings.button_color
-  assign button_hover_color = section.settings.button_hover_color
-  assign button_custom = section.settings.button_custom
-  assign button_font = section.settings.button_font
-  assign button_height = section.settings.button_height
-  assign button_mt = section.settings.button_mt
-  assign button_mt_mobile = section.settings.button_mt_mobile
-  assign button_padding_vertical = section.settings.button_padding_vertical
-  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
-  assign button_padding_horizontal = section.settings.button_padding_horizontal
-  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
-  assign button_radius = section.settings.button_radius
-  assign button_border_thickness = section.settings.button_border_thickness
-  assign button_border_color = section.settings.button_border_color
-  assign button_border_hover_color = section.settings.button_border_hover_color
-  assign button_bg_color = section.settings.button_bg_color
-  assign button_bg_hover_color = section.settings.button_bg_hover_color
-  assign button_style = section.settings.button_style
-  assign button_align = section.settings.button_align
-  assign button_align_mobile = section.settings.button_align_mobile
   
 -%}
 
 {%- style -%}
 
+  {{  heading_font | font_face: font_display: 'swap' }}
   {{  text_font | font_face: font_display: 'swap' }}
-  {{  button_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -87,62 +72,97 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
-    position: relative;
   }
 
-  .collection-slider-wrapper-{{ section.id }} {
-    position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .collection-body-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
-  .collection-slider-{{ section.id }} {
-    height: 100% !important;
+  .collection-heading-{{ section.id }} {
+    text-align: {{ heading_align_mobile }};
   }
 
-  .collection-slider-{{ section.id }} .swiper-wrapper {
-    height: 100% !important;
-  }
-
-  .collection-slide-{{ section.id }} {
-    text-align: center;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    max-width: fit-content !important;
-  }
-
-  .collection-text-{{ section.id }} {
+  .collection-heading-{{ section.id }} * {
     margin: 0;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+  }
+
+  .collection-items-{{ section.id }} {
+    margin-top: {{ items_mt_mobile }}px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: {{ items_align_mobile }};
+    gap: {{ items_gap_mobile }}px;
+  }
+
+  .collection-item-{{ section.id }} {
+    margin: 0;
+    display: block;
+    max-width: fit-content;
     font-size: {{ text_size_mobile }}px;
     color: {{ text_color }};
     line-height: {{ text_height }}%;
     text-transform: unset;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.25s ease 0s;
+    font-weight: 700;
     cursor: pointer;
   }
 
-  .collection-slide-{{ section.id }}.swiper-slide-active .collection-text-{{ section.id }} {
-    color: {{ text_active_color }};
+  .collection-item-{{ section.id }}:hover {
+    transition: all 0.25s ease 0s;
+    color: {{ text_hover_color }};
   }
 
-  .collection-item-{{ section.id }} {
+  .collection-item-{{ section.id }}:after {
+    content: 0;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0px;
+    height: 1px;
+    background-color: {{ text_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .collection-item-{{ section.id }}:hover:after {
     width: 100%;
-    max-width: {{ image_width_mobile }}%;
-    margin: 0px auto;
+    transition: all 0.25s ease 0s;
+  }
+
+  .collection-images-{{ section.id }} {
+    position: relative;
     display: none;
   }
 
-  .collection-item-{{ section.id }}.active {
-    display: block;
+  .collection-image-absolute-{{ section.id }} {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
 
   .collection-image-{{ section.id }} {
+    display: none;
     border-radius: {{ image_radius }}px;
-    border: {{ image_border_thickness }}px solid {{ image_border_color }};
+    outline: {{ image_border_thickness }}px solid {{ image_border_color }};
     overflow: hidden;
+    position: relative;
+  }
+
+  .collection-image-{{ section.id }}.active {
+    display: block;
+  }
+
+  .collection-image-absolute-{{ section.id }} .collection-image-{{ section.id }} {
+    display: block !important;
   }
 
   .collection-image-{{ section.id }} img,
@@ -154,50 +174,22 @@
   }
 
   .collection-image-{{ section.id }} svg {
-    background-color: #AFAFAF;
+    background-color: #AEAEAE;
   }
 
-  .collection-button-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    max-width: fit-content;
-    margin: 0;
-    margin-top: {{ button_mt_mobile }}px;
-    font-size: {{ button_size_mobile }}px;
-    color: {{ button_color }};
-    line-height: {{ button_height }}%;
-    text-align: center;
-    text-transform: unset;
-    text-decoration: none;
-    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
-    border-radius: {{ button_radius }}px;
-    transition: all 0.25s ease 0s;
+  .collection-static-image-{{ section.id }} {
     position: relative;
     z-index: 2;
-    box-sizing: border-box;
   }
 
-  .collection-button-{{ section.id }} svg {
-    width: 14px;
-    height: 14px;
+  .collection-animate-image-{{ section.id }} {
+    transform: rotate(6deg);
+    transition: all 0.35s ease 0s;
   }
 
-  .collection-button-{{ section.id }} svg path {
-    fill: {{ button_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .collection-button-{{ section.id }}:hover {
-    color: {{ button_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .collection-button-{{ section.id }}:hover svg path {
-    fill: {{ button_hover_color }};
-    transition: all 0.25s ease 0s;
+  .collection-animate-image-{{ section.id }}.active {
+    transform: rotate(-6deg);
+    transition: all 0.35s ease 0s;
   }
   
   @media(min-width: 1024px) {
@@ -218,18 +210,31 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .collection-text-{{ section.id }} {
-      font-size: {{ text_size }}px;
+    .collection-body-{{ section.id }} {
+      grid-template-columns: 2.5fr 1fr;
+      gap: {{ body_gap }}px;
+    }
+
+    .collection-heading-{{ section.id }} {
+      text-align: {{ heading_align }};
+    }
+  
+    .collection-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
+    .collection-items-{{ section.id }} {
+      margin-top: {{ items_mt }}px;
+      justify-content: {{ items_align }};
+      gap: {{ items_gap }}px;
     }
 
     .collection-item-{{ section.id }} {
-      max-width: {{ image_width }}%;
+      font-size: {{ text_size }}px;
     }
 
-    .collection-button-{{ section.id }} {
-      margin-top: {{ button_mt }}px;
-      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
-      font-size: {{ button_size }}px;
+    .collection-images-{{ section.id }} {
+      display: block;
     }
   }
   
@@ -270,124 +275,23 @@
   </style>
 {% endif %}
 
+{% if heading_custom %}
+  <style>
+      .collection-heading-{{ section.id }} * {
+          font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+          font-weight: {{ heading_font.weight }};
+          font-style: {{ heading_font.style }};
+      }
+  </style>
+{% endif %}
+
 {% if text_custom %}
   <style>
-    .collection-text-{{ section.id }} {
-      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
-      font-weight: {{ text_font.weight }};
-      font-style: {{ text_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if button_custom %}
-  <style>
-    .collection-button-{{ section.id }} {
-      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
-      font-weight: {{ button_font.weight }};
-      font-style: {{ button_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if button_align_mobile == "center" %}
-  <style>
-   .collection-button-{{ section.id }} {
-      margin-left: auto;
-      margin-right: auto;
-    } 
-  </style>
-{% elsif button_align_mobile == "right" %}
-  <style>
-   .collection-button-{{ section.id }} {
-      margin-left: auto;
-    } 
-  </style>
-{% endif %}
-
-{% if button_align == "center" %}
-  <style>
-    @media(min-width: 1024px) {
-     .collection-button-{{ section.id }} {
-        margin-left: auto !important;
-        margin-right: auto !important;
-      } 
-    }
-  </style>
-{% elsif button_align == "right" %}
-  <style>
-    @media(min-width: 1024px) {
-     .collection-button-{{ section.id }} {
-        margin-left: auto !important;
-        margin-right: 0px !important;
-      } 
-    }
-  </style>
-{% else %}
-  <style>
-    @media(min-width: 1024px) {
-     .collection-button-{{ section.id }} {
-        margin-left: 0px !important;
-        margin-right: 0px !important;
-      } 
-    }
-  </style>
-{% endif %}
-
-{% if button_style == "non_outline" or button_style == "non_outline_arrow" %}
-  <style>
-    .collection-button-{{ section.id }} {
-      background-color: {{ button_bg_color }};
-    }
-
-    .collection-button-{{ section.id }}:hover {
-      background-color: {{ button_bg_hover_color }};
-    }
-  </style>
-{% elsif button_style == "outline" or button_style == "outline_arrow" %}
-  <style>
-    .collection-button-{{ section.id }} {
-      background-color: {{ button_bg_color }};
-      border: {{ button_border_thickness }}px solid {{ button_border_color }};
-    }
-
-    .collection-button-{{ section.id }}:hover {
-      background-color: {{ button_bg_hover_color }};
-      border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
-    }
-  </style>
-{% elsif button_style == "link" %}
-  <style>
-    .collection-button-{{ section.id }} {
-      padding: 0px !important;
-      max-width: fit-content !important;
-    }
-  </style>
-{% endif %}
-
-{% if image_ratio_mobile == "portrait" %}
-  <style>
-    .collection-image-{{ section.id }} {
-     aspect-ratio: 9.6/12; 
-    }
-  </style>
-{% elsif image_ratio_mobile == "landscape" %}
-  <style>
-    .collection-image-{{ section.id }}{
-     aspect-ratio: 12/10; 
-    }
-  </style>
-{% elsif image_ratio_mobile == "square" %}
-  <style>
-    .collection-image-{{ section.id }} {
-     aspect-ratio: 12/12; 
-    }
-  </style>
-{% else %}
-  <style>
-    .collection-image-{{ section.id }} {
-     aspect-ratio: auto; 
-    }
+      .collection-item-{{ section.id }} {
+          font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+          font-weight: {{ text_font.weight }};
+          font-style: {{ text_font.style }};
+      }
   </style>
 {% endif %}
 
@@ -403,7 +307,7 @@
   <style>
     @media(min-width: 1024px) {
       .collection-image-{{ section.id }}{
-       aspect-ratio: 12/10; 
+       aspect-ratio: 12/9; 
       }
     }
   </style>
@@ -427,131 +331,243 @@
 
 <div class="section-{{ section.id }} collection-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="collection-items-{{ section.id }}">
-        {% for block in section.blocks %}
-          <div class="collection-item-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
-            <div class="collection-image-{{ section.id }}">
-              {% if block.settings.image != blank %}
-                <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-              {% else %}
-                {{ 'image' | placeholder_svg_tag }}
-              {% endif %}
+      <div class="collection-body-{{ section.id }}">
+        <div class="collection-content-{{ section.id }}">
+          {% if heading != blank %}
+            <div class="collection-heading-{{ section.id }}">
+              {{ heading }}
             </div>
-            {% if block.settings.button != blank %}
-              <a href="{{ block.settings.button_url }}" class="collection-button-{{ section.id }}">
-                <span>{{ block.settings.button }}</span>
-                {% if button_style == "non_outline_arrow" or button_style == "outline_arrow" %}
-                  <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
-                    <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
-                  </svg>
-                {% endif %}
-              </a>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-      <div class="collection-slider-wrapper-{{ section.id }}">
-        <div class="collection-slider-{{ section.id }} swiper">
-          <div class="swiper-wrapper">
-            {% if section.blocks.size > 1 %}
-            {% for item in (1..4) %}
-              {% for block in section.blocks %}
-                <div class="collection-slide-{{ section.id }} swiper-slide" id="{{ block.id }}">
-                  <p class="collection-text-{{ section.id }}">{{ block.settings.text }}</p>
-                </div>
-              {% endfor %}
+          {% endif %}
+          <div class="collection-items-{{ section.id }}">
+            {% for block in section.blocks %}
+              <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}p{% endif %} class="collection-item-{{ section.id }}" id="{{ block.id }}">{{ block.settings.text }}</{% if block.settings.url != blank %}a{% else %}p{% endif %}>
             {% endfor %}
-            {% else %}
-              {% for block in section.blocks %}
-                <div class="collection-slide-{{ section.id }} swiper-slide" id="{{ block.id }}">
-                  <p class="collection-text-{{ section.id }}">{{ block.settings.text }}</p>
+          </div>
+        </div>
+        <div class="collection-images-{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="collection-image-absolute-{{ section.id }}">
+              <div class="collection-image-{{ section.id }}">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+          <div class="collection-animate-image-{{ section.id }}">
+            {% for block in section.blocks %}
+              <div class="collection-image-static-{{ section.id }}">
+                <div class="collection-image-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
                 </div>
-              {% endfor %}
-            {% endif %}
+              </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
 <script>
-  function initCollection6() {
-    const slider = new Swiper(".collection-slider-{{ section.id }}", {
-      speed: 300,
-      spaceBetween: 20,
-      loop: true,
-      slidesPerView: 'auto',
-      centeredSlides: true,
-      slideToClickedSlide: true,
-      breakpoints: {
-        320: {
-          spaceBetween: {{ slider_gap_mobile }},
-        },
-        768: {
-          spaceBetween: {{ slider_gap_mobile }},
-        },
-        1024: {
-          spaceBetween: {{ slider_gap }},
-        }
-      }
-    });
-
-    slider.on('slideChange', function () {
-      const activeSlideId = slider.slides[slider.activeIndex].id;
-      const collectionItems = document.querySelectorAll('.collection-item-{{ section.id }}');
-    
-      collectionItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('data-id') === String(activeSlideId)) {
-          item.classList.add('active');
-        }
+  function initCollection7() {
+    let toggles = document.querySelectorAll('.collection-item-{{ section.id }}');
+    let images = document.querySelectorAll('.collection-image-{{ section.id }}');
+    let imageWrapper = document.querySelector('.collection-animate-image-{{ section.id }}');
+    if(toggles) {
+      toggles.forEach(toggle => {
+        toggle.addEventListener('mouseover', () => {
+          let toggleId = toggle.id;
+          
+          images.forEach(image => {
+            image.classList.remove('active');
+            if (image.dataset.id === toggleId) {
+              image.classList.add('active');
+              imageWrapper.classList.toggle('active');
+            }
+          });
+          
+        });
       });
-    });
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', initCollection6);
+  document.addEventListener('DOMContentLoaded', initCollection7);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initCollection6);
-     document.addEventListener('shopify:section:load', initCollection6);
+     document.addEventListener('shopify:section:unload', initCollection7);
+     document.addEventListener('shopify:section:load', initCollection7);
   }
 </script>
 
 {% schema %}
 {
-  "name": "SG-Collection #6",
+  "name": "SG-Collection #7",
   "settings": [
     {
       "type": "header",
-      "content": "Save to display section correctly."
+      "content": "Body Settings"
+    },
+    {
+      "type": "range",
+      "id": "body_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Gap - Desktop",
+      "default": 50
     },
     {
       "type": "header",
-      "content": "Slider Settings"
+      "content": "Heading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>DISCOVER OUR COLLECTIONS</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading Font Family",
+      "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "slider_gap",
+      "id": "heading_size",
       "min": 0,
-      "max": 150,
+      "max": 72,
       "step": 2,
       "unit": "px",
-      "label": "Slider Gap",
-      "default": 60
+      "label": "Heading Size",
+      "default": 14
     },
     {
       "type": "range",
-      "id": "slider_gap_mobile",
+      "id": "heading_size_mobile",
       "min": 0,
-      "max": 150,
+      "max": 72,
       "step": 2,
       "unit": "px",
-      "label": "Slider Gap - Mobile",
-      "default": 60
+      "label": "Heading Size - Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Heading Line Height",
+      "default": 130
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_align",
+      "label": "Heading Align"
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_align_mobile",
+      "label": "Heading Align - Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Items Settings"
+    },
+    {
+      "type": "range",
+      "id": "items_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Items Margin Top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "items_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Items Margin Top - Mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "items_gap",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Items Gap",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "items_gap_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Items Gap - Mobile",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "items_align",
+      "label": "Items Align",
+      "default": "start",
+      "options": [
+        {
+          "label": "Left",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "end"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "items_align_mobile",
+      "label": "Items Align - Mobile",
+      "default": "start",
+      "options": [
+        {
+          "label": "Left",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "end"
+        }
+      ]
     },
     {
       "type": "header",
@@ -577,7 +593,7 @@
       "step": 2,
       "unit": "px",
       "label": "Text Size",
-      "default": 44
+      "default": 56
     },
     {
       "type": "range",
@@ -587,7 +603,7 @@
       "step": 2,
       "unit": "px",
       "label": "Text Size - Mobile",
-      "default": 24
+      "default": 32
     },
     {
       "type": "range",
@@ -597,7 +613,7 @@
       "step": 10,
       "unit": "%",
       "label": "Text Line Height",
-      "default": 150
+      "default": 130
     },
     {
       "type": "header",
@@ -605,30 +621,10 @@
     },
     {
       "type": "range",
-      "id": "image_width",
-      "min": 30,
-      "max": 100,
-      "step": 2,
-      "unit": "%",
-      "label": "Image Width",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "image_width_mobile",
-      "min": 30,
-      "max": 100,
-      "step": 2,
-      "unit": "%",
-      "label": "Image Width - Mobile",
-      "default": 60
-    },
-    {
-      "type": "range",
       "id": "image_radius",
       "min": 0,
-      "max": 400,
-      "step": 4,
+      "max": 100,
+      "step": 2,
       "unit": "px",
       "label": "Image Roundness",
       "default": 0
@@ -668,276 +664,26 @@
       ]
     },
     {
-      "type": "select",
-      "id": "image_ratio_mobile",
-      "label": "Image Aspect Ratio - Mobile",
-      "default": "portrait",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Button Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "button_custom",
-      "label": "Use Custom Font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "button_font",
-      "label": "Button Font Family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "button_size",
-      "min": 0,
-      "max": 30,
-      "step": 1,
-      "unit": "px",
-      "label": "Button Size",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_size_mobile",
-      "min": 0,
-      "max": 30,
-      "step": 1,
-      "unit": "px",
-      "label": "Button Size - Mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Button Line Height",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "button_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Margin Top",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "button_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Margin Top - Mobile",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "button_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Vertical",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "button_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Vertical - Mobile",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "button_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Horizontal",
-      "default": 38
-    },
-    {
-      "type": "range",
-      "id": "button_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Horizontal - Mobile",
-      "default": 38
-    },
-    {
-      "type": "range",
-      "id": "button_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Roundness",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "button_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Button Border Thickness",
-      "default": 0
-    },
-    {
-      "type": "select",
-      "id": "button_align",
-      "label": "Button Align",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "button_align_mobile",
-      "label": "Button Align - Mobile",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button Style",
-      "default": "link",
-      "options": [
-        {
-          "label": "Link",
-          "value": "link"
-        },
-        {
-          "label": "Non-Outline",
-          "value": "non_outline"
-        },
-        {
-          "label": "Non-Outline & Arrow",
-          "value": "non_outline_arrow"
-        },
-        {
-          "label": "Outline",
-          "value": "outline"
-        },
-        {
-          "label": "Outline & Arrow",
-          "value": "outline_arrow"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Button Colors"
-    },
-    {
-      "type": "color",
-      "label": "Button Text Color",
-      "id": "button_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Button Hover Text Color",
-      "id": "button_hover_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Button Background Color",
-      "id": "button_bg_color"
-    },
-    {
-      "type": "color",
-      "label": "Button Background Hover Color",
-      "id": "button_bg_hover_color"
-    },
-    {
-      "type": "color",
-      "label": "Button Border Color",
-      "id": "button_border_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Button Border Hover Color",
-      "id": "button_border_hover_color",
-      "default": "#000000"
-    },
-    {
       "type": "header",
       "content": "Section Colors"
     },
     {
       "type": "color",
-      "label": "Text Color",
-      "id": "text_color",
-      "default": "#000000"
+      "label": "Heading Color",
+      "id": "heading_color",
+      "default": "#423A0D"
     },
     {
       "type": "color",
-      "label": "Text Active Color",
-      "id": "text_active_color",
-      "default": "#FFFFFF"
+      "label": "Text Color",
+      "id": "text_color",
+      "default": "#423A0D"
+    },
+    {
+      "type": "color",
+      "label": "Text Hover Color",
+      "id": "text_hover_color",
+      "default": "#817C61"
     },
     {
       "type": "color",
@@ -1038,7 +784,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 0
+      "default": 5
     },
     {
       "type": "range",
@@ -1048,7 +794,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 0
+      "default": 1.5
     },
     {
       "type": "header",
@@ -1058,7 +804,7 @@
       "type": "checkbox",
       "id": "full_width",
       "label": "Full Width",
-      "default": true
+      "default": false
     },
     {
       "type": "range",
@@ -1095,71 +841,59 @@
       "id": "lazy",
       "label": "Lazy load",
       "info": "Lazy load images for speed optimisation",
-      "default": false
+      "default": true
     }
   ],
   "blocks": [
     {
-      "type": "slide",
-      "name": "Slide",
+      "type": "item",
+      "name": "Item",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
         {
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Text"
-        },
-        {
-          "type": "text",
-          "id": "button",
-          "label": "Button Text",
-          "default": "DISCOVER"
+          "default": "Collection"
         },
         {
           "type": "url",
-          "id": "button_url",
-          "label": "Button URL"
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Collection #6",
+      "name": "SG-Collection #7",
       "blocks": [
         {
-          "type": "slide",
+          "type": "item",
           "settings": {
-            "text": "Collection #1"
+            "text": "Collection 1,"
           }
         },
         {
-          "type": "slide",
+          "type": "item",
           "settings": {
-            "text": "Collection #2"
+            "text": "Collection 2,"
           }
         },
         {
-          "type": "slide",
+          "type": "item",
           "settings": {
-            "text": "Collection #3"
+            "text": "Collection 3,"
           }
         },
         {
-          "type": "slide",
+          "type": "item",
           "settings": {
-            "text": "Collection #4"
-          }
-        },
-        {
-          "type": "slide",
-          "settings": {
-            "text": "Collection #5"
+            "text": "Collection 4."
           }
         }
       ]
