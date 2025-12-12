@@ -36,14 +36,45 @@
     },
     "mockup_pEEdb7": {
       "type": "mockup",
+      "blocks": {
+        "card_BMPxBN": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step-1-image.png",
+            "title": "<p>Download juice.exe</p>"
+          }
+        },
+        "card_iarFrq": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step-2-image.png",
+            "title": "<p>Download juice.exe</p>"
+          }
+        },
+        "card_7gnT48": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step-3-image.png",
+            "title": "<p>Download juice.exe</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_BMPxBN",
+        "card_iarFrq",
+        "card_7gnT48"
+      ],
       "name": "SG-Bento grid #3",
       "settings": {
-        "heading": "BONBON CALL TO ACTION",
-        "heading_font_size": 48,
-        "text_color": "#432a54",
+        "title": "BONBON STEPS",
+        "title_color": "#121212",
+        "text-color": "#432a54",
+        "card-background-color": "#fef9f3",
+        "second-card-background-color": "#fbf4fe",
+        "title_font_size": 48,
+        "product_card_title_font_size": 24,
         "url": "",
         "url_text": "SHOP NOW",
-        "url_bg_color": "#fbf4fe",
         "background-color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36,
