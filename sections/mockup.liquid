@@ -7,116 +7,35 @@
   assign border_thickness = section.settings.border_thickness
   assign margin_top = section.settings.margin_top
   assign margin_bottom = section.settings.margin_bottom
-  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
-  assign margin_horizontal = section.settings.margin_horizontal
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
-  assign width = section.settings.width
-  assign content_width = section.settings.content_width
+  assign full_width = section.settings.full_width
+  assign item_width = section.settings.item_width
   assign lazy = section.settings.lazy
-  assign section_radius = section.settings.section_radius
-  assign background_style = section.settings.background_style
 
-  assign cards_gap = section.settings.cards_gap
-  assign cards_gap_mobile = section.settings.cards_gap_mobile
-
-  assign big_card_padding_vertical = section.settings.big_card_padding_vertical
-  assign big_card_padding_vertical_mobile = section.settings.big_card_padding_vertical_mobile
-  assign big_card_padding_horizontal = section.settings.big_card_padding_horizontal
-  assign big_card_padding_horizontal_mobile = section.settings.big_card_padding_horizontal_mobile
-  assign big_card_radius = section.settings.big_card_radius
-  assign big_card_bg_style = section.settings.big_card_bg_style
-  assign big_card_bg_color = section.settings.big_card_bg_color
-  assign big_card_bg_gradient = section.settings.big_card_bg_gradient
-  assign big_card_bg_image = section.settings.big_card_bg_image
-  assign big_card_overlay_color = section.settings.big_card_overlay_color
-  assign big_card_overlay_opacity = section.settings.big_card_overlay_opacity
-  assign big_card_use_overlay = section.settings.big_card_use_overlay
-  assign big_card_border_color = section.settings.big_card_border_color
-  assign big_card_border_thickness = section.settings.big_card_border_thickness
-  assign big_card_align = section.settings.big_card_align
-  assign big_card_align_mobile = section.settings.big_card_align_mobile
-
-  assign big_card_heading_custom = section.settings.big_card_heading_custom
-  assign big_card_heading_font = section.settings.big_card_heading_font
-  assign big_card_heading_size = section.settings.big_card_heading_size
-  assign big_card_heading_size_mobile = section.settings.big_card_heading_size_mobile
-  assign big_card_heading_height = section.settings.big_card_heading_height
-  assign big_card_heading_color = section.settings.big_card_heading_color
-
-  assign big_card_sub_heading_custom = section.settings.big_card_sub_heading_custom
-  assign big_card_sub_heading_font = section.settings.big_card_sub_heading_font
-  assign big_card_sub_heading_size = section.settings.big_card_sub_heading_size
-  assign big_card_sub_heading_size_mobile = section.settings.big_card_sub_heading_size_mobile
-  assign big_card_sub_heading_mt = section.settings.big_card_sub_heading_mt
-  assign big_card_sub_heading_mt_mobile = section.settings.big_card_sub_heading_mt_mobile
-  assign big_card_sub_heading_height = section.settings.big_card_sub_heading_height
-  assign big_card_sub_heading_color = section.settings.big_card_sub_heading_color
-
-  assign big_card_text_custom = section.settings.big_card_text_custom
-  assign big_card_text_font = section.settings.big_card_text_font
-  assign big_card_text_size = section.settings.big_card_text_size
-  assign big_card_text_size_mobile = section.settings.big_card_text_size_mobile
-  assign card_text_mt = section.settings.card_text_mt
-  assign card_text_mt_mobile = section.settings.card_text_mt_mobile
-  assign big_card_text_height = section.settings.big_card_text_height
-  assign big_card_text_color = section.settings.big_card_text_color
-  assign big_card_text_highlight = section.settings.big_card_text_highlight
-
-  assign card_padding_vertical = section.settings.card_padding_vertical
-  assign card_padding_vertical_mobile = section.settings.card_padding_vertical_mobile
-  assign card_padding_horizontal = section.settings.card_padding_horizontal
-  assign card_padding_horizontal_mobile = section.settings.card_padding_horizontal_mobile
-  assign card_gap = section.settings.card_gap
-  assign card_gap_mobile = section.settings.card_gap_mobile
-  assign card_gap_radius = section.settings.card_gap_radius
-  assign card_border_thickness = section.settings.card_border_thickness
-  assign card_bg_color = section.settings.card_bg_color
-  assign card_border_color = section.settings.card_border_color
-  assign card_align = section.settings.card_align
-  assign card_align_mobile = section.settings.card_align_mobile
-
-  assign card_image_ratio = section.settings.card_image_ratio
-  assign card_image_ratio_mobile = section.settings.card_image_ratio_mobile
-
-  assign card_heading_custom = section.settings.card_heading_custom
-  assign card_heading_font = section.settings.card_heading_font
-  assign card_heading_size = section.settings.card_heading_size
-  assign card_heading_size_mobile = section.settings.card_heading_size_mobile
-  assign card_heading_height = section.settings.card_heading_height
-  assign card_heading_color = section.settings.card_heading_color
-
-  assign card_text_custom = section.settings.card_text_custom
-  assign card_text_font = section.settings.card_text_font
-  assign card_text_size = section.settings.card_text_size
-  assign card_text_size_mobile = section.settings.card_text_size_mobile
-  assign card_text_height = section.settings.card_text_height
-  assign card_text_color = section.settings.card_text_color
+  assign body_columns = section.settings.body_columns
+  assign body_gap = section.settings.body_gap
+  assign body_gap_mobile = section.settings.body_gap_mobile
+  assign body_bg_image = section.settings.body_bg_image
+  assign item_padding_vertical = section.settings.item_padding_vertical
+  assign item_padding_vertical_mobile = section.settings.item_padding_vertical_mobile
+  assign item_padding_horizontal = section.settings.item_padding_horizontal
+  assign item_padding_horizontal_mobile = section.settings.item_padding_horizontal_mobile
+  assign item_radius = section.settings.item_radius
+  assign item_border_thickness = section.settings.item_border_thickness
+  assign item_opacity = section.settings.item_opacity
+  assign item_shadow = section.settings.item_shadow
   
-  assign loading_attribute = 'eager'
-  if lazy
-    assign loading_attribute = 'lazy'
-  endif
-
-  assign card_sizes = 0
-  for block in section.blocks
-    if block.type == 'card'
-      assign card_sizes = card_sizes | plus: 1
-    endif
-  endfor
 -%}
 
 {%- style -%}
-
+  
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
-    margin-left: {{ margin_horizontal_mobile }}rem;
-    margin-right: {{ margin_horizontal_mobile }}rem;
-    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
-    overflow: hidden;
+    background-color:{{ background_color }};
   }
   
   .section-{{ section.id }}-settings {
@@ -125,170 +44,33 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .bento-body-{{ section.id }} {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: auto;
-    gap: {{ cards_gap_mobile }}px 0;
+    align-items: start;
+    grid-template-columns: 1fr;
+    row-gap: {{ body_gap_mobile }}px;
   }
 
-  .bento-big-card-{{ section.id }} {
+  .bento-item-{{ section.id }} {
     display: flex;
-    position: relative;
-    overflow: hidden;
-    flex-direction: column;
-    align-items: stretch;
-    grid-row: 1;
-    align-self: stretch;
-    min-height: 260px;
-    padding: {{ big_card_padding_vertical_mobile }}px {{ big_card_padding_horizontal_mobile }}px;
-    gap: 10px;
-    border-radius: {{ big_card_radius }}px;
-    border: {{ big_card_border_thickness }}px solid {{ big_card_border_color }};
-  }
-
-  .bento-big-card-content-top-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
-
-  .bento-big-card-heading-{{ section.id }}  {
-    text-align: {{ big_card_align_mobile }};
-    width: 100%;
-  }
-
-  .bento-big-card-heading-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ big_card_heading_size_mobile }}px;
-    color: {{ big_card_heading_color }};
-    line-height: {{ big_card_heading_height }}%;
-    font-style: normal;
-    text-transform: unset;
-    text-decoration: none;
-    word-break: break-word;
-  }
-
-  .bento-big-card-sub-heading-{{ section.id }} {
-    margin-top: {{ big_card_sub_heading_mt_mobile }}px;
-    text-align: {{ big_card_align_mobile }};
-    width: 100%;
-  }
-
-  .bento-big-card-sub-heading-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ big_card_sub_heading_size_mobile }}px;
-    color: {{ big_card_sub_heading_color }};
-    line-height: {{ big_card_sub_heading_height }}%;
-    font-style: normal;
-    text-transform: unset;
-    text-decoration: none;
-    word-break: break-word;
-  }
-
-  .bento-big-card-content-bottom-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex: 1 0;
-    align-self: stretch;
-  }
-
-  .bento-big-card-text-{{ section.id }}  {
-    text-align: {{ big_card_align_mobile }};
-    width: 100%;
-  }
-
-  .bento-big-card-text-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ big_card_text_size_mobile }}px;
-    line-height: {{ big_card_text_height }}%;
-    color: {{ big_card_text_color }};
-    font-style: normal;
-    text-transform: unset;
-    text-decoration: none;
-    word-break: break-word;
-  }
-
-  .bento-big-card-text-{{ section.id }} strong {
-    font-weight: 400;
-    color: {{ big_card_text_highlight }};
-  }
-
-  .bento-card-{{ section.id }} {
-    overflow: hidden;
-    border-radius: {{ card_gap_radius }}px;
-    border: {{ card_border_thickness }}px solid {{ card_border_color }};
-    background: {{ card_bg_color }};
-  }
-
-  .bento-card-image-wrap-{{ section.id }} {
-    width: 100%;
-  }
-
-  .bento-card-image-wrap-{{ section.id }} img,
-  .bento-card-image-wrap-{{ section.id }} svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .bento-card-image-wrap-{{ section.id }} svg {
-    background-color: #AFAFAF;
-  }
-
-  .bento-card-content-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: {{ card_gap_mobile }}px;
-    align-self: stretch;
-    padding: {{ card_padding_vertical_mobile }}px {{ card_padding_horizontal_mobile }}px;
-  }
-
-  .bento-card-heading-{{ section.id }} {
-    text-align: {{ card_align_mobile }};
-    width: 100%;
-  }
-
-  .bento-card-heading-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ card_heading_size_mobile }}px;
-    color: {{ card_heading_color }};
-    line-height: {{ card_heading_height }}%;
-    font-style: normal;
-    text-transform: unset;
+    gap: 20px;
+    position: relative;
+    height: 100%;
+    border-radius: {{ item_radius }}px;
+    padding: {{ item_padding_vertical_mobile }}px {{ item_padding_horizontal_mobile }}px;
     text-decoration: none;
-    word-break: break-word;
+    overflow: hidden;
+    backdrop-filter: opacity({{ item_opacity | times: 100 }}%);
   }
-
-  .bento-card-text-{{ section.id }} {
-    text-align: {{ card_align_mobile }};
-    margin-top: {{ card_text_mt_mobile }}px;
-    width: 100%;
-  }
-
-  .bento-card-text-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ card_text_size_mobile }}px;
-    color: {{ card_text_color }};
-    line-height: {{ card_text_height }}%;
-    font-style: normal;
-    text-transform: unset;
-    text-decoration: none;
-    word-break: break-word;
-  }
-
+  
   @media(min-width: 1024px) {
 
     .section-{{ section.id }} {
       margin-top: {{ margin_top }}px;
       margin-bottom: {{ margin_bottom }}px;
-      margin-left: {{ margin_horizontal }}rem;
-      margin-right: {{ margin_horizontal }}rem;
-      border-radius: {{ section_radius }}px;
     }
     
     .section-{{ section.id }}-settings {
@@ -297,1340 +79,1487 @@
       padding-bottom: {{ padding_bottom }}px;
       padding-left: {{ padding_horizontal }}rem;
       padding-right: {{ padding_horizontal }}rem;
-      gap: {{ cards_gap }}px;
-      grid-template-columns: repeat(3, 1fr);
     }
 
-    .bento-big-card-{{ section.id }} {
-      grid-column: 1 / span 1;
-      grid-row: 1 / span 2;
-      padding: {{ big_card_padding_vertical }}px {{ big_card_padding_horizontal }}px;
+    .bento-body-{{ section.id }} {
+      gap: {{ body_gap }}px;
+      grid: auto-flow dense auto / repeat({{ body_columns }},minmax(0,1fr));
     }
 
-    .bento-big-card-heading-{{ section.id }}  {
-      text-align: {{ big_card_align }};
-    }
-
-    .bento-big-card-heading-{{ section.id }} * {
-      font-size: {{ big_card_heading_size }}px;
-    }
-
-    .bento-big-card-sub-heading-{{ section.id }} {
-      text-align: {{ big_card_align }};
-      margin-top: {{ big_card_sub_heading_mt }}px;
-    }
-
-    .bento-big-card-sub-heading-{{ section.id }} * {
-      font-size: {{ big_card_sub_heading_size }}px;
-    }
-
-    .bento-big-card-text-{{ section.id }} {
-      text-align: {{ big_card_align }};
-    }
-
-    .bento-big-card-text-{{ section.id }} * {
-      font-size: {{ big_card_text_size }}px;
-    }
-
-    .bento-card-content-{{ section.id }} {
-      padding: {{ card_padding_vertical }}px {{ card_padding_horizontal }}px;
-      gap: {{ card_gap }}px;
-    }
-
-    .bento-card-heading-{{ section.id }} * {
-      font-size: {{ card_heading_size }}px;
-    }
-
-    .bento-card-heading-{{ section.id }} {
-      text-align: {{ card_align }};
-    }
-
-    .bento-card-text-{{ section.id }} {
-      text-align: {{ card_align }};
-      margin-top: {{ card_text_mt }}px;
-    }
-
-    .bento-card-text-{{ section.id }} * {
-      font-size: {{ card_text_size }}px;
+    .bento-item-{{ section.id }} {
+      padding: {{ item_padding_vertical }}px {{ item_padding_horizontal }}px;
     }
   }
-
+  
 {%- endstyle -%}
 
-{% if width == 'custom' %}
+{% unless full_width %}
   <style>
     .section-{{ section.id }}-settings {
-      max-width: {{ content_width }}px;
+      max-width: {{ item_width }}rem;
     }
   </style>
-{% elsif width == 'page' %}
-  <style>
-    .section-{{ section.id }}-settings {
-      max-width: clamp(100px, var(--page-content-width, var(--page-width)), 100%);
-    }
-  </style>
-{% endif %}
+{% endunless %}
 
-{% if margin_horizontal_mobile > 0 %}
+{% if body_bg_image != blank %}
   <style>
-    .section-{{ section.id }} {
-      border-left: solid {{ border_color }} {{ border_thickness }}px;
-      border-right: solid {{ border_color }} {{ border_thickness }}px;
-    }
-    
-    @media(min-width: 1024px) {
-      .section-{{ section.id }} {
-        border-left: 0px;
-        border-right: 0px;
-      }
-    }
-  </style>
-{% endif %}
-
-{% if margin_horizontal > 0 %}
-  <style>
-    @media(min-width: 1024px) {
-      .section-{{ section.id }} {
-        border-left: solid {{ border_color }} {{ border_thickness }}px;
-        border-right: solid {{ border_color }} {{ border_thickness }}px;
-      }
-    }
-  </style>
-{% endif %}
-
-
-{% if big_card_bg_style == 'solid' %}
-  <style>
-    .bento-big-card-{{ section.id }} {
-      background-color: {{ big_card_bg_color }};
-    }
-  </style>
-{% elsif big_card_bg_style == 'gradient' %}
-    <style>
-    .bento-big-card-{{ section.id }} {
-      background-image: {{ big_card_bg_gradient }};
-    }
-  </style>
-{% else %}
-  <style>
-    .bento-big-card-{{ section.id }} {
-      background-image: url('{{ big_card_bg_image | image_url }}');
+    .bento-{{ section.id }} {
+      background-image: url('{{ body_bg_image | image_url }}');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      position: relative;
+    }
+  </style>
+{% else %}
+  <style>
+    .bento-{{ section.id }} {
+      background-image: {{ background_gradient }};
     }
   </style>
 {% endif %}
 
-{% if big_card_bg_style == 'image' %}
+{% if item_shadow %}
   <style>
-    .bento-big-card-{{ section.id }} {
-      position: relative;
-      overflow: hidden;
+    .bento-item-{{ section.id }} {
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    }
+  </style>
+{% endif %}
+
+{% for block in section.blocks %}
+  <style>
+
+    {{  block.settings.heading_font | font_face: font_display: 'swap' }}
+    {{  block.settings.text_font | font_face: font_display: 'swap' }}
+    {{  block.settings.button_font | font_face: font_display: 'swap' }}
+
+    .bento-item-{{ block.id }} {
+      border: {{ item_border_thickness }}px solid {{ block.settings.item_border_color }};
+      grid-area: span min(2, 2) / span min(2,2);
     }
 
-    {% if big_card_overlay_opacity > 0 %}
-      .bento-big-card-{{ section.id }}::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: {{ big_card_overlay_color }};
-        opacity: {{ big_card_overlay_opacity | times: 0.01 }};
-        pointer-events: none;
-        z-index: 1;
-      }
-    {% endif %}
+    .bento-content-{{ block.id }} {
+      width: 100%;
+    }
 
-    {% if big_card_use_overlay %}
-      .bento-big-card-{{ section.id }}::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: unset;
-        height: 50%;
-        background: linear-gradient(180deg, transparent 0%, {{ big_card_overlay_color }} 100%);
-        pointer-events: none;
-        z-index: 2;
-      }
-    {% endif %}
+    .bento-heading-{{ block.id }} {
+      width: 100%;
+      text-align: {{ block.settings.heading_align_mobile }};
+    }
+  
+    .bento-heading-{{ block.id }} * {
+      margin: 0;
+      font-size: {{ block.settings.heading_size_mobile }}px;
+      color: {{ block.settings.item_heading_color }};
+      line-height: {{ block.settings.heading_height }}%;
+      text-transform: unset;
+      word-break: break-word;
+    }
 
-    .bento-big-card-{{ section.id }} > * {
+    .bento-text-{{ block.id }} {
+      width: 100%;
+      margin-top: {{ block.settings.text_mt | times: 0.75 | round: 0 }}px;
+      text-align: {{ block.settings.text_align_mobile }};
+    }
+  
+    .bento-text-{{ block.id }} * {
+      margin: 0;
+      font-size: {{ block.settings.text_size_mobile }}px;
+      color: {{ block.settings.item_text_color }};
+      line-height: {{ block.settings.text_height }}%;
+      text-transform: unset;
+      word-break: break-word;
+    }
+
+    .bento-text-{{ block.id }} p {
+      min-height: 10px;
+    }
+
+    .bento-text-{{ block.id }} p:not(:first-child) {
+      margin-top: 10px;
+    }
+
+    .bento-button-{{ block.id }} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: {{ block.settings.button_width_mobile }}px;
+      margin: 0;
+      margin-top: {{ block.settings.button_mt_mobile }}px;
+      font-size: {{ block.settings.button_size_mobile }}px;
+      color: {{ block.settings.button_color }};
+      line-height: {{ block.settings.button_height }}%;
+      text-align: center;
+      text-transform: unset;
+      text-decoration: none;
+      padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
+      border-radius: {{ block.settings.button_radius }}px;
+      transition: all 0.25s ease 0s;
       position: relative;
+      font-weight: 700;
       z-index: 2;
     }
-  </style>
-{% endif %}
-
-
-{% if big_card_heading_custom %}
-  <style>
-    {{ big_card_heading_font | font_face: font_display: 'swap' }}
-
-    .bento-big-card-heading-{{ section.id }} * {
-      font-family: {{ big_card_heading_font.family }}, {{ big_card_heading_font.fallback_families }};
-      font-weight: {{ big_card_heading_font.weight }};
-      font-style: {{ big_card_heading_font.style }};
+  
+    .bento-button-{{ block.id }}:hover {
+      color: {{ block.settings.button_hover_color }};
+      transition: all 0.25s ease 0s;
     }
-  </style>
-{% endif %}
-
-{% if big_card_sub_heading_custom %}
-  <style>
-    {{ big_card_sub_heading_font | font_face: font_display: 'swap' }}
-
-    .bento-big-card-sub-heading-{{ section.id }} * {
-      font-family: {{ big_card_sub_heading_font.family }}, {{ big_card_sub_heading_font.fallback_families }};
-      font-weight: {{ big_card_sub_heading_font.weight }};
-      font-style: {{ big_card_sub_heading_font.style }};
+  
+    .bento-button-{{ block.id }} svg {
+      width: 14px;
+      height: 14px;
     }
-  </style>
-{% endif %}
-
-{% if big_card_text_custom %}
-  <style>
-    {{ big_card_text_font | font_face: font_display: 'swap' }}
-
-    .bento-big-card-text-{{ section.id }} * {
-      font-family: {{ big_card_text_font.family }}, {{ big_card_text_font.fallback_families }};
-      font-weight: {{ big_card_text_font.weight }};
-      font-style: {{ big_card_text_font.style }};
+  
+    .bento-button-{{ block.id }} svg path {
+      fill: {{ block.settings.button_color }};
+      transition: all 0.25s ease 0s;
     }
-    .bento-big-card-text-{{ section.id }} strong {
-      font-weight: {{ big_card_text_font.weight }};
+  
+    .bento-button-{{ block.id }}:hover svg path {
+      fill: {{ block.settings.button_hover_color }};
+      transition: all 0.25s ease 0s;
     }
-  </style>
-{% endif %}
-
-{% if card_heading_custom %}
-  <style>
-    {{ card_heading_font | font_face: font_display: 'swap' }}
-
-    .bento-card-heading-{{ section.id }} * {
-      font-family: {{ card_heading_font.family }}, {{ card_heading_font.fallback_families }};
-      font-weight: {{ card_heading_font.weight }};
-      font-style: {{ card_heading_font.style }};
+    
+    .bento-image-{{ block.id }} {
+      overflow: hidden;
+      border-radius: {{ block.settings.image_radius }}px;
+      border: {{ block.settings.image_border_thickness }}px solid {{ block.settings.image_border_color }};
     }
-  </style>
-{% endif %}
 
-{% if card_text_custom %}
-  <style>
-    {{ card_text_font | font_face: font_display: 'swap' }}
-
-    .bento-card-text-{{ section.id }} * {
-      font-family: {{ card_text_font.family }}, {{ card_text_font.fallback_families }};
-      font-weight: {{ card_text_font.weight }};
-      font-style: {{ card_text_font.style }};
+    .bento-image-inner-{{ block.id }} {
+      margin: 0px auto;
+      width: 100%;
+      max-width: {{ block.settings.image_width_mobile }}%;
     }
-  </style>
-{% endif %}
 
-{% if card_image_ratio_mobile == "portrait" %}
-    <style>
-        .bento-card-image-wrap-{{ section.id }} {
-            aspect-ratio: 9.6/12; 
-        }
-    </style>
-{% elsif card_image_ratio_mobile == "landscape" %}
-    <style>
-        .bento-card-image-wrap-{{ section.id }}{
-            aspect-ratio: 12/8; 
-        }
-    </style>
-{% elsif card_image_ratio_mobile == "square" %}
-    <style>
-        .bento-card-image-wrap-{{ section.id }} {
-            aspect-ratio: 12/12; 
-        }
-    </style>
-{% else %}
-    <style>
-        .bento-card-image-wrap-{{ section.id }} {
-            aspect-ratio: auto; 
-        }
-    </style>
-{% endif %}
+    .bento-image-{{ block.id }} img,
+    .bento-image-{{ block.id }} svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-{% if card_image_ratio == "portrait" %}
-    <style>
-        @media(min-width: 1024px) {
-            .bento-card-image-wrap-{{ section.id }} {
-                aspect-ratio: 9.6/12; 
-            } 
-        }
-    </style>
-{% elsif card_image_ratio == "landscape" %}
-    <style>
-        @media(min-width: 1024px) {
-            .bento-card-image-wrap-{{ section.id }} {
-                aspect-ratio: 12/8; 
-            }
-        }
-    </style>
-{% elsif card_image_ratio == "square" %}
-    <style>
-        @media(min-width: 1024px) {
-            .bento-card-image-wrap-{{ section.id }} {
-                aspect-ratio: 12/12; 
-            }
-        }
-    </style>
-{% else %}
-    <style>
-        @media(min-width: 1024px) {
-            .bento-card-image-wrap-{{ section.id }} {
-                aspect-ratio: auto; 
-            }
-        }
-    </style>
-{% endif %}
+    @media( min-width: 1024px) {
+      .bento-item-{{ block.id }} {
+        grid-area: span {{ block.settings.row_width }} / span {{ block.settings.column_width }};
+      }
 
-{% if card_sizes < 3 %}
-  <style>
-    @media(min-width: 1024px) {
-      .bento-big-card-{{ section.id }} {
-        grid-row: 1 / span 1;
+      .bento-heading-{{ block.id }} {
+        text-align: {{ block.settings.heading_align }};
+      }
+  
+      .bento-heading-{{ block.id }} * {
+        font-size: {{ block.settings.heading_size }}px;
+      }
+
+      .bento-text-{{ block.id }} {
+        margin-top: {{ block.settings.text_mt }}px;
+        text-align: {{ block.settings.text_align }};
+      }
+  
+      .bento-text-{{ block.id }} * {
+        font-size: {{ block.settings.text_size }}px;
+      }
+
+      .bento-button-{{ block.id }} {
+        margin-top: {{ block.settings.button_mt }}px;
+        max-width: {{ block.settings.button_width }}px;
+        padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+        font-size: {{ block.settings.button_size }}px;
+      }
+
+      .bento-image-inner-{{ block.id }} {
+        max-width: {{ block.settings.image_width }}%;
       }
     }
+    
   </style>
-{% endif %}
 
-<div class="section-{{ section.id }} bento-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>
-  <div class="section-{{ section.id }}-settings">
-    {% for block in section.blocks %}
-      {% if block.type == 'big_card' %}
-        <div class="bento-big-card-{{ section.id }}">
-          <div class="bento-big-card-content-top-{{ section.id }}">
-            {% if block.settings.heading %}
-              <div class="bento-big-card-heading-{{ section.id }}">{{ block.settings.heading }}</div>
-            {% endif %}
-            {% if block.settings.sub_heading %}
-              <div class="bento-big-card-sub-heading-{{ section.id }}">{{ block.settings.sub_heading }}</div>
-            {% endif %}
+  {% if block.settings.heading_custom %}
+    <style>
+      .bento-heading-{{ block.id }} * {
+        font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+        font-weight: {{ block.settings.heading_font.weight }};
+        font-style: {{ block.settings.heading_font.style }};
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.text_custom %}
+    <style>
+      .bento-text-{{ block.id }} * {
+        font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+        font-weight: {{ block.settings.text_font.weight }};
+        font-style: {{ block.settings.text_font.style }};
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.button_custom %}
+    <style>
+      .bento-button-{{ block.id }} {
+        font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+        font-weight: {{ block.settings.button_font.weight }};
+        font-style: {{ block.settings.button_font.style }};
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.button_align_mobile == "center" %}
+    <style>
+     .bento-button-{{ block.id }} {
+        margin-left: auto;
+        margin-right: auto;
+      } 
+    </style>
+  {% elsif block.settings.button_align_mobile == "right" %}
+    <style>
+     .bento-button-{{ block.id }} {
+        margin-left: auto;
+      } 
+    </style>
+  {% endif %}
+  
+  {% if block.settings.button_align == "center" %}
+    <style>
+      @media(min-width: 1024px) {
+       .bento-button-{{ block.id }} {
+          margin-left: auto !important;
+          margin-right: auto !important;
+        } 
+      }
+    </style>
+  {% elsif block.settings.button_align == "right" %}
+    <style>
+      @media(min-width: 1024px) {
+       .bento-button-{{ block.id }} {
+          margin-left: auto !important;
+          margin-right: 0px !important;
+        } 
+      }
+    </style>
+  {% else %}
+    <style>
+      @media(min-width: 1024px) {
+       .bento-button-{{ block.id }} {
+          margin-left: 0px !important;
+          margin-right: 0px !important;
+        } 
+      }
+    </style>
+  {% endif %}
+  
+  {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
+    <style>
+      .bento-button-{{ block.id }} {
+        background-color: {{ block.settings.button_bg_color }};
+      }
+  
+      .bento-button-{{ block.id }}:hover {
+        background-color: {{ block.settings.button_bg_hover_color }};
+      }
+    </style>
+  {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
+    <style>
+      .bento-button-{{ block.id }} {
+        background-color: {{ block.settings.button_bg_color }};
+        border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_color }};
+      }
+  
+      .bento-button-{{ block.id }}:hover {
+        background-color: {{ block.settings.button_bg_hover_color }};
+        border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_hover_color }};
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.image_ratio_mobile == "portrait" %}
+    <style>
+      .bento-image-inner-{{ block.id }} {
+       aspect-ratio: 9.6/14; 
+      }
+    </style>
+  {% elsif block.settings.image_ratio_mobile == "landscape" %}
+    <style>
+      .bento-image-inner-{{ block.id }} {
+       aspect-ratio: 12/9; 
+      }
+    </style>
+  {% elsif block.settings.image_ratio_mobile == "square" %}
+    <style>
+      .bento-image-inner-{{ block.id }} {
+       aspect-ratio: 12/12; 
+      }
+    </style>
+  {% else%}
+    <style>
+      .bento-image-inner-{{ block.id }} {
+       aspect-ratio: auto; 
+      }
+    </style>
+  {% endif %}
+  
+  {% if block.settings.image_ratio == "portrait" %}
+    <style>
+      @media(min-width: 1024px) {
+       .bento-image-inner-{{ block.id }} {
+         aspect-ratio: 9.6/14; 
+        } 
+      }
+    </style>
+  {% elsif block.settings.image_ratio == "landscape" %}
+    <style>
+      @media(min-width: 1024px) {
+        .bento-image-inner-{{ block.id }} {
+         aspect-ratio: 12/9; 
+        }
+      }
+    </style>
+  {% elsif block.settings.image_ratio == "square" %}
+    <style>
+      @media(min-width: 1024px) {
+        .bento-image-inner-{{ block.id }} {
+         aspect-ratio: 12/12; 
+        }
+      }
+    </style>
+  {% else%}
+    <style>
+      @media(min-width: 1024px) {
+        .bento-image-inner-{{ block.id }} {
+         aspect-ratio: auto; 
+        }
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.image_position_mobile == "top" %}
+    <style>
+      .bento-item-{{ block.id }} {
+        flex-direction: column;
+      }
+      
+      .bento-image-{{ block.id }} {
+        flex: 0 1 auto;
+      }
+
+      .bento-content-{{ block.id }} {
+        flex: 0 1 auto;
+      }
+    </style>
+  {% elsif block.settings.image_position_mobile == "bottom" %}
+    <style>
+      .bento-item-{{ block.id }} {
+        flex-direction: column;
+      }
+
+      .bento-image-{{ block.id }} {
+        flex: 0 1 auto;
+        order: 2;
+      }
+
+      .bento-content-{{ block.id }} {
+        flex: 0 1 auto;
+        order: 1;
+      }
+    </style>
+  {% elsif block.settings.image_position_mobile == "right" %}
+    <style>
+      .bento-image-{{ block.id }} {
+        order: 2;
+        flex: 1 0;
+      }
+
+      .bento-content-{{ block.id }} {
+        order: 1;
+        flex: 1 0;
+      }
+    </style>
+    {% else %}
+    <style>
+      .bento-image-{{ block.id }} {
+        order: 1;
+        flex: 1 0;
+      }
+
+      .bento-content-{{ block.id }} {
+        order: 2;
+        flex: 1 0;
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.image_position == "top" %}
+    <style>
+
+      @media(min-width: 1024px) {
+        .bento-item-{{ block.id }} {
+          flex-direction: column;
+        }
+  
+        .bento-image-{{ block.id }} {
+          order: 1;
+          flex: 0 1 auto;
+        }
+  
+        .bento-content-{{ block.id }} {
+          order: 2;
+          flex: 0 1 auto;
+        } 
+      }
+    </style>
+  {% elsif block.settings.image_position == "bottom" %}
+    <style>
+      @media(min-width: 1024px) {
+        .bento-item-{{ block.id }} {
+          flex-direction: column;
+        }
+  
+        .bento-image-{{ block.id }} {
+          order: 2;
+          flex: 0 1 auto;
+        }
+  
+        .bento-content-{{ block.id }} {
+          order: 1;
+          flex: 0 1 auto;
+        }
+      }
+    </style>
+  {% elsif block.settings.image_position == "right" %}
+    <style>
+      @media(min-width: 1024px) {
+        .bento-item-{{ block.id }} {
+          flex-direction: row;
+        }
+
+        .bento-image-{{ block.id }} {
+          order: 2;
+          flex: 1 0;
+        }
+  
+        .bento-content-{{ block.id }} {
+          order: 1;
+          flex: 1 0;
+        }
+      }
+    </style>
+  {% else %}
+    <style>
+      @media(min-width: 1024px) {
+        .bento-item-{{ block.id }} {
+          flex-direction: row;
+        }
+
+        .bento-image-{{ block.id }} {
+          order: 1;
+          flex: 1 0;
+        }
+  
+        .bento-content-{{ block.id }} {
+          order: 2;
+          flex: 1 0;
+        }
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.item_heading_gradient != blank %}
+    <style>
+      .bento-heading-{{ block.id }} {
+        background: {{ block.settings.item_heading_gradient }};
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+      }
+    </style>
+  {% endif %}
+  
+{% endfor %}
+
+<div class="section-{{ section.id }} bento-{{ section.id }}">
+    <div class="section-{{ section.id }}-settings">
+      <div class="bento-body-{{ section.id }}">
+        {% for block in section.blocks %}
+          <div class="bento-item-{{ block.id }} bento-item-{{ section.id }}" style="background-color:{{ block.settings.background_color | hex_to_rgba: item_opacity }}; background-image: {{ block.settings.background_gradient }};">
+            {% unless block.settings.hide_image %}
+              <div class="bento-image-{{ block.id }}">
+                <div class="bento-image-inner-{{ block.id }}">
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endunless %}
+            <div class="bento-content-{{ block.id }}">
+              {% if block.settings.heading != blank %}
+                <div class="bento-heading-{{ block.id }}">
+                  {{ block.settings.heading }}
+                </div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="bento-text-{{ block.id }}">
+                  {{ block.settings.text }}
+                </div>
+              {% endif %}
+              {% if block.settings.button != blank %}
+                <a href="{{ block.settings.button_url }}" class="bento-button-{{ block.id }}">
+                  {{ block.settings.button }}
+                  {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                    <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                      <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                    </svg>
+                  {% endif %}
+                </a>
+              {% endif %}
+            </div>
           </div>
-          <div class="bento-big-card-content-bottom-{{ section.id }}">
-            {% if block.settings.text %}
-              <div class="bento-big-card-text-{{ section.id }}">{{ block.settings.text }}</div>
-            {% endif %}
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-    {% for block in section.blocks %}
-      {% if block.type == 'card' %}
-        <div class="bento-card-{{ section.id }}">
-          <div class="bento-card-image-wrap-{{ section.id }}">
-            {% if block.settings.image != blank %}
-              {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-              {{ block.settings.image | image_url: width: 1000 | image_tag:
-                loading: loading_attribute,
-                width: block.settings.image.width,
-                height: block.settings.image.height,
-                sizes: sizes,
-                widths: '360, 535, 750, 1070, 1500'
-              }}
-            {% else %}
-              {{ 'image' | placeholder_svg_tag }}
-            {% endif %}
-          </div>
-          <div class="bento-card-content-{{ section.id }}">
-            {% if block.settings.heading %}
-              <div class="bento-card-heading-{{ section.id }}">{{ block.settings.heading }}</div>
-            {% endif %}
-            {% if block.settings.text %}
-              <div class="bento-card-text-{{ section.id }}">{{ block.settings.text }}</div>
-            {% endif %}
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
+        {% endfor %}
+      </div>
+    </div>
 </div>
 
 {% schema %}
-  {
-    "name": "SG- Bento grid #4",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "⚠️ Save to display section correctly"
-      },
-      {
-        "type": "header",
-        "content": "Layout"
-      },
-      {
-        "type": "range",
-        "id": "cards_gap",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Gap",
-        "default": 10
-      },
-      {
-        "type": "range",
-        "id": "cards_gap_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Gap - mobile",
-        "default": 10
-      },
-      {
-        "type": "header",
-        "content": "Main card"
-      },
-      {
-        "type": "range",
-        "id": "big_card_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 10
-      },
-      {
-        "type": "range",
-        "id": "big_card_border_thickness",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Border thickness",
-        "default": 0
-      },
-      {
-        "type": "text_alignment",
-        "id": "big_card_align",
-        "label": "Alignment",
-        "default": "left"
-      },
-      {
-        "type": "text_alignment",
-        "id": "big_card_align_mobile",
-        "label": "Alignment - mobile",
-        "default": "left"
-      },      
-      {
-        "type": "checkbox",
-        "id": "big_card_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "big_card_padding_vertical",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 18,
-        "visible_if": "{{ section.settings.big_card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_padding_vertical_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 12,
-        "visible_if": "{{ section.settings.big_card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_padding_horizontal",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 18,
-        "visible_if": "{{ section.settings.big_card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_padding_horizontal_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 12,
-        "visible_if": "{{ section.settings.big_card_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Main card heading"
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_heading_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "big_card_heading_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.big_card_heading_custom }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_heading_size",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Font size",
-        "default": 90
-      },
-      {
-        "type": "range",
-        "id": "big_card_heading_size_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 56
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_heading_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "big_card_heading_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 130,
-        "visible_if": "{{ section.settings.big_card_heading_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Main card subheading"
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_sub_heading_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "big_card_sub_heading_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.big_card_sub_heading_custom }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_sub_heading_size",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size",
-        "default": 36
-      },
-      {
-        "type": "range",
-        "id": "big_card_sub_heading_size_mobile",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 20
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_sub_heading_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "big_card_sub_heading_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 130,
-        "visible_if": "{{ section.settings.big_card_sub_heading_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_sub_heading_mt",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 0,
-        "visible_if": "{{ section.settings.big_card_sub_heading_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_sub_heading_mt_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 0,
-        "visible_if": "{{ section.settings.big_card_sub_heading_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Main card text"
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_text_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "big_card_text_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.big_card_text_custom }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_text_size",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Font size",
-        "default": 36
-      },
-      {
-        "type": "range",
-        "id": "big_card_text_size_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 24
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_text_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "big_card_text_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 130,
-        "visible_if": "{{ section.settings.big_card_text_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Grid card"
-      },
-      {
-        "type": "range",
-        "id": "card_gap_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 10
-      },
-      {
-        "type": "range",
-        "id": "card_border_thickness",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "Border thickness",
-        "default": 1
-      },
-      {
-        "type": "text_alignment",
-        "id": "card_align",
-        "label": "Alignment",
-        "default": "center"
-      },
-      {
-        "type": "text_alignment",
-        "id": "card_align_mobile",
-        "label": "Alignment - mobile",
-        "default": "center"
-      },   
-      {
-        "type": "checkbox",
-        "id": "card_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "card_padding_vertical",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 24,
-        "visible_if": "{{ section.settings.card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_padding_vertical_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 12,
-        "visible_if": "{{ section.settings.card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_padding_horizontal",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 24,
-        "visible_if": "{{ section.settings.card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_padding_horizontal_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 12,
-        "visible_if": "{{ section.settings.card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_gap",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Gap",
-        "default": 6,
-        "visible_if": "{{ section.settings.card_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_gap_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Gap - mobile",
-        "default": 6,
-        "visible_if": "{{ section.settings.card_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Card image"
-      },
-      {
-        "type": "select",
-        "id": "card_image_ratio",
-        "label": "Aspect ratio",
-        "default": "landscape",
-        "options": [
-          {
-            "label": "Portrait",
-            "value": "portrait"
-          },
-          {
-            "label": "Square",
-            "value": "square"
-          },
-          {
-            "label": "Landscape",
-            "value": "landscape"
-          },
-          {
-            "label": "Original",
-            "value": "original"
+{
+  "name": "SG-Bento Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Body Settings"
+    },
+    {
+      "type": "select",
+      "id": "body_columns",
+      "label": "Body Columns - Desktop",
+      "default": "4",
+      "options": [
+        {
+          "label": "6",
+          "value": "6"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "body_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Gap",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "body_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Gap - Mobile",
+      "default": 16
+    },
+    {
+      "type": "image_picker",
+      "id": "body_bg_image",
+      "label": "Body Background Image"
+    },
+    {
+      "type": "header",
+      "content": "Item Settings"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Vertical",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "item_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Vertical - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "item_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Horizontal",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "item_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Horizontal - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "item_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Border Radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "item_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Item Border Thickness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "item_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Item Opacity",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "item_shadow",
+      "label": "Item Box Shadow",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "label": "Section background",
+      "id": "background_color",
+      "default": "#f4f1f1"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Section background gradient"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section margin (outside)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section padding (inside)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding sides",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Padding sides mobile",
+      "default": 1.5
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "item_width",
+      "min": 0,
+      "max": 400,
+      "step": 5,
+      "unit": "rem",
+      "label": "Section item width",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy",
+      "label": "Lazy load",
+      "info": "Lazy load images for speed optimisation",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Layout Settings",
+          "info": "Only for Desktop"
+        },
+        {
+          "type": "range",
+          "id": "column_width",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "label": "Column",
+          "default": 2
+        },
+        {
+          "type": "range",
+          "id": "row_width",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "label": "Row",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Heading Settings"
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<h2>Item Heading</h2>"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_custom",
+          "label": "Use Custom Font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "heading_font",
+          "label": "Heading Font Family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Heading Size",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Heading Size - Mobile",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "heading_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Heading Line Height",
+          "default": 150
+        },
+        {
+          "type": "text_alignment",
+          "id": "heading_align",
+          "label": "Heading Align"
+        },
+        {
+          "type": "text_alignment",
+          "id": "heading_align_mobile",
+          "label": "Heading Align - Mobile"
+        },
+        {
+          "type": "header",
+          "content": "Text Settings"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Item Text</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_custom",
+          "label": "Use Custom Font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "text_font",
+          "label": "Text Font Family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Text Size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Text Size - Mobile",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "text_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Text Line Height",
+          "default": 180
+        },
+        {
+          "type": "range",
+          "id": "text_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Text Margin Top",
+          "default": 8
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_align",
+          "label": "Text Align"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_align_mobile",
+          "label": "Text Align - Mobile"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_custom",
+          "label": "Use Custom Font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "button_font",
+          "label": "Button Font Family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "button_size",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_size_mobile",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Size - Mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Button Line Height",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "button_width",
+          "min": 200,
+          "max": 700,
+          "step": 5,
+          "unit": "px",
+          "label": "Button Max-Width - Desktop",
+          "default": 200
+        },
+        {
+          "type": "range",
+          "id": "button_width_mobile",
+          "min": 200,
+          "max": 700,
+          "step": 5,
+          "unit": "px",
+          "label": "Button Max-Width - Mobile",
+          "default": 200
+        },
+        {
+          "type": "range",
+          "id": "button_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Margin Top",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Margin Top - Mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Padding Vertical",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Padding Vertical - Mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Padding Horizontal",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Padding Horizontal - Mobile",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Button Roundness",
+          "default": 4
+        },
+        {
+          "type": "range",
+          "id": "button_border_thickness",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Border Thickness",
+          "default": 1
+        },
+        {
+          "type": "select",
+          "id": "button_align",
+          "label": "Button Align",
+          "default": "center",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_align_mobile",
+          "label": "Button Align - Mobile",
+          "default": "center",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button Style",
+          "default": "non_outline",
+          "options": [
+            {
+              "label": "Link",
+              "value": "link"
+            },
+            {
+              "label": "Non-Outline",
+              "value": "non_outline"
+            },
+            {
+              "label": "Non-Outline & Arrow",
+              "value": "non_outline_arrow"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Outline & Arrow",
+              "value": "outline_arrow"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Image Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image Position",
+          "default": "right",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            },
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "image_position_mobile",
+          "label": "Image Position - Mobile",
+          "default": "right",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            },
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 40,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Image Width",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "image_width_mobile",
+          "min": 40,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Image Width - Mobile",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "image_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Image Border Radius",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "image_border_thickness",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Image Border Thickness",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "Image Aspect Ratio",
+          "default": "square",
+          "options": [
+            {
+              "label": "Portrait",
+              "value": "portrait"
+            },
+            {
+              "label": "Square",
+              "value": "square"
+            },
+            {
+              "label": "Landscape",
+              "value": "landscape"
+            },
+            {
+              "label": "Original",
+              "value": "original"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "image_ratio_mobile",
+          "label": "Image Aspect Ratio - Mobile",
+          "default": "square",
+          "options": [
+            {
+              "label": "Portrait",
+              "value": "portrait"
+            },
+            {
+              "label": "Square",
+              "value": "square"
+            },
+            {
+              "label": "Landscape",
+              "value": "landscape"
+            },
+            {
+              "label": "Original",
+              "value": "original"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_image",
+          "label": "Hide Image",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Item Colors"
+        },
+        {
+          "type": "color",
+          "label": "Item background",
+          "id": "background_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color_background",
+          "id": "background_gradient",
+          "label": "Item background gradient"
+        },
+        {
+          "type": "color",
+          "label": "Item Border Color",
+          "id": "item_border_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Item Heading Color",
+          "id": "item_heading_color",
+          "default": "#121212"
+        },
+        {
+          "type": "color_background",
+          "id": "item_heading_gradient",
+          "label": "Item Heading Gradient"
+        },
+        {
+          "type": "color",
+          "label": "Item Text Color",
+          "id": "item_text_color",
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Item Image Border Color",
+          "id": "image_border_color",
+          "default": "#121212"
+        },
+        {
+          "type": "header",
+          "content": "Button Colors"
+        },
+        {
+          "type": "color",
+          "label": "Button Text Color",
+          "id": "button_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Button Hover Text Color",
+          "id": "button_hover_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Button Background Color",
+          "id": "button_bg_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Button Background Hover Color",
+          "id": "button_bg_hover_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Button Border Color",
+          "id": "button_border_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Button Border Hover Color",
+          "id": "button_border_hover_color",
+          "default": "#000000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SG-Bento Grid",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "column_width": 1,
+            "row_width": 1,
+            "heading": "<h2>Flat Monthly Fee</h2>",
+            "text": "<p>Every month, the price stays the same - no guesswork, no surprise</p>",
+            "image_position": "bottom"
           }
-        ]
-      },
-      {
-        "type": "select",
-        "id": "card_image_ratio_mobile",
-        "label": "Aspect ratio - mobile",
-        "default": "landscape",
-        "options": [
-          {
-            "label": "Portrait",
-            "value": "portrait"
-          },
-          {
-            "label": "Square",
-            "value": "square"
-          },
-          {
-            "label": "Landscape",
-            "value": "landscape"
-          },
-          {
-            "label": "Original",
-            "value": "original"
+        },
+        {
+          "type": "item",
+          "settings": {
+            "column_width": 2,
+            "row_width": 1,
+            "heading": "<h2>Fast Turnaround</h2>",
+            "text": "<p>Truly amazing desings made for you, ready in just a few days</p>",
+            "image_position": "left"
           }
-        ]
-      },
-      {
-        "type": "header",
-        "content": "Grid card heading"
-      },
-      {
-        "type": "checkbox",
-        "id": "card_heading_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "card_heading_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.card_heading_custom }}"
-      },
-      {
-        "type": "range",
-        "id": "card_heading_size",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size",
-        "default": 18
-      },
-      {
-        "type": "range",
-        "id": "card_heading_size_mobile",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 20
-      },
-      {
-        "type": "checkbox",
-        "id": "card_heading_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "card_heading_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 130,
-        "visible_if": "{{ section.settings.card_heading_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Grid card text"
-      },
-      {
-        "type": "checkbox",
-        "id": "card_text_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "card_text_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.card_text_custom }}"
-      },
-      {
-        "type": "range",
-        "id": "card_text_size",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "card_text_size_mobile",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 14
-      },
-      {
-        "type": "checkbox",
-        "id": "card_text_advanced",
-        "label": "Advanced settings",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "card_text_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 150,
-        "visible_if": "{{ section.settings.card_text_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_text_mt",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 0,
-        "visible_if": "{{ section.settings.card_text_advanced }}"
-      },
-      {
-        "type": "range",
-        "id": "card_text_mt_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 0,
-        "visible_if": "{{ section.settings.card_text_advanced }}"
-      },
-      {
-        "type": "header",
-        "content": "Main card colors"
-      },
-      {
-        "type": "color",
-        "label": "Heading",
-        "id": "big_card_heading_color",
-        "default": "#FFFFFF",
-      },
-      {
-        "type": "color",
-        "label": "Subheading",
-        "id": "big_card_sub_heading_color",
-        "default": "#FFFFFF",
-      },
-      {
-        "type": "color",
-        "label": "Text",
-        "id": "big_card_text_color",
-        "default": "#FFFFFF",
-      },
-      {
-        "type": "color",
-        "label": "Text highlight",
-        "id": "big_card_text_highlight",
-        "default": "#AFAFAF",
-      },
-      {
-        "type": "select",
-        "id": "big_card_bg_style",
-        "label": "Background style",
-        "default": "solid",
-        "options": [
-          {
-            "label": "Solid",
-            "value": "solid"
-          },
-          {
-            "label": "Gradient",
-            "value": "gradient"
-          },
-          {
-            "label": "Image",
-            "value": "image"
+        },
+        {
+          "type": "item",
+          "settings": {
+            "column_width": 1,
+            "row_width": 1,
+            "heading": "<h2>Unlimited Revisions</h2>",
+            "text": "<p>Change it, swap it, until it`s just right - as many times as you want</p>",
+            "image_position": "bottom"
           }
-        ]
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "big_card_bg_color",
-        "default": "#121212",
-        "visible_if": "{{ section.settings.big_card_bg_style == 'solid' }}"
-      },
-      {
-        "type": "color_background",
-        "id": "big_card_bg_gradient",
-        "label": "Gradient",
-        "default": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
-        "visible_if": "{{ section.settings.big_card_bg_style == 'gradient' }}"
-      },
-      {
-        "type": "image_picker",
-        "id": "big_card_bg_image",
-        "label": "Image",
-        "visible_if": "{{ section.settings.big_card_bg_style == 'image' }}"
-      },
-      {
-        "type": "color",
-        "id": "big_card_overlay_color",
-        "label": "Overlay color",
-        "default": "#000000",
-        "visible_if": "{{ section.settings.big_card_bg_style == 'image' }}"
-      },
-      {
-        "type": "range",
-        "id": "big_card_overlay_opacity",
-        "label": "Overlay opacity",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "unit": "%",
-        "default": 0,
-        "visible_if": "{{ section.settings.big_card_bg_style == 'image' }}"
-      },
-      {
-        "type": "checkbox",
-        "id": "big_card_use_overlay",
-        "label": "Use gradient overlay",
-        "default": false
-      },
-      {
-        "type": "color",
-        "label": "Border",
-        "id": "big_card_border_color",
-        "default": "#F0F0F0"
-      },
-      {
-        "type": "header",
-        "content": "Grid card colors"
-      },
-      {
-        "type": "color",
-        "label": "Heading",
-        "id": "card_heading_color",
-        "default": "#121212",
-      },
-      {
-        "type": "color",
-        "label": "Text",
-        "id": "card_text_color",
-        "default": "#121212",
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "card_bg_color",
-        "default": "#F9F9F9",
-      },
-      {
-        "type": "color",
-        "label": "Border",
-        "id": "card_border_color",
-        "default": "#F0F0F0"
-      },
-      {
-        "type": "header",
-        "content": "Section colors"
-      },
-      {
-        "type": "select",
-        "id": "background_style",
-        "label": "Background style",
-        "default": "solid",
-        "options": [
-          {
-            "label": "Solid",
-            "value": "solid"
-          },
-          {
-            "label": "Gradient",
-            "value": "gradient"
+        },
+        {
+          "type": "item",
+          "settings": {
+            "column_width": 2,
+            "row_width": 1,
+            "heading": "<h2>Full Design Service</h2>",
+            "text": "<p>Scale up or down as needed, and pause or cancel at anytime</p>",
+            "image_position": "left"
           }
-        ]
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "visible_if": "{{ section.settings.background_style == 'solid' }}"
-      },
-      {
-        "type": "color_background",
-        "id": "background_gradient",
-        "label": "Gradient",
-        "default": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
-        "visible_if": "{{ section.settings.background_style == 'gradient' }}"
-      },
-      {
-        "type": "color",
-        "label": "Border",
-        "id": "border_color",
-        "default": "#121212"
-      },
-      {
-        "type": "header",
-        "content": "Section margin (outside)"
-      },
-      {
-        "type": "range",
-        "id": "margin_top",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Top",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "margin_bottom",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Bottom",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "margin_horizontal",
-        "min": 0,
-        "max": 30,
-        "step": 0.5,
-        "unit": "rem",
-        "label": "Sides",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "margin_horizontal_mobile",
-        "min": 0,
-        "max": 15,
-        "step": 0.5,
-        "unit": "rem",
-        "label": "Sides - mobile",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "Section padding (inside)"
-      },
-      {
-        "type": "range",
-        "id": "padding_top",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Top",
-        "default": 36
-      },
-      {
-        "type": "range",
-        "id": "padding_bottom",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Bottom",
-        "default": 36
-      },
-      {
-        "type": "range",
-        "id": "padding_horizontal",
-        "min": 0,
-        "max": 30,
-        "step": 0.5,
-        "unit": "rem",
-        "label": "Sides",
-        "default": 5
-      },
-      {
-        "type": "range",
-        "id": "padding_horizontal_mobile",
-        "min": 0,
-        "max": 15,
-        "step": 0.5,
-        "unit": "rem",
-        "label": "Sides - mobile",
-        "default": 1.5
-      },
-      {
-        "type": "header",
-        "content": "Section"
-      },
-      {
-        "type": "select",
-        "id": "width",
-        "label": "Width",
-        "default": "page",
-        "options": [
-          {
-            "label": "Page",
-            "value": "page"
-          },
-          {
-            "label": "Full",
-            "value": "full"
-          },
-          {
-            "label": "Custom",
-            "value": "custom"
+        },
+        {
+          "type": "item",
+          "settings": {
+            "column_width": 2,
+            "row_width": 1,
+            "heading": "<h2>No Contracts, No Headaches</h2>",
+            "text": "<p>Just amazing designs with no tricky rules or papers to sign</p>",
+            "image_position": "right"
           }
-        ]
-      },
-      {
-        "type": "range",
-        "id": "content_width",
-        "min": 800,
-        "max": 2000,
-        "step": 100,
-        "unit": "px",
-        "label": "Content width",
-        "default": 1200,
-        "visible_if": "{{ section.settings.width == 'custom' }}"
-      },
-      {
-        "type": "range",
-        "id": "border_thickness",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Border thickness",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "section_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 0
-      },
-      {
-        "type": "checkbox",
-        "id": "lazy",
-        "label": "Lazy load",
-        "info": "Lazy load images for speed optimisation",
-        "default": true
-      }
-    ],
-    "blocks": [
-      {
-        "type": "big_card",
-        "name": "SG-Main card",
-        "limit": 1,
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "heading",
-            "label": "Heading",
-            "default": "<p>2M+</p>"
-          },
-          {
-            "type": "richtext",
-            "id": "sub_heading",
-            "label": "Subheading",
-            "default": "<p>Followers</p>"
-          },
-          {
-            "type": "richtext",
-            "id": "text",
-            "label": "Text",
-            "info": "Use bold to highlight key words.",
-            "default": "<p><strong>Description</strong> text.</p>"
-          }
-        ]
-      },
-      {
-        "type": "card",
-        "name": "SG-Grid card",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Image"
-          },
-          {
-            "type": "richtext",
-            "id": "heading",
-            "label": "Heading",
-            "default": "<p>Heading</p>"
-          },
-          {
-            "type": "richtext",
-            "id": "text",
-            "label": "Text",
-            "default": "<p>Text</p>"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "SG- Bento grid #4",
-        "blocks": [
-          {
-            "type": "big_card"   
-          },
-          {
-            "type": "card"
-          },
-          {
-            "type": "card"         
-          },
-          {
-            "type": "card"         
-          },
-          {
-            "type": "card"         
-          }
-        ]
-      }
-    ]
-  }
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}
