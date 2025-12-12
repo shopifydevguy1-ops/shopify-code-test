@@ -1,10 +1,10 @@
-<div class="featured_custom-{{section.id}}">
-  <div class="featured_container">
-    <div class="featured_wrapper reversed-{{ section.id }}">
+<div class="featured_custom3">
+  <div class="featured_container3">
+    <div class="featured_wrapper3">
       {%- for block in section.blocks limit: 1 -%}
-        <div class="featured_main" {% if block.settings.article.image %}style="background: url({{ block.settings.article.image | image_url: width: block.settings.article.image.width }}) no-repeat;background-size: cover;"{%else%}style="background: #e8e8e8"{%endif%}>
-          <span class="featured_article">Featured Article</span>
-          <h3 class="featured_title">
+        <div class="featured_main3" {% if block.settings.article.image %}style="background: url({{ block.settings.article.image | image_url: width: block.settings.article.image.width }}) no-repeat;background-size: cover;"{%else%}style="background: #e8e8e8"{%endif%}>
+          <span class="featured_article3">Featured Article</span>
+          <h3 class="featured_title3">
             {%-liquid
               if block.settings.article.title
                 echo block.settings.article.title
@@ -13,7 +13,7 @@
               endif
              -%}
           </h3>
-          <p class="featured_description">
+          <p class="featured_description3">
             {%-liquid
               if block.settings.article.content
                echo block.settings.article.content | truncate: 200
@@ -22,24 +22,24 @@
               endif
              -%}
           </p>
-          <a href="{{block.settings.article.url}}" class="featured_link">{{section.settings.button_text}}</a>
+          <a href="{{block.settings.article.url}}" class="featured_link3">{{section.settings.button_text}}</a>
         </div>
       {%- endfor -%}
-        <div class="featured_blocks">
+        <div class="featured_blocks3">
           {%- for block in section.blocks offset: 1 -%}
-            <div class="featured_blocks-block featured_item">
+            <div class="featured_blocks-block3 featured_item3">
               {%- if block.settings.article.image -%}
                 {{ block.settings.article.image | image_url: width: block.settings.article.image.width | image_tag:  alt: block.settings.article.title }}
               {%- else -%}
                   {{ 'image' | placeholder_svg_tag }}
               {%- endif -%}
-              <div class="featured_item-info">
+              <div class="featured_item-info3">
                 <h4>
                   {%-liquid
                    if block.settings.article.title
                     echo block.settings.article.title
                    else
-                     echo 'Shotkam'
+                     echo 'Article title'
                    endif
                   -%}
                 </h4>
@@ -48,7 +48,7 @@
                     if block.settings.article.excerpt
                      echo block.settings.article.excerpt
                     else
-                      echo 'Intro Shotkam'
+                      echo 'Intro to article'
                     endif
                    -%}
                 </p>
@@ -64,10 +64,10 @@
   
 {% schema %}
 {
-  "name": "SG-Blog #1",
+  "name": "SG-Blog #2",
   "tag": "section",
-  "class": "custome-blog",
-  "max_blocks": 3,
+  "class": "custom-blog",
+  "max_blocks": 4,
   "settings": [
     {
       "type": "header",
@@ -84,12 +84,6 @@
       "id": "make_more_readable",
       "default": false,
       "label": "Make featured article more readable"
-    },
-    {
-      "type": "checkbox",
-      "id": "reverse",
-      "default": false,
-      "label": "Use reverse view"
     },
     {
       "type": "header",
@@ -131,7 +125,7 @@
   "blocks": [
     {
       "type": "Article",
-      "name": "SS - Blog #1",
+      "name": "SS - Blog #2",
       "settings": [
         {
           "type": "article",
@@ -143,8 +137,11 @@
   ],
   "presets": [
     {
-      "name": "SG-Blog #1",
+      "name": "SG-Blog #2",
       "blocks": [
+        {
+          "type": "Article"
+        },
         {
           "type": "Article"
         },
@@ -169,39 +166,39 @@
     .custome-blog {
       background-color: {{ section.settings.section_bg_color }};
     }
-    {%- if section.settings.make_more_readable -%}.featured_main {box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);}{%- endif -%}
-    {%- if section.settings.reverse -%}.reversed-{{ section.id }} {flex-direction: row-reverse;}{%- endif -%}
-    .featured_item-info a {
+    {%- if section.settings.make_more_readable -%}.featured_main3 {box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);}{%- endif -%}
+    {%- if section.settings.reverse -%}.featured_wrapper3 {flex-direction: row-reverse;}{%- endif -%}
+    .featured_item-info3 a {
       color: {{ section.settings.button_color }};
       background-color: transparent;
       border: 2px solid {{ section.settings.button_color }};
     }
-    .featured_item-info a:hover {
+    .featured_item-info3 a:hover {
       background-color: {{ section.settings.button_color }};
     }
-    .featured_link {
+    .featured_link3 {
       background-color: {{ section.settings.button_color }};
     }
-    .featured_link:hover {
+    .featured_link3:hover {
       background-color: transparent;
       border: 2px solid {{ section.settings.button_color }};
     }
-    .featured_description {
+    .featured_description3 {
       color: {{section.settings.description_maintext_color}};
     }
-    .featured_item-info p {
+    .featured_item-info3 p {
       color: {{section.settings.description_text_color}};
     }
-    .featured_article {
+    .featured_article3 {
     color: {{section.settings.description_maintext_color}};
     }
-    .featured_title,
-    .featured_item-info h4 {
+    .featured_title3,
+    .featured_item-info3 h4 {
       font-family: {{section.settings.title_font.family}};
       font-weight: {{section.settings.title_font.weight}};
     }
-    .featured_description,
-    .featured_item-info p {
+    .featured_description3,
+    .featured_item-info3 p {
       font-family: {{section.settings.description_font.family}};
       font-weight: {{section.settings.description_font.weight}};
     }
@@ -209,24 +206,22 @@
 
   {% style %}
 
-  .featured_item svg {
+
+  .featured_item3 svg {
 	max-height: 200px;
     display: block;
     margin: auto;
   }
-
-  .featured_container {
+  .featured_container3 {
     max-width: 140rem;
     margin: 0 auto;
     padding: 50px 5rem;
   }
-  .featured_wrapper {
-    display: flex;
-    justify-content: space-between;
+  .featured_wrapper3 {
   }
   
-  .featured_main {
-    flex: 0 1 70%;
+  .featured_main3 {
+    height: 400px;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -235,40 +230,42 @@
     justify-content: center;
     text-align: center;
   }
-  .featured_blocks {
-    flex: 0 1 28%;
+  .featured_blocks3 {
+	width: 100%;
+	display: flex;
+    justify-content: space-between;
+	margin-top: 20px;
   }
-  .featured_item {
+  .featured_item3 {
+	flex: 0 1 32%;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(164, 162, 163, .3);
     box-shadow: 0 2px 6px #0000000d;
   }
-  .featured_item:last-child {
-    margin-bottom: 0px;
-  }
-  .featured_item-info {
+ 
+  .featured_item-info3 {
     text-align: center;
   }
-  .featured_item-info h4 {
+  .featured_item-info3 h4 {
     font-size: 16px;
-    padding: 10px 10px;
+    padding: 10px 0;
     color: #000;
     text-transform: uppercase;
     margin: 0;
     margin-bottom:5px;
     font-weight: 600;
   }
-  .featured_item-info a:hover {
+  .featured_item-info3 a:hover {
     color:white;
   }
-  .featured_item-info p {
+  .featured_item-info3 p {
     padding-bottom: 10px;
     line-height: 1.2;
     max-width: 80%;
     margin: 0 auto;
   }
-  .featured_item-info a {
+  .featured_item-info3 a {
     font-size: 18px;
     text-decoration: none;
     border-radius: 25px;
@@ -281,18 +278,18 @@
     width: 100%;
     transition: all .3s;
   }
-  .featured_item img {
+  .featured_item3 img {
     max-width: 100%;
     max-height: 200px;
     object-fit: cover;
     object-position: center;
   }
-  .featured_article {
+  .featured_article3 {
     font-size: 16px;
     text-transform: uppercase;
     line-height: 1;
   }
-  .featured_title {
+  .featured_title3 {
     color: #fff;
     font-weight:600;
     text-transform: uppercase;
@@ -300,14 +297,14 @@
     margin: 0;
     padding: 10px 0;
   }
-  .featured_description {
+  .featured_description3 {
     font-size: 16px;
     line-height: 1.2;
     max-width: 80%;
     margin: 0 auto;
     text-align: center;
   }
-  .featured_link {
+  .featured_link3 {
     text-decoration: none;
     color: #fff;
     font-size: 16px;
@@ -325,29 +322,33 @@
   
   
   @media (max-width: 767px) {
-    .featured_container {
+
+	.featured_blocks3 {
+      flex-direction:column;
+	}
+    .featured_container3 {
       padding: 0 20px;
     }
-    .featured_main {
-      min-height: 500px;
+    .featured_main3 {
+	  min-height: 500px;
     }
-    .featured_wrapper {
+    .featured_wrapper3 {
       flex-direction: column;
     }
-    .featured_item {
-      margin-top: 20px;
+    .featured_item3 {
+      margin-top: 0px;
     }
-    .featured_article {
+    .featured_article3 {
       font-size: 16px;
     }
-    .featured_title {
+    .featured_title3 {
       font-size: 24px;
     }
-    .featured_description {
+    .featured_description3 {
       font-size: 16px;
       max-width: 90%;
     }
-    .featured_item-info a {
+    .featured_item-info3 a {
       font-size: 16px;
     }
   }
