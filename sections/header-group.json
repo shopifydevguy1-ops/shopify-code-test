@@ -11,68 +11,60 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "mockup_Nh3iCX": {
+    "mockup_xTfJeh": {
       "type": "mockup",
       "blocks": {
-        "review_LzyFQR": {
-          "type": "review",
-          "settings": {
-            "text": "<p>Excellent <strong>4.6/5</strong></p>",
-            "stars_count": 4.5,
-            "stars_size": 15,
-            "stars_size_mobile": 15,
-            "stars_gap": 2,
-            "stars_color": "#FFFFFF",
-            "stars_bg_color": "#00B67A",
-            "stars_bg_half_color": "#DDDDDD"
-          }
-        },
-        "item_hH9dDJ": {
+        "item_nVcFtV": {
           "type": "item",
           "settings": {
-            "icon": "tags",
+            "text": "<p>Welcome to our store</p>"
+          }
+        },
+        "item_QLMCa9": {
+          "type": "item",
+          "settings": {
+            "text": "<p>Welcome to our store</p>"
+          }
+        },
+        "item_naC76h": {
+          "type": "item",
+          "settings": {
             "text": "<p>Welcome to our store</p>"
           }
         }
       },
       "block_order": [
-        "review_LzyFQR",
-        "item_hH9dDJ"
+        "item_nVcFtV",
+        "item_QLMCa9",
+        "item_naC76h"
       ],
-      "name": "SG- Announcement bar (slideshow) #2",
+      "name": "SG-Announcement bar (slideshow)",
       "settings": {
         "insert_css_class_target": "",
-        "autoplay_delay": 5,
-        "content_align": "center",
-        "content_align_mobile": "center",
         "text_custom": false,
         "text_font": "josefin_sans_n4",
-        "text_size": 12,
+        "text_size": 13,
         "text_size_mobile": 12,
         "text_height": 150,
-        "text_case": "none",
-        "icon_size": 18,
-        "icon_size_mobile": 18,
+        "text_align": "center",
+        "text_align_mobile": "center",
         "text_color": "#121212",
-        "feature_icon_color": "#121212",
-        "background_style": "solid",
-        "background_color": "#F7F7F7",
-        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "progress_default_color": "#AFAFAF",
+        "progress_color": "#121212",
+        "play_icon_color": "#121212",
+        "play_border_color": "#121212",
+        "background_color": "#F3F3F3",
+        "background_gradient": "",
         "border_color": "#121212",
         "margin_top": 0,
         "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
         "padding_top": 12,
         "padding_bottom": 12,
         "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "width": "page",
+        "padding_horizontal_mobile": 0,
+        "full_width": false,
         "content_width": 1200,
-        "section_radius": 0,
-        "border_thickness": 0,
-        "border_bottom": true,
-        "lazy": false
+        "border_thickness": 0
       }
     },
     "announcement-bar": {
@@ -89,6 +81,7 @@
       "block_order": [
         "announcement-bar-0"
       ],
+      "disabled": true,
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
@@ -120,7 +113,7 @@
     }
   },
   "order": [
-    "mockup_Nh3iCX",
+    "mockup_xTfJeh",
     "announcement-bar",
     "header"
   ]
