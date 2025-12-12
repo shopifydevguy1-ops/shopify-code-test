@@ -11,120 +11,68 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "mockup_wKDQ7U": {
+    "mockup_Nh3iCX": {
       "type": "mockup",
       "blocks": {
-        "review_item_WxdMJf": {
-          "type": "review_item",
+        "review_LzyFQR": {
+          "type": "review",
           "settings": {
-            "stars_count": 5,
-            "stars_size": 16,
-            "stars_size_mobile": 16,
-            "text": "4.9 out of 5",
-            "url": "",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 12,
-            "text_size_mobile": 12,
-            "text_height": 100,
-            "stars_bg_color": "#00B67A",
+            "text": "<p>Excellent <strong>4.6/5</strong></p>",
+            "stars_count": 4.5,
+            "stars_size": 15,
+            "stars_size_mobile": 15,
+            "stars_gap": 2,
             "stars_color": "#FFFFFF",
-            "text_color": "#000000"
+            "stars_bg_color": "#00B67A",
+            "stars_bg_half_color": "#DDDDDD"
           }
         },
-        "left_item_c9dJCV": {
-          "type": "left_item",
+        "item_hH9dDJ": {
+          "type": "item",
           "settings": {
-            "icon": "atc",
-            "text": "Announcement",
-            "url": ""
-          }
-        },
-        "left_item_XLFnp7": {
-          "type": "left_item",
-          "settings": {
-            "icon": "atc",
-            "text": "Announcement",
-            "url": ""
-          }
-        },
-        "left_item_KUt8Gk": {
-          "type": "left_item",
-          "settings": {
-            "icon": "atc",
-            "text": "Announcement",
-            "url": ""
-          }
-        },
-        "left_item_dCL7BM": {
-          "type": "left_item",
-          "settings": {
-            "icon": "atc",
-            "text": "Announcement",
-            "url": ""
-          }
-        },
-        "right_item_4apQxn": {
-          "type": "right_item",
-          "settings": {
-            "icon": "atc",
-            "text": "Link",
-            "url": "",
-            "hide_mobile": false
-          }
-        },
-        "right_item_WNz4z4": {
-          "type": "right_item",
-          "settings": {
-            "icon": "atc",
-            "text": "Link",
-            "url": "",
-            "hide_mobile": false
+            "icon": "tags",
+            "text": "<p>Welcome to our store</p>"
           }
         }
       },
       "block_order": [
-        "review_item_WxdMJf",
-        "left_item_c9dJCV",
-        "left_item_XLFnp7",
-        "left_item_KUt8Gk",
-        "left_item_dCL7BM",
-        "right_item_4apQxn",
-        "right_item_WNz4z4"
+        "review_LzyFQR",
+        "item_hH9dDJ"
       ],
-      "name": "SG- Scrolling announcement bar #3",
+      "name": "SG- Announcement bar (slideshow) #2",
       "settings": {
         "insert_css_class_target": "",
-        "show_right_mobile": false,
-        "animate_speed": 0,
-        "animate_speed_mobile": 35,
-        "animate_direction": "left",
-        "animate_pause": true,
-        "items_gap": 20,
-        "items_gap_mobile": 20,
-        "item_gap": 10,
-        "item_gap_mobile": 10,
-        "icon_size": 20,
-        "icon_size_mobile": 20,
+        "autoplay_delay": 5,
+        "content_align": "center",
+        "content_align_mobile": "center",
         "text_custom": false,
         "text_font": "josefin_sans_n4",
         "text_size": 12,
         "text_size_mobile": 12,
-        "text_height": 100,
-        "icon_color": "#000000",
-        "text_color": "#000000",
-        "background_color": "#EEEADB",
-        "background_gradient": "",
-        "border_color": "#000000",
+        "text_height": 150,
+        "text_case": "none",
+        "icon_size": 18,
+        "icon_size_mobile": 18,
+        "text_color": "#121212",
+        "feature_icon_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#F7F7F7",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
         "margin_top": 0,
         "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
         "padding_top": 12,
         "padding_bottom": 12,
-        "padding_horizontal": 2,
-        "padding_horizontal_mobile": 1,
-        "full_width": true,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
         "content_width": 1200,
-        "border_thickness": 0
+        "section_radius": 0,
+        "border_thickness": 0,
+        "border_bottom": true,
+        "lazy": false
       }
     },
     "announcement-bar": {
@@ -172,7 +120,7 @@
     }
   },
   "order": [
-    "mockup_wKDQ7U",
+    "mockup_Nh3iCX",
     "announcement-bar",
     "header"
   ]
