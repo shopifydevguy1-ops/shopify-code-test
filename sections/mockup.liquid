@@ -9,8 +9,8 @@
   assign margin_bottom = section.settings.margin_bottom
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
-  assign content_width = section.settings.content_width
   assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
 
   assign heading = section.settings.heading
@@ -21,6 +21,57 @@
   assign heading_font = section.settings.heading_font
   assign heading_height = section.settings.heading_height
   assign heading_align = section.settings.heading_align
+  assign heading_align_mobile = section.settings.heading_align_mobile
+
+  assign grid_row_mobile = section.settings.grid_row_mobile
+  assign grid_row = section.settings.grid_row
+  assign grid_gap = section.settings.grid_gap
+  assign grid_gap_mobile = section.settings.grid_gap_mobile
+  assign grid_mt = section.settings.grid_mt
+
+  assign articles = section.settings.articles
+
+  assign card_border_thickness = section.settings.card_border_thickness
+  assign card_border_color = section.settings.card_border_color
+  assign card_radius = section.settings.card_radius
+  assign card_hover = section.settings.card_hover
+  assign card_shadow_color = section.settings.card_shadow_color
+
+  assign image_ratio = section.settings.image_ratio
+  assign image_border_thickness = section.settings.image_border_thickness
+  assign image_border_color = section.settings.image_border_color
+  assign image_bottom_border = section.settings.image_bottom_border
+
+  assign content_padding_horizontal_mobile = section.settings.content_padding_horizontal_mobile
+  assign content_padding_horizontal = section.settings.content_padding_horizontal
+  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
+  assign content_padding_vertical = section.settings.content_padding_vertical
+  assign content_bg_color = section.settings.content_bg_color
+  assign content_align_mobile = section.settings.content_align_mobile
+  assign content_align = section.settings.content_align
+
+  assign date_size = section.settings.date_size
+  assign date_size_mobile = section.settings.date_size_mobile
+  assign date_color = section.settings.date_color
+  assign date_custom = section.settings.date_custom
+  assign date_font = section.settings.date_font
+  assign date_height = section.settings.date_height
+
+  assign title_size = section.settings.title_size
+  assign title_size_mobile = section.settings.title_size_mobile
+  assign title_color = section.settings.title_color
+  assign title_custom = section.settings.title_custom
+  assign title_font = section.settings.title_font
+  assign title_height = section.settings.title_height
+  assign title_mt = section.settings.title_mt
+
+  assign description_size = section.settings.description_size
+  assign description_size_mobile = section.settings.description_size_mobile
+  assign description_color = section.settings.description_color
+  assign description_custom = section.settings.description_custom
+  assign description_font = section.settings.description_font
+  assign description_height = section.settings.description_height
+  assign description_mt = section.settings.description_mt
 
   assign button = section.settings.button
   assign button_size = section.settings.button_size
@@ -30,7 +81,7 @@
   assign button_custom = section.settings.button_custom
   assign button_font = section.settings.button_font
   assign button_height = section.settings.button_height
-  assign button_align = section.settings.button_align
+  assign button_arrow = section.settings.button_arrow
   assign button_style = section.settings.button_style
   assign button_mt = section.settings.button_mt
   assign button_padding_vertical = section.settings.button_padding_vertical
@@ -42,46 +93,30 @@
   assign button_bg_color = section.settings.button_bg_color
   assign button_bg_hover_color = section.settings.button_bg_hover_color
 
-  assign blog = section.settings.blog
-  assign blog_show = section.settings.blog_show
-  assign blog_show_row = section.settings.blog_show_row
-  assign blog_mt = section.settings.blog_mt
-  assign blog_gap_mobile = section.settings.blog_gap_mobile
-  assign blog_gap = section.settings.blog_gap
+  assign arrow_hover_color = section.settings.arrow_hover_color
+  assign arrow_color = section.settings.arrow_color
 
-  assign use_custom_height = section.settings.use_custom_height
-  assign image_height = section.settings.image_height
-  assign image_height_mobile = section.settings.image_height_mobile
-  assign image_radius = section.settings.image_radius
-  assign image_border_thickness = section.settings.image_border_thickness
-  assign image_border_color = section.settings.image_border_color
+  if content_align == "center"
+    assign text_align = "center"
+  elsif content_align == "end"
+    assign text_align = "right"
+  endif
 
-  assign date_size = section.settings.date_size
-  assign date_size_mobile = section.settings.date_size_mobile
-  assign date_color = section.settings.date_color
-  assign date_custom = section.settings.date_custom
-  assign date_font = section.settings.date_font
-  assign date_height = section.settings.date_height
-  assign date_mt = section.settings.date_mt
-
-  assign title_size = section.settings.title_size
-  assign title_size_mobile = section.settings.title_size_mobile
-  assign title_color = section.settings.title_color
-  assign title_hover_color = section.settings.title_hover_color
-  assign title_custom = section.settings.title_custom
-  assign title_font = section.settings.title_font
-  assign title_height = section.settings.title_height
-  assign title_mt = section.settings.title_mt
-
-  assign content_align_mobile = section.settings.content_align_mobile
-  assign content_align = section.settings.content_align
+  if content_align_mobile == "center"
+    assign text_align_mobile = "center"
+  elsif content_align_mobile == "end"
+    assign text_align_mobile = "right"
+  endif
+  
 -%}
 
 {%- style -%}
+
   {{  heading_font | font_face: font_display: 'swap' }}
-  {{  button_font | font_face: font_display: 'swap' }}
   {{  date_font | font_face: font_display: 'swap' }}
   {{  title_font | font_face: font_display: 'swap' }}
+  {{  description_font | font_face: font_display: 'swap' }}
+  {{  button_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -98,98 +133,128 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .articles-heading-{{ section.id }} {
+  .blog-heading-{{ section.id }} {
+    text-align: {{ heading_align_mobile }};
+  }
+
+  .blog-heading-{{ section.id }} * {
     margin: 0;
     font-size: {{ heading_size_mobile }}px;
     color: {{ heading_color }};
     line-height: {{ heading_height }}%;
     text-transform: unset;
-    text-align: {{ heading_align }};
   }
 
-  .articles-button-{{ section.id }} {
+  .blog-grid-{{ section.id }} {
+    display: grid;
+    gap: {{ grid_gap_mobile }}px;
+    grid-template-columns: repeat({{ grid_row_mobile }}, 1fr);
+    margin-top: {{ grid_mt | times: 0.75 | round: 0 }}px;
+  }
+
+  .blog-card-{{ section.id }} {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: fit-content;
-    margin: 0;
-    margin-top: {{ button_mt | times: 0.75 | round: 0 }}px;
-    font-size: {{ button_size_mobile }}px;
-    color: {{ button_color }};
-    line-height: {{ button_height }}%;
-    text-transform: unset;
-    text-align: {{ button_align }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .articles-button-{{ section.id }}:hover {
-    color: {{ button_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .articles-items-{{ section.id }} {
-    margin-top: {{ blog_mt | times: 0.75 | round: 0 }}px;
-  }
-
-  .articles-item-{{ section.id }} {
-    display: flex;
-    gap: 20px;
-  }
-
-  .articles-item-{{ section.id }}:not(:first-child) {
-    margin-top: {{ blog_gap_mobile }}px;
-  }
-
-  .articles-image-{{ section.id }} {
-    flex: 0 0 40%;
-    display: block;
-    border-radius: {{ image_radius }}px;
-    border: {{ image_border_thickness }}px solid {{ image_border_color }};
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: {{ card_radius }}px;
+    border: {{ card_border_thickness }}px solid {{ card_border_color }};
     overflow: hidden;
   }
 
-  .articles-image-{{ section.id }} img, 
-  .articles-image-{{ section.id }} svg {
-    width: 100%;
-    height: 100%;
+  .blog-image-{{ section.id }} {
+    display: block;
+    min-height: 300px;
+    border-top-left-radius: {{ card_radius }}px;
+    border-top-right-radius: {{ card_radius }}px;
+  }
+
+  .blog-image-{{ section.id }} img,
+  .blog-image-{{ section.id }} svg {
     display: block;
     object-fit: cover;
-    transition: all 0.25s ease 0s;
+    width: 100%;
+    height: 100%;
   }
 
-  .articles-image-{{ section.id }}:hover img,
-  .articles-image-{{ section.id }}:hover svg {
-    transform: scale(105%);
-    transition: all 0.25s ease 0s;
+  .blog-image-{{ section.id }} svg {
+    background-color: #DDDDDD;
   }
 
-  .articles-image-{{ section.id }} svg {
-    background-color: #CFCFCF;
+  .blog-content-{{ section.id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: {{ content_align_mobile }};
+    padding: {{ content_padding_vertical_mobile }}px {{ content_padding_horizontal_mobile }}px;
+    background-color: {{ content_bg_color }};
   }
 
-  .articles-date-{{ section.id }} {
-    margin: 0px;
+  .blog-date-{{ section.id }} {
+    margin: 0;
     font-size: {{ date_size_mobile }}px;
     color: {{ date_color }};
     line-height: {{ date_height }}%;
-    text-align: {{ content_align_mobile }};
+    text-transform: unset;
   }
 
-  .articles-title-{{ section.id }} {
-    display: block;
-    max-width: fit-content;
-    margin: 0px;
+  .blog-title-{{ section.id }} {
+    margin: 0;
     margin-top: {{ title_mt | times: 0.75 | round: 0 }}px;
     font-size: {{ title_size_mobile }}px;
     color: {{ title_color }};
     line-height: {{ title_height }}%;
+    text-transform: unset;
+    text-align: {{ text_align_mobile }};
     text-decoration: none;
-    text-align: {{ content_align_mobile }};
+  }
+
+  .blog-description-{{ section.id }} {
+    margin-top: {{ description_mt | times: 0.75 | round: 0 }}px;
+    text-align: {{ text_align_mobile }};
+  }
+
+  .blog-description-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ description_size_mobile }}px;
+    color: {{ description_color }};
+    line-height: {{ description_height }}%;
+    text-transform: unset;
+  }
+
+  .blog-button-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-width: fit-content;
+    margin: 0;
+    margin-top: {{ button_mt | times: 0.75 | round: 0 }}px;
+    font-size: {{ button_size_mobile }}px;
+    font-weight: 700;
+    color: {{ button_color }};
+    line-height: {{ button_height }}%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
     transition: all 0.25s ease 0s;
   }
 
-  .articles-title-{{ section.id }}:hover {
-    color: {{ title_hover_color }};
+  .blog-button-{{ section.id }}:hover {
+    color: {{ button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .blog-button-{{ section.id }} svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    fill: {{ arrow_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .blog-button-{{ section.id }}:hover svg {
+    fill: {{ arrow_hover_color }};
     transition: all 0.25s ease 0s;
   }
   
@@ -208,41 +273,49 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .articles-heading-{{ section.id }} {
+    .blog-heading-{{ section.id }} {
+      text-align: {{ heading_align }};
+    }
+
+    .blog-heading-{{ section.id }} * {
       font-size: {{ heading_size }}px;
     }
 
-    .articles-button-{{ section.id }} {
+    .blog-grid-{{ section.id }} {
+      margin-top: {{ grid_mt }}px;
+      gap: {{ grid_gap }}px;
+      grid-template-columns: repeat({{ grid_row }}, 1fr);
+    }
+
+    .blog-content-{{ section.id }} {
+      align-items: {{ content_align }};
+      padding: {{ content_padding_vertical }}px {{ content_padding_horizontal }}px;
+    }
+
+    .blog-date-{{ section.id }} {
+      font-size: {{ date_size }}px;
+    }
+
+    .blog-title-{{ section.id }} {
+      margin-top: {{ title_mt }}px;
+      font-size: {{ title_size }}px;
+      text-align: {{ text_align }};
+    }
+
+    .blog-description-{{ section.id }} {
+      margin-top: {{ description_mt }}px;
+      text-align: {{ text_align }};
+    }
+  
+    .blog-description-{{ section.id }} * {
+      font-size: {{ description_size }}px;
+    }
+
+    .blog-button-{{ section.id }} {
       margin-top: {{ button_mt }}px;
       font-size: {{ button_size }}px;
     }
-
-    .articles-items-{{ section.id }} {
-      display: grid;
-      grid-template-columns: repeat({{ blog_show_row }}, 1fr);
-      gap: {{ blog_gap }}px;
-      margin-top: {{ blog_mt }}px;
-    }
-
-    .articles-item-{{ section.id }} {
-      display: block;
-    }
-
-    .articles-item-{{ section.id }}:not(:first-child) {
-      margin-top: 0px;
-    }
-
-    .articles-date-{{ section.id }} {
-      margin-top: {{ date_mt }}px;
-      font-size: {{ date_size }}px;
-      text-align: {{ content_align }};
-    }
-
-    .articles-title-{{ section.id }} {
-      margin-top: {{ title_mt }}px;
-      font-size: {{ title_size }}px;
-      text-align: {{ content_align }};
-    }
+    
   }
   
 {%- endstyle -%}
@@ -257,7 +330,7 @@
 
 {% if heading_custom %}
   <style>
-    .articles-heading-{{ section.id }} {
+    .blog-heading-{{ section.id }} * {
       font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
       font-weight: {{ heading_font.weight }};
       font-style: {{ heading_font.style }};
@@ -265,19 +338,9 @@
   </style>
 {% endif %}
 
-{% if button_custom %}
-  <style>
-    .articles-button-{{ section.id }} {
-      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
-      font-weight: {{ button_font.weight }};
-      font-style: {{ button_font.style }};
-    }
-  </style>
-{% endif %}
-
 {% if date_custom %}
   <style>
-    .articles-date-{{ section.id }} {
+    .blog-date-{{ section.id }} {
       font-family: {{ date_font.family }}, {{ date_font.fallback_families }};
       font-weight: {{ date_font.weight }};
       font-style: {{ date_font.style }};
@@ -287,7 +350,7 @@
 
 {% if title_custom %}
   <style>
-    .articles-title-{{ section.id }} {
+    .blog-title-{{ section.id }} {
       font-family: {{ title_font.family }}, {{ title_font.fallback_families }};
       font-weight: {{ title_font.weight }};
       font-style: {{ title_font.style }};
@@ -295,151 +358,169 @@
   </style>
 {% endif %}
 
-{% if button_underline %}
+{% if description_custom %}
   <style>
-    .articles-button-{{ section.id }} {
-      text-decoration: underline;
-    }
-  </style>
-{% else %}
-  <style>
-    .articles-button-{{ section.id }} {
-      text-decoration: none;
+    .blog-description-{{ section.id }} * {
+      font-family: {{ description_font.family }}, {{ description_font.fallback_families }};
+      font-weight: {{ description_font.weight }};
+      font-style: {{ description_font.style }};
     }
   </style>
 {% endif %}
 
-{% if button_align == "center" %}
+{% if button_custom %}
   <style>
-    .articles-button-{{ section.id }} {
-      margin-left: auto;
-      margin-right: auto;
+    .blog-button-{{ section.id }} {
+      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-weight: {{ button_font.weight }};
+      font-style: {{ button_font.style }};
     }
   </style>
-{% elsif button_align == "right" %}
+{% endif %}
+
+{% if card_hover %}
   <style>
-    .articles-button-{{ section.id }} {
-      margin-left: auto;
+    .blog-card-{{ section.id }} {
+      transition: all 0.25s ease 0s;
+    }
+
+    .blog-card-{{ section.id }}:hover {
+      transition: all 0.25s ease 0s;
+      box-shadow: 6px 6px 0 0 {{ card_shadow_color }};
+      transform: translate(-6px, -6px);
     }
   </style>
 {% endif %}
 
 {% if button_style == "button" %}
   <style>
-    .articles-button-{{ section.id }} {
+
+    .blog-button-{{ section.id }} {
       padding: {{ button_padding_vertical | times: 0.75 | round: 0 }}px {{ button_padding_horizontal | times: 0.75 | round: 0 }}px;
       border-radius: {{ button_radius }}px;
       border: {{ button_border_thickness }}px solid {{ button_border_color }};
       background-color: {{ button_bg_color }};
     }
 
-    .articles-button-{{ section.id }}:hover {
+    .blog-button-{{ section.id }}:hover {
       border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
       background-color: {{ button_bg_hover_color }};
+      transition: all 0.25s ease 0s;
     }
-    
-    @media(min-width: 1024px) {
-      .articles-button-{{ section.id }} {
+
+    @media(min-width: 1024px ) {
+      .blog-button-{{ section.id }} {
         padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
       }
     }
+    
   </style>
 {% endif %}
 
-{% if use_custom_height %}
+{% if image_bottom_border %}
   <style>
-    .articles-image-{{ section.id }} {
-      height: {{ image_height_mobile }}px;
-    }
-    @media(min-width: 1024px) {
-      .articles-image-{{ section.id }} {
-        height: {{ image_height }}px;
-      }
+    .blog-image-{{ section.id }} {
+      border-bottom: {{ image_border_thickness }}px solid {{ image_border_color }};
     }
   </style>
 {% endif %}
 
-{% if content_align_mobile == "center" %}
+{% if image_ratio == "portrait" %}
   <style>
-    .articles-title-{{ section.id }} {
-      margin-left: auto;
-      margin-right: auto;
+    .blog-image-{{ section.id }} {
+     aspect-ratio: 9.6/12; 
     }
   </style>
-{% elsif content_align_mobile == "right" %}
+{% elsif image_ratio == "landscape" %}
   <style>
-    .articles-title-{{ section.id }} {
-      margin-left: auto;
+    .blog-image-{{ section.id }} {
+     aspect-ratio: 12/7; 
     }
   </style>
-{% endif %}
-
-{% if content_align == "center" %}
+{% elsif image_ratio == "square" %}
   <style>
-    @media(min-width: 1024px) {
-      .articles-title-{{ section.id }} {
-        margin-left: auto;
-        margin-right: auto; 
-      }
-    }
-  </style>
-{% elsif content_align == "right" %}
-  <style>
-    @media(min-width: 1024px) {
-      .articles-title-{{ section.id }} {
-        margin-left: auto;
-        margin-right: 0px; 
-      }
-    }
-  </style>
-{% else %}
-  <style>
-    @media(min-width: 1024px) {
-      .articles-title-{{ section.id }} {
-        margin-left: 0px;
-        margin-right: 0px; 
-      }
+    .blog-image-{{ section.id }} {
+     aspect-ratio: 12/12; 
     }
   </style>
 {% endif %}
 
-<div class="section-{{ section.id }} articles-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings ">
+<div class="section-{{ section.id }} blog-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
       {% if heading != blank %}
-        <h2 class="articles-heading-{{ section.id }}">{{ heading }}</h2>
+        <div class="blog-heading-{{ section.id }}">{{ heading }}</div>
       {% endif %}
-      {% if button != blank %}
-        <a href="{{ blog.url }}" class="articles-button-{{ section.id }}">{{ button }}</a>
-      {% endif %}
-      <div class="articles-items-{{ section.id }}">
-        {% if blog != blank %}
-          {% for article in blog.articles limit: blog_show %}
-            <div class="articles-item-{{ section.id }}">
-              <a href="{{ article.url }}" class="articles-image-{{ section.id }}">
+
+      <div class="blog-grid-{{ section.id }}">
+        {% if articles != blank %}
+          {% for article in articles.articles %}
+            <div class="blog-card-{{ section.id }}">
+  
+              <a href="{{ article.url }}" class="blog-image-{{ section.id }}">
                 {% if article.image != blank %}
-                  <img src="{{ article.image | image_url }}" alt="" {% if lazy %}loading="lazy"{% endif %}>
+                  <img src="{{ article.image | image_url }}" alt="{{ article.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
                 {% else %}
                   {{ 'image' | placeholder_svg_tag }}
                 {% endif %}
               </a>
-              <div class="articles-content-{{ section.id }}">
-                <p class="articles-date-{{ section.id }}">{{ article.published_at | date: "%B %d, %Y" }}</p>
-                <a href="{{ article.url }}" class="articles-title-{{ section.id }}">{{ article.title }}</a>
+              <div class="blog-content-{{ section.id }}">
+                  
+                <p class="blog-date-{{ section.id }}">{{ article.created_at | date: '%B %d, %Y' }}</p>
+  
+                <a href="{{ article.url }}" class="blog-title-{{ section.id }}">{{ article.title }}</a>
+
+                
+                {% if article.excerpt != blank %}
+                  <div class="blog-description-{{ section.id }}">{{ article.excerpt }}</div>
+                {% endif %}
+                
+                  <a href="{{ article.url }}" class="blog-button-{{ section.id }}">
+                    {{ button }}
+                    {% if button_arrow %}
+                        <svg fill="{{ arrow_color }}" height="800px" width="800px" version="1.1" id="Layer_1" viewBox="0 0 330 330" >
+                        	<path id="XMLID_27_" d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255
+                        		s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0
+                        		c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"/>
+                        </svg>
+                    {% endif %}
+                  </a>
+                
               </div>
+              
             </div>
           {% endfor %}
         {% else %}
-          {% for item in (1..blog_show) %}
-            <div class="articles-item-{{ section.id }}">
-              <a href="#" class="articles-image-{{ section.id }}">
-                {{ 'image' | placeholder_svg_tag }}
+          {% for item in (1..3) %}
+            <a href="#" class="blog-card-{{ section.id }}">
+    
+                <div class="blog-image-{{ section.id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+                <div class="blog-content-{{ section.id }}">
+                    
+                  <p class="blog-date-{{ section.id }}">{{ "now" | date: "%Y-%m-%d" }}</p>
+    
+                  <p class="blog-title-{{ section.id }}">Article #{{ forloop.index }}</p>
+    
+                  <div class="blog-description-{{ section.id }}">
+                    <p>Short description article</p>
+                  </div>
+    
+                  <p class="blog-button-{{ section.id }}">
+                      {{ button }}
+                      {% if button_arrow %}
+                          <svg fill="{{ arrow_color }}" height="800px" width="800px" version="1.1" id="Layer_1" viewBox="0 0 330 330" >
+                          	<path id="XMLID_27_" d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255
+                          		s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0
+                          		c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"/>
+                          </svg>
+                      {% endif %}
+                    </p>
+                  
+                </div>
+                
               </a>
-              <div class="articles-content-{{ section.id }}">
-                <p class="articles-date-{{ section.id }}">September 26, 2022</p>
-                <a href="#" class="articles-title-{{ section.id }}">Article {{ forloop.index }}</a>
-              </div>
-            </div>
-          {% endfor %}
+            {% endfor %}
         {% endif %}
       </div>
     </div>
@@ -447,17 +528,16 @@
 
 {% schema %}
 {
-  "name": "SG-Blog #4",
+  "name": "SG-Blog #5",
   "settings": [
     {
       "type": "header",
       "content": "Heading"
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "heading",
-      "label": "Heading",
-      "default": "OUR BLOG"
+      "label": "Heading"
     },
     {
       "type": "checkbox",
@@ -479,7 +559,7 @@
       "step": 2,
       "unit": "px",
       "label": "Heading Size",
-      "default": 34
+      "default": 48
     },
     {
       "type": "range",
@@ -489,7 +569,7 @@
       "step": 2,
       "unit": "px",
       "label": "Heading Size - Mobile",
-      "default": 30
+      "default": 32
     },
     {
       "type": "range",
@@ -499,7 +579,7 @@
       "step": 10,
       "unit": "%",
       "label": "Heading Line Height",
-      "default": 130
+      "default": 150
     },
     {
       "type": "select",
@@ -522,61 +602,9 @@
       ]
     },
     {
-      "type": "header",
-      "content": "Button"
-    },
-    {
-      "type": "text",
-      "id": "button",
-      "label": "Button",
-      "default": "VIEW ALL"
-    },
-    {
-      "type": "checkbox",
-      "id": "button_custom",
-      "label": "Use Custom Font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "button_font",
-      "label": "Button Font Family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "button_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "button_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Size - Mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Button Line Height",
-      "default": 130
-    },
-    {
       "type": "select",
-      "id": "button_align",
-      "label": "Button Text Align",
+      "id": "heading_align_mobile",
+      "label": "Heading Text Align - Mobile",
       "default": "center",
       "options": [
         {
@@ -594,216 +622,136 @@
       ]
     },
     {
+      "type": "header",
+      "content": "Blog"
+    },
+    {
+      "type": "blog",
+      "id": "articles",
+      "label": "Blog"
+    },
+    {
+      "type": "header",
+      "content": "Blog Grid Settings"
+    },
+    {
+      "type": "range",
+      "id": "grid_row",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Blog Articles per Row",
+      "default": 3
+    },
+    {
       "type": "select",
-      "id": "button_style",
-      "label": "Button Style",
-      "default": "button",
+      "id": "grid_row_mobile",
+      "label": "Blog Articles per Row - Mobile",
+      "default": "1",
       "options": [
         {
-          "label": "Button",
-          "value": "button"
+          "label": "1",
+          "value": "1"
         },
         {
-          "label": "Link",
-          "value": "Link"
+          "label": "2",
+          "value": "2"
         }
       ]
     },
     {
       "type": "range",
-      "id": "button_mt",
+      "id": "grid_gap",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 50,
+      "step": 2,
       "unit": "px",
-      "label": "Button Margin Top",
-      "default": 16
+      "label": "Blog Grid Gap",
+      "default": 32
     },
     {
       "type": "range",
-      "id": "button_padding_vertical",
+      "id": "grid_gap_mobile",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 50,
+      "step": 2,
       "unit": "px",
-      "label": "Button Padding Vertical",
-      "default": 8
+      "label": "Blog Grid Gap - Mobile",
+      "default": 24
     },
     {
       "type": "range",
-      "id": "button_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Button Padding Horizontal",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "button_radius",
+      "id": "grid_mt",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Button Border Radius",
+      "label": "Blog Grid Margin Top",
       "default": 0
     },
     {
+      "type": "header",
+      "content": "Blog Card Settings"
+    },
+    {
       "type": "range",
-      "id": "button_border_thickness",
+      "id": "card_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "card_border_thickness",
       "min": 0,
       "max": 10,
       "step": 1,
       "unit": "px",
-      "label": "Button Border Thickness",
-      "default": 1
+      "label": "Card Border Thickness",
+      "default": 2
     },
     {
       "type": "checkbox",
-      "id": "button_underline",
-      "label": "Button Underline"
-    },
-    {
-      "type": "header",
-      "content": "Blog Settings"
-    },
-    {
-      "type": "blog",
-      "id": "blog",
-      "label": "Blog"
-    },
-    {
-      "type": "range",
-      "id": "blog_show",
-      "min": 1,
-      "max": 12,
-      "step": 1,
-      "label": "Article to Show",
-      "default": 3
-    },
-    {
-      "type": "range",
-      "id": "blog_show_row",
-      "min": 1,
-      "max": 6,
-      "step": 1,
-      "label": "Article Per Row - Desktop",
-      "default": 3
-    },
-    {
-      "type": "range",
-      "id": "blog_gap",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Blog Gap",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "blog_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Blog Gap - Mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "blog_mt",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Blog Margin Top",
-      "default": 52
-    },
-    {
-      "type": "header",
-      "content": "Article Content Settings"
-    },
-    {
-      "type": "select",
-      "id": "content_align",
-      "label": "Content Text Align",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "content_align_mobile",
-      "label": "Content Text Align - Mobile",
-      "default": "left",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Image Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "use_custom_height",
-      "label": "Use Custom Height",
+      "id": "card_hover",
+      "label": "Use Hover Effect",
       "default": true
     },
     {
-      "type": "range",
-      "id": "image_height",
-      "min": 50,
-      "max": 600,
-      "step": 10,
-      "unit": "px",
-      "label": "Image Custom Height",
-      "default": 200
+      "type": "header",
+      "content": "Card Image Settings"
     },
     {
-      "type": "range",
-      "id": "image_height_mobile",
-      "min": 50,
-      "max": 600,
-      "step": 10,
-      "unit": "px",
-      "label": "Image Custom Height - Mobile",
-      "default": 100
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image Aspect Ratio",
+      "default": "landscape",
+      "options": [
+        {
+          "label": "Original",
+          "value": "original"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        }
+      ]
     },
     {
-      "type": "range",
-      "id": "image_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Image Border Radius",
-      "default": 0
+      "type": "checkbox",
+      "id": "image_bottom_border",
+      "label": "Use Bottom Border",
+      "default": true
     },
     {
       "type": "range",
@@ -813,11 +761,95 @@
       "step": 1,
       "unit": "px",
       "label": "Image Border Thickness",
-      "default": 0
+      "default": 2
     },
     {
       "type": "header",
-      "content": "Article Date"
+      "content": "Card Content Settings"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Padding Vertical",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Padding Vertical - Mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Padding Horizontal",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Padding Horizontal - Mobile",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Content Text Align",
+      "default": "start",
+      "options": [
+        {
+          "label": "Left",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "end"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_align_mobile",
+      "label": "Content Text Align - Mobile",
+      "default": "start",
+      "options": [
+        {
+          "label": "Left",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "end"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Card Date Settings"
     },
     {
       "type": "checkbox",
@@ -839,7 +871,7 @@
       "step": 2,
       "unit": "px",
       "label": "Date Size",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
@@ -849,7 +881,7 @@
       "step": 2,
       "unit": "px",
       "label": "Date Size - Mobile",
-      "default": 12
+      "default": 16
     },
     {
       "type": "range",
@@ -859,21 +891,11 @@
       "step": 10,
       "unit": "%",
       "label": "Date Line Height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "date_mt",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Date Margin Top",
-      "default": 20
+      "default": 150
     },
     {
       "type": "header",
-      "content": "Article Title"
+      "content": "Card Title Settings"
     },
     {
       "type": "checkbox",
@@ -895,7 +917,7 @@
       "step": 2,
       "unit": "px",
       "label": "Title Size",
-      "default": 20
+      "default": 28
     },
     {
       "type": "range",
@@ -905,7 +927,7 @@
       "step": 2,
       "unit": "px",
       "label": "Title Size - Mobile",
-      "default": 18
+      "default": 24
     },
     {
       "type": "range",
@@ -915,17 +937,303 @@
       "step": 10,
       "unit": "%",
       "label": "Title Line Height",
-      "default": 130
+      "default": 150
     },
     {
       "type": "range",
       "id": "title_mt",
       "min": 0,
       "max": 100,
-      "step": 1,
+      "step": 2,
       "unit": "px",
       "label": "Title Margin Top",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Card Short Description Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "description_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "description_font",
+      "label": "Short Description Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Short Description Size",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Short Description Size - Mobile",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "description_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Short Description Line Height",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "description_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Short Description Margin Top",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Card Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Button Text",
+      "default": "Read More"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Button Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Size - Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Button Line Height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Margin Top",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "default": "link",
+      "options": [
+        {
+          "label": "Link",
+          "value": "link"
+        },
+        {
+          "label": "Button",
+          "value": "button"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Vertical",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Horizontal",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Border Thickness",
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "button_arrow",
+      "label": "Use Button Arrow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card Colors"
+    },
+    {
+      "type": "color",
+      "label": "Card Border Color",
+      "id": "card_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Card Shadow Color",
+      "id": "card_shadow_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Card Image Colors"
+    },
+    {
+      "type": "color",
+      "label": "Image Border Color",
+      "id": "image_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Card Content Colors"
+    },
+    {
+      "type": "color",
+      "label": "Content Background Color",
+      "id": "content_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Content Date Color",
+      "id": "date_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Content Title Color",
+      "id": "title_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Content Short Description Color",
+      "id": "description_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Card Button Colors"
+    },
+    {
+      "type": "color",
+      "label": "Button Color",
+      "id": "button_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Button Hover Color",
+      "id": "button_hover_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Button Background Color",
+      "id": "button_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Button Background Hover Color",
+      "id": "button_bg_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Button Border Color",
+      "id": "button_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Button Border Hover Color",
+      "id": "button_border_hover_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Button Arrow Color",
+      "id": "arrow_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Button Arrow Hover Color",
+      "id": "arrow_hover_color",
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -935,71 +1243,13 @@
       "type": "color",
       "label": "Heading Color",
       "id": "heading_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Button Color",
-      "id": "button_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Button Hover Color",
-      "id": "button_hover_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Button Background Color",
-      "id": "button_bg_color"
-    },
-    {
-      "type": "color",
-      "label": "Button Background Hover Color",
-      "id": "button_bg_hover_color"
-    },
-    {
-      "type": "color",
-      "label": "Button Border Color",
-      "id": "button_border_color",
-      "default": "#2b2a27"
-    },
-    {
-      "type": "color",
-      "label": "Button Border Hover Color",
-      "id": "button_border_hover_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Image Border Color",
-      "id": "image_border_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Date Color",
-      "id": "date_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Title Color",
-      "id": "title_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Title Hover Color",
-      "id": "title_hover_color",
-      "default": "#CFCFCF"
+      "default": "#000000"
     },
     {
       "type": "color",
       "label": "Section background",
       "id": "background_color",
-      "default": "#000000"
+      "default": "#FFFFFF"
     },
     {
       "type": "color_background",
@@ -1098,7 +1348,7 @@
       "step": 10,
       "unit": "rem",
       "label": "Section content width",
-      "default": 120
+      "default": 130
     },
     {
       "type": "range",
@@ -1120,7 +1370,7 @@
   ],
   "presets": [
     {
-      "name": "SG-Blog #4"
+      "name": "SG-Blog #5"
     }
   ]
 }
