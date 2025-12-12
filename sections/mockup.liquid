@@ -17,18 +17,29 @@
 {%- endstyle -%}
 
 <style>
-  .easy-setup {
-    color: var(--text-color);
+
+   .rating-item svg {
+    width:16px;
+    height:16px;
+    border:none;
+    margin-right:0px;
+    line-height: 1.6;
+    fill: var(--text-color);
   }
-  .easy-setup div {
+
+  .customers-reviews {
+    color: var(--text-color);
+    text-align: center;
+  }
+  .customers-reviews div {
     box-sizing: border-box;
   }
-  .easy-setup p {
+  .customers-reviews p {
     margin-top: 0;
     margin-bottom: 0;
   }
   @media screen and (min-width: 750px) {
-    .easy-setup .swiper-arrow-icon-wrapper {
+    .customers-reviews .swiper-arrow-icon-wrapper {
       display: none;
     }
   }
@@ -60,7 +71,7 @@
       margin-bottom: 60px;
     }
   }
-  .easy-setup-title {
+  .customers-reviews-title {
     font-size: calc(var(--title-font-size) * 0.5);
     font-weight: 800;
     line-height: 107%;
@@ -69,16 +80,15 @@
     color: var(--title-color);
   }
   @media screen and (min-width: 750px) {
-    .easy-setup-title {
+    .customers-reviews-title {
       font-size: calc(var(--title-font-size) * 0.75);
+      margin-bottom: 60px;
       text-align: center;
-      margin-bottom: 2rem;
     }
   }
   @media screen and (min-width: 750px) {
-    .easy-setup-title {
+    .customers-reviews-title {
       font-size: var(--title-font-size);
-      margin-bottom: 2.5rem;
     }
   }
   /* .sg-custom-card will be reused on other sections */
@@ -105,6 +115,17 @@
     font-weight: 500;
     font-size: var(--product-card-description-font-size, 20px);
     margin-bottom: 13px;
+  }
+  .sg-custom-card__rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 13px;
+  }
+  .sg-custom-card__author {
+    font-size: 24px;
+    font-weight: 800;
   }
   .sg-custom-card__link {
     border: 1px solid var(--text-color);
@@ -145,28 +166,9 @@
     font-size: 28px;
   }
 </style>
-<style>
-  .sg-custom-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    width: 277px;
-    margin: 0 auto;
-    background: var(--second-card-background-color);
-    border-radius: 45px;
-    font-size: 20px;
-    font-weight: 800;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    margin-top: 45px;
-    text-decoration: none;
-  }
-</style>
 
 <div
-  class="easy-setup" id="easy-setup"
+  class="customers-reviews" id="customers-reviews"
   style="
     background-color:{{ section.settings.background-color }};
     --title-font-size: {{ section.settings.title_font_size }}px;
@@ -174,14 +176,13 @@
     --product-card-title-font-size: {{ section.settings.product_card_title_font_size }}px;
     --text-color:{{ section.settings.text-color }};
     --card-background-color: {{ section.settings.card-background-color }};
-    --second-card-background-color: {{ section.settings.second-card-background-color }};
-      overflow: hidden;
+    overflow:hidden;
   "
 >
-  <div class="page-width section-{{ section.id }}-padding" >
-    <div class="easy-setup-title">{{ section.settings.title }}</div>
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="customers-reviews-title">{{ section.settings.title }}</div>
 
-    <div class="swiper swiper-{{ section.id }}" style="overflow:visible">
+    <div class="swiper swiper-{{ section.id }}" style="overflow:visible;">
       <div class="swiper-arrow-icon-wrapper">
         <svg
           class="swiper-button-prev swiper-arrow-icon swiper-arrow-icon--left"
@@ -211,44 +212,17 @@
       <div class="swiper-wrapper">
         {% for block in section.blocks %}
           <div class="swiper-slide sg-custom-card">
-            {% assign image = block.settings.image %}
-            {% if image != blank %}
-              <img
-                class="sg-custom-card__image"
-                src="{{ image | img_url: '400x' }}"
-                srcset="
-                  {{ image | img_url: '400x' }} 400w,
-                  {{ image | img_url: '600x' }} 800w,
-                  {{ image | img_url: '800x' }} 1200w,
-                  {{ image | img_url: '1000x' }} 1600w,
-                  {{ image | img_url: 'master' }} 2000w
-                "
-                alt="{{ image.alt }}"
-              >
-            {% else %}
-              <div
-                style="
-                  display: block;
-                  width: 100%;
-                  aspect-ratio: 1/1;
-                  border: 1px solid var(--text-color);
-                  border-radius: 26px;
-                  background-color: #FBF4FE;
-                "
-              ></div>
-            {% endif %}
-            <div class="sg-custom-card__index">{{ forloop.index }}</div>
             <div class="sg-custom-card__title">{{ block.settings.title }}</div>
+            {% assign rating = block.settings.rating %}
+            <div class="sg-custom-card__rating">
+              {% for i in (1..5) %}{% if i <= rating %}<div class="rating-item"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="{{ section.settings.stars-color }}" d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>{% endif %}{% endfor %}
+            </div>
+            <div class="sg-custom-card__desc">{{ block.settings.desc }}</div>
+            <div class="sg-custom-card__author">{{ block.settings.author }}</div>
           </div>
         {% endfor %}
       </div>
     </div>
-
-    {% if section.settings.url_text != blank %}
-      <a class="sg-custom-cta" href="{{ section.settings.url }}">
-        {{ section.settings.url_text }}
-      </a>
-    {% endif %}
   </div>
 </div>
 
@@ -265,6 +239,7 @@
       let head = document.getElementsByTagName('head')[0];
       head.appendChild(link);
     }
+    // do the same with the swiperjs script
     const jsId = 'swiper-js';
     let existingScript = document.getElementById(jsId);
     if (!existingScript) {
@@ -301,13 +276,14 @@
             //},
           },
         });
-      } catch (e) {
+      }
+      catch (e) {
         console.log('Swiper not loaded');
-        console.log(e);
+        console.log(e)
       }
     }
     document.addEventListener('swiper:loaded', loadSwiper);
-    if (window.Shopify && Shopify.designMode) {
+    if(window.Shopify && Shopify.designMode) {
       document.addEventListener('shopify:section:load', loadSwiper);
     }
   })();
@@ -315,7 +291,8 @@
 
 {% schema %}
 {
-  "name": "SG-Easy Setup Slider",
+  "name": "SG-Customer reviews",
+  "class": "section",
   "tag": "section",
   "settings": [
     {
@@ -326,7 +303,7 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "EASY SET UP IN 3 STEPS"
+      "default": "WHAT OUT CUSTOMERS THINK"
     },
     {
       "type": "header",
@@ -336,25 +313,19 @@
       "type": "color",
       "label": "Title color",
       "id": "title_color",
-      "default": "#FFFFFF"
+      "default": "#432a54"
     },
     {
       "type": "color",
       "label": "Text color",
       "id": "text-color",
-      "default": "#432A54"
+      "default": "#432a54"
     },
     {
       "type": "color",
       "label": "Card background color",
       "id": "card-background-color",
       "default": "#fef9f3"
-    },
-    {
-      "type": "color",
-      "label": "Card second background color",
-      "id": "second-card-background-color",
-      "default": "#fbf4fe"
     },
     {
       "type": "header",
@@ -382,28 +353,13 @@
     },
     {
       "type": "header",
-      "content": "URL"
-    },
-    {
-      "type": "text",
-      "id": "url",
-      "label": "URL"
-    },
-    {
-      "type": "text",
-      "id": "url_text",
-      "label": "URL Text",
-      "default": "SHOP NOW"
-    },
-    {
-      "type": "header",
       "content": "Background color"
     },
     {
       "type": "color",
       "label": "Section background color",
       "id": "background-color",
-      "default": "#BB8FC1"
+      "default": "#F7EAF9"
     },
     {
       "type": "header",
@@ -447,40 +403,62 @@
   "max_blocks": 3,
   "blocks": [
     {
-      "type": "card",
-      "name": "Card",
+      "type": "review",
+      "name": "Review",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
         {
           "type": "richtext",
           "id": "title",
           "label": "Title",
-          "default": "<p>Download juice.exe</p>"
+          "default": "<p>OUTSTANDING STUFF!</p>"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description",
+          "default": "<p>Totally wicked, can honestly recommend it to every viber out there. Better buy that stuff right now or regret it forever!</p>"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "NIC R."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-BonBon Steps",
+      "name": "SG-BonBon Testimonials",
       "blocks": [
         {
-          "type": "card"
+          "type": "review"
         },
         {
-          "type": "card",
+          "type": "review",
           "settings": {
-            "title": "<p>Unzip that stuff</p>"
+            "title": "<p>LOVING IT :)</p>",
+            "rating": 5,
+            "desc": "<p>Totally wicked, can honestly recommend it to every viber out there. Better buy that stuff right now or regret it forever!</p>",
+            "author": "SUSAN K."
           }
         },
         {
-          "type": "card",
+          "type": "review",
           "settings": {
-            "title": "<p>Enjoy the funky stuff</p>"
+            "title": "<p>ORDERED MORE!</p>",
+            "rating": 5,
+            "desc": "<p>Totally wicked, can honestly recommend it to every viber out there. Better buy that stuff right now or regret it forever!</p>",
+            "author": "LINUS Vbr."
           }
         }
       ]
