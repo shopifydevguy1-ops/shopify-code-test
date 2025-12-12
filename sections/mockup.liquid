@@ -1,212 +1,207 @@
-{% capture section_content %}
-<style>
-  .cs-faq-item {
-    cursor: pointer;
-    border: 1px solid var(--border-color);
-    padding: 16px 10px;
-    margin-bottom: 20px;
-  }
-  .cs-faq-item:last-child {
-    margin-bottom: 0;
-  }
-  .cs-faq-item.cs-faq-item-active,
-  .cs-faq-item:hover {
-    border: 1px solid var(--active-border-color);
-  }
-  .cs-faq-title {
-    font-size: calc(var(--title-size) * 0.75);
-    color: var(--title-color);
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  @media screen and (min-width: 750px) {
-    .cs-faq-title {
-      font-size: var(--title-size);
-      margin-bottom: 30px;
-    }
-  }
-  .cs-faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: calc(var(--question-size) * 0.75);
-    color: var(--question-color);
-    padding: 0 5px;
-  }
-  @media screen and (min-width: 750px) {
-    .cs-faq-question {
-      font-size: var(--question-size);
-      padding: 5px 15px;
-    }
-  }
-  .cs-faq-answer {
-    display: none;
-    color: var(--answer-color);
-    font-size: calc(var(--answer-size) * 0.75);
-    padding: 5px 5px;
-  }
-  @media screen and (min-width: 750px) {
-    .cs-faq-answer {
-      font-size: var(--answer-size);
-      padding: 0 15px;
-    }
-  }
-  .cs-faq-item-active .cs-faq-answer {
-    display: block;
-  }
-</style>
-
-<div
-  class="cs-faq cs-faq-{{ section.id }}" id="threads-faq"
-  style="
-    --border-color: {{ section.settings.border_color }};
-    --active-border-color: {{ section.settings.active_border_color }};
-    --title-size: {{ section.settings.font_size }}px;
-    --title-color: {{ section.settings.font_color }};
-
-    --question-size: {{ section.settings.question_font_size }}px;
-    --question-color: {{ section.settings.question_font_color }};
-
-    --answer-size: {{ section.settings.answer_font_size }}px;
-    --answer-color: {{ section.settings.answer_font_color }};
-  "
->
-  <div class="cs-faq-title">
-    {{ section.settings.title }}
-  </div>
-  {% for block in section.blocks %}
-    <div class="cs-faq-item">
-      <div class="cs-faq-question">
-        {{ block.settings.question }}
-        <span>+</span>
-      </div>
-      <div class="cs-faq-answer">{{ block.settings.answer }}</div>
-    </div>
-  {% endfor %}
-</div>
-
-<script>
-  (function () {
-    var faq = document.querySelector('.cs-faq-{{ section.id }}');
-    var items = faq.querySelectorAll('.cs-faq-item');
-    var answers = faq.querySelectorAll('.cs-faq-answer');
-
-    items.forEach(function (item) {
-      item.addEventListener('click', function () {
-        const question = item.querySelector('.cs-faq-question');
-        const answer = item.querySelector('.cs-faq-answer');
-
-        item.classList.toggle('cs-faq-item-active');
-        if (item.classList.contains('cs-faq-item-active')) {
-          question.querySelector('span').innerHTML = '-';
-        } else {
-          question.querySelector('span').innerHTML = '+';
-        }
-      });
-    });
-  })();
-</script>
-{% endcapture %}
-
 {%- style -%}
   .section-{{ section.id }}-padding {
-    max-width: {{section.settings.section-width}}rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
-      padding: 0 5rem;
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .collection-2-title {
+    font-size: {{section.settings.section_title_font_size}}px;
+    line-height: 1.32;
+    letter-spacing: 0.5px;
+    color: {{section.settings.section_title_color}};
+    padding: 0 0 50px 0;
+    text-align:center;
+  }
+  {% if section.settings.heading_custom %}
+    .collection-2-title {
+      font-family: {{section.settings.type_header_font.family}}, {{ section.settings.type_header_font.fallback_families }};
+      font-weight: {{section.settings.type_header_font.weight}};
+      font-style:  {{ section.settings.type_header_font.style }};
+    }
+  {% endif %}
+
+  .collection-2-wrapper {
+	display:flex;
+  	flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .box-{{ section.id }} {
+    flex: 0 0 calc(33% - 40px);
+  	position: relative;
+    width: 100%;
+    min-height: 1px;
+  	margin-bottom:60px;
+    margin-right: 20px;
+    margin-left: 20px;
+  	height: 115px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  	background-color:#fafafa;
+    transition: all 0.2s;
+  }
+
+    .box-{{ section.id }} img {
+      max-height: 130px;
+      max-width: 130px;
+      position:absolute;
+      left: -20px;
+      top: -7.5px;
+  }
+
+  .collection-2-name-box {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 70%;
+    text-align: center;
+    font-weight: 600;
+    line-height:1.2;
+  }
+
+  @media (max-width: 1070px) {
+
+     .box-{{ section.id }} {
+       height:100px;
+     }
+      
+    .box-{{ section.id }} img {
+      max-height: 100px;
+      max-width: 100px;
+      left: -15px;
+      top: 0px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .collection-2-title {
+      padding: 0 0 20px 0;
+    }
+    
+    .collection-2-name-box {
+      left: 60%;
+    }
+    
+    .box-{{ section.id }} {
+      flex: 0 0 calc(50% - 20px);
+      margin:20px 10px;
+      height: 60px;
+    }
+    .collection-2-wrapper {
+      justify-content:space-between;
+    }
+
+    .box-{{ section.id }} img {
+      max-height: 50px;
+      max-width: 50px;
+      left: -10px;
+      top: 5px;
+    }
+  }
+
+  .box-{{ section.id }}:hover {
+    transform: scale(1.1);
+  }
+
+   .box-{{ section.id }} svg {
+    max-height: 130%;
+    max-width: 100%;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+  }
+
+
+  
 {%- endstyle -%}
 
 <div style="background-color:{{section.settings.background-color}};">
   <div class="page-width section-{{ section.id }}-padding">
-    <div>{{ section_content }}</div>
+    <div class="collection-2-title">{{section.settings.header}}</div>
+    <div class="collection-2-wrapper">
+      {%- for block in section.blocks -%}
+        <a style="display:contents;text-decoration:none;color:{{ section.settings.link-color }}" href="{{ block.settings.link }}">
+        <div class="box-{{ section.id }}">
+          <div>
+             {%- if block.settings.collection.featured_image -%}
+                {{ block.settings.collection.featured_image | image_url: width: block.settings.collection.featured_image.width | image_tag: loading: 'lazy', alt: block.settings.collection.title }}
+             {%- elsif block.settings.image -%}
+                 {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.collection.title }}
+             {%- else -%}
+                {{ 'image' | placeholder_svg_tag }}
+             {%- endif -%}
+      
+            <div class="collection-2-name-box"><p>{{ block.settings.collection_name }}</p></div>
+          </div>
+        </div></a>
+      {%- endfor -%}
+    </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "SG-Threads FAQ",
+  "name": "SG-Collection #2",
   "tag": "section",
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "FAQs"
+      "id": "header",
+      "label": "Section Header",
+      "default": "Shop by category"
     },
     {
       "type": "header",
-      "content": "Colors:"
+      "content": "Font&Color settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "type_header_font",
+      "default": "assistant_n7",
+      "label": "Select Section Header Font"
+    },
+    {
+      "type": "range",
+      "id": "section_title_font_size",
+      "min": 12,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Title Font Size",
+      "default": 32
     },
     {
       "type": "color",
-      "id": "border_color",
-      "label": "Border color",
-      "default": "#e5e5e5"
-    },
-    {
-      "type": "color",
-      "id": "active_border_color",
-      "label": "Active border color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "font_color",
-      "label": "Title color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "question_font_color",
-      "label": "Question color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "answer_font_color",
-      "label": "Answer color",
-      "default": "#000000"
+      "id": "section_title_color",
+      "label": "Section Title Color",
+      "default": "#1a1b18"
     },
     {
       "type": "header",
-      "content": "Fonts size:"
+      "content": "Link color"
     },
     {
-      "type": "range",
-      "id": "font_size",
-      "label": "Title font size",
-      "min": 10,
-      "max": 50,
-      "step": 1,
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "question_font_size",
-      "label": "Question font size",
-      "min": 10,
-      "max": 50,
-      "step": 1,
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "answer_font_size",
-      "label": "Answer font size",
-      "min": 10,
-      "max": 50,
-      "step": 1,
-      "default": 14
+      "type": "color",
+      "label": "Link color",
+      "id": "link-color",
+      "default": "#5E5E5E"
     },
     {
       "type": "header",
@@ -220,7 +215,7 @@
     },
     {
       "type": "header",
-      "content": "Section padding"
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
@@ -229,7 +224,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding top",
+      "label": "t:sections.all.padding.padding_top",
       "default": 36
     },
     {
@@ -239,66 +234,73 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding bottom",
+      "label": "t:sections.all.padding.padding_bottom",
       "default": 36
-    },
-    {
-      "type": "header",
-      "content": "Section width"
-    },
-    {
-      "type": "range",
-      "id": "section-width",
-      "min": 80,
-      "max": 200,
-      "step": 5,
-      "unit": "rem",
-      "label": "Section width",
-      "default": 120
     }
   ],
   "blocks": [
     {
-      "type": "question",
-      "name": "Question",
+      "type": "Collection",
+      "name": "collection item",
       "settings": [
         {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "What is the question?"
+          "type": "collection",
+          "id": "collection",
+          "label": "Slide Collection"
         },
         {
           "type": "text",
-          "id": "answer",
-          "label": "Answer",
-          "default": "This is the answer."
+          "id": "collection_name",
+          "label": "Collection name",
+          "default": "Collection name"
+        },
+        {
+          "type": "header",
+          "content": "ATT: Upload transparent and squared image."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Threads FAQ",
+      "name": "SG-Collection #2",
       "blocks": [
         {
-          "type": "question",
-          "settings": {}
+          "type": "Collection"
         },
         {
-          "type": "question",
-          "settings": {}
+          "type": "Collection"
         },
         {
-          "type": "question",
-          "settings": {}
+          "type": "Collection"
         },
         {
-          "type": "question",
-          "settings": {}
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
         }
       ]
     }
   ]
 }
 {% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
