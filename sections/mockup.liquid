@@ -1,5 +1,4 @@
 {%- liquid 
-  assign initial_position = section.settings.initial_position
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
   assign padding_top = section.settings.padding_top
@@ -15,17 +14,61 @@
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
-  assign section_radius = section.settings.section_radius 
+  assign section_radius = section.settings.section_radius
 
-  assign layout = section.settings.layout
-  assign layout_mobile = section.settings.layout_mobile
-  assign layout_gap_mobile = section.settings.layout_gap_mobile
-  assign layout_gap = section.settings.layout_gap
+  assign content_align = section.settings.content_align
+  assign content_align_mobile = section.settings.content_align_mobile
 
-  assign before_image = section.settings.before_image
-  assign before_image_mobile = section.settings.before_image_mobile
-  assign after_image = section.settings.after_image
-  assign after_image_mobile = section.settings.after_image_mobile
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align_mobile = section.settings.heading_align_mobile
+  assign heading_align = section.settings.heading_align
+  
+  assign text = section.settings.text
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_height = section.settings.text_height
+  assign text_color = section.settings.text_color
+  assign text_mt = section.settings.text_mt
+  assign text_mt_mobile = section.settings.text_mt_mobile
+
+  assign body_gap = section.settings.body_gap
+  assign body_gap_mobile = section.settings.body_gap_mobile
+  assign body_mt = section.settings.body_mt
+  assign body_mt_mobile = section.settings.body_mt_mobile
+
+  assign features_gap = section.settings.features_gap
+  assign features_gap_mobile = section.settings.features_gap_mobile
+
+  assign feature_align = section.settings.feature_align
+  assign feature_align_mobile = section.settings.feature_align_mobile
+
+  assign percent_custom = section.settings.percent_custom
+  assign percent_font = section.settings.percent_font
+  assign percent_size = section.settings.percent_size
+  assign percent_size_mobile = section.settings.percent_size_mobile
+  assign percent_height = section.settings.percent_height
+  assign percent_color = section.settings.percent_color
+
+  assign feature_text_custom = section.settings.feature_text_custom
+  assign feature_text_font = section.settings.feature_text_font
+  assign feature_text_size = section.settings.feature_text_size
+  assign feature_text_size_mobile = section.settings.feature_text_size_mobile
+  assign feature_text_height = section.settings.feature_text_height
+  assign feature_text_color = section.settings.feature_text_color
+  assign feature_text_mt = section.settings.feature_text_mt
+
+  assign progress_mt = section.settings.progress_mt  
+  assign progress_mt_mobile = section.settings.progress_mt_mobile
+  assign progress_color = section.settings.progress_color
+  assign progress_active_color = section.settings.progress_active_color
 
   assign image_ratio_mobile = section.settings.image_ratio_mobile
   assign image_ratio = section.settings.image_ratio
@@ -42,71 +85,38 @@
   assign btn_arrow_size_mobile = section.settings.btn_arrow_size_mobile
   assign btn_arrow_size = section.settings.btn_arrow_size
 
-  assign image_text_before = section.settings.image_text_before
-  assign image_text_after = section.settings.image_text_after
-  assign image_text_custom = section.settings.image_text_custom
-  assign image_text_font = section.settings.image_text_font
-  assign image_text_size = section.settings.image_text_size
-  assign image_text_size_mobile = section.settings.image_text_size_mobile
-  assign image_text_height = section.settings.image_text_height
-  assign image_text_color = section.settings.image_text_color
+  assign badge_padding_horizontal = section.settings.badge_padding_horizontal
+  assign badge_padding_horizontal_mobile = section.settings.badge_padding_horizontal_mobile
+  assign badge_padding_vertical = section.settings.badge_padding_vertical
+  assign badge_padding_vertical_mobile = section.settings.badge_padding_vertical_mobile
+  assign badge_bg_color = section.settings.badge_bg_color
+  assign badge_radius = section.settings.badge_radius
+  assign badge_custom = section.settings.badge_custom
+  assign badge_font = section.settings.badge_font
+  assign badge_size = section.settings.badge_size
+  assign badge_size_mobile = section.settings.badge_size_mobile
+  assign badge_height = section.settings.badge_height
+  assign badge_color = section.settings.badge_color
   
-  assign content_align = section.settings.content_align
-  assign content_align_mobile = section.settings.content_align_mobile
+  assign toggle_images_view = section.settings.toggle_images_view
+  assign toggle_images_view_mobile = section.settings.toggle_images_view_mobile
+  assign toggle_images_gap = section.settings.toggle_images_gap
+  assign toggle_images_gap_mobile = section.settings.toggle_images_gap_mobile
 
-  assign heading = section.settings.heading
-  assign heading_size = section.settings.heading_size
-  assign heading_size_mobile = section.settings.heading_size_mobile
-  assign heading_color = section.settings.heading_color
-  assign heading_custom = section.settings.heading_custom
-  assign heading_font = section.settings.heading_font
-  assign heading_height = section.settings.heading_height
-    
-  assign text = section.settings.text
-  assign text_custom = section.settings.text_custom
-  assign text_font = section.settings.text_font
-  assign text_size = section.settings.text_size
-  assign text_size_mobile = section.settings.text_size_mobile
-  assign text_height = section.settings.text_height
-  assign text_color = section.settings.text_color
-  assign text_mt = section.settings.text_mt
-  assign text_mt_mobile = section.settings.text_mt_mobile
-
-  assign features_gap = section.settings.features_gap
-  assign features_gap_mobile = section.settings.features_gap_mobile
-  assign features_mt = section.settings.features_mt
-  assign features_mt_mobile = section.settings.features_mt_mobile
-
-  assign progress_border_thickness = section.settings.progress_border_thickness
-  assign progress_border_color = section.settings.progress_border_color
-  assign progress_radius = section.settings.progress_radius
-  assign progress_bg_color = section.settings.progress_bg_color
-
-  assign percent_custom = section.settings.percent_custom
-  assign percent_font = section.settings.percent_font
-  assign percent_size = section.settings.percent_size
-  assign percent_size_mobile = section.settings.percent_size_mobile
-  assign percent_height = section.settings.percent_height
-  assign percent_color = section.settings.percent_color
-
-  assign progress_text_size = section.settings.progress_text_size
-  assign progress_text_size_mobile = section.settings.progress_text_size_mobile
-  assign progress_text_color = section.settings.progress_text_color
-  assign progress_text_custom = section.settings.progress_text_custom
-  assign progress_text_font = section.settings.progress_text_font
-  assign progress_text_height = section.settings.progress_text_height
-  assign progress_text_mt = section.settings.progress_text_mt
-  assign progress_text_mt_mobile = section.settings.progress_text_mt_mobile
-  assign progress_text_align = section.settings.progress_text_align
-  assign progress_text_align_mobile = section.settings.progress_text_align_mobile
+  assign toggle_image_border_thickness = section.settings.toggle_image_border_thickness
+  assign toggle_image_border_color = section.settings.toggle_image_border_color
+  assign toggle_image_radius = section.settings.toggle_image_radius
+  assign toggle_image_ratio = section.settings.toggle_image_ratio
+  assign toggle_image_ratio_mobile = section.settings.toggle_image_ratio_mobile
+  assign toggle_image_overlay_color = section.settings.toggle_image_overlay_color  
 -%}
 
 {%- style -%}
-  {{ image_text_font | font_face: font_display: 'swap' }}
-  {{ heading_font | font_face: font_display: 'swap' }}
+  {{  heading_font | font_face: font_display: 'swap' }}
   {{ text_font | font_face: font_display: 'swap' }}
   {{ percent_font | font_face: font_display: 'swap' }}
-  {{ progress_text_font | font_face: font_display: 'swap' }}
+  {{ feature_text_font | font_face: font_display: 'swap' }}
+  {{ badge_font | font_face: font_display: 'swap' }}
 
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -125,14 +135,106 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .before-after-heading-{{ section.id }} {
+    text-align: {{ content_align_mobile }};
+  }
+
+  .before-after-heading-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    word-wrap: break-word;
+    font-weight: 700;
+  }
+
+  .before-after-text-{{ section.id }} {
+    text-align: {{ content_align_mobile }};
+    margin-top: {{ text_mt_mobile }}px;    
+  }
+
+  .before-after-text-{{ section.id }} * {
+    margin: 0;   
+    font-size: {{ text_size_mobile }}px;
+    line-height: {{ text_height }}%;
+    color: {{ text_color }};  
+    text-transform: unset;
+    word-wrap: break-word;
   } 
 
   .before-after-body-{{ section.id }} {
-    display: grid; 
+    display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: {{ layout_gap_mobile }}px;
-  }   
+    margin-top: {{ body_mt_mobile }}px;
+    gap: {{ body_gap_mobile }}px;
+  }
+
+  .before-after-features-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ features_gap_mobile }}px;
+  }
+
+  .before-after-feature-content-{{ section.id }} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  .before-after-percent-{{ section.id }} {
+    margin: 0; 
+    width: 100%;       
+    font-size: {{ percent_size_mobile }}px;
+    line-height: {{ percent_height }}%;
+    color: {{ percent_color }};  
+    text-align: {{ feature_align_mobile }};
+    text-transform: unset;
+    word-wrap: break-word;
+    font-weight: 700;
+  }
+
+  .before-after-feature-text-{{ section.id }} {    
+    width: 100%;
+    text-align: {{ feature_align_mobile }};   
+  }
+
+  .before-after-feature-text-{{ section.id }} * {
+    margin: 0;   
+    font-size: {{ feature_text_size_mobile }}px;
+    line-height: {{ feature_text_height }}%;
+    color: {{ feature_text_color }};  
+    text-transform: unset;
+    word-wrap: break-word;
+  } 
+
+  .before-after-progresg-bar-{{ section.id }} {
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    height: 6px;
+    border-radius: 100px;
+    background-color: {{ progress_color }};
+    width: 100%;
+    margin-top: {{ progress_mt_mobile }}px;
+    overflow: hidden;
+  }
+
+  .before-after-progresg-bar-{{ section.id }}:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--after-width, 0);
+    background-color: {{ progress_active_color }};
+    transition: all 0.5s linear 0s;
+    z-index: 2;
+  }
   
   .before-after-button-{{ section.id }} {
     width: {{ btn_size_mobile }}px;
@@ -189,6 +291,13 @@
     position: absolute;
   }
 
+  .before-after-images-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: {{ toggle_images_gap_mobile }}px;
+  }
+
   .before-after-image-relative-{{ section.id }} {
     position: relative;
     height: 100%;
@@ -205,13 +314,21 @@
   .before-after-image-first-{{ section.id }} {
     display: none;
   }
-
+  
   .before-after-image-second-{{ section.id }} {
     display: none;
   }
 
   .before-after-image-relative-{{ section.id }} svg {
     background-color: #AFAFAF;
+  }
+
+  .before-after-image-wrapper-{{ section.id }} {
+    display: none;
+  }
+
+  .before-after-image-wrapper-{{ section.id }}.active {
+    display: block;
   }
 
   .before-after-image-inner-{{ section.id }} {    
@@ -258,112 +375,72 @@
     position: absolute;
   }
 
-  .before-after-before-text-{{ section.id }},
-  .before-after-after-text-{{ section.id }} {
+  .before-after-badge-{{ section.id }} {
     position: absolute;
-    bottom: 10px;
+    top: 10px;
+    padding: {{ badge_padding_vertical_mobile }}px {{ badge_padding_horizontal_mobile }}px;
+    border-radius: {{ badge_radius }}px;
+    background-color: {{ badge_bg_color | hex_to_rgba: 0.4 }};
     margin: 0;    
     text-align: center;
     text-transform: unset;
     word-wrap: break-word;
-    font-size: {{ image_text_size_mobile }}px;
-    line-height: {{ image_text_height }}%;
-    color: {{ image_text_color }};  
+    font-size: {{ badge_size_mobile }}px;
+    line-height: {{ badge_height }}%;
+    color: {{ badge_color }};  
   }
 
-  .before-after-before-text-{{ section.id }} {
+  .before-after-before-badge-{{ section.id }} {
     left: 10px;
   }
 
-  .before-after-after-text-{{ section.id }} {
+  .before-after-after-badge-{{ section.id }} {
     right: 10px;
   }
 
-  .before-after-content-mobile-{{ section.id }} {
-    display: block;
+  .before-after-image-toggles-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat({{ toggle_images_view_mobile }}, 1fr);
+    align-items: center;
+    gap: {{ toggle_images_gap_mobile }}px;
   }
 
-  .before-after-content-desktop-{{ section.id }} {
-    display: none;
-  }
-
-  .before-after-heading-{{ section.id }} {
-    text-align: {{ content_align_mobile }};
-  }
-
-  .before-after-heading-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ heading_size_mobile }}px;
-    color: {{ heading_color }};
-    line-height: {{ heading_height }}%;
-    text-transform: unset;
-    word-wrap: break-word;
-    font-weight: 700;
-  }  
-
-  .before-after-text-{{ section.id }} {
-    text-align: {{ content_align_mobile }};
-    margin-top: {{ text_mt_mobile }}px;    
-  }
-
-  .before-after-text-{{ section.id }} * {
-    margin: 0;   
-    font-size: {{ text_size_mobile }}px;
-    line-height: {{ text_height }}%;
-    color: {{ text_color }};  
-    text-transform: unset;
-    word-wrap: break-word;
-  }
-
-  .before-after-features-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    margin-top: {{ features_mt_mobile }}px;
-    gap: {{ features_gap_mobile }}px;
-  }
-
-  .before-after-progresg-{{ section.id }} {
+  .before-after-image-toggle-{{ section.id }} {
     position: relative;
-    border: {{ progress_border_thickness }}px solid {{ progress_border_color }};
-    border-radius: {{ progress_radius }}px;
-    padding: 10px;
+    border: {{ toggle_image_border_thickness }}px solid {{ toggle_image_border_color }};
+    border-radius: {{ toggle_image_radius }}px;
     overflow: hidden;
+    cursor: pointer;
   }
 
-  .before-after-percent-{{ section.id }} {
-    margin: 0;    
-    position: relative;
-    z-index: 2;
-    font-size: {{ percent_size_mobile }}px;
-    line-height: {{ percent_height }}%;
-    color: {{ percent_color }};      
-    text-transform: unset;
-    word-wrap: break-word;
+  .before-after-image-toggle-{{ section.id }} img,
+  .before-after-image-toggle-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  .before-after-progresg-bg-{{ section.id }} {
+  .before-after-image-toggle-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .before-after-image-toggle-{{ section.id }}:before {
+    content: '';
     position: absolute;
-    z-index: 1;
-    display: block !important;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
-    background-color: {{ progress_bg_color }};
-    transition: all 1.5s ease 0s;
+    z-index: 2;
+    background-color: {{ toggle_image_overlay_color | hex_to_rgba: 0.5 }};
+    opacity: 1;
+    transition: all 0.25s ease 0s;
   }
 
-  .before-after-progresg-text-{{ section.id }} {
-    text-align: {{ progress_text_align_mobile }};
-    margin-top: {{ progress_text_mt_mobile }}px;    
-  }
-
-  .before-after-progresg-text-{{ section.id }} * {
-    margin: 0;   
-    font-size: {{ progress_text_size_mobile }}px;
-    line-height: {{ progress_text_height }}%;
-    color: {{ progress_text_color }};  
-    text-transform: unset;
-    word-wrap: break-word;
+  .before-after-image-toggle-{{ section.id }}.active:before {
+    opacity: 0;
+    transition: all 0.25s ease 0s;
   }
   
   @media(min-width: 1024px) {
@@ -384,14 +461,60 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
+    .before-after-heading-{{ section.id }} {
+      text-align: {{ content_align }};
+    }
+
+    .before-after-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
+    .before-after-text-{{ section.id }} {
+      text-align: {{ content_align }};
+      margin-top: {{ text_mt }}px;    
+    }
+
+    .before-after-text-{{ section.id }} * {
+      font-size: {{ text_size }}px; 
+    } 
+        
     .before-after-body-{{ section.id }} {
       grid-template-columns: 0.5fr 1fr;
-      gap: {{ layout_gap }}px;
-    } 
+      margin-top: {{ body_mt }}px;
+      gap: {{ body_gap }}px;
+    }
 
-    .before-after-button-{{ section.id }} {
-      width: {{ btn_size }}px;
-      height: {{ btn_size }}px;
+    .before-after-features-{{ section.id }} {
+      gap: {{ features_gap }}px;
+    }
+
+    .before-after-feature-content-{{ section.id }} {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+      
+    .before-after-percent-{{ section.id }} {  
+      font-size: {{ percent_size }}px;
+      text-align: {{ feature_align }};
+    }
+
+    .before-after-feature-text-{{ section.id }} {
+      text-align: {{ feature_align }};
+      margin-top: {{ feature_text_mt }}px;    
+    }
+
+    .before-after-feature-text-{{ section.id }} * {
+      font-size: {{ feature_text_size }}px;
+    }
+
+    .before-after-progresg-bar-{{ section.id }} {
+      margin-top: {{ progress_mt }}px;
+    }
+    
+    .before-after-images-{{ section.id }} {
+      grid-template-columns: 1fr 0.5fr;
+      gap: {{ toggle_images_gap }}px;
     }
 
     .before-after-image-first-{{ section.id }} {
@@ -409,6 +532,11 @@
     .before-after-image-mobile-second-{{ section.id }} {
       display: none;
     }
+
+    .before-after-button-{{ section.id }} {
+      width: {{ btn_size }}px;
+      height: {{ btn_size }}px;
+    }    
 
     .before-after-button-{{ section.id }}::after {
       transform: rotate(-45deg) scale({{ btn_arrow_size }}%) translateY(-50%);
@@ -428,53 +556,15 @@
       height: calc(50% - {{ btn_size | times: 0.5 | round: 0 }}px);
     }
 
-    .before-after-before-text-{{ section.id }},
-    .before-after-after-text-{{ section.id }} {
-      font-size: {{ image_text_size }}px; 
+    .before-after-badge-{{ section.id }} {
+      padding: {{ badge_padding_vertical }}px {{ badge_padding_horizontal }}px;
+      font-size: {{ badge_size }}px; 
     }
 
-    .before-after-content-mobile-{{ section.id }} {
-      display: none;
-    }
-
-    .before-after-content-desktop-{{ section.id }} {
-      display: block;
-    }
-
-    .before-after-heading-{{ section.id }} {
-      text-align: {{ content_align }};
-    }
-
-    .before-after-heading-{{ section.id }} * {
-      font-size: {{ heading_size }}px;
-    }
-
-    .before-after-text-{{ section.id }} {
-      text-align: {{ content_align }};
-      margin-top: {{ text_mt }}px;    
-    }
-
-    .before-after-text-{{ section.id }} * {
-      font-size: {{ text_size }}px; 
-    }   
-    
-    .before-after-features-{{ section.id }} {
-      margin-top: {{ features_mt }}px;
-      gap: {{ features_gap }}px;
-    }
-
-    .before-after-percent-{{ section.id }} {
-      font-size: {{ percent_size }}px; 
-    }
-
-    .before-after-progresg-text-{{ section.id }} {
-      margin-top: {{ progress_text_mt }}px;
-      text-align: {{ progress_text_align }};      
-    }
-
-    .before-after-progresg-text-{{ section.id }} * {
-      font-size: {{ progress_text_size }}px;
-    }
+    .before-after-image-toggles-{{ section.id }} {
+      grid-template-columns: repeat({{ toggle_images_view }}, 1fr);
+      gap: {{ toggle_images_gap }}px;
+    }  
   }
   
 {%- endstyle -%}
@@ -514,17 +604,6 @@
   </style>
 {% endif %}
 
-{% if image_text_custom %}
-  <style>
-    .before-after-before-text-{{ section.id }},
-    .before-after-after-text-{{ section.id }} {
-      font-family: {{ image_text_font.family }}, {{ image_text_font.fallback_families }};
-      font-weight: {{ image_text_font.weight }};
-      font-style: {{ image_text_font.style }};
-    }
-  </style>
-{% endif %}
-
 {% if heading_custom %}
   <style>
     .before-after-heading-{{ section.id }} * {
@@ -546,8 +625,8 @@
 {% endif %}
 
 {% if percent_custom %}
-  <style>    
-    .before-after-percent-{{ section.id }}{
+  <style>
+    .before-after-percent-{{ section.id }} {
       font-family: {{ percent_font.family }}, {{ percent_font.fallback_families }};
       font-weight: {{ percent_font.weight }};
       font-style: {{ percent_font.style }};
@@ -555,72 +634,25 @@
   </style>
 {% endif %}
 
-{% if progress_text_custom %}
-  <style>    
-    .before-after-progresg-text-{{ section.id }} * {
-      font-family: {{ progress_text_font.family }}, {{ progress_text_font.fallback_families }};
-      font-weight: {{ progress_text_font.weight }};
-      font-style: {{ progress_text_font.style }};
+{% if feature_text_custom %}
+  <style>
+    .before-after-feature-text-{{ section.id }} * {
+      font-family: {{ feature_text_font.family }}, {{ feature_text_font.fallback_families }};
+      font-weight: {{ feature_text_font.weight }};
+      font-style: {{ feature_text_font.style }};
     }
   </style>
 {% endif %}
 
-{% if layout_mobile == "images_text" %}
-  <style>    
-    .before-after-content-{{ section.id }} {
-      order: 2;
-    }
-    
-    .before-after-image-wrapper-{{ section.id }} {
-      order: 1;
-    }
-  </style>
-{% else %}
+{% if badge_custom %}
   <style>
-    .before-after-content-{{ section.id }} {
-      order: 1;
-    }
-    
-    .before-after-image-wrapper-{{ section.id }} {
-      order: 2;
+    .before-after-badge-{{ section.id }} {
+      font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+      font-weight: {{ badge_font.weight }};
+      font-style: {{ badge_font.style }};
     }
   </style>
 {% endif %}
-
-{% if layout == "images_text" %}
-  <style>
-    @media(min-width: 1024px) {
-      .before-after-body-{{ section.id }} {
-        grid-template-columns: 1fr 0.5fr;
-      }
-
-      .before-after-content-{{ section.id }} {
-        order: 2;
-      }
-      
-      .before-after-image-wrapper-{{ section.id }} {
-        order: 1;
-      }
-    }
-  </style>
-{% else %}
-  <style>
-    @media(min-width: 1024px) {
-      .before-after-body-{{ section.id }} {
-        grid-template-columns: 0.5fr 1fr;
-      }
-
-      .before-after-content-{{ section.id }} {
-        order: 1;
-      }
-      
-      .before-after-image-wrapper-{{ section.id }} {
-        order: 2;
-      }
-    }
-  </style>
-{% endif %}
-
 
 {% if image_ratio_mobile == "portrait" %}
   <style>
@@ -640,7 +672,7 @@
      aspect-ratio: 12/12; 
     }
   </style>
-{% else%}
+{% else %}
   <style>
    .before-after-image-relative-{{ section.id }} {
      aspect-ratio: auto; 
@@ -672,7 +704,7 @@
       }
     }
   </style>
-{% else%}
+{% else %}
   <style>
     @media(min-width: 1024px) {
       .before-after-image-relative-{{ section.id }} {
@@ -682,133 +714,204 @@
   </style>
 {% endif %}
 
-{% capture content %}
-  {% if heading != blank %}
-    <div class="before-after-heading-{{ section.id }}">{{ heading }}</div>
-  {% endif %}
-  {% if text != blank %} 
-    <div class="before-after-text-{{ section.id }}">{{ text }}</div>
-  {% endif %}
-{% endcapture %}
+{% if toggle_image_ratio_mobile == "portrait" %}
+  <style>
+    .before-after-image-toggle-{{ section.id }} {
+      aspect-ratio: 9.6/14; 
+    }
+  </style>
+{% elsif toggle_image_ratio_mobile == "landscape" %}
+  <style>
+    .before-after-image-toggle-{{ section.id }} {
+      aspect-ratio: 12/9; 
+    }
+  </style>
+{% elsif toggle_image_ratio_mobile == "square" %}
+  <style>
+   .before-after-image-toggle-{{ section.id }} {
+      aspect-ratio: 12/12; 
+    }
+  </style>
+{% else %}
+  <style>
+    .before-after-image-toggle-{{ section.id }} {
+      aspect-ratio: auto; 
+    }
+  </style>
+{% endif %}
+
+{% if toggle_image_ratio == "portrait" %}
+  <style>
+    @media(min-width: 1024px) {
+      .before-after-image-toggle-{{ section.id }} {
+        aspect-ratio: 9.6/14; 
+      } 
+    }
+  </style>
+{% elsif toggle_image_ratio == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .before-after-image-toggle-{{ section.id }}{
+        aspect-ratio: 12/9; 
+      }
+    }
+  </style>
+{% elsif toggle_image_ratio == "square" %}
+  <style>
+    @media(min-width: 1024px) {
+      .before-after-image-toggle-{{ section.id }} {
+        aspect-ratio: 12/12; 
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .before-after-image-toggle-{{ section.id }} {
+        aspect-ratio: auto; 
+      }
+    }
+  </style>
+{% endif %}
 
 <div class="section-{{ section.id }} before-after-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings">    
+    <div class="section-{{ section.id }}-settings">
+      {% if heading != blank %}
+        <div class="before-after-heading-{{ section.id }}">{{ heading }}</div>
+      {% endif %}
+      {% if text != blank %}
+        <div class="before-after-text-{{ section.id }}">{{ text }}</div>
+      {% endif %}            
       <div class="before-after-body-{{ section.id }}">
-        <div class="before-after-content-mobile-{{ section.id }}">
-          {{ content }}
-        </div>   
-        <div class="before-after-image-wrapper-{{ section.id }}">
-          <div class="before-after-image-inner-{{ section.id }}" style="--before-after-initial-drag-position: {{ initial_position }}%; --clip-path-offset: 0px;">
-            <div class="before-after-image-relative-{{ section.id }}" style=" position: relative;">
-              {% if before_image_mobile != blank %}
-                <img src="{{ before_image_mobile | image_url }}" alt="{{ before_image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} before-after-image-mobile-{{ section.id }}">
-              {% endif %}
-              {% if before_image != blank %}
-                <img src="{{ before_image | image_url }}" alt="{{ before_image.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} {% if before_image_mobile != blank %}before-after-image-first-{{ section.id }}{% endif %}">
-              {% else %}
-                {{  'image' | placeholder_svg_tag }}
-              {% endif %}
-              {% if image_text_before != blank %}
-                <p class="before-after-before-text-{{ section.id }}">{{ image_text_before }}</p>
-              {% endif %}
-             
-            </div>
-            <div class="before-after-image-relative-{{ section.id }}" style="clip-path: inset(0 0 0 calc(var(--before-after-initial-drag-position, 50%) + var(--clip-path-offset, 0px))); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-              {% if after_image_mobile != blank %}
-                <img src="{{ after_image_mobile | image_url }}" alt="{{ after_image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} before-after-image-mobile-second-{{ section.id }}">
-              {% endif %}
-              {% if after_image != blank %}
-                <img src="{{ after_image | image_url }}" alt="{{ after_image.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} {% if after_image_mobile != blank %}before-after-image-second-{{ section.id }}{% endif %}">
-              {% else %}
-                {{ 'image' | placeholder_svg_tag }}
-              {% endif %}
-              {% if image_text_after != blank %}
-                <p class="before-after-after-text-{{ section.id }}">{{ image_text_after }}</p>
-              {% endif %}           
-            </div>
-            {% comment %} Cursor: {% endcomment %}
-            <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-              <split-cursor class="before-after-image-cursor-{{ section.id }}">
-                <div class="before-after-button-{{ section.id }}"></div>
-              </split-cursor>
-            </div>         
-          </div>
-        </div>  
-        <div class="before-after-content-{{ section.id }}">
-          <div class="before-after-content-desktop-{{ section.id }}">
-            {{ content }}
-          </div>          
-          <div class="before-after-features-{{ section.id }}">
-            {% for block in section.blocks %}
-              <div class="before-after-feature-{{ section.id }}">
-                {% if block.settings.percent != 0 %}
-                  <div class="before-after-progresg-{{ section.id }}">
-                    <p class="before-after-percent-{{ section.id }}">{{ block.settings.percent }} %</p>
-                    <div class="before-after-progresg-bg-{{ section.id }}" data-percent="{{ block.settings.percent }}"></div>
+        <div class="before-after-features-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' %}
+              {% if block.settings.percent != 0 %}
+                <div class="before-after-feature-{{ section.id }}">
+                  <div class="before-after-feature-content-{{ section.id }}">
+                    <div class="before-after-percent-{{ section.id }}" data-percent="{{ block.settings.percent }}">0 %</div>
+                    {% if block.settings.text != blank %}
+                      <div class="before-after-feature-text-{{ section.id }}">{{ block.settings.text }}</div>
+                    {% endif %}   
+                  </div>                 
+                  <div class="before-after-progresg-bar-{{ section.id }}" data-percent="{{ block.settings.percent }}"></div>                              
+                </div>
+              {% endif %}             
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="before-after-images-{{ section.id }}">
+          {% for block in section.blocks %}      
+            {% if block.type == 'image' %}
+              <div class="before-after-image-wrapper-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+                <div class="before-after-image-inner-{{ section.id }}" style="--before-after-initial-drag-position: 50%; --clip-path-offset: 0px;">
+                  {% assign before_image = block.settings.before_image %}
+                  {% assign before_image_mobile = block.settings.before_image_mobile %}
+                  {% assign after_image = block.settings.after_image %}
+                  {% assign after_image_mobile = block.settings.after_image_mobile %}
+                  <div class="before-after-image-relative-{{ section.id }}" style=" position: relative;">
+                    {% if before_image_mobile != blank %}
+                      <img src="{{ before_image_mobile | image_url }}" alt="{{ before_image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} before-after-image-mobile-{{ section.id }}">
+                    {% endif %}
+                    {% if before_image != blank %}
+                      <img src="{{ before_image | image_url }}" alt="{{ before_image.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} {% if before_image_mobile != blank %}before-after-image-first-{{ section.id }}{% endif %}">
+                    {% else %}
+                      {{  'image' | placeholder_svg_tag }}
+                    {% endif %}
+                    {% if block.settings.badge_before != blank %}
+                      <p class="before-after-badge-{{ section.id }} before-after-before-badge-{{ section.id }}">{{ block.settings.badge_before }}</p>
+                    {% endif %}                   
                   </div>
-                {% endif %}                
-                {% if block.settings.text != blank %}
-                  <div class="before-after-progresg-text-{{ section.id }}">{{ block.settings.text }}</div>
-                {% endif %}              
-              </div>
+                  <div class="before-after-image-relative-{{ section.id }}" style="clip-path: inset(0 0 0 calc(var(--before-after-initial-drag-position, 50%) + var(--clip-path-offset, 0px))); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                    {% if after_image_mobile != blank %}
+                      <img src="{{ after_image_mobile | image_url }}" alt="{{ after_image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} before-after-image-mobile-second-{{ section.id }}">
+                    {% endif %}
+                    {% if after_image != blank %}
+                      <img src="{{ after_image | image_url }}" alt="{{ after_image.alt }}" {% if lazy %}loading="lazy"{% endif %} draggable="false" class="before-after-image-{{ section.id }} {% if after_image_mobile != blank %}before-after-image-second-{{ section.id }}{% endif %}">
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag }}
+                    {% endif %}
+                    {% if block.settings.badge_after != blank %}
+                      <p class="before-after-badge-{{ section.id }} before-after-after-badge-{{ section.id }}">{{ block.settings.badge_after }}</p>
+                    {% endif %}                  
+                  </div>
+                  {% comment %} Cursor: {% endcomment %}
+                  <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                    <split-cursor class="before-after-image-cursor-{{ section.id }}">
+                      <div class="before-after-button-{{ section.id }}"></div>
+                    </split-cursor>
+                  </div>          
+                </div>
+              </div> 
+            {% endif %}                       
+          {% endfor %}
+          <div class="before-after-image-toggles-{{ section.id }}">
+            {% for block in section.blocks %}
+              {% if block.type == 'image' %}
+                <div class="before-after-image-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">
+                  {% if block.settings.toggle_image != blank %}
+                    <img src="{{ block.settings.toggle_image | image_url }}" alt="{{ block.settings.toggle_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}             
+                </div>
+              {% endif %}              
             {% endfor %}
           </div>
-        </div>                 
+        </div>        
       </div>
     </div>
 </div>
 
 <script>
-function initBeforeAfterImage7() {
-  const imageWrappers = document.querySelectorAll('.before-after-image-inner-{{ section.id }}');
-  const progressBars = document.querySelectorAll('.before-after-progresg-bg-{{ section.id }}');
+function animatePercentages(feature) {
+  const sectionId = feature.getAttribute('data-section-id');
+  const percentElement = feature.querySelector(`.before-after-percent-${sectionId}`);
+  const progressBar = feature.querySelector(`.before-after-progresg-bar-${sectionId}`);
   
-  const animatedElements = new Set();
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!animatedElements.has(entry.target)) {
-        const percent = entry.target.getAttribute('data-percent');
-        
-        if (entry.isIntersecting) {
-          requestAnimationFrame(() => {
-            entry.target.style.width = percent + '%';
-          });
-          animatedElements.add(entry.target);
-          observer.unobserve(entry.target);
-        } else {
-          entry.target.style.width = '0.01%';
-        }
-      }
-    });
-  }, { threshold: 0.5 });
-
-  progressBars.forEach((bar) => {
-    bar.style.width = '0.01%';
+  if (!percentElement || !progressBar) return;
+  
+  const duration = 2250;
+  const targetPercent = parseInt(percentElement.getAttribute('data-percent'));
+  let startTime = null;
+  
+  function animate(currentTime) {
+    if (!startTime) startTime = currentTime;
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
     
-    const rect = bar.getBoundingClientRect();
-    const isInViewport = (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-
-    if (isInViewport) {
-      const percent = bar.getAttribute('data-percent');
-      requestAnimationFrame(() => {
-        bar.style.width = percent + '%';
-      });
-      animatedElements.add(bar);
+    const currentValue = Math.floor(targetPercent * progress);
+    
+    percentElement.textContent = `${currentValue}%`;
+    
+    const exactProgress = targetPercent * progress;
+    progressBar.style.setProperty('--after-width', `${exactProgress}%`);
+    
+    if (progress < 1) {
+      requestAnimationFrame(animate);
     } else {
-      observer.observe(bar);
+      percentElement.textContent = `${targetPercent}%`;
+      progressBar.style.setProperty('--after-width', `${targetPercent}%`);
     }
-  });
+  }
+  
+  requestAnimationFrame(animate);
+}
 
+function initBeforeAfterImage8() {
+  const section = this.closest('[id^="shopify-section"]');
+  const sectionId = section ? section.id.replace('shopify-section-', '') : '';
+  
+  if (!sectionId) return;
+
+  const toggles = document.querySelectorAll(`.before-after-image-toggle-${sectionId}`);
+  const images = document.querySelectorAll(`.before-after-image-wrapper-${sectionId}`);
+  const imageWrappers = document.querySelectorAll(`.before-after-image-inner-${sectionId}`);
+  
   imageWrappers.forEach(imageWrapper => {
-    const cursor = imageWrapper.querySelector('.before-after-image-cursor-{{ section.id }}');
-
+    const cursor = imageWrapper.querySelector(`.before-after-image-cursor-${sectionId}`);
     let xStart, xEnd, xDiff, originalOffset;
+    
     function dragStart(event) {
       xStart = event.clientX;
       originalOffset = imageWrapper.style
@@ -817,54 +920,238 @@ function initBeforeAfterImage7() {
       document.addEventListener('pointermove', dragMove);
       document.addEventListener('pointerup', dragEnd);
     }
-
+    
     function dragMove(event) {
       xEnd = event.clientX;
       xDiff = xEnd - xStart;
-
       let result = xDiff + parseInt(originalOffset);
       let cursorOffsetPercent = parseFloat(getComputedStyle(imageWrapper).getPropertyValue('--before-after-initial-drag-position'));
       let containerWidth = imageWrapper.offsetWidth;
       let pixelsOffset = (cursorOffsetPercent / 100) * containerWidth;
-
       const negativeMax = -1 * (pixelsOffset);
       const positiveMax = imageWrapper.offsetWidth - pixelsOffset;
+      
       if (result < negativeMax) {
         result = negativeMax;
       } else if (result > positiveMax) {
         result = positiveMax;
       }
-      imageWrapper.style.setProperty(
-        '--clip-path-offset',
-        result + 'px'
-      );
+      imageWrapper.style.setProperty('--clip-path-offset', result + 'px');
     }
-
+    
     function dragEnd(event) {
       document.removeEventListener('pointermove', dragMove);
       document.removeEventListener('pointerup', dragEnd);
     }
-
+    
     cursor.addEventListener('pointerdown', dragStart);
+  });
+
+  if (toggles) {
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        toggles.forEach(toggle => toggle.classList.remove('active'));
+        if (images) {
+          images.forEach(image => image.classList.remove('active'));
+          images.forEach(image => {            
+            if (toggle.id == image.getAttribute('data-id')) {
+              image.classList.add('active');
+              toggle.classList.add('active');
+            }                     
+          });
+        }
+      });  
+    });
+  }
+  
+  const features = document.querySelectorAll(`.before-after-feature-${sectionId}`);
+  
+  features.forEach(feature => {
+    feature.setAttribute('data-section-id', sectionId);
+    
+    if (!feature.hasAttribute('data-animated')) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animatePercentages(feature);
+            feature.setAttribute('data-animated', 'true');
+            observer.disconnect();
+          }
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: '0px'
+      });
+      
+      observer.observe(feature);
+    }
   });
 }
 
-document.addEventListener('DOMContentLoaded', initBeforeAfterImage7);
+function initAllSections() {
+  const sections = document.querySelectorAll('[id^="shopify-section"]');
+  sections.forEach(section => {
+    initBeforeAfterImage8.call(section);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initAllSections);
 
 if (Shopify.designMode) {
-  document.addEventListener('shopify:section:unload', initBeforeAfterImage7);
-  document.addEventListener('shopify:section:load', initBeforeAfterImage7);
+  document.addEventListener('shopify:section:unload', function(event) {
+    const sectionId = event.detail.sectionId.replace('shopify-section-', '');
+    initBeforeAfterImage8.call(document.getElementById(`shopify-section-${sectionId}`));
+  });
+  
+  document.addEventListener('shopify:section:load', function(event) {
+    const sectionId = event.detail.sectionId.replace('shopify-section-', '');
+    initBeforeAfterImage8.call(document.getElementById(`shopify-section-${sectionId}`));
+  });
 }
 </script>
-
-
 {% schema %}
 {
-  "name": "SG-Before/after #7",
+  "name": "SG-Before/after #8",
   "settings": [
     {
-      "type": "paragraph",
-      "content": "Save to display section correctly"
+      "type": "header",
+      "content": "Content settings"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Heading settings"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<h2>Before/after image #8</h2>"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Text settings"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Showcase your product benefit by using before/after image comparison.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "text_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "text_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 16
     },
     {
       "type": "header",
@@ -872,79 +1159,211 @@ if (Shopify.designMode) {
     },
     {
       "type": "range",
-      "id": "layout_gap",
+      "id": "body_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "body_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "body_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 32
+      "default": 50
     },
     {
       "type": "range",
-      "id": "layout_gap_mobile",
+      "id": "body_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 24
+      "default": 30
     },
     {
-      "type": "select",
-      "id": "layout",
-      "label": "Image placement",
-      "default": "images_text",
-      "options": [
-        {
-          "label": "Align image left",
-          "value": "images_text"
-        },
-        {
-          "label": "Align image right",
-          "value": "text_images"
-        }
-      ]
+      "type": "header",
+      "content": "Features settings"
     },
     {
-      "type": "select",
-      "id": "layout_mobile",
-      "label": "Image placement - mobile",
-      "default": "images_text",
-      "options": [
-        {
-          "label": "Image on top",
-          "value": "images_text"
-        },
-        {
-          "label": "Text on top",
-          "value": "text_images"
-        }
-      ]
+      "type": "range",
+      "id": "features_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "features_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Feature settings"
+    },
+    {
+      "type": "text_alignment",
+      "id": "feature_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "feature_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "header",
+      "content": "Percent settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "percent_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "percent_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "percent_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "percent_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "percent_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Feature text settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "feature_text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "feature_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "feature_text_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Progress settings"
+    },
+    {
+      "type": "range",
+      "id": "progress_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "progress_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 16
     },
     {
       "type": "header",
       "content": "Image settings"
-    },
-    {
-      "type": "image_picker",
-      "id": "before_image",
-      "label": "Before image"
-    },
-    {
-      "type": "image_picker",
-      "id": "before_image_mobile",
-      "label": "Before image - mobile (optional)"
-    },
-    {
-      "type": "image_picker",
-      "id": "after_image",
-      "label": "After image"
-    },
-    {
-      "type": "image_picker",
-      "id": "after_image_mobile",
-      "label": "After image - mobile (optional)"
     },
     {
       "type": "range",
@@ -1020,34 +1439,23 @@ if (Shopify.designMode) {
     },
     {
       "type": "range",
-      "id": "initial_position",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "label": "Initial line position",
-      "info": "From left to right",
-      "default": 50
-    },
-    {
-      "type": "range",
       "id": "btn_size",
-      "min": 40,
+      "min": 50,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Size",
-      "default": 52
+      "default": 56
     },
     {
       "type": "range",
       "id": "btn_size_mobile",
-      "min": 40,
+      "min": 50,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Size - mobile",
-      "default": 48
+      "default": 52
     },
     {
       "type": "range",
@@ -1057,7 +1465,7 @@ if (Shopify.designMode) {
       "step": 5,
       "unit": "%",
       "label": "Arrow size",
-      "default": 110
+      "default": 115
     },
     {
       "type": "range",
@@ -1067,7 +1475,7 @@ if (Shopify.designMode) {
       "step": 5,
       "unit": "%",
       "label": "Arrow size - mobile",
-      "default": 105
+      "default": 110
     },
     {
       "type": "range",
@@ -1077,167 +1485,87 @@ if (Shopify.designMode) {
       "step": 1,
       "unit": "px",
       "label": "Border thickness",
-      "default": 1
+      "default": 2
     },
     {
       "type": "header",
-      "content": "Before/after text settings"
-    },
-    {
-      "type": "text",
-      "id": "image_text_before",
-      "label": "Before text",
-      "default": "Before"
-    },
-    {
-      "type": "text",
-      "id": "image_text_after",
-      "label": "After text",
-      "default": "After"
-    },
-    {
-      "type": "checkbox",
-      "id": "image_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "image_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
+      "content": "Badge settings"
     },
     {
       "type": "range",
-      "id": "image_text_size",
+      "id": "badge_padding_horizontal",
       "min": 0,
-      "max": 40,
-      "step": 1,
+      "max": 100,
+      "step": 2,
       "unit": "px",
-      "label": "Font size",
+      "label": "Padding horizontal",
       "default": 16
     },
     {
       "type": "range",
-      "id": "image_text_size_mobile",
+      "id": "badge_padding_horizontal_mobile",
       "min": 0,
-      "max": 40,
-      "step": 1,
+      "max": 100,
+      "step": 2,
       "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
+      "label": "Padding horizontal - mobile",
+      "default": 16
     },
     {
       "type": "range",
-      "id": "image_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
+      "id": "badge_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 10
     },
     {
-      "type": "header",
-      "content": "Content settings"
+      "type": "range",
+      "id": "badge_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 10
     },
     {
-      "type": "text_alignment",
-      "id": "content_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "content_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "header",
-      "content": "Heading settings"
-    },
-    {
-      "type": "richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "<p>Before/after image #7</p>"
+      "type": "range",
+      "id": "badge_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 0
     },
     {
       "type": "checkbox",
-      "id": "heading_custom",
+      "id": "badge_custom",
       "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "heading_font",
+      "id": "badge_font",
       "label": "Font family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "heading_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "header",
-      "content": "Text settings"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Showcase your product benefit by using before/after image comparison.</p>"
-    },
-    {
-      "type": "checkbox",
-      "id": "text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "text_size",
+      "id": "badge_size",
       "min": 0,
       "max": 40,
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 15
+      "default": 14
     },
     {
       "type": "range",
-      "id": "text_size_mobile",
+      "id": "badge_size_mobile",
       "min": 0,
       "max": 40,
       "step": 1,
@@ -1247,85 +1575,63 @@ if (Shopify.designMode) {
     },
     {
       "type": "range",
-      "id": "text_height",
+      "id": "badge_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
       "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "range",
-      "id": "text_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 10
-    },
-    {
-      "type": "range",
-      "id": "text_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 10
+      "default": 130
     },
     {
       "type": "header",
-      "content": "Features settings"
+      "content": "Toggle images settings"
     },
     {
       "type": "range",
-      "id": "features_gap",
+      "id": "toggle_images_view",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Images per row",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "toggle_images_view_mobile",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Images per row - mobile",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "toggle_images_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 20
+      "default": 16
     },
     {
       "type": "range",
-      "id": "features_gap_mobile",
+      "id": "toggle_images_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "features_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "features_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 0
+      "default": 4
     },
     {
       "type": "header",
-      "content": "Progress settings"
+      "content": "Toggle image settings"
     },
     {
       "type": "range",
-      "id": "progress_radius",
+      "id": "toggle_image_radius",
       "min": 0,
       "max": 100,
       "step": 2,
@@ -1335,7 +1641,7 @@ if (Shopify.designMode) {
     },
     {
       "type": "range",
-      "id": "progress_border_thickness",
+      "id": "toggle_image_border_thickness",
       "min": 0,
       "max": 10,
       "step": 1,
@@ -1344,154 +1650,52 @@ if (Shopify.designMode) {
       "default": 0
     },
     {
-      "type": "header",
-      "content": "Percent settings"
+      "type": "select",
+      "id": "toggle_image_ratio",
+      "label": "Aspect ratio",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
     },
     {
-      "type": "checkbox",
-      "id": "percent_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "percent_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "percent_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 22
-    },
-    {
-      "type": "range",
-      "id": "percent_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 22
-    },
-    {
-      "type": "range",
-      "id": "percent_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 100
-    },
-    {
-      "type": "header",
-      "content": "Progress text settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "progress_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "progress_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "progress_text_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "progress_text_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "progress_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "range",
-      "id": "progress_text_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 10
-    },
-    {
-      "type": "range",
-      "id": "progress_text_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 10
-    },
-    {
-      "type": "text_alignment",
-      "id": "progress_text_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "progress_text_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "header",
-      "content": "Image colors"
-    },
-    {
-      "type": "color",
-      "label": "Text",
-      "id": "image_text_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "image_border_color",
-      "label": "Border",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Vertical line + arrows",
-      "id": "line_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "btn_border_color",
-      "label": "Drag border",
-      "default": "#FFFFFF"
+      "type": "select",
+      "id": "toggle_image_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
     },
     {
       "type": "header",
@@ -1511,30 +1715,84 @@ if (Shopify.designMode) {
     },
     {
       "type": "header",
-      "content": "Progress colors"
+      "content": "Feature colors"
     },
     {
       "type": "color",
-      "label": "Text",
-      "id": "progress_text_color",
+      "id": "percent_color",
+      "label": "Percent",
       "default": "#000000"
     },
     {
       "type": "color",
-      "label": "Percent",
-      "id": "percent_color",
+      "id": "feature_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "progress_color",
+      "label": "Progress",
+      "default": "#E3E3E3"
+    },
+    {
+      "type": "color",
+      "id": "progress_active_color",
+      "label": "Progress active",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Image colors"
+    },
+    {
+      "type": "color",
+      "id": "image_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Vertical line",
+      "id": "line_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Drag border",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Badge colors"
+    },
+    {
+      "type": "color",
+      "label": "Text",
+      "id": "badge_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
       "label": "Background",
-      "id": "progress_bg_color",
+      "id": "badge_bg_color",
       "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Toggle image colors"
     },
     {
       "type": "color",
       "label": "Border",
-      "id": "progress_border_color",
+      "id": "toggle_image_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Overlay",
+      "id": "toggle_image_overlay_color",
       "default": "#000000"
     },
     {
@@ -1655,7 +1913,7 @@ if (Shopify.designMode) {
       "type": "checkbox",
       "id": "full_width",
       "label": "Full width",
-      "default": false
+      "default": true
     },
     {
       "type": "range",
@@ -1697,6 +1955,49 @@ if (Shopify.designMode) {
   ],
   "blocks": [
     {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "toggle_image",
+          "label": "Toggle image"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image_mobile",
+          "label": "Before image - mobile (optional)"
+        },
+        {
+          "type": "text",
+          "id": "badge_before",
+          "label": "Badge before text",
+          "default": "Before"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image_mobile",
+          "label": "After image - mobile (optional)"
+        },
+        {
+          "type": "text",
+          "id": "badge_after",
+          "label": "Badge after text",
+          "default": "After"
+        }
+      ]
+    },
+    {
       "type": "feature",
       "name": "Feature",
       "settings": [
@@ -1721,25 +2022,34 @@ if (Shopify.designMode) {
   ],
   "presets": [
     {
-      "name": "SG-Before/after image #7",
+      "name": "SG-Before/after image #8",
       "blocks": [
         {
-          "type": "feature",
-          "settings": {
-            "percent": 100
-          }
+          "type": "image"
         },
         {
-          "type": "feature",
-          "settings": {
-            "percent": 83
-          }
+          "type": "image"
         },
         {
-          "type": "feature",
-          "settings": {
-            "percent": 75
-          }
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
         }
       ]
     }
