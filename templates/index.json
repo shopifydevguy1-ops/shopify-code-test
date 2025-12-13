@@ -15,7 +15,7 @@
         "heading_Frp6hp": {
           "type": "heading",
           "settings": {
-            "heading": "CIRCLE MENU #2",
+            "heading": "COLLECTION #8",
             "heading_size": "h1"
           }
         }
@@ -23,7 +23,6 @@
       "block_order": [
         "heading_Frp6hp"
       ],
-      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -37,48 +36,69 @@
     "mockup_pEEdb7": {
       "type": "mockup",
       "blocks": {
+        "item_4YPWqf": {
+          "type": "item",
+          "settings": {
+            "text": "<p><strong>New</strong> Collection</p>",
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/collection-image.png",
+            "url": "",
+            "text_other_color": "#334fb4"
+          }
+        },
         "item_jLmMBH": {
           "type": "item",
           "settings": {
-            "text": "Collection 1",
+            "text": "<p>Collection 1</p>",
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/collection-image_1d30c451-d99b-4ec9-818d-84265d196c2c.png",
             "url": "",
-            "image": "shopify://shop_images/41684610-3c16-4440-99d9-1e12e1cf0642.jpg"
+            "text_other_color": "#334fb4"
           }
         },
         "item_RpcDjG": {
           "type": "item",
           "settings": {
-            "text": "Collection 2",
+            "text": "<p>Collection 2</p>",
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/web-development-collection-image.png",
             "url": "",
-            "image": "shopify://shop_images/43f8fbbc-9f58-436e-be0a-19b24cdcea07.jpg"
+            "text_other_color": "#334fb4"
           }
         },
         "item_FPaR9n": {
           "type": "item",
           "settings": {
-            "text": "Collection 3",
+            "text": "<p>Collection 3</p>",
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/gadget-collection-image.png",
             "url": "",
-            "image": "shopify://shop_images/43f8fbbc-9f58-436e-be0a-19b24cdcea07.jpg"
+            "text_other_color": "#334fb4"
           }
         },
         "item_rDKMGV": {
           "type": "item",
           "settings": {
-            "text": "Collection 4",
+            "text": "<p>Collection 4</p>",
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/blog-image_6542a2c9-72d2-4afb-a917-929c5b37534a.png",
             "url": "",
-            "image": "shopify://shop_images/43f8fbbc-9f58-436e-be0a-19b24cdcea07.jpg"
+            "text_other_color": "#334fb4"
           }
         },
         "item_JxfNXH": {
           "type": "item",
           "settings": {
-            "text": "Collection 5",
+            "text": "<p>Collection 5</p>",
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/generate-an-image-section.png",
             "url": "",
-            "image": "shopify://shop_images/43f8fbbc-9f58-436e-be0a-19b24cdcea07.jpg"
+            "text_other_color": "#334fb4"
           }
         }
       },
       "block_order": [
+        "item_4YPWqf",
         "item_jLmMBH",
         "item_RpcDjG",
         "item_FPaR9n",
@@ -87,33 +107,38 @@
       ],
       "name": "SG-Bento grid #3",
       "settings": {
+        "body_row": 3,
+        "body_row_mobile": "1",
         "body_gap": 50,
-        "heading": "<p>COLLECTION #7</p>",
-        "heading_custom": false,
-        "heading_font": "josefin_sans_n4",
-        "heading_size": 24,
-        "heading_size_mobile": 18,
-        "heading_height": 130,
-        "heading_align": "center",
-        "heading_align_mobile": "left",
-        "items_mt": 48,
-        "items_mt_mobile": 32,
-        "items_gap": 4,
-        "items_gap_mobile": 4,
-        "items_align": "center",
-        "items_align_mobile": "center",
+        "body_gap_mobile": 12,
+        "item_padding_vertical": 16,
+        "item_padding_vertical_mobile": 16,
+        "item_padding_left": 16,
+        "item_padding_left_mobile": 16,
+        "item_padding_right": 16,
+        "item_padding_right_mobile": 16,
+        "item_radius": 16,
+        "item_border_thickness": 1,
+        "item_shadow": false,
+        "item_hover": true,
         "text_custom": false,
         "text_font": "josefin_sans_n4",
         "text_size": 18,
         "text_size_mobile": 16,
         "text_height": 150,
-        "image_radius": 0,
-        "image_border_thickness": 0,
-        "image_ratio": "portrait",
-        "heading_color": "#202020",
+        "icon_size": 50,
+        "icon_size_mobile": 32,
+        "icon_radius": 0,
+        "arrow_size": 20,
+        "arrow_size_mobile": 16,
+        "item_bg": "#ffffff",
+        "item_bg_hover": "#ffffff",
+        "item_border_color": "#f0f0f0",
+        "item_border_hover_color": "#121212",
+        "item_shadow_color": "#000000",
         "text_color": "#121212",
-        "text_hover_color": "#817c61",
-        "image_border_color": "#000000",
+        "icon_color": "#121212",
+        "arrow_color": "#121212",
         "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#000000",
