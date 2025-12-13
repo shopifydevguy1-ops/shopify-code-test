@@ -37,6 +37,16 @@
     "mockup_pEEdb7": {
       "type": "mockup",
       "blocks": {
+        "item_8mfGrE": {
+          "type": "item",
+          "settings": {
+            "row_heading": "Row Heading",
+            "first_column": "Yes",
+            "second_column": "No",
+            "third_column": "",
+            "four_column": ""
+          }
+        },
         "item_EmhrGh": {
           "type": "item",
           "settings": {
@@ -44,8 +54,7 @@
             "first_column": "Yes",
             "second_column": "No",
             "third_column": "No",
-            "four_column": "No",
-            "five_column": "No"
+            "four_column": "No"
           }
         },
         "item_PpLQcb": {
@@ -55,8 +64,7 @@
             "first_column": "Yes",
             "second_column": "No",
             "third_column": "No",
-            "four_column": "No",
-            "five_column": "No"
+            "four_column": "No"
           }
         },
         "item_MRFhtw": {
@@ -66,8 +74,7 @@
             "first_column": "Yes",
             "second_column": "No",
             "third_column": "No",
-            "four_column": "No",
-            "five_column": "No"
+            "four_column": "No"
           }
         },
         "item_zCBLCT": {
@@ -77,12 +84,12 @@
             "first_column": "Yes",
             "second_column": "No",
             "third_column": "No",
-            "four_column": "No",
-            "five_column": "No"
+            "four_column": "No"
           }
         }
       },
       "block_order": [
+        "item_8mfGrE",
         "item_EmhrGh",
         "item_PpLQcb",
         "item_MRFhtw",
@@ -90,10 +97,7 @@
       ],
       "name": "SG-Bento grid #3",
       "settings": {
-        "body_gap": 32,
-        "body_gap_mobile": 32,
-        "content_maxwidth": 40,
-        "heading": "<p>COMPARISON TABLE #3</p>",
+        "heading": "<p>COMPARISON TABLE #4</p>",
         "heading_custom": false,
         "heading_font": "josefin_sans_n4",
         "heading_size": 36,
@@ -101,41 +105,19 @@
         "heading_height": 130,
         "heading_align": "center",
         "heading_align_mobile": "center",
-        "text": "",
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
-        "text_size": 24,
-        "text_size_mobile": 18,
-        "text_height": 150,
-        "text_align": "center",
-        "text_align_mobile": "center",
-        "text_mt": 20,
-        "button": "Feel The Magic",
-        "button_url": "",
-        "button_custom": false,
-        "button_font": "josefin_sans_n4",
-        "button_size": 22,
-        "button_size_mobile": 18,
-        "button_height": 100,
-        "button_align": "center",
-        "button_align_mobile": "center",
-        "button_mt": 24,
-        "button_padding_vertical": 16,
-        "button_padding_horizontal": 24,
-        "button_radius": 4,
-        "button_border_thickness": 0,
-        "button_position_mobile": "bottom",
-        "table_radius": 0,
-        "table_border_thickness": 0,
+        "table_width": 80,
+        "table_columns": 2,
+        "table_align": "center",
+        "table_mt": 44,
         "table_column_active": "1",
         "table_column_active_radius": 10,
         "table_column_active_border_thickness": 2,
-        "use_icon": false,
+        "table_heading_image_size": 66,
+        "table_heading_image_size_mobile": 40,
         "first_heading": "Mind juice",
         "second_heading": "Study Drugs",
         "third_heading": "Other Energy Shorts",
         "four_heading": "Energy Drinks",
-        "five_heading": "Coffee",
         "table_heading_custom": false,
         "table_heading_font": "assistant_n4",
         "table_heading_size": 12,
@@ -150,6 +132,10 @@
         "table_row_padding_horizontal_mobile": 4,
         "table_row_padding_vertical": 12,
         "table_row_padding_vertical_mobile": 10,
+        "table_row_border_thickness": 1,
+        "table_row_heading_image_size": 66,
+        "table_row_heading_image_size_mobile": 40,
+        "table_row_heading_width_mobile": 66,
         "table_row_heading_custom": false,
         "table_row_heading_font": "assistant_n4",
         "table_row_heading_size": 12,
@@ -162,12 +148,38 @@
         "table_row_text_size_mobile": 10,
         "table_row_text_height": 130,
         "table_row_text_align": "center",
-        "table_border_color": "#d7d8d5",
+        "table_row_image_size": 52,
+        "table_row_image_size_mobile": 40,
+        "buttons_mt": 44,
+        "buttons_gap": 16,
+        "button": "Feel The Magic",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 22,
+        "button_size_mobile": 18,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_horizontal": 24,
+        "button_radius": 4,
+        "button_border_thickness": 0,
+        "second_button": "EXPLORE ALL SECTIONS",
+        "second_button_url": "",
+        "second_button_custom": false,
+        "second_button_font": "josefin_sans_n4",
+        "second_button_size": 22,
+        "second_button_size_mobile": 18,
+        "second_button_height": 100,
+        "second_button_padding_vertical": 20,
+        "second_button_padding_horizontal": 40,
+        "second_button_radius": 6,
+        "second_button_border_thickness": 2,
         "table_heading_color": "#1a1818",
         "table_heading_active_color": "#05a087",
+        "table_heading_bg_active_color": "#aa1b26",
         "table_column_active_bg_color": "",
         "table_column_active_border_color": "#1a1818",
-        "table_row_odd_bg_color": "#f8f8f8",
+        "table_row_border_color": "#d3cabc",
         "table_row_heading_color": "#040200",
         "table_row_text_color": "#f36f6f",
         "table_row_active_text_color": "#05a087",
@@ -177,8 +189,13 @@
         "button_bg_hover_color": "#121212",
         "button_border_color": "#121212",
         "button_border_hover_color": "#121212",
+        "second_button_color": "#ffffff",
+        "second_button_hover_color": "#ffffff",
+        "second_button_bg_color": "#a8252e",
+        "second_button_bg_hover_color": "#791119",
+        "second_button_border_color": "#a8252e",
+        "second_button_border_hover_color": "#791119",
         "heading_color": "#121212",
-        "text_color": "#121212",
         "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#121212",
@@ -190,7 +207,8 @@
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
         "content_width": 120,
-        "border_thickness": 0
+        "border_thickness": 0,
+        "lazy": true
       }
     }
   },
