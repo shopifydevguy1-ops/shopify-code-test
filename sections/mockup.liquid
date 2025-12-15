@@ -15,28 +15,17 @@
   assign content_width = section.settings.content_width
   assign section_radius = section.settings.section_radius
 
-  assign heading = section.settings.heading
-  assign heading_size = section.settings.heading_size
-  assign heading_size_mobile = section.settings.heading_size_mobile
-  assign heading_color = section.settings.heading_color
-  assign heading_custom = section.settings.heading_custom
-  assign heading_font = section.settings.heading_font
-  assign heading_height = section.settings.heading_height
-  assign heading_align = section.settings.heading_align
-  assign heading_align_mobile = section.settings.heading_align_mobile
+  assign layout = section.settings.layout
+  assign layout_mobile = section.settings.layout_mobile
+  assign layout_gap = section.settings.layout_gap
+  assign layout_gap_mobile = section.settings.layout_gap_mobile
 
-  assign form_padding_horizontal = section.settings.form_padding_horizontal
-  assign form_padding_horizontal_mobile = section.settings.form_padding_horizontal_mobile
-  assign form_padding_vertical = section.settings.form_padding_vertical
-  assign form_padding_vertical_mobile = section.settings.form_padding_vertical_mobile
+  assign content_align = section.settings.content_align
+  assign content_align_mobile = section.settings.content_align_mobile
+  assign content_vertical_align = section.settings.content_vertical_align
+
   assign form_gap = section.settings.form_gap
   assign form_gap_mobile = section.settings.form_gap_mobile
-  assign form_radius = section.settings.form_radius
-  assign form_mt = section.settings.form_mt
-  assign form_mt_mobile = section.settings.form_mt_mobile
-  assign form_bg_color = section.settings.form_bg_color
-  assign form_shadow_color = section.settings.form_shadow_color
-  assign form_shadow_opacity = section.settings.form_shadow_opacity
 
   assign success_text = section.settings.success_text
   assign success_text_size = section.settings.success_text_size
@@ -45,21 +34,8 @@
   assign success_text_custom = section.settings.success_text_custom
   assign success_text_font = section.settings.success_text_font
   assign success_text_height = section.settings.success_text_height
-  assign success_text_mt = section.settings.success_text_mt
-  assign success_text_mt_mobile = section.settings.success_text_mt_mobile
   assign success_text_align = section.settings.success_text_align
   assign success_text_align_mobile = section.settings.success_text_align_mobile
-  
-  assign error_text_size = section.settings.error_text_size
-  assign error_text_size_mobile = section.settings.error_text_size_mobile
-  assign error_text_color = section.settings.error_text_color
-  assign error_text_custom = section.settings.error_text_custom
-  assign error_text_font = section.settings.error_text_font
-  assign error_text_height = section.settings.error_text_height
-  assign error_text_align = section.settings.error_text_align
-  assign error_text_align_mobile = section.settings.error_text_align_mobile
-  assign error_text_mt = section.settings.error_text_mt
-  assign error_text_mt_mobile = section.settings.error_text_mt_mobile
 
   assign title_size = section.settings.title_size
   assign title_size_mobile = section.settings.title_size_mobile
@@ -67,7 +43,7 @@
   assign title_custom = section.settings.title_custom
   assign title_font = section.settings.title_font
   assign title_height = section.settings.title_height
-  
+
   assign label_size = section.settings.label_size
   assign label_size_mobile = section.settings.label_size_mobile
   assign label_color = section.settings.label_color
@@ -107,6 +83,29 @@
 
   assign placeholder_color = section.settings.placeholder_color
 
+  assign checkbox_bg_color = section.settings.checkbox_bg_color
+  assign checkbox_bg_active_color = section.settings.checkbox_bg_active_color
+  assign checkbox_border_color = section.settings.checkbox_border_color
+  assign checkbox_border_active_color = section.settings.checkbox_border_active_color
+  assign checkbox_checkmar_color = section.settings.checkbox_checkmar_color
+
+  assign checkbox_size = section.settings.checkbox_size
+  assign checkbox_size_mobile = section.settings.checkbox_size_mobile
+  assign checkbox_color = section.settings.checkbox_color
+  assign checkbox_custom = section.settings.checkbox_custom
+  assign checkbox_font = section.settings.checkbox_font
+  assign checkbox_height = section.settings.checkbox_height
+  assign checkbox_radius = section.settings.checkbox_radius
+
+  assign error_text_size = section.settings.error_text_size
+  assign error_text_size_mobile = section.settings.error_text_size_mobile
+  assign error_text_color = section.settings.error_text_color
+  assign error_text_custom = section.settings.error_text_custom
+  assign error_text_font = section.settings.error_text_font
+  assign error_text_height = section.settings.error_text_height
+  assign error_text_align = section.settings.error_text_align
+  assign error_text_align_mobile = section.settings.error_text_align_mobile
+
   assign submit = section.settings.submit
   assign submit_size = section.settings.submit_size
   assign submit_size_mobile = section.settings.submit_size_mobile
@@ -129,56 +128,27 @@
   assign submit_bg_hover_color = section.settings.submit_bg_hover_color
   assign submit_horizontal_align = section.settings.submit_horizontal_align
   assign submit_horizontal_align_mobile = section.settings.submit_horizontal_align_mobile
-
-  assign checkbox_bg_color = section.settings.checkbox_bg_color
-  assign checkbox_bg_active_color = section.settings.checkbox_bg_active_color
-  assign checkbox_border_color = section.settings.checkbox_border_color
-  assign checkbox_border_active_color = section.settings.checkbox_border_active_color
-  assign checkbox_checkmar_color = section.settings.checkbox_checkmar_color
-
-  assign checkbox_size = section.settings.checkbox_size
-  assign checkbox_size_mobile = section.settings.checkbox_size_mobile
-  assign checkbox_color = section.settings.checkbox_color
-  assign checkbox_custom = section.settings.checkbox_custom
-  assign checkbox_font = section.settings.checkbox_font
-  assign checkbox_height = section.settings.checkbox_height
-
-  assign bottom_text = section.settings.bottom_text
-  assign bottom_text_size = section.settings.bottom_text_size
-  assign bottom_text_size_mobile = section.settings.bottom_text_size_mobile
-  assign bottom_text_color = section.settings.bottom_text_color
-  assign bottom_text_custom = section.settings.bottom_text_custom
-  assign bottom_text_font = section.settings.bottom_text_font
-  assign bottom_text_height = section.settings.bottom_text_height
-  assign bottom_text_align = section.settings.bottom_text_align
-  assign bottom_text_align_mobile = section.settings.bottom_text_align_mobile
-  assign bottom_text_mt = section.settings.bottom_text_mt
-  assign bottom_text_mt_mobile = section.settings.bottom_text_mt_mobile
-  
-  assign progress_bar_active_color = section.settings.progress_bar_active_color  
 -%}
 
 {%- style -%}
-
-  {{  heading_font | font_face: font_display: 'swap' }}
-  {{  error_text_font | font_face: font_display: 'swap' }}
-  {{  success_text_font | font_face: font_display: 'swap' }}
   {{  title_font | font_face: font_display: 'swap' }}
   {{  label_font | font_face: font_display: 'swap' }}
-  {{  required_font | font_face: font_display: 'swap' }}
   {{  input_font | font_face: font_display: 'swap' }}
+  {{  required_font | font_face: font_display: 'swap' }}
+  {{  error_text_font | font_face: font_display: 'swap' }}
+  {{  success_text_font | font_face: font_display: 'swap' }}
   {{  submit_font | font_face: font_display: 'swap' }}
-  {{  bottom_text_font | font_face: font_display: 'swap' }}
-  {{  checkbox_font | font_face: font_display: 'swap' }}
-  
+  {{  checkbox_font | font_face: font_display: 'swap' }}  
+
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
-    margin-left: {{ margin_horizontal_mobile }}rem;
-    margin-right: {{ margin_horizontal_mobile }}rem;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: {{ margin_horizontal_mobile }}rem;
+    margin-right: {{ margin_horizontal_mobile }}rem;
     border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
+    overflow: hidden;
   }
   
   .section-{{ section.id }}-settings {
@@ -189,36 +159,23 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .contact-heading-{{ section.id }} > * {
-    margin: 0;
-    font-size: {{ heading_size_mobile }}px;
-    color: {{ heading_color }};
-    line-height: {{ heading_height }}%;
-    text-transform: unset;
-    text-align: {{ heading_align_mobile }};
+  .contact-content-{{ section.id }} {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: {{ content_vertical_align }};
+    align-items: {{ content_horizontal_align_mobile }};
   }
 
   .contact-form-{{ section.id }} {
-    position: relative;
-    border-radius: {{ form_radius }}px;
-    padding: {{ form_padding_vertical_mobile }}px {{ form_padding_horizontal_mobile }}px;
-    background-color: {{ form_bg_color }};
-    box-shadow: 0px 0 4px 0px {{ form_shadow_color |  hex_to_rgba: form_shadow_opacity }};
+    grid-area: form;
   }
 
-  .contact-succesg-{{ section.id }} {
-    display: block;
-    margin: 0;
-    margin-top: {{ success_text_mt_mobile }}px;
-    font-size: {{ success_text_size_mobile }}px;
-    color: {{ success_text_color }};
-    line-height: {{ success_text_height }}%;
-    text-align: {{ success_text_align_mobile }};
-    text-transform: unset;
-  }
-
-  .contact-succesg-{{ section.id }}.active {
-    display: none;
+  .contact-body-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ layout_gap_mobile }}px;
   }
 
   .contact-fields-{{ section.id }} {
@@ -226,23 +183,17 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
-    margin-top: {{ form_mt_mobile }}px;
     gap: {{ form_gap_mobile }}px;
   }
 
-  .contact-field-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-  }
-
-  .contact-field-title-{{ section.id }} {
-    display: flex;
-    align-items: flex-start;
+  .contact-succesg-{{ section.id }} {
+    display: block;
     margin: 0;
-    font-size: {{ title_size_mobile }}px;
-    color: {{ title_color }};
-    line-height: {{ title_height }}%;
+    margin-bottom: 12px;
+    font-size: {{ success_text_size_mobile }}px;
+    color: {{ success_text_color }};
+    line-height: {{ success_text_height }}%;
+    text-align: {{ success_text_align_mobile }};
     text-transform: unset;
   }
 
@@ -253,6 +204,23 @@
     color: {{ label_color }};
     line-height: {{ label_height }}%;
     text-transform: unset;
+    font-weight: 400;
+  }
+
+  .contact-field-title-{{ section.id }} + .contact-field-checkbox-{{ section.id }},
+  .contact-field-label-{{ section.id }} + .contact-field-checkbox-{{ section.id }} {
+    margin-top: {{ label_mt_mobile }}px;
+  }
+  
+  .contact-field-title-{{ section.id }} {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    font-size: {{ title_size_mobile }}px;
+    color: {{ title_color }};
+    line-height: {{ title_height }}%;
+    text-transform: unset;
+    font-weight: 700;
   }
 
   .contact-field-required-{{ section.id }} {
@@ -260,6 +228,20 @@
     font-size: {{ required_size_mobile }}px;
     color: {{ required_color }};
     line-height: {{ required_height }}%;
+    text-transform: unset;
+  }
+
+  .contact-{{ section.id }} .errors ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-{{ section.id }} .errors * {
+    margin: 0;
+    font-size: {{ error_text_size_mobile }}px;
+    color: {{ error_text_color }};
+    line-height: {{ error_text_height }}%;
+    text-align: {{ error_text_align_mobile }};
     text-transform: unset;
   }
 
@@ -321,7 +303,7 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    color: {{ placeholder_color }};
+    color: {{ input_color }};
   }
 
   .contact-field-title-{{ section.id }} + .contact-field-checkbox-{{ section.id }},
@@ -339,13 +321,14 @@
 
   .contact-field-checkbox-{{ section.id }} label {
     position: relative;
-    padding-left: {{ checkbox_size_mobile | plus: 5 }}px;
+    padding-left: {{ checkbox_size_mobile | plus: 8 }}px;
     cursor: pointer;
     margin: 0;
     font-size: {{ checkbox_size_mobile }}px;
     color: {{ checkbox_color }};
     line-height: {{ checkbox_height }}%;
     text-transform: unset;
+    font-weight: 700;
   }
 
   .contact-field-checkbox-{{ section.id }} label:before {
@@ -385,6 +368,7 @@
     z-index: 1;
     background-color: {{ checkbox_bg_color }};
     border: 1px solid {{ checkbox_border_color }};
+    border-radius: {{ checkbox_radius }}px;
   }
 
   .contact-field-checkbox-{{ section.id }} input:checked + label:before {
@@ -430,68 +414,15 @@
     background-color: {{ submit_bg_hover_color }};
     border: {{ submit_border_thickness }}px solid {{ submit_border_hover_color }};
   }
-
-  .contact-bottom-text-{{ section.id }} * {
-    margin: 0;
-    margin-top: {{ bottom_text_mt_mobile }}px;
-    font-size: {{ bottom_text_size_mobile }}px;
-    color: {{ bottom_text_color }};
-    line-height: {{ bottom_text_height }}%;
-    text-transform: unset;
-    text-align: {{ bottom_text_align_mobile }};
-  }
-
-  .contact-bottom-text-{{ section.id }} a {
-    color: {{ bottom_text_color }};
-    text-decoration: underline;
-    transition: all 0.25s ease 0s;
-  }
-
-  .contact-bottom-text-{{ section.id }} a:hover {
-    color: {{ bottom_text_color | hex_to_rgba: 0.8 }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .contact-{{ section.id }} .errors ul {
-    padding: 0;
-    list-style: none;
-    margin-top: {{ error_text_mt_mobile }}px;
-  }
-
-  .contact-{{ section.id }} .errors * {
-    margin: 0;
-    font-size: {{ error_text_size_mobile }}px;
-    color: {{ error_text_color }};
-    line-height: {{ error_text_height }}%;
-    text-align: {{ error_text_align_mobile }};
-    text-transform: unset;
-  }
-
-  .contact-progresg-container-{{ section.id }} {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    height: 10px;
-    margin-top: 20px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-
-  .contact-progresg-bar-{{ section.id }} {
-    display: block !important;
-    width: 0;
-    height: 100%;
-    background-color: {{ progress_bar_active_color }};
-    border-radius: 5px;
-    transition: width 0.3s;
-  }
   
   @media(min-width: 1024px) {
 
     .section-{{ section.id }} {
       margin-top: {{ margin_top }}px;
       margin-bottom: {{ margin_bottom }}px;
+      margin-left: {{ margin_horizontal }}rem;
+      margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
     }
     
     .section-{{ section.id }}-settings {
@@ -502,28 +433,17 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .contact-heading-{{ section.id }} > * {
-      font-size: {{ heading_size }}px;
-      text-align: {{ heading_align }};
-    }
-
-    .contact-form-{{ section.id }} {     
-      padding: {{ form_padding_vertical }}px {{ form_padding_horizontal }}px;
-    }
-
-    .contact-succesg-{{ section.id }} {
-      margin-top: {{ success_text_mt }}px;
-      font-size: {{ success_text_size }}px;
-      text-align: {{ success_text_align }};
+    .contact-body-{{ section.id }} {
+      {% if layout == 'content_form' %}
+      grid-template-columns: 0.8fr 1.2fr;
+      {% else %}
+      grid-template-columns: 1.2fr 0.8fr;
+      {% endif %}
+      gap: {{ layout_gap }}px;
     }
 
     .contact-fields-{{ section.id }} {
-      margin-top: {{ form_mt }}px;
       gap: {{ form_gap }}px;
-    }
-
-    .contact-field-title-{{ section.id }} {
-      font-size: {{ title_size }}px;
     }
 
     .contact-field-label-{{ section.id }} {
@@ -531,8 +451,32 @@
       font-size: {{ label_size }}px;
     }
 
+    .contact-field-title-{{ section.id }} {
+      font-size: {{ title_size }}px;
+    }
+
+    .contact-field-title-{{ section.id }} + .contact-field-checkbox-{{ section.id }},
+    .contact-field-label-{{ section.id }} + .contact-field-checkbox-{{ section.id }} {
+      margin-top: {{ label_mt }}px;
+    }
+
+    .contact-field-label-file-{{ section.id }} {
+      margin-top: {{ label_mt }}px !important;
+      padding: {{ input_padding_vertical }}px {{ input_padding_horizontal }}px {{ input_padding_vertical | plus: 50 }}px;
+    }
+
     .contact-field-required-{{ section.id }} {
       font-size: {{ required_size }}px;
+    }
+
+    .contact-succesg-{{ section.id }} {
+      font-size: {{ success_text_size }}px;
+      text-align: {{ success_text_align }};
+    }
+
+    .contact-{{ section.id }} .errors * {
+      text-align: {{ error_text_align }};
+      font-size: {{ error_text_size }}px;
     }
 
     .contact-field-input-{{ section.id }} {
@@ -547,15 +491,15 @@
     }
 
     .contact-field-checkbox-{{ section.id }} label {
-      padding-left: {{ checkbox_size | plus: 5 }}px;
+      padding-left: {{ checkbox_size | plus: 8 }}px;
       font-size: {{ checkbox_size }}px;
     }
 
     .contact-field-checkbox-{{ section.id }} label:before {
       {% if checkbox_size < 10 %}
-      left: {{ checkbox_size | times: 0.15 | round: 0 }}px;
+      left: {{ checkbox_size | times: 0.2 | round: 0 }}px;
       {% elsif checkbox_size < 20 %}
-      left: {{ checkbox_size | times: 0.15 | round: 0 }}px;
+      left: {{ checkbox_size | times: 0.2 | round: 0 }}px;
       {% else %}
       left: {{ checkbox_size | times: 0.18 | round: 0 }}px;
       {% endif %}    
@@ -567,7 +511,7 @@
       top: {{ checkbox_size | times: 0.25 | round: 0 }}px;
       {% else %}
       top: {{ checkbox_size | times: 0.18 | round: 0 }}px;
-      {% endif %};
+      {% endif %}
       width: {{ checkbox_size | times: 0.7 | round: 0 }}px;
       height: {{ checkbox_size | times: 0.7 | round: 0 }}px;
     }
@@ -585,26 +529,6 @@
     .contact-submit-{{ section.id }} {      
       font-size: {{ submit_size }}px;
       padding: {{ submit_padding_vertical }}px {{ submit_padding_horizontal }}px;
-    }
-
-    .contact-field-label-file-{{ section.id }} {
-      margin-top: {{ label_mt }}px !important;
-      padding: {{ input_padding_vertical }}px {{ input_padding_horizontal }}px {{ input_padding_vertical | plus: 50 }}px;
-    }
-
-    .contact-bottom-text-{{ section.id }} * {
-      text-align: {{ bottom_text_align }};
-      margin-top: {{ bottom_text_mt }}px;
-      font-size: {{ bottom_text_size }}px;
-    }
-
-    .contact-{{ section.id }} .errors ul {
-      margin-top: {{ error_text_mt }}px;
-    }
-
-    .contact-{{ section.id }} .errors * {
-      text-align: {{ error_text_align }};
-      font-size: {{ error_text_size }}px;
     }
   }
   
@@ -645,16 +569,6 @@
   </style>
 {% endif %}
 
-{% if heading_custom %}
-  <style>
-    .contact-heading-{{ section.id }} > * {
-      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-      font-weight: {{ heading_font.weight }};
-      font-style: {{ heading_font.style }};
-    }
-  </style>
-{% endif %}
-
 {% if success_text_custom %}
   <style>
     .contact-succesg-{{ section.id }} {
@@ -664,18 +578,6 @@
     }
   </style>
 {% endif %}
-
-
-{% if error_text_custom %}
-  <style>
-    .contact-{{ section.id }} .errors * {
-      font-family: {{ error_text_font.family }}, {{ error_text_font.fallback_families }};
-      font-weight: {{ error_text_font.weight }};
-      font-style: {{ error_text_font.style }};
-    }
-  </style>
-{% endif %}
-
 
 {% if title_custom %}
   <style>
@@ -729,6 +631,16 @@
   </style>
 {% endif %}
 
+{% if error_text_custom %}
+  <style>
+    .contact-{{ section.id }} .errors * {
+      font-family: {{ error_text_font.family }}, {{ error_text_font.fallback_families }};
+      font-weight: {{ error_text_font.weight }};
+      font-style: {{ error_text_font.style }};
+    }
+  </style>
+{% endif %}
+
 {% if submit_custom %}
   <style>
     .contact-submit-{{ section.id }} {
@@ -739,15 +651,135 @@
   </style>
 {% endif %}
 
-{% if bottom_text_custom %}
+
+{% if layout_mobile == 'content_form'%}
   <style>
-    .contact-bottom-text-{{ section.id }} * {
-      font-family: {{ bottom_text_font.family }}, {{ bottom_text_font.fallback_families }};
-      font-weight: {{ bottom_text_font.weight }};
-      font-style: {{ bottom_text_font.style }};
+    .contact-body-{{ section.id }} {
+      grid-template-areas: 
+        "content"
+        "form";     
+    }
+  </style>
+{% elsif layout_mobile == 'form_content' %}
+  <style>
+    .contact-body-{{ section.id }} {
+      grid-template-areas: 
+        "form"
+        "content";     
     }
   </style>
 {% endif %}
+
+{% if layout == 'content_form'%}
+  <style>
+    @media(min-width: 1024px) {
+      .contact-body-{{ section.id }} {
+        grid-template-areas: "content form";    
+      }
+    }    
+  </style>
+{% elsif layout == 'form_content' %}
+  <style>
+    @media(min-width: 1024px) {
+      .contact-body-{{ section.id }} {
+        grid-template-areas: "form content";   
+      }
+    }   
+  </style>
+{% endif %}
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'heading' %}  
+      <style>
+        {{  block.settings.heading_font | font_face: font_display: 'swap' }}
+
+        .contact-heading-{{ block.id }} {
+          margin-top: {{ block.settings.heading_mt_mobile }}px;
+          text-align: {{ content_align_mobile }};
+        }
+      
+        .contact-heading-{{ block.id }} * {
+          margin: 0;
+          font-size: {{ block.settings.heading_size_mobile }}px;
+          color: {{ block.settings.heading_color }};
+          line-height: {{ block.settings.heading_height }}%;
+          text-transform: unset;
+          word-break: break-word;
+          font-weight: 700;
+        }
+
+        .contact-heading-{{ block.id }} * strong {
+          text-decoration: underline {{ block.settings.heading_border_color }};
+        }
+
+        @media(min-width: 1024px) {
+          
+          .contact-heading-{{ block.id }} {
+            margin-top: {{ block.settings.heading_mt }}px;
+            text-align: {{ content_align }};
+          }
+        
+          .contact-heading-{{ block.id }} * {
+            font-size: {{ block.settings.heading_size }}px;
+          }
+        }          
+      </style>
+        
+      {% if block.settings.heading_custom %}
+        <style>
+          .contact-heading-{{ block.id }} * {
+            font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+            font-weight: {{ block.settings.heading_font.weight }};
+            font-style: {{ block.settings.heading_font.style }};
+          }
+        </style>
+      {% endif %}
+
+    {% when 'content' %}   
+      <style>
+        {{  block.settings.text_font | font_face: font_display: 'swap' }}
+        
+        .contact-text-{{ block.id }} {
+          margin-top: {{ block.settings.text_mt_mobile }}px;
+          text-align: {{ content_align_mobile }};
+          position: relative;
+          z-index: 2;
+        }
+      
+        .contact-text-{{ block.id }} * {
+          margin: 0;
+          font-size: {{ block.settings.text_size_mobile }}px;
+          color: {{ block.settings.text_color }};
+          line-height: {{ block.settings.text_height }}%;
+          text-transform: unset;
+        }
+
+        @media(min-width: 1024px) {
+          
+          .contact-text-{{ block.id }} {
+            margin-top: {{ block.settings.text_mt }}px;
+            text-align: {{  content_align }};
+          }
+      
+          .contact-text-{{ block.id }} * {
+            font-size: {{ block.settings.text_size }}px;
+          }
+          
+        }
+      </style>
+
+      {% if block.settings.text_custom %}
+        <style>
+          .contact-text-{{ block.id }} * {
+            font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+            font-weight: {{ block.settings.text_font.weight }};
+            font-style: {{ block.settings.text_font.style }};
+          }
+        </style>          
+      {% endif %}  
+  {% endcase %}
+{% endfor %}
 
 {% for block in section.blocks %}
   <style>
@@ -759,357 +791,266 @@
       width: 100%;
     }
     
-    .contact-field-label-{{ block.id }} {
-       margin-top: {{ label_mt_mobile }}px;
-    }
-    
     @media(min-width: 1024px) {
-      .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} {
-        flex: 0 1 100%;
-      }
+      {% if block.settings.half_width %}
+        .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} {
+          flex: 0 1 calc(50% - {{ form_gap | times: 0.5 }}px);
+        }
+      {% else %}
+        .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} {
+          flex: 0 1 100%;
+        }
+      {% endif %}
 
       .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} input {
-        width: {{ block.settings.width }}%;
+        width: 100%;
       }
       
-      .contact-field-{{ block.id }} {
-        flex: 0 1 {{ block.settings.width }}%;
-      }
-
-      .contact-field-label-{{ block.id }} {
-         margin-top: {{ label_mt }}px;
-      }
+      {% if block.settings.half_width %}
+        .contact-field-{{ block.id }} {
+          flex: 0 1 calc(50% - {{ form_gap | times: 0.5 }}px);
+        }
+      {% else %}
+        .contact-field-{{ block.id }} {
+          flex: 0 1 100%;
+        }
+      {% endif %}
     }
   </style>
 {% endfor %}
 
 <div class="section-{{ section.id }} contact-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings ">
-      <div class="contact-form-{{ section.id }}">
-        {% if heading != blank %}
-          <div class="contact-heading-{{ section.id }}">{{ heading }}</div>
-        {% endif %}
-        {% form 'contact'%}
-      
-          {% comment %} Successful message {% endcomment %}
-          <p class="contact-succesg-{{ section.id }}">{{ success_text }}</p>
-
+    <div class="section-{{ section.id }}-settings">
+      <div class="contact-body-{{ section.id }}">
+        <div class="contact-content-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'heading'%}
+                {% if block.settings.heading != blank %}
+                  <div class="contact-heading-{{ block.id }}">
+                    {{ block.settings.heading }}
+                  </div>
+                {% endif %}
+              {% when 'content' %}
+                {% if block.settings.text != blank %}
+                  <div class="contact-text-{{ block.id }}">
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}  
+            {% endcase %}
+          {% endfor %}   
+        </div> 
+        <div class="contact-form-{{ section.id }}">
+          {% form 'contact'%}
           
-          {{ form.errors | default_errors }}
-
-          <div class="contact-fields-{{ section.id }}">
-            {% for block in section.blocks %}
-              <div class="contact-field-{{ section.id }} contact-field-{{ block.id }} {% if block.type == "date" %} contact-field-date-{{ block.id }}{% endif %}">
-                {% case block.type %}
-                  {% when 'date' %}
-                    <div class="contact-field-inner-{{ section.id }}">
-                      {% if block.settings.label != blank %}
-                        <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">
-                          {{ forloop.index }}.
-                          {{ block.settings.label }}
-                        </label>
-                      {% endif %}
-                      <input type="date" {% if block.settings.placeholder != blank %}placeholder="{{ block.settings.placeholder }}"{% endif %} class="contact-field-input-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{ block.settings.name }}]" {% if block.settings.required %}required{% endif %}>
-                    </div>
-                  {% when 'text' %}
-                    {% if block.settings.title != blank %}
-                      <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">              
-                        {{ forloop.index }}.
-                        {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
-                    {% endif %}
-                    <div class="contact-field-inner-{{ section.id }}">
-                      {% if block.settings.label != blank %}
-                        <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">           
-                          {{ block.settings.label }}
-                        </label>
-                      {% endif %}
-                      <input type="{% if block.settings.type == "tel" %}tel{% elsif block.settings.type == "email" %}email{% else %}text{% endif %}" {% if block.settings.placeholder != blank %}placeholder="{{ block.settings.placeholder }}"{% endif %} class="contact-field-input-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="{% if block.settings.type == "email" %}contact[email]{% else %}contact[{{ block.settings.name }}]{% endif %}" {% if block.settings.required %}required{% endif %}>
-                    </div>
-                  {% when 'textarea' %}
-                    {% if block.settings.title != blank %}
-                      <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">                        
-                        {{ forloop.index }}.
-                        {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
-                    {% endif %}
-                    <div class="contact-field-inner-{{ section.id }}">
-                      {% if block.settings.label != blank %}
-                        <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">{{ block.settings.label }}</label>
-                      {% endif %}
-                      <textarea {% if block.settings.placeholder != blank %}placeholder="{{ block.settings.placeholder }}"{% endif %} class="contact-field-input-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="{% if block.settings.type == "message" %}contact[message]{% else %}contact[{{ block.settings.name }}]{% endif %}" {% if block.settings.required %}required{% endif %}></textarea>
-                    </div>
-                  {% when 'dropdown' %}
-                    {% assign options = block.settings.dropdown_options | strip | split: ',' %}
-                    {% if block.settings.title != blank %}
-                      <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">                        
-                        {{ forloop.index }}.
-                        {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
-                    {% endif %}
-                    <div class="contact-field-inner-{{ section.id }}">
-                      {% if block.settings.label != blank %}
-                        <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">{{ block.settings.label }}</label>
-                      {% endif %}
-                      <div class="contact-field-select-{{ section.id }}">
-                        <svg class="contact-field-select-svg-{{ section.id }}" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512 581.5l273.1-273.1c25-25 65.5-25 90.5 0s25 65.5 0 90.5l-316.7 316.7c-12.9 12.9-30 19.2-47 18.7-16.9 0.4-33.9-5.8-46.8-18.699l-316.8-316.8c-25-25-25-65.5 0-90.5s65.5-25 90.5 0l273.2 273.2z"/></svg>
-                        <select class="contact-field-input-{{ section.id }} contact-field-input-select-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{block.settings.name}}]" {% if block.settings.required %}required{% endif %}>
-                          {% if block.settings.placeholder  %}
-                            <option value = "" disabled selected>{% if block.settings.placeholder != blank %}{{ block.settings.placeholder }}{% endif %}</option>
+            {% if form.posted_successfully? %}
+              {% comment %} Successful message {% endcomment %}
+              <p class="contact-succesg-{{ section.id }}">{{ success_text }}</p>
+            {% endif %}
+            
+            {{ form.errors | default_errors }}
+  
+            <div class="contact-fields-{{ section.id }}">
+              {% for block in section.blocks %}               
+                {% unless block.type == "heading" or block.type == "content" %}
+                  <div class="contact-field-{{ section.id }} contact-field-{{ block.id }} {% if block.type == "date" %} contact-field-date-{{ block.id }}{% endif %}">
+                    {% case block.type %}
+                      {% when 'date' %}
+                        {% if block.settings.title != blank %}
+                          <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">              
+                            {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
+                        {% endif %}
+                        <div class="contact-field-inner-{{ section.id }}">
+                          {% if block.settings.label != blank %}
+                            <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">                  
+                              {{ block.settings.label }}
+                            </label>
                           {% endif %}
-                          
-                          {% for option in options %}
-                            <option value = "{{option}}">{{option}}</option>
-                          {% endfor %}
-                        </select>  
-                      </div>
-                      
-                    </div>
-                  {% when 'checkbox' %}
-                    {% assign optionscheckbox = block.settings.checkbox_options | strip | split: ',' %}
-                    {% if block.settings.title != blank %}
-                      <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">                       
-                        {{ forloop.index }}.
-                        {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
-                    {% endif %}
-                    <div class="contact-field-inner-{{ section.id }}">
-                      {% if block.settings.label != blank %}
-                        <p class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">{{ block.settings.label }}</p>
-                      {% endif %}
-                      {% for option in optionscheckbox %}
-                        <div class="contact-field-checkbox-{{ section.id }}">
-                          <input type="checkbox" id="ContactForm{{ block.settings.name }}{{ forloop.index }}" name="contact[{{ block.settings.name }}-{{ option }}]">
-                          <label for="ContactForm{{ block.settings.name }}{{ forloop.index }}" class="contact-field-label-{{ block.id }}">{{ option }}</label>
+                          <input type="date" class="contact-field-input-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{ block.settings.name }}]" {% if block.settings.required %}required{% endif %}>
                         </div>
-                      {% endfor %}
-                    </div>
-                {% endcase %}
-              </div>
-            {% endfor %}
-          </div>
-          
-          <div class="contact-submit-button-{{ section.id }}">
-            <input type="submit" class="contact-submit-{{ section.id }}" value="{% if submit != blank %}{{ submit }}{% else %}Submit{% endif %}">
-          </div>        
-
-        {% endform %}
-        {% if bottom_text != blank %}
-          <div class="contact-bottom-text-{{ section.id }}">{{ bottom_text }}</div>
-        {% endif %}
-
-        <div class="contact-progresg-container-{{ section.id }}">
-          <div id="contact-progresg-bar-{{ section.id }}" class="contact-progresg-bar-{{ section.id }}"></div>
-        </div>
+                      {% when 'text' %}
+                        {% if block.settings.title != blank %}
+                          <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">              
+                            {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
+                        {% endif %}
+                        <div class="contact-field-inner-{{ section.id }}">
+                          {% if block.settings.label != blank %}
+                            <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">           
+                              {{ block.settings.label }}
+                            </label>
+                          {% endif %}
+                          <input type="{% if block.settings.type == "tel" %}tel{% elsif block.settings.type == "email" %}email{% else %}text{% endif %}" {% if block.settings.placeholder != blank %}placeholder="{{ block.settings.placeholder }}"{% endif %} class="contact-field-input-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="{% if block.settings.type == "email" %}contact[email]{% else %}contact[{{ block.settings.name }}]{% endif %}" {% if block.settings.required %}required{% endif %}>
+                        </div>
+                      {% when 'textarea' %}
+                        {% if block.settings.title != blank %}
+                          <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">                        
+                            {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
+                        {% endif %}
+                        <div class="contact-field-inner-{{ section.id }}">
+                          {% if block.settings.label != blank %}
+                            <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">{{ block.settings.label }}</label>
+                          {% endif %}
+                          <textarea {% if block.settings.placeholder != blank %}placeholder="{{ block.settings.placeholder }}"{% endif %} class="contact-field-input-{{ section.id }}" style="font-family: inherit" id="ContactForm{{ block.settings.name }}" name="{% if block.settings.type == "message" %}contact[message]{% else %}contact[{{ block.settings.name }}]{% endif %}" {% if block.settings.required %}required{% endif %}></textarea>
+                        </div>
+                      {% when 'dropdown' %}
+                        {% assign options = block.settings.dropdown_options | strip | split: ',' %}
+                        {% if block.settings.title != blank %}
+                          <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">                        
+                            {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
+                        {% endif %}
+                        <div class="contact-field-inner-{{ section.id }}">
+                          {% if block.settings.label != blank %}
+                            <label for="ContactForm{{ block.settings.name }}" class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">{{ block.settings.label }}</label>
+                          {% endif %}
+                          <div class="contact-field-select-{{ section.id }}">
+                            <svg class="contact-field-select-svg-{{ section.id }}" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512 581.5l273.1-273.1c25-25 65.5-25 90.5 0s25 65.5 0 90.5l-316.7 316.7c-12.9 12.9-30 19.2-47 18.7-16.9 0.4-33.9-5.8-46.8-18.699l-316.8-316.8c-25-25-25-65.5 0-90.5s65.5-25 90.5 0l273.2 273.2z"/></svg>
+                            <select class="contact-field-input-{{ section.id }} contact-field-input-select-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{block.settings.name}}]" {% if block.settings.required %}required{% endif %}>
+                              {% if block.settings.placeholder  %}
+                                <option value = "" disabled selected>{% if block.settings.placeholder != blank %}{{ block.settings.placeholder }}{% endif %}</option>
+                              {% endif %}
+                              
+                              {% for option in options %}
+                                <option value = "{{option}}">{{option}}</option>
+                              {% endfor %}
+                            </select>  
+                          </div>
+                          
+                        </div>
+                      {% when 'checkbox' %}
+                        {% assign optionscheckbox = block.settings.checkbox_options | strip | split: ',' %}
+                        {% if block.settings.title != blank %}
+                          <p class="contact-field-title-{{ section.id }} contact-field-title-{{ block.id }}">                       
+                            {{ block.settings.title }} {% if block.settings.required %}<span class="contact-field-required-{{ section.id }}">{{ required_text }}</span>{% endif %}</p>
+                        {% endif %}
+                        <div class="contact-field-inner-{{ section.id }}">
+                          {% if block.settings.label != blank %}
+                            <p class="contact-field-label-{{ section.id }} contact-field-label-{{ block.id }}">{{ block.settings.label }}</p>
+                          {% endif %}
+                          {% for option in optionscheckbox %}
+                            <div class="contact-field-checkbox-{{ section.id }}">
+                              <input type="checkbox" {% if block.settings.required %}required{% endif %} id="ContactForm{{ block.settings.name }}{{ forloop.index }}{{ section.id }}" name="{% if block.settings.use_newsletter and forloop.first %}customer[accepts_marketing]{% else %}contact[{{ block.settings.name }}-{{ option }}]{% endif %}">
+                              <label for="ContactForm{{ block.settings.name }}{{ forloop.index }}{{ section.id }}" class="contact-field-label-{{ block.id }}">{{ option }}</label>
+                            </div>
+                          {% endfor %}
+                        </div>
+                    {% endcase %}
+                  </div>    
+                {% endunless %}                 
+              {% endfor %}
+            </div>
+            
+            <div class="contact-submit-button-{{ section.id }}">
+              <input type="submit" class="contact-submit-{{ section.id }}" value="{% if submit != blank %}{{ submit }}{% else %}Submit{% endif %}">
+            </div>        
+  
+          {% endform %}
+        </div>        
       </div>
     </div>
 </div>
 
-<script>
-  function initContactForm2() {
-    const section = document.querySelector('.contact-{{ section.id }}');
-    const form = section.querySelector('form');
-    const progressBar = section.querySelector('.contact-progresg-bar-{{ section.id }}');
-    const fields = section.querySelectorAll('input, textarea, select');
-    const fieldInnerContainers = section.querySelectorAll('.contact-field-inner-{{ section.id }}');     
-    const succesMessage = document.querySelector('.contact-succesg-{{ section.id }}')
-    const submitFormValue = localStorage.getItem('submitForm');
-
-    if (!form || !progressBar || fields.length === 0) return;     
-
-    if (succesMessage) {        
-      console.log(submitFormValue);
-      if (submitFormValue == 'true') {
-        setTimeout(() => {
-          succesMessage.classList.add('active');
-        }, 3000);
-        localStorage.setItem('submitForm', false);
-      } else {
-        succesMessage.classList.add('active');
-      }     
-    }
-
-    form.addEventListener("submit", () => {
-      localStorage.setItem('submitForm', true);
-    })
-
-    function updateProgressBar() {
-      let filledFields = 0;
-      let countableFields = 0;
-
-      fieldInnerContainers.forEach(container => {
-        let checkboxGroupChecked = false;
-        let hasCheckbox = false;
-        const containerFields = container.querySelectorAll('input, textarea, select');
-        
-        containerFields.forEach(field => {
-          if (field.offsetParent !== null && !field.disabled && field.type !== 'submit') {
-            if (field.type === 'checkbox') {
-              hasCheckbox = true;
-              if (field.checked) {
-                checkboxGroupChecked = true;
-              }
-            } else {
-              countableFields++;
-              if (field.value.trim() !== '') {
-                filledFields++;
-              }
-            }
-          }
-        });
-
-        if (hasCheckbox) {
-          countableFields++;
-          if (checkboxGroupChecked) {
-            filledFields++;
-          }
-        }
-      });
-
-      const progress = (filledFields / countableFields) * 100;
-      progressBar.style.width = progress + '%';
-    }
-
-    progressBar.style.width = '0%';
-
-    fields.forEach(field => {
-      field.addEventListener('input', updateProgressBar);
-      field.addEventListener('change', updateProgressBar);
-    });
-
-    updateProgressBar();
-  }
-  
-  document.addEventListener('DOMContentLoaded', initContactForm2);
-  
-  if (Shopify.designMode) {
-    document.addEventListener('shopify:section:unload', initContactForm2);
-    document.addEventListener('shopify:section:load', initContactForm2);
-  }
-</script>
-
 {% schema %}
 {
-  "name": "SG-Contact form #2",
+  "name": "SG-Contact form #3",
   "settings": [
     {
       "type": "header",
       "content": "Important information",
-      "info": "To ensure the form functions correctly, you must complete all the fields marked as 'required.' [Video guide](https://www.loom.com/share/e3a97aa6b5494093823fa646fb39707c?sid=6d2843a8-00f7-4e42-be35-dd7a2a9937b5)"
+      "info": "To ensure the form functions correctly, you must complete all the fields marked as 'required*' [Watch quick video guide](https://www.loom.com/share/e3a97aa6b5494093823fa646fb39707c?sid=6d2843a8-00f7-4e42-be35-dd7a2a9937b5)"
     },
     {
       "type": "header",
-      "content": "Heading settings"
+      "content": "Layout"
     },
     {
-      "type": "richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "<h2>Submit an Inquiry</h2>"
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "content_form",
+      "options": [
+        {
+          "label": "Align form left",
+          "value": "form_content"
+        },
+        {
+          "label": "Align form right",
+          "value": "content_form"
+        }
+      ]
     },
     {
-      "type": "checkbox",
-      "id": "heading_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 24
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Layout - mobile",
+      "default": "content_form",
+      "options": [
+        {
+          "label": "Content above form",
+          "value": "content_form"
+        },
+        {
+          "label": "Form above content",
+          "value": "form_content"
+        }
+      ]
     },
     {
       "type": "range",
-      "id": "heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "text_alignment",
-      "id": "heading_align",
-      "label": "Alignment",
-      "default": "left"
-    },
-    {
-      "type": "text_alignment",
-      "id": "heading_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "left"
-    },
-    {
-      "type": "header",
-      "content": "Form layout settings"
-    },
-    {
-      "type": "range",
-      "id": "form_padding_horizontal",
+      "id": "layout_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Padding horizontal",
-      "default": 68
+      "label": "Gap",
+      "default": 72
     },
     {
       "type": "range",
-      "id": "form_padding_horizontal_mobile",
+      "id": "layout_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Padding horizontal - mobile",
+      "label": "Gap - mobile",
       "default": 36
     },
     {
-      "type": "range",
-      "id": "form_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical",
-      "default": 52
+      "type": "header",
+      "content": "Content"
     },
     {
-      "type": "range",
-      "id": "form_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical - mobile",
-      "default": 48
+      "type": "text_alignment",
+      "id": "content_align",
+      "label": "Alignment"
     },
     {
-      "type": "range",
-      "id": "form_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 8
+      "type": "text_alignment",
+      "id": "content_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_align",
+      "label": "Vertical align - desktop",
+      "default": "start",
+      "options": [
+        {
+          "label": "Top",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Bottom",
+          "value": "end"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Form"
     },
     {
       "type": "range",
@@ -1119,7 +1060,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 40
+      "default": 24
     },
     {
       "type": "range",
@@ -1129,40 +1070,11 @@
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "form_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "form_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "form_shadow_opacity",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "label": "Shadow opacity",
-      "default": 0.1
+      "default": 24
     },
     {
       "type": "header",
-      "content": "Field title settings"
+      "content": "Field title"
     },
     {
       "type": "checkbox",
@@ -1180,18 +1092,18 @@
       "type": "range",
       "id": "title_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 16
+      "default": 14
     },
     {
       "type": "range",
       "id": "title_size_mobile",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
       "default": 14
@@ -1208,73 +1120,7 @@
     },
     {
       "type": "header",
-      "content": "Field label settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "label_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "label_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "label_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "label_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "label_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "label_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "label_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 16
-    },
-    {
-      "type": "header",
-      "content": "Field required text settings"
+      "content": "Field required text"
     },
     {
       "type": "text",
@@ -1298,18 +1144,18 @@
       "type": "range",
       "id": "required_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 16
+      "default": 14
     },
     {
       "type": "range",
       "id": "required_size_mobile",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
       "default": 14
@@ -1326,7 +1172,73 @@
     },
     {
       "type": "header",
-      "content": "Field input settings"
+      "content": "Field label"
+    },
+    {
+      "type": "checkbox",
+      "id": "label_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "label_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "label_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "label_mt",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "label_mt_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Field input"
     },
     {
       "type": "checkbox",
@@ -1344,21 +1256,21 @@
       "type": "range",
       "id": "input_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 16
+      "default": 14
     },
     {
       "type": "range",
       "id": "input_size_mobile",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
@@ -1368,7 +1280,7 @@
       "step": 10,
       "unit": "%",
       "label": "Line height",
-      "default": 130
+      "default": 150
     },
     {
       "type": "range",
@@ -1398,7 +1310,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical",
-      "default": 8
+      "default": 16
     },
     {
       "type": "range",
@@ -1408,7 +1320,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical - mobile",
-      "default": 8
+      "default": 16
     },
     {
       "type": "range",
@@ -1418,7 +1330,7 @@
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 4
+      "default": 8
     },
     {
       "type": "range",
@@ -1438,7 +1350,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 16
+      "default": 8
     },
     {
       "type": "range",
@@ -1448,11 +1360,11 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 16
+      "default": 8
     },
     {
       "type": "header",
-      "content": "Checkbox settings"
+      "content": "Checkbox"
     },
     {
       "type": "checkbox",
@@ -1470,8 +1382,8 @@
       "type": "range",
       "id": "checkbox_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size",
       "default": 16
@@ -1480,8 +1392,8 @@
       "type": "range",
       "id": "checkbox_size_mobile",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
       "default": 14
@@ -1497,8 +1409,140 @@
       "default": 130
     },
     {
+      "type": "range",
+      "id": "checkbox_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 4
+    },
+    {
       "type": "header",
-      "content": "Form submit settings"
+      "content": "Success message",
+      "info": "This message appears when the form is submitted successfully."
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Text",
+      "default": "Thank you!"
+    },
+    {
+      "type": "checkbox",
+      "id": "success_text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "success_text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "success_text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "success_text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "success_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "text_alignment",
+      "id": "success_text_align",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "success_text_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Error message",
+      "info": "This message appears when there's an issue with form submission."
+    },
+    {
+      "type": "checkbox",
+      "id": "error_text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "error_text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "error_text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "error_text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "error_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 150
+    },
+    {
+      "type": "text_alignment",
+      "id": "error_text_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "error_text_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "header",
+      "content": "Form submit button"
     },
     {
       "type": "text",
@@ -1522,8 +1566,8 @@
       "type": "range",
       "id": "submit_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size",
       "default": 16
@@ -1532,11 +1576,11 @@
       "type": "range",
       "id": "submit_size_mobile",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
@@ -1556,7 +1600,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal",
-      "default": 16
+      "default": 24
     },
     {
       "type": "range",
@@ -1566,7 +1610,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal - mobile",
-      "default": 16
+      "default": 24
     },
     {
       "type": "range",
@@ -1576,7 +1620,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical",
-      "default": 10
+      "default": 12
     },
     {
       "type": "range",
@@ -1586,7 +1630,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical - mobile",
-      "default": 10
+      "default": 12
     },
     {
       "type": "range",
@@ -1596,7 +1640,7 @@
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 4
+      "default": 100
     },
     {
       "type": "range",
@@ -1642,351 +1686,65 @@
     },
     {
       "type": "header",
-      "content": "Bottom text settings"
-    },
-    {
-      "type": "richtext",
-      "id": "bottom_text",
-      "label": "Text",
-      "default": "<p>Bottom text</p>"
-    },
-    {
-      "type": "checkbox",
-      "id": "bottom_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "bottom_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "bottom_text_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "bottom_text_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "bottom_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "bottom_text_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "bottom_text_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 24
-    },
-    {
-      "type": "text_alignment",
-      "id": "bottom_text_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "bottom_text_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "Success text settings"
-    },
-    {
-      "type": "text",
-      "id": "success_text",
-      "label": "Text",
-      "default": "Thank you!"
-    },
-    {
-      "type": "checkbox",
-      "id": "success_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "success_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "success_text_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 28
-    },
-    {
-      "type": "range",
-      "id": "success_text_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 18
-    },
-    {
-      "type": "range",
-      "id": "success_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "success_text_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "success_text_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 24
-    },
-    {
-      "type": "text_alignment",
-      "id": "success_text_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "success_text_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "Error settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "error_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "error_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "error_text_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "error_text_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "error_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "error_text_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "error_text_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 24
-    },
-    {
-      "type": "text_alignment",
-      "id": "error_text_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "error_text_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "header",
       "content": "Form colors"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading",
-      "default": "#323338"
-    },
-    {
-      "type": "color",
-      "id": "bottom_text_color",
-      "label": "Bottom text",
-      "default": "#676879"
-    },
-    {
-      "type": "color",
-      "id": "success_text_color",
-      "label": "Success text",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "error_text_color",
-      "label": "Error text",
-      "default": "#D83A52"
-    },
-    {
-      "type": "color",
-      "id": "progress_bar_active_color",
-      "label": "Progress bar",
-      "default": "#C20062"
-    },
-    {
-      "type": "color",
-      "id": "form_bg_color",
-      "label": "Background",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "form_shadow_color",
-      "label": "Shadow",
-      "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Field colors"
     },
     {
       "type": "color",
       "id": "title_color",
       "label": "Title",
-      "default": "#323338"
-    },
-    {
-      "type": "color",
-      "id": "label_color",
-      "label": "Label",
-      "default": "#323338"
+      "default": "#121212"
     },
     {
       "type": "color",
       "id": "required_color",
       "label": "Required text",
-      "default": "#D83A52"
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Input colors"
     },
     {
       "type": "color",
       "id": "input_color",
-      "label": "Input text",
-      "default": "#323338"
+      "label": "Text",
+      "default": "#121212"
     },
     {
       "type": "color",
       "id": "placeholder_color",
-      "label": "Placeholder text",
-      "default": "#979AA9"
+      "label": "Placeholder",
+      "default": "#b3b3b3"
     },
     {
       "type": "color",
       "id": "input_bg_color",
-      "label": "Input background",
+      "label": "Background",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "input_border_color",
-      "label": "Input border",
-      "default": "#C3C6D4"
+      "label": "Border",
+      "default": "#DEDEDE"
     },
     {
       "type": "color",
       "id": "input_border_hover_color",
-      "label": "Input border hover",
-      "default": "#323348"
+      "label": "Border hover",
+      "default": "#A8A8A8"
     },
     {
       "type": "color",
       "id": "input_active_color",
-      "label": "Input border active",
-      "default": "#323348"
+      "label": "Border active",
+      "default": "#121212"
     },
     {
       "type": "color",
@@ -2002,7 +1760,7 @@
       "type": "color",
       "id": "checkbox_color",
       "label": "Text",
-      "default": "#323338"
+      "default": "#121212"
     },
     {
       "type": "color",
@@ -2020,19 +1778,19 @@
       "type": "color",
       "id": "checkbox_bg_active_color",
       "label": "Background active",
-      "default": "#C20062"
+      "default": "#121212"
     },
     {
       "type": "color",
       "id": "checkbox_border_color",
       "label": "Border",
-      "default": "#323338"
+      "default": "#121212"
     },
     {
       "type": "color",
       "id": "checkbox_border_active_color",
       "label": "Border active",
-      "default": "#C20062"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -2054,25 +1812,25 @@
       "type": "color",
       "id": "submit_bg_color",
       "label": "Background",
-      "default": "#C20062"
+      "default": "#121212"
     },
     {
       "type": "color",
       "id": "submit_bg_hover_color",
       "label": "Background hover",
-      "default": "#94054D"
+      "default": "#222222"
     },
     {
       "type": "color",
       "id": "submit_border_color",
       "label": "Border",
-      "default": "#C3C6D4"
+      "default": "#121212"
     },
     {
       "type": "color",
       "id": "submit_border_hover_color",
       "label": "Border hover",
-      "default": "#C3C6D4"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -2080,20 +1838,33 @@
     },
     {
       "type": "color",
-      "id": "background_color",
+      "label": "Success message",
+      "id": "success_text_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Error message",
+      "id": "error_text_color",
+      "default": "#c70a24"
+    },
+    {
+      "type": "color",
       "label": "Section background",
-      "default": "#FAF7Ef"
+      "id": "background_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "color_background",
       "id": "background_gradient",
-      "label": "Section background gradient"
+      "label": "Section background gradient",
+      "info": "Remove gradient to replace with solid colors"
     },
     {
       "type": "color",
-      "id": "border_color",
       "label": "Border",
-      "default": "#000000"
+      "id": "border_color",
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -2117,6 +1888,26 @@
       "step": 4,
       "unit": "px",
       "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin sides",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Margin sides mobile",
       "default": 0
     },
     {
@@ -2151,7 +1942,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 6
+      "default": 5
     },
     {
       "type": "range",
@@ -2165,7 +1956,7 @@
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section"
     },
     {
       "type": "checkbox",
@@ -2181,7 +1972,7 @@
       "step": 100,
       "unit": "px",
       "label": "Section content width",
-      "default": 800
+      "default": 1200
     },
     {
       "type": "range",
@@ -2192,9 +1983,180 @@
       "unit": "px",
       "label": "Border thickness",
       "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Section roundness",
+      "default": 0
     }
   ],
   "blocks": [
+    {
+      "type": "heading",
+      "limit": 1,
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<h2>Contact form #3</h2>"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "heading_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Font size",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "heading_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 130
+        },
+        {
+          "type": "range",
+          "id": "heading_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "heading_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "label": "Color",
+          "id": "heading_color",
+          "default": "#121212"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Let your customers get in touch with you by filling out the contant form.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "text_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 150
+        },
+        {
+          "type": "range",
+          "id": "text_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "text_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 16
+        },
+        {
+          "type": "color",
+          "label": "Color",
+          "id": "text_color",
+          "default": "#121212"
+        }
+      ]
+    },
     {
       "name": "Text field (oneline)",
       "type": "text",
@@ -2203,7 +2165,7 @@
           "type": "text",
           "id": "name",
           "label": "Field name for form",
-          "info": "This field is required!"
+          "info": "This field is required*"
         },
         {
           "type": "checkbox",
@@ -2244,17 +2206,13 @@
               "label": "Telephone number"
             }
           ],
-          "label": "Data validation"
+          "label": "Text data"
         },
         {
-          "type": "range",
-          "id": "width",
-          "min": 10,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Width",
-          "default": 100
+          "type": "checkbox",
+          "id": "half_width",
+          "label": "Half width",
+          "default": false
         }
       ]
     },
@@ -2266,13 +2224,13 @@
           "type": "text",
           "id": "name",
           "label": "Field name for form",
-          "info": "This field is required!"
+          "info": "This field is required*"
         },
         {
           "type": "checkbox",
           "id": "required",
           "label": "Required",
-          "default": false
+          "default": true
         },
         {
           "type": "text",
@@ -2306,14 +2264,10 @@
           "label": "Textarea type"
         },
         {
-          "type": "range",
-          "id": "width",
-          "min": 10,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Width",
-          "default": 100
+          "type": "checkbox",
+          "id": "half_width",
+          "label": "Half width",
+          "default": false
         }
       ]
     },
@@ -2325,7 +2279,41 @@
           "type": "text",
           "id": "name",
           "label": "Field name for form",
-          "info": "This field is required!"
+          "info": "This field is required*"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "checkbox",
+          "id": "half_width",
+          "label": "Half width",
+          "default": false
+        }
+      ]
+    },
+    {
+      "name": "Dropdown box",
+      "type": "dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Field name for form",
+          "info": "This field is required*"
         },
         {
           "type": "checkbox",
@@ -2347,68 +2335,21 @@
           "type": "text",
           "id": "placeholder",
           "label": "Placeholder text",
-          "info": "Please leave empty if you don't want any text."
-        },
-        {
-          "type": "range",
-          "id": "width",
-          "min": 10,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Width",
-          "default": 100
-        }
-      ]
-    },
-    {
-      "name": "Dropdown box",
-      "type": "dropdown",
-      "settings": [
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Field name for form",
-          "info": "This field is required!"
-        },
-        {
-          "type": "checkbox",
-          "id": "required",
-          "label": "Required",
-          "default": false
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label"
-        },
-        {
-          "type": "text",
-          "id": "placeholder",
-          "label": "Placeholder text",
-          "info": "Please leave empty if you don't want any text."
+          "info": "Please leave empty if you don't want any text.",
+          "default": "Select a topic"
         },
         {
           "type": "textarea",
           "id": "dropdown_options",
           "label": "Dropdown box options",
           "info": "Please separate options with a comma.",
-          "default": "First option,Second option,Third option"
+          "default": "Feedback,Press,Support,Wholesale"
         },
         {
-          "type": "range",
-          "id": "width",
-          "min": 10,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Width",
-          "default": 100
+          "type": "checkbox",
+          "id": "half_width",
+          "label": "Half width",
+          "default": false
         }
       ]
     },
@@ -2420,7 +2361,7 @@
           "type": "text",
           "id": "name",
           "label": "Field name for form",
-          "info": "This field is required!"
+          "info": "This field is required*"
         },
         {
           "type": "checkbox",
@@ -2446,27 +2387,45 @@
           "default": "Checkbox options"
         },
         {
-          "type": "range",
-          "id": "width",
-          "min": 10,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Width",
-          "default": 100
+          "type": "checkbox",
+          "id": "half_width",
+          "label": "Half width",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "use_newsletter",
+          "label": "Use for sign up to newsletter"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Contact form #2",
+      "name": "SG-Contact form #3",
       "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "content"
+        },
         {
           "type": "text",
           "settings": {
-            "name": "Name",
-            "title": "Name"
+            "name": "First name",
+            "title": "First name",
+            "half_width": true,
+            "placeholder": "i.e. Jane"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "name": "Last name",
+            "title": "Last name",
+            "half_width": true,
+            "placeholder": "i.e. Doe"
           }
         },
         {
@@ -2474,7 +2433,17 @@
           "settings": {
             "name": "Email",
             "title": "Email",
-            "type": "email"
+            "type": "email",
+            "placeholder": "i.e. jane.doe@email.com"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "name": "Company name",
+            "title": "Company name",
+            "placeholder": "i.e. Section Store",
+            "required": false
           }
         },
         {
@@ -2482,35 +2451,31 @@
           "settings": {
             "name": "Phone number",
             "title": "Phone number",
-            "type": "tel"
-          }
-        },
-        {
-          "type": "text",
-          "settings": {
-            "name": "Company name",
-            "title": "Company name"
-          }
-        },
-        {
-          "type": "text",
-          "settings": {
-            "name": "CVR number",
-            "title": "CVR number"
+            "type": "tel",
+            "placeholder": "i.e. (123) 123-1234",
+            "required": false
           }
         },
         {
           "type": "dropdown",
           "settings": {
-            "name": "Topic",
-            "title": "Topic"
+            "name": "How can we help you",
+            "title": "How can we help you"
           }
         },
         {
           "type": "textarea",
           "settings": {
-            "name": "Message",
-            "title": "Message"
+            "name": "Please share more details about your enquiry",
+            "title": "Please share more details about your enquiry",
+            "placeholder": "i.e. What is my order status?"
+          }
+        },
+        {
+          "type": "checkbox",
+          "settings": {
+            "name": "Subscribe for exclusive news and offers",
+            "checkbox_options": "Subscribe for exclusive news and offers"
           }
         }
       ]
