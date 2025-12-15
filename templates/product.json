@@ -99,10 +99,106 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "mockup_NmDjYJ": {
+      "type": "mockup",
+      "blocks": {
+        "item_Jz9nWh": {
+          "type": "item",
+          "settings": {
+            "days": 0,
+            "range": false,
+            "second_days": 2,
+            "weekend": true,
+            "title": "Order placed"
+          }
+        },
+        "item_BxLNhw": {
+          "type": "item",
+          "settings": {
+            "days": 1,
+            "range": true,
+            "second_days": 2,
+            "weekend": true,
+            "title": "Dispatched"
+          }
+        },
+        "item_aHPU4P": {
+          "type": "item",
+          "settings": {
+            "days": 4,
+            "range": true,
+            "second_days": 6,
+            "weekend": true,
+            "title": "Delivered"
+          }
+        }
+      },
+      "block_order": [
+        "item_Jz9nWh",
+        "item_BxLNhw",
+        "item_aHPU4P"
+      ],
+      "name": "SG-Delivery timer",
+      "settings": {
+        "delivery_position": "below_buy",
+        "items_style": "first",
+        "heading": "estimated delivery",
+        "heading_use_delivery": true,
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 13,
+        "heading_size_mobile": 13,
+        "heading_advanced": false,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_align_mobile": "left",
+        "items_mt": 16,
+        "items_gap": 0,
+        "item_padding_vertical": 10,
+        "item_padding_horizontal": 10,
+        "item_radius": 0,
+        "item_border_thickness": 1,
+        "item_arrow": true,
+        "icon_size": 38,
+        "icon_size_mobile": 36,
+        "date_custom": false,
+        "date_font": "josefin_sans_n4",
+        "date_size": 12,
+        "date_size_mobile": 11,
+        "date_advanced": false,
+        "date_height": 100,
+        "date_mt": 10,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 12,
+        "title_size_mobile": 12,
+        "title_advanced": false,
+        "title_height": 130,
+        "title_mt": 10,
+        "item_border_color": "#DEDEDF",
+        "icon_bg_color": "#4D4D4D",
+        "icon_color": "#FFFFFF",
+        "line_color": "#4D4D4D",
+        "date_color": "#787878",
+        "title_color": "#787878",
+        "heading_color": "#787878",
+        "background_color": "#FFFFFF",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "border_thickness": 0
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "mockup_NmDjYJ"
   ]
 }
