@@ -37,56 +37,16 @@
     "mockup_P3CQh7": {
       "type": "mockup",
       "blocks": {
-        "heading_4XFDCE": {
-          "type": "heading",
-          "settings": {
-            "heading": "<h2>Contact form #6</h2>",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
-            "heading_size": 40,
-            "heading_size_mobile": 32,
-            "heading_height": 130,
-            "heading_mt": 0,
-            "heading_mt_mobile": 0,
-            "heading_color": "#121212"
-          }
-        },
         "text_YbYbzc": {
           "type": "text",
           "settings": {
-            "text": "<p>Let your customers get in touch with you by filling out the contant form.</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 14,
-            "text_size_mobile": 14,
-            "text_height": 150,
-            "text_mt": 20,
-            "text_mt_mobile": 20,
-            "text_color": "#121212"
-          }
-        },
-        "text_field_xB7d8h": {
-          "type": "text_field",
-          "settings": {
-            "name": "SG-Name",
-            "required": false,
+            "name": "",
+            "required": true,
             "title": "",
             "label": "",
-            "placeholder": "Name",
+            "placeholder": "",
             "type": "text",
-            "width": 50
-          }
-        },
-        "text_field_yyNpEh": {
-          "type": "text_field",
-          "settings": {
-            "name": "SG-Email",
-            "required": false,
-            "title": "",
-            "label": "",
-            "placeholder": "Email",
-            "type": "email",
-            "width": 50
+            "width": 100
           }
         },
         "dropdown_p7JtQM": {
@@ -101,12 +61,6 @@
             "width": 100
           }
         },
-        "submenu_TEAX6T": {
-          "type": "submenu",
-          "settings": {
-            "option": "Product Question"
-          }
-        },
         "checkbox_88PX46": {
           "type": "checkbox",
           "settings": {
@@ -115,8 +69,7 @@
             "title": "",
             "label": "",
             "checkbox_options": "Have you checked out our FAQ's?",
-            "width": 100,
-            "use_newsletter": false
+            "width": 100
           }
         },
         "textarea_6nVeBe": {
@@ -131,12 +84,6 @@
             "width": 100
           }
         },
-        "submenu_3Cn797": {
-          "type": "submenu",
-          "settings": {
-            "option": "Product Experience"
-          }
-        },
         "dropdown_fY3Nwi": {
           "type": "dropdown",
           "settings": {
@@ -146,18 +93,6 @@
             "label": "",
             "placeholder": "What issue are you experiencing?",
             "dropdown_options": "Experience,Damaged Product,Other",
-            "width": 100
-          }
-        },
-        "text_field_dGPfbw": {
-          "type": "text_field",
-          "settings": {
-            "name": "SG-Order number",
-            "required": false,
-            "title": "",
-            "label": "",
-            "placeholder": "Order number (i.e. #1234)",
-            "type": "text",
             "width": 100
           }
         },
@@ -173,12 +108,6 @@
             "width": 100
           }
         },
-        "submenu_Uq6nMh": {
-          "type": "submenu",
-          "settings": {
-            "option": "Order Issue"
-          }
-        },
         "checkbox_fra7dc": {
           "type": "checkbox",
           "settings": {
@@ -187,19 +116,6 @@
             "title": "",
             "label": "",
             "checkbox_options": "Have you checked out our FAQ's?",
-            "width": 100,
-            "use_newsletter": false
-          }
-        },
-        "text_field_Q7mKme": {
-          "type": "text_field",
-          "settings": {
-            "name": "SG-Order number",
-            "required": false,
-            "title": "",
-            "label": "",
-            "placeholder": "Order number (i.e. #1234)",
-            "type": "text",
             "width": 100
           }
         },
@@ -227,12 +143,6 @@
             "width": 100
           }
         },
-        "submenu_MEkcf4": {
-          "type": "submenu",
-          "settings": {
-            "option": "Website Issue"
-          }
-        },
         "dropdown_qkx4aj": {
           "type": "dropdown",
           "settings": {
@@ -257,12 +167,6 @@
             "width": 100
           }
         },
-        "submenu_Hw9Uae": {
-          "type": "submenu",
-          "settings": {
-            "option": "Other"
-          }
-        },
         "textarea_by38QA": {
           "type": "textarea",
           "settings": {
@@ -277,149 +181,113 @@
         }
       },
       "block_order": [
-        "heading_4XFDCE",
         "text_YbYbzc",
-        "text_field_xB7d8h",
-        "text_field_yyNpEh",
         "dropdown_p7JtQM",
-        "submenu_TEAX6T",
         "checkbox_88PX46",
         "textarea_6nVeBe",
-        "submenu_3Cn797",
         "dropdown_fY3Nwi",
-        "text_field_dGPfbw",
         "textarea_kBUhkW",
-        "submenu_Uq6nMh",
         "checkbox_fra7dc",
-        "text_field_Q7mKme",
         "dropdown_HJhiVH",
         "textarea_kpmFYX",
-        "submenu_MEkcf4",
         "dropdown_qkx4aj",
         "textarea_VMjKy4",
-        "submenu_Hw9Uae",
         "textarea_by38QA"
       ],
       "name": "SG- Contact form #6",
       "settings": {
-        "content_align": "center",
-        "content_align_mobile": "center",
+        "heading": "<h2>CONTACT FORM PRO</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 30,
+        "heading_size_mobile": 20,
+        "heading_height": 130,
+        "heading_align": "left",
+        "form_mt": 70,
         "form_gap": 20,
         "form_gap_mobile": 20,
-        "form_mt": 70,
-        "form_mt_mobile": 70,
-        "title_advanced": false,
+        "text": "Thank you!",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 30,
+        "text_size_mobile": 20,
+        "text_height": 130,
         "title_custom": false,
         "title_font": "josefin_sans_n4",
         "title_size": 14,
         "title_size_mobile": 14,
         "title_height": 130,
-        "required_text": "*",
-        "required_custom": false,
-        "required_font": "josefin_sans_n4",
-        "required_size": 14,
-        "required_size_mobile": 14,
-        "required_height": 130,
-        "label_advanced": false,
+        "title_mt": 20,
         "label_custom": false,
         "label_font": "josefin_sans_n4",
         "label_size": 12,
         "label_size_mobile": 12,
         "label_height": 130,
         "label_mt": 8,
-        "label_mt_mobile": 8,
-        "input_advanced": false,
+        "required_text": "*",
+        "required_custom": false,
+        "required_font": "josefin_sans_n4",
+        "required_size": 14,
+        "required_size_mobile": 14,
+        "required_height": 130,
         "input_custom": false,
         "input_font": "josefin_sans_n4",
         "input_size": 14,
         "input_size_mobile": 16,
         "input_height": 150,
-        "input_padding_horizontal": 10,
-        "input_padding_horizontal_mobile": 10,
+        "input_mt": 6,
         "input_padding_vertical": 10,
-        "input_padding_vertical_mobile": 10,
+        "input_padding_horizontal": 10,
         "input_radius": 0,
         "input_border_thickness": 1,
-        "input_mt": 6,
-        "input_mt_mobile": 6,
-        "checkbox_advanced": false,
-        "checkbox_custom": false,
-        "checkbox_font": "josefin_sans_n4",
-        "checkbox_size": 14,
-        "checkbox_size_mobile": 14,
-        "checkbox_height": 150,
-        "checkbox_radius": 2,
-        "success_text": "Thank you! We've received your message and will get back to you within 1-2 business days.",
-        "success_advanced": false,
-        "success_text_custom": false,
-        "success_text_font": "josefin_sans_n4",
-        "success_text_size": 14,
-        "success_text_size_mobile": 14,
-        "success_text_height": 150,
-        "success_text_align": "center",
-        "success_text_align_mobile": "center",
-        "error_advanced": false,
-        "error_text_custom": false,
-        "error_text_font": "josefin_sans_n4",
-        "error_text_size": 14,
-        "error_text_size_mobile": 14,
-        "error_text_height": 150,
-        "error_text_align": "center",
-        "error_text_align_mobile": "center",
+        "placeholder_custom": false,
+        "placeholder_font": "josefin_sans_n4",
+        "placeholder_size": 16,
+        "placeholder_size_mobile": 14,
+        "placeholder_height": 130,
         "submit": "Submit your message",
         "submit_custom": false,
         "submit_font": "josefin_sans_n4",
         "submit_size": 14,
         "submit_size_mobile": 14,
         "submit_height": 100,
-        "submit_padding_horizontal": 40,
-        "submit_padding_horizontal_mobile": 40,
+        "submit_mt": 32,
         "submit_padding_vertical": 16,
-        "submit_padding_vertical_mobile": 16,
+        "submit_padding_horizontal": 40,
         "submit_radius": 100,
         "submit_border_thickness": 1,
-        "submit_mt": 32,
-        "submit_mt_mobile": 36,
+        "submit_align": "left",
+        "heading_color": "#000000",
+        "text_color": "#000000",
         "title_color": "#121212",
-        "required_color": "#121212",
         "label_color": "#121212",
+        "required_color": "#121212",
         "input_color": "#121212",
-        "placeholder_color": "#AFAFAF",
-        "input_bg_color": "#FFFFFF",
         "input_border_color": "#121212",
-        "input_border_hover_color": "#121212",
         "input_active_color": "#121212",
-        "select_icon_color": "#121212",
-        "checkbox_color": "#121212",
-        "checkbox_checkmar_color": "#FFFFFF",
-        "checkbox_bg_color": "#FFFFFF",
+        "placeholder_color": "#afafaf",
+        "checkbox_bg_color": "#ffffff",
         "checkbox_bg_active_color": "#121212",
         "checkbox_border_color": "#121212",
         "checkbox_border_active_color": "#121212",
-        "submit_color": "#FFFFFF",
-        "submit_hover_color": "#FFFFFF",
+        "submit_color": "#ffffff",
+        "submit_hover_color": "#ffffff",
         "submit_bg_color": "#121212",
         "submit_bg_hover_color": "#121212",
         "submit_border_color": "#121212",
         "submit_border_hover_color": "#121212",
-        "success_text_color": "#31B61F",
-        "error_text_color": "#FF2020",
-        "background_style": "solid",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#121212",
         "margin_top": 0,
         "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
         "padding_top": 36,
         "padding_bottom": 36,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
         "full_width": false,
-        "content_width": 900,
-        "border_thickness": 0,
-        "section_radius": 0
+        "content_width": 130,
+        "border_thickness": 0
       }
     }
   },
