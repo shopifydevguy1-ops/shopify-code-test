@@ -1,6 +1,4 @@
 {%- liquid 
-  assign padding_horizontal = section.settings.padding_horizontal
-  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
   assign padding_top = section.settings.padding_top
   assign padding_bottom = section.settings.padding_bottom
   assign border_color = section.settings.border_color
@@ -12,7 +10,7 @@
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
   assign content_width = section.settings.content_width
-  assign full_width = section.settings.full_width
+  assign width = section.settings.width
   assign section_radius = section.settings.section_radius
   assign background_style = section.settings.background_style
 
@@ -29,31 +27,32 @@
     assign content_horizontal_align_mobile = "start"
   endif
 
-  assign hide_close = section.settings.hide_close
-
-  assign close_color = section.settings.close_color
+  assign scrolling_velocity = section.settings.scrolling_velocity
+  assign scrolling_velocity_mobile = section.settings.scrolling_velocity_mobile
+  assign scrolling_gap = section.settings.scrolling_gap
+  assign scrolling_gap_mobile = section.settings.scrolling_gap_mobile
+  assign reverse_direction = section.settings.reverse_direction
+  assign pause_hover = section.settings.pause_hover
 -%}
 
 {%- style -%}
   
-  .section-{{ section.id }} {
-    border-top: solid {{ border_color }} {{ border_thickness }}px;
-    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+  .section-{{ section.id }} {  
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
     margin-left: {{ margin_horizontal_mobile }}rem;
     margin-right: {{ margin_horizontal_mobile }}rem;    
-    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
-    overflow: hidden;
   }
 
   .section-{{ section.id }}-settings {
     margin: 0 auto;
     position: relative;
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
-    padding-left: {{ padding_horizontal_mobile }}rem;
-    padding-right: {{ padding_horizontal_mobile }}rem;
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
+    overflow: hidden;
   }
 
   .countdown-timer-content-{{ section.id }} {
@@ -64,30 +63,31 @@
     justify-content: space-between;
     flex-direction: column;
   }
-
-  .timer-close-{{ section.id }} {
-    position: absolute;
-    top: -{{ content_mt_mobile | plus: 4 }}px;
-    right: 0px;
-    z-index: 9999;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
+   
+  .timer-wrapper-{{ section.id }} {
+    position: relative;
+    z-index: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
+    scrollbar-width: none;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    gap: {{ scrolling_gap_mobile }}px;
+    background-attachment: scroll !important;
   }
 
-  .timer-close-{{ section.id }} svg {
-    display: block;
-    width: 100%;
+  .timer-list-{{ section.id }} {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    white-space: nowrap;
     height: 100%;
-    object-fit: cover;
-  }
-
-  .timer-close-{{ section.id }} svg rect {
-    fill: {{ close_color }};
+    gap: {{ scrolling_gap_mobile }}px;
+    background-attachment: scroll !important;
+    -webkit-animation: ticker{{ section.id | replace: '-', '' }} {{ scrolling_velocity_mobile }}s infinite linear;
+    animation: ticker{{ section.id | replace: '-', '' }} {{ scrolling_velocity_mobile }}s infinite linear;
+    flex-shrink: 0;
   }
 
   @media(min-width: 1024px) {
@@ -103,8 +103,6 @@
       padding: 0 5rem;
       padding-top: {{ padding_top }}px;
       padding-bottom: {{ padding_bottom }}px;
-      padding-left: {{ padding_horizontal }}rem;
-      padding-right: {{ padding_horizontal }}rem;
     }
 
     .countdown-timer-content-{{ section.id }} {  
@@ -112,12 +110,15 @@
       align-items: center;
     }
 
-    .timer-close-{{ section.id }} {    
-      top: 50%;
-      right: -24px;
-      transform: translateY(-50%);    
+    .timer-wrapper-{{ section.id }} {
+      gap: {{ scrolling_gap }}px;
     }
 
+    .timer-list-{{ section.id }} {
+      gap: {{ scrolling_gap }}px;
+      -webkit-animation: ticker{{ section.id | replace: '-', '' }} {{ scrolling_velocity }}s infinite linear;
+      animation: ticker{{ section.id | replace: '-', '' }} {{ scrolling_velocity }}s infinite linear;
+    }
   }
   
 {%- endstyle -%}
@@ -149,13 +150,54 @@
   </style>
 {% endif %}
 
-{% unless full_width %}
+{% if width == 'custom' %}
   <style>
     .section-{{ section.id }}-settings {
       max-width: {{ content_width }}px;
     }
   </style>
-{% endunless %}
+{% elsif width == 'page' %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: var(--page-width);
+    }
+  </style>
+{% endif %}
+
+
+{% if reverse_direction %}
+  <style>
+    @keyframes ticker{{ section.id | replace: '-', '' }} {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @keyframes ticker{{ section.id | replace: '-', '' }} {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+{% endif %}
+
+{% if pause_hover %}
+	<style>
+    @media(min-width: 1024px) {
+      .timer-wrapper-{{ section.id }}:hover .timer-list-{{ section.id }} {
+        animation-play-state: paused;
+      }
+    } 
+	</style>
+{% endif %}
 
 {% if position == "fixed_bottom" %}
   <style>
@@ -175,160 +217,10 @@
   </style>
 {% endif %}
 
-{% if hide_close == false %}
-  <style>
-    .countdown-timer-content-{{ section.id }} {
-      margin-top: {{ content_mt_mobile }}px;
-    }
-
-    @media(min-width: 1024px) {
-      .countdown-timer-content-{{ section.id }} {
-        margin-top: 0;
-        margin-right: 24px;
-      }
-    }
-  </style>
-
-{% endif %}
-
 {% for block in section.blocks %}
   {% case block.type %}
-    {% when 'copy_button' %}
-      <style>
-        {{  block.settings.button_font | font_face: font_display: 'swap' }}
-        {{  block.settings.success_text_font | font_face: font_display: 'swap' }}
-
-        .countdown-button-{{ block.id }} {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          max-width: fit-content;
-          gap: 10px;
-          width: 100%;
-          margin: 0;
-          font-size: {{ block.settings.button_size_mobile }}px;
-          color: {{ block.settings.button_color }};
-          line-height: {{ block.settings.button_height }}%;
-          text-align: center;
-          text-transform: unset;
-          text-decoration: none;
-          padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
-          border-radius: {{ block.settings.button_radius }}px;
-          transition: all 0.3s ease 0s;
-          background-color: transparent;
-          border: 0px;
-          cursor: pointer;
-          font-weight: 700;
-          background-color: {{  block.settings.button_bg_color }};
-          border: {{  block.settings.button_border_thickness }}px solid {{  block.settings.button_border_color }};
-        }
-
-        .countdown-button-inner-{{ block.id }} {
-          margin: 0px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          text-decoration: none;
-        }
-
-        .countdown-button-{{ block.id }}:hover {
-          background-color: {{  block.settings.button_bg_hover_color }};
-          border: {{  block.settings.button_border_thickness }}px solid {{ block.settings. button_border_hover_color }};
-          color: {{ block.settings.button_hover_color }};
-          transition: all 0.25s ease 0s;
-        }
-
-        .countdown-button-{{ block.id }} svg {
-          width: {{ block.settings.copy_icon_size_mobile }}px;
-          height: {{ block.settings.copy_icon_size_mobile }}px;
-        }
-
-        .countdown-button-{{ block.id }} svg path {
-          stroke: {{ block.settings.button_color }};
-          transition: all 0.25s ease 0s;
-        }
-
-        .countdown-button-{{ block.id }}:hover svg path {
-          stroke: {{ block.settings.button_hover_color }};
-          transition: all 0.25s ease 0s;
-        }
-
-        .countdown-copy-succesg-{{ block.id }} {
-          margin: 0;
-          display: none;
-          padding: 6px 8px;
-          border-radius: {{ block.settings.success_text_radius }}px;
-          border: {{ block.settings.success_text_border_thickness }}px solid {{ block.settings.success_text_border_color }};
-          position: absolute;
-          top: 80%;
-          left: 8%;
-          background-color: {{ block.settings.success_text_bg_color }};
-          font-size: {{ block.settings.success_text_size_mobile }}px;
-          color: {{ block.settings.success_text_color }};
-          line-height: {{ block.settings.success_text_height }}%;
-          text-align: center;
-          text-transform: unset;
-          text-decoration: none;
-          font-weight: 400;
-        }
-
-        .countdown-copy-succesg-{{ block.id }}.active {
-          display: block;
-        }
-
-        @media (min-width: 1024px) {
-          .countdown-button-{{ block.id }} {
-            padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
-            font-size: {{ block.settings.button_size }}px;
-          }
-
-          .countdown-button-{{ block.id }} svg {
-            width: {{ block.settings.copy_icon_size }}px;
-            height: {{ block.settings.copy_icon_size }}px;
-          }
-
-          .countdown-copy-succesg-{{ block.id }} {
-            font-size: {{ block.settings.success_text_size }}px;        
-          }
-        }
-      </style>
-
-      {% if block.settings.use_shadow %}
-        <style>
-          .countdown-button-{{ block.id }}:hover {
-            -webkit-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
-            -moz-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
-            box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
-          }
-        </style>
-      {% endif %}  
-
-      {% if block.settings.button_custom %}
-        <style>
-          .countdown-button-{{ block.id }} {
-            font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
-            font-weight: {{ block.settings.button_font.weight }};
-            font-style: {{ block.settings.button_font.style }};
-          }
-        </style>
-      {% endif %}
-
-      {% if block.settings.success_text_custom %}
-        <style>
-          .countdown-copy-succesg-{{ block.id }} {
-            font-family: {{ block.settings.success_text_font.family }}, {{ block.settings.success_text_font.fallback_families }};
-            font-weight: {{ block.settings.success_text_font.weight }};
-            font-style: {{ block.settings.success_text_font.style }};
-          }
-        </style>
-      {% endif %}
-
     {% when 'text' %}
       <style>
-        {{  block.settings.text_font | font_face: font_display: 'swap' }}
-
         .countdown-text-{{ block.id }} {
           text-align: {{ content_align_mobile }};
           max-width: {{ block.settings.text_max_width_mobile }}%;
@@ -340,7 +232,6 @@
           color: {{ block.settings.text_color }};
           line-height: {{ block.settings.text_height }}%;
           text-transform: unset;
-          text-decoration: none;
           word-break: break-word;
         }  
 
@@ -365,6 +256,7 @@
 
       {% if block.settings.text_custom %}
         <style>
+          {{  block.settings.text_font | font_face: font_display: 'swap' }}
           .countdown-text-{{ block.id }} * {
             font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
             font-weight: {{ block.settings.text_font.weight }};
@@ -375,9 +267,13 @@
 
     {% when 'timer' %}      
       <style>
-        {{  block.settings.number_font | font_face: font_display: 'swap' }}
-        {{  block.settings.text_font | font_face: font_display: 'swap' }}
-        {{  block.settings.completed_text_font | font_face: font_display: 'swap' }}
+        .countdown-timer-wrapper-{{ block.id }} {
+          width: 100%;
+          justify-content: {{ content_horizontal_align_mobile }};
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
         
         .countdown-timer-{{ block.id }} {
           display: flex;
@@ -390,17 +286,13 @@
           display: flex;
           flex-direction: column;
           align-items: stretch;
-          justify-content: start;
+          justify-content: center;
           text-align: center; 
           width: {{ block.settings.item_width_mobile }}px;              
         }
 
         .countdown-timer-{{ block.id }} .time-block__num {
           margin: 0;          
-          border-radius: {{ block.settings.item_radius }}px; 
-          border: {{ block.settings.item_border_thickness }}px solid {{  block.settings.item_border_color }};
-          padding: {{ block.settings.item_padding_vertical_mobile }}px 4px;
-          background-color: {{ block.settings.item_bg_color }};
           font-size: {{ block.settings.number_size_mobile }}px;
           color: {{ block.settings.number_color }};
           line-height: {{ block.settings.number_height }}%;
@@ -409,7 +301,6 @@
         
         .countdown-timer-{{ block.id }} .time-block__unit {
           margin: 0;
-          margin-top: {{ block.settings.text_mt_mobile }}px;
           font-size: {{ block.settings.text_size_mobile }}px;
           color: {{ block.settings.text_color }};
           line-height: {{ block.settings.text_height }}%;
@@ -417,13 +308,34 @@
           word-break: break-word;
         }
 
-        .countdown-timer-completed-text-{{ block.id }} * {
+        .countdown-completed-text-{{ block.id }} {
+          display: none;
+        }
+
+        .countdown-completed-text-{{ block.id }} * {
           margin: 0;
           font-size: {{ block.settings.completed_text_size_mobile }}px;
           color: {{ block.settings.completed_text_color }};
           line-height: {{ block.settings.completed_text_height }}%;
           text-transform: unset;
           text-align: {{ content_align_mobile }};
+        }
+
+        .countdown-completed-text-{{ block.id }}.active {
+          display: block;
+        }
+
+        
+        .countdown-timer-text-{{ block.id }} * {
+          margin: 0;
+          font-size: {{ block.settings.number_size_mobile }}px;
+          color: {{ block.settings.text_color }};
+          line-height: {{ block.settings.number_height }}%;
+          text-transform: unset;
+        }
+
+        .countdown-timer-{{ block.id }} .time-block__num.colons {
+          font-size: {{ block.settings.number_size_mobile | times: 0.8 }}px;
         }
 
         @media(min-width: 1024px) {
@@ -437,23 +349,32 @@
 
           .countdown-timer-{{ block.id }} .time-block__num { 
             font-size: {{ block.settings.number_size }}px;
-            padding: {{ block.settings.item_padding_vertical }}px 4px;
           }
 
           .countdown-timer-{{ block.id }} .time-block__unit {
-            margin-top: {{ block.settings.text_mt }}px;
             font-size: {{ block.settings.text_size }}px;
           }
 
-          .countdown-timer-completed-text-{{ block.id }} * {
+          .countdown-completed-text-{{ block.id }} * {
             font-size: {{ block.settings.completed_text_size }}px;
+          }
+
+           .countdown-timer-text-{{ block.id }} * {
+            font-size: {{ block.settings.number_size }}px;
+          }
+
+          .countdown-timer-{{ block.id }} .time-block__num.colons {
+            font-size: {{ block.settings.number_size | times: 0.8 }}px;
           }
         }
       </style>
 
       {% if block.settings.number_custom %}
         <style>
-          .countdown-timer-{{ block.id }} .time-block__num {
+          {{  block.settings.number_font | font_face: font_display: 'swap' }}
+
+          .countdown-timer-{{ block.id }} .time-block__num,
+          .countdown-timer-text-{{ block.id }} * {
             font-family: {{ block.settings.number_font.family }}, {{ block.settings.number_font.fallback_families }};
             font-weight: {{ block.settings.number_font.weight }};
             font-style: {{ block.settings.number_font.style }};
@@ -463,6 +384,8 @@
 
       {% if block.settings.text_custom %}
         <style>
+          {{  block.settings.text_font | font_face: font_display: 'swap' }}
+
           .countdown-timer-{{ block.id }} .time-block__unit {
             font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
             font-weight: {{ block.settings.text_font.weight }};
@@ -472,8 +395,10 @@
       {% endif %}
 
       {% if block.settings.completed_text_custom %}
-        <style>
-          .countdown-timer-completed-text-{{ block.id }} * {
+        <style>          
+          {{  block.settings.completed_text_font | font_face: font_display: 'swap' }}
+          
+          .countdown-completed-text-{{ block.id }} * {
             font-family: {{ block.settings.completed_text_font.family }}, {{ block.settings.completed_text_font.fallback_families }};
             font-weight: {{ block.settings.completed_text_font.weight }};
             font-style: {{ block.settings.completed_text_font.style }};
@@ -486,83 +411,60 @@
   {% endcase %}
 {% endfor %}
 
+{% capture list %}
+  <div class="timer-list-{{ section.id }}">
+    {% for i in (1..5) %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+            {% when 'timer' %}
+             <div class="countdown-timer-wrapper-{{ block.id }}">
+                  <div class="countdown-timer-text-{{ block.id }}">{{ block.settings.text }}</div>
+                  <div class="countdown-timer-{{ block.id }}">        
+                    <div class="time-block">
+                      <span class="time-block__num js-timer-days">00</span>                          
+                    </div>
+                    <span class="time-block__num colons">:</span>
+                    <div class="time-block">
+                      <span class="time-block__num js-timer-hours">00</span>                              
+                    </div>
+                    <span class="time-block__num colons">:</span>
+                    <div class="time-block">
+                      <span class="time-block__num js-timer-minutes">00</span>                                    
+                    </div>
+                    <span class="time-block__num colons">:</span>
+                    <div class="time-block">
+                      <span class="time-block__num js-timer-seconds">00</span>                           
+                    </div>
+                  </div>
+                  <div class="countdown-completed-text-{{ block.id }}">
+                    {{ block.settings.completed_text }}
+                  </div>
+                </div> 
+            
+            {% when 'text' %}
+            {% if block.settings.text != blank %}
+                <div class="countdown-text-{{ block.id }}">{{ block.settings.text }}</div>
+            {% endif %} 
+            
+            {% else %}
+            
+        {% endcase %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endcapture %}
+
 {% if position == "class" %}
 <template id="countdown-timer-template-{{ section.id }}">
 {% endif %}
-  <div class="section-{{ section.id }} countdown-timer-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>
-    <div class="section-{{ section.id }}-settings">  
-      <div class="countdown-timer-content-{{ section.id }}">
-        {% unless hide_close %}
-          <div class="timer-close-{{ section.id }}">
-            <svg viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 text-white"><rect x="1.25391" y="19.4238" width="25" height="4" transform="rotate(-45 1.25391 19.4238)" fill="currentColor"></rect><rect x="4.08203" y="1.74609" width="25" height="4" transform="rotate(45 4.08203 1.74609)" fill="currentColor"></rect></svg>
-          </div>
-        {% endunless %}
+  <div class="section-{{ section.id }} countdown-timer-{{ section.id }}">
+    <div class="section-{{ section.id }}-settings" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>  
+      <div class="countdown-timer-content-{{ section.id }}">           
 
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'copy_button' %}              
-              {% if block.settings.code != blank %}                
-                <div class="countdown-button-{{ block.id }}">
-                  <p class="countdown-button-inner-{{ block.id }}">
-                    {% if block.settings.code != blank %}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path d="M3.64973 14.3333V14.9661C3.64973 16.0894 4.56034 17 5.68363 17H14.9661C16.0894 17 17 16.0894 17 14.9661V5.70054C17 4.57725 16.0894 3.66664 14.9661 3.66664H14.3503M1 12.2994V3.0339C1 1.91058 1.91061 1 3.0339 1H12.3164C13.4397 1 14.3503 1.91058 14.3503 3.0339V12.2994C14.3503 13.4227 13.4397 14.3333 12.3164 14.3333H3.0339C1.91061 14.3333 1 13.4227 1 12.2994Z" stroke="#121212" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                      {{ block.settings.copy_text }}
-                    {% endif %}              
-                  </p>
-                  {% if block.settings.code != blank %}
-                    <p class="coutdown-copy-code-{{ section.id }}" style="display: none;">{{ block.settings.code }}</p>
-                  {% endif %}
-                  {% if block.settings.success_text != blank %}
-                    <p class="countdown-copy-succesg-{{ section.id }} countdown-copy-succesg-{{ block.id }}">{{ block.settings.success_text }}</p>
-                  {% endif %}
-                </div>                  
-               
-              {% endif %} 
-
-            {% when 'timer' %}
-              <div class="countdown-timer-{{ block.id }}">
-
-                <div class="time-block">
-                  <span class="time-block__num js-timer-days">00</span>
-                  <span class="time-block__unit">{{ block.settings.days_text }}</span>
-                </div>
-                <div class="time-block">
-                  <span class="time-block__num js-timer-hours">00</span>
-                  <span class="time-block__unit">{{ block.settings.hours_text }}</span>
-                </div>
-                <div class="time-block">
-                  <span class="time-block__num js-timer-minutes">00</span>
-                  <span class="time-block__unit">{{ block.settings.minutes_text }}</span>
-                </div>
-                <div class="time-block">
-                  <span class="time-block__num js-timer-seconds">00</span>
-                  <span class="time-block__unit">{{ block.settings.seconds_text }}</span>
-                </div>
-              </div>
-    
-              <style>
-                .countdown-timer-completed-text-{{ block.id }} {
-                  display: none;
-                }
-              </style>
-
-              <div
-                class="countdown-timer-completed-text-{{ block.id }}"
-              >
-                {{ block.settings.timer_completed_text }}
-              </div>
-            
-            {% when 'text' %}
-              {% if block.settings.text != blank %}
-                <div class="countdown-text-{{ block.id }}">{{ block.settings.text }}</div>
-              {% endif %} 
-            
-            {% else %}
-              
-          {% endcase %}
-        {% endfor %}
+        <div class="timer-wrapper-{{ section.id }}">
+          {{ list }}
+          {{ list }}
+        </div>
       </div>     
     </div>
   </div>
@@ -572,1793 +474,1224 @@
 
 <div id="countdown-timer-local-target-{{ section.id }}"></div>
 
-    <script>
-      function initCountdownTimerBar5() {
-        setTimeout(() => {
-        {% for block in section.blocks %}
-          {% case block.type %} 
-            {% when 'timer' %}
-                {% if position == "class" %}
-                  let cssTarget = '{{ section.settings.insert_css_class_target }}';
-                  let productForm = cssTarget
-                    ? document.querySelector(cssTarget)
-                    : document.querySelector('#countdown-timer-local-target-{{ section.id }}');
-              
-                  if (!productForm) return;
-              
-                  const templateContent = document.querySelector(
-                    '#countdown-timer-template-{{ section.id }}'
-                  ).content;
-              
-                  productForm.insertAdjacentElement(
-                    'beforebegin',
-                    templateContent.firstElementChild
-                  );
-                {% endif %}
+<script>
+  function initCountdownTimerBar6{{ section.id | replace: '-', '' }}() {
+  const sectionId = '{{ section.id }}';
+  if (window[`timer_initialized_${sectionId}`]) return;
+  window[`timer_initialized_${sectionId}`] = true;
 
-                let section = document.querySelector('.countdown-timer-{{ section.id }}');
+  setTimeout(() => {
+    {% for block in section.blocks %}
+      {% case block.type %} 
+      {% when 'timer' %}
+        {% if position == "class" %}
+            const cssTarget = '{{ section.settings.insert_css_class_target }}';
+            const targetElement = cssTarget
+                ? document.querySelector(cssTarget)
+                : document.querySelector('#countdown-timer-local-target-{{ section.id }}');
+        
+            if (!targetElement) {
+                console.warn('Target element not found for countdown timer');
+                return;
+            }
+        
+            const templateContent = document.querySelector('#countdown-timer-template-{{ section.id }}');
+            if (!templateContent) return;
+            
+            if (document.querySelector('.countdown-timer-{{ section.id }}')) return;
+            
+            targetElement.insertAdjacentElement('beforebegin', templateContent.content.firstElementChild.cloneNode(true));
+        {% endif %}
 
-                let close = document.querySelector('.timer-close-{{ section.id }}');
+        const section = document.querySelector('.countdown-timer-{{ section.id }}');
+        if (!section) return;
 
-                if(close) {
-                  close.addEventListener('click', () => {
-                    section.style.display = "none";
-                  })
-                }
-
-                function startTimer() {
-                  const second = 1000,
-                    minute = second * 60,
-                    hour = minute * 60,
-                    day = hour * 24,
-                    wrapper = document.querySelector(
-                      '.countdown-timer-{{ block.id }}'
-                    ),
-                    countDown = new Date('{{  block.settings.year }}-{{  block.settings.month }}-{{  block.settings.day }}T{{  block.settings.hour }}:{{  block.settings.minute }}:00Z').getTime();
-
-                  console.log('start timer, end date:' + countDown)
-                  const interval = setInterval(function () {
-                    let now = new Date().getTime(),
-                      distance = countDown - now,
-                      days = Math.floor(distance / day),
-                      hours = Math.floor((distance % day) / hour),
-                      minutes = Math.floor((distance % hour) / minute),
-                      seconds = Math.floor((distance % minute) / second);
-
-                    (wrapper.querySelector('.js-timer-days').innerText = (
-                      days
-                    )),
-                      (wrapper.querySelector('.js-timer-hours').innerText = (
-                        hours
-                      )),
-                      (wrapper.querySelector('.js-timer-minutes').innerText = (
-                        minutes
-                      )),
-                      (wrapper.querySelector('.js-timer-seconds').innerText = (
-                        seconds
-                      ));
-
-                    if (distance < 0) {
-                      wrapper.querySelector('.js-timer-days').innerText = '00';
-                      wrapper.querySelector('.js-timer-hours').innerText = '00';
-                      wrapper.querySelector('.js-timer-minutes').innerText = '00';
-                      wrapper.querySelector('.js-timer-seconds').innerText = '00';
-                      {% if block.settings.hide_timer_on_completed %}
-                        wrapper.style.display = 'none';
-                      {% endif %}
-                      document.querySelector(
-                        '.countdown-timer-completed-text-{{ block.id }}'
-                      ).style.display = 'block';
-
-                      clearInterval(interval);
-                    }
-
-                  }, second);
-                  document.addEventListener('shopify:section:unload', function (event) {
-                    if (event.detail.sectionId === '{{ section.id }}') clearInterval(interval);
-                  });
-                }
-
-                startTimer()
-                if (window.Shopify && Shopify.designMode) {
-                  document.addEventListener('shopify:section:load', function (event) {
-                    if (event.detail.sectionId === '{{ section.id }}') {
-                      startTimer();
-                    }
-                  });
-                }
-
-            {% when 'copy_button' %}
-              const copyButton = document.querySelector('.countdown-button-{{ block.id }}');
-              const copyCodeElement = document.querySelector('.coutdown-copy-code-{{ section.id }}');
-              const copyCodeText = document.querySelector('.countdown-copy-succesg-{{ block.id }}');
-                  
-              if (copyButton && copyCodeElement) {
-                copyButton.addEventListener('click', function() {
-                  const textarea = document.createElement('textarea');
-                  textarea.value = copyCodeElement.textContent;
-                  
-                  document.body.appendChild(textarea);
-                  
-                  textarea.select();
-                  document.execCommand('copy');
-                  
-                  document.body.removeChild(textarea);
-
-                  copyCodeText.classList.add('active');
-
-                  setTimeout(() => {
-                    copyCodeText.classList.remove('active');
-                  }, 2000)
-                });
+        function setFixedWidthForTimeBlocks() {
+          const wrappers = document.querySelectorAll('.countdown-timer-{{ block.id }}');
+          
+          wrappers.forEach((wrapper) => {
+            const timeBlocks = wrapper.querySelectorAll('.time-block');
+            let maxWidth = 0;
+            
+            // Создаем временный элемент для измерения ширины всех цифр
+            const tempSpan = document.createElement('span');
+            tempSpan.className = 'time-block__num';
+            tempSpan.style.visibility = 'hidden';
+            tempSpan.style.position = 'absolute';
+            wrapper.appendChild(tempSpan);
+            
+            for (let i = 0; i <= 59; i++) {
+              tempSpan.innerText = i.toString();
+              const width = tempSpan.offsetWidth;
+              if (width > maxWidth) {
+                maxWidth = width;
               }
+            }
+            
+            wrapper.removeChild(tempSpan);
 
-          {% endcase %}
-        {% endfor %}        
-        }, 500);
-      }
-      document.addEventListener('DOMContentLoaded', initCountdownTimerBar5);  
-    </script>
+            timeBlocks.forEach((block) => {
+              const numSpan = block.querySelector('.time-block__num');
+              if (numSpan) {
+                numSpan.style.minWidth = maxWidth + 'px';
+                numSpan.style.display = 'inline-block';
+                numSpan.style.textAlign = 'center';
+              }
+            });
+          });
+        }
+
+        function startTimer() {
+          const second = 1000,
+              minute = second * 60,
+              hour = minute * 60,
+              day = hour * 24;
+              
+          const wrappers = document.querySelectorAll('.countdown-timer-{{ block.id }}');
+          
+          // Устанавливаем фиксированную ширину перед началом таймера
+          setFixedWidthForTimeBlocks();
+          
+          wrappers.forEach((wrapper) => {
+            const countDown = new Date('{{ block.settings.year }}-{{ block.settings.month }}-{{ block.settings.day }}T{{ block.settings.hour }}:{{ block.settings.minute }}:00Z').getTime();
+
+            const interval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = countDown - now;
+                
+                const days = Math.floor(distance / day);
+                const hours = Math.floor((distance % day) / hour);
+                const minutes = Math.floor((distance % hour) / minute);
+                const seconds = Math.floor((distance % minute) / second);
+
+                // Проверка существования элементов
+                const daysEl = wrapper.querySelector('.js-timer-days');
+                const hoursEl = wrapper.querySelector('.js-timer-hours');
+                const minutesEl = wrapper.querySelector('.js-timer-minutes');
+                const secondsEl = wrapper.querySelector('.js-timer-seconds');
+
+                if (daysEl) daysEl.innerText = days >= 0 ? days : '00';
+                if (hoursEl) hoursEl.innerText = hours >= 0 ? hours : '00';
+                if (minutesEl) minutesEl.innerText = minutes >= 0 ? minutes : '00';
+                if (secondsEl) secondsEl.innerText = seconds >= 0 ? seconds : '00';
+
+                if (distance < 0) {
+                    {% if block.settings.hide_timer_on_completed %}
+                        wrapper.style.display = 'none';
+                        const completedText = document.querySelectorAll('.countdown-completed-text-{{ block.id }}');
+                        if (completedText) {
+                          completedText.forEach((text) => {
+                            text.classList.add('active');
+                          })
+                        }
+                    {% endif %}
+                    clearInterval(interval);
+                }
+            }, second);
+            
+            document.addEventListener('shopify:section:unload', function (event) {
+                if (event.detail.sectionId === '{{ section.id }}') {
+                    clearInterval(interval);
+                }
+            });
+          });               
+        }
+        
+        startTimer();
+      {% endcase %}
+    {% endfor %}        
+  }, 500);
+  }
+
+  document.addEventListener('DOMContentLoaded', initCountdownTimerBar6{{ section.id | replace: '-', '' }});  
+</script>
 
 
 {% schema %}
-{
-  "name": "SG-Countdown timer bar #5",
-  "settings": [
-    {
-      "type": "paragraph",
-      "content": "⚠️ Save settings to display this section and see updates."
-    },
-    {
-      "type": "select",
-      "id": "position",
-      "label": "Position",
-      "default": "static",
-      "options": [
-        {
-          "value": "static",
-          "label": "Static / drag"
-        },
-        {
-          "value": "fixed_bottom",
-          "label": "Fixed bottom"
-        },
-        {
-          "value": "class",
-          "label": "Target CSS class (old themes)"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "id": "insert_css_class_target",
-      "label": "Target CSS class",
-      "default": ".header, .pageheader, .section-header, #announcement, .toolbar, .header__wrapper",
-      "placeholder": ".header",
-      "visible_if": "{{ section.settings.position == 'class' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "hide_close",
-      "label": "Hide close button",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Mobile layout"
-    },
-    {
-      "type": "text_alignment",
-      "id": "content_align_mobile",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "content_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 16,
-      "visible_if": "{{ section.settings.hide_close == false }}"
-    },
-    {
-      "type": "header",
-      "content": "Section colors"
-    },
-    {
-      "type": "color",
-      "label": "Close button",
-      "id": "close_color",
-      "default": "#121212",
-      "visible_if": "{{ section.settings.hide_close == false }}"
-    },
-    {
-      "type": "select",
-      "id": "background_style",
-      "label": "Background style",
-      "default": "solid",
-      "options": [
-        {
-          "label": "Solid",
-          "value": "solid"
-        },
-        {
-          "label": "Gradient",
-          "value": "gradient"
-        }
-      ]
-    },
-    {
-      "type": "color",
-      "label": "Background",
-      "id": "background_color",
-      "default": "#F3F3F3",
-      "visible_if": "{{ section.settings.background_style == 'solid' }}"
-    },
-    {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Gradient",
-      "default": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
-      "visible_if": "{{ section.settings.background_style == 'gradient' }}"
-    },
-    {
-      "type": "color",
-      "label": "Border",
-      "id": "border_color",
-      "default": "#121212"
-    },
-    {
-      "type": "header",
-      "content": "Section margin (outside)"
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Top",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Bottom",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_horizontal",
-      "min": 0,
-      "max": 30,
-      "step": 1,
-      "unit": "rem",
-      "label": "Sides",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_horizontal_mobile",
-      "min": 0,
-      "max": 15,
-      "step": 0.5,
-      "unit": "rem",
-      "label": "Sides - mobile",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Section padding (inside)"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Top",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Bottom",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "padding_horizontal",
-      "min": 0,
-      "max": 30,
-      "step": 1,
-      "unit": "rem",
-      "label": "Sides",
-      "default": 5
-    },
-    {
-      "type": "range",
-      "id": "padding_horizontal_mobile",
-      "min": 0,
-      "max": 15,
-      "step": 0.5,
-      "unit": "rem",
-      "label": "Sides - mobile",
-      "default": 1.5
-    },
-    {
-      "type": "header",
-      "content": "Section"
-    },
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "content_width",
-      "min": 800,
-      "max": 2000,
-      "step": 100,
-      "unit": "px",
-      "label": "Content width",
-      "default": 1200,
-      "visible_if": "{{ section.settings.full_width == false }}"
-    },
-    {
-      "type": "range",
-      "id": "border_thickness",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "section_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 0
-    }
-  ],
-  "blocks": [
-    {
-      "type": "text",
-      "name": "Text",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "⚠️ Save settings to view updates"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text",
-          "default": "<p>Hurry up, the offer is only valid until <strong>November 30</strong></p>",
-          "info": "Use bold to highlight key words."
-        },
-        {
-          "type": "checkbox",
-          "id": "text_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "text_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.text_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "text_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "text_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "text_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 180
-        },
-        {
-          "type": "header",
-          "content": "Layout"
-        },
-        {
-          "type": "text_alignment",
-          "id": "text_align",
-          "label": "Alignment"
-        },
-        {
-          "type": "range",
-          "id": "text_max_width",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "%",
-          "label": "Max width",
-          "default": 60
-        },
-        {
-          "type": "range",
-          "id": "text_max_width_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "%",
-          "label": "Max width - mobile",
-          "default": 80
-        },
-        {
-          "type": "range",
-          "id": "text_accent_roundness",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 6,
-          "info": "Rounds the corners of the accent background."
-        },
-        {
-          "type": "header",
-          "content": "Colors"
-        },
-        {
-          "type": "color",
-          "label": "Text",
-          "id": "text_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Accent text",
-          "id": "text_accent_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Accent background",
-          "id": "text_accent_bg_color",
-          "default": "#121212"
-        }
-      ]
-    },
-    {
-      "type": "copy_button",
-      "name": "Discount code",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "copy_text",
-          "label": "Displayed text",
-          "default": "Copy Code"
-        },
-        {
-          "type": "text",
-          "id": "code",
-          "label": "Discount code",
-          "default": "GAFFDS"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "button_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.button_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "button_size",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_size_mobile",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 100
-        },
-        {
-          "type": "range",
-          "id": "copy_icon_size",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Icon size",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "copy_icon_size_mobile",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Icon size - mobile",
-          "default": 16
-        },
-        {
-          "type": "checkbox",
-          "id": "padding_advanced",
-          "label": "Advanced padding settings",
-          "default": false
-        },
-        {
-          "type": "range",
-          "id": "button_padding_horizontal",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding horizontal",
-          "default": 24,
-          "visible_if": "{{ block.settings.padding_advanced }}"
-        },
-        {
-          "type": "range",
-          "id": "button_padding_horizontal_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding horizontal - mobile",
-          "default": 24,
-          "visible_if": "{{ block.settings.padding_advanced }}"
-        },
-        {
-          "type": "range",
-          "id": "button_padding_vertical",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding vertical",
-          "default": 18,
-          "visible_if": "{{ block.settings.padding_advanced }}"
-        },
-        {
-          "type": "range",
-          "id": "button_padding_vertical_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding vertical - mobile",
-          "default": 18,
-          "visible_if": "{{ block.settings.padding_advanced }}"
-        },
-        {
-          "type": "range",
-          "id": "button_radius",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 100
-        },
-        {
-          "type": "range",
-          "id": "button_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 0
-        },
-        {
-          "type": "header",
-          "content": "Code copied confirmation"
-        },
-        {
-          "type": "text",
-          "id": "success_text",
-          "label": "Text",
-          "default": "Copied!"
-        },
-        {
-          "type": "checkbox",
-          "id": "success_text_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "success_text_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.success_text_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "success_text_size",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "success_text_size_mobile",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "success_text_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 100
-        },
-        {
-          "type": "range",
-          "id": "success_text_radius",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 8
-        },
-        {
-          "type": "range",
-          "id": "success_text_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 0
-        },
-        {
-          "type": "header",
-          "content": "Discount code colors"
-        },
-        {
-          "type": "color",
-          "label": "Text",
-          "id": "button_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Text hover",
-          "id": "button_hover_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Background",
-          "id": "button_bg_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Background hover",
-          "id": "button_bg_hover_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Border",
-          "id": "button_border_color",
-          "default": "#121212",
-          "visible_if": "{{ block.settings.button_border_thickness >= 1 }}"
-        },
-        {
-          "type": "color",
-          "label": "Border hover",
-          "id": "button_border_hover_color",
-          "default": "#121212",
-          "visible_if": "{{ block.settings.button_border_thickness >= 1 }}"
-        },
-        {
-          "type": "header",
-          "content": "Code copied confirmation colors"
-        },
-        {
-          "type": "color",
-          "label": "Text",
-          "id": "success_text_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Background",
-          "id": "success_text_bg_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Border",
-          "id": "success_text_border_color",
-          "default": "#AFAFAF",
-          "visible_if": "{{ block.settings.success_text_border_thickness >= 1 }}"
-        }
-      ]
-    },
-    {
-      "type": "timer",
-      "limit": 1,
-      "name": "Timer",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Timer",
-          "info": "Please use UTC time zone"
-        },
-        {
-          "type": "select",
-          "id": "year",
-          "label": "Year",
-          "default": "2026",
-          "options": [
-            {
-              "value": "2025",
-              "label": "2025"
-            },
-            {
-              "value": "2026",
-              "label": "2026"
-            },
-            {
-              "value": "2027",
-              "label": "2027"
-            },
-            {
-              "value": "2028",
-              "label": "2028"
-            },
-            {
-              "value": "2029",
-              "label": "2029"
-            },
-            {
-              "value": "2030",
-              "label": "2030"
-            },
-            {
-              "value": "2031",
-              "label": "2031"
-            },
-            {
-              "value": "2032",
-              "label": "2032"
-            },
-            {
-              "value": "2033",
-              "label": "2033"
-            },
-            {
-              "value": "2034",
-              "label": "2034"
-            },
-            {
-              "value": "2035",
-              "label": "2035"
-            },
-            {
-              "value": "2036",
-              "label": "2036"
-            },
-            {
-              "value": "2037",
-              "label": "2037"
-            },
-            {
-              "value": "2038",
-              "label": "2038"
-            },
-            {
-              "value": "2039",
-              "label": "2039"
-            },
-            {
-              "value": "2040",
-              "label": "2040"
-            },
-            {
-              "value": "2041",
-              "label": "2041"
-            },
-            {
-              "value": "2042",
-              "label": "2042"
-            },
-            {
-              "value": "2043",
-              "label": "2043"
-            },
-            {
-              "value": "2044",
-              "label": "2044"
-            },
-            {
-              "value": "2045",
-              "label": "2045"
-            },
-            {
-              "value": "2046",
-              "label": "2046"
-            },
-            {
-              "value": "2047",
-              "label": "2047"
-            },
-            {
-              "value": "2048",
-              "label": "2048"
-            },
-            {
-              "value": "2049",
-              "label": "2049"
-            },
-            {
-              "value": "2050",
-              "label": "2050"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "month",
-          "label": "Month",
-          "default": "01",
-          "options": [
-            {
-              "value": "01",
-              "label": "January"
-            },
-            {
-              "value": "02",
-              "label": "February"
-            },
-            {
-              "value": "03",
-              "label": "March"
-            },
-            {
-              "value": "04",
-              "label": "April"
-            },
-            {
-              "value": "05",
-              "label": "May"
-            },
-            {
-              "value": "06",
-              "label": "June"
-            },
-            {
-              "value": "07",
-              "label": "July"
-            },
-            {
-              "value": "08",
-              "label": "August"
-            },
-            {
-              "value": "09",
-              "label": "September"
-            },
-            {
-              "value": "10",
-              "label": "October"
-            },
-            {
-              "value": "11",
-              "label": "November"
-            },
-            {
-              "value": "12",
-              "label": "December"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "days_text",
-          "label": "Days text",
-          "default": "Days"
-        },
-        {
-          "type": "select",
-          "id": "day",
-          "label": "Day",
-          "default": "01",
-          "options": [
-            {
-              "value": "01",
-              "label": "01"
-            },
-            {
-              "value": "02",
-              "label": "02"
-            },
-            {
-              "value": "03",
-              "label": "03"
-            },
-            {
-              "value": "04",
-              "label": "04"
-            },
-            {
-              "value": "05",
-              "label": "05"
-            },
-            {
-              "value": "06",
-              "label": "06"
-            },
-            {
-              "value": "07",
-              "label": "07"
-            },
-            {
-              "value": "08",
-              "label": "08"
-            },
-            {
-              "value": "09",
-              "label": "09"
-            },
-            {
-              "value": "10",
-              "label": "10"
-            },
-            {
-              "value": "11",
-              "label": "11"
-            },
-            {
-              "value": "12",
-              "label": "12"
-            },
-            {
-              "value": "13",
-              "label": "13"
-            },
-            {
-              "value": "14",
-              "label": "14"
-            },
-            {
-              "value": "15",
-              "label": "15"
-            },
-            {
-              "value": "16",
-              "label": "16"
-            },
-            {
-              "value": "17",
-              "label": "17"
-            },
-            {
-              "value": "18",
-              "label": "18"
-            },
-            {
-              "value": "19",
-              "label": "19"
-            },
-            {
-              "value": "20",
-              "label": "20"
-            },
-            {
-              "value": "21",
-              "label": "21"
-            },
-            {
-              "value": "22",
-              "label": "22"
-            },
-            {
-              "value": "23",
-              "label": "23"
-            },
-            {
-              "value": "24",
-              "label": "24"
-            },
-            {
-              "value": "25",
-              "label": "25"
-            },
-            {
-              "value": "26",
-              "label": "26"
-            },
-            {
-              "value": "27",
-              "label": "27"
-            },
-            {
-              "value": "28",
-              "label": "28"
-            },
-            {
-              "value": "29",
-              "label": "29"
-            },
-            {
-              "value": "30",
-              "label": "30"
-            },
-            {
-              "value": "31",
-              "label": "31"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "hours_text",
-          "label": "Hours text",
-          "default": "Hours"
-        },
-        {
-          "type": "select",
-          "id": "hour",
-          "label": "Hour",
-          "default": "00",
-          "options": [
-            {
-              "value": "00",
-              "label": "12 AM"
-            },
-            {
-              "value": "01",
-              "label": "01 AM"
-            },
-            {
-              "value": "02",
-              "label": "02 AM"
-            },
-            {
-              "value": "03",
-              "label": "03 AM"
-            },
-            {
-              "value": "04",
-              "label": "04 AM"
-            },
-            {
-              "value": "05",
-              "label": "05 AM"
-            },
-            {
-              "value": "06",
-              "label": "06 AM"
-            },
-            {
-              "value": "07",
-              "label": "07 AM"
-            },
-            {
-              "value": "08",
-              "label": "08 AM"
-            },
-            {
-              "value": "09",
-              "label": "09 AM"
-            },
-            {
-              "value": "10",
-              "label": "10 AM"
-            },
-            {
-              "value": "11",
-              "label": "11 AM"
-            },
-            {
-              "value": "12",
-              "label": "12 PM"
-            },
-            {
-              "value": "13",
-              "label": "01 PM"
-            },
-            {
-              "value": "14",
-              "label": "02 PM"
-            },
-            {
-              "value": "15",
-              "label": "03 PM"
-            },
-            {
-              "value": "16",
-              "label": "04 PM"
-            },
-            {
-              "value": "17",
-              "label": "05 PM"
-            },
-            {
-              "value": "18",
-              "label": "06 PM"
-            },
-            {
-              "value": "19",
-              "label": "07 PM"
-            },
-            {
-              "value": "20",
-              "label": "08 PM"
-            },
-            {
-              "value": "21",
-              "label": "09 PM"
-            },
-            {
-              "value": "22",
-              "label": "10 PM"
-            },
-            {
-              "value": "23",
-              "label": "11 PM"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "minutes_text",
-          "label": "Minutes text",
-          "default": "Minutes"
-        },
-        {
-          "type": "select",
-          "id": "minute",
-          "label": "Minute",
-          "default": "00",
-          "options": [
-            {
-              "value": "00",
-              "label": "00"
-            },
-            {
-              "value": "01",
-              "label": "01"
-            },
-            {
-              "value": "02",
-              "label": "02"
-            },
-            {
-              "value": "03",
-              "label": "03"
-            },
-            {
-              "value": "04",
-              "label": "04"
-            },
-            {
-              "value": "05",
-              "label": "05"
-            },
-            {
-              "value": "06",
-              "label": "06"
-            },
-            {
-              "value": "07",
-              "label": "07"
-            },
-            {
-              "value": "08",
-              "label": "08"
-            },
-            {
-              "value": "09",
-              "label": "09"
-            },
-            {
-              "value": "10",
-              "label": "10"
-            },
-            {
-              "value": "11",
-              "label": "11"
-            },
-            {
-              "value": "12",
-              "label": "12"
-            },
-            {
-              "value": "13",
-              "label": "13"
-            },
-            {
-              "value": "14",
-              "label": "14"
-            },
-            {
-              "value": "15",
-              "label": "15"
-            },
-            {
-              "value": "16",
-              "label": "16"
-            },
-            {
-              "value": "17",
-              "label": "17"
-            },
-            {
-              "value": "18",
-              "label": "18"
-            },
-            {
-              "value": "19",
-              "label": "19"
-            },
-            {
-              "value": "20",
-              "label": "20"
-            },
-            {
-              "value": "21",
-              "label": "21"
-            },
-            {
-              "value": "22",
-              "label": "22"
-            },
-            {
-              "value": "23",
-              "label": "23"
-            },
-            {
-              "value": "24",
-              "label": "24"
-            },
-            {
-              "value": "25",
-              "label": "25"
-            },
-            {
-              "value": "26",
-              "label": "26"
-            },
-            {
-              "value": "27",
-              "label": "27"
-            },
-            {
-              "value": "28",
-              "label": "28"
-            },
-            {
-              "value": "29",
-              "label": "29"
-            },
-            {
-              "value": "30",
-              "label": "30"
-            },
-            {
-              "value": "31",
-              "label": "31"
-            },
-            {
-              "value": "32",
-              "label": "32"
-            },
-            {
-              "value": "33",
-              "label": "33"
-            },
-            {
-              "value": "34",
-              "label": "34"
-            },
-            {
-              "value": "35",
-              "label": "35"
-            },
-            {
-              "value": "36",
-              "label": "36"
-            },
-            {
-              "value": "37",
-              "label": "37"
-            },
-            {
-              "value": "38",
-              "label": "38"
-            },
-            {
-              "value": "39",
-              "label": "39"
-            },
-            {
-              "value": "40",
-              "label": "40"
-            },
-            {
-              "value": "41",
-              "label": "41"
-            },
-            {
-              "value": "42",
-              "label": "42"
-            },
-            {
-              "value": "43",
-              "label": "43"
-            },
-            {
-              "value": "44",
-              "label": "44"
-            },
-            {
-              "value": "45",
-              "label": "45"
-            },
-            {
-              "value": "46",
-              "label": "46"
-            },
-            {
-              "value": "47",
-              "label": "47"
-            },
-            {
-              "value": "48",
-              "label": "48"
-            },
-            {
-              "value": "49",
-              "label": "49"
-            },
-            {
-              "value": "50",
-              "label": "50"
-            },
-            {
-              "value": "51",
-              "label": "51"
-            },
-            {
-              "value": "52",
-              "label": "52"
-            },
-            {
-              "value": "53",
-              "label": "53"
-            },
-            {
-              "value": "54",
-              "label": "54"
-            },
-            {
-              "value": "55",
-              "label": "55"
-            },
-            {
-              "value": "56",
-              "label": "56"
-            },
-            {
-              "value": "57",
-              "label": "57"
-            },
-            {
-              "value": "58",
-              "label": "58"
-            },
-            {
-              "value": "59",
-              "label": "59"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "seconds_text",
-          "label": "Seconds text",
-          "default": "Seconds"
-        },
-        {
-          "type": "checkbox",
-          "id": "hide_timer_on_completed",
-          "label": "Hide timer on completed",
-          "default": false
-        },
-        {
-          "type": "header",
-          "content": "Layout"
-        },
-        {
-          "type": "range",
-          "id": "timer_gap",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Gap",
-          "default": 20
-        },
-        {
-          "type": "range",
-          "id": "timer_gap_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Gap - mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "item_width",
-          "min": 30,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Width",
-          "default": 56
-        },
-        {
-          "type": "range",
-          "id": "item_width_mobile",
-          "min": 30,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Width - mobile",
-          "default": 56
-        },
-        {
-          "type": "checkbox",
-          "id": "padding_advanced",
-          "label": "Advanced padding settings",
-          "default": false
-        },
-        {
-          "type": "range",
-          "id": "item_padding_vertical",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "px",
-          "label": "Padding vertical",
-          "default": 12,
-          "visible_if": "{{ block.settings.padding_advanced }}"
-        },
-        {
-          "type": "range",
-          "id": "item_padding_vertical_mobile",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "px",
-          "label": "Padding vertical - mobile",
-          "default": 12,
-          "visible_if": "{{ block.settings.padding_advanced }}"
-        },
-        {
-          "type": "range",
-          "id": "item_radius",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 8
-        },
-        {
-          "type": "range",
-          "id": "item_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 0
-        },
-        {
-          "type": "header",
-          "content": "Number"
-        },
-        {
-          "type": "checkbox",
-          "id": "number_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "number_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.number_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "number_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 18
-        },
-        {
-          "type": "range",
-          "id": "number_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - Mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "number_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 100
-        },
-        {
-          "type": "header",
-          "content": "Text"
-        },
-        {
-          "type": "checkbox",
-          "id": "text_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "text_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.text_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "text_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "text_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - Mobile",
-          "default": 10
-        },
-        {
-          "type": "range",
-          "id": "text_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 100
-        },
-        {
-          "type": "range",
-          "id": "text_mt",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "px",
-          "label": "Margin top",
-          "default": 8
-        },
-        {
-          "type": "range",
-          "id": "text_mt_mobile",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "px",
-          "label": "Margin top - mobile",
-          "default": 8
-        },
-        {
-          "type": "header",
-          "content": "Completed text"
-        },
-        {
-          "type": "richtext",
-          "id": "timer_completed_text",
-          "label": "Text",
-          "default": "<p>This offer has expired.</p>"
-        },
-        {
-          "type": "checkbox",
-          "id": "completed_text_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "completed_text_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.completed_text_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "completed_text_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "completed_text_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "completed_text_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 150
-        },
-        {
-          "type": "header",
-          "content": "Colors"
-        },
-        {
-          "type": "color",
-          "label": "Number",
-          "id": "number_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Background",
-          "id": "item_bg_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Border",
-          "id": "item_border_color",
-          "default": "#121212",
-          "visible_if": "{{ block.settings.item_border_thickness >= 1 }}"
-        },
-        {
-          "type": "color",
-          "label": "Text",
-          "id": "text_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Completed text",
-          "id": "completed_text_color",
-          "default": "#121212"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "SG-Countdown timer bar #5",
-      "blocks": [
-        {
-          "type": "text"
-        },
-        {
-          "type": "timer"
-        },
-        {
-          "type": "copy_button"
-        }
-      ]
-    }
-  ]
-}
+  {
+    "name": "SG-Countdown timer bar #6",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "⚠️ Save settings to display this section and see updates."
+      },
+      {
+        "type": "select",
+        "id": "position",
+        "label": "Position",
+        "default": "static",
+        "options": [
+          {
+            "value": "static",
+            "label": "Static / drag"
+          },
+          {
+            "value": "fixed_bottom",
+            "label": "Fixed bottom"
+          },
+          {
+            "value": "class",
+            "label": "Target CSS class (old themes)"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "insert_css_class_target",
+        "label": "Target CSS class",
+        "default": ".header, .pageheader, .section-header, #announcement, .toolbar, .header__wrapper",
+        "placeholder": ".header",
+        "visible_if": "{{ section.settings.position == 'class' }}"
+      },  
+      {
+        "type": "header",
+        "content": "Scrolling",
+         "info": "The theme editor may display incorrect scrolling speed; please verify on the live site."
+      },
+      {
+        "type": "range",
+        "id": "scrolling_velocity",
+        "min": 10,
+        "max": 150,
+        "step": 2,
+        "label": "Speed",
+        "info": "🐇 ———●——— 🐢",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "scrolling_velocity_mobile",
+        "min": 10,
+        "max": 150,
+        "step": 2,
+        "label": "Speed - mobile",
+        "info": "🐇 ———●——— 🐢",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "scrolling_gap",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "scrolling_gap_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 20
+      }, 
+      {
+        "type": "checkbox",
+        "id": "reverse_direction",
+        "label": "Reverse scrolling direction"
+      },
+      {
+        "type": "checkbox",
+        "id": "pause_hover",
+        "label": "Pause on hover",
+        "default": true
+      },   
+      {
+        "type": "header",
+        "content": "Section colors"
+      },          
+      {
+        "type": "select",
+        "id": "background_style",
+        "label": "Background style",
+        "default": "solid",
+        "options": [
+          {
+            "label": "Solid",
+            "value": "solid"
+          },
+          {
+            "label": "Gradient",
+            "value": "gradient"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "background_color",
+        "default": "#F3F3F3",
+        "visible_if": "{{ section.settings.background_style == 'solid' }}"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Gradient",
+        "default": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "visible_if": "{{ section.settings.background_style == 'gradient' }}"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "border_color",
+        "default": "#121212"
+      },
+      {
+        "type": "header",
+        "content": "Section margin (outside)"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Bottom",
+        "default": 0
+      },
+         {
+        "type": "range",
+        "id": "margin_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Sides",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Sides - mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section padding (inside)"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Bottom",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Section"
+      },
+       {
+        "type": "select",
+        "id": "width",
+        "label": "Width",
+        "default": "page",
+        "options": [
+          {
+            "label": "Page",
+            "value": "page"
+          },
+          {
+            "label": "Full",
+            "value": "full"
+          },
+          {
+            "label": "Custom",
+            "value": "custom"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "min": 800,
+        "max": 2000,
+        "step": 100,
+        "unit": "px",
+        "label": "Content width",
+        "default": 1200,
+        "visible_if": "{{ section.settings.width == 'custom' }}"
+      },
+      {
+        "type": "range",
+        "id": "border_thickness",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "limit": 3,
+        "name": "SG-Text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Add text content about your brand that makes a statement.</p>"
+          },
+          {
+            "type": "checkbox",
+            "id": "text_custom",
+            "label": "Use custom font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "text_font",
+            "label": "Font family",
+            "default": "josefin_sans_n4",
+            "visible_if": "{{ block.settings.text_custom }}"
+          },
+          {
+            "type": "range",
+            "id": "text_size",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size",
+            "default": 14
+          },
+          {
+            "type": "range",
+            "id": "text_size_mobile",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size - mobile",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "text_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Line height",
+            "default": 130
+          },
+          {
+            "type": "color",
+            "label": "Color",
+            "id": "text_color",
+            "default": "#121212"
+          }
+        ]
+      },
+      {
+        "type": "timer",
+        "name": "SG-Timer",
+        "limit": 1,
+        "settings": [ 
+          {
+            "type": "header",
+            "content": "Timer",
+            "info": "Please use UTC time zone"
+          },
+          {
+            "type": "select",
+            "id": "year",
+            "label": "Year",
+            "default": "2026",
+            "options": [
+              {
+                "value": "2025",
+                "label": "2025"
+              },
+              {
+                "value": "2026",
+                "label": "2026"
+              },
+              {
+                "value": "2027",
+                "label": "2027"
+              },
+              {
+                "value": "2028",
+                "label": "2028"
+              },
+              {
+                "value": "2029",
+                "label": "2029"
+              },
+              {
+                "value": "2030",
+                "label": "2030"
+              },
+              {
+                "value": "2031",
+                "label": "2031"
+              },
+              {
+                "value": "2032",
+                "label": "2032"
+              },
+              {
+                "value": "2033",
+                "label": "2033"
+              },
+              {
+                "value": "2034",
+                "label": "2034"
+              },
+              {
+                "value": "2035",
+                "label": "2035"
+              },
+              {
+                "value": "2036",
+                "label": "2036"
+              },
+              {
+                "value": "2037",
+                "label": "2037"
+              },
+              {
+                "value": "2038",
+                "label": "2038"
+              },
+              {
+                "value": "2039",
+                "label": "2039"
+              },
+              {
+                "value": "2040",
+                "label": "2040"
+              },
+              {
+                "value": "2041",
+                "label": "2041"
+              },
+              {
+                "value": "2042",
+                "label": "2042"
+              },
+              {
+                "value": "2043",
+                "label": "2043"
+              },
+              {
+                "value": "2044",
+                "label": "2044"
+              },
+              {
+                "value": "2045",
+                "label": "2045"
+              },
+              {
+                "value": "2046",
+                "label": "2046"
+              },
+              {
+                "value": "2047",
+                "label": "2047"
+              },
+              {
+                "value": "2048",
+                "label": "2048"
+              },
+              {
+                "value": "2049",
+                "label": "2049"
+              },
+              {
+                "value": "2050",
+                "label": "2050"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "month",
+            "label": "Month",
+            "default": "01",
+            "options": [
+              {
+                "value": "01",
+                "label": "January"
+              },
+              {
+                "value": "02",
+                "label": "February"
+              },
+              {
+                "value": "03",
+                "label": "March"
+              },
+              {
+                "value": "04",
+                "label": "April"
+              },
+              {
+                "value": "05",
+                "label": "May"
+              },
+              {
+                "value": "06",
+                "label": "June"
+              },
+              {
+                "value": "07",
+                "label": "July"
+              },
+              {
+                "value": "08",
+                "label": "August"
+              },
+              {
+                "value": "09",
+                "label": "September"
+              },
+              {
+                "value": "10",
+                "label": "October"
+              },
+              {
+                "value": "11",
+                "label": "November"
+              },
+              {
+                "value": "12",
+                "label": "December"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "day",
+            "label": "Day",
+            "default": "01",
+            "options": [
+              {
+                "value": "01",
+                "label": "01"
+              },
+              {
+                "value": "02",
+                "label": "02"
+              },
+              {
+                "value": "03",
+                "label": "03"
+              },
+              {
+                "value": "04",
+                "label": "04"
+              },
+              {
+                "value": "05",
+                "label": "05"
+              },
+              {
+                "value": "06",
+                "label": "06"
+              },
+              {
+                "value": "07",
+                "label": "07"
+              },
+              {
+                "value": "08",
+                "label": "08"
+              },
+              {
+                "value": "09",
+                "label": "09"
+              },
+              {
+                "value": "10",
+                "label": "10"
+              },
+              {
+                "value": "11",
+                "label": "11"
+              },
+              {
+                "value": "12",
+                "label": "12"
+              },
+              {
+                "value": "13",
+                "label": "13"
+              },
+              {
+                "value": "14",
+                "label": "14"
+              },
+              {
+                "value": "15",
+                "label": "15"
+              },
+              {
+                "value": "16",
+                "label": "16"
+              },
+              {
+                "value": "17",
+                "label": "17"
+              },
+              {
+                "value": "18",
+                "label": "18"
+              },
+              {
+                "value": "19",
+                "label": "19"
+              },
+              {
+                "value": "20",
+                "label": "20"
+              },
+              {
+                "value": "21",
+                "label": "21"
+              },
+              {
+                "value": "22",
+                "label": "22"
+              },
+              {
+                "value": "23",
+                "label": "23"
+              },
+              {
+                "value": "24",
+                "label": "24"
+              },
+              {
+                "value": "25",
+                "label": "25"
+              },
+              {
+                "value": "26",
+                "label": "26"
+              },
+              {
+                "value": "27",
+                "label": "27"
+              },
+              {
+                "value": "28",
+                "label": "28"
+              },
+              {
+                "value": "29",
+                "label": "29"
+              },
+              {
+                "value": "30",
+                "label": "30"
+              },
+              {
+                "value": "31",
+                "label": "31"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "hour",
+            "label": "Hour",
+            "default": "00",
+            "options": [
+              { "value": "00", "label": "12 AM" },
+              { "value": "01", "label": "01 AM" },
+              { "value": "02", "label": "02 AM" },
+              { "value": "03", "label": "03 AM" },
+              { "value": "04", "label": "04 AM" },
+              { "value": "05", "label": "05 AM" },
+              { "value": "06", "label": "06 AM" },
+              { "value": "07", "label": "07 AM" },
+              { "value": "08", "label": "08 AM" },
+              { "value": "09", "label": "09 AM" },
+              { "value": "10", "label": "10 AM" },
+              { "value": "11", "label": "11 AM" },
+              { "value": "12", "label": "12 PM" },
+              { "value": "13", "label": "01 PM" },
+              { "value": "14", "label": "02 PM" },
+              { "value": "15", "label": "03 PM" },
+              { "value": "16", "label": "04 PM" },
+              { "value": "17", "label": "05 PM" },
+              { "value": "18", "label": "06 PM" },
+              { "value": "19", "label": "07 PM" },
+              { "value": "20", "label": "08 PM" },
+              { "value": "21", "label": "09 PM" },
+              { "value": "22", "label": "10 PM" },
+              { "value": "23", "label": "11 PM" }
+            ]
+          },         
+          {
+            "type": "select",
+            "id": "minute",
+            "label": "Minute",
+            "default": "00",
+            "options": [
+              {
+                "value": "00",
+                "label": "00"
+              },
+              {
+                "value": "01",
+                "label": "01"
+              },
+              {
+                "value": "02",
+                "label": "02"
+              },
+              {
+                "value": "03",
+                "label": "03"
+              },
+              {
+                "value": "04",
+                "label": "04"
+              },
+              {
+                "value": "05",
+                "label": "05"
+              },
+              {
+                "value": "06",
+                "label": "06"
+              },
+              {
+                "value": "07",
+                "label": "07"
+              },
+              {
+                "value": "08",
+                "label": "08"
+              },
+              {
+                "value": "09",
+                "label": "09"
+              },
+              {
+                "value": "10",
+                "label": "10"
+              },
+              {
+                "value": "11",
+                "label": "11"
+              },
+              {
+                "value": "12",
+                "label": "12"
+              },
+              {
+                "value": "13",
+                "label": "13"
+              },
+              {
+                "value": "14",
+                "label": "14"
+              },
+              {
+                "value": "15",
+                "label": "15"
+              },
+              {
+                "value": "16",
+                "label": "16"
+              },
+              {
+                "value": "17",
+                "label": "17"
+              },
+              {
+                "value": "18",
+                "label": "18"
+              },
+              {
+                "value": "19",
+                "label": "19"
+              },
+              {
+                "value": "20",
+                "label": "20"
+              },
+              {
+                "value": "21",
+                "label": "21"
+              },
+              {
+                "value": "22",
+                "label": "22"
+              },
+              {
+                "value": "23",
+                "label": "23"
+              },
+              {
+                "value": "24",
+                "label": "24"
+              },
+              {
+                "value": "25",
+                "label": "25"
+              },
+              {
+                "value": "26",
+                "label": "26"
+              },
+              {
+                "value": "27",
+                "label": "27"
+              },
+              {
+                "value": "28",
+                "label": "28"
+              },
+              {
+                "value": "29",
+                "label": "29"
+              },
+              {
+                "value": "30",
+                "label": "30"
+              },
+              {
+                "value": "31",
+                "label": "31"
+              },
+              {
+                "value": "32",
+                "label": "32"
+              },
+              {
+                "value": "33",
+                "label": "33"
+              },
+              {
+                "value": "34",
+                "label": "34"
+              },
+              {
+                "value": "35",
+                "label": "35"
+              },
+              {
+                "value": "36",
+                "label": "36"
+              },
+              {
+                "value": "37",
+                "label": "37"
+              },
+              {
+                "value": "38",
+                "label": "38"
+              },
+              {
+                "value": "39",
+                "label": "39"
+              },
+              {
+                "value": "40",
+                "label": "40"
+              },
+              {
+                "value": "41",
+                "label": "41"
+              },
+              {
+                "value": "42",
+                "label": "42"
+              },
+              {
+                "value": "43",
+                "label": "43"
+              },
+              {
+                "value": "44",
+                "label": "44"
+              },
+              {
+                "value": "45",
+                "label": "45"
+              },
+              {
+                "value": "46",
+                "label": "46"
+              },
+              {
+                "value": "47",
+                "label": "47"
+              },
+              {
+                "value": "48",
+                "label": "48"
+              },
+              {
+                "value": "49",
+                "label": "49"
+              },
+              {
+                "value": "50",
+                "label": "50"
+              },
+              {
+                "value": "51",
+                "label": "51"
+              },
+              {
+                "value": "52",
+                "label": "52"
+              },
+              {
+                "value": "53",
+                "label": "53"
+              },
+              {
+                "value": "54",
+                "label": "54"
+              },
+              {
+                "value": "55",
+                "label": "55"
+              },
+              {
+                "value": "56",
+                "label": "56"
+              },
+              {
+                "value": "57",
+                "label": "57"
+              },
+              {
+                "value": "58",
+                "label": "58"
+              },
+              {
+                "value": "59",
+                "label": "59"
+              }
+            ]
+          },
+          {
+            "type": "checkbox",
+            "id": "hide_timer_on_completed",
+            "label": "Hide timer on completed",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "timer_advanced",
+            "label": "Advanced settings"
+          },
+          {
+            "type": "range",
+            "id": "timer_gap",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Gap",
+            "default": 3,
+            "visible_if": "{{ block.settings.timer_advanced }}"
+          },
+          {
+            "type": "range",
+            "id": "timer_gap_mobile",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Gap - mobile",
+            "default": 3,
+            "visible_if": "{{ block.settings.timer_advanced }}"
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Offer expires in:</p>"
+          },
+          {
+            "type": "checkbox",
+            "id": "number_custom",
+            "label": "Use custom font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "number_font",
+            "label": "Font family",
+            "default": "josefin_sans_n4",
+            "visible_if": "{{ block.settings.number_custom }}"
+          },
+          {
+            "type": "range",
+            "id": "number_size",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size",
+            "default": 14
+          },
+          {
+            "type": "range",
+            "id": "number_size_mobile",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size - mobile",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "number_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Line height",
+            "default": 130
+          },           
+          {
+            "type": "header",
+            "content": "Completed text"
+          },
+          {
+            "type": "richtext",
+            "id": "completed_text",
+            "label": "Text",
+            "default": "<p>This offer has expired.</p>"
+          },
+          {
+            "type": "checkbox",
+            "id": "completed_text_custom",
+            "label": "Use custom font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "completed_text_font",
+            "label": "Font family",
+            "default": "josefin_sans_n4",
+            "visible_if": "{{ block.settings.completed_text_custom }}"
+          },
+          {
+            "type": "range",
+            "id": "completed_text_size",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size",
+            "default": 14
+          },
+          {
+            "type": "range",
+            "id": "completed_text_size_mobile",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size - mobile",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "completed_text_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Line height",
+            "default": 130
+          },  
+          {
+            "type": "header",
+            "content": "Colors"
+          },
+          {
+            "type": "color",
+            "label": "Text",
+            "id": "text_color",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "label": "Numbers",
+            "id": "number_color",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "label": "Completed text",
+            "id": "completed_text_color",
+            "default": "#121212"
+          } 
+        ]
+      },
+    ],
+    "presets": [
+      {
+        "name": "SG- Countdown timer bar #6",
+        "blocks": [
+          {
+            "type": "text"
+          },
+          {
+            "type": "timer"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}
