@@ -36,10 +36,19 @@
     "mockup_qbUQpH": {
       "type": "mockup",
       "blocks": {
+        "image_GFGyKp": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Item Title",
+            "feature_text": "<p>Item text</p>",
+            "hide_image": false
+          }
+        },
         "image_Mkp8Mx": {
           "type": "image",
           "settings": {
             "feature_title": "Free Shipping",
+            "feature_text": "<p>Item text</p>",
             "hide_image": false
           }
         },
@@ -47,6 +56,7 @@
           "type": "image",
           "settings": {
             "feature_title": "Price-match guarantee",
+            "feature_text": "<p>Item text</p>",
             "hide_image": false
           }
         },
@@ -54,29 +64,59 @@
           "type": "image",
           "settings": {
             "feature_title": "Hassle-free exchange",
+            "feature_text": "<p>Item text</p>",
             "hide_image": false
           }
         }
       },
       "block_order": [
+        "image_GFGyKp",
         "image_Mkp8Mx",
         "image_dPBA6J",
         "image_acA4qR"
       ],
       "name": "SG-Feature #3",
       "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 1,
         "feature_gap": 20,
         "feature_gap_mobile": 20,
+        "feature_padding_vertical": 0,
+        "feature_padding_horizontal": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_item_padding_vertical": 0,
+        "feature_item_padding_horizontal": 0,
+        "feature_item_radius": 16,
+        "feature_item_border_thickness": 1,
+        "feature_image_radius": 16,
+        "feature_image_border_thickness": 0,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 14,
+        "feature_heading_size_mobile": 14,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 4,
         "feature_text_custom": false,
         "feature_text_font": "josefin_sans_n4",
         "feature_text_size": 14,
         "feature_text_size_mobile": 14,
         "feature_text_height": 130,
+        "feature_text_mt": 8,
         "feature_icon_size": 42,
         "feature_icon_size_mobile": 42,
+        "feature_bg": "#ffffff",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_item_bg_color": "#ffffff",
+        "feature_item_border_color": "#e5e5e5",
+        "feature_image_bg_color": "#f7f7f7",
+        "feature_image_border_color": "#e5e5e5",
+        "feature_heading_color": "#000000",
         "feature_text_color": "#000000",
         "feature_icon_color": "#000000",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
