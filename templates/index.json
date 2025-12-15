@@ -15,7 +15,7 @@
         "heading_Frp6hp": {
           "type": "heading",
           "settings": {
-            "heading": "FEATURE #21",
+            "heading": "FEATURE #28",
             "heading_size": "h1"
           }
         }
@@ -23,7 +23,6 @@
       "block_order": [
         "heading_Frp6hp"
       ],
-      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -34,119 +33,100 @@
         "padding_bottom": 0
       }
     },
-    "mockup_dJCC3P": {
+    "mockup_MgzxPJ": {
       "type": "mockup",
       "blocks": {
-        "card_aEKVwT": {
-          "type": "card",
+        "toggle_wwfjU9": {
+          "type": "toggle",
           "settings": {
-            "icon": "atc",
-            "count_from": "1",
-            "count_to": "50",
-            "prefix": "",
-            "suffix": "+",
-            "title": "Team Members",
-            "url": ""
+            "image": "shopify://shop_images/animated-image.png",
+            "toggle": "First",
+            "text": "<p>Use this text to share information about your brand with your customers.</p>"
           }
         },
-        "card_FLRU7t": {
-          "type": "card",
+        "toggle_fmYTC9": {
+          "type": "toggle",
           "settings": {
-            "icon": "atc",
-            "count_from": "1",
-            "count_to": "15",
-            "prefix": "",
-            "suffix": "+",
-            "title": "Years of Experience",
-            "url": ""
+            "toggle": "Second",
+            "text": "<p>Use this text to share information about your brand with your customers.</p>"
           }
         },
-        "card_WTfpGG": {
-          "type": "card",
+        "toggle_xrWdey": {
+          "type": "toggle",
           "settings": {
-            "icon": "atc",
-            "count_from": "1",
-            "count_to": "500",
-            "prefix": "",
-            "suffix": "+",
-            "title": "Successful Projects",
-            "url": ""
-          }
-        },
-        "card_FrFJXL": {
-          "type": "card",
-          "settings": {
-            "icon": "atc",
-            "count_from": "1",
-            "count_to": "150",
-            "prefix": "",
-            "suffix": "",
-            "title": "Blog Posts",
-            "url": ""
+            "toggle": "Third",
+            "text": "<p>Use this text to share information about your brand with your customers.</p>"
           }
         }
       },
       "block_order": [
-        "card_aEKVwT",
-        "card_FLRU7t",
-        "card_WTfpGG",
-        "card_FrFJXL"
+        "toggle_wwfjU9",
+        "toggle_fmYTC9",
+        "toggle_xrWdey"
       ],
-      "name": "SG-Feature #27",
+      "name": "SG-Feature #28",
       "settings": {
-        "heading": "<h2>Feature #27</h2>",
-        "heading_custom": false,
-        "heading_font": "josefin_sans_n4",
-        "heading_size": 40,
-        "heading_size_mobile": 24,
-        "heading_height": 130,
-        "heading_align": "center",
-        "heading_align_mobile": "center",
-        "cards_per_row": 4,
-        "cards_per_row_mobile": "1",
-        "cards_max_width": 80,
-        "cards_gap": 20,
-        "cards_gap_mobile": 20,
-        "cards_mt": 40,
-        "cards_mt_mobile": 32,
-        "cards_align": "center",
-        "card_padding_horizontal": 20,
-        "card_padding_horizontal_mobile": 20,
-        "card_padding_vertical": 30,
-        "card_padding_vertical_mobile": 30,
-        "card_radius": 10,
-        "card_border_thickness": 0,
-        "card_content_align": "center",
-        "card_content_align_mobile": "center",
-        "icon_width": 52,
-        "icon_width_mobile": 48,
-        "count_custom": false,
-        "count_font": "josefin_sans_n4",
-        "count_size": 36,
-        "count_size_mobile": 32,
-        "count_height": 130,
-        "count_mt": 16,
-        "count_mt_mobile": 16,
-        "count_speed": 1,
-        "title_custom": false,
-        "title_font": "josefin_sans_n4",
-        "title_size": 16,
-        "title_size_mobile": 14,
-        "title_height": 150,
-        "title_mt": 10,
-        "title_mt_mobile": 8,
-        "icon_color": "#000000",
-        "icon_hover_color": "#FFFFFF",
-        "count_color": "#000000",
-        "count_hover_color": "#FFFFFF",
-        "title_color": "#000000",
-        "title_hover_color": "#FFFFFF",
-        "card_bg_color": "#FFFFFF",
-        "card_bg_hover_color": "#000000",
-        "card_border_color": "#000000",
-        "card_border_hover_color": "#000000",
-        "heading_color": "#000000",
-        "background_color": "#F7F7F7",
+        "layout": "content_images",
+        "layout_mobile": "images_content",
+        "layout_radius": 0,
+        "layout_border_thickness": 1,
+        "top_content_padding_horizontal": 40,
+        "top_content_padding_horizontal_mobile": 12,
+        "top_content_padding_vertical": 50,
+        "top_content_padding_vertical_mobile": 36,
+        "top_content_gap": 32,
+        "top_content_gap_mobile": 24,
+        "top_content_align": "left",
+        "top_content_align_mobile": "left",
+        "toggle_custom": false,
+        "toggle_font": "josefin_sans_n4",
+        "toggle_size": 40,
+        "toggle_size_mobile": 40,
+        "toggle_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 13,
+        "text_size_mobile": 13,
+        "text_height": 150,
+        "button": "LEARN MORE",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 13,
+        "button_size_mobile": 13,
+        "button_height": 100,
+        "button_padding_vertical": 18,
+        "button_padding_vertical_mobile": 18,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_border_thickness": 1,
+        "button_style": "vertical_hover",
+        "scrolling_velocity": 80,
+        "scrolling_velocity_mobile": 80,
+        "scrolling_padding_vertical": 20,
+        "scrolling_padding_vertical_mobile": 20,
+        "scrolling_gap": 60,
+        "scrolling_gap_mobile": 30,
+        "reverse_direction": false,
+        "scrolling_text_custom": false,
+        "scrolling_text_font": "josefin_sans_n4",
+        "scrolling_text_size": 160,
+        "scrolling_text_size_mobile": 72,
+        "scrolling_text_height": 130,
+        "image_ratio_mobile": "square",
+        "layout_border_color": "#000000",
+        "toggle_color": "#EAEAEA",
+        "toggle_hover_color": "#000000",
+        "toggle_active_color": "#000000",
+        "text_color": "#000000",
+        "button_color": "#000000",
+        "button_hover_color": "#FFFFFF",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "scrolling_text_color": "#000000",
+        "background_color": "#FFFFFF",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
@@ -157,8 +137,8 @@
         "padding_bottom": 36,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
-        "full_width": false,
-        "content_width": 1200,
+        "full_width": true,
+        "content_width": 1600,
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
@@ -167,6 +147,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_dJCC3P"
+    "mockup_MgzxPJ"
   ]
 }
