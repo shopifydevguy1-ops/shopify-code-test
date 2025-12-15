@@ -14,25 +14,10 @@
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
 
-  assign feature_row = section.settings.feature_row
-  assign feature_row_mobile = section.settings.feature_row_mobile
   assign feature_gap_mobile = section.settings.feature_gap_mobile
   assign feature_gap = section.settings.feature_gap
-  assign feature_padding_vertical = section.settings.feature_padding_vertical
-  assign feature_padding_horizontal = section.settings.feature_padding_horizontal
-  assign feature_border_thickness = section.settings.feature_border_thickness
-  assign feature_border_color = section.settings.feature_border_color
-  assign feature_bg = section.settings.feature_bg
-  assign feature_radius = section.settings.feature_radius
-  assign feature_shadow_color = section.settings.feature_shadow_color
-  assign feature_shadow = section.settings.feature_shadow
-  
-  assign feature_heading_size = section.settings.feature_heading_size
-  assign feature_heading_size_mobile = section.settings.feature_heading_size_mobile
-  assign feature_heading_color = section.settings.feature_heading_color
-  assign feature_heading_custom = section.settings.feature_heading_custom
-  assign feature_heading_font = section.settings.feature_heading_font
-  assign feature_heading_height = section.settings.feature_heading_height
+  assign feature_items_row_mobile = section.settings.feature_items_row_mobile
+  assign feature_items_row = section.settings.feature_items_row
 
   assign feature_text_size = section.settings.feature_text_size
   assign feature_text_size_mobile = section.settings.feature_text_size_mobile
@@ -40,17 +25,16 @@
   assign feature_text_custom = section.settings.feature_text_custom
   assign feature_text_font = section.settings.feature_text_font
   assign feature_text_height = section.settings.feature_text_height
-  assign feature_text_mt = section.settings.feature_text_mt
 
   assign feature_icon_size_mobile = section.settings.feature_icon_size_mobile
   assign feature_icon_size = section.settings.feature_icon_size
   assign feature_icon_color = section.settings.feature_icon_color
-   
+  
 -%}
+
 {% style %}
 
   {{ feature_text_font | font_face: font_display: 'swap' }}
-  {{ feature_heading_font | font_face: font_display: 'swap' }}
 
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -67,73 +51,53 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .feature-{{ section.id }} .box__title {
-    margin: 0px;
-    font-size: {{ feature_heading_size_mobile }}px;
-    color: {{ feature_heading_color }};
-    line-height: {{ feature_heading_height }}%;
-    text-transform: unset;
-    font-weight: bold;
-    margin-top: {{section.settings.feature_heading_mt}}px;
-  }
-  
-  .feature-{{ section.id }} .box__description {
-    margin-top: {{ feature_text_mt | times: 0.75 | round: 0 }}px;
-  }
-
-  .feature-{{ section.id }} .box__description * {
-    margin: 0px;
-    font-size: {{ feature_text_size_mobile }}px;
-    color: {{ feature_text_color }};
-    line-height: {{ feature_text_height }}%;
-    text-transform: unset;
-  }
-
-  .feature-{{ section.id }} .wrapper-box {
+  .section-{{ section.id }}-settings  .wrapper-box {
     display: grid;
-    grid-template-columns: repeat({{ feature_row_mobile}}, 1fr);
-    background-color: {{ feature_bg }}; 
-    border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
-    border-radius: {{ feature_radius }}px;
-    padding: {{ feature_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_padding_horizontal | times: 0.75 | round: 0 }}px;
+    grid-template-columns: repeat({{ feature_items_row_mobile }}, 1fr);
     gap: {{ feature_gap_mobile }}px;
   }
-  
-  .feature-{{ section.id }} .box:not(:nth-child(2)) .box__content-wrapper {
-    padding-right: 10px;
-  }
-  
-  .feature-{{ section.id }} .box {
+
+  .section-{{ section.id }}-settings .box {
+    width: 100%;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    gap: 5px;
+    justify-content: start;
   }
-  
-  .feature-{{ section.id }} .box__image {
+
+  .section-{{ section.id }}-settings .box__image {
     display:flex;
-    margin-right: 10px;
+    margin-right: {{section.settings.margin_right | times: 0.75 | round: 0 }}px;
     flex: 0 0 {{ feature_icon_size_mobile }}px;
     height: {{ feature_icon_size_mobile }}px;
   }
 
-  .feature-{{ section.id }} .box__image img,
-  .feature-{{ section.id }} .box__image svg {
+  .section-{{ section.id }}-settings .box__image img,
+  .section-{{ section.id }}-settings .box__image svg {
+    width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
   }
 
-  .feature-{{ section.id }} .box__image svg path {
+  .section-{{ section.id }}-settings .box__image svg path {
     fill: {{ feature_icon_color }};
   }
 
-  @media(min-width: 768px) {
+  .box__title-{{ section.id }} {
+    max-width: fit-content;
+    font-size: {{ feature_text_size_mobile }}px;
+    color: {{ feature_text_color }};
+    line-height: {{ feature_text_height }}%;
+    text-transform: unset;
+    font-weight: bold;
+  }
 
-    .section-{{ section.id }} {
+ @media (min-width: 768px) {
+
+    .section-{{ section.id }}-settings .box {
+      justify-content:center;
+    }
+   .section-{{ section.id }} {
       margin-top: {{ margin_top }}px;
       margin-bottom: {{ margin_bottom }}px;
     }
@@ -146,48 +110,28 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .feature-{{ section.id }} .wrapper-box {
-      grid-template-columns: repeat({{ feature_row }}, 1fr);
-      padding: {{ feature_padding_vertical }}px {{ feature_padding_horizontal }}px;
-      gap: {{ feature_gap }}px;
-    }
-
-    .feature-{{ section.id }} .box {
-      flex: 1 0 auto;
-    }
-    
-    .feature-{{ section.id }} .box__title {
-      font-size: {{ feature_heading_size }}px;
-    }
-
-    .feature-{{ section.id }} .box__description {
-      margin-top: {{ feature_text_mt }}px;
-    }
-
-    .feature-{{ section.id }} .box__description * {
+    .box__title-{{ section.id }}  {
       font-size: {{ feature_text_size }}px;
     }
-
-    .section-{{ section.id }}-settings .box__image {
+   
+   .section-{{ section.id }}-settings .box__image {
+      display:flex;
+      margin-right: {{ section.settings.margin_right }}px;
       flex: 0 0 {{ feature_icon_size }}px;
       height: {{ feature_icon_size }}px;
     }
-  }
-{% endstyle %}
 
-{% if feature_heading_custom %}
-  <style>
-    .feature-{{ section.id }} .box__title {
-      font-family: {{ feature_heading_font.family }}, {{ feature_heading_font.fallback_families }};
-      font-weight: {{ feature_heading_font.weight }};
-      font-style: {{ feature_heading_font.style }};
-    }
-  </style>
-{% endif %}
+   .section-{{ section.id }}-settings  .wrapper-box {
+     gap: {{ feature_gap }}px;
+     grid-template-columns: repeat({{ feature_items_row }}, 1fr);
+   }
+ }
+
+{% endstyle %}
 
 {% if feature_text_custom %}
   <style>
-    .feature-{{ section.id }} .box__description * {
+    .box__title-{{ section.id }} {
       font-family: {{ feature_text_font.family }}, {{ feature_text_font.fallback_families }};
       font-weight: {{ feature_text_font.weight }};
       font-style: {{ feature_text_font.style }};
@@ -202,14 +146,6 @@
     }
   </style>
 {% endunless %}
-
-{% if feature_shadow %}
-  <style>
-    .feature-{{ section.id }} .wrapper-box {
-       box-shadow: 4px 4px 20px {{ feature_shadow_color | hex_to_rgba: 0.2 }};
-    }
-  </style>
-{% endif %}
 
 {% capture svg_example_1 %}
  <svg class='icon icon--medium icon--type-truck' stroke-width='1' aria-hidden='true' focusable='false' role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M15.64 6.92L9.5 5.12V4a.5.5 0 00-.5-.5H1a.5.5 0 00-.5.5v8.5c0 .28.22.5.5.5h1.27a2.1 2.1 0 004.06 0h3.94a2.1 2.1 0 004.06 0h1.17a.5.5 0 00.5-.5V7.4a.5.5 0 00-.36-.48zM4.3 13.6a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zM6.33 12a2.1 2.1 0 00-4.06 0H1.5V4.5h7V12H6.33zm5.97 1.6a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zM15 12h-.67a2.1 2.1 0 00-4.06 0H9.5V6.17l5.5 1.6V12z'></path></svg>
@@ -228,8 +164,8 @@
     <div class="section-{{ section.id }}-settings ">
       <div class="wrapper-box">
           {%- for block in section.blocks -%}
-              <{% if block.settings.feature_url != blank %}a href="{{ block.settings.feature_url }}"{% else %}div{% endif %} class="box">
-                  {% unless block.settings.hide_image %}
+              <div class="box">
+                {% unless block.settings.hide_image %}
                   <div class="box__image">
                       {%- if block.settings.feature_image != blank -%}
                         <img src="{{ block.settings.feature_image | image_url }}" alt="feature-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
@@ -249,11 +185,8 @@
                       {%- endif -%}
                   </div>
                   {% endunless %}
-                  <div class="box__content-wrapper">
-                      <div class="box__title">{{ block.settings.feature_title }}</div>
-                      <div class="box__description">{{ block.settings.feature_text }}</div>
-                  </div>
-              </{% if block.settings.feature_url != blank %}a{% else %}div{% endif %}>
+                  <div class="box__title box__title-{{ section.id }}">{{ block.settings.feature_title }}</div>
+              </div>
           {%- endfor -%}
       </div>
   </div>
@@ -261,31 +194,38 @@
 
 {% schema %}
 {
-  "name": "SG-Feature #1",
+  "name": "SG-Feature #2",
   "tag": "section",
-  "class": "feature-type1",
+  "class": "feature-type2",
   "settings": [
     {
       "type": "header",
-      "content": "Feature wrapper settings"
+      "content": "Feature Settings"
     },
     {
       "type": "range",
-      "id": "feature_row",
+      "id": "feature_items_row",
       "min": 1,
       "max": 5,
       "step": 1,
-      "label": "Feature per row",
-      "default": 4
+      "label": "Feature Items per Row",
+      "default": 3
     },
     {
-      "type": "range",
-      "id": "feature_row_mobile",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "label": "Feature per row - mobile",
-      "default": 1
+      "type": "select",
+      "id": "feature_items_row_mobile",
+      "label": "Feature Items per Row - Mobile",
+      "default": "1",
+      "options": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        }
+      ]
     },
     {
       "type": "range",
@@ -294,8 +234,8 @@
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Gap",
-      "default": 20
+      "label": "Feature Gap",
+      "default": 60
     },
     {
       "type": "range",
@@ -304,125 +244,23 @@
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Gap - mobile",
+      "label": "Feature Gap - Mobile",
       "default": 20
     },
     {
-      "type": "range",
-      "id": "feature_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "feature_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "feature_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "feature_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "feature_shadow",
-      "label": "Use shadow",
-      "default": false
-    },
-    {
       "type": "header",
-      "content": "Feature heading settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "feature_heading_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "feature_heading_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "feature_heading_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "feature_heading_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "feature_heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "feature_heading_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 8
-    },
-    {
-      "type": "header",
-      "content": "Feature text settings"
+      "content": "Feature Text Settings"
     },
     {
       "type": "checkbox",
       "id": "feature_text_custom",
-      "label": "Use custom font",
+      "label": "Use Custom Font",
       "default": false
     },
     {
       "type": "font_picker",
       "id": "feature_text_font",
-      "label": "Font family",
+      "label": "Feature Text Font Family",
       "default": "josefin_sans_n4"
     },
     {
@@ -432,8 +270,8 @@
       "max": 72,
       "step": 2,
       "unit": "px",
-      "label": "Font size",
-      "default": 12
+      "label": "Feature Text Size",
+      "default": 14
     },
     {
       "type": "range",
@@ -442,8 +280,8 @@
       "max": 72,
       "step": 2,
       "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
+      "label": "Feature Text Size - Mobile",
+      "default": 14
     },
     {
       "type": "range",
@@ -452,22 +290,12 @@
       "max": 200,
       "step": 10,
       "unit": "%",
-      "label": "Line height",
+      "label": "Feature Text Line Height",
       "default": 130
     },
     {
-      "type": "range",
-      "id": "feature_text_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 4
-    },
-    {
       "type": "header",
-      "content": "Feature icon settings"
+      "content": "Feature Icon Settings"
     },
     {
       "type": "range",
@@ -476,8 +304,8 @@
       "max": 200,
       "step": 2,
       "unit": "px",
-      "label": "Size",
-      "default": 42
+      "label": "Feature Icon Size",
+      "default": 26
     },
     {
       "type": "range",
@@ -486,67 +314,45 @@
       "max": 200,
       "step": 2,
       "unit": "px",
-      "label": "Size - mobile",
-      "default": 42
+      "label": "Feature Icon Size - Mobile",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "margin_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature Icon Margin Right",
+      "default": 15
     },
     {
       "type": "header",
-      "content": "Feature wrapper colors"
-    },
-    {
-      "type": "color",
-      "id": "feature_bg",
-      "label": "Background color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "feature_border_color",
-      "label": "Border color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "feature_shadow_color",
-      "label": "Shadow color",
-      "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Feature content colors"
-    },
-    {
-      "type": "color",
-      "id": "feature_heading_color",
-      "label": "Heading color",
-      "default": "#000000"
+      "content": "Feature Colors"
     },
     {
       "type": "color",
       "id": "feature_text_color",
-      "label": "Text color",
+      "label": "Feature Text Color",
       "default": "#000000"
     },
     {
       "type": "color",
       "id": "feature_icon_color",
-      "label": "Icon color",
+      "label": "Feature Icon Color",
       "default": "#000000"
     },
     {
-      "type": "header",
-      "content": "Section colors"
-    },
-    {
       "type": "color",
-      "label": "Background color",
+      "label": "Section background",
       "id": "background_color",
-      "default": "#FFFFFF"
+      "default": "#D68D8D"
     },
     {
       "type": "color_background",
       "id": "background_gradient",
-      "label": "Background gradient"
+      "label": "Section background gradient"
     },
     {
       "type": "color",
@@ -624,12 +430,12 @@
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section Settings"
     },
     {
       "type": "checkbox",
       "id": "full_width",
-      "label": "Full width",
+      "label": "Full Width",
       "default": false
     },
     {
@@ -663,29 +469,18 @@
   "blocks": [
     {
       "type": "image",
-      "name": "SG - Feature #1",
+      "name": "Feature item",
       "settings": [
         {
           "type": "text",
           "id": "feature_title",
-          "label": "Item title text",
-          "default": "Item title"
-        },
-        {
-          "type": "richtext",
-          "id": "feature_text",
-          "label": "Item text (richtext)",
-          "default": "<p>Item text</p>"
+          "label": "Item Title text",
+          "default": "Item Title"
         },
         {
           "type": "image_picker",
           "id": "feature_image",
-          "label": "Icon"
-        },
-        {
-          "type": "url",
-          "id": "feature_url",
-          "label": "Item URL"
+          "label": "Level Image"
         },
         {
           "type": "checkbox",
@@ -698,35 +493,30 @@
   ],
   "presets": [
     {
-      "name": "SG-Feature #1",
+      "name": "SG-Feature #2",
       "blocks": [
         {
           "type": "image",
           "settings": {
-            "feature_title": "Free Shipping",
-            "feature_text": "<p>Order today, receive tomorrow</p>",
-            "feature_url": "https://section.store/"
+            "feature_title": "Free shipping"
           }
         },
         {
           "type": "image",
           "settings": {
-            "feature_title": "Price-match guarantee",
-            "feature_text": "<p>Safe money when ordering with us</p>"
+            "feature_title": "Price-match guarantee"
           }
         },
         {
           "type": "image",
           "settings": {
-            "feature_title": "Hassle-free exchange",
-            "feature_text": "<p>Receive a slip for exchanges</p>"
+            "feature_title": "Hassle-free exchange"
           }
         },
         {
           "type": "image",
           "settings": {
-            "feature_title": "5.0 Google Reviews",
-            "feature_text": "<p>Customer satisfaction #1 priority</p>"
+            "feature_title": "5.0 Google Reviews"
           }
         }
       ]
