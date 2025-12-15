@@ -1,413 +1,977 @@
 {%- liquid 
+
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign margin_horizontal = section.settings.margin_horizontal
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
-  assign margin_top = section.settings.margin_top
-  assign margin_top_mobile = section.settings.margin_top_mobile
-  assign margin_bottom = section.settings.margin_bottom
-  assign margin_bottom_mobile = section.settings.margin_bottom_mobile
+  assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
+  assign section_radius = section.settings.section_radius
 
-  assign fill = section.settings.fill
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align = section.settings.heading_align
+  assign heading_align_mobile = section.settings.heading_align_mobile
 
-  assign flip_vertically = section.settings.flip_vertically
-  assign flip_horizontally = section.settings.flip_horizontally
+  assign link = section.settings.link
+  assign link_url = section.settings.link_url
+  assign link_size = section.settings.link_size
+  assign link_size_mobile = section.settings.link_size_mobile
+  assign link_color = section.settings.link_color
+  assign link_hover_color = section.settings.link_hover_color
+  assign link_custom = section.settings.link_custom
+  assign link_font = section.settings.link_font
+  assign link_height = section.settings.link_height
+  assign link_align = section.settings.link_align
+  assign link_align_mobile = section.settings.link_align_mobile
+  assign link_mt = section.settings.link_mt
 
-  assign spacing = section.settings.spacing
+  assign items_mt = section.settings.items_mt
 
-  assign shape_animate = section.settings.shape_animate
-  assign shape_animate_speed = section.settings.shape_animate_speed
-  assign shape_animate_speed_mobile = section.settings.shape_animate_speed_mobile
-  assign shape_direction = section.settings.shape_direction
+  assign item_padding_vertical_mobile = section.settings.item_padding_vertical_mobile
+  assign item_padding_vertical = section.settings.item_padding_vertical
+  assign item_padding_horizontal_mobile = section.settings.item_padding_horizontal_mobile
+  assign item_padding_horizontal = section.settings.item_padding_horizontal
+  assign item_radius = section.settings.item_radius
+  assign item_border_thickness = section.settings.item_border_thickness
+  assign item_border_color = section.settings.item_border_color
+  assign item_active_border_color = section.settings.item_active_border_color
+  assign item_shadow = section.settings.item_shadow
+  assign item_bg_color = section.settings.item_bg_color
+  assign item_mt = section.settings.item_mt
 
-  assign animate_type = "marquee"
-    
-  if section.settings.shape == '2' or section.settings.shape == '5' or section.settings.shape == '6' or section.settings.shape == '7' or section.settings.shape == '10' or section.settings.shape == '12' or section.settings.shape == '13'
-    assign animate_type = "float"
-  endif
-  
+  assign question_size = section.settings.question_size
+  assign question_size_mobile = section.settings.question_size_mobile
+  assign question_color = section.settings.question_color
+  assign question_active_color = section.settings.question_active_color
+  assign question_custom = section.settings.question_custom
+  assign question_font = section.settings.question_font
+  assign question_height = section.settings.question_height
+
+  assign arrow_color = section.settings.arrow_color
+  assign arrow_size = section.settings.arrow_size
+  assign arrow_size_mobile = section.settings.arrow_size_mobile
+
+  assign answer_size = section.settings.answer_size
+  assign answer_size_mobile = section.settings.answer_size_mobile
+  assign answer_color = section.settings.answer_color
+  assign answer_custom = section.settings.answer_custom
+  assign answer_font = section.settings.answer_font
+  assign answer_height = section.settings.answer_height
+  assign answer_padding_top = section.settings.answer_padding_top
+   
 -%}
 
 {%- style -%}
-
+  {{  heading_font | font_face: font_display: 'swap' }}
+  {{  link_font | font_face: font_display: 'swap' }}
+  
   .section-{{ section.id }} {
-    margin-top: {{ margin_top_mobile }}px;
-    margin-bottom: {{ margin_bottom_mobile }}px;
-    overflow: hidden;
-    width: 100%;
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+    margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: {{ margin_horizontal_mobile }}rem;
+    margin-right: {{ margin_horizontal_mobile }}rem;
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
   }
-
+  
   .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: {{ padding_horizontal_mobile }}rem;
+    padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .penal-title-{{ section.id }} {
     width: 100%;
-    max-width: 100%;
+    text-align: {{ heading_align_mobile }};
   }
 
-  .divider-shape-wrapper-{{ section.id }} {
-    display: flex;
-    align-items: flex-start;
-    height: 100%;
+  .penal-title-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    word-break: break-word;
   }
 
-  .divider-shape-{{ section.id }} {
-    height: 100%;
-    flex-shrink: 0;
-  }
-
-  .divider-shape-{{ section.id }} svg {
+  .penal-link-{{ section.id }} {
+    margin: 0;
+    margin-top: {{ link_mt | times: 0.75 | round: 0 }}px;
     display: block;
-    width: 100.05%;
-    height: 100%;
-    object-fit: cover;
+    max-width: fit-content;
+    font-size: {{ link_size_mobile }}px;
+    color: {{ link_color }};
+    line-height: {{ link_height }}%;
+    font-weight: bold;
+    text-transform: none;
+    text-decoration-line: underline;
+    word-break: break-word;
+    transition: all 0.25s ease 0s;
   }
 
-  @media(min-width: 1024px) {
+  .penal-link-{{ section.id }}:hover {
+    transition: all 0.25s ease 0s;
+    color: {{ link_hover_color }};
+  }
+
+  .penal-group-{{ section.id }} {
+    margin-top: {{ items_mt | times: 0.75 | round: 0 }}px;
+  }
+
+  .faq-item-{{ section.id }} {
+    padding: {{ item_padding_vertical_mobile }}px {{ item_padding_horizontal_mobile }}px;
+    border-radius: {{ item_radius }}px;
+    border: {{ item_border_thickness }}px solid {{ item_border_color }};
+    background-color: {{ item_bg_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-item-{{ section.id }}:not(:first-child) {
+    margin-top: {{ item_mt | times: 0.75 | round: 0 }}px;
+  }
+
+  .faq-toggle-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 12px;
+  }
+
+  .faq-arrow-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 {{ arrow_size_mobile }}px;
+    height: {{ arrow_size_mobile }}px;
+    transition: all 0.3s ease 0s;
+    transform: rotate(var(--rotate));
+    border-radius: 50%;
+  }
+
+  .faq-arrow-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .faq-arrow-{{ section.id }} svg path {
+    fill: {{ arrow_color }};
+  }
+
+  .faq-question-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ question_size_mobile }}px;
+    color: {{ question_color }};
+    line-height: {{ question_height }}%;
+    text-transform: unset;
+    font-weight: 700;
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-answer-{{ section.id }} {
+    transition: all 0.2s ease-in-out;
+    overflow: hidden;
+  }
+
+  .faq-answer-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ answer_size_mobile }}px;
+    color: {{ answer_color }};
+    line-height: {{ answer_height }}%;
+    text-transform: unset;
+  }
+
+  .faq-answer-{{ section.id }} p {
+    min-height: 10px;
+  }
+
+  .faq-answer-{{ section.id }} p:not(:first-child ) {
+    margin-top: 10px;
+  } 
+
+  .faq-height-cal-{{ section.id }} {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: {{ answer_padding_top }}px;
+  }
+
+  .faq-height-cal-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ answer_size_mobile }}px;
+    color: {{ answer_color }};
+    line-height: {{ answer_height }}%;
+    text-transform: unset;
+  }
+
+  .faq-height-cal-{{ section.id }} p {
+    min-height: 10px;
+  }
+
+  .faq-height-cal-{{ section.id }} p:not(:first-child ) {
+    margin-top: 10px;
+  } 
+
+  @media screen and (min-width: 1024px) {
     .section-{{ section.id }} {
       margin-top: {{ margin_top }}px;
       margin-bottom: {{ margin_bottom }}px;
+      margin-left: {{ margin_horizontal }}rem;
+      margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
+    }
+    
+    .section-{{ section.id }}-settings {
+      padding: 0 5rem;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_horizontal }}rem;
+      padding-right: {{ padding_horizontal }}rem;
+    }
+
+    .penal-title-{{ section.id }} {
+      text-align: {{ heading_align }};
+    }
+    
+    .penal-title-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
+    .penal-link-{{ section.id }} {
+      margin-top: {{ link_mt }}px;
+      font-size: {{ link_size }}px;
+    }
+
+    .penal-group-{{ section.id }} {
+      margin-top: {{ items_mt }}px;
+    }
+
+    .faq-item-{{ section.id }} {
+      padding: {{ item_padding_vertical }}px {{ item_padding_horizontal }}px;
+    }
+    
+    .faq-item-{{ section.id }}:not(:first-child) {
+      margin-top: {{ item_mt }}px;
+    }
+
+    .faq-question-{{ section.id }} {
+      font-size: {{ question_size }}px;
+    }
+
+    .faq-answer-{{ section.id }} * {
+      font-size: {{ answer_size }}px;
+    }
+
+    .faq-arrow-{{ section.id }} {
+      flex: 0 0 {{ arrow_size }}px;
+      height: {{ arrow_size }}px;
+    }
+
+    .faq-height-cal-{{ section.id }} * {
+      font-size: {{ answer_size }}px;
     }
   }
-  
 {%- endstyle -%}
 
-{% if flip_vertically %}
+{% unless full_width %}
   <style>
-    .divider-shape-{{ section.id }} {
-      margin-top: -1px;
-      transform: rotateX(180deg) {% if flip_horizontally %} rotateY(180deg) {% endif %};
+    .section-{{ section.id }}-settings {
+      max-width: {{ content_width }}rem;
+    }
+  </style>
+{% endunless %}
+
+{% if heading_custom %}
+  <style>
+    .penal-title-{{ section.id }} * {
+      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      font-weight: {{ heading_font.weight }};
+      font-style: {{ heading_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if link_custom %}
+  <style>
+    .penal-link-{{ section.id }} {
+      font-family: {{ link_font.family }}, {{ link_font.fallback_families }};
+      font-weight: {{ link_font.weight }};
+      font-style: {{ link_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if question_custom %}
+  <style>
+    .faq-question-{{ section.id }} {
+      font-family: {{ question_font.family }}, {{ question_font.fallback_families }};
+      font-weight: {{ question_font.weight }};
+      font-style: {{ question_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if answer_custom %}
+  <style>
+    .faq-answer-{{ section.id }} * {
+      font-family: {{ answer_font.family }}, {{ answer_font.fallback_families }};
+      font-weight: {{ answer_font.weight }};
+      font-style: {{ answer_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if link_align_mobile == "center" %}
+  <style>
+   .penal-link-{{ section.id }} {
+      margin-left: auto;
+      margin-right: auto;
+    } 
+  </style>
+{% elsif link_align_mobile == "right" %}
+  <style>
+   .penal-link-{{ section.id }} {
+      margin-left: auto;
+    } 
+  </style>
+{% endif %}
+
+{% if link_align == "center" %}
+  <style>
+    @media(min-width: 1024px) {
+     .penal-link-{{ section.id }} {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      } 
+    }
+  </style>
+{% elsif link_align == "right" %}
+  <style>
+    @media(min-width: 1024px) {
+     .penal-link-{{ section.id }} {
+        margin-left: auto !important;
+        margin-right: 0px !important;
+      } 
     }
   </style>
 {% else %}
   <style>
-    .divider-shape-{{ section.id }} {
-      margin-bottom: -1px;
+    @media(min-width: 1024px) {
+     .penal-link-{{ section.id }} {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+      } 
     }
   </style>
 {% endif %}
 
-{% if flip_horizontally %}
+{% if item_shadow %}
   <style>
-    .divider-shape-{{ section.id }} {
-      transform: rotateY(180deg) {% if flip_vertically %} rotateX(180deg) {% endif %};
+    .faq-item-{{ section.id }} {
+      box-shadow: rgba(18, 18, 23, 0.08) 0px 6px 4px -1px;
     }
   </style>
 {% endif %}
 
-{% if shape_animate %}
-
-  <style>
-    .divider-shape-{{ section.id }} {
-      max-width: 100%;
-    }
-  </style>
-
-  {% if shape_direction %}
-    <style>
-      @keyframes shapeAnimation{{ section.id | replace: '-', '' }}{ 
-        from { transform: translateX(-100%) {% if flip_vertically %} rotateX(180deg) {% endif %} {% if flip_horizontally  %} rotateY(180deg) {% endif %}; }
-        to { transform: translateX(0%) {% if flip_vertically %} rotateX(180deg) {% endif %} {% if flip_horizontally  %} rotateY(180deg) {% endif %}; } 
-      }
-
-      @keyframes shapeAnimationFloat{{ section.id | replace: '-', '' }} {
-        0%, 100% {
-          translate: 0% 0%;
-        }
-        50% {
-          translate: 0% 15%;
-        }
-      }
-    </style>
-  {% else %}
-    <style>
-      @keyframes shapeAnimation{{ section.id | replace: '-', '' }} { 
-        from { transform: translateX(0) {% if flip_vertically %} rotateX(180deg) {% endif %} {% if flip_horizontally  %} rotateY(180deg) {% endif %}; }
-        to { transform: translateX(-100%) {% if flip_vertically %} rotateX(180deg) {% endif %} {% if flip_horizontally  %} rotateY(180deg) {% endif %}; } 
-      }
-
-      @keyframes shapeAnimationFloat{{ section.id | replace: '-', '' }} {
-        0%, 100% {
-          translate: 0% 0%;
-        }
-        50% {
-          translate: 0% -15%;
-        }
-      }
-    </style>
-  {% endif %}
-
-  {% if animate_type == "marquee" %}
-    <style>
-      .divider-shape-{{ section.id }} {
-        animation: shapeAnimation{{ section.id | replace: '-', '' }} {{ shape_animate_speed_mobile }}s linear infinite; 
-      }
-
-      @media(min-width: 1024px) {
-        .divider-shape-{{ section.id }} {
-          animation-duration: {{ shape_animate_speed }}s;
-        }
-      }
-    </style>
-  {% else %}
-    <style>
-      .divider-shape-{{ section.id }} {
-        animation: shapeAnimationFloat{{ section.id | replace: '-', '' }} {{ shape_animate_speed_mobile }}s linear infinite; 
-      }
-      
-      @media(min-width: 1024px) {
-        .divider-shape-{{ section.id }} {
-          animation-duration: {{ shape_animate_speed }}s;
-        }
-      }
-    </style>
-  {% endif %}
-
-{% endif %}
-{% if spacing == 'above' %}
-  <style>
-    #shopify-section-{{ section.id }} {
-        position: relative;
-    }
-    .section-{{ section.id }} {
-        position: absolute;
-        bottom: 0;
-        z-index: 2;
-    }
-  </style>
-{% elsif spacing == 'below' %}
-  <style>
-    #shopify-section-{{ section.id }} {
-        position: relative;
-    }
-    .section-{{ section.id }} {
-        position: absolute;
-        top: 0;
-        z-index: 2;
-    }
-  </style>
-{% else %}
-  <style>
-  .section-{{ section.id }} {
-    background-color:{{ background_color }};
-    background-image: {{ background_gradient }};
-  }
-  </style>
-{% endif %}
-
-{% if section.settings.shape == "1" %}
-  <style>
-    .divider-shape-{{ section.id }} svg {
-      min-height: 27px;
-    }
-  </style>
-{% endif %}
-
-
-{% capture svg %}
-  {% if section.settings.shape == '1' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="122.745" viewBox="0 0 1920 122.745">
-  <path id="wave-1" d="M1921.25,56.946S1721.2,1,1441.125,1,961.5,56.883,961.5,56.883l-.5.133S761.448,112.9,481.375,112.9,1.25,56.946,1.25,56.946v66.8h1920Z" transform="translate(-1.25 -1.001)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '2' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="159.169" viewBox="0 0 1920 159.169">
-  <path id="wave-2" d="M1922.5,1521.59c-120.03-65.591-260.412-93.288-396.359-78.2-133.13,14.773-260.916,69.172-394.854,70.7-152.286,1.736-296.117-64.693-445.208-95.769-231.052-48.16-479.37-8.125-683.579,110.209v29.03h1920Z" transform="translate(-2.503 -1398.388)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '3' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1926" height="102.489" viewBox="0 0 1926 102.489">
-  <path id="wave-3" d="M1617.436,84.249C1455.818,84.2,1455.771,0,1294.06,0h-.277C1132.3.1,1132.209,84.249,970.545,84.249,808.787,84.249,808.787,0,647.03,0S485.273,84.249,323.515,84.249,161.758,0,0,0V102.489H1926V.247c-147.059,4.977-152.038,83.954-308.564,84" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '4' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="41.359" viewBox="0 0 1920 41.359">
-  <path id="wave-4" d="M1921,1772c-36.927,0-36.927,30-73.854,30s-36.928-30-73.855-30-36.926,30-73.851,30-36.925-30-73.849-30-36.923,30-73.846,30-36.924-30-73.848-30-36.925,30-73.849,30-36.923-30-73.846-30-36.925,30-73.849,30-36.923-30-73.847-30-36.922,30-73.843,30-36.921-30-73.842-30-36.92,30-73.841,30-36.922-30-73.845-30-36.923,30-73.846,30-36.923-30-73.847-30-36.922,30-73.845,30-36.922-30-73.845-30-36.922,30-73.845,30-36.922-30-73.844-30-36.922,30-73.844,30-36.922-30-73.845-30-36.922,30-73.843,30-36.923-30-73.846-30-36.922,30-73.843,30S37.921,1772,1,1772v41.359H1921Z" transform="translate(-1 -1772)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '5' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1921.254" height="131.438" viewBox="0 0 1921.254 131.438">
-  <path id="wave-5" d="M1922.254,49.156c-58.3-44.32-137.511-46.732-210.673-43.459-231.928,10.377-460.372,58.977-691.343,82.452C948.7,95.419,872.934,99.562,808.421,67.8c-31.742-15.632-59.237-39.346-92.02-52.66C669.448-3.935,616.7.166,566.274,5.246A5712.748,5712.748,0,0,0,1,90.973v41.464H1922.254Z" transform="translate(-1 -0.999)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '6' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="117.412" viewBox="0 0 1920 117.412">
-  <path id="curve-1" d="M1,1518.2c228.357-55.242,573.624-90.443,960-90.443s731.643,35.2,960,90.443v26.969H1Z" transform="translate(-1 -1427.757)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '7' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920.085" height="162.685" viewBox="0 0 1920.085 162.685">
-  <path id="curve-2" d="M1919.841.009c-.5-1.037-574.043,134.923-960.387,134.923S228.338,55.419,0,.009V162.688H1919.841s.548-161.545,0-162.679" transform="translate(0 -0.003)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '8' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="68.401" viewBox="0 0 1920 68.401">
-  <path id="scallop-1" d="M1846.169,0c-31.889,0-59.625,19.9-73.83,49.213v.228l-.426-.225C1757.708,19.905,1729.974,0,1698.084,0s-59.627,19.9-73.83,49.213C1610.049,19.905,1582.314,0,1550.424,0s-59.625,19.9-73.829,49.213C1462.39,19.905,1434.655,0,1402.765,0s-59.625,19.9-73.829,49.213C1314.73,19.905,1287,0,1255.106,0s-59.625,19.9-73.83,49.213C1167.071,19.905,1139.335,0,1107.446,0s-59.624,19.9-73.829,49.213C1019.412,19.905,991.68,0,959.787,0s-59.625,19.9-73.83,49.213C871.752,19.9,844.017,0,812.128,0S752.5,19.9,738.3,49.213C724.093,19.9,696.357,0,664.467,0s-59.625,19.9-73.83,49.213C576.434,19.9,548.7,0,516.808,0s-59.626,19.9-73.83,49.213C428.773,19.9,401.039,0,369.149,0s-59.626,19.9-73.83,49.213C281.114,19.9,253.379,0,221.489,0s-59.625,19.9-73.83,49.213C133.455,19.9,105.72,0,73.83,0S14.2,19.905,0,49.216V68.4l1920,0V49.213C1905.795,19.9,1878.059,0,1846.169,0" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '9' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1922.692" height="112.216" viewBox="0 0 1922.692 112.216">
-  <path id="scallop-2" d="M1922.692,106.816a106.816,106.816,0,0,0-213.632,0,106.816,106.816,0,1,0-213.632,0,106.816,106.816,0,0,0-213.633,0,106.816,106.816,0,1,0-213.632,0,106.816,106.816,0,0,0-213.632,0,106.816,106.816,0,0,0-213.632,0,106.816,106.816,0,1,0-213.632,0,106.816,106.816,0,0,0-213.632,0A106.816,106.816,0,0,0,0,106.816v5.4H1922.692" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '10' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="95.588" viewBox="0 0 1920 95.588">
-  <path id="zigzag-1" d="M1921,73.115l-640-72-640,72L1,1.115V96.7H1921Z" transform="translate(-1 -1.115)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '11' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="40.835" viewBox="0 0 1920 40.835">
-  <path id="zigzag-2" d="M1871.99,28.7l-48-28.7-48,28.7-48-28.7-48,28.7L1631.973,0l-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-47.995,28.7L1055.976,0l-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7-48-28.7-48,28.7L95.992,0,48,28.7,0,0V40.833H1920V0Z" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '12' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="131.774" viewBox="0 0 1920 131.774">
-  <path id="diagonal-1" d="M1922.5,560.324,2.5,453.587V585.361h1920Z" transform="translate(-2.503 -453.587)" fill="{{ fill }}"/>
-  </svg>
-  {% elsif section.settings.shape == '13' %}
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="173.691" viewBox="0 0 1920 173.691">
-  <path id="drips-1" d="M1921.5,680.859c-11.46-11.8-33.385-2.635-39.736,12.537s-2.208,32.46,1.9,48.388,7.989,33.348,1.209,48.333a36.826,36.826,0,0,1-68.78-4.448c-5.2-17.086,2.433-35.294,2.229-53.154s-17.111-38.563-32.8-30.034c-16.154,8.778-14.3,40.623-32.682,41.085-15.007.377-19.587-22.295-33.558-27.786-17.385-6.833-31.325,16.669-31.971,35.338s1.37,41.422-14.2,51.735c-16.4,10.858-39.178-2.961-47.735-20.668s-8.742-38.32-15.476-56.8-25.021-36.064-43.9-30.573c-29.273,8.513-27.942,60.279-57.79,66.484-14.241,2.96-28.026-7.094-36.962-18.571s-15.444-25.1-26.656-34.371-29.843-12.244-39.327-1.215c-9.716,11.3-10.08,34.929-24.924,33.618-9.266-.818-13.792-12.552-22.62-15.483-8.151-2.707-16.889,3.234-21.42,10.531s-6.39,15.951-10.474,23.508c-15.253,28.223-63.58,28.048-78.627-.285-6.346-11.95-6.934-26.014-10.444-39.081s-11.874-26.687-25.219-28.917c-18.852-3.15-33.127,18.589-33.588,37.7s7.116,37.793,6.174,56.882-16.594,40.265-35.154,35.7c-14.235-3.5-21.14-19.982-22-34.616s2.089-29.69-1.977-43.774-19.405-26.72-32.75-20.654c-21.127,9.6-13.2,51.606-36.089,55.437-12.607,2.109-22.588-11.291-25.081-23.828s-1.01-26.068-6.521-37.6c-10.575-22.127-47.879-23.137-59.636-1.614-6.8,12.451-5.076,27.655-2.753,41.652s4.976,28.83-.325,41.99-22.153,22.688-34.088,15.016c-10.428-6.7-11.116-21.255-14.751-33.109-2.426-7.9-8.981-15.263-17-17.544-5.673-1.613-8.078-.139-10.757-6.7-3.9-9.549-.42-21.265-.734-31.087-.1-3.08-.229-6.282-1.665-9.008-5.2-9.875-21.264-1.7-26.419,3.962-7.336,8.054-13.113,19.183-23.77,21.441-16.317,3.457-31.792-16.789-47.45-11.044-12.684,4.654-13.927,21.734-13.754,35.244s-3.835,30.967-17.257,32.514-25.3-1.8-31.655-13.736-7.067-25.926-9.1-39.293-6.15-27.541-16.9-35.745c-14.085-10.752-34.627-7.358-50.26.985s-28.778,20.9-44.71,28.658-37.018,9.545-49.823-2.7c-11.008-10.53-15.837-30.485-31.044-31.372-19.542-1.14-27.945,32.066-47.449,30.415-8.25-.7-14.494-7.911-17.976-15.422s-5.189-15.834-9.459-22.927a36.119,36.119,0,0,0-65.911,9.565c-5.78,22.307,10.3,45.546,6.061,68.2-3.171,16.958-18.85,30.735-36.074,31.7s-34.344-10.977-39.388-27.474c-3.233-10.572-1.836-21.915-.966-32.936s1.045-22.7-4.247-32.407-17.858-16.273-27.764-11.365c-14.272,7.071-16.322,32.706-32.25,32.661-14.851-.041-18.4-23.007-32.143-28.644-10.314-4.232-22.368,3.77-26.571,14.1s-2.709,21.981-1.058,33.007,3.338,22.61-.534,33.065c-6.987,18.867-33.655,26.927-49.923,15.088-12.145-8.839-16.74-24.784-18.195-39.735s-.62-30.353-5.318-44.621-17.086-27.581-32.1-27.065c-16.51.567-27.6,16.389-37.294,29.762S17.114,746.95,1.5,741.557V849.173h1920Z" transform="translate(-1.5 -675.482)" fill="{{ fill }}"/>
-  </svg>
-  {% endif %}
-{% endcapture %}
-
-<div class="section-{{ section.id }} divider-{{ section.id }}">
-    <div class="section-{{ section.id }}-settings">
-      {% if shape_animate and animate_type == "marquee" %}
-        <div class="divider-shape-wrapper-{{ section.id }}">
-          <div class="divider-shape-{{ section.id }}">
-            {{ svg }}
-          </div>
-          <div class="divider-shape-{{ section.id }}">
-            {{ svg }}
-          </div>
-          <div class="divider-shape-{{ section.id }}">
-            {{ svg }}
-          </div>
-        </div>
-      {% else %}
-        <div class="divider-shape-{{ section.id }}">
-          {{ svg }}
-        </div>
-      {% endif %}
+<div class="section-{{ section.id }} penal-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+  <div class="section-{{ section.id }}-settings">
+    {%- if heading != blank -%}
+      <div class="penal-title-{{ section.id }}">
+        {{ heading }}
+      </div>
+    {%- endif -%}
+    <div class="penal-group-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'faq' -%}
+            <div class="faq-item-{{ section.id }}">
+              <div class="faq-toggle-{{ section.id }}">
+                <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+                <div class="faq-arrow-{{ section.id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0 0 128 128"><path d="M 64 6.0507812 C 49.15 6.0507812 34.3 11.7 23 23 C 0.4 45.6 0.4 82.4 23 105 C 34.3 116.3 49.2 122 64 122 C 78.8 122 93.7 116.3 105 105 C 127.6 82.4 127.6 45.6 105 23 C 93.7 11.7 78.85 6.0507812 64 6.0507812 z M 64 12 C 77.3 12 90.600781 17.099219 100.80078 27.199219 C 121.00078 47.499219 121.00078 80.500781 100.80078 100.80078 C 80.500781 121.10078 47.500781 121.10078 27.300781 100.80078 C 7.0007813 80.500781 6.9992188 47.499219 27.199219 27.199219 C 37.399219 17.099219 50.7 12 64 12 z M 64 42 C 62.3 42 61 43.3 61 45 L 61 61 L 45 61 C 43.3 61 42 62.3 42 64 C 42 65.7 43.3 67 45 67 L 61 67 L 61 83 C 61 84.7 62.3 86 64 86 C 65.7 86 67 84.7 67 83 L 67 67 L 83 67 C 84.7 67 86 65.7 86 64 C 86 62.3 84.7 61 83 61 L 67 61 L 67 45 C 67 43.3 65.7 42 64 42 z"></path></svg>
+                </div>
+              </div>
+              <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
+                  {{ block.settings.answer }}
+                </div>
+              <div class="faq-height-cal-{{ section.id }}">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+          {%- endcase -%}
+      {%- endfor -%}
     </div>
+    {% if link != blank %}
+      <a class="penal-link-{{ section.id }}" href="{{ link_url }}">{{ link }}</a>
+    {% endif %}
+  </div>
 </div>
+<script>
+  function initEcoFAQ() {
+    
+    const answerPaddingTop = {{ answer_padding_top }};
+    const answerPaddingBottom = 0;
+
+    const faqs = document.querySelectorAll(
+      '.faq-item-{{ section.id }}'
+    );
+    const buttons = document.querySelectorAll(
+      '.faq-toggle-{{ section.id }}'
+    );
+     const questions = document.querySelectorAll(
+      '.faq-question-{{ section.id }}'
+    );
+    const answers = document.querySelectorAll(
+      '.faq-answer-{{ section.id }}'
+    );
+    const answersHeightCalElements = document.querySelectorAll(
+      '.faq-height-cal-{{ section.id }}'
+    );
+    const icons = document.querySelectorAll(
+      '.faq-arrow-{{ section.id }}'
+    );
+
+    let activeIndex = -1;
+
+    function openAnswer(index) {
+      const height = answersHeightCalElements[index].offsetHeight;
+
+      answers[index].style.display = 'block';
+      setTimeout(() => {
+        answers[index].style.paddingTop = `${answerPaddingTop}px`;
+        answers[index].style.paddingBottom = `${answerPaddingBottom}px`;
+        answers[index].style.height = `${height }px`;
+        icons[index].style.setProperty('--rotate', '135deg');
+        questions[index].style.color = '{{ question_active_color }}';
+        faqs[index].style.borderColor = '{{ item_active_border_color }}';
+      });
+    }
+    function closeAnswer(index) {
+      answers[index].style.paddingTop = 0;
+      answers[index].style.paddingBottom = 0;
+      answers[index].style.height = 0;
+      icons[index].style.setProperty('--rotate', '0deg');
+      questions[index].style.color = '{{ question_color }}';
+      faqs[index].style.borderColor = '{{ item_border_color }}';
+
+      setTimeout(() => {
+        answers[index].style.display = 'none';
+      }, 300);
+    }
+    function toggleAnswer(index) {
+      if (answers[index].style.display === 'none') {
+        openAnswer(index);
+        activeIndex = index;
+      } else {
+        closeAnswer(index);
+        activeIndex = -1;
+      }
+    }
+    function closeAllAnswerBut(index) {
+      answers.forEach((answer, i) => {
+        if (i !== index) {
+          closeAnswer(i);
+        }
+      });
+    }
+
+    // When clicked, toggle the answer, animate the answer's height:
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        toggleAnswer(index);
+        closeAllAnswerBut(index);
+      });
+    });
+
+    // When the window is resized, debounce the answer's height:
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (activeIndex !== -1) {
+          const height = answersHeightCalElements[activeIndex].offsetHeight;
+          answers[activeIndex].style.height = `${height}px`;
+        }
+      }, 250);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initEcoFAQ);
+  
+  if (Shopify.designMode) {
+     document.addEventListener('shopify:section:unload', initEcoFAQ);
+     document.addEventListener('shopify:section:load', initEcoFAQ);
+  }
+</script>
 
 {% schema %}
 {
-  "name": "SG-Divider",
+  "name": "SG-Eco FAQ",
   "settings": [
     {
       "type": "header",
-      "content": "Divider Shape Settings"
+      "content": "Heading Settings"
     },
     {
-      "type": "select",
-      "id": "shape",
-      "label": "Divider Shape",
-      "options": [
-        {
-          "value": "1",
-          "label": "Wave 1"
-        },
-        {
-          "value": "2",
-          "label": "Wave 2"
-        },
-        {
-          "value": "3",
-          "label": "Wave 3"
-        },
-        {
-          "value": "4",
-          "label": "Wave 4"
-        },
-        {
-          "value": "5",
-          "label": "Wave 5"
-        },
-        {
-          "value": "6",
-          "label": "Curve 1"
-        },
-        {
-          "value": "7",
-          "label": "Curve 2"
-        },
-        {
-          "value": "8",
-          "label": "Scallop 1"
-        },
-        {
-          "value": "9",
-          "label": "Scallop 2"
-        },
-        {
-          "value": "10",
-          "label": "Zig Zag 1"
-        },
-        {
-          "value": "11",
-          "label": "Zig Zag 2"
-        },
-        {
-          "value": "12",
-          "label": "Diagonal"
-        },
-        {
-          "value": "13",
-          "label": "Drips"
-        }
-      ],
-      "default": "1"
+      "type": "richtext",
+      "id": "heading",
+      "default": "<h2>FAQs</h2>",
+      "label": "Heading"
     },
     {
       "type": "checkbox",
-      "id": "flip_vertically",
-      "label": "Flip Shape Vertically"
+      "id": "heading_custom",
+      "label": "Use Custom Font",
+      "default": false
     },
     {
-      "type": "checkbox",
-      "id": "flip_horizontally",
-      "label": "Flip Shape Horizontally"
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading Font Family",
+      "default": "josefin_sans_n4"
     },
     {
-      "type": "radio",
-      "id": "spacing",
-      "label": "Position Adjustment",
-      "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "above",
-          "label": "Overlap above section"
-        },
-        {
-          "value": "below",
-          "label": "Overlap below section"
-        }
-      ],
-      "default": "none"
+      "type": "range",
+      "id": "heading_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size - Mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "heading_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Heading Line Height",
+      "default": 130
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_align",
+      "label": "Heading Align"
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_align_mobile",
+      "label": "Heading Align - Mobile"
     },
     {
       "type": "header",
-      "content": "Shape Animation Settings"
+      "content": "Link Settings"
+    },
+    {
+      "type": "text",
+      "id": "link",
+      "default": "SEE ALL",
+      "label": "Link"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
     },
     {
       "type": "checkbox",
-      "id": "shape_animate",
-      "label": "Animate Shape"
+      "id": "link_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "link_font",
+      "label": "Link Font Family",
+      "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "shape_animate_speed",
-      "min": 1,
-      "max": 40,
-      "step": 1,
-      "label": "Scrolling speed",
-      "info": "⚡ <--------> 🐌",
-      "default": 5
+      "id": "link_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Link Size",
+      "default": 18
     },
     {
       "type": "range",
-      "id": "shape_animate_speed_mobile",
-      "min": 1,
-      "max": 40,
+      "id": "link_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Link Size - Mobile",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "link_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Link Line Height",
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "link_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Link Margin Top",
+      "default": 20
+    },
+    {
+      "type": "text_alignment",
+      "id": "link_align",
+      "label": "Link Align"
+    },
+    {
+      "type": "text_alignment",
+      "id": "link_align_mobile",
+      "label": "Link Align - Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "label": "Heading Color",
+      "id": "heading_color",
+      "default": "#233e16"
+    },
+    {
+      "type": "color",
+      "label": "Link Color",
+      "id": "link_color",
+      "default": "#233e16"
+    },
+    {
+      "type": "color",
+      "label": "Link Hover Color",
+      "id": "link_hover_color",
+      "default": "#233e16"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Items Settings"
+    },
+    {
+      "type": "range",
+      "id": "items_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Items Margin Top",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "FAQ Item Settings"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_vertical",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Vertical",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "item_padding_vertical_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Vertical - Mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "item_padding_horizontal",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Horizontal",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "item_padding_horizontal_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Horizontal - Mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "item_mt",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Margin Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "item_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Border Radius",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "item_border_thickness",
+      "min": 0,
+      "max": 10,
       "step": 1,
-      "label": "Scrolling speed - Mobile",
-      "info": "⚡ <--------> 🐌",
-      "default": 5
+      "unit": "px",
+      "label": "Item Border Thickness",
+      "default": 1
     },
     {
       "type": "checkbox",
-      "id": "shape_direction",
-      "label": "Reverse the Animation Direction"
+      "id": "item_shadow",
+      "label": "Item Box Shadow"
+    },
+    {
+      "type": "header",
+      "content": "Question Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "question_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "question_font",
+      "label": "Question Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Question Size",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "question_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Question Size - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "question_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Question Line Height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Arrow Settings"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Arrow Size",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "arrow_size_mobile",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Arrow Size - Mobile",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Answer Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "answer_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "answer_font",
+      "label": "Answer Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Answer Size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "answer_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Answer Size - Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "answer_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Answer Line Height",
+      "default": 170
+    },
+    {
+      "type": "range",
+      "id": "answer_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Answer Padding Top",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "FAQ Item Colors"
+    },
+    {
+      "type": "color",
+      "label": "Item Background Color",
+      "id": "item_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Item Border Color",
+      "id": "item_border_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Item Active Border Color",
+      "id": "item_active_border_color",
+      "default": "#233E16"
+    },
+    {
+      "type": "color",
+      "label": "Question Color",
+      "id": "question_color",
+      "default": "#233e16"
+    },
+    {
+      "type": "color",
+      "label": "Question Active Color",
+      "id": "question_active_color",
+      "default": "#3f8f58"
+    },
+    {
+      "type": "color",
+      "label": "Arrow Color",
+      "id": "arrow_color",
+      "default": "#233e16"
+    },
+    {
+      "type": "color",
+      "label": "Answer Color",
+      "id": "answer_color",
+      "default": "#233e16"
+    },
+    {
+      "type": "color",
+      "label": "Section background",
+      "id": "background_color",
+      "default": "#CCEDBE"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Section background gradient"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "border_color",
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -416,69 +980,166 @@
     {
       "type": "range",
       "id": "margin_top",
-      "min": -50,
-      "max": 50,
-      "step": 1,
+      "min": 0,
+      "max": 100,
+      "step": 4,
       "unit": "px",
       "label": "Margin top",
       "default": 0
     },
     {
       "type": "range",
-      "id": "margin_top_mobile",
-      "min": -50,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Margin top - Mobile",
-      "default": -1
-    },
-    {
-      "type": "range",
       "id": "margin_bottom",
-      "min": -50,
-      "max": 50,
-      "step": 1,
+      "min": 0,
+      "max": 100,
+      "step": 4,
       "unit": "px",
       "label": "Margin bottom",
       "default": 0
     },
     {
       "type": "range",
-      "id": "margin_bottom_mobile",
-      "min": -50,
-      "max": 50,
+      "id": "margin_horizontal",
+      "min": 0,
+      "max": 30,
       "step": 1,
-      "unit": "px",
-      "label": "Margin bottom - Mobile",
-      "default": -1
+      "unit": "rem",
+      "label": "Margin sides",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Margin sides mobile",
+      "default": 0
     },
     {
       "type": "header",
-      "content": "Section Colors"
+      "content": "Section padding (inside)"
     },
     {
-      "type": "color",
-      "label": "Shape Color",
-      "id": "fill",
-      "default": "#FF9C88"
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
     },
     {
-      "type": "color",
-      "label": "Section background",
-      "id": "background_color",
-      "default": "#FFFFFF"
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
     },
     {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Section background gradient",
-      "info": "Section background color applies only if Position Adjustment is None"
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding sides",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Padding sides mobile",
+      "default": 1.5
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "rem",
+      "label": "Section content width",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Roundness",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ BOX",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Lorem ipsum dolor sit amet?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Si habetis ulteriores quaestiones, quaeso, nostri auxilium clientibus contact.</p>"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Divider"
+      "name": "SG-Eco FAQ",
+      "blocks": [
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq"
+        }
+      ]
     }
   ]
 }
