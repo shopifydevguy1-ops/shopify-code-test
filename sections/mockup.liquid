@@ -14,6 +14,8 @@
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
 
+  assign feature_row = section.settings.feature_row
+  assign feature_row_mobile = section.settings.feature_row_mobile
   assign feature_gap_mobile = section.settings.feature_gap_mobile
   assign feature_gap = section.settings.feature_gap
   assign feature_padding_vertical = section.settings.feature_padding_vertical
@@ -31,11 +33,7 @@
   assign feature_item_border_color = section.settings.feature_item_border_color
   assign feature_item_bg_color = section.settings.feature_item_bg_color
   assign feature_item_radius = section.settings.feature_item_radius
-  assign feature_item_shadow_color = section.settings.feature_item_shadow_color
-  assign feature_item_shadow = section.settings.feature_item_shadow
 
-  assign feature_image_padding_vertical = section.settings.feature_image_padding_vertical
-  assign feature_image_padding_horizontal = section.settings.feature_image_padding_horizontal
   assign feature_image_border_color = section.settings.feature_image_border_color
   assign feature_image_border_thickness = section.settings.feature_image_border_thickness
   assign feature_image_bg_color = section.settings.feature_image_bg_color
@@ -47,7 +45,6 @@
   assign feature_heading_custom = section.settings.feature_heading_custom
   assign feature_heading_font = section.settings.feature_heading_font
   assign feature_heading_height = section.settings.feature_heading_height
-  assign feature_heading_ml = section.settings.feature_heading_ml
 
   assign feature_text_size = section.settings.feature_text_size
   assign feature_text_size_mobile = section.settings.feature_text_size_mobile
@@ -82,23 +79,6 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .feature-wrapper-{{ section.id }} {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: {{ feature_gap_mobile }}px;
-    background-color: {{ feature_bg }}; 
-    border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
-    border-radius: {{ feature_radius }}px;
-    padding: {{ feature_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_padding_horizontal | times: 0.75 | round: 0 }}px;
-  }
-
-  .feature-wrapper-{{ section.id }} .box__content-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
- 
   .feature-{{ section.id }} .box__title {
     margin: 0px;
     font-size: {{ feature_heading_size_mobile }}px;
@@ -106,22 +86,7 @@
     line-height: {{ feature_heading_height }}%;
     text-transform: unset;
     font-weight: bold;
-    position: relative;
-  }
-
-  .feature-{{ section.id }} .box__title::after {
-    content: '';
-    position: absolute;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAB40lEQVR4nO3aP24TQRxH8Te2RLHiSmlCBQJK7kKx1sgn4Bq0QUoHDVdCLtIMTSYKihOvnd3Z+aH3adw4Gun7MrbzByRJkiRJkiRJkiRJkiRJkiRJkiRJkiJKrQ/MOQ+llO+llG/7/f5n6/OPGcfxarvdfgW+5Jz/tDx70/KwnPMA3AAfU0o3u93uXcvzjxnH8Wqz2dyWUt4Dtznnty3Pb3YD6villMejH0opn9e6CXV84GH0lNJv4EOrm9AkwDPjV6tEODZ+1TLC4gFOjF81jfDS+FWrCIsGmDh+1STClPGrFhGavgmfMCz9xnzO+K308hL02CI34dzx/4uXoGrtCL2OD+t/DH3JLBF6Hh8a/yTcOkLv48NKv4qgQYQI48MKAWD5CFHGh5UCwHIRIo0PKwaA+SNEGx9WDgDzRYg4PnQQAF4fIer40EkAuDxCKeUu6vjQUQB4+GvZD+B64pcc7h+Hic//lVL6lHM+nH5qG10FgItuwiS9fedX3QWA+SP0Oj50GgDmi9Dz+NBxAHh9hN7Hh84DwOURIowPAQLA+RGijA9BAsD0CJHGh0AB4HSEaONDsADwfISI40PAAPA0QtTxIWgA+Of/TN8QdPzwcs7DfQhJkiRJkiRJkiRJkiRJkiTBX266nC6Z5woGAAAAAElFTkSuQmCC');
-    width: 20px;
-    height: 20px;
-    background-repeat: repeat;
-    background-size: contain;
-    right: 0;
-  }
-
-  .feature-{{ section.id }} .box.active .box__title::after {
-    transform: rotate(180deg);
+    margin-top: {{section.settings.feature_heading_mt}}px;
   }
   
   .feature-{{ section.id }} .box__description {
@@ -132,46 +97,46 @@
     line-height: {{ feature_text_height }}%;
     text-transform: unset;
     padding-bottom: 10px;
-    display: none;
-  }
-
-  .feature-{{ section.id }} .box.active .box__description {
-    display: block;
   }
 
   .feature-{{ section.id }} .wrapper-box {
-    display: flex;
-    flex: 0 0 100%;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat({{ feature_row_mobile}}, 1fr);
+    background-color: {{ feature_bg }}; 
+    border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
+    border-radius: {{ feature_radius }}px;
+    padding: {{ feature_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_padding_horizontal | times: 0.75 | round: 0 }}px;
     gap: {{ feature_gap_mobile }}px;
   }
   
-  .feature-{{ section.id }} .box__content-wrapper {
-    padding: 10px;
-    padding-left: 0px;
+  .feature-{{ section.id }} .box:not(:nth-child(2)) .box__content-wrapper {
+    padding-right: 10px;
+  }
+
+  .box__content-wrapper {
+    padding: 0 8px;
   }
   
   .feature-{{ section.id }} .box {
     display: flex;
     align-items: center;
-    gap: {{ feature_heading_ml | times: 0.75 | round: 0 }}px;
+    flex-direction: column;
+    gap: 5px;
     position: relative;
+    text-align: center;
     padding: {{ feature_item_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_item_padding_horizontal | times: 0.75 | round: 0 }}px;
     border: {{ feature_item_border_thickness }}px solid {{ feature_item_border_color }};
     border-radius: {{ feature_item_radius }}px;
     background-color: {{ feature_item_bg_color }};
-  }
-
-  .feature-{{ section.id }} .box.active {
-    min-height: 104px;
+    height: 100%;
   }
   
   .feature-{{ section.id }} .box__image {
-    height: 100%;
+    width: 100%;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: {{ feature_image_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_image_padding_horizontal | times: 0.75 | round: 0 }}px;
     border-radius: {{ feature_image_radius }}px;
     border: {{ feature_image_border_thickness }}px solid {{ feature_image_border_color }};
     background-color: {{ feature_image_bg_color }};
@@ -204,19 +169,15 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .feature-wrapper-{{ section.id }} {
-      gap: {{ feature_gap }}px;
-      padding: {{ feature_padding_vertical }}px {{ feature_padding_horizontal }}px;
-    }
-
     .feature-{{ section.id }} .wrapper-box {
-      flex: 0 0 calc(50% - {{ feature_gap | times: 0.5 }}px);
+      grid-template-columns: repeat({{ feature_row }}, 1fr);
+      align-items: center;
+      padding: {{ feature_padding_vertical }}px {{ feature_padding_horizontal }}px;
       gap: {{ feature_gap }}px;
     }
 
     .feature-{{ section.id }} .box {
       padding: {{ feature_item_padding_vertical }}px {{ feature_item_padding_horizontal }}px;
-      gap: {{ feature_heading_ml }}px;
     }
     
     .feature-{{ section.id }} .box__title {
@@ -226,10 +187,6 @@
     .feature-{{ section.id }} .box__description {
       margin-top: {{ feature_text_mt }}px;
       font-size: {{ feature_text_size }}px;
-    }
-
-    .feature-{{ section.id }} .box__image {
-      padding: {{ feature_image_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_image_padding_horizontal | times: 0.75 | round: 0 }}px;
     }
 
     .feature-{{ section.id }} .box__image img,
@@ -270,16 +227,8 @@
 
 {% if feature_shadow %}
   <style>
-    .feature-wrapper-{{ section.id }} {
+    .feature-{{ section.id }} .wrapper-box {
        box-shadow: 4px 4px 20px {{ feature_shadow_color | hex_to_rgba: 0.2 }};
-    }
-  </style>
-{% endif %}
-
-{% if feature_item_shadow %}
-  <style>
-    .box-{{ section.id }} {
-       box-shadow: 4px 4px 20px {{ feature_item_shadow_color | hex_to_rgba: 0.2 }};
     }
   </style>
 {% endif %}
@@ -299,102 +248,65 @@
 
 
 <div class="section-{{ section.id }} feature-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings">
-      <div class="feature-wrapper-{{ section.id }}">
-        {%- assign limit = section.blocks.size | divided_by: 2 | round -%}
-        <div class="wrapper-box">
-            {%- for block in section.blocks limit: limit -%}
-                <div class="box box-{{ section.id }}">
-                    {% unless block.settings.hide_image %}
-                    <div class="box__image">
-                        {%- if block.settings.feature_image != blank -%}
-                          <img src="{{ block.settings.feature_image | image_url }}" alt="feature-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
-                        {%- else -%}
-                         {% case forloop.index %}
-                          {% when 1 %}
-                            {{ svg_example_1 }}
-                          {% when 2 %}
-                            {{ svg_example_2 }}
-                          {% when 3 %}
-                            {{ svg_example_3 }}
-                          {% when 4 %}
-                            {{ svg_example_4 }}
-                          {% else %}
-                            {{ svg_example_1 }}
-                          {% endcase %}
-                        {%- endif -%}
-                    </div>
-                    {% endunless %}
-                    <div class="box__content-wrapper">
-                        <div class="box__title">{{ block.settings.feature_title }}</div>
-                        <div class="box__description">{{ block.settings.feature_text }}</div>
-                    </div>
-                </div>
-            {%- endfor -%}
-        </div>
-        <div class="wrapper-box">
-            {%- for block in section.blocks offset: limit -%}
-                <div class="box box-{{ section.id }}">
-                    {% unless block.settings.hide_image %}
-                    <div class="box__image">
-                        {%- if block.settings.feature_image != blank -%}
-                          <img src="{{ block.settings.feature_image | image_url }}" alt="feature-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
-                        {%- else -%}
-                         {% case forloop.index %}
-                          {% when 1 %}
-                            {{ svg_example_3 }}
-                          {% when 2 %}
-                            {{ svg_example_4 }}
-                          {% else %}
-                            {{ svg_example_1 }}
-                          {% endcase %}
-                        {%- endif -%}
-                    </div>
-                    {% endunless %}
-                    <div class="box__content-wrapper">
-                        <div class="box__title">{{ block.settings.feature_title }}</div>
-                        <div class="box__description">{{ block.settings.feature_text }}</div>
-                    </div>
-                </div>
-            {%- endfor -%}
-        </div>
-    </div>
+    <div class="section-{{ section.id }}-settings ">
+      <div class="wrapper-box">
+          {%- for block in section.blocks -%}
+              <div class="box">
+                  {% unless block.settings.hide_image %}
+                  <div class="box__image">
+                      {%- if block.settings.feature_image != blank -%}
+                        <img src="{{ block.settings.feature_image | image_url }}" alt="feature-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
+                      {%- else -%}
+                       {% case forloop.index %}
+                        {% when 1 %}
+                          {{ svg_example_1 }}
+                        {% when 2 %}
+                          {{ svg_example_2 }}
+                        {% when 3 %}
+                          {{ svg_example_3 }}
+                        {% else %}
+                          {{ svg_example_4 }}
+                        {% endcase %}
+                      {%- endif -%}
+                  </div>
+                  {% endunless %}
+                  <div class="box__content-wrapper">
+                      <div class="box__title">{{ block.settings.feature_title }}</div>
+                      <div class="box__description">{{ block.settings.feature_text }}</div>
+                  </div>
+              </div>
+          {%- endfor -%}
+      </div>
   </div>
 </div>
 
-<script>
-  function initFeature5() {
-   const faqItem = document.querySelectorAll('.box-{{ section.id }}');
-    for (item of faqItem) {
-        item.addEventListener('click', function () {
-            if (this.classList.contains('active')) {
-                this.classList.remove('active');
-            } else {
-                for (el of faqItem) {
-                    el.classList.remove('active');
-                }
-                this.classList.add('active');
-            }
-        })
-    } 
-  }
-  document.addEventListener('DOMContentLoaded', initFeature5);
-  
-  if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initFeature5);
-     document.addEventListener('shopify:section:load', initFeature5);
-  }
-</script>
-
 {% schema %}
 {
-  "name": "SG-Feature Section #5",
+  "name": "SG-Feature #4",
   "tag": "section",
-  "class": "feature-type5",
+  "class": "feature-type4",
   "settings": [
     {
       "type": "header",
       "content": "Feature Settings"
+    },
+    {
+      "type": "range",
+      "id": "feature_row",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Feature per Row",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "feature_row_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Feature per Row - Mobile",
+      "default": 1
     },
     {
       "type": "range",
@@ -507,34 +419,8 @@
       "default": 1
     },
     {
-      "type": "checkbox",
-      "id": "feature_item_shadow",
-      "label": "Use Shadow",
-      "default": false
-    },
-    {
       "type": "header",
       "content": "Feature Image Settings"
-    },
-    {
-      "type": "range",
-      "id": "feature_image_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Feature Image Padding Vertical",
-      "default": 28
-    },
-    {
-      "type": "range",
-      "id": "feature_image_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Feature Image Padding Horizontal",
-      "default": 28
     },
     {
       "type": "range",
@@ -580,7 +466,7 @@
       "step": 2,
       "unit": "px",
       "label": "Feature Heading Size",
-      "default": 18
+      "default": 14
     },
     {
       "type": "range",
@@ -590,7 +476,7 @@
       "step": 2,
       "unit": "px",
       "label": "Feature Heading Size - Mobile",
-      "default": 18
+      "default": 14
     },
     {
       "type": "range",
@@ -604,13 +490,13 @@
     },
     {
       "type": "range",
-      "id": "feature_heading_ml",
+      "id": "feature_heading_mt",
       "min": 0,
       "max": 50,
       "step": 2,
       "unit": "px",
-      "label": "Feature Heading Margin left",
-      "default": 28
+      "label": "Feature Heading Margin top",
+      "default": 4
     },
     {
       "type": "header",
@@ -636,7 +522,7 @@
       "step": 2,
       "unit": "px",
       "label": "Feature Text Size",
-      "default": 14
+      "default": 12
     },
     {
       "type": "range",
@@ -646,7 +532,7 @@
       "step": 2,
       "unit": "px",
       "label": "Feature Text Size - Mobile",
-      "default": 14
+      "default": 12
     },
     {
       "type": "range",
@@ -725,12 +611,6 @@
       "id": "feature_item_border_color",
       "label": "Feature Item Border Color",
       "default": "#E5E5E5"
-    },
-    {
-      "type": "color",
-      "id": "feature_item_shadow_color",
-      "label": "Feature Item Shadow Color",
-      "default": "#000000"
     },
     {
       "type": "color",
@@ -815,7 +695,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 16
+      "default": 36
     },
     {
       "type": "range",
@@ -825,7 +705,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 16
+      "default": 36
     },
     {
       "type": "range",
@@ -918,7 +798,7 @@
   ],
   "presets": [
     {
-      "name": "SG-Feature Section #5",
+      "name": "SG-Feature #4",
       "blocks": [
         {
           "type": "image",
