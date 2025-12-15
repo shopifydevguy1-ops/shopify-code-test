@@ -34,38 +34,47 @@
         "padding_bottom": 0
       }
     },
-    "mockup_WTgTXt": {
+    "mockup_HW3MGR": {
       "type": "mockup",
       "blocks": {
-        "heading_dVXHFK": {
+        "icon_DJQrW3": {
+          "type": "icon",
+          "settings": {
+            "icon_color": "#000000"
+          }
+        },
+        "heading_MAWBBi": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>COUNTDOWN TIMER #4</h2>",
+            "heading": "<p>Countdown timer #5</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
-            "heading_size": 40,
-            "heading_size_mobile": 32,
+            "heading_size": 56,
+            "heading_size_mobile": 40,
             "heading_height": 130,
-            "heading_mt": 0,
-            "heading_mt_mobile": 0,
+            "heading_mt": 16,
+            "heading_mt_mobile": 16,
             "heading_color": "#000000"
           }
         },
-        "text_ezjfCz": {
+        "text_cNURMp": {
           "type": "text",
           "settings": {
-            "text": "<p>Shop your favorite pillow products now with discounts up to 20%!</p>",
+            "text": "<p>Don't miss out while inventory lasts! Take advantage of this <strong>limited offer</strong> before stock runs out.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 16,
             "text_size_mobile": 16,
             "text_height": 150,
-            "text_mt": 8,
-            "text_mt_mobile": 8,
-            "text_color": "#000000"
+            "text_max_width": 60,
+            "text_max_width_mobile": 100,
+            "text_mt": 24,
+            "text_mt_mobile": 24,
+            "text_color": "#000000",
+            "text_active_color": "#334FB4"
           }
         },
-        "timer_a7e4wA": {
+        "timer_dB6BPk": {
           "type": "timer",
           "settings": {
             "year": "2025",
@@ -78,102 +87,65 @@
             "minute": "00",
             "seconds_text": "Seconds",
             "hide_timer_on_completed": false,
-            "timer_mt": 16,
-            "timer_gap": 8,
-            "timer_gap_mobile": 8,
-            "item_width": 70,
-            "item_width_mobile": 70,
-            "item_padding_vertical": 8,
-            "item_padding_horizontal": 8,
-            "item_radius": 12,
+            "timer_mt": 50,
+            "timer_mt_mobile": 32,
+            "timer_gap": 40,
+            "timer_gap_mobile": 16,
+            "timer_border_thickness": 2,
             "number_custom": false,
             "number_font": "josefin_sans_n4",
-            "number_size": 35,
-            "number_size_mobile": 35,
-            "number_height": 100,
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 11,
-            "text_size_mobile": 11,
-            "text_height": 100,
-            "timer_completed_text": "",
+            "number_size": 88,
+            "number_size_mobile": 40,
+            "number_height": 130,
+            "timer_text_custom": false,
+            "timer_text_font": "josefin_sans_n4",
+            "timer_text_size": 16,
+            "timer_text_size_mobile": 12,
+            "timer_text_height": 130,
+            "timer_text_mt": 16,
+            "timer_text_mt_mobile": 0,
+            "completed_text": "<p>Completed</p>",
             "completed_text_custom": false,
             "completed_text_font": "josefin_sans_n4",
-            "completed_text_size": 16,
-            "completed_text_size_mobile": 16,
-            "completed_text_height": 100,
-            "item_bg_color": "#FFFFFF",
+            "completed_text_size": 20,
+            "completed_text_size_mobile": 20,
+            "completed_text_height": 150,
             "number_color": "#000000",
-            "text_color": "#000000",
-            "completed_text_color": "#000000"
-          }
-        },
-        "button_kgcQjD": {
-          "type": "button",
-          "settings": {
-            "button": "Check out the sale",
-            "button_url": "",
-            "button_custom": false,
-            "button_font": "josefin_sans_n4",
-            "button_size": 18,
-            "button_size_mobile": 18,
-            "button_height": 100,
-            "button_width": 300,
-            "button_width_mobile": 300,
-            "button_mt": 28,
-            "button_mt_mobile": 24,
-            "button_padding_vertical": 16,
-            "button_padding_vertical_mobile": 12,
-            "button_padding_horizontal": 32,
-            "button_padding_horizontal_mobile": 32,
-            "button_radius": 100,
-            "button_border_thickness": 0,
-            "button_style": "non_outline",
-            "button_color": "#FFFFFF",
-            "button_hover_color": "#FFFFFF",
-            "button_bg_color": "#FF7400",
-            "button_bg_hover_color": "#f06d00",
-            "button_border_color": "#000000",
-            "button_border_hover_color": "#000000"
+            "timer_text_color": "#000000",
+            "completed_text_color": "#000000",
+            "timer_border_color": "#E6E6E6"
           }
         }
       },
       "block_order": [
-        "heading_dVXHFK",
-        "text_ezjfCz",
-        "timer_a7e4wA",
-        "button_kgcQjD"
+        "icon_DJQrW3",
+        "heading_MAWBBi",
+        "text_cNURMp",
+        "timer_dB6BPk"
       ],
-      "name": "SG-Countdown Timer #4",
+      "name": "SG-Countdown timer #5",
       "settings": {
-        "body_gap": 50,
-        "body_gap_mobile": 0,
-        "image": "shopify://shop_images/countdown-image-with-text.png",
-        "image_position": "right",
-        "image_position_mobile": "top",
-        "image_ratio": "square",
-        "image_ratio_mobile": "square",
-        "hide_shape": false,
-        "content_maxwidth": 550,
-        "content_padding_vertical": 40,
-        "content_padding_vertical_mobile": 20,
-        "content_padding_horizontal": 24,
-        "content_padding_horizontal_mobile": 16,
-        "content_horizontal_align": "start",
-        "content_horizontal_align_mobile": "center",
-        "background_color": "#FFFBEC",
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "icons_gap": 8,
+        "icons_gap_mobile": 8,
+        "icons_mt": 0,
+        "icons_mt_mobile": 0,
+        "icon_width": 32,
+        "icon_width_mobile": 32,
+        "background_color": "#FFFFFF",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "padding_horizontal": 0,
-        "padding_horizontal_mobile": 0,
-        "full_width": true,
-        "content_width": 120,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 1200,
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
@@ -182,6 +154,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_WTgTXt"
+    "mockup_HW3MGR"
   ]
 }
