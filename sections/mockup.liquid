@@ -13,90 +13,29 @@
   assign background_gradient = section.settings.background_gradient
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
-  assign background_image = section.settings.background_image
 
-  assign content_align = section.settings.content_align
-  assign content_align_mobile = section.settings.content_align_mobile
-
-  assign content_horizontal_align = ""
-  if content_align == "center"
-    assign content_horizontal_align = "center"
-  elsif content_align == "right"
-    assign content_horizontal_align = "end"
-  else
-    assign content_horizontal_align = "start"
-  endif
-
-  assign content_horizontal_align_mobile = ""
-  if content_align_mobile == "center"
-    assign content_horizontal_align_mobile = "center"
-  elsif content_align_mobile == "right"
-    assign content_horizontal_align_mobile = "end"
-  else
-    assign content_horizontal_align_mobile = "start"
-  endif
-
-  assign sub_heading = section.settings.sub_heading
-  assign sub_heading_size = section.settings.sub_heading_size
-  assign sub_heading_size_mobile = section.settings.sub_heading_size_mobile
-  assign sub_heading_color = section.settings.sub_heading_color
-  assign sub_heading_custom = section.settings.sub_heading_custom
-  assign sub_heading_font = section.settings.sub_heading_font
-  assign sub_heading_height = section.settings.sub_heading_height
-
-  assign dot_color = section.settings.dot_color
-
-  assign line_width = section.settings.line_width
-  assign line_width_mobile = section.settings.line_width_mobile
-  assign line_thickness = section.settings.line_thickness
-  assign line_color = section.settings.line_color
-  
-  assign heading = section.settings.heading
-  assign heading_size = section.settings.heading_size
-  assign heading_size_mobile = section.settings.heading_size_mobile
-  assign heading_color = section.settings.heading_color
-  assign heading_custom = section.settings.heading_custom
-  assign heading_font = section.settings.heading_font
-  assign heading_height = section.settings.heading_height
-  assign heading_mt = section.settings.heading_mt
-  assign heading_mt_mobile = section.settings.heading_mt_mobile
-
-  assign toggles_gap = section.settings.toggles_gap  
-  assign toggles_gap_mobile = section.settings.toggles_gap_mobile
-  assign toggles_mt = section.settings.toggles_mt 
-  assign toggles_mt_mobile = section.settings.toggles_mt_mobile 
-
-  assign toggle_padding_horizontal = section.settings.toggle_padding_horizontal
-  assign toggle_padding_horizontal_mobile = section.settings.toggle_padding_horizontal_mobile
-  assign toggle_padding_vertical = section.settings.toggle_padding_vertical
-  assign toggle_padding_vertical_mobile = section.settings.toggle_padding_vertical_mobile
-  assign toggle_bg_color = section.settings.toggle_bg_color
-  assign toggle_radius = section.settings.toggle_radius
-  assign toggle_opacity = section.settings.toggle_opacity 
-  assign toggle_custom = section.settings.toggle_custom
-  assign toggle_font = section.settings.toggle_font
-  assign toggle_size = section.settings.toggle_size
-  assign toggle_size_mobile = section.settings.toggle_size_mobile
-  assign toggle_height = section.settings.toggle_height
-  assign toggle_color = section.settings.toggle_color
-  assign toggle_active_color = section.settings.toggle_active_color
-
-  assign tabs_mt = section.settings.tabs_mt
-  assign tabs_mt_mobile = section.settings.tabs_mt_mobile
+  assign layout_gap_mobile = section.settings.layout_gap_mobile
+  assign layout_gap = section.settings.layout_gap
+  assign layout = section.settings.layout
+  assign layout_mobile = section.settings.layout_mobile
 
   assign item_padding_vertical_mobile = section.settings.item_padding_vertical_mobile
   assign item_padding_vertical = section.settings.item_padding_vertical
   assign item_padding_horizontal_mobile = section.settings.item_padding_horizontal_mobile
   assign item_padding_horizontal = section.settings.item_padding_horizontal
-  assign item_radius = section.settings.item_radius
-  assign item_bg_color = section.settings.item_bg_color
+  assign item_border_thickness = section.settings.item_border_thickness
+  assign item_border_color = section.settings.item_border_color
   assign item_mt = section.settings.item_mt
   assign item_mt_mobile = section.settings.item_mt_mobile
+
+  assign open_first  = section.settings.open_first
 
   assign question_size = section.settings.question_size
   assign question_size_mobile = section.settings.question_size_mobile
   assign question_color = section.settings.question_color
+  assign question_active_color = section.settings.question_active_color
   assign question_custom = section.settings.question_custom
   assign question_font = section.settings.question_font
   assign question_height = section.settings.question_height
@@ -112,21 +51,15 @@
   assign icon_color = section.settings.icon_color
   assign icon_size = section.settings.icon_size
   assign icon_size_mobile = section.settings.icon_size_mobile
-  assign icon_border_thickness = section.settings.icon_border_thickness
-  assign icon_border_color = section.settings.icon_border_color
-  assign icon_padding_horizontal = section.settings.icon_padding_horizontal
-  assign icon_padding_horizontal_mobile = section.settings.icon_padding_horizontal_mobile
-  assign icon_padding_vertical = section.settings.icon_padding_vertical
-  assign icon_padding_vertical_mobile = section.settings.icon_padding_vertical_mobile
-  assign icon_radius = section.settings.icon_radius
-  assign icon_bg = section.settings.icon_bg
-  assign icon_active_bg = section.settings.icon_active_bg
+
+  assign media_border_thickness = section.settings.media_border_thickness
+  assign media_border_color = section.settings.media_border_color
+  assign media_radius = section.settings.media_radius
+  assign media_ratio = section.settings.media_ratio
+  assign media_ratio_mobile = section.settings.media_ratio_mobile
 -%}
 
 {%- style -%}
-  {{  heading_font | font_face: font_display: 'swap' }}
-  {{  sub_heading_font | font_face: font_display: 'swap' }}
-  {{  toggle_font | font_face: font_display: 'swap' }}
   {{  question_font | font_face: font_display: 'swap' }}
   {{  answer_font | font_face: font_display: 'swap' }}
 
@@ -148,138 +81,30 @@
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
+
+  .faq-body-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ layout_gap_mobile }}px;
+  }
+
+  .faq-items-{{ section.id }} {
+    grid-area: faq;
+  }
   
-  .faq-top-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  .faq-subheading-{{ section.id }},
-  .faq-heading-{{ section.id }} {
-    text-align: {{ content_align_mobile }};
-  }
-
-  .faq-subheading-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    max-width: fit-content;
-  }
-
-  .faq-subheading-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ sub_heading_size_mobile }}px;  
-    color: {{ sub_heading_color }};
-    line-height: {{ sub_heading_height }}%;
-    word-break: break-word;
-    text-transform: unset;
-  }
-
-  .faq-subheading-dot-{{ section.id }} {
-    display: block !important;
-    width: 5px;
-    height: 5px;
-    border-radius: 100%;
-    background-color: {{ dot_color }};
-  }
-
-  .faq-subheading-line-{{ section.id }} {
-    display: block !important;
-    max-width: {{ line_width_mobile }}px;
+  .faq-item-{{ section.id }} {
+    padding: {{ item_padding_vertical_mobile }}px {{ item_padding_horizontal_mobile }}px;
     width: 100%;
-    height: {{ line_thickness }}px;
-    background-color: {{ line_color }};
-  }
-
-  .faq-heading-{{ section.id }} {
-    margin-top: {{ heading_mt_mobile }}px;
-  }
- 
-  .faq-heading-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ heading_size_mobile }}px; 
-    color: {{ heading_color }};
-    line-height: {{ heading_height }}%;
-    word-break: break-word;
-    text-transform: unset;
-    font-weight: 500;
-  }
-
-  .faq-toggles-{{ section.id }} {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: {{ content_horizontal_align_mobile }};
-    gap: {{ toggles_gap_mobile }}px;
-    margin-top: {{ toggles_mt_mobile }}px;
-  }
-
-  .faq-toggle-{{ section.id }} {
-    padding: {{ toggle_padding_vertical_mobile }}px {{ toggle_padding_horizontal_mobile }}px;
-    border-radius: {{ toggle_radius }}px;
-    background-color: {{ toggle_bg_color | hex_to_rgba: toggle_opacity }};
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    margin: 0px;
-    font-size: {{ toggle_size_mobile }}px; 
-    color: {{ toggle_color }};
-    line-height: {{ toggle_height }}%;
-    word-break: break-word;
-    text-transform: unset;
-    cursor: pointer;
+    position: relative;
+    border-top: {{ item_border_thickness }}px solid {{ item_border_color }};
     transition: all 0.25s ease 0s;
-  }
-
-  .faq-toggle-{{ section.id }}:hover {
-    color: {{ toggle_active_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .faq-toggle-{{ section.id }}.active {
-    transition: all 0.25s ease 0s;
-    background-color: {{ toggle_bg_color }};
-    color: {{ toggle_active_color }};
-  }
-
-  .faq-tabs-{{ section.id }} {
-    margin-top: {{ tabs_mt_mobile }}px;
-  }
-
-  .faq-tab-{{ section.id }} {
-    display: none;
-  }
-
-  .faq-tab-{{ section.id }}.active {
-    display: block;
   }
 
   .faq-item-{{ section.id }}:not(:first-child) {
     margin-top: {{ item_mt_mobile }}px;
   }
 
-  .faq-item-{{ section.id }} {
-    padding: {{ item_padding_vertical_mobile }}px {{ item_padding_horizontal_mobile }}px;
-    border-radius: {{ item_radius }}px;
-    background-color: {{ item_bg_color | hex_to_rgba: 0.5 }};
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    width: 100%;
-    position: relative;
-    transition: all 0.25s ease 0s;
-  }
-
-  .faq-item-{{ section.id }}:hover {
-    transition: all 0.25s ease 0s;
-    background-color: {{ item_bg_color }};
-  }
-
-  .faq-item-{{ section.id }}.active {
-    transition: all 0.25s ease 0s;
-    background-color: {{ item_bg_color }};
-  }
-
-  .faq-tab-toggle-{{ section.id }} {
+  .faq-toggle-{{ section.id }} {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -287,27 +112,32 @@
     gap: 12px;
   }
 
+  .faq-question-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ question_size_mobile }}px;
+    color: {{ question_color }};
+    line-height: {{ question_height }}%;
+    text-transform: unset;
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-toggle-{{ section.id }}.active .faq-question-{{ section.id }} {
+    color: {{ question_active_color }};
+    transition: all 0.25s ease 0s;
+  }
+
   .faq-icon-{{ section.id }} {
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 0 0 {{ icon_size_mobile }}px;
-    padding: {{ icon_padding_vertical_mobile }}px {{ icon_padding_horizontal_mobile }}px;
-    border-radius: {{ icon_radius }}px;
-    background-color: {{ icon_bg }};
     height: {{ icon_size_mobile }}px;
-    border: {{ icon_border_thickness }}px solid {{ icon_border_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .faq-item-{{ section.id }}.active .faq-icon-{{ section.id }} {
-    background-color: {{ icon_active_bg }};
     transition: all 0.25s ease 0s;
   }
 
   .faq-icon-{{ section.id }} svg {
-    width: {{ icon_size_mobile }}px;
-    height: {{ icon_size_mobile }}px;
+    width: 100%;
+    height: 100%;
     transition: all 0.25s ease 0s;
   }
 
@@ -318,15 +148,6 @@
   .faq-icon-{{ section.id }}.active svg {
     transform: rotate(180deg);
     transition: all 0.25s ease 0s;
-  }
-
-  .faq-question-{{ section.id }} {
-    margin: 0px;
-    font-size: {{ question_size_mobile }}px;
-    color: {{ question_color }};
-    line-height: {{ question_height }}%;
-    text-transform: unset;
-    font-weight: 700;
   }
 
   .faq-answer-{{ section.id }} {
@@ -341,14 +162,6 @@
     line-height: {{ answer_height }}%;
     text-transform: unset;
   }
-
-  .faq-answer-{{ section.id }} p {
-    min-height: 10px;
-  }
-
-  .faq-answer-{{ section.id }} p:not(:first-child ) {
-    margin-top: 10px;
-  } 
 
   .faq-height-cal-{{ section.id }} {
     visibility: hidden;
@@ -369,14 +182,36 @@
     text-transform: unset;
   }
 
-  .faq-height-cal-{{ section.id }} p {
-    min-height: 10px;
+  .faq-medias-{{ section.id }} {
+    grid-area: media;
   }
 
-  .faq-height-cal-{{ section.id }} p:not(:first-child ) {
-    margin-top: 10px;
+  .faq-media-{{ section.id }} {
+    display: none;
+    border: {{ media_border_thickness }}px solid {{ media_border_color }};
+    border-radius: {{ media_radius }}px;
+    overflow: hidden;
+  }
+
+  .faq-media-{{ section.id }}.active {
+    display: block;
   }
   
+  .faq-media-{{ section.id }} img,
+  .faq-media-{{ section.id }} svg,
+  .faq-media-{{ section.id }} video,
+  .faq-media-{{ section.id }} iframe {    
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+  }
+
+  .faq-media-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
   @media(min-width: 1024px) {
 
     .section-{{ section.id }} {
@@ -395,67 +230,32 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .faq-subheading-line-{{ section.id }} {
-      max-width: {{ line_width }}px;
-    }
-
-    .faq-subheading-{{ section.id }},
-    .faq-heading-{{ section.id }} {
-      text-align: {{ content_align }};
-    }
-
-    .faq-subheading-{{ section.id }} * {  
-      font-size: {{ sub_heading_size }}px;  
-    }
-
-    .faq-heading-{{ section.id }} {
-      margin-top: {{ heading_mt }}px;
-    }
-
-    .faq-heading-{{ section.id }} * {   
-      font-size: {{ heading_size }}px; 
-    }
-
-    .faq-toggles-{{ section.id }} {
-      gap: {{ toggles_gap }}px;
-      justify-content: {{ content_horizontal_align }};
-      margin-top: {{ toggles_mt }}px;
-    }
-
-    .faq-toggle-{{ section.id }} {
-      padding: {{ toggle_padding_vertical }}px {{ toggle_padding_horizontal }}px;
-      font-size: {{ toggle_size }}px; 
-    }
-
-    .faq-tabs-{{ section.id }} {
-      margin-top: {{ tabs_mt }}px;
+    
+    .faq-body-{{ section.id }} {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: {{ layout_gap }}px;
     }
 
     .faq-item-{{ section.id }} {
       padding: {{ item_padding_vertical }}px {{ item_padding_horizontal }}px;
     }
-    
+
     .faq-item-{{ section.id }}:not(:first-child) {
       margin-top: {{ item_mt }}px;
     }
-
+    
     .faq-question-{{ section.id }} {
       font-size: {{ question_size }}px;
     }
-
-    .faq-answer-{{ section.id }} * {
-      font-size: {{ answer_size }}px;
-    }
-
+    
     .faq-icon-{{ section.id }} {
-      padding: {{ icon_padding_vertical }}px {{ icon_padding_horizontal }}px;
       flex: 0 0 {{ icon_size }}px;
       height: {{ icon_size }}px;
     }
-  
-    .faq-icon-{{ section.id }} svg {
-      width: {{ icon_size }}px;
-      height: {{ icon_size }}px;
+    
+    .faq-answer-{{ section.id }} * {
+      font-size: {{ answer_size }}px;
     }
 
     .faq-height-cal-{{ section.id }} {
@@ -504,36 +304,6 @@
   </style>
 {% endif %}
 
-{% if heading_custom %}
-  <style>
-    .faq-heading-{{ section.id }} * {
-      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-      font-weight: {{ heading_font.weight }};
-      font-style: {{ heading_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if sub_heading_custom %}
-  <style>
-    .faq-subheading-{{ section.id }} * {
-      font-family: {{ sub_heading_font.family }}, {{ sub_heading_font.fallback_families }};
-      font-weight: {{ sub_heading_font.weight }};
-      font-style: {{ sub_heading_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if toggle_custom %}
-  <style>
-    .faq-toggle-{{ section.id }} {
-      font-family: {{ toggle_font.family }}, {{ toggle_font.fallback_families }};
-      font-weight: {{ toggle_font.weight }};
-      font-style: {{ toggle_font.style }};
-    }
-  </style>
-{% endif %}
-
 {% if question_custom %}
   <style>
     .faq-question-{{ section.id }} {
@@ -551,16 +321,110 @@
       font-weight: {{ answer_font.weight }};
       font-style: {{ answer_font.style }};
     }
+
+    .faq-height-cal-{{ section.id }} * {
+      font-family: {{ answer_font.family }}, {{ answer_font.fallback_families }};
+      font-weight: {{ answer_font.weight }};
+      font-style: {{ answer_font.style }};
+    }
   </style>
 {% endif %}
 
-{% if background_image != blank %}
-  <style>    
-    .section-{{ section.id }} {
-      background-image: url('{{ background_image | image_url }}');
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
+
+{% if layout_mobile == 'media_faq'%}
+  <style>
+    .faq-body-{{ section.id }} {
+      grid-template-areas: 
+        "media"
+        "faq";     
+    }
+  </style>
+{% elsif layout_mobile == 'faq_media' %}
+  <style>
+    .faq-body-{{ section.id }} {
+      grid-template-areas: 
+        "faq"
+        "media";     
+    }
+  </style>
+{% endif %}
+
+{% if layout == 'media_faq'%}
+  <style>
+    @media(min-width: 1024px) {
+      .faq-body-{{ section.id }} {
+        grid-template-areas: "media faq";    
+      }
+    }    
+  </style>
+{% elsif layout == 'faq_media' %}
+  <style>
+    @media(min-width: 1024px) {
+      .faq-body-{{ section.id }} {
+        grid-template-areas: "faq media";       
+      }
+    }   
+  </style>
+{% endif %}
+
+
+{% if media_ratio_mobile == "portrait" %}
+  <style>
+    .faq-media-{{ section.id }} {
+      aspect-ratio: 9.6/13;
+    }
+  </style>
+{% elsif media_ratio_mobile == "landscape" %}
+  <style>
+  .faq-media-{{ section.id }} {
+    aspect-ratio: 12/8;
+  }
+  </style>
+{% elsif media_ratio_mobile == "square" %}
+  <style>
+    .faq-media-{{ section.id }} {
+      aspect-ratio: 12/12;
+    }
+  </style>
+{% else %}
+  <style>
+    .faq-media-{{ section.id }} {
+      aspect-ratio: auto;
+    }
+  </style>
+{% endif %}
+
+{% if media_ratio == "portrait" %}
+  <style>
+    @media(min-width: 1024px) {
+      .faq-media-{{ section.id }} {
+        aspect-ratio: 9.6/13;
+      }
+    }
+    
+  </style>
+{% elsif media_ratio == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .faq-media-{{ section.id }} {
+        aspect-ratio: 12/8;
+      }
+    }  
+  </style>
+{% elsif media_ratio == "square" %}
+  <style>
+    @media(min-width: 1024px) {
+      .faq-media-{{ section.id }} {
+        aspect-ratio: 12/12;
+      }
+    }    
+  </style>
+{% else %}
+  <style>
+     @media(min-width: 1024px) {
+      .faq-media-{{ section.id }} {
+        aspect-ratio: auto;
+      }
     }
   </style>
 {% endif %}
@@ -568,105 +432,81 @@
 <div class="section-{{ section.id }} faq-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
       <div class="faq-body-{{ section.id }}">
-        {% if sub_heading != blank %}
-          <div class="faq-top-{{ section.id }}">
-            <div class="faq-subheading-{{ section.id }}">
-              <div class="faq-subheading-dot-{{ section.id }}"></div>
-              {{ sub_heading }}
-            </div>
-            <div class="faq-subheading-line-{{ section.id }}"></div>
-          </div>          
-        {% endif %}     
-        {% if heading != blank %}
-          <div class="faq-heading-{{ section.id }}">{{ heading }}</div>
-        {% endif %}
-        <div class="faq-toggles-{{ section.id }}">
+        <div class="faq-items-{{ section.id }}">
           {% for block in section.blocks %}
-            {% if block.type == 'tab' %}
-              <p class="faq-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">{{ block.settings.tab }}</p>
-            {% endif %}          
-          {% endfor %}
-        </div> 
-        <div class="faq-tabs-{{ section.id }}">
-          {% assign inside_item = false %} 
-          {% for block in section.blocks %}
-            {% if block.type == 'tab' %}
-              {% if inside_item %}
+            <div class="faq-item-{{ section.id }}" id="{{ block.id }}">        
+              <div class="faq-toggle-{{ section.id }}">
+                <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+                <div class="faq-icon-{{ section.id }}">
+                  <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.396 0.474972C13.3123 0.477473 13.2323 0.512472 13.1735 0.573722L6.99977 6.74747L0.826021 0.573722C0.766021 0.511222 0.683521 0.477473 0.597271 0.476222C0.466021 0.477473 0.349771 0.556222 0.299771 0.676222C0.251021 0.797473 0.279771 0.934972 0.373521 1.02622L6.77352 7.42622C6.89852 7.55122 7.10102 7.55122 7.22602 7.42622L13.626 1.02622C13.721 0.934972 13.7498 0.793723 13.6998 0.672473C13.6485 0.551222 13.5285 0.472473 13.396 0.474972Z" fill="#93908A"></path>
+                  </svg>                 
                 </div>
-              {% endif %}  
-              <div class="faq-tab-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">     
-                {% assign inside_item = true %}                
-            {% elsif block.type == 'faq_item' %}
-              <div class="faq-item-{{ section.id }}">        
-                  <div class="faq-tab-toggle-{{ section.id }}">
-                    <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
-                    <div class="faq-icon-{{ section.id }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8.00045 8.78094L11.3003 5.48112L12.2431 6.42393L8.00045 10.6666L3.75781 6.42393L4.70063 5.48112L8.00045 8.78094Z" fill="currentColor"></path>
-                      </svg>                   
-                    </div>
-                  </div>
-                  <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
-                      {{ block.settings.answer }}
-                    </div>
-                  <div class="faq-height-cal-{{ section.id }}">
-                    {{ block.settings.answer }}
-                  </div>                      
-                </div>   
-            {% endif %}              
+              </div>
+              <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
+                  {{ block.settings.answer }}
+                </div>
+              <div class="faq-height-cal-{{ section.id }}">
+                {{ block.settings.answer }}
+              </div>                      
+            </div>  
           {% endfor %}
-          {% if inside_item %}
+        </div>
+        <div class="faq-medias-{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="faq-media-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+              {% if block.settings.media_type == 'image' %}
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}">
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag }}
+                {% endif %}
+              {% else %}
+                  {% assign video_id = block.settings.video.id | default: block.settings.video_url.id %}
+                  {% assign loop = '&loop=1&playlist=' | append: video_id %}
+                  {%- if block.settings.video == null and block.settings.video_url != null -%}
+                  {%- if block.settings.video_url.type == 'youtube' -%}
+                  <iframe
+                    src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0{{ loop }}"
+                    data-src1="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=0&controls=0&showinfo=0{{ loop }}"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="lazy"
+                  ></iframe>
+                  {%- else -%}
+                  <iframe
+                    src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0{{ loop }}"    
+                    data-src1="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=0&controls=0&showinfo=0{{ loop }}"               
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="lazy"
+                  ></iframe>
+                  {% endif %}
+                  {% else %}
+                    <video src="{{ block.settings.video.sources[1].url }}" {% if block.settings.controls %}controls{% endif %} muted autoplay playsinline preload="none" loop></video>
+                  {% endif %}
+              {% endif %}
             </div>
-          {% endif %}
-        </div>       
+          {% endfor %}
+        </div>
       </div>
     </div>
 </div>
 
 <script>
-  function initFaq13() {
-    const toggles = document.querySelectorAll('.faq-toggle-{{ section.id }}');
-    const tabs = document.querySelectorAll('.faq-tab-{{ section.id }}');
-    const items = document.querySelectorAll('.faq-item-{{ section.id }}');
-
-    if(toggles) {
-      toggles.forEach(toggle => {        
-        toggle.addEventListener('click', () => {
-          toggles.forEach(e => {
-            e.classList.remove('active');
-          })
-          tabs.forEach(tab => {
-            toggle.classList.add('active');
-            if(toggle.id == tab.getAttribute('data-id')) {
-              tab.classList.add('active');
-            } else {
-              tab.classList.remove('active');
-            }
-          })
-        })
-      })
-    }
-
+  function initFaq14() {
     const answerPaddingTop = {{ answer_padding_top }};
     const answerPaddingBottom = 0;
 
-    const buttons = document.querySelectorAll(
-      '.faq-tab-toggle-{{ section.id }}'
-    );
-    const answers = document.querySelectorAll(
-      '.faq-answer-{{ section.id }}'
-    );
-    const answersHeightCalElements = document.querySelectorAll(
-      '.faq-height-cal-{{ section.id }}'
-    );
-    const faqIcons = document.querySelectorAll(
-      '.faq-icon-{{ section.id }}'
-    ); 
+    const buttons = document.querySelectorAll('.faq-toggle-{{ section.id }}');
+    const answers = document.querySelectorAll('.faq-answer-{{ section.id }}');
+    const answersHeightCalElements = document.querySelectorAll('.faq-height-cal-{{ section.id }}');
+    const faqIcons = document.querySelectorAll('.faq-icon-{{ section.id }}');
+    const mediaItems = document.querySelectorAll('.faq-media-{{ section.id }}');
 
     let activeIndex = -1;
 
     function openAnswer(index) {
-      console.log(answersHeightCalElements[index]);
       const height = answersHeightCalElements[index].offsetHeight;
 
       answers[index].style.display = 'block';
@@ -676,8 +516,8 @@
         answers[index].style.height = `${height}px`;
       });
 
-      items[index].classList.add('active');
       faqIcons[index].classList.add('active');
+      buttons[index].classList.add('active');
     }
 
     function closeAnswer(index) {
@@ -689,8 +529,8 @@
         answers[index].style.display = 'none';
       }, 300);
 
-      items[index].classList.remove('active');
       faqIcons[index].classList.remove('active');
+      buttons[index].classList.remove('active');
     }
 
     function toggleAnswer(index) {
@@ -703,7 +543,7 @@
       }
     }
 
-    function closeAllAnswerBut(index) {
+    function closeAllAnswersBut(index) {
       answers.forEach((answer, i) => {
         if (i !== index) {
           closeAnswer(i);
@@ -711,10 +551,43 @@
       });
     }
 
+    function stopAllVideos() {
+      mediaItems.forEach(media => {
+        const video = media.querySelector('video');
+        const iframe = media.querySelector('iframe');
+        media.classList.remove('active');
+
+        if (video) {
+          video.pause();
+        } else if (iframe) {
+          const iframeSrc = iframe.dataset.src1;
+          iframe.src = iframeSrc; // Перезагружаем iframe
+        }
+      });
+    }
+
+    function playActiveVideo(index) {
+      const activeMedia = mediaItems[index];
+      activeMedia.classList.add('active');
+
+      const video = activeMedia.querySelector('video');
+      const iframe = activeMedia.querySelector('iframe');
+
+      if (video) {
+        video.play();
+      } else if (iframe) {
+        const iframeSrc = iframe.src.replace('autoplay=0', 'autoplay=1');
+        iframe.src = iframeSrc;
+      }
+    }
+
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
         toggleAnswer(index);
-        closeAllAnswerBut(index);
+        closeAllAnswersBut(index);
+
+        stopAllVideos();
+        playActiveVideo(index);
       });
     });
 
@@ -727,395 +600,98 @@
           answers[activeIndex].style.height = `${height}px`;
         }
       }, 250);
-    });    
+    });
+
+    {% if open_first %}
+      openAnswer(0);
+      activeIndex = 0;
+      playActiveVideo(0);
+    {% endif %}
   }
 
-  document.addEventListener('DOMContentLoaded', initFaq13);
+  document.addEventListener('DOMContentLoaded', initFaq14);
 
   if (Shopify.designMode) {
-    document.addEventListener('shopify:section:unload', initFaq13);
-    document.addEventListener('shopify:section:load', initFaq13);
+    document.addEventListener('shopify:section:unload', initFaq14);
+    document.addEventListener('shopify:section:load', initFaq14);
   }
 </script>
 
 
 
+
 {% schema %}
   {
-    "name": "SG- FAQ #13",
+    "name": "SG- FAQ #14",
     "settings": [
       {
         "type": "header",
-        "content": "Content settings"
+        "content": "Layout settings"
       },
       {
-        "type": "text_alignment",
-        "id": "content_align",
-        "label": "Alignment"
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "faq_media",
+        "options": [
+          {
+            "label": "Media - FAQ",
+            "value": "media_faq"
+          },
+          {
+            "label": "FAQ - media",
+            "value": "faq_media"
+          }
+        ]
       },
       {
-        "type": "text_alignment",
-        "id": "content_align_mobile",
-        "label": "Alignment - mobile"
-      },     
-      {
-        "type": "header",
-        "content": "Subheading settings"
-      },
-      {
-        "type": "richtext",
-        "id": "sub_heading",
-        "label": "Subheading",
-        "default": "<p>FAQ</p>"
-      },
-      {
-        "type": "checkbox",
-        "id": "sub_heading_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "sub_heading_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4"
-      },
-      {
-        "type": "range",
-        "id": "sub_heading_size",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size",
-        "default": 14
+        "type": "select",
+        "id": "layout_mobile",
+        "label": "Layout - mobile",
+        "default": "media_faq",
+        "options": [
+          {
+            "label": "Media - FAQ",
+            "value": "media_faq"
+          },
+          {
+            "label": "FAQ - media",
+            "value": "faq_media"
+          }
+        ]
       },
       {
         "type": "range",
-        "id": "sub_heading_size_mobile",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "sub_heading_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 130
-      },
-      {
-        "type": "header",
-        "content": "Line settings"
-      },
-      {
-        "type": "range",
-        "id": "line_width",
-        "min": 120,
-        "max": 500,
-        "step": 10,
-        "unit": "px",
-        "label": "Max width",
-        "default": 500
-      },
-      {
-        "type": "range",
-        "id": "line_width_mobile",
-        "min": 120,
-        "max": 500,
-        "step": 10,
-        "unit": "px",
-        "label": "Max width - mobile",
-        "default": 250
-      },
-      {
-        "type": "range",
-        "id": "line_thickness",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "Thickness",
-        "default": 1
-      },
-      {
-        "type": "header",
-        "content": "Heading settings"
-      },
-      {
-        "type": "richtext",
-        "id": "heading",
-        "label": "Heading",
-        "default": "<h2>Have questions in mind? <br> See our FAQs below</h2>"
-      },
-      {
-        "type": "checkbox",
-        "id": "heading_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "heading_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4"
-      },
-      {
-        "type": "range",
-        "id": "heading_size",
-        "min": 0,
-        "max": 72,
-        "step": 2,
-        "unit": "px",
-        "label": "Font size",
-        "default": 24
-      },
-      {
-        "type": "range",
-        "id": "heading_size_mobile",
-        "min": 0,
-        "max": 72,
-        "step": 2,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "heading_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 150
-      },
-      {
-        "type": "range",
-        "id": "heading_mt",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 24
-      },
-      {
-        "type": "range",
-        "id": "heading_mt_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 24
-      },
-      {
-        "type": "header",
-        "content": "Toggles settings"
-      },
-      {
-        "type": "range",
-        "id": "toggles_gap",
+        "id": "layout_gap",
         "min": 0,
         "max": 100,
         "step": 2,
         "unit": "px",
         "label": "Gap",
-        "default": 8
+        "default": 70
       },
       {
         "type": "range",
-        "id": "toggles_gap_mobile",
+        "id": "layout_gap_mobile",
         "min": 0,
         "max": 100,
         "step": 2,
         "unit": "px",
         "label": "Gap - mobile",
-        "default": 8
-      },
-      {
-        "type": "range",
-        "id": "toggles_mt",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 32
-      },
-      {
-        "type": "range",
-        "id": "toggles_mt_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 32
+        "default": 24
       },
       {
         "type": "header",
-        "content": "Toggle settings"
+        "content": "FAQ items settings"
       },
-      {
-        "type": "range",
-        "id": "toggle_padding_horizontal",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "toggle_padding_horizontal_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "toggle_padding_vertical",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 6
-      },
-      {
-        "type": "range",
-        "id": "toggle_padding_vertical_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 6
-      },     
-      {
-        "type": "range",
-        "id": "toggle_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 100
-      },
-      {
-        "type": "range",
-        "id": "toggle_opacity",
-        "min": 0,
-        "max": 1,
-        "step": 0.1,
-        "label": "Opacity",
-        "default": 0.5
-      },  
-      {
-        "type": "header",
-        "content": "Toggle text settings"
-      },    
       {
         "type": "checkbox",
-        "id": "toggle_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "toggle_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4"
-      },     
-      {
-        "type": "range",
-        "id": "toggle_size",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "toggle_size_mobile",
-        "min": 0,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "toggle_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 130
+        "id": "open_first",
+        "label": "Open the first item by default"
       },
       {
         "type": "header",
-        "content": "Collapsible tabs settings"
-      },
-      {
-        "type": "range",
-        "id": "tabs_mt",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 24
-      },
-      {
-        "type": "range",
-        "id": "tabs_mt_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 24
-      },
-      {
-        "type": "range",
-        "id": "item_mt",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Gap",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "item_mt_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Gap - mobile",
-        "default": 12
-      },
-      {
-        "type": "header",
-        "content": "Collapsible tab settings"
+        "content": "FAQ item settings"
       },
       {
         "type": "range",
@@ -1125,7 +701,7 @@
         "step": 2,
         "unit": "px",
         "label": "Padding horizontal",
-        "default": 24
+        "default": 0
       },
       {
         "type": "range",
@@ -1135,7 +711,7 @@
         "step": 2,
         "unit": "px",
         "label": "Padding horizontal - mobile",
-        "default": 24
+        "default": 0
       },
       {
         "type": "range",
@@ -1145,7 +721,7 @@
         "step": 2,
         "unit": "px",
         "label": "Padding vertical",
-        "default": 24
+        "default": 16
       },
       {
         "type": "range",
@@ -1155,17 +731,37 @@
         "step": 2,
         "unit": "px",
         "label": "Padding vertical - mobile",
-        "default": 24
+        "default": 16
       },
       {
         "type": "range",
-        "id": "item_radius",
+        "id": "item_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "item_mt",
         "min": 0,
         "max": 50,
         "step": 2,
         "unit": "px",
-        "label": "Roundness",
-        "default": 16
+        "label": "Margin top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "item_mt_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 0
       },
       {
         "type": "header",
@@ -1191,7 +787,7 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 14
+        "default": 12
       },
       {
         "type": "range",
@@ -1201,7 +797,7 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 14
+        "default": 12
       },
       {
         "type": "range",
@@ -1211,12 +807,12 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 150
+        "default": 130
       },
       {
         "type": "header",
-        "content": "Arrow settings"
-      },
+        "content": "Icon settings"
+      },    
       {
         "type": "range",
         "id": "icon_size",
@@ -1225,7 +821,7 @@
         "step": 1,
         "unit": "px",
         "label": "Size",
-        "default": 16
+        "default": 14
       },
       {
         "type": "range",
@@ -1235,57 +831,7 @@
         "step": 1,
         "unit": "px",
         "label": "Size - mobile",
-        "default": 16
-      },
-      {
-        "type": "range",
-        "id": "icon_padding_horizontal",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "icon_padding_horizontal_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "icon_padding_vertical",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "icon_padding_vertical_mobile",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "icon_radius",
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 50
+        "default": 14
       },
       {
         "type": "header",
@@ -1341,62 +887,90 @@
         "step": 2,
         "unit": "px",
         "label": "Padding top",
-        "default": 30,
+        "default": 20,
         "info": "Save to see updates"
       },
       {
         "type": "header",
-        "content": "Content colors"
+        "content": "Media settings"
       },
       {
-        "type": "color",
-        "label": "Heading",
-        "id": "heading_color",
-        "default": "#000000"
+        "type": "range",
+        "id": "media_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
       },
       {
-        "type": "color",
-        "label": "Subheading",
-        "id": "sub_heading_color",
-        "default": "#000000"
-      },      
-      {
-        "type": "color",
-        "label": "Dot",
-        "id": "dot_color",
-        "default": "#FFAF00"
+        "type": "range",
+        "id": "media_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 0
       },
       {
-        "type": "color",
-        "label": "Line",
-        "id": "line_color",
-        "default": "#D9D9D9"
+        "type": "select",
+        "id": "media_ratio",
+        "label": "Aspect ratio",
+        "default": "portrait",
+        "options": [
+          {
+            "label": "Portrait",
+            "value": "portrait"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          },
+          {
+            "label": "Landscape",
+            "value": "landscape"
+          },
+          {
+            "label": "Original",
+            "value": "original"
+          }
+        ]
       },
+      {
+        "type": "select",
+        "id": "media_ratio_mobile",
+        "label": "Aspect ratio - mobile",
+        "default": "portrait",
+        "options": [
+          {
+            "label": "Portrait",
+            "value": "portrait"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          },
+          {
+            "label": "Landscape",
+            "value": "landscape"
+          },
+          {
+            "label": "Original",
+            "value": "original"
+          }
+        ]
+      }, 
       {
         "type": "header",
-        "content": "Toggle colors"
+        "content": "FAQ item colors"
       },
       {
         "type": "color",
-        "label": "Text",
-        "id": "toggle_color",
-        "default": "#999999"
-      },
-      {
-        "type": "color",
-        "label": "Active text",
-        "id": "toggle_active_color",
-        "default": "#000000"
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "toggle_bg_color",
-        "default": "#EFEFEF"
-      },
-      {
-        "type": "header",
-        "content": "Collapsible tab colors"
+        "label": "Border",
+        "id": "item_border_color",
+        "default": "#CECDCA"
       },
       {
         "type": "color",
@@ -1406,38 +980,36 @@
       },
       {
         "type": "color",
+        "label": "Question active",
+        "id": "question_active_color",
+        "default": "#93908a"
+      },
+      {
+        "type": "color",
+        "label": "Icon",
+        "id": "icon_color",
+        "default": "#93908a"
+      },
+      {
+        "type": "color",
         "label": "Answer",
         "id": "answer_color",
-        "default": "#4D4D4D"
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "item_bg_color",
-        "default": "#EFEFEF"
-      },
-      {
-        "type": "color",
-        "label": "Arrow",
-        "id": "icon_color",
         "default": "#000000"
       },
       {
-        "type": "color",
-        "label": "Arrow background",
-        "id": "icon_bg",
-        "default": "#FFFFFF"
+        "type": "header",
+        "content": "Media colors"
       },
       {
         "type": "color",
-        "label": "Arrow active background",
-        "id": "icon_active_bg",
-        "default": "#DFDFDF"
+        "label": "Border",
+        "id": "media_border_color",
+        "default": "#000000"
       },
       {
         "type": "header",
         "content": "Section colors"
-      },    
+      },
       {
         "type": "color",
         "label": "Section background",
@@ -1549,11 +1121,6 @@
         "content": "Section settings"
       },
       {
-        "type": "image_picker",
-        "id": "background_image",
-        "label": "Background image"
-      },
-      {
         "type": "checkbox",
         "id": "full_width",
         "label": "Full width",
@@ -1567,7 +1134,7 @@
         "step": 100,
         "unit": "px",
         "label": "Section content width",
-        "default": 800
+        "default": 1200
       },
       {
         "type": "range",
@@ -1588,48 +1155,82 @@
         "unit": "px",
         "label": "Section roundness",
         "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "lazy",
+        "label": "Lazy load",
+        "info": "Lazy load images for speed optimisation",
+        "default": true
       }
     ],
     "blocks": [
       {
-        "type": "tab",
-        "name": "SG-Toggle",
+        "type": "faq_item",
+        "name": "SG-FAQ item",
         "settings": [
           {
-            "type": "text",
-            "id": "tab",
-            "label": "Toggle",
-            "default": "Toggle"
-          }        
-        ]
-      },
-      {
-        "type": "faq_item",
-        "name": "SG-Collapsible tab",
-        "settings": [
+            "type": "select",
+            "id": "media_type",
+            "label": "Media type",
+            "default": "video",
+            "options": [
+              {
+                "label": "Image",
+                "value": "image"
+              },
+              {
+                "label": "Video",
+                "value": "video"
+              }
+            ]
+          }, 
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "video",
+            "id": "video",
+            "label": "Video from Shopify"
+          },
+          {
+            "type": "video_url",
+            "id": "video_url",
+            "label": "Video embed from URL",
+            "accept": [
+              "youtube",
+              "vimeo"
+            ],
+            "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "info": "Youtube or Vimeo. Shows when no Shopify-hosted video is selected."
+          }, 
+          {
+            "type": "checkbox",
+            "id": "controls",
+            "label": "Use Shopify video controls"
+          },
           {
             "type": "text",
             "id": "question",
             "label": "Question",
-            "default": "Question"
+            "default": "QUESTION"
           },
           {
             "type": "richtext",
             "id": "answer",
             "label": "Answer",
-            "default": "<p>Answer</p>"
+            "default": "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex repellendus cupiditate nisi aspernatur enim reiciendis?</p>"
           }
         ]
       },
     ],
     "presets": [
       {
-        "name": "SG- FAQ #13",
+        "name": "SG- FAQ #14",
         "blocks": [
           {
-            "type": "tab"
-          },
-          {
             "type": "faq_item"
           },
           {
@@ -1637,25 +1238,7 @@
           },
           {
             "type": "faq_item"
-          },
-          {
-            "type": "tab"
-          },
-          {
-            "type": "faq_item"
-          },
-          {
-            "type": "faq_item"
-          },
-          {
-            "type": "tab"
-          },
-          {
-            "type": "faq_item"
-          },
-          {
-            "type": "faq_item"
-          }
+          }          
         ]
       }
     ]
