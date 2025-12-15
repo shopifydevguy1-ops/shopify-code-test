@@ -23,6 +23,7 @@
       "block_order": [
         "heading_Frp6hp"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -33,114 +34,120 @@
         "padding_bottom": 0
       }
     },
-    "mockup_bG7P88": {
+    "mockup_FeWkRJ": {
       "type": "mockup",
       "blocks": {
-        "feature_mRkgYX": {
+        "heading_KtXbXf": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h1>FEATURE #52</h1>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 48,
+            "heading_size_mobile": 32,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "feature_kH6bXU": {
           "type": "feature",
           "settings": {
-            "title": "Feature",
-            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
-            "feature_bg_color": "#F3F3F3",
-            "vertical_position": 15,
-            "horizontal_position": 5,
-            "vertical_position_mobile": 0,
-            "horizontal_position_mobile": -15
+            "heading": "<h3>Feature heading</h3>",
+            "text": "<p>Feature text.</p>"
           }
         },
-        "feature_image_9arymM": {
-          "type": "feature_image",
-          "settings": {
-            "image": "shopify://shop_images/icon_2c26cd6a-b40f-40d7-b958-7e260e93c2f6.png",
-            "vertical_position": 90,
-            "horizontal_position": 85,
-            "vertical_position_mobile": 0,
-            "horizontal_position_mobile": -50
-          }
-        },
-        "feature_cePdpP": {
+        "feature_y77tiy": {
           "type": "feature",
           "settings": {
-            "title": "Feature",
-            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
-            "feature_bg_color": "#F3F3F3",
-            "vertical_position": 50,
-            "horizontal_position": 95,
-            "vertical_position_mobile": 0,
-            "horizontal_position_mobile": 15
+            "heading": "<h3>Feature heading</h3>",
+            "text": "<p>Feature text.</p>"
           }
         },
-        "feature_qCFHKK": {
+        "feature_YeGW3X": {
           "type": "feature",
           "settings": {
-            "title": "Feature",
-            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
-            "feature_bg_color": "#F3F3F3",
-            "vertical_position": 90,
-            "horizontal_position": 10,
-            "vertical_position_mobile": 0,
-            "horizontal_position_mobile": -15
-          }
-        },
-        "feature_image_PXnEnm": {
-          "type": "feature_image",
-          "settings": {
-            "image": "shopify://shop_images/icon_c7cfb613-0d39-483b-b494-f6574ada945e.png",
-            "vertical_position": 50,
-            "horizontal_position": 15,
-            "vertical_position_mobile": 0,
-            "horizontal_position_mobile": 50
+            "heading": "<h3>Feature heading</h3>",
+            "text": "<p>Feature text.</p>"
           }
         }
       },
       "block_order": [
-        "feature_mRkgYX",
-        "feature_image_9arymM",
-        "feature_cePdpP",
-        "feature_qCFHKK",
-        "feature_image_PXnEnm"
+        "heading_KtXbXf",
+        "feature_kH6bXU",
+        "feature_y77tiy",
+        "feature_YeGW3X"
       ],
-      "name": "SG- Feature #51",
+      "name": "SG- Feature #52",
       "settings": {
+        "layout": "content_image",
+        "layout_mobile": "image_content",
+        "image_width": 40,
+        "layout_gap": 20,
+        "layout_gap_mobile": 20,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "space-between",
         "image": "shopify://shop_images/animated-image.png",
-        "image_radius": 32,
-        "image_border_thickness": 0,
         "image_ratio": "portrait",
         "image_ratio_mobile": "portrait",
-        "feature_image_size": 250,
-        "feature_image_size_mobile": 170,
-        "feature_image_radius": 32,
-        "feature_image_border_thickness": 0,
-        "feature_image_ratio": "square",
-        "feature_image_ratio_mobile": "square",
-        "feature_radius": 32,
-        "feature_border_thickness": 0,
-        "feature_align": "left",
-        "feature_align_mobile": "left",
-        "feature_advanced": false,
-        "feature_padding_horizontal": 30,
-        "feature_padding_horizontal_mobile": 20,
-        "feature_padding_vertical": 30,
-        "feature_padding_vertical_mobile": 20,
-        "title_custom": false,
-        "title_font": "josefin_sans_n4",
-        "title_size": 26,
-        "title_size_mobile": 20,
-        "title_advanced": false,
-        "title_height": 130,
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
-        "text_size": 18,
-        "text_size_mobile": 14,
-        "text_advanced": false,
-        "text_height": 150,
-        "text_mt": 16,
-        "text_mt_mobile": 10,
-        "title_color": "#121212",
-        "text_color": "#121212",
-        "feature_border_color": "#121212",
-        "feature_image_border_color": "#121212",
-        "image_border_color": "#121212",
+        "image_radius": 16,
+        "image_border_thickness": 0,
+        "feature_accordion_mt": 0,
+        "feature_accordion_mt_mobile": 20,
+        "feature_accordion_gap": 30,
+        "feature_accordion_gap_mobile": 30,
+        "feature_accordion_width": 70,
+        "feature_accordion_animate_duration": 5,
+        "feature_item_padding": 0,
+        "feature_item_padding_mobile": 0,
+        "feature_item_border_radius": 0,
+        "feature_item_border_thickness": 0,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 20,
+        "feature_heading_size_mobile": 16,
+        "feature_heading_height": 120,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 16,
+        "feature_text_size_mobile": 16,
+        "feature_text_height": 120,
+        "progress_bar_margin": 10,
+        "progress_bar_margin_mobile": 10,
+        "progress_bar_height": 2,
+        "controls_mt": 0,
+        "controls_mt_mobile": 20,
+        "controls_gap": 20,
+        "controls_gap_mobile": 20,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": true,
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 10,
+        "arrow_radius": 100,
+        "arrow_border_thickness": 0,
+        "arrow_hover_effect": "color",
+        "controls_text_custom": false,
+        "controls_text_font": "josefin_sans_n4",
+        "controls_text_size": 16,
+        "controls_text_size_mobile": 16,
+        "controls_text_height": 100,
+        "feature_item_border_color": "#121212",
+        "feature_item_bg_color": "#FFFFFF",
+        "feature_heading_color": "#241EC6",
+        "feature_text_color": "#121212",
+        "progress_bar_bg": "#241ec6",
+        "arrow_color": "#121212",
+        "arrow_hover_color": "#FFFFFF",
+        "arrow_bg_color": "#FAF2F4",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "controls_text_color": "#121212",
         "background_style": "solid",
         "background_color": "#FFFFFF",
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
@@ -163,6 +170,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_bG7P88"
+    "mockup_FeWkRJ"
   ]
 }
