@@ -40,39 +40,50 @@
         "heading_Gp8EJt": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>CONTACT FORM #3</h2>",
+            "heading": "<h2>CONTACT FORM #4</h2>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 40,
             "heading_size_mobile": 32,
             "heading_height": 130,
+            "heading_max_width": 60,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
             "heading_color": "#121212"
           }
         },
-        "text_LFz6zp": {
-          "type": "text",
+        "text_field_4rp9Pm": {
+          "type": "text_field",
           "settings": {
             "name": "",
             "required": true,
-            "title": "First Name",
+            "title": "FIRST NAME",
             "label": "",
             "placeholder": "",
             "type": "text",
-            "half_width": false
+            "width": 50
           }
         },
-        "text_r3wxdz": {
-          "type": "text",
+        "text_field_473Xfi": {
+          "type": "text_field",
           "settings": {
             "name": "",
             "required": true,
-            "title": "Last Name",
+            "title": "LAST NAME",
             "label": "",
             "placeholder": "",
             "type": "text",
-            "half_width": false
+            "width": 50
+          }
+        },
+        "date_nMNVd4": {
+          "type": "date",
+          "settings": {
+            "name": "",
+            "required": true,
+            "title": "",
+            "label": "",
+            "width": 100
           }
         },
         "textarea_YtzWMC": {
@@ -84,7 +95,7 @@
             "label": "",
             "placeholder": "Description",
             "type": "textarea",
-            "half_width": false
+            "width": 100
           }
         },
         "dropdown_Ey3nLN": {
@@ -96,14 +107,15 @@
             "label": "",
             "placeholder": "",
             "dropdown_options": "",
-            "half_width": false
+            "width": 100
           }
         }
       },
       "block_order": [
         "heading_Gp8EJt",
-        "text_LFz6zp",
-        "text_r3wxdz",
+        "text_field_4rp9Pm",
+        "text_field_473Xfi",
+        "date_nMNVd4",
         "textarea_YtzWMC",
         "dropdown_Ey3nLN"
       ],
@@ -113,9 +125,19 @@
         "layout_mobile": "content_form",
         "layout_gap": 72,
         "layout_gap_mobile": 36,
+        "layout_mt": 48,
+        "layout_mt_mobile": 24,
         "content_align": "left",
         "content_align_mobile": "left",
-        "content_vertical_align": "start",
+        "image": "shopify://shop_images/contact-image-without-text.png",
+        "image_radius": 20,
+        "image_border_thickness": 0,
+        "form_padding_horizontal": 30,
+        "form_padding_horizontal_mobile": 18,
+        "form_padding_vertical": 40,
+        "form_padding_vertical_mobile": 30,
+        "form_radius": 20,
+        "form_border_thickness": 0,
         "form_gap": 40,
         "form_gap_mobile": 40,
         "title_custom": false,
@@ -184,11 +206,23 @@
         "submit_border_thickness": 0,
         "submit_mt": 24,
         "submit_mt_mobile": 24,
-        "submit_horizontal_align": "center",
-        "submit_horizontal_align_mobile": "center",
+        "form_bottom_text": "<p>*Fields marked with an asterisk are required.</p>",
+        "form_bottom_text_custom": false,
+        "form_bottom_text_font": "josefin_sans_n4",
+        "form_bottom_text_size": 12,
+        "form_bottom_text_size_mobile": 12,
+        "form_bottom_text_height": 150,
+        "form_bottom_text_mt": 50,
+        "form_bottom_text_mt_mobile": 40,
+        "form_bottom_text_align": "left",
+        "form_bottom_text_align_mobile": "left",
+        "image_border_color": "#121212",
         "title_color": "#323338",
         "required_color": "#d83a52",
         "label_color": "#323338",
+        "form_bottom_text_color": "#121212",
+        "form_bg_color": "#ffffff",
+        "form_border_color": "#121212",
         "input_color": "#323338",
         "placeholder_color": "#979aa9",
         "input_bg_color": "#ffffff",
@@ -224,7 +258,8 @@
         "full_width": true,
         "content_width": 1400,
         "border_thickness": 0,
-        "section_radius": 0
+        "section_radius": 0,
+        "lazy": true
       }
     }
   },
