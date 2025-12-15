@@ -23,6 +23,7 @@
       "block_order": [
         "heading_Frp6hp"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -39,7 +40,7 @@
         "text_qpCayJ": {
           "type": "text",
           "settings": {
-            "heading": "<p>50% off spring collection</p>",
+            "heading": "COUNTDOWN TIMER #2",
             "color": "#ffffff",
             "font_size": 30,
             "richtext": "",
@@ -47,55 +48,36 @@
             "richtext_font_size": 14
           }
         },
-        "button_dRnfd9": {
-          "type": "button",
-          "settings": {
-            "button_text": "View Discounted Items",
-            "button_link": "",
-            "color": "#000000",
-            "background_color": "#ffffff",
-            "button_border_color": "#FFFFFF",
-            "border_radius": 50,
-            "font_size": 18,
-            "button_border_thickness": 0
-          }
-        },
         "timer_j8KTN9": {
           "type": "timer",
           "settings": {
-            "year": "2024",
-            "month": "01",
-            "day": "01",
+            "year": "2025",
+            "month": "12",
+            "day": "27",
             "hour": "00",
             "minute": "00",
             "hide_timer_on_completed": false,
             "timer_completed_text": "",
-            "color": "#FFFFFF",
-            "days_text": "Days",
-            "hours_text": "Hours",
-            "minutes_text": "Minutes",
-            "seconds_text": "Seconds"
+            "color": "#ffffff",
+            "days_translated": "Days",
+            "hours_translated": "Hours",
+            "minutes_translated": "Minutes",
+            "seconds_translated": "Seconds"
           }
         }
       },
       "block_order": [
         "text_qpCayJ",
-        "button_dRnfd9",
         "timer_j8KTN9"
       ],
       "name": "SG-countdown timer 1",
       "settings": {
         "full_width": false,
-        "height": "600px",
-        "height_mobile": "500px",
-        "image": "shopify://shop_images/countdown-image-with-text.png",
-        "no_image_bg_color": "#FFFFFF",
-        "blur": false,
-        "overlay_opacity": 10,
-        "overlay_color": "#000000",
         "border_radius": 15,
-        "lazy_load": true,
-        "background-color": "#ffffff",
+        "bg_color": "#334fb4",
+        "section-background-color": "#ffffff",
+        "pt": 32,
+        "pb": 32,
         "padding_top": 36,
         "padding_bottom": 36
       }
