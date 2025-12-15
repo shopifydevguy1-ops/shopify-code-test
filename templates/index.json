@@ -37,257 +37,46 @@
     "mockup_P3CQh7": {
       "type": "mockup",
       "blocks": {
-        "text_YbYbzc": {
-          "type": "text",
+        "decline_button_AbrVCb": {
+          "type": "decline_button",
           "settings": {
-            "name": "",
-            "required": true,
-            "title": "",
-            "label": "",
-            "placeholder": "",
-            "type": "text",
-            "width": 100
+            "redirect_url": "",
+            "button_text": "Decline",
+            "button_color": "#ffffff",
+            "button_text_color": "#000000",
+            "button_border_color": "#000000",
+            "button_border_width": 1,
+            "button_border_radius": 24
           }
         },
-        "dropdown_p7JtQM": {
-          "type": "dropdown",
+        "accept_button_hmxLr9": {
+          "type": "accept_button",
           "settings": {
-            "name": "SG-Reason for contacting",
-            "required": false,
-            "title": "",
-            "label": "Reason for contacting",
-            "placeholder": "Select reason...",
-            "dropdown_options": "Product Question,Product Experience,Order Issue,Website Issue,Other",
-            "width": 100
-          }
-        },
-        "checkbox_88PX46": {
-          "type": "checkbox",
-          "settings": {
-            "name": "SG-Have you checked out our FAQ's?",
-            "required": false,
-            "title": "",
-            "label": "",
-            "checkbox_options": "Have you checked out our FAQ's?",
-            "width": 100
-          }
-        },
-        "textarea_6nVeBe": {
-          "type": "textarea",
-          "settings": {
-            "name": "SG-Message",
-            "required": false,
-            "title": "",
-            "label": "Tell us about your question",
-            "placeholder": "Message...",
-            "type": "textarea",
-            "width": 100
-          }
-        },
-        "dropdown_fY3Nwi": {
-          "type": "dropdown",
-          "settings": {
-            "name": "SG-What issue are you experiencing?",
-            "required": false,
-            "title": "",
-            "label": "",
-            "placeholder": "What issue are you experiencing?",
-            "dropdown_options": "Experience,Damaged Product,Other",
-            "width": 100
-          }
-        },
-        "textarea_kBUhkW": {
-          "type": "textarea",
-          "settings": {
-            "name": "SG-Message",
-            "required": false,
-            "title": "",
-            "label": "Tell us more about your product experience",
-            "placeholder": "Message...",
-            "type": "textarea",
-            "width": 100
-          }
-        },
-        "checkbox_fra7dc": {
-          "type": "checkbox",
-          "settings": {
-            "name": "SG-Have you checked out our FAQ's?",
-            "required": false,
-            "title": "",
-            "label": "",
-            "checkbox_options": "Have you checked out our FAQ's?",
-            "width": 100
-          }
-        },
-        "dropdown_HJhiVH": {
-          "type": "dropdown",
-          "settings": {
-            "name": "SG-What issue are you experiencing?",
-            "required": false,
-            "title": "",
-            "label": "What issue are you experiencing?",
-            "placeholder": "Choose Issue",
-            "dropdown_options": "Cancel,Update Address,Change Order,Track Order,Order Issue,Login",
-            "width": 100
-          }
-        },
-        "textarea_kpmFYX": {
-          "type": "textarea",
-          "settings": {
-            "name": "SG-Message",
-            "required": false,
-            "title": "",
-            "label": "Please share more details about your enquiry",
-            "placeholder": "Message...",
-            "type": "textarea",
-            "width": 100
-          }
-        },
-        "dropdown_qkx4aj": {
-          "type": "dropdown",
-          "settings": {
-            "name": "SG-What issue are you experiencing?",
-            "required": false,
-            "title": "",
-            "label": "What issue are you experiencing?",
-            "placeholder": "Choose Issue",
-            "dropdown_options": "Account/Login,Website Bug",
-            "width": 100
-          }
-        },
-        "textarea_VMjKy4": {
-          "type": "textarea",
-          "settings": {
-            "name": "SG-Message",
-            "required": false,
-            "title": "",
-            "label": "Please describe what issue you're having",
-            "placeholder": "Message...",
-            "type": "textarea",
-            "width": 100
-          }
-        },
-        "textarea_by38QA": {
-          "type": "textarea",
-          "settings": {
-            "name": "SG-Message",
-            "required": false,
-            "title": "",
-            "label": "Please describe the reason for contacting us",
-            "placeholder": "Message...",
-            "type": "textarea",
-            "width": 100
+            "button_text": "Accept",
+            "button_color": "#f73333",
+            "button_text_color": "#ffffff",
+            "button_border_color": "#000000",
+            "button_border_width": 0,
+            "button_border_radius": 24
           }
         }
       },
       "block_order": [
-        "text_YbYbzc",
-        "dropdown_p7JtQM",
-        "checkbox_88PX46",
-        "textarea_6nVeBe",
-        "dropdown_fY3Nwi",
-        "textarea_kBUhkW",
-        "checkbox_fra7dc",
-        "dropdown_HJhiVH",
-        "textarea_kpmFYX",
-        "dropdown_qkx4aj",
-        "textarea_VMjKy4",
-        "textarea_by38QA"
+        "decline_button_AbrVCb",
+        "accept_button_hmxLr9"
       ],
       "name": "SG- Contact form #6",
       "settings": {
-        "heading": "<h2>CONTACT FORM PRO</h2>",
-        "heading_custom": false,
-        "heading_font": "josefin_sans_n4",
-        "heading_size": 30,
-        "heading_size_mobile": 20,
-        "heading_height": 130,
-        "heading_align": "left",
-        "form_mt": 70,
-        "form_gap": 20,
-        "form_gap_mobile": 20,
-        "text": "Thank you!",
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
+        "text_color": "#ffffff",
         "text_size": 30,
-        "text_size_mobile": 20,
-        "text_height": 130,
-        "title_custom": false,
-        "title_font": "josefin_sans_n4",
-        "title_size": 14,
-        "title_size_mobile": 14,
-        "title_height": 130,
-        "title_mt": 20,
-        "label_custom": false,
-        "label_font": "josefin_sans_n4",
-        "label_size": 12,
-        "label_size_mobile": 12,
-        "label_height": 130,
-        "label_mt": 8,
-        "required_text": "*",
-        "required_custom": false,
-        "required_font": "josefin_sans_n4",
-        "required_size": 14,
-        "required_size_mobile": 14,
-        "required_height": 130,
-        "input_custom": false,
-        "input_font": "josefin_sans_n4",
-        "input_size": 14,
-        "input_size_mobile": 16,
-        "input_height": 150,
-        "input_mt": 6,
-        "input_padding_vertical": 10,
-        "input_padding_horizontal": 10,
-        "input_radius": 0,
-        "input_border_thickness": 1,
-        "placeholder_custom": false,
-        "placeholder_font": "josefin_sans_n4",
-        "placeholder_size": 16,
-        "placeholder_size_mobile": 14,
-        "placeholder_height": 130,
-        "submit": "Submit your message",
-        "submit_custom": false,
-        "submit_font": "josefin_sans_n4",
-        "submit_size": 14,
-        "submit_size_mobile": 14,
-        "submit_height": 100,
-        "submit_mt": 32,
-        "submit_padding_vertical": 16,
-        "submit_padding_horizontal": 40,
-        "submit_radius": 100,
-        "submit_border_thickness": 1,
-        "submit_align": "left",
-        "heading_color": "#000000",
-        "text_color": "#000000",
-        "title_color": "#121212",
-        "label_color": "#121212",
-        "required_color": "#121212",
-        "input_color": "#121212",
-        "input_border_color": "#121212",
-        "input_active_color": "#121212",
-        "placeholder_color": "#afafaf",
-        "checkbox_bg_color": "#ffffff",
-        "checkbox_bg_active_color": "#121212",
-        "checkbox_border_color": "#121212",
-        "checkbox_border_active_color": "#121212",
-        "submit_color": "#ffffff",
-        "submit_hover_color": "#ffffff",
-        "submit_bg_color": "#121212",
-        "submit_bg_hover_color": "#121212",
-        "submit_border_color": "#121212",
-        "submit_border_hover_color": "#121212",
-        "background_color": "#ffffff",
-        "background_gradient": "",
-        "border_color": "#121212",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "full_width": false,
-        "content_width": 130,
-        "border_thickness": 0
+        "text": "<p>COOKIE BANNER</p>",
+        "max_width": 400,
+        "background_color": "#334fb4",
+        "border_radius": 24,
+        "vertical_padding": 20,
+        "horizontal_padding": 20,
+        "placement": "bottom-left",
+        "enable_shadow": true
       }
     }
   },
