@@ -15,51 +15,29 @@
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
-  assign background_image = section.settings.background_image
-
-  assign image_ratio = section.settings.image_ratio
-  assign image_ratio_mobile = section.settings.image_ratio_mobile
-  assign image_content_align = section.settings.image_content_align
-  assign image_content_align_mobile = section.settings.image_content_align_mobile
-  assign image_content_vertical_align = section.settings.image_content_vertical_align
-  assign image_content_vertical_align_mobile = section.settings.image_content_vertical_align_mobile
-
-  assign image_content_horizontal_align = ""
-  if image_content_align == "center"
-    assign image_content_horizontal_align = "center"
-  elsif image_content_align == "right"
-    assign image_content_horizontal_align = "end"
-  else
-    assign image_content_horizontal_align = "start"
-  endif
-
-  assign image_content_horizontal_align_mobile = ""
-  if image_content_align_mobile == "center"
-    assign image_content_horizontal_align_mobile = "center"
-  elsif image_content_align_mobile == "right"
-    assign image_content_horizontal_align_mobile = "end"
-  else
-    assign image_content_horizontal_align_mobile = "start"
-  endif
-
+  assign background_style = section.settings.background_style
 
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
-  
-  assign layout = section.settings.layout
-  assign layout_mobile = section.settings.layout_mobile
-  assign layout_gap = section.settings.layout_gap  
-  assign layout_gap_mobile = section.settings.layout_gap_mobile
 
-  assign image = section.settings.image
-  assign image_border_thickness = section.settings.image_border_thickness
-  assign image_border_color = section.settings.image_border_color
-  assign image_radius = section.settings.image_radius
+  assign content_horizontal_align = ""
+  if content_align == "center"
+    assign content_horizontal_align = "center"
+  elsif content_align == "right"
+    assign content_horizontal_align = "end"
+  else
+    assign content_horizontal_align = "start"
+  endif
 
-  assign form_padding_horizontal = section.settings.form_padding_horizontal
-  assign form_padding_horizontal_mobile = section.settings.form_padding_horizontal_mobile
-  assign form_padding_vertical = section.settings.form_padding_vertical
-  assign form_padding_vertical_mobile = section.settings.form_padding_vertical_mobile
+  assign content_horizontal_align_mobile = ""
+  if content_align_mobile == "center"
+    assign content_horizontal_align_mobile = "center"
+  elsif content_align_mobile == "right"
+    assign content_horizontal_align_mobile = "end"
+  else
+    assign content_horizontal_align_mobile = "start"
+  endif
+
   assign form_gap = section.settings.form_gap
   assign form_gap_mobile = section.settings.form_gap_mobile
   assign form_mt = section.settings.form_mt
@@ -75,8 +53,6 @@
   assign success_text_height = section.settings.success_text_height
   assign success_text_align = section.settings.success_text_align
   assign success_text_align_mobile = section.settings.success_text_align_mobile
-  assign success_text_mt = section.settings.success_text_mt
-  assign success_text_mt_mobile = section.settings.success_text_mt_mobile
 
   assign title_size = section.settings.title_size
   assign title_size_mobile = section.settings.title_size_mobile
@@ -146,8 +122,6 @@
   assign error_text_height = section.settings.error_text_height
   assign error_text_align = section.settings.error_text_align
   assign error_text_align_mobile = section.settings.error_text_align_mobile
-  assign error_text_mt = section.settings.error_text_mt
-  assign error_text_mt_mobile = section.settings.error_text_mt_mobile
 
   assign submit = section.settings.submit
   assign submit_size = section.settings.submit_size
@@ -207,50 +181,9 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .contact-layout-{{ section.id }} {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: {{ layout_gap_mobile }}px;
-  }
-
-  .contact-image-{{ section.id }} {
-    grid-area: image;
-    margin-top: {{ form_padding_vertical_mobile }}px;
-    margin-bottom: {{ form_padding_vertical_mobile }}px;
-    border: {{ image_border_thickness }}px solid {{ image_border_color }};
-    border-radius: {{ image_radius }}px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .contact-image-{{ section.id }} img,
-  .contact-image-{{ section.id }} svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .contact-image-{{ section.id }} svg {
-    background-color: #AFAFAF;
-  }
-
-  .contact-image-content-{{ section.id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: {{ image_content_vertical_align_mobile }};
-    align-items: {{ image_content_horizontal_align_mobile }};
-  }
-
   .contact-form-{{ section.id }} {
     grid-area: form;
-    padding: {{ form_padding_vertical_mobile }}px {{ form_padding_horizontal_mobile }}px;
+    padding: 0;
     background-color: {{ form_bg_color }};
   }
 
@@ -265,8 +198,7 @@
 
   .contact-succesg-{{ section.id }} {
     display: block;
-    margin: 0;
-    margin-top: {{ success_text_mt_mobile }}px;
+    margin: 16px 0;
     font-size: {{ success_text_size_mobile }}px;
     color: {{ success_text_color }};
     line-height: {{ success_text_height }}%;
@@ -314,13 +246,28 @@
   }
 
   .contact-{{ section.id }} .errors * {
-    margin: 0;
-    margin-top: {{ error_text_mt_mobile }}px;
+    margin: 16px 0;
     font-size: {{ error_text_size_mobile }}px;
     color: {{ error_text_color }};
     line-height: {{ error_text_height }}%;
     text-align: {{ error_text_align_mobile }};
     text-transform: unset;
+  }
+
+  .contact-field-form-tab-{{ section.id }} {
+    width: 100%;
+    padding: 3rem;
+    border: {{ input_border_thickness | plus: 2 }}px solid {{ input_border_color }};
+    border-radius: {{ input_radius }}px;
+    margin-top: 36px !important;
+  }
+
+  .contact-field-form-tab-{{ section.id }} {
+    display: none !important;
+  }
+
+  .contact-field-form-tab-{{ section.id }}.active {
+    display: flex !important;
   }
 
   .contact-field-input-{{ section.id }} {
@@ -332,16 +279,17 @@
     color: {{ input_color }};
     line-height: {{ input_height }}%;
     text-transform: unset;
+    border: 0;
     padding: {{ input_padding_vertical_mobile }}px {{ input_padding_horizontal_mobile }}px;
-    border: {{ input_border_thickness }}px solid {{ input_border_color }};
-    border-radius: {{ input_radius }}px;
+    border-bottom: {{ input_border_thickness }}px solid {{ input_border_color }}; 
     background-color: {{ input_bg_color }};
     transition: all 0.25s ease 0s;
+    border-radius: 0;
   }
 
   .contact-field-input-{{ section.id }}:hover {
     transition: all 0.25s ease 0s;
-    border: {{ input_border_thickness }}px solid {{ input_border_hover_color }};
+    border-color: {{ input_border_hover_color }};
   }
 
   .contact-field-input-{{ section.id }}:after,
@@ -371,7 +319,6 @@
     transform: translateY(-50%);
     right: 15px;
     width: 12px;  
-    pointer-events: none;
   }
 
   .contact-field-select-svg-{{ section.id }} path {
@@ -383,6 +330,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     color: {{ input_color }};
+    border: {{ input_border_thickness }}px solid {{ input_border_color }};
+    border-radius: {{ input_radius }}px;
   }
 
   .contact-field-title-{{ section.id }} + .contact-field-checkbox-{{ section.id }},
@@ -460,21 +409,24 @@
   }
 
   .contact-field-inner-{{ section.id }} textarea {
-    font-family: Montserrat, sans-serif;
     min-height: 250px;
     resize: vertical;
+    border: {{ input_border_thickness }}px solid {{ input_border_color }};
+    border-radius: {{ input_radius }}px;
   }
 
   .contact-submit-button-{{ section.id }} {
     display: flex;
     width: 100%;
     margin-top: {{ submit_mt_mobile }}px;
+    justify-content: {{ content_horizontal_align_mobile }};
   }
 
   .contact-submit-{{ section.id }} {
     display: block;
     width: 100%;
     word-break: break-word;
+    max-width: fit-content;
     font-size: {{ submit_size_mobile }}px;
     color: {{ submit_color }};
     line-height: {{ submit_height }}%;
@@ -537,18 +489,8 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .contact-layout-{{ section.id }} {
-      grid-template-columns: 1fr 1fr;
-      gap: {{ layout_gap }}px;
-    }
-
-    .contact-image-{{ section.id }} {   
-      margin-top: {{ form_padding_vertical }}px;
-      margin-bottom: {{ form_padding_vertical }}px;  
-    }
-
     .contact-form-{{ section.id }} {
-      padding: {{ form_padding_vertical }}px {{ form_padding_horizontal }}px;
+      padding: 0;
     }
 
     .contact-fields-{{ section.id }} {
@@ -580,13 +522,11 @@
     }
 
     .contact-succesg-{{ section.id }} {
-      margin-top: {{ success_text_mt }}px;
       font-size: {{ success_text_size }}px;
       text-align: {{ success_text_align }};
     }
 
     .contact-{{ section.id }} .errors * {
-      margin-top: {{ error_text_mt }}px;
       text-align: {{ error_text_align }};
       font-size: {{ error_text_size }}px;
     }
@@ -628,6 +568,10 @@
       height: {{ checkbox_size | times: 0.7 | round: 0 }}px;
     }
 
+    .contact-image-{{ section.id }} {
+      aspect-ratio: auto !important;
+    }
+
     .contact-field-checkbox-{{ section.id }} label:after {
       width: {{ checkbox_size }}px;
       height: {{ checkbox_size }}px;
@@ -635,16 +579,12 @@
 
     .contact-submit-button-{{ section.id }} {
       margin-top: {{ submit_mt }}px;    
+      justify-content: {{ content_horizontal_align }};
     }
 
     .contact-submit-{{ section.id }} {      
       font-size: {{ submit_size }}px;
       padding: {{ submit_padding_vertical }}px {{ submit_padding_horizontal }}px;
-    }
-
-    .contact-image-content-{{ section.id }} {    
-      justify-content: {{ image_content_vertical_align }};
-      align-items: {{ image_content_horizontal_align }};
     }
   }
   
@@ -730,8 +670,7 @@
   <style>
     .contact-field-input-{{ section.id }},
     .contact-field-input-{{ section.id }}::placeholder,
-    .contact-field-inner--{{ section.id }} textarea,
-    input[type="date"]{
+    .contact-field-inner--{{ section.id }} textarea {
       font-family: {{ input_font.family }}, {{ input_font.fallback_families }} !important;
       font-weight: {{ input_font.weight }} !important;
       font-style: {{ input_font.style }} !important;
@@ -769,115 +708,6 @@
   </style>
 {% endif %}
 
-{% if layout_mobile == 'image_form'%}
-  <style>
-    .contact-layout-{{ section.id }} {
-      grid-template-areas: 
-        "image"
-        "form";     
-    }
-  </style>
-{% elsif layout_mobile == 'form_image' %}
-  <style>
-    .contact-layout-{{ section.id }} {
-      grid-template-areas: 
-        "form"
-        "image";     
-    }
-  </style>
-{% endif %}
-
-{% if layout == 'image_form'%}
-  <style>
-    @media(min-width: 1024px) {
-      .contact-layout-{{ section.id }} {
-        grid-template-areas: "image form";    
-      }
-    }    
-  </style>
-{% elsif layout == 'form_image' %}
-  <style>
-    @media(min-width: 1024px) {
-      .contact-layout-{{ section.id }} {
-        grid-template-areas: "form image";   
-      }
-    }   
-  </style>
-{% endif %}
-
-
-{% if image_ratio_mobile == "portrait" %}
-  <style>
-    .contact-image-{{ section.id }} {
-      aspect-ratio: 9.6/13;
-    }
-  </style>
-{% elsif image_ratio_mobile == "landscape" %}
-  <style>
-  .contact-image-{{ section.id }} {
-    aspect-ratio: 12/8;
-  }
-  </style>
-{% elsif image_ratio_mobile == "square" %}
-  <style>
-    .contact-image-{{ section.id }} {
-      aspect-ratio: 12/12;
-    }
-  </style>
-{% else %}
-  <style>
-    .featured-media-{{ section.id }} {
-      aspect-ratio: auto;
-    }
-  </style>
-{% endif %}
-
-
-{% if image_ratio == "portrait" %}
-  <style>
-    @media(min-width: 1024px) {
-      .contact-image-{{ section.id }} {
-        aspect-ratio: 9.6/13;
-      }
-    }   
-  </style>
-{% elsif image_ratio == "landscape" %}
-  <style>
-    @media(min-width: 1024px) {
-      .contact-image-{{ section.id }} {
-        aspect-ratio: 12/8;
-      }
-    }
-  </style>
-{% elsif image_ratio == "square" %}
-  <style>
-    @media(min-width: 1024px) {
-      .contact-image-{{ section.id }} {
-        aspect-ratio: 12/12;
-      }
-    }
-  </style>
-{% else %}
-  <style>
-    @media(min-width: 1024px) {
-      .featured-media-{{ section.id }} {
-        aspect-ratio: auto;
-      }
-    }   
-  </style>
-{% endif %}
-
-{% if background_image != blank %}
-  <style>
-    .section-{{ section.id }} {
-      background-image: url('{{ background_image | image_url }}');
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-  </style>
-{% endif %}
-
 
 {% for block in section.blocks %}
   <style>
@@ -885,22 +715,11 @@
       flex: 0 1 100%;
     }
 
-    .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} input {
-      width: 100%;
-    }
-    
     .contact-field-label-{{ block.id }} {
        margin-top: {{ label_mt_mobile }}px;
     }
     
     @media(min-width: 1024px) {
-      .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} {
-        flex: 0 1 100%;
-      }
-
-      .contact-field-{{ block.id }}.contact-field-date-{{ block.id }} input {
-        width: {{ block.settings.width }}%;
-      }
       
       .contact-field-{{ block.id }} {
         flex: 0 1 calc({{ block.settings.width }}% - {{ form_gap | divided_by: 2 }}px);
@@ -923,89 +742,6 @@
   {% endif %}
 
   {% case block.type %}
-      {% when 'image_heading' %}  
-      <style>
-        {{  block.settings.heading_font | font_face: font_display: 'swap' }}
-
-        .contact-image-heading-{{ block.id }} {
-          margin-top: {{ block.settings.heading_mt_mobile }}px;
-          text-align: {{ image_content_align_mobile }};         
-        }
-      
-        .contact-image-heading-{{ block.id }} * {
-          margin: 0;
-          font-size: {{ block.settings.heading_size_mobile }}px;
-          color: {{ block.settings.heading_color }};
-          line-height: {{ block.settings.heading_height }}%;
-          text-transform: unset;
-          text-shadow: 0px 18px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        @media(min-width: 1024px) {
-          
-          .contact-image-heading-{{ block.id }} {
-            margin-top: {{ block.settings.heading_mt }}px;
-            text-align: {{ image_content_align }};
-          }
-        
-          .contact-image-heading-{{ block.id }} * {
-            font-size: {{ block.settings.heading_size }}px;
-          }
-        }          
-      </style>
-        
-      {% if block.settings.heading_custom %}
-        <style>
-          .contact-image-heading-{{ block.id }} * {
-            font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-            font-weight: {{ block.settings.heading_font.weight }};
-            font-style: {{ block.settings.heading_font.style }};
-          }
-        </style>
-      {% endif %}
-
-    {% when 'image_text' %}   
-      <style>
-        {{  block.settings.text_font | font_face: font_display: 'swap' }}
-        
-        .contact-image-text-{{ block.id }} {
-          margin: 0;
-          margin-top: {{ block.settings.text_mt_mobile }}px;
-          text-align: {{ image_content_align_mobile }};    
-        }
-      
-        .contact-image-text-{{ block.id }} * {
-          margin: 0;
-          font-size: {{ block.settings.text_size_mobile }}px;
-          color: {{ block.settings.text_color }};
-          line-height: {{ block.settings.text_height }}%;
-          text-transform: unset;
-          text-shadow: 0px 18px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        @media(min-width: 1024px) {
-          
-          .contact-image-text-{{ block.id }} {
-            margin-top: {{ block.settings.text_mt }}px;
-            text-align: {{  image_content_align }};        
-          }
-      
-          .contact-image-text-{{ block.id }} * {
-            font-size: {{ block.settings.text_size }}px;
-          }
-          
-        }
-      </style>
-
-      {% if block.settings.text_custom %}
-        <style>
-          .contact-image-text-{{ block.id }} * {
-            font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
-            font-weight: {{ block.settings.text_font.weight }};
-            font-style: {{ block.settings.text_font.style }};
-          }
-        </style>          
-      {% endif %} 
     {% when 'heading' %}  
       <style>
         {{  block.settings.heading_font | font_face: font_display: 'swap' }}
@@ -1087,206 +823,42 @@
           }
         </style>          
       {% endif %}  
-
-    {% when 'image_button' %}  
-      <style>
-        {{ block.settings.button_font | font_face: font_display: 'swap' }}
-
-        .contact-image-button-{{ block.id }} {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          max-width: fit-content;
-          gap: 10px;
-          width: 100%;
-          margin: 0;
-          margin-top: {{ block.settings.button_mt_mobile }}px;
-          font-size: {{ block.settings.button_size_mobile }}px;
-          color: {{ block.settings.button_color }};
-          line-height: {{ block.settings.button_height }}%;
-          text-align: center;
-          text-transform: unset;
-          text-decoration: none;
-          padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
-          border-radius: {{ block.settings.button_radius }}px;
-          transition: all 0.25s ease 0s;
-          background-color: transparent;
-          border: 0px;
-          cursor: pointer;
-          font-weight: 700;
-        }
-
-        .contact-image-button-inner-{{ block.id }} {
-          margin: 0px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          text-decoration: none;
-        }
-
-        .contact-image-button-{{ block.id }}:hover {
-          color: {{ block.settings.button_hover_color }};
-          transition: all 0.25s ease 0s;
-        }
-
-        .contact-image-button-{{ block.id }} svg {
-          width: 14px;
-          height: 14px;
-          background: transparent !important;
-        }
-
-        .contact-image-button-{{ block.id }} svg path {
-          fill: {{ block.settings.button_color }};
-          transition: all 0.25s ease 0s;
-        }
-
-        .contact-image-button-{{ block.id }}:hover svg path {
-          fill: {{ block.settings.button_hover_color }};
-          transition: all 0.25s ease 0s;
-        }
-
-        @media (min-width: 1024px) {
-          .contact-image-button-{{ block.id }} {
-            margin-top: {{ block.settings.button_mt }}px;
-            padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
-            font-size: {{ block.settings.button_size }}px;
-          }
-        }
-      </style>
-
-      {% if block.settings.button_custom %}
-        <style>
-          .contact-image-button-{{ block.id }} {
-            font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
-            font-weight: {{ block.settings.button_font.weight }};
-            font-style: {{ block.settings.button_font.style }};
-          }
-        </style>
-      {% endif %}
-
-      {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
-        <style>
-          .contact-image-button-{{ block.id }} {
-            transition: all 0.25s ease 0s;
-            background: {{ block.settings.button_bg_gradient | default: block.settings.button_bg_color }};
-          }
-      
-          .contact-image-button-{{ block.id }}:hover {
-            transition: all 0.25s ease 0s;
-            background: {{ block.settings.button_bg_hover_gradient | default: block.settings.button_bg_hover_color }};
-          }
-        </style>
-      {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
-        <style>          
-          .contact-image-button-{{ block.id }} {
-            transition: all 0.25s ease 0s;
-            background: {{  block.settings.button_bg_color }};
-            background: {{ block.settings.button_bg_gradient }};
-            border: {{  block.settings.button_border_thickness }}px solid {{  block.settings.button_border_color }};
-          }
-      
-          .contact-image-button-{{ block.id }}:hover {
-            transition: all 0.25s ease 0s;      
-            background: {{ block.settings.button_bg_hover_color }};
-            background: {{ block.settings.button_bg_hover_gradient }};           
-            border: {{  block.settings.button_border_thickness }}px solid {{ block.settings. button_border_hover_color }};
-          }
-        </style>
-      {% elsif block.settings.button_style == "link" %}
-        <style>
-          .contact-image-button-{{ block.id }} {
-            padding: 0px !important;
-            -webkit-box-shadow: none !important;
-            -moz-box-shadow: none !important;
-            box-shadow: none !important;
-          }
-        </style>
-      {% endif %} 
   {% endcase %}
 {% endfor %}
 
-<div class="section-{{ section.id }} contact-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings">   
-      <div class="contact-layout-{{ section.id }}">
-        <div class="contact-image-{{ section.id }}">
-          {% if image != blank %}
-            {%- capture sizes -%}100vw{%- endcapture -%}
-            {{ image | image_url: width: 1500 | image_tag:
-              loading: loading_attribute,
-              sizes: sizes,
-              alt: image.alt,
-              widths: '1100, 1500, 1780, 2000, 2500, 3000'
-            }}              
-          {% else %}
-            {{ 'image' | placeholder_svg_tag }}
-          {% endif %} 
-          <div class="contact-image-content-{{ section.id }}">
-            {% for block in section.blocks %}
-              {% case block.type %}
-                {% when 'image_heading'%}
-                  {% if block.settings.heading != blank %}
-                    <div class="contact-image-heading-{{ block.id }}">
-                      {{ block.settings.heading }}
-                    </div>
-                    {% endif %}  
-                  {% else %}
-                {% when 'image_text' %}
-                  {% if block.settings.text != blank %}
-                    <div class="contact-image-text-{{ block.id }}">
-                      {{ block.settings.text }}
-                    </div>
-                  {% endif %}  
-                {% when 'image_button' %}    
-                  {% if block.settings.button != blank %}                 
-                    <a href="{{ block.settings.url }}" class="contact-image-button-{{ block.id }}">
-                      <p class="contact-image-button-inner-{{ block.id }}">
-                        {{ block.settings.button }}
-                        {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
-                          <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
-                            <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
-                          </svg>
-                        {% endif %}
-                      </p>
-                    </a>     
-                  {% endif %}
-                                  
-              {% endcase %}
-            {% endfor %} 
-          </div>
-        </div>
-        <div class="contact-form-{{ section.id }}">
-          {% for block in section.blocks %}
-            {% case block.type %}
-              {% when 'heading'%}
-                {% if block.settings.heading != blank %}
-                  <div class="contact-heading-{{ block.id }}">
-                    {{ block.settings.heading }}
-                  </div>
-                  {% endif %}  
-                {% else %}
-              {% when 'text' %}
-                {% if block.settings.text != blank %}
-                  <div class="contact-text-{{ block.id }}">
-                    {{ block.settings.text }}
-                  </div>
-                {% endif %}                      
-            {% endcase %}
-          {% endfor %} 
+<div class="section-{{ section.id }} contact-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>
+    <div class="section-{{ section.id }}-settings">        
+      <div class="contact-form-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'heading'%}
+              {% if block.settings.heading != blank %}
+                <div class="contact-heading-{{ block.id }}">
+                  {{ block.settings.heading }}
+                </div>
+                {% endif %}  
+              {% else %}
+            {% when 'text' %}
+              {% if block.settings.text != blank %}
+                <div class="contact-text-{{ block.id }}">
+                  {{ block.settings.text }}
+                </div>
+              {% endif %}                      
+          {% endcase %}
+        {% endfor %} 
 
-          {% form 'contact'%}          
-            {% if form.posted_successfully? %}
-              {% comment %} Successful message {% endcomment %}
-              <p class="contact-succesg-{{ section.id }}">{{ success_text }}</p>
-            {% endif %}    
-    
-            {{ form.errors | default_errors }}
+        {% form 'contact'%}          
+          {% if form.posted_successfully? %}
+            {% comment %} Successful message {% endcomment %}
+            <p class="contact-succesg-{{ section.id }}">{{ success_text }}</p>
+          {% endif %}    
   
-            <div class="contact-fields-{{ section.id }}">
-              {% for block in section.blocks %}               
-                {% unless block.type == "heading" or block.type == "text" or block.type == "image_heading" or block.type == "image_text" or block.type == "image_button" %}
+          {{ form.errors | default_errors }}
+
+          <div class="contact-fields-{{ section.id }}">
+            {% assign inside_item = false %} 
+            {% for block in section.blocks %}               
+                {% if block.type != "heading" and block.type != "text" and block.type != 'submenu' %}
                   <div class="contact-field-{{ section.id }} contact-field-{{ block.id }} {% if block.type == "date" %} contact-field-date-{{ block.id }}{% endif %}">
                     {% case block.type %}
                       {% when 'date' %}
@@ -1300,7 +872,7 @@
                               {{ block.settings.label }}
                             </label>
                           {% endif %}
-                          <div style="position: relative;">
+                          <div class="contact-field-input-date-{{ block.id }}" style="position: relative;">
                             <input type="date" {% if block.settings.placeholder != blank %}placeholder="{{ block.settings.placeholder }}"{% endif %} class="contact-field-input-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{ block.settings.name }}]" {% if block.settings.required %}required{% endif %}>
                             <svg class="custom-date-icon-{{ section.id }}" viewBox="0 0 24 24">
                               <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/>
@@ -1343,13 +915,13 @@
                           {% endif %}
                           <div class="contact-field-select-{{ section.id }}">
                             <svg class="contact-field-select-svg-{{ section.id }}" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512 581.5l273.1-273.1c25-25 65.5-25 90.5 0s25 65.5 0 90.5l-316.7 316.7c-12.9 12.9-30 19.2-47 18.7-16.9 0.4-33.9-5.8-46.8-18.699l-316.8-316.8c-25-25-25-65.5 0-90.5s65.5-25 90.5 0l273.2 273.2z"/></svg>
-                            <select class="contact-field-input-{{ section.id }} contact-field-input-select-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{block.settings.name}}]" {% if block.settings.required %}required{% endif %} style="cursor: pointer;">
+                            <select class="contact-field-input-{{ section.id }} contact-field-input-select-{{ section.id }}" id="ContactForm{{ block.settings.name }}" name="contact[{{block.settings.name}}]" {% if block.settings.required %}required{% endif %}>
                               {% if block.settings.placeholder  %}
                                 <option value = "" disabled selected>{% if block.settings.placeholder != blank %}{{ block.settings.placeholder }}{% endif %}</option>
                               {% endif %}
                               
                               {% for option in options %}
-                                <option value = "{{option}}">{{option}}</option>
+                                <option value="{{option}}">{{option}}</option>
                               {% endfor %}
                             </select>  
                           </div>
@@ -1367,40 +939,73 @@
                           {% endif %}
                           {% for option in optionscheckbox %}
                             <div class="contact-field-checkbox-{{ section.id }}">
-                              <input type="checkbox" id="ContactForm{{ block.settings.name }}{{ forloop.index }}" name="{% if block.settings.use_newsletter and forloop.first %}customer[accepts_marketing]{% else %}contact[{{ block.settings.name }}-{{ option }}]{% endif %}">
-                              <label for="ContactForm{{ block.settings.name }}{{ forloop.index }}" class="contact-field-label-{{ block.id }}">{{ option }}</label>
+                              <input type="checkbox" id="ContactForm{{ block.settings.name }}{{ forloop.index }}-{{ block.id }}" name="{% if block.settings.use_newsletter and forloop.first %}customer[accepts_marketing]{% else %}contact[{{ block.settings.name }}-{{ option }}]{% endif %}">
+                              <label for="ContactForm{{ block.settings.name }}{{ forloop.index }}-{{ block.id }}" class="contact-field-label-{{ block.id }}">{{ option }}</label>
                             </div>
                           {% endfor %}
-                        </div>
+                        </div>                       
                     {% endcase %}
-                  </div>    
-                {% endunless %}                 
+                  </div> 
+                {% elsif block.type == 'submenu' %}   
+                  {% if inside_item %}
+                    </div>
+                  {% endif %}
+                  <div class="contact-field-form-tab-{{ section.id }} contact-fields-{{ section.id }}" data-option="{{ block.settings.option }}">
+                  {% assign inside_item = true %}   
+                {% endif %}                 
               {% endfor %}
-            </div>
-            
+              {% if inside_item %}                 
+                </div>
+              {% endif %}
+          </div>
+
+          <div class="contact-submit-button-wrapper-{{ section.id }}">
             <div class="contact-submit-button-{{ section.id }}">
               <input type="submit" class="contact-submit-{{ section.id }}" value="{% if submit != blank %}{{ submit }}{% else %}Submit{% endif %}">
-            </div>                 
-  
-          {% endform %}
-        </div>   
-      </div>
+            </div>  
+          </div>                        
 
-      {% for block in section.blocks %}
-        {% if block.type == 'bottom_text' %}
-          {% if block.settings.text != blank %}
-            <div class="contact-bottom-text-{{ block.id }}">
-              {{ block.settings.text }}
-            </div>
-          {% endif %}     
-        {% endif %}
-      {% endfor %}    
+        {% endform %}
+      </div>       
     </div>
 </div>
 
+<script>
+function initContactForm6() {
+  const selectElement = document.querySelector('.contact-field-input-select-{{ section.id }}');
+
+  if (selectElement) {
+    const handleSelectChange = () => {
+      const selectedOptionId = selectElement.options[selectElement.selectedIndex].value;
+      console.log(selectedOptionId);
+     
+      const allTabs = document.querySelectorAll('[data-option]');
+      allTabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      const targetTab = document.querySelector(`.contact-field-form-tab-{{ section.id }}[data-option="${selectedOptionId}"]`);
+      if (targetTab) {
+        targetTab.classList.add('active');
+      }
+    };
+    selectElement.addEventListener('change', handleSelectChange);
+
+    handleSelectChange();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initContactForm6);
+
+if (Shopify.designMode) {
+  document.addEventListener('shopify:section:unload', initContactForm6);
+  document.addEventListener('shopify:section:load', initContactForm6);
+}
+</script>
+
 {% schema %}
   {
-    "name": "SG- Contact form #5",
+    "name": "SG- Contact form #6",
     "settings": [
       {
         "type": "header",
@@ -1409,201 +1014,13 @@
       },
       {
         "type": "header",
-        "content": "Layout"
-      },
-      {
-        "type": "select",
-        "id": "layout",
-        "label": "Image placement",
-        "default": "image_form",
-        "options": [
-          {
-            "label": "Left",
-            "value": "image_form"
-          },
-          {
-            "label": "Right",
-            "value": "form_image"
-          }
-        ]
-      },
-      {
-        "type": "select",
-        "id": "layout_mobile",
-        "label": "Image placement - mobile",
-        "default": "form_image",
-        "options": [
-          {
-            "label": "Top",
-            "value": "image_form"
-          },
-          {
-            "label": "Bottom",
-            "value": "form_image"
-          }
-        ]
-      },  
-      {
-        "type": "range",
-        "id": "layout_gap",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Gap",
-        "default": 70
-      },
-      {
-        "type": "range",
-        "id": "layout_gap_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Gap - mobile",
-        "default": 30
-      },   
-      {
-        "type": "header",
-        "content": "Image"
-      },
-      {
-        "type": "image_picker",
-        "id": "image",
-        "label": "Image"
-      },  
-      {
-        "type": "range",
-        "id": "image_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 0
-      },  
-      {
-        "type": "range",
-        "id": "image_border_thickness",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "Border thickness",
-        "default": 0
-      },  
-      {
-        "type": "header",
-        "content": "Image content"
-      },
-      {
-        "type": "text_alignment",
-        "id": "image_content_align",
-        "label": "Alignment",
-        "default": "center"
-      },
-      {
-        "type": "text_alignment",
-        "id": "image_content_align_mobile",
-        "label": "Alignment - mobile",
-        "default": "center"
-      },
-      {
-        "type": "select",
-        "id": "image_content_vertical_align",
-        "label": "Position",
-        "default": "start",
-        "options": [
-          {
-            "label": "Top",
-            "value": "start"
-          },
-          {
-            "label": "Center",
-            "value": "center"
-          },
-          {
-            "label": "Bottom",
-            "value": "end"
-          }
-        ]
-      },
-      {
-        "type": "select",
-        "id": "image_content_vertical_align_mobile",
-        "label": "Position - mobile",
-        "default": "start",
-        "options": [
-          {
-            "label": "Top",
-            "value": "start"
-          },
-          {
-            "label": "Center",
-            "value": "center"
-          },
-          {
-            "label": "Bottom",
-            "value": "end"
-          }
-        ]
-      },
-      {
-        "type": "select",
-        "id": "image_ratio",
-        "label": "Aspect ratio",
-        "default": "portrait",
-        "options": [
-          {
-            "label": "Portrait",
-            "value": "portrait"
-          },
-          {
-            "label": "Square",
-            "value": "square"
-          },
-          {
-            "label": "Landscape",
-            "value": "landscape"
-          },
-          {
-            "label": "Original",
-            "value": "original"
-          }
-        ]
-      },
-      {
-        "type": "select",
-        "id": "image_ratio_mobile",
-        "label": "Aspect ratio - mobile",
-        "default": "portrait",
-        "options": [
-          {
-            "label": "Portrait",
-            "value": "portrait"
-          },
-          {
-            "label": "Square",
-            "value": "square"
-          },
-          {
-            "label": "Landscape",
-            "value": "landscape"
-          },
-          {
-            "label": "Original",
-            "value": "original"
-          }
-        ]
-      },
-      {
-        "type": "header",
         "content": "Content"
       },
       {
         "type": "text_alignment",
         "id": "content_align",
-        "label": "Alignment"
+        "label": "Alignment",
+        "default": "center"
       },
       {
         "type": "text_alignment",
@@ -1617,53 +1034,13 @@
       },
       {
         "type": "range",
-        "id": "form_padding_horizontal",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "form_padding_horizontal_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "form_padding_vertical",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 30
-      },
-      {
-        "type": "range",
-        "id": "form_padding_vertical_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 0
-      },
-      {
-        "type": "range",
         "id": "form_gap",
         "min": 0,
         "max": 100,
         "step": 2,
         "unit": "px",
         "label": "Gap",
-        "default": 12
+        "default": 20
       },
       {
         "type": "range",
@@ -1673,7 +1050,7 @@
         "step": 2,
         "unit": "px",
         "label": "Gap - mobile",
-        "default": 8
+        "default": 20
       },
       {
         "type": "range",
@@ -1683,7 +1060,7 @@
         "step": 2,
         "unit": "px",
         "label": "Margin top",
-        "default": 20
+        "default": 70
       },
       {
         "type": "range",
@@ -1693,7 +1070,7 @@
         "step": 2,
         "unit": "px",
         "label": "Margin top - mobile",
-        "default": 20
+        "default": 70
       },
       {
         "type": "header",
@@ -1701,16 +1078,23 @@
       },
       {
         "type": "checkbox",
+        "id": "title_advanced",
+        "label": "Advanced field title settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "title_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "title_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.title_custom }}"
+        "visible_if": "{{ section.settings.title_custom and section.settings.title_advanced }}"
       },
       {
         "type": "range",
@@ -1720,7 +1104,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "range",
@@ -1730,7 +1115,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "range",
@@ -1740,30 +1126,34 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 130
+        "default": 130,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "header",
-        "content": "Field required text"
+        "content": "Field required text",
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "text",
         "id": "required_text",
-        "label": "Text",
-        "default": "*"
+        "label": "Required text",
+        "default": "*",
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "checkbox",
         "id": "required_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "required_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.required_custom }}"
+        "visible_if": "{{ section.settings.required_custom and section.settings.title_advanced }}"
       },
       {
         "type": "range",
@@ -1773,7 +1163,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "range",
@@ -1783,7 +1174,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "range",
@@ -1793,7 +1185,8 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 130
+        "default": 130,
+        "visible_if": "{{ section.settings.title_advanced }}"
       },
       {
         "type": "header",
@@ -1801,16 +1194,23 @@
       },
       {
         "type": "checkbox",
+        "id": "label_advanced",
+        "label": "Advanced field label settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "label_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.label_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "label_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.label_custom }}"
+        "visible_if": "{{ section.settings.label_custom and section.settings.label_advanced }}"
       },
       {
         "type": "range",
@@ -1820,7 +1220,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 12
+        "default": 12,
+        "visible_if": "{{ section.settings.label_advanced }}"
       },
       {
         "type": "range",
@@ -1830,7 +1231,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 12
+        "default": 12,
+        "visible_if": "{{ section.settings.label_advanced }}"
       },
       {
         "type": "range",
@@ -1840,7 +1242,8 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 150
+        "default": 130,
+        "visible_if": "{{ section.settings.label_advanced }}"
       },
       {
         "type": "range",
@@ -1850,7 +1253,8 @@
         "step": 2,
         "unit": "px",
         "label": "Margin top",
-        "default": 8
+        "default": 8,
+        "visible_if": "{{ section.settings.label_advanced }}"
       },
       {
         "type": "range",
@@ -1860,7 +1264,8 @@
         "step": 2,
         "unit": "px",
         "label": "Margin top - mobile",
-        "default": 8
+        "default": 8,
+        "visible_if": "{{ section.settings.label_advanced }}"
       },
       {
         "type": "header",
@@ -1868,16 +1273,23 @@
       },
       {
         "type": "checkbox",
+        "id": "input_advanced",
+        "label": "Advanced field input settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "input_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "input_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.input_custom }}"
+        "visible_if": "{{ section.settings.input_custom and section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1887,7 +1299,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 16
+        "default": 14,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1897,7 +1310,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 16
+        "default": 16,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1907,7 +1321,8 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 150
+        "default": 150,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1917,7 +1332,8 @@
         "step": 2,
         "unit": "px",
         "label": "Padding horizontal",
-        "default": 16
+        "default": 10,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1927,7 +1343,8 @@
         "step": 2,
         "unit": "px",
         "label": "Padding horizontal - mobile",
-        "default": 16
+        "default": 10,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1937,7 +1354,8 @@
         "step": 2,
         "unit": "px",
         "label": "Padding vertical",
-        "default": 16
+        "default": 10,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1947,7 +1365,8 @@
         "step": 2,
         "unit": "px",
         "label": "Padding vertical - mobile",
-        "default": 16
+        "default": 10,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1957,7 +1376,8 @@
         "step": 2,
         "unit": "px",
         "label": "Roundness",
-        "default": 30
+        "default": 0,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1967,7 +1387,8 @@
         "step": 1,
         "unit": "px",
         "label": "Border thickness",
-        "default": 1
+        "default": 1,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1977,7 +1398,8 @@
         "step": 2,
         "unit": "px",
         "label": "Margin top",
-        "default": 8
+        "default": 6,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "range",
@@ -1987,7 +1409,8 @@
         "step": 2,
         "unit": "px",
         "label": "Margin top - mobile",
-        "default": 8
+        "default": 6,
+        "visible_if": "{{ section.settings.input_advanced }}"
       },
       {
         "type": "header",
@@ -1995,16 +1418,23 @@
       },
       {
         "type": "checkbox",
+        "id": "checkbox_advanced",
+        "label": "Advanced checkbox settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "checkbox_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.checkbox_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "checkbox_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.checkbox_custom }}"
+        "visible_if": "{{ section.settings.checkbox_custom and section.settings.checkbox_advanced }}"
       },
       {
         "type": "range",
@@ -2014,7 +1444,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.checkbox_advanced }}"
       },
       {
         "type": "range",
@@ -2024,7 +1455,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.checkbox_advanced }}"
       },
       {
         "type": "range",
@@ -2034,7 +1466,8 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 150
+        "default": 150,
+        "visible_if": "{{ section.settings.checkbox_advanced }}"
       },
       {
         "type": "range",
@@ -2044,7 +1477,8 @@
         "step": 1,
         "unit": "px",
         "label": "Roundness",
-        "default": 2
+        "default": 2,
+        "visible_if": "{{ section.settings.checkbox_advanced }}"
       },
       {
         "type": "header",
@@ -2059,16 +1493,23 @@
       },
       {
         "type": "checkbox",
+        "id": "success_advanced",
+        "label": "Advanced success message settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "success_text_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.success_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "success_text_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.success_text_custom }}"
+        "visible_if": "{{ section.settings.success_text_custom and section.settings.success_advanced }}"
       },
       {
         "type": "range",
@@ -2078,7 +1519,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.success_advanced }}"
       },
       {
         "type": "range",
@@ -2088,7 +1530,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.success_advanced }}"
       },
       {
         "type": "range",
@@ -2098,39 +1541,22 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 150
-      },
-      {
-        "type": "range",
-        "id": "success_text_mt",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "success_text_mt_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 20
+        "default": 150,
+        "visible_if": "{{ section.settings.success_advanced }}"
       },
       {
         "type": "text_alignment",
         "id": "success_text_align",
         "label": "Alignment",
-        "default": "center"
+        "default": "center",
+        "visible_if": "{{ section.settings.success_advanced }}"
       },
       {
         "type": "text_alignment",
         "id": "success_text_align_mobile",
         "label": "Alignment - mobile",
-        "default": "center"
+        "default": "center",
+        "visible_if": "{{ section.settings.success_advanced }}"
       },
       {
         "type": "header",
@@ -2139,16 +1565,23 @@
       },
       {
         "type": "checkbox",
+        "id": "error_advanced",
+        "label": "Advanced error message settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "error_text_custom",
         "label": "Use custom font",
-        "default": false
+        "default": false,
+        "visible_if": "{{ section.settings.error_advanced }}"
       },
       {
         "type": "font_picker",
         "id": "error_text_font",
         "label": "Font family",
         "default": "josefin_sans_n4",
-        "visible_if": "{{ section.settings.error_text_custom }}"
+        "visible_if": "{{ section.settings.error_text_custom and section.settings.error_advanced }}"
       },
       {
         "type": "range",
@@ -2158,7 +1591,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.error_advanced }}"
       },
       {
         "type": "range",
@@ -2168,7 +1602,8 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 15
+        "default": 14,
+        "visible_if": "{{ section.settings.error_advanced }}"
       },
       {
         "type": "range",
@@ -2178,37 +1613,22 @@
         "step": 10,
         "unit": "%",
         "label": "Line height",
-        "default": 150
-      },
-      {
-        "type": "range",
-        "id": "error_text_mt",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "error_text_mt_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Margin top - mobile",
-        "default": 20
+        "default": 150,
+        "visible_if": "{{ section.settings.error_advanced }}"
       },
       {
         "type": "text_alignment",
         "id": "error_text_align",
-        "label": "Alignment"
+        "label": "Alignment",
+        "default": "center",
+        "visible_if": "{{ section.settings.error_advanced }}"
       },
       {
         "type": "text_alignment",
         "id": "error_text_align_mobile",
-        "label": "Alignment - mobile"
+        "label": "Alignment - mobile",
+        "default": "center",
+        "visible_if": "{{ section.settings.error_advanced }}"
       },      
       {
         "type": "header",
@@ -2241,7 +1661,7 @@
         "step": 1,
         "unit": "px",
         "label": "Font size",
-        "default": 15
+        "default": 14
       },
       {
         "type": "range",
@@ -2251,7 +1671,7 @@
         "step": 1,
         "unit": "px",
         "label": "Font size - mobile",
-        "default": 15
+        "default": 14
       },
       {
         "type": "range",
@@ -2267,27 +1687,27 @@
         "type": "range",
         "id": "submit_padding_horizontal",
         "min": 0,
-        "max": 100,
+        "max": 60,
         "step": 2,
         "unit": "px",
         "label": "Padding horizontal",
-        "default": 20
+        "default": 40
       },
       {
         "type": "range",
         "id": "submit_padding_horizontal_mobile",
         "min": 0,
-        "max": 100,
+        "max": 60,
         "step": 2,
         "unit": "px",
         "label": "Padding horizontal - mobile",
-        "default": 20
+        "default": 40
       },
       {
         "type": "range",
         "id": "submit_padding_vertical",
         "min": 0,
-        "max": 100,
+        "max": 60,
         "step": 2,
         "unit": "px",
         "label": "Padding vertical",
@@ -2297,7 +1717,7 @@
         "type": "range",
         "id": "submit_padding_vertical_mobile",
         "min": 0,
-        "max": 100,
+        "max": 60,
         "step": 2,
         "unit": "px",
         "label": "Padding vertical - mobile",
@@ -2327,32 +1747,22 @@
         "type": "range",
         "id": "submit_mt",
         "min": 0,
-        "max": 100,
+        "max": 50,
         "step": 2,
         "unit": "px",
         "label": "Margin top",
-        "default": 20
+        "default": 32
       },
       {
         "type": "range",
         "id": "submit_mt_mobile",
         "min": 0,
-        "max": 100,
+        "max": 50,
         "step": 2,
         "unit": "px",
         "label": "Margin top - mobile",
-        "default": 20
+        "default": 36
       },    
-      {
-        "type": "header",
-        "content": "Image colors"
-      },
-      {
-        "type": "color",        
-        "id": "image_border_color",
-        "label": "Border",
-        "default": "#121212"
-      },
       {
         "type": "header",
         "content": "Form colors"
@@ -2389,7 +1799,7 @@
         "type": "color",        
         "id": "placeholder_color",
         "label": "Placeholder",
-        "default": "#333333"
+        "default": "#AFAFAF"
       },
       {
         "type": "color",        
@@ -2401,13 +1811,13 @@
         "type": "color",        
         "id": "input_border_color",
         "label": "Border",
-        "default": "#F5F5F5"
+        "default": "#121212"
       },
       {
         "type": "color",        
         "id": "input_border_hover_color",
         "label": "Border hover",
-        "default": "#E7E7E7"
+        "default": "#121212"
       },
       {
         "type": "color",        
@@ -2435,7 +1845,7 @@
         "type": "color",        
         "id": "checkbox_checkmar_color",
         "label": "Checkmark",
-        "default": "#121212"
+        "default": "#FFFFFF"
       },      
       {
         "type": "color",        
@@ -2447,7 +1857,7 @@
         "type": "color",        
         "id": "checkbox_bg_active_color",
         "label": "Background active",
-        "default": "#FFFFFF"
+        "default": "#121212"
       },
       {
         "type": "color",        
@@ -2475,7 +1885,7 @@
         "type": "color",        
         "id": "submit_hover_color",
         "label": "Text hover",
-        "default": "#121212"
+        "default": "#FFFFFF"
       },
       {
         "type": "color",        
@@ -2484,34 +1894,24 @@
         "default": "#121212"
       },
       {
-        "type": "color_background",
-        "id": "submit_bg_gradient",
-        "label": "Background gradient",
-        "info": "Remove gradient to replace with solid colors"
-      },
-      {
         "type": "color",        
         "id": "submit_bg_hover_color",
         "label": "Background hover",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "color_background",
-        "id": "submit_bg_hover_gradient",
-        "label": "Background gradient hover",
-        "info": "Remove gradient to replace with solid colors"
+        "default": "#121212"
       },
       {
         "type": "color",        
         "id": "submit_border_color",
         "label": "Border",
-        "default": "#121212"
+        "default": "#121212",
+        "visible_if": "{{ section.settings.submit_border_thickness >= 1 }}"
       },
       {
         "type": "color",        
         "id": "submit_border_hover_color",
         "label": "Border hover",
-        "default": "#121212"
+        "default": "#121212",
+        "visible_if": "{{ section.settings.submit_border_thickness >= 1 }}"
       },
       {
         "type": "header",
@@ -2521,25 +1921,42 @@
         "type": "color",
         "label": "Success message",
         "id": "success_text_color",
-        "default": "#008060"
+        "default": "#31B61F"
       },
       {
         "type": "color",
         "label": "Error message",
         "id": "error_text_color",
-        "default": "#E53030"
+        "default": "#FF2020"
+      },
+       {
+        "type": "select",
+        "id": "background_style",
+        "label": "Background style",
+        "default": "solid",
+        "options": [
+          {
+            "label": "Solid",
+            "value": "solid"
+          },
+          {
+            "label": "Gradient",
+            "value": "gradient"
+          }
+        ]
       },
       {
         "type": "color",
-        "label": "Section background",
+        "label": "Background",
         "id": "background_color",
-        "default": "#FFFFFF"
+        "default": "#FFFFFF",
+        "visible_if": "{{ section.settings.background_style == 'solid' }}"
       },
       {
         "type": "color_background",
         "id": "background_gradient",
-        "label": "Section background gradient",
-        "info": "Remove gradient to replace with solid colors"
+        "label": "Gradient",
+        "visible_if": "{{ section.settings.background_style == 'gradient' }}"
       },
       {
         "type": "color",
@@ -2640,11 +2057,6 @@
         "content": "Section"
       },
       {
-        "type": "image_picker",
-        "id": "background_image",
-        "label": "Background image"
-      },
-      {
         "type": "checkbox",
         "id": "full_width",
         "label": "Full width",
@@ -2658,7 +2070,8 @@
         "step": 100,
         "unit": "px",
         "label": "Section content width",
-        "default": 1400
+        "default": 900,
+        "visible_if": "{{ section.settings.full_width == false }}"
       },
       {
         "type": "range",
@@ -2679,13 +2092,6 @@
         "unit": "px",
         "label": "Section roundness",
         "default": 0
-      },
-      {
-        "type": "checkbox",
-        "id": "lazy",
-        "label": "Lazy load",
-        "info": "Lazy load images for speed optimisation",
-        "default": true
       }
     ],
     "blocks": [
@@ -2698,7 +2104,7 @@
             "type": "richtext",
             "id": "heading",
             "label": "Heading",
-            "default": "<h2>Contact form #5</h2>"
+            "default": "<h2>Contact form #6</h2>"
           },
           {
             "type": "checkbox",
@@ -2721,7 +2127,7 @@
             "step": 2,
             "unit": "px",
             "label": "Font size",
-            "default": 48
+            "default": 40
           },
           {
             "type": "range",
@@ -2803,7 +2209,7 @@
             "step": 1,
             "unit": "px",
             "label": "Font size",
-            "default": 15
+            "default": 14
           },
           {
             "type": "range",
@@ -2813,7 +2219,7 @@
             "step": 1,
             "unit": "px",
             "label": "Font size - mobile",
-            "default": 15
+            "default": 14
           },
           {
             "type": "range",
@@ -2867,7 +2273,7 @@
             "type": "checkbox",
             "id": "required",
             "label": "Make this field required",
-            "default": true
+            "default": false
           },
           {
 		    "type": "text",
@@ -2881,8 +2287,8 @@
             "label": "Field label",
             "info": "Shown above the input field, below the title."
           },
-		  {
-		    "type": "text",
+          {
+            "type": "text",
             "id": "placeholder",
             "label": "Placeholder text",
             "info": "Hint shown inside the input field before the user types. Leave empty to show nothing."
@@ -2892,10 +2298,10 @@
             "id": "type",
 			"label": "Input type",
             "options": [
-              {"value": "text", "label": "Text"},
-              {"value": "email", "label": "Email address"},
-              {"value": "tel", "label": "Telephone number"}
-			],
+                {"value": "text", "label": "Text"},
+                {"value": "email", "label": "Email address"},
+                {"value": "tel", "label": "Telephone number"}
+              ],
             "info": "Helps validate the user's input."
 		  },
           {
@@ -2909,7 +2315,7 @@
             "default": 100
           }
         ]
-      },
+      },      
       {
         "name": "SG-Multiline text field",
 		"type": "textarea",
@@ -2924,7 +2330,7 @@
             "type": "checkbox",
             "id": "required",
             "label": "Make this field required",
-            "default": true
+            "default": false
 		  },
           {
             "type": "text",
@@ -2974,7 +2380,7 @@
             "id": "name",
             "label": "Internal field name (required)",
             "info": "Used to identify this field in form submissions."
-		      },
+		  },
           {
             "type": "checkbox",
             "id": "required",
@@ -3014,7 +2420,7 @@
             "id": "name",
             "label": "Internal field name (required)",
             "info": "Used to identify this field in form submissions."
-		  },
+		      },
           {
             "type": "checkbox",
             "id": "required",
@@ -3037,14 +2443,15 @@
             "type": "text",
             "id": "placeholder",
             "label": "Placeholder text",
+            "default": "Select reason...",
             "info": "Hint shown inside the input field before the user types. Leave empty to show nothing."
           },
           {
             "type": "textarea",
             "id": "dropdown_options",            
             "label": "Dropdown options",
-            "info": "Enter choices separated by commas, e.g., Feedback, Press, Support, Wholesale.",
-            "default": "Feedback, Press, Support, Wholesale"
+            "info": "Enter choices separated by commas, e.g., Feedback,Press,Support,Wholesale.",
+            "default": "Feedback,Press,Support"
           },
           {
             "type": "range",
@@ -3079,7 +2486,7 @@
             "id": "title",
             "label": "Field title",
             "info": "Displayed above the input box as a heading."
-		  },
+		      },
           {
             "type": "text",
             "id": "label",
@@ -3092,7 +2499,7 @@
             "label": "Checkbox options",
             "info": "Enter each option separated by a comma, e.g., Option 1, Option 2, Option 3.",
             "default": "Checkbox option"
-		  },
+		      },
           {
             "type": "range",
             "id": "width",
@@ -3111,455 +2518,181 @@
           }
         ]
       },
-      {            
-        "type": "image_heading",
-        "limit": 1,
-        "name": "SG-Image heading",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "heading",
-            "label": "Heading",
-            "default": "<h2>Heading</h2>"
-          },
-          {
-            "type": "checkbox",
-            "id": "heading_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "heading_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4",
-            "visible_if": "{{ block.settings.heading_custom }}"
-          },
-          {
-            "type": "range",
-            "id": "heading_size",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size",
-            "default": 40
-          },
-          {
-            "type": "range",
-            "id": "heading_size_mobile",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 40
-          },
-          {
-            "type": "range",
-            "id": "heading_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 130
-          },
-          {
-            "type": "range",
-            "id": "heading_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 0
-          },
-          {
-            "type": "range",
-            "id": "heading_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 0
-          },      
-          {
-            "type": "color",
-            "label": "Color",
-            "id": "heading_color",
-            "default": "#121212"
-          }
-        ]
-      },
       {
-        "type": "image_text",
-        "limit": 1,
-        "name": "SG-Image text",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "text",
-            "label": "Text",
-            "default": "<p>Text</p>"
-          },
-          {
-            "type": "checkbox",
-            "id": "text_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "text_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4",
-            "visible_if": "{{ block.settings.text_custom }}"
-          },
-          {
-            "type": "range",
-            "id": "text_size",
-            "min": 0,
-            "max": 40,
-            "step": 1,
-            "unit": "px",
-            "label": "Font size",
-            "default": 15
-          },
-          {
-            "type": "range",
-            "id": "text_size_mobile",
-            "min": 0,
-            "max": 40,
-            "step": 1,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 15
-          },
-          {
-            "type": "range",
-            "id": "text_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 150
-          },
-          {
-            "type": "range",
-            "id": "text_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 24
-          },
-          {
-            "type": "range",
-            "id": "text_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 24
-          },          
-          {
-            "type": "color",
-            "label": "Color",
-            "id": "text_color",
-            "default": "#121212"
-          }
-        ]
-      },
-      {
-        "type": "image_button",
-        "name": "SG-Image button",
-        "limit": 1,
+        "name": "SG-Submenu",
+        "type": "submenu",     
         "settings": [
           {
             "type": "text",
-            "id": "button",
-            "label": "Button label",
-            "default": "Button label"
-          },
-          {
-            "type": "url",
-            "id": "url",
-            "label": "Button link",
-            "info": "If you want the link to open an email instead of a website, start it with mailto: — For example: mailto:yourname@example.com"
-          },
-          {
-            "type": "select",
-            "id": "button_style",
-            "label": "Style",
-            "default": "non_outline",
-            "options": [
-              {
-                "label": "Link",
-                "value": "link"
-              },
-              {
-                "label": "Non-outline",
-                "value": "non_outline"
-              },
-              {
-                "label": "Non-outline & arrow",
-                "value": "non_outline_arrow"
-              },
-              {
-                "label": "Outline",
-                "value": "outline"
-              },
-              {
-                "label": "Outline & arrow",
-                "value": "outline_arrow"
-              }
-            ]
-          },
-          {
-            "type": "checkbox",
-            "id": "button_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "button_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4",
-            "visible_if": "{{ block.settings.button_custom }}"
-          },
-          {
-            "type": "range",
-            "id": "button_size",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "px",
-            "label": "Font size",
-            "default": 15
-          },
-          {
-            "type": "range",
-            "id": "button_size_mobile",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 15
-          },
-          {
-            "type": "range",
-            "id": "button_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 100
-          },
-          {
-            "type": "range",
-            "id": "button_padding_horizontal",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding horizontal",
-            "default": 24,
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "range",
-            "id": "button_padding_horizontal_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding horizontal - mobile",
-            "default": 24,
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "range",
-            "id": "button_padding_vertical",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding vertical",
-            "default": 16,
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "range",
-            "id": "button_padding_vertical_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding vertical - mobile",
-            "default": 16,
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "range",
-            "id": "button_radius",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Roundness",
-            "default": 100,
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "range",
-            "id": "button_border_thickness",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "unit": "px",
-            "label": "Border thickness",
-            "default": 1,
-            "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
-          },
-          {
-            "type": "range",
-            "id": "button_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 24
-          },
-          {
-            "type": "range",
-            "id": "button_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 24
-          },
-          {
-            "type": "header",
-            "content": "Colors"
-          },
-          {
-            "type": "color",
-            "label": "Text",
-            "id": "button_color",
-            "default": "#121212"
-          },
-          {
-            "type": "color",
-            "label": "Text hover",
-            "id": "button_hover_color",
-            "default": "#FFFFFF"
-          },
-          {
-            "type": "color",
-            "label": "Background",
-            "id": "button_bg_color",
-            "default": "#FFFFFF",
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "color_background",
-            "id": "button_bg_gradient",
-            "label": "Background gradient",
-            "info": "Remove gradient to replace with solid colors",
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "color",
-            "label": "Background hover",
-            "id": "button_bg_hover_color",
-            "default": "#121212",
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "color_background",
-            "id": "button_bg_hover_gradient",
-            "label": "Background gradient hover",
-            "info": "Remove gradient to replace with solid colors",
-            "visible_if": "{{ block.settings.button_style != 'link' }}"
-          },
-          {
-            "type": "color",
-            "label": "Border",
-            "id": "button_border_color",
-            "default": "#121212",
-            "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
-          },
-          {
-            "type": "color",
-            "label": "Border hover",
-            "id": "button_border_hover_color",
-            "default": "#121212",
-            "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+            "id": "option",
+            "label": "Option",
+            "default": "Option",
+            "info": "Use one of the dropdown options"
           }
         ]
-      }  
+      }
     ],
     "presets": [
       {
-        "name": "SG- Contact form #5",
+        "name": "SG- Contact form #6",
         "blocks": [
-          {
-            "type": "image_heading"
-          },
-          {
-            "type": "image_text"
-          },
-          {
-            "type": "image_button"
-          },
           {
             "type": "heading"
           },
           {
             "type": "text"
-          },
+          },   
           {
             "type": "text_field",
-            "settings": {        
-              "name": "SG-Name",
+            "settings": {
+              "name": "SG-Name",       
               "placeholder": "Name",
               "type": "text",
               "width": 50
             }
-          },
+          },  
           {
             "type": "text_field",
             "settings": {
-              "name": "SG-Email",
+              "name": "SG-Email",            
               "placeholder": "Email",
               "type": "email",
               "width": 50
             }
+          },        
+          {
+            "type": "dropdown",
+            "settings": {        
+              "name": "SG-Reason for contacting",
+              "label": "Reason for contacting",
+              "placeholder": "Select reason...",
+              "dropdown_options": "Product Question,Product Experience,Order Issue,Website Issue,Other"
+            }
+          }, 
+          {
+            "type": "submenu",
+            "settings": {        
+              "option": "Product Question"
+            }
           },
           {
-            "type": "text_field",
+            "type": "checkbox",
             "settings": {
-              "name": "SG-Phone number",       
-              "placeholder": "Phone number",
-              "type": "tel"
+              "name": "SG-Have you checked out our FAQ's?",
+              "checkbox_options": "Have you checked out our FAQ's?"
             }
           },
           {
             "type": "textarea",
             "settings": {
-              "name": "SG-Comment",          
-              "placeholder": "Comment"
+              "name": "SG-Message",          
+              "label": "Tell us about your question",          
+              "placeholder": "Message..."
+            }
+          },
+          {
+            "type": "submenu",
+            "settings": {        
+              "option": "Product Experience"
+            }
+          },
+          {
+            "type": "dropdown",
+            "settings": {        
+              "name": "SG-What issue are you experiencing?",
+              "placeholder": "What issue are you experiencing?",
+              "dropdown_options": "Experience,Damaged Product,Other"
+            }
+          },
+          {
+            "type": "text_field",
+            "settings": {
+              "name": "SG-Order number",       
+              "placeholder": "Order number (i.e. #1234)",
+              "type": "text"
+            }
+          },
+          {
+            "type": "textarea",
+            "settings": {
+              "name": "SG-Message",          
+              "label": "Tell us more about your product experience",          
+              "placeholder": "Message..."
+            }
+          },
+          {
+            "type": "submenu",
+            "settings": {        
+              "option": "Order Issue"
+            }
+          },
+          {
+            "type": "checkbox",
+            "settings": {
+              "name": "SG-Have you checked out our FAQ's?",
+              "checkbox_options": "Have you checked out our FAQ's?"
+            }
+          },
+          {
+            "type": "text_field",
+            "settings": {
+              "name": "SG-Order number",       
+              "placeholder": "Order number (i.e. #1234)",
+              "type": "text"
+            }
+          },
+          {
+            "type": "dropdown",
+            "settings": {        
+              "name": "SG-What issue are you experiencing?",
+              "label": "What issue are you experiencing?",
+              "placeholder": "Choose Issue",
+              "dropdown_options": "Cancel,Update Address,Change Order,Track Order,Order Issue,Login"
+            }
+          },
+          {
+            "type": "textarea",
+            "settings": {
+              "name": "SG-Message",          
+              "label": "Please share more details about your enquiry",          
+              "placeholder": "Message..."
+            }
+          },
+          {
+            "type": "submenu",
+            "settings": {        
+              "option": "Website Issue"
+            }
+          },
+          {
+            "type": "dropdown",
+            "settings": {        
+              "name": "SG-What issue are you experiencing?",
+              "label": "What issue are you experiencing?",
+              "placeholder": "Choose Issue",
+              "dropdown_options": "Account/Login,Website Bug"
+            }
+          },
+          {
+            "type": "textarea",
+            "settings": {
+              "name": "SG-Message",          
+              "label": "Please describe what issue you're having",          
+              "placeholder": "Message..."
+            }
+          },
+          {
+            "type": "submenu",
+            "settings": {        
+              "option": "Other"
+            }
+          },
+          {
+            "type": "textarea",
+            "settings": {
+              "name": "SG-Message",          
+              "label": "Please describe the reason for contacting us",          
+              "placeholder": "Message..."
             }
           }
         ]
