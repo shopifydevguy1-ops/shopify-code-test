@@ -1,28 +1,5 @@
-<script>
-  function initFAQNew() {
-    {% for block in section.blocks %}
-      let sectionFaqItems{{ forloop.index }} = document.querySelectorAll('.section-faq-item-{{ block.id }}');
-      sectionFaqItems{{ forloop.index }}.forEach((element,key) => {
-      let sectionFaqQuestion{{ forloop.index }} = element.querySelector('.section-faq-question-{{ block.id }}');
-      let sectionFaqAnswer{{ forloop.index }} = element.querySelector('.section-faq-answer-{{ block.id }}');
-      sectionFaqQuestion{{ forloop.index }}.addEventListener('click', () => {
-        sectionFaqQuestion{{ forloop.index }}.classList.toggle('open-faq');
-        sectionFaqAnswer{{ forloop.index }}.classList.toggle('open-faq');
-      })
-    })
-    {% endfor %}
-  }
+{%- liquid
 
-  document.addEventListener('DOMContentLoaded', initFAQNew);
-  
-  if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initFAQNew);
-     document.addEventListener('shopify:section:load', initFAQNew);
-  }
-  
-</script>
-
-{%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
   assign padding_top = section.settings.padding_top
@@ -33,63 +10,48 @@
   assign margin_bottom = section.settings.margin_bottom
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
+  assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
 
-  assign heading = section.settings.heading
-  assign heading_size = section.settings.heading_size
-  assign heading_color = section.settings.heading_color
-  assign heading_font = section.settings.heading_font
-  assign heading_height = section.settings.heading_height
-  assign heading_align = section.settings.heading_align
-
-  assign items_mt = section.settings.items_mt
-  assign items_padding_horizontal = section.settings.items_padding_horizontal
-  assign items_padding_vertical = section.settings.items_padding_vertical
-  assign items_gap = section.settings.items_gap
-  assign items_gap_mobile = section.settings.items_gap_mobile
-  assign items_bg_color = section.settings.items_bg_color
-  assign items_radius = section.settings.items_radius
+  assign feature_row = section.settings.feature_row
+  assign feature_row_mobile = section.settings.feature_row_mobile
+  assign feature_gap_mobile = section.settings.feature_gap_mobile
+  assign feature_gap = section.settings.feature_gap
+  assign feature_padding_vertical = section.settings.feature_padding_vertical
+  assign feature_padding_horizontal = section.settings.feature_padding_horizontal
+  assign feature_border_thickness = section.settings.feature_border_thickness
+  assign feature_border_color = section.settings.feature_border_color
+  assign feature_bg = section.settings.feature_bg
+  assign feature_radius = section.settings.feature_radius
+  assign feature_shadow_color = section.settings.feature_shadow_color
+  assign feature_shadow = section.settings.feature_shadow
   
-  assign align_radius = section.settings.align_radius
-  assign hide_icon = section.settings.hide_icon
+  assign feature_heading_size = section.settings.feature_heading_size
+  assign feature_heading_size_mobile = section.settings.feature_heading_size_mobile
+  assign feature_heading_color = section.settings.feature_heading_color
+  assign feature_heading_custom = section.settings.feature_heading_custom
+  assign feature_heading_font = section.settings.feature_heading_font
+  assign feature_heading_height = section.settings.feature_heading_height
 
-  assign question_custom = section.settings.question_custom
-  assign question_font = section.settings.question_font
-  assign question_height = section.settings.question_height
-  assign question_size = section.settings.question_size
-  assign question_padding_horizontal = section.settings.question_padding_horizontal
-  assign question_padding_vertical = section.settings.question_padding_vertical
-  assign question_color = section.settings.question_color
-  assign question_hover_color = section.settings.question_hover_color
-  assign question_bg_color = section.settings.question_bg_color
-  assign question_bg_hover_color = section.settings.question_bg_hover_color
-  assign question_icon_color = section.settings.question_icon_color
-  assign question_icon_hover_color = section.settings.question_icon_hover_color
-  assign question_radius = section.settings.question_radius
-  assign question_icon_size = section.settings.question_icon_size
+  assign feature_text_size = section.settings.feature_text_size
+  assign feature_text_size_mobile = section.settings.feature_text_size_mobile
+  assign feature_text_color = section.settings.feature_text_color
+  assign feature_text_custom = section.settings.feature_text_custom
+  assign feature_text_font = section.settings.feature_text_font
+  assign feature_text_height = section.settings.feature_text_height
+  assign feature_text_mt = section.settings.feature_text_mt
 
-  assign answer_size = section.settings.answer_size
-  assign answer_color = section.settings.answer_color
-  assign answer_custom = section.settings.answer_custom
-  assign answer_font = section.settings.answer_font
-  assign answer_height = section.settings.answer_height
-  assign answer_color = section.settings.answer_color
-  assign answer_link_hover_color = section.settings.answer_link_hover_color
-  assign answer_bg_color = section.settings.answer_bg_color
-  assign answer_padding_horizontal = section.settings.answer_padding_horizontal
-  assign answer_padding_vertical = section.settings.answer_padding_vertical
-  assign answer_mt = section.settings.answer_mt
-  assign answer_mb = section.settings.answer_mb
-  assign answer_radius = section.settings.answer_radius
-  
+  assign feature_icon_size_mobile = section.settings.feature_icon_size_mobile
+  assign feature_icon_size = section.settings.feature_icon_size
+  assign feature_icon_color = section.settings.feature_icon_color
+   
 -%}
+{% style %}
 
-{%- style -%}
+  {{ feature_text_font | font_face: font_display: 'swap' }}
+  {{ feature_heading_font | font_face: font_display: 'swap' }}
 
-  {{  heading_font | font_face: font_display: 'swap' }}
-  {{  question_font | font_face: font_display: 'swap' }}
-  {{  answer_font | font_face: font_display: 'swap' }}
-  
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
@@ -98,7 +60,6 @@
   }
   
   .section-{{ section.id }}-settings {
-    max-width: {{ content_width }}rem;
     margin: 0 auto;
     padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
@@ -106,22 +67,70 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .section-faq-heading-{{ section.id }} {
-    margin: 0;
-    font-size: {{ heading_size | times: 0.85 }}px;
-    color: {{ heading_color }};
-    line-height: {{ heading_height }}%;
+  .feature-{{ section.id }} .box__title {
+    margin: 0px;
+    font-size: {{ feature_heading_size_mobile }}px;
+    color: {{ feature_heading_color }};
+    line-height: {{ feature_heading_height }}%;
     text-transform: unset;
-    text-align: {{ heading_align  }};
-  }
-
-  .section-faq-items-{{ section.id }} {
-    margin-top: {{ items_mt | times: 0.75 | round: 0 }}px;
-    padding: {{ items_padding_vertical | times: 0.75 | round: 0 }}px {{ items_padding_horizontal | times: 0.75 | round: 0 }}px;
-    border-radius: {{ items_radius | times: 0.75 | round: 0 }}px;
-    background-color: {{ items_bg_color }};
+    font-weight: bold;
+    margin-top: {{section.settings.feature_heading_mt}}px;
   }
   
+  .feature-{{ section.id }} .box__description {
+    margin-top: {{ feature_text_mt | times: 0.75 | round: 0 }}px;
+  }
+
+  .feature-{{ section.id }} .box__description * {
+    margin: 0px;
+    font-size: {{ feature_text_size_mobile }}px;
+    color: {{ feature_text_color }};
+    line-height: {{ feature_text_height }}%;
+    text-transform: unset;
+  }
+
+  .feature-{{ section.id }} .wrapper-box {
+    display: grid;
+    grid-template-columns: repeat({{ feature_row_mobile}}, 1fr);
+    background-color: {{ feature_bg }}; 
+    border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
+    border-radius: {{ feature_radius }}px;
+    padding: {{ feature_padding_vertical | times: 0.75 | round: 0 }}px {{ feature_padding_horizontal | times: 0.75 | round: 0 }}px;
+    gap: {{ feature_gap_mobile }}px;
+  }
+  
+  .feature-{{ section.id }} .box:not(:nth-child(2)) .box__content-wrapper {
+    padding-right: 10px;
+  }
+  
+  .feature-{{ section.id }} .box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    gap: 5px;
+  }
+  
+  .feature-{{ section.id }} .box__image {
+    display:flex;
+    margin-right: 10px;
+    flex: 0 0 {{ feature_icon_size_mobile }}px;
+    height: {{ feature_icon_size_mobile }}px;
+  }
+
+  .feature-{{ section.id }} .box__image img,
+  .feature-{{ section.id }} .box__image svg {
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .feature-{{ section.id }} .box__image svg path {
+    fill: {{ feature_icon_color }};
+  }
+
   @media(min-width: 768px) {
 
     .section-{{ section.id }} {
@@ -137,631 +146,407 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .section-faq-heading-{{ section.id }} {
-      font-size: {{ heading_size }}px;
+    .feature-{{ section.id }} .wrapper-box {
+      grid-template-columns: repeat({{ feature_row }}, 1fr);
+      padding: {{ feature_padding_vertical }}px {{ feature_padding_horizontal }}px;
+      gap: {{ feature_gap }}px;
     }
 
-    .section-faq-items-{{ section.id }} {
-      margin-top: {{ items_mt }}px;
-      padding: {{ items_padding_vertical }}px {{ items_padding_horizontal }}px;
-      border-radius: {{ items_radius }}px;
-      box-sizing: border-box;
+    .feature-{{ section.id }} .box {
+      flex: 1 0 auto;
+    }
+    
+    .feature-{{ section.id }} .box__title {
+      font-size: {{ feature_heading_size }}px;
+    }
+
+    .feature-{{ section.id }} .box__description {
+      margin-top: {{ feature_text_mt }}px;
+    }
+
+    .feature-{{ section.id }} .box__description * {
+      font-size: {{ feature_text_size }}px;
+    }
+
+    .section-{{ section.id }}-settings .box__image {
+      flex: 0 0 {{ feature_icon_size }}px;
+      height: {{ feature_icon_size }}px;
     }
   }
-  
-{%- endstyle -%}
+{% endstyle %}
 
-{% if section.settings.heading_custom %}
+{% if feature_heading_custom %}
   <style>
-    .section-faq-heading-{{ section.id }} {
-      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-      font-weight: {{ heading_font.weight }};
-      font-style: {{ heading_font.style }};
+    .feature-{{ section.id }} .box__title {
+      font-family: {{ feature_heading_font.family }}, {{ feature_heading_font.fallback_families }};
+      font-weight: {{ feature_heading_font.weight }};
+      font-style: {{ feature_heading_font.style }};
     }
   </style>
 {% endif %}
 
-{% for block in section.blocks %}
+{% if feature_text_custom %}
   <style>
-    
-    .section-faq-item-{{ block.id }}:not(:first-child) {
-      margin-top: {{ items_gap_mobile }}px;
+    .feature-{{ section.id }} .box__description * {
+      font-family: {{ feature_text_font.family }}, {{ feature_text_font.fallback_families }};
+      font-weight: {{ feature_text_font.weight }};
+      font-style: {{ feature_text_font.style }};
     }
-
-    .section-faq-question-{{ block.id }} {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      justify-content: space-between;
-      cursor: pointer;
-      padding: {{ question_padding_vertical | times: 0.75 | round: 0 }}px {{ question_padding_horizontal | times: 0.75 | round: 0 }}px;
-      border-radius: {{ question_radius }}px;
-      background-color: {{ question_bg_color }};
-      transition: all 0.3s ease 0s;
-      box-sizing: border-box;
-    }
-
-     .section-faq-question-{{ block.id }}:hover {
-       transition: all 0.3s ease 0s;
-       background-color: {{ question_bg_hover_color }};
-     }
-
-    .section-faq-question-{{ block.id }} h3 {
-      margin: 0;
-      font-size: {{ question_size | times: 0.85 }}px;
-      color: {{ question_color }};
-      line-height: {{ question_height }}%;
-      text-transform: unset;
-      transition: all 0.3s ease 0s;
-    }
-
-    .section-faq-question-{{ block.id }}:hover h3 {
-      color: {{ question_hover_color }};
-      transition: all 0.3s ease 0s;
-    }
-
-    .section-faq-question-{{ block.id }}::after {
-      font-size: {{ question_icon_size }}px;
-      color: {{ question_icon_color }};
-      content: '\276F';
-      transition: all 0.2s ease;
-    }
-
-    .section-faq-question-{{ block.id }}:hover::after {
-      color: {{ question_icon_hover_color }};
-    }
-
-    .section-faq-question-{{ block.id }}.open-faq::after {
-      transition: all 0.3s ease 0s;
-      transform: rotate(90deg);
-    }
-
-    .section-faq-answer-{{ block.id }} {
-      padding-left: {{ answer_padding_horizontal | times: 0.75 | round: 0 }}px;
-      padding-right: {{ answer_padding_horizontal | times: 0.75 | round: 0 }}px;
-      border-radius: {{ answer_radius }}px;
-      background-color: {{ answer_bg_color }};
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease 0s;
-      box-sizing: border-box;
-    }
-
-    .section-faq-answer-{{ block.id }}.open-faq {
-      margin-top: {{ answer_mt | times: 0.75 | round: 0 }}px;
-      margin-bottom: {{ answer_mb | times: 0.75 | round: 0 }}px;
-      padding-top: {{ answer_padding_vertical | times: 0.75 | round: 0 }}px;
-      padding-bottom: {{ answer_padding_vertical | times: 0.75 | round: 0 }}px;
-      transition: all 0.3s ease 0s;
-      opacity: 1;
-      max-height: max-content;
-      pointer-events: all;
-    }
-
-    .section-faq-answer-{{ block.id }} p,
-    .section-faq-answer-{{ block.id }} li,
-    .section-faq-answer-{{ block.id }} a {
-      margin: 0;
-      font-size: {{ answer_size | times: 0.85 }}px;
-      color: {{ answer_color }};
-      line-height: {{ answer_height }}%;
-      text-transform: unset;
-      text-decoration: none;
-      transition: all 0.3s ease 0s;
-    }
-
-    .section-faq-answer-{{ block.id }} a:hover {
-      transition: all 0.3s ease 0s;
-      color: {{ answer_link_hover_color }};
-    }
-
-    @media(min-width: 768px) {
-      
-      .section-faq-item-{{ block.id }}:not(:first-child) {
-        margin-top: {{ items_gap }}px;
-      }
-
-      .section-faq-question-{{ block.id }} {
-        padding: {{ question_padding_vertical }}px {{ question_padding_horizontal }}px;
-      }
-
-      .section-faq-question-{{ block.id }} h3 {
-        font-size: {{ question_size }}px;
-      }
-
-      .section-faq-answer-{{ block.id }} {
-        padding-left: {{ answer_padding_horizontal }}px;
-        padding-right: {{ answer_padding_horizontal }}px;
-      }
-
-      .section-faq-answer-{{ block.id }}.open-faq {
-        margin-top: {{ answer_mt }}px;
-        margin-bottom: {{ answer_mb }}px;
-        padding-top: {{ answer_padding_vertical }}px;
-        padding-bottom: {{ answer_padding_vertical }}px;
-      }
-
-      .section-faq-answer-{{ block.id }} p,
-      .section-faq-answer-{{ block.id }} li,
-      .section-faq-answer-{{ block.id }} a {
-        font-size: {{ answer_size }}px;
-      }
-      
-    }
-    
   </style>
+{% endif %}
 
-  {% if question_custom %}
-    <style>
-      .section-faq-question-{{ block.id }} h3 {
-        font-family: {{ question_font.family }}, {{ question_font.fallback_families }};
-        font-weight: {{ question_font.weight }};
-        font-style: {{ question_font.style }};
-      }
-    </style>
-  {% endif %}
+{% unless full_width %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: {{ content_width }}rem;
+    }
+  </style>
+{% endunless %}
 
-  {% if answer_custom %}
-    <style>
-      .section-faq-answer-{{ block.id }} p,
-      .section-faq-answer-{{ block.id }} li,
-      .section-faq-answer-{{ block.id }} a {
-        font-family: {{ answer_font.family }}, {{ answer_font.fallback_families }};
-        font-weight: {{ answer_font.weight }};
-        font-style: {{ answer_font.style }};
-      }
+{% if feature_shadow %}
+  <style>
+    .feature-{{ section.id }} .wrapper-box {
+       box-shadow: 4px 4px 20px {{ feature_shadow_color | hex_to_rgba: 0.2 }};
+    }
+  </style>
+{% endif %}
 
-      .section-faq-answer-{{ block.id }} p{
-        margin-block: 15px;
-      }
-      .section-faq-answer-{{ block.id }} a{
-        text-decoration:underline;
-      }
-      .section-faq-answer-{{ block.id }} strong{
-        font-weight:bold;
-      }
-    </style>
-  {% endif %}
+{% capture svg_example_1 %}
+ <svg class='icon icon--medium icon--type-truck' stroke-width='1' aria-hidden='true' focusable='false' role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M15.64 6.92L9.5 5.12V4a.5.5 0 00-.5-.5H1a.5.5 0 00-.5.5v8.5c0 .28.22.5.5.5h1.27a2.1 2.1 0 004.06 0h3.94a2.1 2.1 0 004.06 0h1.17a.5.5 0 00.5-.5V7.4a.5.5 0 00-.36-.48zM4.3 13.6a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zM6.33 12a2.1 2.1 0 00-4.06 0H1.5V4.5h7V12H6.33zm5.97 1.6a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zM15 12h-.67a2.1 2.1 0 00-4.06 0H9.5V6.17l5.5 1.6V12z'></path></svg>
+{% endcapture %}
+{% capture svg_example_2 %}
+  <svg class='icon icon--medium icon--type-price_tag' stroke-width='1' aria-hidden='true' focusable='false' role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M7.59 1.34a1 1 0 01.7-.29h5.66a1 1 0 011 1v5.66a1 1 0 01-.3.7L7.6 15.5a1 1 0 01-1.42 0L.52 9.83a1 1 0 010-1.42l7.07-7.07zm6.36 6.37l-7.07 7.07-5.66-5.66L8.3 2.05h5.66v5.66z' fill-rule='evenodd'></path><path d='M9.7 6.3a1 1 0 101.42-1.42 1 1 0 00-1.41 1.41zM9 7a2 2 0 102.83-2.83A2 2 0 009 7z' fill-rule='evenodd'></path></svg>
+{% endcapture %}
+{% capture svg_example_3 %}
+  <svg class='icon icon--medium icon--type-return' stroke-width='1' aria-hidden='true' focusable='false' role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M9 .5a.5.5 0 000 1h1a4.5 4.5 0 110 9H2.2l3.15-3.15a.5.5 0 10-.7-.7l-4 4a.5.5 0 000 .7l4 4a.5.5 0 00.7-.7L2.21 11.5H10a5.5 5.5 0 100-11H9z'></path></svg>
+{% endcapture %}
+{% capture svg_example_4 %}
+  <svg class='icon icon--medium icon--type-star' stroke-width='1' aria-hidden='true' focusable='false' role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M8 1c.21 0 .4.13.47.33l1.62 4.54 4.92.1a.5.5 0 01.29.9l-3.92 2.9 1.42 4.58a.5.5 0 01-.75.56L8 12.17 3.95 14.9a.5.5 0 01-.75-.56l1.42-4.58L.7 6.87a.5.5 0 01.29-.9l4.92-.1 1.62-4.54A.5.5 0 018 1zm0 2L6.74 6.52a.5.5 0 01-.46.33l-3.8.08L5.5 9.17a.5.5 0 01.18.55l-1.1 3.56 3.14-2.13a.5.5 0 01.56 0l3.15 2.13-1.1-3.56a.5.5 0 01.17-.55l3.02-2.23-3.8-.08a.5.5 0 01-.46-.33L8 2.99z'></path></svg>
+{% endcapture %}
 
-  {% if align_radius %}
-    <style>
-      .section-faq-question-{{ block.id }}.open-faq {
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-      }
-      .section-faq-answer-{{ block.id }}.open-faq {
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-      }
-    </style>
-  {% endif %}
-  
-{% endfor %}
-
-<div class="section-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings section-faq-{{ section.id }}">
-
-      {% if section.settings.heading != blank %}
-        <h2 class="section-faq-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
-      {% endif %}
-      
-      <div class="section-faq-items-{{ section.id }}">
-        {% for block in section.blocks %}
-          <div class="section-faq-item-{{ block.id }}">
-
-            <div class="section-faq-question-{{ block.id }}">
-              {% if block.settings.question != blank %}
-                <h3>{{ block.settings.question }}</h3>
-              {% endif %}
-
-              {% unless hide_icon %}
-
-              {% endunless %}
-          
-            </div>
-
-            <div class="section-faq-answer-{{ block.id }}">
-
-              {% if block.settings.answer != blank %}
-                {{ block.settings.answer }}
-              {% endif %}
-              
-            </div>
-            
-          </div>
-        {% endfor %}
+<div class="section-{{ section.id }} feature-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings ">
+      <div class="wrapper-box">
+          {%- for block in section.blocks -%}
+              <{% if block.settings.feature_url != blank %}a href="{{ block.settings.feature_url }}"{% else %}div{% endif %} class="box">
+                  {% unless block.settings.hide_image %}
+                  <div class="box__image">
+                      {%- if block.settings.feature_image != blank -%}
+                        <img src="{{ block.settings.feature_image | image_url }}" alt="feature-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
+                      {%- else -%}
+                       {% case forloop.index %}
+                        {% when 1 %}
+                          {{ svg_example_1 }}
+                        {% when 2 %}
+                          {{ svg_example_2 }}
+                        {% when 3 %}
+                          {{ svg_example_3 }}
+                        {% when 4 %}
+                          {{ svg_example_4 }}
+                        {% else %}
+                          {{ svg_example_1 }}
+                        {% endcase %}
+                      {%- endif -%}
+                  </div>
+                  {% endunless %}
+                  <div class="box__content-wrapper">
+                      <div class="box__title">{{ block.settings.feature_title }}</div>
+                      <div class="box__description">{{ block.settings.feature_text }}</div>
+                  </div>
+              </{% if block.settings.feature_url != blank %}a{% else %}div{% endif %}>
+          {%- endfor -%}
       </div>
-    </div>
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "SG-FAQ Pro",
+  "name": "SG-Feature #1",
+  "tag": "section",
+  "class": "feature-type1",
   "settings": [
     {
       "type": "header",
-      "content": "Heading"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Frequently Asked Questions"
-    },
-    {
-      "type": "checkbox",
-      "id": "heading_custom",
-      "label": "Use Custom Font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Heading Font Family",
-      "default": "josefin_sans_n4"
+      "content": "Feature wrapper settings"
     },
     {
       "type": "range",
-      "id": "heading_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading Size",
-      "default": 40
+      "id": "feature_row",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Feature per row",
+      "default": 4
     },
     {
       "type": "range",
-      "id": "heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Heading Line Height",
-      "default": 100
-    },
-    {
-      "type": "select",
-      "id": "heading_align",
-      "label": "Heading Text Align",
-      "default": "center",
-      "options": [
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "FAQ Items"
+      "id": "feature_row_mobile",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Feature per row - mobile",
+      "default": 1
     },
     {
       "type": "range",
-      "id": "items_mt",
+      "id": "feature_gap",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "label": "FAQ Items Margin top",
+      "label": "Gap",
       "default": 20
     },
     {
       "type": "range",
-      "id": "items_padding_horizontal",
+      "id": "feature_gap_mobile",
       "min": 0,
       "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "FAQ Items Padding horizontal",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "items_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "FAQ Items Padding Vertical",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "items_gap",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "FAQ Items Gap",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "items_gap_mobile",
-      "min": 0,
-      "max": 52,
-      "step": 4,
-      "unit": "px",
-      "label": "FAQ Items Gap - Mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "items_radius",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "FAQ Items Border Radius",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "align_radius",
-      "label": "Align Border Radius between Question and Answer When Open",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "hide_icon",
-      "label": "Hide Icon",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Question"
-    },
-    {
-      "type": "checkbox",
-      "id": "question_custom",
-      "label": "Use Custom Font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "question_font",
-      "label": "Question Font Family",
-      "default": "assistant_n4"
-    },
-    {
-      "type": "range",
-      "id": "question_size",
-      "min": 0,
-      "max": 72,
       "step": 2,
       "unit": "px",
-      "label": "Question Size",
+      "label": "Gap - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "feature_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "feature_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "feature_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
       "default": 16
     },
     {
       "type": "range",
-      "id": "question_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Question Line Height",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "question_padding_horizontal",
+      "id": "feature_border_thickness",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 10,
+      "step": 1,
       "unit": "px",
-      "label": "Question Padding horizontal",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "question_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Question Padding Vertical",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "question_radius",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Question Border Radius",
-      "default": 4
-    },
-    {
-      "type": "header",
-      "content": "Question Icon"
-    },
-    {
-      "type": "range",
-      "id": "question_icon_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Question Icon Size",
-      "default": 18
-    },
-    {
-      "type": "header",
-      "content": "Answer"
+      "label": "Border thickness",
+      "default": 0
     },
     {
       "type": "checkbox",
-      "id": "answer_custom",
-      "label": "Use Custom Font",
+      "id": "feature_shadow",
+      "label": "Use shadow",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Feature heading settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_heading_custom",
+      "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "answer_font",
-      "label": "Answer Font Family",
+      "id": "feature_heading_font",
+      "label": "Font family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "answer_size",
+      "id": "feature_heading_size",
       "min": 0,
       "max": 72,
       "step": 2,
       "unit": "px",
-      "label": "Answer Size",
-      "default": 16
+      "label": "Font size",
+      "default": 14
     },
     {
       "type": "range",
-      "id": "answer_height",
+      "id": "feature_heading_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "feature_heading_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
-      "label": "Answer Line Height",
-      "default": 100
+      "label": "Line height",
+      "default": 130
     },
     {
       "type": "range",
-      "id": "answer_padding_horizontal",
+      "id": "feature_heading_mt",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 50,
+      "step": 2,
       "unit": "px",
-      "label": "Answer Padding horizontal",
-      "default": 20
+      "label": "Margin top",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Feature text settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "feature_text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "answer_padding_vertical",
+      "id": "feature_text_size",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 72,
+      "step": 2,
       "unit": "px",
-      "label": "Answer Padding Vertical",
-      "default": 20
+      "label": "Font size",
+      "default": 12
     },
     {
       "type": "range",
-      "id": "answer_mt",
+      "id": "feature_text_size_mobile",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 72,
+      "step": 2,
       "unit": "px",
-      "label": "Answer Margin top",
-      "default": 0
+      "label": "Font size - mobile",
+      "default": 12
     },
     {
       "type": "range",
-      "id": "answer_mb",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Answer Margin bottom",
-      "default": 0
+      "id": "feature_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
     },
     {
       "type": "range",
-      "id": "answer_radius",
+      "id": "feature_text_mt",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 50,
+      "step": 2,
       "unit": "px",
-      "label": "Answer Border Radius",
+      "label": "Margin top",
       "default": 4
     },
     {
       "type": "header",
-      "content": "Section Colors"
+      "content": "Feature icon settings"
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_size",
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_size_mobile",
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Size - mobile",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "Feature wrapper colors"
     },
     {
       "type": "color",
-      "label": "Heading Color",
-      "id": "heading_color",
+      "id": "feature_bg",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "feature_border_color",
+      "label": "Border color",
       "default": "#000000"
     },
     {
       "type": "color",
-      "label": "FAQ Items background",
-      "id": "items_bg_color"
+      "id": "feature_shadow_color",
+      "label": "Shadow color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Feature content colors"
     },
     {
       "type": "color",
-      "label": "Question Color",
-      "id": "question_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Question Hover Color",
-      "id": "question_hover_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Question Background Color",
-      "id": "question_bg_color",
-      "default": "#D5CAA6"
-    },
-    {
-      "type": "color",
-      "label": "Question Background Hover Color",
-      "id": "question_bg_hover_color",
-      "default": "#2D281D"
-    },
-    {
-      "type": "color",
-      "label": "Question Icon Color",
-      "id": "question_icon_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Question Icon Hover Color",
-      "id": "question_icon_hover_color",
-      "default": "#D5CAA6"
-    },
-    {
-      "type": "color",
-      "label": "Answer Color",
-      "id": "answer_color",
+      "id": "feature_heading_color",
+      "label": "Heading color",
       "default": "#000000"
     },
     {
       "type": "color",
-      "label": "Answer Link Hover Color",
-      "info": "If Answer Text Contain Link",
-      "id": "answer_link_hover_color",
-      "default": "#FFFFFF"
+      "id": "feature_text_color",
+      "label": "Text color",
+      "default": "#000000"
     },
     {
       "type": "color",
-      "label": "Answer Background Color",
-      "id": "answer_bg_color"
+      "id": "feature_icon_color",
+      "label": "Icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
     },
     {
       "type": "color",
-      "label": "Section background",
+      "label": "Background color",
       "id": "background_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color_background",
       "id": "background_gradient",
-      "label": "Section background gradient"
+      "label": "Background gradient"
     },
     {
       "type": "color",
@@ -805,7 +590,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 36
+      "default": 16
     },
     {
       "type": "range",
@@ -815,7 +600,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 16
     },
     {
       "type": "range",
@@ -839,7 +624,13 @@
     },
     {
       "type": "header",
-      "content": "Section Settings"
+      "content": "Section settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
     },
     {
       "type": "range",
@@ -849,7 +640,7 @@
       "step": 10,
       "unit": "rem",
       "label": "Section content width",
-      "default": 110
+      "default": 120
     },
     {
       "type": "range",
@@ -860,55 +651,83 @@
       "unit": "px",
       "label": "Border thickness",
       "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy",
+      "label": "Lazy load",
+      "info": "Lazy load images for speed optimisation",
+      "default": true
     }
   ],
   "blocks": [
     {
-      "type": "item",
-      "name": "FAQ Item",
+      "type": "image",
+      "name": "SG - Feature #1",
       "settings": [
         {
-          "type": "header",
-          "content": "Block Settings"
-        },
-        {
-          "type": "header",
-          "content": "Question"
-        },
-        {
           "type": "text",
-          "id": "question",
-          "label": "Question Text",
-          "default": "Question Text"
-        },
-        {
-          "type": "header",
-          "content": "Answer"
+          "id": "feature_title",
+          "label": "Item title text",
+          "default": "Item title"
         },
         {
           "type": "richtext",
-          "id": "answer",
-          "label": "Answer Text",
-          "default": "<p>Answer Text</p>"
+          "id": "feature_text",
+          "label": "Item text (richtext)",
+          "default": "<p>Item text</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_image",
+          "label": "Icon"
+        },
+        {
+          "type": "url",
+          "id": "feature_url",
+          "label": "Item URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_image",
+          "default": false,
+          "label": "Hide Image"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-FAQ Pro",
+      "name": "SG-Feature #1",
       "blocks": [
         {
-          "type": "item"
+          "type": "image",
+          "settings": {
+            "feature_title": "Free Shipping",
+            "feature_text": "<p>Order today, receive tomorrow</p>",
+            "feature_url": "https://section.store/"
+          }
         },
         {
-          "type": "item"
+          "type": "image",
+          "settings": {
+            "feature_title": "Price-match guarantee",
+            "feature_text": "<p>Safe money when ordering with us</p>"
+          }
         },
         {
-          "type": "item"
+          "type": "image",
+          "settings": {
+            "feature_title": "Hassle-free exchange",
+            "feature_text": "<p>Receive a slip for exchanges</p>"
+          }
         },
         {
-          "type": "item"
+          "type": "image",
+          "settings": {
+            "feature_title": "5.0 Google Reviews",
+            "feature_text": "<p>Customer satisfaction #1 priority</p>"
+          }
         }
       ]
     }
