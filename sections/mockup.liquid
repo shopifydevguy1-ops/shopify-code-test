@@ -11,72 +11,116 @@
   assign margin_horizontal = section.settings.margin_horizontal
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
-  assign full_width = section.settings.full_width
+  assign width = section.settings.width
   assign content_width = section.settings.content_width
-  assign section_radius = section.settings.section_radius
+  assign section_radius = section.settings.section_radius  
+  assign background_style = section.settings.background_style
 
-  assign content_max_width = section.settings.content_max_width
-  assign content_align = section.settings.content_align
-  assign content_align_mobile = section.settings.content_align_mobile
+  assign cards_gap = section.settings.cards_gap
+  assign cards_gap_mobile = section.settings.cards_gap_mobile
+  assign cards_shadow = section.settings.cards_shadow
+  assign cards_shadow_color = section.settings.cards_shadow_color
 
-  assign toggles_mt = section.settings.toggles_mt 
-  assign toggles_mt_mobile = section.settings.toggles_mt_mobile 
-  assign toggles_gap = section.settings.toggles_gap  
-  assign toggles_gap_mobile = section.settings.toggles_gap_mobile
-  assign toggles_bg_color = section.settings.toggles_bg_color
+  assign card_radius = section.settings.card_radius
+  assign card_border_thickness = section.settings.card_border_thickness
+  assign card_border_color = section.settings.card_border_color
 
-  assign toggle_padding_horizontal = section.settings.toggle_padding_horizontal
-  assign toggle_padding_horizontal_mobile = section.settings.toggle_padding_horizontal_mobile
-  assign toggle_padding_vertical = section.settings.toggle_padding_vertical
-  assign toggle_padding_vertical_mobile = section.settings.toggle_padding_vertical_mobile
-  assign toggle_bg_color = section.settings.toggle_bg_color
-  assign toggle_radius = section.settings.toggle_radius
-  assign toggle_custom = section.settings.toggle_custom
-  assign toggle_font = section.settings.toggle_font
-  assign toggle_size = section.settings.toggle_size
-  assign toggle_size_mobile = section.settings.toggle_size_mobile
-  assign toggle_height = section.settings.toggle_height
-  assign toggle_color = section.settings.toggle_color
-  assign toggle_active_color = section.settings.toggle_active_color
-  assign toggle_bg_gradient = section.settings.toggle_bg_gradient
-  assign tabs_mt = section.settings.tabs_mt
-  assign tabs_mt_mobile = section.settings.tabs_mt_mobile
+  assign card_padding_horizontal = section.settings.card_padding_horizontal
+  assign card_padding_horizontal_mobile = section.settings.card_padding_horizontal_mobile
+  assign card_padding_vertical = section.settings.card_padding_vertical
+  assign card_padding_vertical_mobile = section.settings.card_padding_vertical_mobile 
+  assign card_bg_color = section.settings.card_bg_color
+  assign card_align = section.settings.card_align
+  assign card_align_mobile = section.settings.card_align_mobile
 
-  assign item_padding_vertical_mobile = section.settings.item_padding_vertical_mobile
-  assign item_padding_vertical = section.settings.item_padding_vertical
-  assign item_padding_horizontal_mobile = section.settings.item_padding_horizontal_mobile
-  assign item_padding_horizontal = section.settings.item_padding_horizontal
-  assign item_border_thickness = section.settings.item_border_thickness
-  assign item_border_color = section.settings.item_border_color
-  assign item_radius = section.settings.item_radius
-  assign item_mt = section.settings.item_mt
-  assign item_mt_mobile = section.settings.item_mt_mobile
+  assign card_horizontal_align = ""
+  if card_align == "center"
+    assign card_horizontal_align = "center"
+  elsif card_align == "right"
+    assign card_horizontal_align = "end"
+  else
+    assign card_horizontal_align = "start"
+  endif
 
-  assign question_size = section.settings.question_size
-  assign question_size_mobile = section.settings.question_size_mobile
-  assign question_color = section.settings.question_color
+  assign card_horizontal_align_mobile = ""
+  if card_align_mobile == "center"
+    assign card_horizontal_align_mobile = "center"
+  elsif card_align_mobile == "right"
+    assign card_horizontal_align_mobile = "end"
+  else
+    assign card_horizontal_align_mobile = "start"
+  endif
+
   assign question_custom = section.settings.question_custom
   assign question_font = section.settings.question_font
+  assign question_size = section.settings.question_size
+  assign question_size_mobile = section.settings.question_size_mobile
   assign question_height = section.settings.question_height
+  assign question_color = section.settings.question_color
   
-  assign answer_size = section.settings.answer_size
-  assign answer_size_mobile = section.settings.answer_size_mobile
-  assign answer_color = section.settings.answer_color
-  assign answer_custom = section.settings.answer_custom
-  assign answer_font = section.settings.answer_font
-  assign answer_height = section.settings.answer_height
-  assign answer_padding_top = section.settings.answer_padding_top
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_height = section.settings.text_height
+  assign text_color = section.settings.text_color
+  assign text_mt = section.settings.text_mt
+  assign text_mt_mobile = section.settings.text_mt_mobile
 
-  assign icon_color = section.settings.icon_color
-  assign icon_size = section.settings.icon_size
-  assign icon_size_mobile = section.settings.icon_size_mobile
+  assign buttons_gap = section.settings.buttons_gap
+  assign buttons_gap_mobile = section.settings.buttons_gap_mobile
+  assign buttons_mt = section.settings.buttons_mt
+  assign buttons_mt_mobile = section.settings.buttons_mt_mobile
+
+  assign button_custom = section.settings.button_custom
+  assign button_font = section.settings.button_font
+  assign button_size = section.settings.button_size
+  assign button_size_mobile = section.settings.button_size_mobile
+  assign button_height = section.settings.button_height
+  assign button_padding_vertical = section.settings.button_padding_vertical
+  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
+  assign button_padding_horizontal = section.settings.button_padding_horizontal
+  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
+  assign button_radius = section.settings.button_radius
+  assign button_border_thickness = section.settings.button_border_thickness
+  
+  assign first_button_color = section.settings.first_button_color
+  assign first_button_hover_color = section.settings.first_button_hover_color
+  assign first_button_border_color = section.settings.first_button_border_color
+  assign first_button_border_hover_color = section.settings.first_button_border_hover_color
+  assign first_button_bg_color = section.settings.first_button_bg_color
+  assign first_button_bg_hover_color = section.settings.first_button_bg_hover_color
+  assign first_button_style = section.settings.first_button_style
+
+  assign second_button_color = section.settings.second_button_color
+  assign second_button_hover_color = section.settings.second_button_hover_color
+  assign second_button_border_color = section.settings.second_button_border_color
+  assign second_button_border_hover_color = section.settings.second_button_border_hover_color
+  assign second_button_bg_color = section.settings.second_button_bg_color
+  assign second_button_bg_hover_color = section.settings.second_button_bg_hover_color
+  assign second_button_style = section.settings.second_button_style
+
+  
+  assign column_first_count = 0
+  assign column_second_count = 0
+  assign column_third_count = 0
+
+  for block in section.blocks
+    if block.settings.column == "1"
+      assign column_first_count = column_first_count | plus: 1
+    elsif block.settings.column == "2"
+      assign column_second_count = column_second_count | plus: 1  
+    elsif block.settings.column == "3"
+      assign column_third_count = column_third_count | plus: 1
+    endif
+  endfor
 -%}
 
 {%- style -%}
-  {{  toggle_font | font_face: font_display: 'swap' }}
   {{  question_font | font_face: font_display: 'swap' }}
-  {{  answer_font | font_face: font_display: 'swap' }}
-
+  {{  text_font | font_face: font_display: 'swap' }}
+  {{  button_font | font_face: font_display: 'swap' }}
+  
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
@@ -86,6 +130,7 @@
     margin-right: {{ margin_horizontal_mobile }}rem;
     border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
     overflow: hidden;
+    position: relative;
   }
   
   .section-{{ section.id }}-settings {
@@ -96,172 +141,171 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .faq-toggles-{{ section.id }} {
-    display: flex;    
-    gap: {{ toggles_gap_mobile }}px;
-    background-color: {{ toggles_bg_color }};
-    padding: 7px;
-    max-width: fit-content;
-    margin: 0 auto;
-    margin-top: {{ toggles_mt_mobile }}px;
-    border-radius: {{ toggle_radius }}px;
-    overflow-x: scroll;
-    scrollbar-width: none;
-  }
-
-  .faq-toggle-{{ section.id }} {
-    padding: {{ toggle_padding_vertical_mobile }}px {{ toggle_padding_horizontal_mobile }}px;
-    border-radius: {{ toggle_radius }}px;  
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    margin: 0px;
-    font-size: {{ toggle_size_mobile }}px; 
-    color: {{ toggle_color }};
-    line-height: {{ toggle_height }}%;
-    text-transform: unset;
-    cursor: pointer;
-    text-wrap: nowrap;
-    transition: all 0.25s ease 0s;
-  }
-
-  .faq-toggle-{{ section.id }}:hover {
-    background-color: {{ toggle_bg_color }};
-    background-image: {{ toggle_bg_gradient }};
-    color: {{ toggle_active_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .faq-toggle-{{ section.id }}.active {
-    transition: all 0.25s ease 0s;
-    background-color: {{ toggle_bg_color }};
-    background-image: {{ toggle_bg_gradient }};
-    color: {{ toggle_active_color }};
-  }
-
-  .faq-tabs-{{ section.id }} {
-    margin-top: {{ tabs_mt_mobile }}px;
-  }
-
-  .faq-tab-{{ section.id }} {
-    display: none;
-  }
-
-  .faq-tab-{{ section.id }}.active {
-    display: block;
-  }
-
-  .faq-item-{{ section.id }}:not(:first-child) {
-    margin-top: {{ item_mt_mobile }}px;
-  }
-
-  .faq-item-{{ section.id }} {
-    padding: {{ item_padding_vertical_mobile }}px {{ item_padding_horizontal_mobile }}px;
-    border-bottom: {{ item_border_thickness }}px solid {{ item_border_color }};
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    width: 100%;
+  .faq-cards-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ cards_gap_mobile }}px;
     position: relative;
-    transition: all 0.25s ease 0s;
   }
 
-  .faq-tab-toggle-{{ section.id }} {
+  .faq-column-{{ section.id }} {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    gap: 12px;
+    gap: {{ cards_gap_mobile }}px;
+    flex-direction: column;
   }
 
-  .faq-icon-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 {{ icon_size_mobile }}px;   
-    height: {{ icon_size_mobile }}px;
+  .faq-card-{{ section.id }} {
+    padding: {{ card_padding_vertical_mobile }}px {{ card_padding_horizontal_mobile }}px;
+    border: {{ card_border_thickness }}px solid {{ card_border_color }};
+    border-radius: {{ card_radius }}px;
+    background-color: {{ card_bg_color }};
     transition: all 0.25s ease 0s;
-  }
-
-  .faq-icon-{{ section.id }} svg {
-    width: {{ icon_size_mobile }}px;
-    height: {{ icon_size_mobile }}px;
-    transition: all 0.25s ease 0s;
-  }
-
-  .faq-icon-{{ section.id }} svg path {
-    stroke: {{ icon_color }};
-  }
-
-  .faq-icon-{{ section.id }} svg:first-child {
-    display: block;
-  }
-
-  .faq-icon-{{ section.id }} svg:last-child {
-    display: none;
-  }
-
-  .faq-icon-{{ section.id }}.active svg:first-child {
-    display: none;
-  }
-
-  .faq-icon-{{ section.id }}.active svg:last-child {
-    display: block;
   }
 
   .faq-question-{{ section.id }} {
-    margin: 0px;
+    margin: 0;    
+    text-align: {{ card_align_mobile }};
+    text-transform: unset;
+    word-wrap: break-word;
     font-size: {{ question_size_mobile }}px;
-    color: {{ question_color }};
-    line-height: {{ question_height }}%;
-    text-transform: unset;
     font-weight: 700;
+    line-height: {{ question_height }}%;
+    color: {{ question_color }};
   }
 
-  .faq-answer-{{ section.id }} {
-    transition: all 0.2s ease-in-out;
-    overflow: hidden;
+  .faq-text-{{ section.id }} {
+    margin-top: {{ text_mt_mobile }}px;
+    text-align: {{ card_align_mobile }};
   }
 
-  .faq-answer-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ answer_size_mobile }}px;
-    color: {{ answer_color }};
-    line-height: {{ answer_height }}%;
+  .faq-text-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ text_size_mobile }}px;
+    color: {{ text_color }};
+    line-height: {{ text_height }}%;
     text-transform: unset;
+    text-decoration: none;
   }
 
-  .faq-answer-{{ section.id }} p {
-    min-height: 10px;
+  
+  .faq-buttons-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: {{ card_horizontal_align_mobile }};
+    gap: {{ buttons_gap_mobile }}px;
+    margin-top: {{ buttons_mt_mobile }}px;
   }
 
-  .faq-answer-{{ section.id }} p:not(:first-child ) {
-    margin-top: 10px;
+  .faq-first-button-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: fit-content;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    font-size: {{ button_size_mobile }}px;
+    color: {{ first_button_color }};
+    line-height: {{ button_height }}%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
+    border-radius: {{ button_radius }}px;
+    transition: all 0.25s ease 0s;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 700;
+    min-width: max-content;
+  }
+
+  .faq-first-button-inner-{{ section.id }} {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .faq-first-button-{{ section.id }}:hover {
+    color: {{ first_button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-first-button-{{ section.id }} svg {
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+  }
+
+  .faq-first-button-{{ section.id }} svg path {
+    fill: {{ first_button_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-first-button-{{ section.id }}:hover svg path {
+    fill: {{ first_button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }  
+
+  .faq-second-button-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: fit-content;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    font-size: {{ button_size_mobile }}px;
+    color: {{ second_button_color }};
+    line-height: {{ button_height }}%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
+    border-radius: {{ button_radius }}px;
+    transition: all 0.25s ease 0s;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 700;
+    min-width: max-content;
+  }
+
+  .faq-second-button-inner-{{ section.id }} {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .faq-second-button-{{ section.id }}:hover {
+    color: {{ second_button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-second-button-{{ section.id }} svg {
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+  }
+
+  .faq-second-button-{{ section.id }} svg path {
+    fill: {{ second_button_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-second-button-{{ section.id }}:hover svg path {
+    fill: {{ second_button_hover_color }};
+    transition: all 0.25s ease 0s;
   } 
 
-  .faq-height-cal-{{ section.id }} {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - {{ item_padding_horizontal_mobile | times: 2 }}px);
-    padding-top: {{ answer_padding_top }}px;
-  }
-
-  .faq-height-cal-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ answer_size_mobile }}px;
-    color: {{ answer_color }};
-    line-height: {{ answer_height }}%;
-    text-transform: unset;
-  }
-
-  .faq-height-cal-{{ section.id }} p {
-    min-height: 10px;
-  }
-
-  .faq-height-cal-{{ section.id }} p:not(:first-child ) {
-    margin-top: 10px;
+  
+  .faq-text-{{ section.id }} a {
+    text-decoration: underline;
   }
   
   @media(min-width: 1024px) {
@@ -282,65 +326,67 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .faq-toggles-{{ section.id }} {
-      gap: {{ toggles_gap }}px;    
-      margin-top: {{ toggles_mt }}px;
+    .faq-cards-{{ section.id }} {
+      flex-direction: row;
+      gap: {{ cards_gap }}px;
     }
 
-    .faq-toggle-{{ section.id }} {
-      text-wrap: wrap;
-      padding: {{ toggle_padding_vertical }}px {{ toggle_padding_horizontal }}px;
-      font-size: {{ toggle_size }}px; 
+    .faq-column-{{ section.id }} {     
+      gap: {{ cards_gap }}px;
+      flex: 1;
+      min-width: 0;
     }
 
-    .faq-tabs-{{ section.id }} {
-      margin-top: {{ tabs_mt }}px;
+    .faq-card-{{ section.id }} {
+      padding: {{ card_padding_vertical }}px {{ card_padding_horizontal }}px;
     }
 
-    .faq-item-{{ section.id }} {
-      padding: {{ item_padding_vertical }}px {{ item_padding_horizontal }}px;
-    }
-    
-    .faq-item-{{ section.id }}:not(:first-child) {
-      margin-top: {{ item_mt }}px;
-    }
-
-    .faq-question-{{ section.id }} {
+    .faq-question-{{ section.id }} { 
+      text-align: {{ card_align }};
       font-size: {{ question_size }}px;
     }
 
-    .faq-answer-{{ section.id }} * {
-      font-size: {{ answer_size }}px;
+    .faq-text-{{ section.id }} {
+      margin-top: {{ text_mt }}px;
+      text-align: {{ card_align }};
     }
 
-    .faq-icon-{{ section.id }} {
-      flex: 0 0 {{ icon_size }}px;
-      height: {{ icon_size }}px;
+    .faq-text-{{ section.id }} * {
+      font-size: {{ text_size }}px;
     }
-  
-    .faq-icon-{{ section.id }} svg {
-      width: {{ icon_size }}px;
-      height: {{ icon_size }}px;
-    }
-
-    .faq-height-cal-{{ section.id }} {
-      width: calc(100% - {{ item_padding_horizontal | times: 2 }}px);
+    
+    .faq-buttons-{{ section.id }} {
+      justify-content: {{ card_horizontal_align }};
+      gap: {{ buttons_gap }}px;
+      margin-top: {{ buttons_mt }}px;
     }
 
-    .faq-height-cal-{{ section.id }} * {
-      font-size: {{ answer_size }}px;
-    }
+    .faq-first-button-{{ section.id }} {
+      font-size: {{ button_size }}px;
+      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
+    }    
+
+    .faq-second-button-{{ section.id }} {
+      font-size: {{ button_size }}px;
+      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
+    }  
   }
   
 {%- endstyle -%}
 
-{% unless full_width %}
+{% if width == 'custom' %}
   <style>
     .section-{{ section.id }}-settings {
       max-width: {{ content_width }}px;
     }
   </style>
-{% endunless %}
+{% elsif width == 'page' %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: var(--page-width);
+    }
+  </style>
+{% endif %}
 
 {% if margin_horizontal_mobile > 0 %}
   <style>
@@ -369,16 +415,6 @@
   </style>
 {% endif %}
 
-{% if toggle_custom %}
-  <style>
-    .faq-toggle-{{ section.id }} {
-      font-family: {{ toggle_font.family }}, {{ toggle_font.fallback_families }};
-      font-weight: {{ toggle_font.weight }};
-      font-style: {{ toggle_font.style }};
-    }
-  </style>
-{% endif %}
-
 {% if question_custom %}
   <style>
     .faq-question-{{ section.id }} {
@@ -389,417 +425,300 @@
   </style>
 {% endif %}
 
-{% if answer_custom %}
+{% if button_custom %}
   <style>
-    .faq-answer-{{ section.id }} * {
-      font-family: {{ answer_font.family }}, {{ answer_font.fallback_families }};
-      font-weight: {{ answer_font.weight }};
-      font-style: {{ answer_font.style }};
+    .faq-first-button-{{ section.id }} {
+      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-weight: {{ button_font.weight }};
+      font-style: {{ button_font.style }};
     }
   </style>
 {% endif %}
 
-{% for block in section.blocks %}
-  {% case block.type %}
-    {% when 'heading' %}
-      <style>
-        {{ block.settings.heading_font | font_face: font_display: 'swap' }} 
+{% if button_custom %}
+  <style>
+    .faq-second-button-{{ section.id }} {
+      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-weight: {{ button_font.weight }};
+      font-style: {{ button_font.style }};
+    }
+  </style>
+{% endif %}
 
-        .faq-heading-{{ section.id }} {
-          max-width: 100%;
-          margin-top: {{ block.settings.heading_mt_mobile }}px;
-          text-align: {{ content_align_mobile }};
-          width: 100%;
-        }
-        
-        .faq-heading-{{ section.id }} * {
-          margin: 0; 
-          font-size: {{ block.settings.heading_size_mobile }}px;
-          color: {{ block.settings.heading_color }};
-          line-height: {{ block.settings.heading_height }}%;
-          text-transform: unset;
-          text-decoration: none;
-          word-break: break-word;
-          font-weight: 700;
-        }
+{% if text_custom %}
+  <style>
+    .faq-text-{{ section.id }} * {
+      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+      font-weight: {{ text_font.weight }};
+      font-style: {{ text_font.style }};
+    }
+  </style>
+{% endif %}
 
-        @media(min-width: 1024px) {
-          
-          .faq-heading-{{ section.id }} {
-            max-width: {{ content_max_width }}%;            
-            margin-top: {{ block.settings.heading_mt }}px;
-            text-align: {{ content_align }};
-          }
 
-          .faq-heading-{{ section.id }} * {    
-            font-size: {{ block.settings.heading_size }}px;
-          }
-        }
-      </style>
+{% if cards_shadow %}
+  <style>
+    .faq-card-{{ section.id }} {
+      box-shadow: 2px 2px 12px {{ cards_shadow_color }}0d;
+    }
+
+    .faq-media-{{ section.id }} {
+      box-shadow: 2px 2px 12px {{ cards_shadow_color }}0d;
+    }
       
-      {% if block.settings.heading_custom %}
-        <style>
-          .faq-heading-{{ section.id }} * {
-            font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-            font-weight: {{ block.settings.heading_font.weight }};
-            font-style: {{ block.settings.heading_font.style }};
-          }
-        </style>
-      {% endif %}
+    .faq-media-card-{{ section.id }} {
+      box-shadow: 2px 2px 12px {{ cards_shadow_color }}0d;
+    }
 
-      {% if content_align_mobile == "center" %}
-        <style>
-          .faq-heading-{{ section.id }} {
-            margin-left: auto;
-            margin-right: auto;
-          }
-        </style>
-      {% elsif content_align_mobile == "right" %}
-        <style>
-          .faq-heading-{{ section.id }} {
-            margin-left: auto;
-          }
-        </style>
-      {% endif %}
-      
-      {% if content_align == "center" %}
-        <style>
-          @media(min-width: 1024px) {
-            .faq-heading-{{ section.id }} {
-              margin-left: auto;
-              margin-right: auto;
-            } 
-          }
-        </style>
-      {% elsif content_align == "right" %}
-        <style>
-          @media(min-width: 1024px) {
-            .faq-heading-{{ section.id }} {
-              margin-left: auto;
-              margin-right: 0px;
-            } 
-          }
-        </style>
-      {% else %}
-        <style>
-          @media(min-width: 1024px) {
-            .faq-heading-{{ section.id }} {
-              margin-left: 0px;
-              margin-right: 0px;
-            } 
-          }
-        </style>
-      {% endif %}
-    {% when 'text' %}
+    @media(min-width: 1024px) {
+      .faq-card-{{ section.id }}:hover {
+        z-index: 1;
+        box-shadow: 3px 3px 16px {{ cards_shadow_color }}40;
+        transition: all 0.25s ease 0s;
+      }  
 
-      <style>
-        {{ block.settings.text_font | font_face: font_display: 'swap' }}   
+      .faq-media-{{ section.id }}:hover {
+        z-index: 1;
+        box-shadow: 3px 3px 16px {{ cards_shadow_color }}40;
+        transition: all 0.25s ease 0s;
+      }
 
-        .faq-text-{{ section.id }} {
-          text-align: {{ content_align_mobile }};
-          margin-top: {{ block.settings.text_mt_mobile }}px;
-          width: 100%;      
-          max-width: 100%;
-        }
+      .faq-media-card-{{ section.id }}:hover {
+        z-index: 1;
+        transition: all 0.25s ease 0s;
+        box-shadow: 3px 3px 16px {{ cards_shadow_color }}40;
+      }
+    }
+  </style>
+{% endif %}
 
-        .faq-text-{{ section.id }} * {
-          margin: 0;                  
-          font-size: {{ block.settings.text_size_mobile }}px;
-          color: {{ block.settings.text_color }};
-          line-height: {{ block.settings.text_height }}%;
-          text-transform: unset;
-          text-decoration: none;
-          word-break: break-word;
-        }
-        
-        @media(min-width: 1024px) {
-          .faq-text-{{ section.id }} {
-            max-width: {{ content_max_width }}%;    
-            text-align: {{ content_align }};
-            margin-top: {{ block.settings.text_mt }}px;
-          }
+{% if first_button_style == "non_outline" or first_button_style == "non_outline_arrow" %}
+  <style>
+    .faq-first-button-{{ section.id }} {
+      background-color: {{ first_button_bg_color }};
+    }
 
-          .faq-text-{{ section.id }} * { 
-            font-size: {{ block.settings.text_size }}px;
-          }
-        }
-      </style>
+    .faq-first-button-{{ section.id }}:hover {
+      background-color: {{ first_button_bg_hover_color }};
+    }
+  </style>
+{% elsif first_button_style == "outline" or first_button_style == "outline_arrow" %}
+  <style>
+    .faq-first-button-{{ section.id }} {
+      background-color: {{ first_button_bg_color }};
+      border: {{ button_border_thickness }}px solid {{ first_button_border_color }};
+    }
 
-      {% if block.settings.text_custom %}
-        <style>
-          .faq-text-{{ section.id }} * {
-            font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
-            font-weight: {{ block.settings.text_font.weight }};
-            font-style: {{ block.settings.text_font.style }};
-          }
-        </style>
-      {% endif %}  
+    .faq-first-button-{{ section.id }}:hover {
+      background-color: {{ first_button_bg_hover_color }};
+      border: {{ button_border_thickness }}px solid {{ first_button_border_hover_color }};
+    }
+  </style>
+{% elsif first_button_style == "link" %}
+  <style>
+    .faq-first-button-{{ section.id }} {
+      padding: 0px !important;
+    }
+  </style>
+{% endif %}
 
-      {% if content_align_mobile == "center" %}
-        <style>
-          .faq-text-{{ section.id }} {
-            margin-left: auto;
-            margin-right: auto;
-          }
-        </style>
-      {% elsif content_align_mobile == "right" %}
-        <style>
-          .faq-text-{{ section.id }} {
-            margin-left: auto;
-          }
-        </style>
-      {% endif %}
-      
-      {% if content_align == "center" %}
-        <style>
-          @media(min-width: 1024px) {
-            .faq-text-{{ section.id }} {
-              margin-left: auto;
-              margin-right: auto;
-            } 
-          }
-        </style>
-      {% elsif content_align == "right" %}
-        <style>
-          @media(min-width: 1024px) {
-            .faq-text-{{ section.id }} {
-              margin-left: auto;
-              margin-right: 0px;
-            } 
-          }
-        </style>
-      {% else %}
-        <style>
-          @media(min-width: 1024px) {
-            .faq-text-{{ section.id }} {
-              margin-left: 0px;
-              margin-right: 0px;
-            } 
-          }
-        </style>
-      {% endif %}
-  {% endcase %}
-{% endfor %}
+{% if second_button_style == "non_outline" or second_button_style == "non_outline_arrow" %}
+  <style>
+    .faq-second-button-{{ section.id }} {
+      background-color: {{ second_button_bg_color }};
+    }
 
-<div class="section-{{ section.id }} faq-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings">
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'heading' %}
-            {% if block.settings.heading != blank %}
-              <div class="faq-heading-{{ section.id }}">{{ block.settings.heading }}</div>
-            {% endif %}
-          {% when 'text' %}  
-            {% if block.settings.text != blank %}
-              <div class="faq-text-{{ section.id }}">{{ block.settings.text }}</div>
-            {% endif %}
-          {% else %}
-            
-        {% endcase %}
-      {% endfor %}
-      <div class="faq-body-{{ section.id }}">
-        <div class="faq-toggles-{{ section.id }}">
-          {% for block in section.blocks %}
-            {% if block.type == 'tab' %}
-              <p class="faq-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">{{ block.settings.tab }}</p>
-            {% endif %}          
-          {% endfor %}
-        </div> 
-        <div class="faq-tabs-{{ section.id }}">
-          {% assign inside_item = false %} 
-          {% for block in section.blocks %}
-            {% if block.type == 'tab' %}
-              {% if inside_item %}
-                </div>
-              {% endif %}  
-              <div class="faq-tab-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">     
-                {% assign inside_item = true %}                
-            {% elsif block.type == 'faq_item' %}
-              <div class="faq-item-{{ section.id }}">        
-                  <div class="faq-tab-toggle-{{ section.id }}">
+    .faq-second-button-{{ section.id }}:hover {
+      background-color: {{ second_button_bg_hover_color }};
+    }
+  </style>
+{% elsif second_button_style == "outline" or second_button_style == "outline_arrow" %}
+  <style>
+    .faq-second-button-{{ section.id }} {
+      background-color: {{ second_button_bg_color }};
+      border: {{ button_border_thickness }}px solid {{ second_button_border_color }};
+    }
+
+    .faq-second-button-{{ section.id }}:hover {
+      background-color: {{ second_button_bg_hover_color }};
+      border: {{ button_border_thickness }}px solid {{ second_button_border_hover_color }};
+    }
+  </style>
+{% elsif second_button_style == "link" %}
+  <style>
+    .faq-second-button-{{ section.id }} {
+      padding: 0px !important;
+    }
+  </style>
+{% endif %}
+
+<div class="section-{{ section.id }} faq-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>
+    <div class="section-{{ section.id }}-settings">         
+      <div class="faq-cards-{{ section.id }}">
+        {% if column_first_count > 0 %}
+          <div class="faq-column-{{ section.id }}">
+            {% for block in section.blocks %}              
+              {% if block.settings.column == '1' %}
+                <div class="faq-card-{{ section.id }}">
+                  {% if block.settings.use_second_border %}<div class="faq-card-{{ section.id }}">{% endif %}
+                  {% if block.settings.question != blank %}
                     <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
-                    <div class="faq-icon-{{ section.id }}">
-                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-plus" viewBox="0 0 24 24"><path d="M6 12h6m6 0h-6m0 0V6m0 6v6" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path></svg>             
-                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-minus" viewBox="0 0 24 24"><path d="M6 12h12" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path></svg>                  
-                    </div>
+                  {% endif %}
+                  {% if block.settings.text %}
+                    <div class="faq-text-{{ section.id }}">{{ block.settings.text }}</div>
+                  {% endif %}
+                  <div class="faq-buttons-{{ section.id }}">
+                    {% if block.settings.first_button != blank %}
+                      <{% if block.settings.first_url != blank %}a href="{{ block.settings.first_url }}"{% else %}div{% endif %} class="faq-first-button-{{ section.id }}">
+                        <p class="faq-first-button-inner-{{ section.id }}">
+                        {{ block.settings.first_button }}
+                        {% if first_button_style == "non_outline_arrow" or first_button_style == "outline_arrow" %}
+                            <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                              <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                            </svg>
+                          {% endif %}
+                        </p>
+                      </{% if block.settings.first_url != blank %}a{% else %}div{% endif %}>
+                    {% endif %}
+                    {% if block.settings.second_button != blank %}
+                      <{% if block.settings.second_url != blank %}a href="{{ block.settings.second_url }}"{% else %}div{% endif %} class="faq-second-button-{{ section.id }}">
+                        <p class="faq-second-button-inner-{{ section.id }}">
+                        {{ block.settings.second_button }}
+                        {% if second_button_style == "non_outline_arrow" or second_button_style == "outline_arrow" %}
+                            <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                              <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                            </svg>
+                          {% endif %}
+                        </p>
+                      </{% if block.settings.second_url != blank %}a{% else %}div{% endif %}>
+                    {% endif %}
                   </div>
-                  <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
-                      {{ block.settings.answer }}
-                    </div>
-                  <div class="faq-height-cal-{{ section.id }}">
-                    {{ block.settings.answer }}
-                  </div>                      
-                </div>   
-            {% endif %}              
-          {% endfor %}
-          {% if inside_item %}
-            </div>
-          {% endif %}
-        </div>       
-      </div>
+                  {% if block.settings.use_second_border %}</div>{% endif %}
+                </div>
+              {% endif %}                           
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if column_second_count > 0 %}
+          <div class="faq-column-{{ section.id }}">
+            {% for block in section.blocks %}              
+              {% if block.settings.column == '2' %}
+                <div class="faq-card-{{ section.id }}">
+                  {% if block.settings.use_second_border %}<div class="faq-card-{{ section.id }}">{% endif %}
+                  {% if block.settings.question != blank %}
+                    <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+                  {% endif %}
+                  {% if block.settings.text %}
+                    <div class="faq-text-{{ section.id }}">{{ block.settings.text }}</div>
+                  {% endif %}
+                  <div class="faq-buttons-{{ section.id }}">
+                    {% if block.settings.first_button != blank %}
+                      <{% if block.settings.first_url != blank %}a href="{{ block.settings.first_url }}"{% else %}div{% endif %} class="faq-first-button-{{ section.id }}">
+                        <p class="faq-first-button-inner-{{ section.id }}">
+                        {{ block.settings.first_button }}
+                        {% if first_button_style == "non_outline_arrow" or first_button_style == "outline_arrow" %}
+                            <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                              <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                            </svg>
+                          {% endif %}
+                        </p>
+                      </{% if block.settings.first_url != blank %}a{% else %}div{% endif %}>
+                    {% endif %}
+                    {% if block.settings.second_button != blank %}
+                      <{% if block.settings.second_url != blank %}a href="{{ block.settings.second_url }}"{% else %}div{% endif %} class="faq-second-button-{{ section.id }}">
+                        <p class="faq-second-button-inner-{{ section.id }}">
+                        {{ block.settings.second_button }}
+                        {% if second_button_style == "non_outline_arrow" or second_button_style == "outline_arrow" %}
+                            <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                              <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                            </svg>
+                          {% endif %}
+                        </p>
+                      </{% if block.settings.second_url != blank %}a{% else %}div{% endif %}>
+                    {% endif %}
+                  </div>
+                  {% if block.settings.use_second_border %}</div>{% endif %}
+                </div>
+              {% endif %}                           
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if column_third_count > 0 %}
+          <div class="faq-column-{{ section.id }}">
+            {% for block in section.blocks %}              
+              {% if block.settings.column == '3' %}
+                <div class="faq-card-{{ section.id }}">
+                  {% if block.settings.use_second_border %}<div class="faq-card-{{ section.id }}">{% endif %}
+                  {% if block.settings.question != blank %}
+                    <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+                  {% endif %}
+                  {% if block.settings.text %}
+                    <div class="faq-text-{{ section.id }}">{{ block.settings.text }}</div>
+                  {% endif %}
+                  <div class="faq-buttons-{{ section.id }}">
+                    {% if block.settings.first_button != blank %}
+                      <{% if block.settings.first_url != blank %}a href="{{ block.settings.first_url }}"{% else %}div{% endif %} class="faq-first-button-{{ section.id }}">
+                        <p class="faq-first-button-inner-{{ section.id }}">
+                        {{ block.settings.first_button }}
+                        {% if first_button_style == "non_outline_arrow" or first_button_style == "outline_arrow" %}
+                            <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                              <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                            </svg>
+                          {% endif %}
+                        </p>
+                      </{% if block.settings.first_url != blank %}a{% else %}div{% endif %}>
+                    {% endif %}
+                    {% if block.settings.second_button != blank %}
+                      <{% if block.settings.second_url != blank %}a href="{{ block.settings.second_url }}"{% else %}div{% endif %} class="faq-second-button-{{ section.id }}">
+                        <p class="faq-second-button-inner-{{ section.id }}">
+                        {{ block.settings.second_button }}
+                        {% if second_button_style == "non_outline_arrow" or second_button_style == "outline_arrow" %}
+                            <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                              <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                            </svg>
+                          {% endif %}
+                        </p>
+                      </{% if block.settings.second_url != blank %}a{% else %}div{% endif %}>
+                    {% endif %}
+                  </div>
+                  {% if block.settings.use_second_border %}</div>{% endif %}
+                </div>
+              {% endif %}                           
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>      
     </div>
 </div>
 
-<script>
-  function initFaq17() {
-    const toggles = document.querySelectorAll('.faq-toggle-{{ section.id }}');
-    const tabs = document.querySelectorAll('.faq-tab-{{ section.id }}');
-    const items = document.querySelectorAll('.faq-item-{{ section.id }}');
-
-    if (toggles.length > 0) {
-      toggles[0].classList.add('active');
-    }
-
-    if (tabs.length > 0) {
-      tabs[0].classList.add('active');
-    }
-
-    if(toggles) {
-      toggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-          toggles.forEach(e => {
-            e.classList.remove('active');
-          })
-          tabs.forEach(tab => {
-            toggle.classList.add('active');
-            if(toggle.id == tab.getAttribute('data-id')) {
-              tab.classList.add('active');
-            } else {
-              tab.classList.remove('active');
-            }
-          })
-        })
-      })
-    }
-
-    const answerPaddingTop = {{ answer_padding_top }};
-    const answerPaddingBottom = 0;
-
-    const buttons = document.querySelectorAll(
-      '.faq-tab-toggle-{{ section.id }}'
-    );
-    const answers = document.querySelectorAll(
-      '.faq-answer-{{ section.id }}'
-    );
-    const answersHeightCalElements = document.querySelectorAll(
-      '.faq-height-cal-{{ section.id }}'
-    );
-    const faqIcons = document.querySelectorAll(
-      '.faq-icon-{{ section.id }}'
-    ); 
-
-    let activeIndex = -1;
-
-    function openAnswer(index) {
-      console.log(answersHeightCalElements[index]);
-      const height = answersHeightCalElements[index].offsetHeight;
-
-      answers[index].style.display = 'block';
-      setTimeout(() => {
-        answers[index].style.paddingTop = `${answerPaddingTop}px`;
-        answers[index].style.paddingBottom = `${answerPaddingBottom}px`;
-        answers[index].style.height = `${height}px`;
-      });
-
-      items[index].classList.add('active');
-      faqIcons[index].classList.add('active');
-    }
-
-    function closeAnswer(index) {
-      answers[index].style.paddingTop = 0;
-      answers[index].style.paddingBottom = 0;
-      answers[index].style.height = 0;
-
-      setTimeout(() => {
-        answers[index].style.display = 'none';
-      }, 300);
-
-      items[index].classList.remove('active');
-      faqIcons[index].classList.remove('active');
-    }
-
-    function toggleAnswer(index) {
-      if (answers[index].style.display === 'none') {
-        openAnswer(index);
-        activeIndex = index;
-      } else {
-        closeAnswer(index);
-        activeIndex = -1;
-      }
-    }
-
-    function closeAllAnswerBut(index) {
-      answers.forEach((answer, i) => {
-        if (i !== index) {
-          closeAnswer(i);
-        }
-      });
-    }
-
-    buttons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        toggleAnswer(index);
-        closeAllAnswerBut(index);
-      });
-    });
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        if (activeIndex !== -1) {
-          const height = answersHeightCalElements[activeIndex].offsetHeight;
-          answers[activeIndex].style.height = `${height}px`;
-        }
-      }, 250);
-    });    
-  }
-
-  document.addEventListener('DOMContentLoaded', initFaq17);
-
-  if (Shopify.designMode) {
-    document.addEventListener('shopify:section:unload', initFaq17);
-    document.addEventListener('shopify:section:load', initFaq17);
-  }
-</script>
 
 {% schema %}
 {
-  "name": "SG-FAQ #17",
+  "name": "SG-FAQ #18",
   "settings": [
     {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "range",
-      "id": "content_max_width",
-      "min": 10,
-      "max": 100,
-      "step": 2,
-      "unit": "%",
-      "label": "Max width - desktop",
-      "default": 60
-    },
-    {
-      "type": "text_alignment",
-      "id": "content_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "content_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
+      "type": "paragraph",
+      "content": "⚠️ Save to display section correctly"
     },
     {
       "type": "header",
-      "content": "Toggles"
+      "content": "Layout"
     },
     {
       "type": "range",
-      "id": "toggles_gap",
+      "id": "cards_gap",
       "min": 0,
       "max": 100,
       "step": 2,
@@ -809,231 +728,103 @@
     },
     {
       "type": "range",
-      "id": "toggles_gap_mobile",
+      "id": "cards_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "toggles_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "toggles_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 24
+      "default": 16
     },
     {
       "type": "header",
-      "content": "Toggle"
+      "content": "Card"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_advanced",
+      "label": "Advanced settings",
+      "default": false
     },
     {
       "type": "range",
-      "id": "toggle_padding_horizontal",
+      "id": "card_padding_horizontal",
       "min": 0,
-      "max": 100,
+      "max": 50,
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal",
-      "default": 26
+      "default": 16,
+      "visible_if": "{{ section.settings.card_advanced }}"
     },
     {
       "type": "range",
-      "id": "toggle_padding_horizontal_mobile",
+      "id": "card_padding_horizontal_mobile",
       "min": 0,
-      "max": 100,
+      "max": 50,
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal - mobile",
-      "default": 20
+      "default": 16,
+      "visible_if": "{{ section.settings.card_advanced }}"
     },
     {
       "type": "range",
-      "id": "toggle_padding_vertical",
+      "id": "card_padding_vertical",
       "min": 0,
-      "max": 100,
+      "max": 50,
       "step": 2,
       "unit": "px",
       "label": "Padding vertical",
-      "default": 12
+      "default": 16,
+      "visible_if": "{{ section.settings.card_advanced }}"
     },
     {
       "type": "range",
-      "id": "toggle_padding_vertical_mobile",
+      "id": "card_padding_vertical_mobile",
       "min": 0,
-      "max": 100,
+      "max": 50,
       "step": 2,
       "unit": "px",
       "label": "Padding vertical - mobile",
-      "default": 10
+      "default": 16,
+      "visible_if": "{{ section.settings.card_advanced }}"
     },
     {
       "type": "range",
-      "id": "toggle_radius",
+      "id": "card_radius",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 100
-    },
-    {
-      "type": "header",
-      "content": "Toggle text"
-    },
-    {
-      "type": "checkbox",
-      "id": "toggle_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "toggle_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
+      "default": 8
     },
     {
       "type": "range",
-      "id": "toggle_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "toggle_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "toggle_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "header",
-      "content": "Collapsible tabs"
-    },
-    {
-      "type": "range",
-      "id": "tabs_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "tabs_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "item_mt",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "item_mt_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap - mobile",
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "Collapsible tab"
-    },
-    {
-      "type": "range",
-      "id": "item_padding_horizontal",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "item_padding_horizontal_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal - mobile",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "item_padding_vertical",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "item_padding_vertical_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "item_border_thickness",
+      "id": "card_border_thickness",
       "min": 0,
       "max": 10,
       "step": 1,
       "unit": "px",
       "label": "Border thickness",
       "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "cards_shadow",
+      "label": "Use shadow",
+      "default": true
+    },
+    {
+      "type": "text_alignment",
+      "id": "card_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "card_align_mobile",
+      "label": "Alignment - mobile"
     },
     {
       "type": "header",
@@ -1049,7 +840,8 @@
       "type": "font_picker",
       "id": "question_font",
       "label": "Font family",
-      "default": "josefin_sans_n4"
+      "default": "josefin_sans_n4",
+      "visible_if": "{{ section.settings.question_custom }}"
     },
     {
       "type": "range",
@@ -1059,7 +851,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 16
+      "default": 20
     },
     {
       "type": "range",
@@ -1069,7 +861,12 @@
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 14
+      "default": 18
+    },
+    {
+      "type": "checkbox",
+      "id": "question_advanced",
+      "label": "Advanced settings"
     },
     {
       "type": "range",
@@ -1079,51 +876,29 @@
       "step": 10,
       "unit": "%",
       "label": "Line height",
-      "default": 150
+      "default": 150,
+      "visible_if": "{{ section.settings.question_advanced }}"
     },
     {
       "type": "header",
-      "content": "Icon"
-    },
-    {
-      "type": "range",
-      "id": "icon_size",
-      "min": 10,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Size",
-      "default": 26
-    },
-    {
-      "type": "range",
-      "id": "icon_size_mobile",
-      "min": 10,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Size - mobile",
-      "default": 24
-    },
-    {
-      "type": "header",
-      "content": "Answer"
+      "content": "Text"
     },
     {
       "type": "checkbox",
-      "id": "answer_custom",
+      "id": "text_custom",
       "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "answer_font",
+      "id": "text_font",
       "label": "Font family",
-      "default": "josefin_sans_n4"
+      "default": "josefin_sans_n4",
+      "visible_if": "{{ section.settings.text_custom }}"
     },
     {
       "type": "range",
-      "id": "answer_size",
+      "id": "text_size",
       "min": 0,
       "max": 40,
       "step": 1,
@@ -1133,7 +908,7 @@
     },
     {
       "type": "range",
-      "id": "answer_size_mobile",
+      "id": "text_size_mobile",
       "min": 0,
       "max": 40,
       "step": 1,
@@ -1142,73 +917,272 @@
       "default": 14
     },
     {
+      "type": "checkbox",
+      "id": "text_advanced",
+      "label": "Advanced settings"
+    },
+    {
       "type": "range",
-      "id": "answer_height",
+      "id": "text_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
       "label": "Line height",
-      "default": 150
+      "default": 150,
+      "visible_if": "{{ section.settings.text_advanced }}"
     },
     {
       "type": "range",
-      "id": "answer_padding_top",
+      "id": "text_mt",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Padding top",
-      "default": 30,
-      "info": "Save to see updates"
+      "label": "Margin top",
+      "default": 16,
+      "visible_if": "{{ section.settings.text_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "text_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 12,
+      "visible_if": "{{ section.settings.text_advanced }}"
     },
     {
       "type": "header",
-      "content": "Toggles colors"
+      "content": "Buttons"
     },
     {
-      "type": "color",
-      "label": "Background",
-      "id": "toggles_bg_color",
-      "default": "#F7F7F7"
+      "type": "checkbox",
+      "id": "button_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4",
+      "visible_if": "{{ section.settings.button_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_size_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "button_advanced",
+      "label": "Advanced settings",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 100,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 16,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 16,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 20,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 16,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_border_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "buttons_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 10,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "buttons_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 10,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "buttons_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 24,
+      "visible_if": "{{ section.settings.button_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "buttons_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 20,
+      "visible_if": "{{ section.settings.button_advanced }}"
     },
     {
       "type": "header",
-      "content": "Toggle colors"
+      "content": "First button"
     },
     {
-      "type": "color",
-      "label": "Background",
-      "id": "toggle_bg_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color_background",
-      "id": "toggle_bg_gradient",
-      "label": "Background gradient",
-      "info": "Remove gradient to replace with solid colors"
-    },
-    {
-      "type": "color",
-      "label": "Text",
-      "id": "toggle_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Active text",
-      "id": "toggle_active_color",
-      "default": "#FFFFFF"
+      "type": "select",
+      "id": "first_button_style",
+      "label": "Button style",
+      "default": "outline",
+      "options": [
+        {
+          "label": "Link",
+          "value": "link"
+        },
+        {
+          "label": "Non-outline",
+          "value": "non_outline"
+        },
+        {
+          "label": "Non-outline & arrow",
+          "value": "non_outline_arrow"
+        },
+        {
+          "label": "Outline",
+          "value": "outline"
+        },
+        {
+          "label": "Outline & arrow",
+          "value": "outline_arrow"
+        }
+      ]
     },
     {
       "type": "header",
-      "content": "Collapsible tab colors"
+      "content": "Second button"
     },
     {
-      "type": "color",
-      "label": "Border",
-      "id": "item_border_color",
-      "default": "#E2E2E2"
+      "type": "select",
+      "id": "second_button_style",
+      "label": "Button style",
+      "default": "outline",
+      "options": [
+        {
+          "label": "Link",
+          "value": "link"
+        },
+        {
+          "label": "Non-outline",
+          "value": "non_outline"
+        },
+        {
+          "label": "Non-outline & arrow",
+          "value": "non_outline_arrow"
+        },
+        {
+          "label": "Outline",
+          "value": "outline"
+        },
+        {
+          "label": "Outline & arrow",
+          "value": "outline_arrow"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Card colors"
     },
     {
       "type": "color",
@@ -1219,13 +1193,104 @@
     {
       "type": "color",
       "label": "Answer",
-      "id": "answer_color",
+      "id": "text_color",
       "default": "#121212"
     },
     {
       "type": "color",
-      "label": "Plus icon",
-      "id": "icon_color",
+      "label": "Background",
+      "id": "card_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "card_border_color",
+      "default": "#F0F0F0"
+    },
+    {
+      "type": "color",
+      "label": "Shadow",
+      "id": "cards_shadow_color",
+      "default": "#D2D2D2"
+    },
+    {
+      "type": "header",
+      "content": "First button colors"
+    },
+    {
+      "type": "color",
+      "label": "Text",
+      "id": "first_button_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Text hover",
+      "id": "first_button_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Background",
+      "id": "first_button_bg_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Background hover",
+      "id": "first_button_bg_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "first_button_border_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Border hover",
+      "id": "first_button_border_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Second button colors"
+    },
+    {
+      "type": "color",
+      "label": "Text",
+      "id": "second_button_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Text hover",
+      "id": "second_button_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Background",
+      "id": "second_button_bg_color"
+    },
+    {
+      "type": "color",
+      "label": "Background hover",
+      "id": "second_button_bg_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "second_button_border_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Border hover",
+      "id": "second_button_border_hover_color",
       "default": "#121212"
     },
     {
@@ -1233,22 +1298,40 @@
       "content": "Section colors"
     },
     {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background style",
+      "default": "solid",
+      "options": [
+        {
+          "label": "Solid",
+          "value": "solid"
+        },
+        {
+          "label": "Gradient",
+          "value": "gradient"
+        }
+      ]
+    },
+    {
       "type": "color",
-      "label": "Section background",
+      "label": "Background",
       "id": "background_color",
-      "default": "#FFFFFF"
+      "default": "#FFFFFF",
+      "visible_if": "{{ section.settings.background_style == 'solid' }}"
     },
     {
       "type": "color_background",
       "id": "background_gradient",
-      "label": "Section background gradient",
-      "info": "Remove gradient to replace with solid colors"
+      "label": "Gradient",
+      "default": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+      "visible_if": "{{ section.settings.background_style == 'gradient' }}"
     },
     {
       "type": "color",
       "label": "Border",
       "id": "border_color",
-      "default": "#000000"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -1261,7 +1344,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Margin top",
+      "label": "Top",
       "default": 0
     },
     {
@@ -1271,7 +1354,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Margin bottom",
+      "label": "Bottom",
       "default": 0
     },
     {
@@ -1281,7 +1364,7 @@
       "max": 30,
       "step": 1,
       "unit": "rem",
-      "label": "Margin sides",
+      "label": "Sides",
       "default": 0
     },
     {
@@ -1291,7 +1374,7 @@
       "max": 15,
       "step": 0.5,
       "unit": "rem",
-      "label": "Margin sides mobile",
+      "label": "Sides - mobile",
       "default": 0
     },
     {
@@ -1305,7 +1388,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding top",
+      "label": "Top",
       "default": 36
     },
     {
@@ -1315,7 +1398,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding bottom",
+      "label": "Bottom",
       "default": 36
     },
     {
@@ -1325,7 +1408,7 @@
       "max": 30,
       "step": 1,
       "unit": "rem",
-      "label": "Padding sides",
+      "label": "Sides",
       "default": 5
     },
     {
@@ -1335,23 +1418,32 @@
       "max": 15,
       "step": 0.5,
       "unit": "rem",
-      "label": "Padding sides mobile",
+      "label": "Sides - mobile",
       "default": 1.5
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section"
     },
     {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image"
-    },
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": false
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "page",
+      "options": [
+        {
+          "label": "Page",
+          "value": "page"
+        },
+        {
+          "label": "Full",
+          "value": "full"
+        },
+        {
+          "label": "Custom",
+          "value": "custom"
+        }
+      ]
     },
     {
       "type": "range",
@@ -1360,8 +1452,9 @@
       "max": 2000,
       "step": 100,
       "unit": "px",
-      "label": "Section content width",
-      "default": 800
+      "label": "Content width",
+      "default": 1200,
+      "visible_if": "{{ section.settings.width == 'custom' }}"
     },
     {
       "type": "range",
@@ -1380,191 +1473,35 @@
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Section roundness",
+      "label": "Roundness",
       "default": 0
     }
   ],
   "blocks": [
     {
-      "type": "heading",
-      "name": "Heading",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "heading",
-          "label": "Heading",
-          "default": "<h2>FAQ #17</h2>"
-        },
-        {
-          "type": "checkbox",
-          "id": "heading_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "heading_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.heading_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "heading_size",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Font size",
-          "default": 40
-        },
-        {
-          "type": "range",
-          "id": "heading_size_mobile",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 32
-        },
-        {
-          "type": "range",
-          "id": "heading_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 130
-        },
-        {
-          "type": "range",
-          "id": "heading_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "heading_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top - mobile",
-          "default": 0
-        },
-        {
-          "type": "color",
-          "label": "Color",
-          "id": "heading_color",
-          "default": "#121212"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "limit": 1,
-      "name": "Text",
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text",
-          "default": "<p>Share details about your brand with customers. Introduce products, make announcements, or greet visitors to your store.</p>"
-        },
-        {
-          "type": "checkbox",
-          "id": "text_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "text_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.text_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "text_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 15
-        },
-        {
-          "type": "range",
-          "id": "text_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 15
-        },
-        {
-          "type": "range",
-          "id": "text_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 150
-        },
-        {
-          "type": "range",
-          "id": "text_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top",
-          "default": 30
-        },
-        {
-          "type": "range",
-          "id": "text_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top - mobile",
-          "default": 20
-        },
-        {
-          "type": "color",
-          "label": "Color",
-          "id": "text_color",
-          "default": "#121212"
-        }
-      ]
-    },
-    {
-      "type": "tab",
-      "name": "Toggle",
-      "settings": [
-        {
-          "type": "text",
-          "id": "tab",
-          "label": "Toggle",
-          "default": "Toggle"
-        }
-      ]
-    },
-    {
-      "type": "faq_item",
+      "type": "card",
       "name": "Question",
       "settings": [
+        {
+          "type": "select",
+          "id": "column",
+          "label": "Column",
+          "default": "1",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "question",
@@ -1573,61 +1510,90 @@
         },
         {
           "type": "richtext",
-          "id": "answer",
+          "id": "text",
           "label": "Answer",
           "default": "<p>Answer</p>"
+        },
+        {
+          "type": "text",
+          "id": "first_button",
+          "label": "First button",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "first_url",
+          "label": "First button link"
+        },
+        {
+          "type": "text",
+          "id": "second_button",
+          "label": "Second button",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "second_url",
+          "label": "Second button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_second_border",
+          "label": "Use second border"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-FAQ #17",
+      "name": "SG-FAQ #18",
       "blocks": [
         {
-          "type": "heading"
-        },
-        {
-          "type": "text"
-        },
-        {
-          "type": "tab",
+          "type": "card",
           "settings": {
-            "tab": "General information"
+            "column": "1",
+            "question": "How can I use my discount code?",
+            "text": "<p>During checkout, look for the designated discount code field. Simply enter your code and click 'apply' or a similar button.</p>"
           }
         },
         {
-          "type": "faq_item"
-        },
-        {
-          "type": "faq_item"
-        },
-        {
-          "type": "faq_item"
-        },
-        {
-          "type": "tab",
+          "type": "card",
           "settings": {
-            "tab": "Product information"
+            "column": "2",
+            "question": "What is the shipping policy?",
+            "text": "<p>Once your order is placed, you will receive a confirmation email letting you know that our fulfillment team has received your order. Rates and delivery times will vary depending on your selection and location.</p>"
           }
         },
         {
-          "type": "faq_item"
-        },
-        {
-          "type": "faq_item"
-        },
-        {
-          "type": "tab",
+          "type": "card",
           "settings": {
-            "tab": "Shipping & Delivery"
+            "column": "3",
+            "question": "I placed an order where is it?",
+            "text": "<p>All items are dispatched from our warehouse within 48 hours of placing your order, during business hours. If you place an order on a Friday afternoon or over the weekend, it will be sent out on the next business day.</p>"
           }
         },
         {
-          "type": "faq_item"
+          "type": "card",
+          "settings": {
+            "column": "1",
+            "question": "How long do I have to return my order?",
+            "text": "<p>For US orders you have 30 days to return your order.</p>"
+          }
         },
         {
-          "type": "faq_item"
+          "type": "card",
+          "settings": {
+            "column": "2"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "column": "3",
+            "first_button": "Our blog",
+            "second_button": "Contact us",
+            "use_second_border": true
+          }
         }
       ]
     }
