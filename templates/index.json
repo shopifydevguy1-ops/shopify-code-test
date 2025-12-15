@@ -33,9 +33,55 @@
         "padding_top": 20,
         "padding_bottom": 0
       }
+    },
+    "mockup_9RF7PN": {
+      "type": "mockup",
+      "blocks": {
+        "heading_ceRmp9": {
+          "type": "heading",
+          "settings": {
+            "heading": "ECO IMAGE WITH TEXT",
+            "heading_size": "h1",
+            "titlesize": 30,
+            "color_text": "#091d63"
+          }
+        },
+        "text_rz6ePe": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "descsize": 18,
+            "color_desc": "#091d63"
+          }
+        },
+        "button_xF6pVU": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "#",
+            "button-size": 16,
+            "button-text": "#091d63",
+            "button-text-hover": "#091d63"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ceRmp9",
+        "text_rz6ePe",
+        "button_xF6pVU"
+      ],
+      "name": "SG-Eco Text With Image",
+      "settings": {
+        "image": "shopify://shop_images/eco-hero-image-full-width-without-text.png",
+        "layout": "image_first",
+        "image-color": "#091d63",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
-    "rich_text_E7gF9H"
+    "rich_text_E7gF9H",
+    "mockup_9RF7PN"
   ]
 }
