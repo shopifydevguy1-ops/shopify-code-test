@@ -16,8 +16,41 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
+  assign content_align = section.settings.content_align
+  assign content_align_mobile = section.settings.content_align_mobile
+  assign content_padding_vertical = section.settings.content_padding_vertical
+  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
+
+  assign content_horizontal_align = ""
+  if content_align == "center"
+    assign content_horizontal_align = "center"
+  elsif content_align == "right"
+    assign content_horizontal_align = "end"
+  else
+    assign content_horizontal_align = "start"
+  endif
+
+  assign content_horizontal_align_mobile = ""
+  if content_align_mobile == "center"
+    assign content_horizontal_align_mobile = "center"
+  elsif content_align_mobile == "right"
+    assign content_horizontal_align_mobile = "end"
+  else
+    assign content_horizontal_align_mobile = "start"
+  endif
+
+  assign heading = section.settings.heading
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_height = section.settings.heading_height
+  assign heading_color = section.settings.heading_color
+
   assign toggles_gap = section.settings.toggles_gap  
   assign toggles_gap_mobile = section.settings.toggles_gap_mobile
+  assign toggles_mt = section.settings.toggles_mt  
+  assign toggles_mt_mobile = section.settings.toggles_mt_mobile
 
   assign toggle_custom = section.settings.toggle_custom
   assign toggle_font = section.settings.toggle_font
@@ -25,7 +58,9 @@
   assign toggle_size_mobile = section.settings.toggle_size_mobile
   assign toggle_height = section.settings.toggle_height
   assign toggle_color = section.settings.toggle_color
+  assign toggle_hover_color = section.settings.toggle_hover_color
   assign toggle_bg_color = section.settings.toggle_bg_color
+  assign toggle_bg_hover_color = section.settings.toggle_bg_hover_color
   assign toggle_padding_horizontal = section.settings.toggle_padding_horizontal
   assign toggle_padding_horizontal_mobile = section.settings.toggle_padding_horizontal_mobile
   assign toggle_padding_vertical = section.settings.toggle_padding_vertical
@@ -33,6 +68,7 @@
   assign toggle_radius = section.settings.toggle_radius
   assign toggle_border_thickness = section.settings.toggle_border_thickness
   assign toggle_border_color = section.settings.toggle_border_color
+  assign toggle_border_hover_color = section.settings.toggle_border_hover_color
   assign toggle_border_hover_color = section.settings.toggle_border_hover_color
   assign toggle_border_active_color = section.settings.toggle_border_active_color
   assign toggle_bg_hover_color = section.settings.toggle_bg_hover_color
@@ -42,32 +78,13 @@
 
   assign layout_gap = section.settings.layout_gap
   assign layout_gap_mobile = section.settings.layout_gap_mobile
-  assign layout_mt = section.settings.layout_mt
-  assign layout_mt_mobile = section.settings.layout_mt_mobile
+  assign autoplay = section.settings.autoplay
 
   assign image_border_thickness = section.settings.image_border_thickness
   assign image_border_color = section.settings.image_border_color
   assign image_radius = section.settings.image_radius
   assign image_ratio = section.settings.image_ratio
   assign image_ratio_mobile = section.settings.image_ratio_mobile
-
-  assign second_image_width = section.settings.second_image_width
-  assign second_image_width_mobile = section.settings.second_image_width_mobile
-  assign second_image_border_thickness = section.settings.second_image_border_thickness
-  assign second_image_border_color = section.settings.second_image_border_color
-  assign second_image_radius = section.settings.second_image_radius
-  assign second_image_ratio = section.settings.second_image_ratio
-  assign second_image_ratio_mobile = section.settings.second_image_ratio_mobile
-
-  assign feature_layout_align = section.settings.feature_layout_align
-  assign feature_layout_align_mobile = section.settings.feature_layout_align_mobile
-
-  assign title_size = section.settings.title_size
-  assign title_size_mobile = section.settings.title_size_mobile
-  assign title_color = section.settings.title_color
-  assign title_custom = section.settings.title_custom
-  assign title_font = section.settings.title_font
-  assign title_height = section.settings.title_height
 
   assign text_size = section.settings.text_size
   assign text_size_mobile = section.settings.text_size_mobile
@@ -85,8 +102,8 @@
 -%}
 
 {%- style -%}
+  {{ heading_font | font_face: font_display: 'swap' }}
   {{ toggle_font | font_face: font_display: 'swap' }}
-  {{ title_font | font_face: font_display: 'swap' }}
   {{ text_font | font_face: font_display: 'swap' }}
 
   .section-{{ section.id }} {
@@ -107,19 +124,47 @@
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
+
+  .feature-body-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ layout_gap_mobile }}px;
+  }
+
+  .feature-images-{{ section.id }} {
+    order: 1;
+  }
+
+  .feature-content-{{ section.id }} {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: {{ content_padding_vertical_mobile }}px 0px;
+  }
+  
+  .feature-heading-{{ section.id }} {
+    text-align: {{ content_align_mobile }};
+  }
+
+  .feature-heading-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-weight: 700;
+  }
   
   .feature-toggles-{{ section.id }} {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    align-items: center;   
-    justify-content: start; 
+    flex-wrap: wrap;
+    align-items: center;  
+    justify-content: {{ content_horizontal_align_mobile }}; 
+    margin-top: {{ toggles_mt_mobile }}px;
     gap: {{ toggles_gap_mobile }}px;
-    margin-left: -{{ padding_horizontal_mobile }}rem;
-    margin-right: -{{ padding_horizontal_mobile }}rem;
-    padding-left: {{ padding_horizontal_mobile }}rem;
-    padding-right: {{ padding_horizontal_mobile }}rem;
   }
   
   .feature-toggles-{{ section.id }}::-webkit-scrollbar {
@@ -128,94 +173,118 @@
 
   .feature-toggle-{{ section.id }} {
     margin: 0;
+    position: relative;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: {{ toggle_size_mobile }}px;
-    color: {{ toggle_color }};
-    line-height: {{ toggle_height }}%;
+    overflow: hidden;
     background-color: {{ toggle_bg_color }};
     padding: {{ toggle_padding_vertical_mobile }}px {{ toggle_padding_horizontal_mobile }}px;
     border: {{ toggle_border_thickness }}px solid {{ toggle_border_color }};
     border-radius: {{ toggle_radius }}px;
     text-transform: unset;
     text-decoration: none;
-    white-space: nowrap;
+    transition: all 0.25s ease 0s;
+    opacity: 0.6;
+  }
+
+  .feature-toggle-bg-{{ section.id }} {
+    display: none;
+  }
+
+  .feature-toggle-bg-{{ section.id }}.hide-{{ section.id }} {
+    display: none !important;
+  }
+
+  .feature-toggle-{{ section.id }}.active .feature-toggle-bg-{{ section.id }} {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: {{ toggle_bg_active_color }};    
+    opacity: 0.3;
+    -webkit-animation: ticker{{ section.id | replace: '-', '' }} {{ autoplay }}s linear;
+    animation: ticker{{ section.id | replace: '-', '' }} {{ autoplay }}s linear;
+  }
+
+  @keyframes ticker{{ section.id | replace: '-', '' }} {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  .feature-toggle-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ toggle_size_mobile }}px;
+    color: {{ toggle_color }};
+    line-height: {{ toggle_height }}%;
+    text-transform: unset;
+    text-decoration: none;
     transition: all 0.25s ease 0s;
   }
 
   .feature-toggle-{{ section.id }}.active {
-    background-color: {{ toggle_bg_active_color }};
-    border: {{ toggle_border_thickness }}px solid {{ toggle_border_active_color }};
-    color: {{ toggle_active_color }};
+    opacity: 1;
+    background-color: {{ toggle_bg_color }};
+    border: {{ toggle_border_thickness }}px solid {{ toggle_border_active_color }};    
     transition: all 0.25s ease 0s;
   }
 
-  .feature-item-{{ section.id }} {
-    display: none;
-    flex-direction: column;
-    gap: {{ layout_gap_mobile }}px;
-    align-items: center;
-    margin-top: {{ layout_mt_mobile }}px;
+  .feature-toggle-{{ section.id }}:hover {
+    opacity: 1;
+    background-color: {{ toggle_bg_hover_color }};
+    border: {{ toggle_border_thickness }}px solid {{ toggle_border_hover_color }};    
+    transition: all 0.25s ease 0s;
   }
 
-  .feature-item-{{ section.id }}.active {
-    display: flex;
+  .feature-toggle-{{ section.id }}.active * {
+    color: {{ toggle_active_color }};
   }
 
-  .feature-images-{{ section.id }} {
-    position: relative;
-    width: 70%;
+  .feature-toggle-{{ section.id }}:hover * {
+    color: {{ toggle_hover_color }};
   }
 
   .feature-image-{{ section.id }} {
+    display: none;
     border: {{ image_border_thickness }}px solid {{ image_border_color }};
     border-radius: {{ image_radius }}px;
     overflow: hidden;
     width: 100%;
   }
 
-  .feature-second-image-{{ section.id }} {
-    position: absolute;
-    bottom: -{{ second_image_width_mobile | times: 0.25 }}px;
-    left: -{{ second_image_width_mobile | times: 0.25 }}px;
-    width: {{ second_image_width_mobile }}px;
-    border: {{ second_image_border_thickness }}px solid {{ second_image_border_color }};
-    border-radius: {{ second_image_radius }}px;
-    overflow: hidden;
+  .feature-image-{{ section.id }}.active {
+    display: block;
   }
 
   .feature-image-{{ section.id }} img,
-  .feature-image-{{ section.id }} svg,
-  .feature-second-image-{{ section.id }} img,
-  .feature-second-image-{{ section.id }} svg {
+  .feature-image-{{ section.id }} svg {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .feature-image-{{ section.id }} svg,
-  .feature-second-image-{{ section.id }} svg {
+  .feature-image-{{ section.id }} svg {
     background-color: #AFAFAF;
   }
 
-  .feature-title-{{ section.id }} {
-    margin: 0px;
-    width: 100%;
-    text-align: {{ feature_layout_align_mobile }};
-    font-size: {{ title_size_mobile }}px;
-    line-height: {{ title_height }}%;
-    color: {{ title_color }};
-    text-transform: unset;
-    word-break: break-word;
-    font-weight: 700;
+  .feature-text-{{ section.id }}.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
   }
 
   .feature-text-{{ section.id }} {
+    display: none;
     margin-top: {{ text_mt_mobile }}px;
-    text-align: {{ feature_layout_align_mobile }};
+    text-align: {{ content_align_mobile }};
     width: 100%;
   }
 
@@ -239,65 +308,63 @@
     }
     
     .section-{{ section.id }}-settings {
-      padding: 0 0rem;
+      padding: 0 5rem;
       padding-top: {{ padding_top }}px;
-      padding-bottom: calc({{ padding_bottom }}px + {{ second_image_width | times: 0.25 }}px);
-      padding-left: calc({{ padding_horizontal }}rem + {{ second_image_width | times: 0.25 }}px);
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_horizontal }}rem;
       padding-right: {{ padding_horizontal }}rem;
+    }
+
+    .feature-body-{{ section.id }} {
+      grid-template-columns: 1fr 1fr;
+      gap: {{ layout_gap }}px;
+    }
+
+    .feature-heading-{{ section.id }} {
+      text-align: {{ content_align }};
+    }
+  
+    .feature-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    } 
+    
+    .feature-images-{{ section.id }} {
+      order: 2;
+    }
+    
+    .feature-content-{{ section.id }} {
+      order: 1;
+      padding: {{ content_padding_vertical }}px 0px;
     }
 
     .feature-toggles-{{ section.id }} {
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: {{ content_horizontal_align }}; 
       gap: {{ toggles_gap }}px;
-      margin-left: 0rem;
-      margin-right: 0rem;
-      padding-left: 0rem;
-      padding-right: 0rem;
+      margin-top: {{ toggles_mt }}px;
     }
 
-    .feature-toggle-{{ section.id }} {
-      font-size: {{ toggle_size }}px;
+    .feature-toggle-{{ section.id }} {   
       padding: {{ toggle_padding_vertical }}px {{ toggle_padding_horizontal }}px;
     }
 
+    .feature-toggle-{{ section.id }} * {
+      font-size: {{ toggle_size }}px;
+    }
       
-    .feature-toggle-{{ section.id }}:not(.active):hover {
+    .feature-toggle-{{ section.id }}:hover {
       background-color: {{ toggle_bg_hover_color }};
-      border: {{ toggle_border_thickness }}px solid {{ toggle_border_hover_color }};
-      color: {{ toggle_hover_color }};
+      border: {{ toggle_border_thickness }}px solid {{ toggle_border_hover_color }};     
       transition: all 0.25s ease 0s;
     }
 
-    .feature-item-{{ section.id }} {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: {{ layout_gap }}px;
-      margin-top: {{ layout_mt }}px;
-    }
-
-    .feature-item-{{ section.id }}.active {
-      display: grid;
-    }
-
-    .feature-images-{{ section.id }} {
-      width: 100%;
-    }
-
-    .feature-second-image-{{ section.id }} {
-      width: {{ second_image_width }}px;
-      bottom: -{{ second_image_width | times: 0.25 }}px;
-      left: -{{ second_image_width | times: 0.25 }}px;
-    }
-
-    .feature-title-{{ section.id }} {
-      text-align: {{ feature_layout_align }};
-      font-size: {{ title_size }}px;
+    .feature-toggle-{{ section.id }}:hover * {
+      color: {{ toggle_hover_color }};
     }
 
     .feature-text-{{ section.id }} {
       margin-top: {{ text_mt }}px;
-      text-align: {{ feature_layout_align }};
+      text-align: {{ content_align }};
     }
 
     .feature-text-{{ section.id }} * {
@@ -342,22 +409,22 @@
   </style>
 {% endif %}
 
-{% if toggle_custom %}
+{% if heading_custom %}
   <style>
-    .feature-toggle-{{ section.id }} {
-      font-family: {{ toggle_font.family }}, {{ toggle_font.fallback_families }};
-      font-weight: {{ toggle_font.weight }};
-      font-style: {{ toggle_font.style }};
+    .feature-heading-{{ section.id }} * {
+      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      font-weight: {{ heading_font.weight }};
+      font-style: {{ heading_font.style }};
     }
   </style>
 {% endif %}
 
-{% if title_custom %}
-  <style>
-    .feature-title-{{ section.id }} {
-      font-family: {{ title_font.family }}, {{ title_font.fallback_families }};
-      font-weight: {{ title_font.weight }};
-      font-style: {{ title_font.style }};
+{% if toggle_custom %}
+  <style> 
+    .feature-toggle-{{ section.id }} * {
+      font-family: {{ toggle_font.family }}, {{ toggle_font.fallback_families }};
+      font-weight: {{ toggle_font.weight }};
+      font-style: {{ toggle_font.style }};
     }
   </style>
 {% endif %}
@@ -433,158 +500,344 @@
   </style>
 {% endif %}
 
-{% if second_image_ratio_mobile == "portrait" %}
-  <style>
-    .feature-second-image-{{ section.id }} {
-      aspect-ratio: 9.6/11;
-    }
-  </style>
-{% elsif second_image_ratio_mobile == "landscape" %}
-  <style>
-  .feature-second-image-{{ section.id }} {
-    aspect-ratio: 12/8;
-  }
-  </style>
-{% elsif second_image_ratio_mobile == "square" %}
-  <style>
-    .feature-second-image-{{ section.id }} {
-      aspect-ratio: 12/12;
-    }
-  </style>
-{% else %}
-  <style>
-    .feature-second-image-{{ section.id }} {
-      aspect-ratio: auto;
-    }
-  </style>
-{% endif %}
-
-{% if second_image_ratio == "portrait" %}
-  <style>
-    @media(min-width: 1024px) {
-      .feature-second-image-{{ section.id }} {
-        aspect-ratio: 9.6/11;
-      }
-    }
-    
-  </style>
-{% elsif second_image_ratio == "landscape" %}
-  <style>
-    @media(min-width: 1024px) {
-      .feature-second-image-{{ section.id }} {
-        aspect-ratio: 12/8;
-      }
-    }  
-  </style>
-{% elsif second_image_ratio == "square" %}
-  <style>
-    @media(min-width: 1024px) {
-      .feature-second-image-{{ section.id }} {
-        aspect-ratio: 12/12;
-      }
-    }    
-  </style>
-{% else %}
-  <style>
-     @media(min-width: 1024px) {
-      .feature-second-image-{{ section.id }} {
-        aspect-ratio: auto;
-      }
-    }
-  </style>
-{% endif %}
 
 <div class="section-{{ section.id }} feature-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="feature-body-{{ section.id }}">
-        <div class="feature-toggles-{{ section.id }}">
-          {% for block in section.blocks %}
-            <p class="feature-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">{{ block.settings.toggle }}</p>
-          {% endfor %}
-        </div>
-        <div class="feature-items-{{ section.id }}">
-          {% for block in section.blocks %}
-            <div class="feature-item-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
-              <div class="feature-images-{{ section.id }}">
-                <div class="feature-image-{{ section.id }}">
-                  {% if block.settings.image != blank %}
-                  {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                    {{ block.settings.image | image_url: width: 1000 | image_tag:
-                      loading: lazy_load_setting,
-                      width: block.settings.image.width,
-                      height: block.settings.image.height,
-                      sizes: sizes,
-                      widths: '360, 535, 750, 1070, 1500'
-                    }}
-                  {% else %}  
-                    {{ 'image' | placeholder_svg_tag }}
-                  {% endif %}  
+      <div class="feature-body-{{ section.id }}">           
+        <div class="feature-content-{{ section.id }}">
+          <div class="feature-toggles-wrapper-{{ section.id }}">
+            {% if heading != blank %}
+              <div class="feature-heading-{{ section.id }}">{{ heading }}</div>
+            {% endif %}
+            <div class="feature-toggles-{{ section.id }}">
+              {% for block in section.blocks %}
+                <div class="feature-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">
+                  <p>{{ block.settings.toggle }}</p>
+                  <div class="feature-toggle-bg-{{ section.id }}"></div>
                 </div>
-                {% if block.settings.use_second_image != blank %}
-                  <div class="feature-second-image-{{ section.id }}">
-                    {% if block.settings.second_image != blank %}
-                    {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                      {{ block.settings.second_image | image_url: width: 700 | image_tag:
-                        loading: lazy_load_setting,
-                        width: block.settings.second_image.width,
-                        height: block.settings.second_image.height,
-                        sizes: sizes,
-                        widths: '360, 535, 750, 1070, 1500'
-                      }}
-                    {% else %}  
-                      {{ 'image' | placeholder_svg_tag }}
-                    {% endif %}  
-                  </div>
-                {% endif %}
-              </div>
-              <div class="feature-content-{{ section.id }}">
-                {% if block.settings.title != blank %}
-                  <h3 class="feature-title-{{ section.id }}">{{ block.settings.title }}</h3>
-                {% endif %}
-                {% if block.settings.text != blank %}
-                  <div class="feature-text-{{ section.id }}">{{ block.settings.text }}</div>
-                {% endif %}
-              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="feature-text-wrapper-{{ section.id }}">              
+            {% for block in section.blocks %}
+              {% if block.settings.text != blank %}
+                <div class="feature-text-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">{{ block.settings.text }}</div>
+              {% endif %}
+            {% endfor %}   
+          </div>            
+        </div>
+        <div class="feature-images-{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="feature-image-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+              {% if block.settings.image != blank %}
+              {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
+                {{ block.settings.image | image_url: width: 1500 | image_tag:
+                  loading: lazy_load_setting,
+                  width: block.settings.image.width,
+                  height: block.settings.image.height,
+                  sizes: sizes,
+                  widths: '360, 535, 750, 1070, 1500'
+                }}
+              {% else %}  
+                {{ 'image' | placeholder_svg_tag }}
+              {% endif %}  
             </div>
           {% endfor %}
-        </div>
+        </div> 
       </div>
     </div>
 </div>
 
 <script>
-  function initFeature37() {
+  function initFeature38() {
     const toggles = document.querySelectorAll('.feature-toggle-{{ section.id }}');
-    const contents = document.querySelectorAll('.feature-item-{{ section.id }}');
+    const images = document.querySelectorAll('.feature-image-{{ section.id }}');
+    const texts = document.querySelectorAll('.feature-text-{{ section.id }}');
+    const bgs = document.querySelectorAll('.feature-toggle-bg-{{ section.id }}');
+    const time = {{ autoplay }} * 1000;
+    let currentIndex = 1;
+    let intervalId = null;
+    let userInteracted = false;
 
-    toggles.forEach(toggle => {
+    function setMaxHeight() {
+      let maxHeight = 0;
+      texts.forEach(text => {
+        const height = text.offsetHeight;
+        if (height > maxHeight) {
+          maxHeight = height;
+        }
+      });
+      texts.forEach(text => {
+        text.style.minHeight = `${maxHeight}px`;
+      });
+    }
+
+    function activateByIndex(index, isUser = false) {
+      images.forEach(image => image.classList.remove('active'));
+      toggles.forEach(toggle => toggle.classList.remove('active'));
+      texts.forEach(text => text.classList.remove('active'));
+      if (isUser) {
+        bgs.forEach(bg => bg.classList.remove('hide-{{ section.id }}'));
+      }
+
+      const toggle = toggles[index];
+      const dataId = toggle.id;
+
+      images.forEach(image => {
+        if (image.getAttribute('data-id') === dataId) {
+          image.classList.add('active');
+        }
+      });
+
+      texts.forEach(text => {
+        if (text.getAttribute('data-id') === dataId) {
+          text.classList.add('active');
+        }
+      });
+
+      if (isUser) {
+        bgs.forEach(bg => {        
+          bg.classList.add('hide-{{ section.id }}');          
+        });
+      }
+
+      toggle.classList.add('active');
+    }
+
+    function startAutoSwitching() {
+      intervalId = setInterval(() => {
+        activateByIndex(currentIndex);
+        currentIndex = (currentIndex + 1) % toggles.length;
+      }, time);
+    }
+
+    setMaxHeight();
+
+    window.addEventListener('resize', () => {
+      setMaxHeight();
+    });
+
+    toggles.forEach((toggle, index) => {
       toggle.addEventListener('click', () => {
-        contents.forEach(otherContent => otherContent.classList.remove('active'));
-        toggles.forEach(otherToggle => otherToggle.classList.remove('active'));
-        contents.forEach(content => {
-          if(toggle.id == content.getAttribute('data-id')) {          
-            content.classList.add('active');
-            toggle.classList.add('active');
-          }
-        })
-      })
-    })
+        if (!userInteracted) {
+          userInteracted = true;
+          clearInterval(intervalId);
+        }
+        activateByIndex(index, true);
+        currentIndex = index;
+      });
+    });
+
+    if (toggles.length > 1) {
+      startAutoSwitching();
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', initFeature37);
+  document.addEventListener('DOMContentLoaded', initFeature38);
 
   if (Shopify.designMode) {
-    document.addEventListener('shopify:section:unload', initFeature37);
-    document.addEventListener('shopify:section:load', initFeature37);
+    document.addEventListener('shopify:section:unload', initFeature38);
+    document.addEventListener('shopify:section:load', initFeature38);
   }
 </script>
 
 
-
 {% schema %}
 {
-  "name": "SG-Feature #37",
+  "name": "SG-Feature #38",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "layout_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "layout_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "autoplay",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay time",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Aspect ratio",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 0
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Text",
+      "default": "<h2>Feature #38</h2>"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
     {
       "type": "header",
       "content": "Toggles"
@@ -597,7 +850,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 24
+      "default": 8
     },
     {
       "type": "range",
@@ -607,7 +860,27 @@
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 12
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "toggles_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "toggles_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 16
     },
     {
       "type": "header",
@@ -633,7 +906,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 18
+      "default": 24
     },
     {
       "type": "range",
@@ -663,7 +936,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal",
-      "default": 26
+      "default": 16
     },
     {
       "type": "range",
@@ -673,7 +946,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal - mobile",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
@@ -683,7 +956,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical",
-      "default": 14
+      "default": 10
     },
     {
       "type": "range",
@@ -693,7 +966,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical - mobile",
-      "default": 12
+      "default": 10
     },
     {
       "type": "range",
@@ -703,7 +976,7 @@
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 100
+      "default": 4
     },
     {
       "type": "range",
@@ -713,275 +986,7 @@
       "step": 1,
       "unit": "px",
       "label": "Border thickness",
-      "default": 1
-    },
-    {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "range",
-      "id": "layout_gap",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "layout_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap - mobile",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "layout_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 52
-    },
-    {
-      "type": "range",
-      "id": "layout_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 20
-    },
-    {
-      "type": "header",
-      "content": "Image 1"
-    },
-    {
-      "type": "range",
-      "id": "image_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "image_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Aspect ratio",
-      "default": "portrait",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "image_ratio_mobile",
-      "label": "Aspect ratio - mobile",
-      "default": "portrait",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Image 2"
-    },
-    {
-      "type": "range",
-      "id": "second_image_width",
-      "min": 100,
-      "max": 300,
-      "step": 10,
-      "unit": "px",
-      "label": "Width",
-      "default": 210
-    },
-    {
-      "type": "range",
-      "id": "second_image_width_mobile",
-      "min": 100,
-      "max": 200,
-      "step": 10,
-      "unit": "px",
-      "label": "Width - mobile",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "second_image_radius",
-      "min": 0,
-      "max": 150,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 150
-    },
-    {
-      "type": "range",
-      "id": "second_image_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 0
-    },
-    {
-      "type": "select",
-      "id": "second_image_ratio",
-      "label": "Aspect ratio",
-      "default": "square",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "second_image_ratio_mobile",
-      "label": "Aspect ratio - mobile",
-      "default": "square",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Feature content"
-    },
-    {
-      "type": "text_alignment",
-      "id": "feature_layout_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "feature_layout_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "header",
-      "content": "Title"
-    },
-    {
-      "type": "checkbox",
-      "id": "title_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "title_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "title_size",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 42
-    },
-    {
-      "type": "range",
-      "id": "title_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "title_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
     },
     {
       "type": "header",
@@ -1007,7 +1012,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 20
+      "default": 18
     },
     {
       "type": "range",
@@ -1037,7 +1042,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 32
+      "default": 20
     },
     {
       "type": "range",
@@ -1047,7 +1052,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 24
+      "default": 20
     },
     {
       "type": "header",
@@ -1061,7 +1066,7 @@
     },
     {
       "type": "color",
-      "label": "Text hover",
+      "label": "Text",
       "id": "toggle_hover_color",
       "default": "#121212"
     },
@@ -1069,37 +1074,37 @@
       "type": "color",
       "label": "Text active",
       "id": "toggle_active_color",
-      "default": "#FFFFFF"
+      "default": "#121212"
     },
     {
       "type": "color",
       "label": "Background",
       "id": "toggle_bg_color",
-      "default": "transparent"
+      "default": "#F3F3F3"
     },
     {
       "type": "color",
       "label": "Background hover",
       "id": "toggle_bg_hover_color",
-      "default": "transparent"
+      "default": "#F3F3F3"
     },
     {
       "type": "color",
       "label": "Background active",
       "id": "toggle_bg_active_color",
-      "default": "#121212"
+      "default": "#334FB4"
     },
     {
       "type": "color",
       "label": "Border",
       "id": "toggle_border_color",
-      "default": "#AFAFAF"
+      "default": "#121212"
     },
     {
       "type": "color",
       "label": "Border hover",
       "id": "toggle_border_hover_color",
-      "default": "#4D4D4D"
+      "default": "#121212"
     },
     {
       "type": "color",
@@ -1109,30 +1114,28 @@
     },
     {
       "type": "header",
+      "content": "Image colors"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "image_border_color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
       "content": "Content colors"
     },
     {
       "type": "color",
-      "label": "Title",
-      "id": "title_color",
+      "label": "Heading",
+      "id": "heading_color",
       "default": "#121212"
     },
     {
       "type": "color",
       "label": "Text",
       "id": "text_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Image 1 border",
-      "id": "image_border_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Image 2 border",
-      "id": "second_image_border_color",
       "default": "#121212"
     },
     {
@@ -1296,7 +1299,7 @@
   "blocks": [
     {
       "type": "toggle",
-      "name": "Feature",
+      "name": "Toggle",
       "settings": [
         {
           "type": "text",
@@ -1305,74 +1308,45 @@
           "default": "Toggle"
         },
         {
-          "type": "header",
-          "content": "Image"
-        },
-        {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
         },
         {
-          "type": "image_picker",
-          "id": "second_image",
-          "label": "Second image"
-        },
-        {
-          "type": "checkbox",
-          "id": "use_second_image",
-          "label": "Use second image",
-          "default": true
-        },
-        {
-          "type": "header",
-          "content": "Content"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Title"
-        },
-        {
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+          "default": "<p>Pair text with an image to focus on your chosen product, or collection. Add details on availability, style, or even provide a review.</p>"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Feature #37",
+      "name": "SG-Feature #38",
       "blocks": [
         {
           "type": "toggle",
           "settings": {
-            "toggle": "Feature 1",
-            "title": "Feature 1"
+            "toggle": "Toggle - 1"
           }
         },
         {
           "type": "toggle",
           "settings": {
-            "toggle": "Feature 2",
-            "title": "Feature 2"
+            "toggle": "Toggle - 2"
           }
         },
         {
           "type": "toggle",
           "settings": {
-            "toggle": "Feature 3",
-            "title": "Feature 3"
+            "toggle": "Toggle - 3"
           }
         },
         {
           "type": "toggle",
           "settings": {
-            "toggle": "Feature 4",
-            "title": "Feature 4"
+            "toggle": "Toggle - 4"
           }
         }
       ]
