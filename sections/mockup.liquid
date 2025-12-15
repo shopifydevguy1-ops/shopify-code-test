@@ -16,8 +16,20 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
+  assign layout = section.settings.layout
+  assign layout_mobile = section.settings.layout_mobile
+  assign layout_height = section.settings.layout_height
+  assign layout_fixed_height = section.settings.layout_fixed_height
+
+  assign image = section.settings.image
+  assign image_ratio_mobile = section.settings.image_ratio_mobile
+  assign image_radius = section.settings.image_radius
+  assign image_padding = section.settings.image_padding
+  assign image_padding_mobile = section.settings.image_padding_mobile
+
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
+  assign content_vertical_align = section.settings.content_vertical_align
 
   assign content_horizontal_align = ""
   if content_align == "center"
@@ -37,17 +49,13 @@
     assign content_horizontal_align_mobile = "start"
   endif
 
-  assign icons_gap = section.settings.icons_gap
-  assign icons_gap_mobile = section.settings.icons_gap_mobile
-  assign icons_mt = section.settings.icons_mt
-  assign icons_mt_mobile = section.settings.icons_mt_mobile
-
-  assign icon_width = section.settings.icon_width
-  assign icon_width_mobile = section.settings.icon_width_mobile
+  assign lazy_load_setting = 'lazy'
+  unless lazy
+    assign lazy_load_setting = 'eiger'
+  endunless
 -%}
 
 {%- style -%}
-  
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
@@ -68,35 +76,40 @@
   }
 
   .countdown-body-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    align-items: {{ content_horizontal_align_mobile }};
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr;    
   }
 
-  .countdown-icons-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    justify-content: {{ content_horizontal_align_mobile }};
-    gap: {{ icons_gap_mobile }}px;
+  .countdown-image-{{ section.id }} {
+    grid-area: image;
+    position: relative; 
+    overflow: hidden;
+    padding: {{ image_padding_mobile }}px;
   }
 
-  .countdown-icons-{{ section.id }}:not(:first-child) {
-    margin-top: {{ icons_mt_mobile }}px;
-  }
-
-  .countdown-icon-{{ section.id }} {
-    width: {{ icon_width_mobile }}px;
-  }
-
-  .countdown-icon-{{ section.id }} img,
-  .countdown-icon-{{ section.id }} svg {
-    display: block;     
+  .countdown-image-{{ section.id }} img,
+  .countdown-image-{{ section.id }} svg {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: {{ image_radius }}px;
+  }
+
+  .countdown-image-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .countdown-content-{{ section.id }} {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   @media(min-width: 1024px) {
+
     .section-{{ section.id }} {
       margin-top: {{ margin_top }}px;
       margin-bottom: {{ margin_bottom }}px;
@@ -114,21 +127,17 @@
     }
 
     .countdown-body-{{ section.id }} {
-      flex-direction: rows;
-      align-items: {{ content_horizontal_align }};
+      grid-template-columns: 1fr 1fr;    
+    }   
+
+    .countdown-image-{{ section.id }} {
+      padding: {{ image_padding }}px;
+      aspect-ratio: auto !important;
     }
 
-    .countdown-icons-{{ section.id }} {
-      justify-content: {{ content_horizontal_align }};
-      gap: {{ icons_gap }}px;
-    }
-
-    .countdown-icons-{{ section.id }}:not(:first-child) {
-      margin-top: {{ icons_mt }}px;
-    }
-
-    .countdown-icon-{{ section.id }} {
-      width: {{ icon_width }}px;
+    .countdown-content-{{ section.id }} {
+      padding: 5rem;
+      justify-content: {{ content_vertical_align }};
     }
   }
   
@@ -169,14 +178,166 @@
   </style>
 {% endif %}
 
+{% if image_ratio_mobile == "portrait" %}
+  <style>
+    .countdown-image-{{ section.id }} {
+      aspect-ratio: 9.6/13;
+    }
+  </style>
+{% elsif image_ratio_mobile == "landscape" %}
+  <style>
+  .countdown-image-{{ section.id }} {
+    aspect-ratio: 12/8;
+  }
+  </style>
+{% elsif image_ratio_mobile == "square" %}
+  <style>
+    .countdown-image-{{ section.id }} {
+      aspect-ratio: 12/12;
+    }
+  </style>
+{% else %}
+  <style>
+    .countdown-image-{{ section.id }} {
+      aspect-ratio: auto;
+    }
+  </style>
+{% endif %}
+
+
+{% if layout_height == "full_screen" %}
+  <style>
+
+    @media(min-width: 1024px) {      
+      .section-{{ section.id }}-settings {
+        height: 100%;
+      }
+
+      .countdown-{{ section.id }} {
+        height: 95vh;
+      }
+
+      .countdown-body-{{ section.id }} {
+        height: 95vh;
+      }
+    }
+  </style>
+{% elsif layout_height == 'fixed_height' %}  
+  <style>      
+    @media(min-width: 1024px) {
+      .section-{{ section.id }}-settings {
+        height: 100%;
+      }
+
+      .countdown-{{ section.id }} {
+        height: {{ layout_fixed_height }}px;
+      }
+
+     .countdown-body-{{ section.id }} {
+        height: {{ layout_fixed_height }}px;
+     }
+    }
+  </style>
+{% endif %}
+
+{% if layout_mobile == "image_content" %}
+  <style>
+    .countdown-body-{{ section.id }} {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+{% else %} 
+  {% if layout_mobile == "content_image" %}
+    <style>
+      .countdown-body-{{ section.id }} {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    </style>
+  {% endif %}  
+{% endif %}
+
+{% if layout == "image_content" %}
+  <style>
+    @media (min-width: 1024px) {
+      .countdown-body-{{ section.id }} {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "image content";
+      }
+    }
+  </style>
+{% else %}  
+  {% if layout == "content_image" %}
+    <style>
+      @media (min-width: 1024px) {
+        .countdown-body-{{ section.id }} {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: "content image";
+        }
+      }
+    </style>
+  {% endif %}  
+{% endif %}
+
 {% for block in section.blocks %}
-  {% case block.type %}    
-    {% when 'icon' %}
+  {% case block.type %}
+    {% when 'sub_heading' %}
       <style>
-        .countdown-icon-{{ block.id }} svg path {
-          fill: {{ block.settings.icon_color }};
+        {{  block.settings.sub_heading_font | font_face: font_display: 'swap' }}
+
+        .countdown-subheading-{{ block.id }} {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          justify-content: {{ content_horizontal_align_mobile }};
+          margin-top: {{ block.settings.sub_heading_mt_mobile }}px;
+          text-align: {{ content_align_mobile }};
+        }
+
+        .countdown-subheading-{{ block.id }}:before {
+          content: "";
+          display: block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: {{ block.settings.sub_heading_color }};
+        }
+
+        .countdown-subheading-{{ block.id }} * {          
+          margin: 0;            
+          font-size: {{ block.settings.sub_heading_size_mobile }}px;
+          color: {{ block.settings.sub_heading_color }};
+          line-height: {{ block.settings.sub_heading_height }}%;
+          text-transform: unset;
+          text-decoration: none;
+          word-break: break-word;
+        }          
+
+        @media(min-width: 1024px) {
+          .countdown-subheading-{{ block.id }} {
+            justify-content: {{ content_horizontal_align }};
+            margin-top: {{ block.settings.sub_heading_mt }}px;
+            text-align: {{ content_align }};
+          }
+
+          .countdown-subheading-{{ block.id }} * {                
+            font-size: {{ block.settings.sub_heading_size }}px;
+          }  
         }
       </style>
+
+      {% if block.settings.sub_heading_custom %}
+        <style>
+          .countdown-subheading-{{ block.id }} * {
+            font-family: {{ block.settings.sub_heading_font.family }}, {{ block.settings.sub_heading_font.fallback_families }};
+            font-weight: {{ block.settings.sub_heading_font.weight }};
+            font-style: {{ block.settings.sub_heading_font.style }};
+          }
+        </style>
+      {% endif %}
     {% when 'heading' %}
       <style>
         {{  block.settings.heading_font | font_face: font_display: 'swap' }}
@@ -226,7 +387,6 @@
         .countdown-text-{{ block.id }} {
           margin-top: {{ block.settings.text_mt_mobile }}px;
           text-align: {{ content_align_mobile }};
-          max-width: {{ block.settings.text_max_width_mobile }}%;
         }
 
         .countdown-text-{{ block.id }} * {          
@@ -247,7 +407,6 @@
           .countdown-text-{{ block.id }} {
             margin-top: {{ block.settings.text_mt }}px;
             text-align: {{ content_align }};
-            max-width: {{ block.settings.text_max_width }}%;
           }
 
           .countdown-text-{{ block.id }} * {                
@@ -265,6 +424,277 @@
           }
         </style>
       {% endif %}
+      
+    {% when 'scrolling_text' %}
+      <style>
+        {{ block.settings.scrolling_text_font | font_face: font_display: 'swap' }}
+
+        .countdown-wrap-{{ block.id }} {                
+          position: absolute;
+          max-height: fit-content;      
+          -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          z-index: 0;        
+          background-attachment: scroll !important;        
+          padding: {{ block.settings.scrolling_padding_horizontal_mobile }}px;
+          background-color: {{ block.settings.scrolling_bg_color }};
+          overflow: hidden;
+        }
+
+        .countdown-wrap-mobile-{{ block.id }} {
+          position: relative;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          transform-origin: left;
+          margin-bottom: 0;
+        }
+
+        .countdown-wrap-desktop-{{ block.id }} {
+          display: none;
+          transform-origin: left;
+          left: 50%;
+          transform: rotate(90deg) translateX(-10vh);      
+        }
+
+        .countdown-list-{{ block.id }} {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          white-space: nowrap;
+          height: fit-content;
+          background-attachment: scroll !important;
+          -webkit-animation: ticker{{ block.id | replace: '-', '' }} {{ block.settings.scrolling_velocity_mobile }}s infinite linear;
+          animation: ticker{{ block.id | replace: '-', '' }} {{ block.settings.scrolling_velocity_mobile }}s infinite linear;
+          flex-shrink: 0;
+        }
+
+        .countdown-{{ block.id }} {
+          margin: 0;    
+          font-weight: 700;
+          font-size: {{ block.settings.scrolling_text_size_mobile }}px;
+          color: {{ block.settings.scrolling_text_color }};
+          line-height: {{ block.settings.scrolling_text_height }}%;
+          margin-right: {{ block.settings.scrolling_gap_mobile }}px;
+          text-transform: unset;
+          word-wrap: break-word;
+          background-attachment: scroll !important;
+          position: relative;
+          flex-shrink: 0;
+        }  
+
+        @media (min-width: 1024px) {        
+          .countdown-wrap-mobile-{{ block.id }} {         
+            display: none;
+          }
+
+          .countdown-wrap-desktop-{{ block.id }} {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding: {{ block.settings.scrolling_padding_horizontal }}px;
+          }
+
+          .countdown-list-{{ block.id }} {
+            -webkit-animation: ticker{{ block.id | replace: '-', '' }} {{ block.settings.scrolling_velocity }}s infinite linear;
+            animation: ticker{{ block.id | replace: '-', '' }} {{ block.settings.scrolling_velocity }}s infinite linear;        
+          }
+
+          .countdown-{{ block.id }} {
+            font-size: {{ block.settings.scrolling_text_size }}px;
+            margin-right: {{ block.settings.scrolling_gap }}px;
+          }  
+        }
+      </style>
+    
+      {% if block.settings.scrolling_text_custom %}
+        <style>
+          .countdown-{{ block.id }} {
+            font-family: {{ block.settings.scrolling_text_font.family }}, {{ block.settings.scrolling_text_font.fallback_families }};
+            font-weight: {{ block.settings.scrolling_text_font.weight }};
+            font-style: {{ block.settings.scrolling_text_font.style }};
+          }
+        </style>
+      {% endif %}
+
+      {% if block.settings.reverse_direction %}
+        <style>          
+          @keyframes ticker{{ block.id | replace: '-', '' }} {
+            0% {
+              transform: translateX(-50%);
+            }
+            100% {
+              transform: translateX(0%);
+            }
+          }
+        </style>
+      {% else %}
+        <style>      
+          @keyframes ticker{{ block.id | replace: '-', '' }} {
+            0% {
+              transform: translateX(0%);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+        </style>
+      {% endif %}
+      
+      {% if block.settings.pause_hover %}
+        <style>
+          .countdown-wrap-{{ block.id }}:hover .countdown-list-{{ block.id }} {
+            animation-play-state: paused;
+          }
+        </style>
+      {% endif %}
+
+      {% if layout_mobile == 'content_image' %}
+        <style>
+          .countdown-wrap-mobile-{{ block.id }} {
+            top: 0;        
+          }
+        </style>
+      {% else %}
+        <style>
+          .countdown-wrap-mobile-{{ block.id }} {
+            bottom: 0;        
+          }
+        </style>
+      {% endif %}
+
+    {% when 'button' %}  
+      <style>
+        {{  block.settings.button_font | font_face: font_display: 'swap' }}
+
+        .contdown-button-wrapper-{{ block.id }} {
+          display: flex;
+          justify-content: {{ content_horizontal_align_mobile }};
+        }
+
+        .countdown-button-{{ block.id }} {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: fit-content;
+          gap: 10px;
+          width: 100%;
+          margin: 0;
+          margin-top: {{ block.settings.button_mt_mobile }}px;
+          font-size: {{ block.settings.button_size_mobile }}px;
+          color: {{ block.settings.button_color }};
+          line-height: {{ block.settings.button_height }}%;
+          text-align: center;
+          text-transform: unset;
+          text-decoration: none;
+          padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
+          border-radius: {{ block.settings.button_radius }}px;
+          transition: all 0.3s ease 0s;
+          background-color: transparent;
+          border: 0px;
+          cursor: pointer;
+          font-weight: 700;
+        }
+
+        .countdown-button-inner-{{ block.id }} {
+          margin: 0px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          text-decoration: none;
+        }
+
+        .countdown-button-{{ block.id }}:hover {
+          color: {{ block.settings.button_hover_color }};
+          transition: all 0.25s ease 0s;
+        }
+
+        .countdown-button-{{ block.id }} svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        .countdown-button-{{ block.id }} svg path {
+          fill: {{ block.settings.button_color }};
+          transition: all 0.25s ease 0s;
+        }
+
+        .countdown-button-{{ block.id }}:hover svg path {
+          fill: {{ block.settings.button_hover_color }};
+          transition: all 0.25s ease 0s;
+        }
+
+        @media (min-width: 1024px) {
+          .contdown-button-wrapper-{{ block.id }} {
+            display: flex;
+            justify-content: {{ content_horizontal_align }};
+          }
+
+          .countdown-button-{{ block.id }} {
+            margin-top: {{ block.settings.button_mt }}px;
+            padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+            font-size: {{ block.settings.button_size }}px;
+          }
+        }
+      </style>
+
+      {% if block.settings.use_shadow %}
+        <style>
+          .countdown-button-{{ block.id }}:hover {
+            -webkit-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
+            -moz-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
+            box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
+          }
+        </style>
+      {% endif %}  
+
+      {% if block.settings.button_custom %}
+        <style>
+          .countdown-button-{{ block.id }} {
+            font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+            font-weight: {{ block.settings.button_font.weight }};
+            font-style: {{ block.settings.button_font.style }};
+          }
+        </style>
+      {% endif %}
+
+      {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
+        <style>
+          .countdown-button-{{ block.id }} {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_color }};
+          }
+      
+          .countdown-button-{{ block.id }}:hover {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_hover_color }};
+          }
+        </style>
+      {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
+        <style>          
+          .countdown-button-{{ block.id }} {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_color }};
+            border: {{  block.settings.button_border_thickness }}px solid {{  block.settings.button_border_color }};
+          }
+      
+          .countdown-button-{{ block.id }}:hover {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_hover_color }};
+            border: {{  block.settings.button_border_thickness }}px solid {{ block.settings. button_border_hover_color }};
+          }
+        </style>
+      {% elsif block.settings.button_style == "link" %}
+        <style>
+          .countdown-button-{{ block.id }} {
+            padding: 0px !important;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+          }
+        </style>
+      {% endif %}  
 
     {% when 'timer' %}              
       <style>
@@ -277,9 +707,13 @@
           margin-top: {{ block.settings.timer_mt_mobile }}px;
           display: flex;
           align-items: center;
+          justify-content: {{ content_horizontal_align_mobile }};
           gap: {{ block.settings.timer_gap_mobile }}px;
           flex-wrap: wrap;
-          min-width: none;
+          min-width: 0;
+          padding: 30px 0px;
+          border-top: {{ block.settings.timer_border_thickness }}px solid {{ block.settings.timer_border_color }};
+          border-bottom: {{ block.settings.timer_border_thickness }}px solid {{ block.settings.timer_border_color }};
         }
 
         .countdown-{{ block.id }} .time-block {
@@ -299,15 +733,6 @@
           text-transform: unset;
           font-weight: 700;
         }   
-        
-        .countdown-{{ block.id }} .line {
-          display: block !important;
-          width: {{ block.settings.timer_border_thickness }}px;
-          height: 30px;
-          margin-top: auto;
-          margin-bottom: auto;
-          background-color: {{ block.settings.timer_border_color }};
-        }
 
         .countdown-{{ block.id }} .time-block__text {
           margin-top: {{ block.settings.timer_text_mt_mobile }}px;
@@ -336,16 +761,13 @@
 
         @media (min-width: 1024px) {
           .countdown-{{ block.id }} {
+            justify-content: {{ content_horizontal_align }};
             margin-top: {{ block.settings.timer_mt }}px;
             gap: {{ block.settings.timer_gap }}px;         
           }
         
           .countdown-{{ block.id }} .time-block {
             min-width: {% if block.settings.number_size > 70 %}120px{% elsif block.settings.number_size > 40 %}90px{% else %}45px{% endif %}; 
-          }
-
-          .countdown-{{ block.id }} .line {
-            height: 70px;
           }
 
           .countdown-{{ block.id }} .time-block__num {
@@ -440,89 +862,139 @@
           }          
         </style>
       {% endif %} 
-
+  
   {% endcase %}
 {% endfor %}
 
 <div class="section-{{ section.id }} countdown-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
       <div class="countdown-body-{{ section.id }}">
-        {% assign is_open = false %}
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'icon' %}               
-              {% if is_open == false %}
-                <div class="countdown-icons-{{ section.id }}">
-                {% assign is_open = true %}
-              {% endif %}
-              
-              <div class="countdown-icon-{{ section.id }} countdown-icon-{{ block.id }}">
-                {% if block.settings.custom_icon != blank %}
-                  <img src="{{ block.settings.custom_icon | image_url }}" alt="{{ block.settings.custom_icon.alt }}">
-                {% else %}
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 100 100" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M93.04 30 69.69 6.65 49.84 26.5 30 6.65 6.65 30 26.5 49.85 6.65 69.7 30 93.05 49.85 73.2 69.7 93.05 93.05 69.7 73.2 49.85 93.05 30zM66.19 49.85 49.84 66.2 33.49 49.85 49.84 33.5z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg>
-                {% endif %}
-              </div>                   
-         
-              {% assign next_index = forloop.index0 | plus: 1 %}
-              {% if next_index < section.blocks.size and section.blocks[next_index].type != 'icon' %}
+        <div class="countdown-image-{{ section.id }}">
+          {% if image != blank %}
+            {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
+              {{ image | image_url: width: 1500 | image_tag:
+                loading: lazy_load_setting,
+                width: image.width,
+                height: image.height,
+                sizes: sizes,
+                widths: '165, 360, 535, 750, 1070, 1500'
+              }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}             
+        </div>
+        {% for block in section.blocks %}               
+          {% if block.type == 'scrolling_text' %}             
+            {% if block.settings.scrolling_text != blank %}            
+              <div class="countdown-wrap-{{ block.id }} countdown-wrap-desktop-{{ block.id }}">                 
+                <div class="countdown-list-{{ block.id }}">
+                  {% for item in (1..10) %}
+                    <p class="countdown-{{ block.id }}">{{ block.settings.scrolling_text }}</p>
+                  {% endfor %}
                 </div>
-                {% assign is_open = false %}
-              {% elsif forloop.last %}
+                <div class="countdown-list-{{ block.id }}">
+                  {% for item in (1..10) %}
+                    <p class="countdown-{{ block.id }}">{{ block.settings.scrolling_text }}</p>
+                  {% endfor %}
+                </div>         
+              </div>    
+              <div class="countdown-wrap-{{ block.id }} countdown-wrap-mobile-{{ block.id }}">                 
+                <div class="countdown-list-{{ block.id }}">
+                  {% for item in (1..10) %}
+                    <p class="countdown-{{ block.id }}">{{ block.settings.scrolling_text }}</p>
+                  {% endfor %}
                 </div>
-              {% endif %}
-            {% when 'heading' %}
-              {% if block.settings.heading != blank %}
-                <div class="countdown-heading-{{ block.id }}">{{ block.settings.heading }}</div>
-              {% endif %}
-
-            {% when 'text' %}
-              {% if block.settings.text != blank %}
-                <div class="countdown-text-{{ block.id }}">{{ block.settings.text }}</div>
-              {% endif %}             
-            {% when 'timer' %}             
-              <div class="countdown-{{ block.id }}">        
-                <div class="time-block">
-                  <span class="time-block__num js-timer-days">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.days_text }}</span>
-                  </div>              
-                </div>
-                <div class="line"></div>        
-                <div class="time-block">
-                  <span class="time-block__num js-timer-hours">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.hours_text }}</span>
-                  </div>              
-                </div>
-                <div class="line"></div>               
-                <div class="time-block">
-                  <span class="time-block__num js-timer-minutes">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.minutes_text }}</span>
-                  </div>                   
-                </div>
-                <div class="line"></div>               
-                <div class="time-block">
-                  <span class="time-block__num js-timer-seconds">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.seconds_text }}</span>
-                  </div>            
-                </div>
-              </div>
-              <div class="countdown-completed-text-{{ block.id }}">
-                {{ block.settings.completed_text }}
-              </div>                    
-          {% endcase %}
+                <div class="countdown-list-{{ block.id }}">
+                  {% for item in (1..10) %}
+                    <p class="countdown-{{ block.id }}">{{ block.settings.scrolling_text }}</p>
+                  {% endfor %}
+                </div>         
+              </div>  
+            {% endif %}            
+          {% endif %}        
         {% endfor %}
+        <div class="countdown-content-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% case block.type %}       
+              {% when 'sub_heading' %}  
+                {% if block.settings.sub_heading != blank %}
+                  <div class="countdown-subheading-{{ block.id }}">{{ block.settings.sub_heading }}</div>
+                {% endif %}  
+
+              {% when 'heading' %}  
+                {% if block.settings.heading != blank %}
+                  <div class="countdown-heading-{{ block.id }}">{{ block.settings.heading }}</div>
+                {% endif %}  
+
+              {% when 'text' %}
+                {% if block.settings.text != blank %}
+                  <div class="countdown-text-{{ block.id }}">{{ block.settings.text }}</div>
+                {% endif %} 
+
+              {% when 'button' %}
+                {% if block.settings.button != blank %}    
+                  <div class="contdown-button-wrapper-{{ block.id }}">
+                    <a href="{{ block.settings.url }}" class="countdown-button-{{ block.id }}">
+                      <p class="countdown-button-inner-{{ block.id }}">
+                        {{ block.settings.button }}
+                        {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                          <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                            <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                          </svg>
+                        {% endif %}
+                      </p>
+                    </a>    
+                  </div>            
+                {% endif %}  
+
+              {% when 'timer' %}             
+                <div class="countdown-{{ block.id }}">        
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-days">00</span>
+                    <div class="time-block__text">
+                      <span class="time-block__unit">{{ block.settings.days_text }}</span>
+                    </div>              
+                  </div>
+                  <div class="line"></div>        
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-hours">00</span>
+                    <div class="time-block__text">
+                      <span class="time-block__unit">{{ block.settings.hours_text }}</span>
+                    </div>              
+                  </div>
+                  <div class="line"></div>               
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-minutes">00</span>
+                    <div class="time-block__text">
+                      <span class="time-block__unit">{{ block.settings.minutes_text }}</span>
+                    </div>                   
+                  </div>
+                  <div class="line"></div>               
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-seconds">00</span>
+                    <div class="time-block__text">
+                      <span class="time-block__unit">{{ block.settings.seconds_text }}</span>
+                    </div>            
+                  </div>
+                </div>
+                <div class="countdown-completed-text-{{ block.id }}">
+                  {{ block.settings.completed_text }}
+                </div>     
+
+            {% endcase %}
+          {% endfor %}
+        </div>              
       </div>
+  
     </div>
 </div>
 
 {% for block in section.blocks %}
   {% if block.type == 'timer' %}
     <script>
-      function initCountDownTimer5() {    
+      function initCountDownTimer6() {    
         const offset = new Date().getTimezoneOffset();  
         function startTimer() {
           const second = 1000,
@@ -589,11 +1061,11 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', initCountDownTimer5);
+      document.addEventListener('DOMContentLoaded', initCountDownTimer6);
 
       if (Shopify.designMode) {
-        document.addEventListener('shopify:section:unload', initCountDownTimer5);
-        document.addEventListener('shopify:section:load', initCountDownTimer5);
+        document.addEventListener('shopify:section:unload', initCountDownTimer6);
+        document.addEventListener('shopify:section:load', initCountDownTimer6);
       }
     </script>
   {% endif %}
@@ -601,91 +1073,172 @@
 
 {% schema %}
 {
-  "name": "SG-Countdown timer #5",
+  "name": "SG-Countdown timer #6",
   "settings": [
     {
       "type": "header",
-      "content": "Content settings"
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image placement",
+      "default": "image_content",
+      "options": [
+        {
+          "label": "Left",
+          "value": "image_content"
+        },
+        {
+          "label": "Right",
+          "value": "content_image"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Image placement - mobile",
+      "default": "image_content",
+      "options": [
+        {
+          "label": "Text on top",
+          "value": "content_image"
+        },
+        {
+          "label": "Image on top",
+          "value": "image_content"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_height",
+      "label": "Height",
+      "default": "fixed_height",
+      "options": [
+        {
+          "label": "Full screen",
+          "value": "full_screen"
+        },
+        {
+          "label": "Fixed height",
+          "value": "fixed_height"
+        },
+        {
+          "label": "Auto",
+          "value": "auto"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "layout_fixed_height",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed height - desktop",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding - mobile",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
     },
     {
       "type": "text_alignment",
       "id": "content_align",
-      "label": "Alignment",
+      "label": "Horizontal alignment",
       "default": "center"
     },
     {
       "type": "text_alignment",
       "id": "content_align_mobile",
-      "label": "Alignment - mobile",
+      "label": "Horizontal alignment - mobile",
       "default": "center"
     },
     {
-      "type": "header",
-      "content": "Icons settings"
-    },
-    {
-      "type": "range",
-      "id": "icons_gap",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "icons_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap - mobile",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "icons_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "icons_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Icon settings"
-    },
-    {
-      "type": "range",
-      "id": "icon_width",
-      "min": 10,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "label": "Width",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "icon_width_mobile",
-      "min": 10,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "label": "Width - mobile",
-      "default": 32
+      "type": "select",
+      "id": "content_vertical_align",
+      "label": "Vertical alignment - desktop",
+      "default": "center",
+      "options": [
+        {
+          "label": "Top",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Bottom",
+          "value": "end"
+        }
+      ]
     },
     {
       "type": "header",
@@ -707,7 +1260,7 @@
       "type": "color",
       "label": "Border",
       "id": "border_color",
-      "default": "#000000"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -765,7 +1318,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -775,7 +1328,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -785,7 +1338,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 5
+      "default": 0
     },
     {
       "type": "range",
@@ -795,17 +1348,17 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 1.5
+      "default": 0
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section"
     },
     {
       "type": "checkbox",
       "id": "full_width",
       "label": "Full width",
-      "default": false
+      "default": true
     },
     {
       "type": "range",
@@ -847,19 +1400,82 @@
   ],
   "blocks": [
     {
-      "type": "icon",
-      "name": "Icon",
+      "type": "sub_heading",
+      "name": "Subheading",
       "settings": [
         {
-          "type": "image_picker",
-          "label": "Custom icon",
-          "id": "custom_icon"
+          "type": "richtext",
+          "id": "sub_heading",
+          "label": "Subheading",
+          "default": "<p>Limited time offer</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "sub_heading_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "sub_heading_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 130
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 16
         },
         {
           "type": "color",
-          "label": "Default icon color",
-          "id": "icon_color",
-          "default": "#000000"
+          "label": "Color",
+          "id": "sub_heading_color",
+          "default": "#121212"
         }
       ]
     },
@@ -871,7 +1487,7 @@
           "type": "richtext",
           "id": "heading",
           "label": "Heading",
-          "default": "<p>Countdown timer #5</p>"
+          "default": "<h2>Countdown timer #6</h2>"
         },
         {
           "type": "checkbox",
@@ -893,7 +1509,7 @@
           "step": 2,
           "unit": "px",
           "label": "Font size",
-          "default": 56
+          "default": 52
         },
         {
           "type": "range",
@@ -939,7 +1555,7 @@
           "type": "color",
           "label": "Color",
           "id": "heading_color",
-          "default": "#000000"
+          "default": "#121212"
         }
       ]
     },
@@ -951,8 +1567,7 @@
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Don't miss out while inventory lasts! Take advantage of this <strong>limited offer</strong> before stock runs out.</p>",
-          "info": "Use bold style for the accent color"
+          "default": "<p>Don't miss out while inventory lasts! Take advantage of this limited offer before stock runs out.</p>"
         },
         {
           "type": "checkbox",
@@ -998,26 +1613,6 @@
         },
         {
           "type": "range",
-          "id": "text_max_width",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "%",
-          "label": "Max width",
-          "default": 60
-        },
-        {
-          "type": "range",
-          "id": "text_max_width_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "%",
-          "label": "Max width - mobile",
-          "default": 100
-        },
-        {
-          "type": "range",
           "id": "text_mt",
           "min": 0,
           "max": 100,
@@ -1037,20 +1632,160 @@
           "default": 24
         },
         {
+          "type": "color",
+          "label": "Color",
+          "id": "text_color",
+          "default": "#121212"
+        }
+      ]
+    },
+    {
+      "type": "scrolling_text",
+      "name": "Scrolling text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Scrolling",
+          "info": "The theme editor may display incorrect scrolling speed; please verify on the live site."
+        },
+        {
+          "type": "range",
+          "id": "scrolling_velocity",
+          "min": 5,
+          "max": 100,
+          "step": 1,
+          "label": "Speed",
+          "info": "⚡ <----------------> 🐌",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "scrolling_velocity_mobile",
+          "min": 5,
+          "max": 100,
+          "step": 1,
+          "label": "Speed mobile",
+          "info": "⚡ <----------------> 🐌",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "scrolling_gap",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Gap",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "scrolling_gap_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Gap - mobile",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "scrolling_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "scrolling_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 10
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_direction",
+          "label": "Reverse scrolling direction"
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_hover",
+          "label": "Pause on hover"
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "text",
+          "id": "scrolling_text",
+          "label": "Text",
+          "default": "Scrolling text"
+        },
+        {
+          "type": "checkbox",
+          "id": "scrolling_text_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "scrolling_text_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "scrolling_text_size",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Font size",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "scrolling_text_size_mobile",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "scrolling_text_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 100
+        },
+        {
           "type": "header",
           "content": "Colors"
         },
         {
           "type": "color",
-          "label": "Primary",
-          "id": "text_color",
-          "default": "#000000"
+          "label": "Text",
+          "id": "scrolling_text_color",
+          "default": "#121212"
         },
         {
           "type": "color",
-          "label": "Accent",
-          "id": "text_active_color",
-          "default": "#334FB4"
+          "label": "Background",
+          "id": "scrolling_bg_color",
+          "default": "#F2FF89"
         }
       ]
     },
@@ -1061,19 +1796,15 @@
       "settings": [
         {
           "type": "header",
-          "content": "Timer settings",
+          "content": "Timer",
           "info": "Please use UTC time zone"
         },
         {
           "type": "select",
           "id": "year",
           "label": "Year",
-          "default": "2025",
+          "default": "2026",
           "options": [
-            {
-              "value": "2024",
-              "label": "2024"
-            },
             {
               "value": "2025",
               "label": "2025"
@@ -1788,7 +2519,7 @@
           "step": 2,
           "unit": "px",
           "label": "Gap - mobile",
-          "default": 16
+          "default": 24
         },
         {
           "type": "range",
@@ -1798,11 +2529,11 @@
           "step": 1,
           "unit": "px",
           "label": "Border thickness",
-          "default": 2
+          "default": 1
         },
         {
           "type": "header",
-          "content": "Timer number settings"
+          "content": "Timer number"
         },
         {
           "type": "checkbox",
@@ -1824,7 +2555,7 @@
           "step": 2,
           "unit": "px",
           "label": "Font size",
-          "default": 88
+          "default": 40
         },
         {
           "type": "range",
@@ -1834,7 +2565,7 @@
           "step": 2,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 40
+          "default": 28
         },
         {
           "type": "range",
@@ -1848,7 +2579,7 @@
         },
         {
           "type": "header",
-          "content": "Timer text settings"
+          "content": "Timer text"
         },
         {
           "type": "checkbox",
@@ -1870,7 +2601,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 16
+          "default": 12
         },
         {
           "type": "range",
@@ -1900,7 +2631,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 16
+          "default": 4
         },
         {
           "type": "range",
@@ -1914,7 +2645,7 @@
         },
         {
           "type": "header",
-          "content": "Completed text settings"
+          "content": "Completed text"
         },
         {
           "type": "richtext",
@@ -1972,41 +2703,255 @@
           "type": "color",
           "label": "Number",
           "id": "number_color",
-          "default": "#000000"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Text",
           "id": "timer_text_color",
-          "default": "#000000"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Completed text",
           "id": "completed_text_color",
-          "default": "#000000"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Border",
           "id": "timer_border_color",
-          "default": "#E6E6E6"
+          "default": "#F3F3F3"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "button_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "button_size",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_size_mobile",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Roundness",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "button_border_thickness",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border thickness",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "button_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "button_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 24
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "outline",
+          "options": [
+            {
+              "label": "Link",
+              "value": "link"
+            },
+            {
+              "label": "Non-outline",
+              "value": "non_outline"
+            },
+            {
+              "label": "Non-outline & arrow",
+              "value": "non_outline_arrow"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Outline & arrow",
+              "value": "outline_arrow"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Button colors"
+        },
+        {
+          "type": "color",
+          "label": "Text",
+          "id": "button_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Hover text",
+          "id": "button_hover_color",
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Background",
+          "id": "button_bg_color",
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Background hover",
+          "id": "button_bg_hover_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Button border",
+          "id": "button_border_color",
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Border hover",
+          "id": "button_border_hover_color",
+          "default": "#121212"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Countdown timer #5",
+      "name": "SG-Countdown timer #6",
       "blocks": [
         {
-          "type": "icon"
+          "type": "scrolling_text"
+        },
+        {
+          "type": "sub_heading"
         },
         {
           "type": "heading"
         },
         {
           "type": "text"
+        },
+        {
+          "type": "button"
         },
         {
           "type": "timer"
