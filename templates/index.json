@@ -15,7 +15,7 @@
         "heading_Frp6hp": {
           "type": "heading",
           "settings": {
-            "heading": "FEATURE #28",
+            "heading": "FEATURE #29",
             "heading_size": "h1"
           }
         }
@@ -33,99 +33,104 @@
         "padding_bottom": 0
       }
     },
-    "mockup_MgzxPJ": {
+    "mockup_KEYDFt": {
       "type": "mockup",
       "blocks": {
-        "toggle_wwfjU9": {
-          "type": "toggle",
+        "feature_enUeNH": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/animated-image.png",
-            "toggle": "First",
-            "text": "<p>Use this text to share information about your brand with your customers.</p>"
+            "title": "Title",
+            "percent": 100,
+            "text": "<p>Give your customers useful information about your products.</p>"
           }
         },
-        "toggle_fmYTC9": {
-          "type": "toggle",
+        "feature_Ny88aF": {
+          "type": "feature",
           "settings": {
-            "toggle": "Second",
-            "text": "<p>Use this text to share information about your brand with your customers.</p>"
+            "title": "Title",
+            "percent": 80,
+            "text": "<p>Give your customers useful information about your products.</p>"
           }
         },
-        "toggle_xrWdey": {
-          "type": "toggle",
+        "feature_eAG79j": {
+          "type": "feature",
           "settings": {
-            "toggle": "Third",
-            "text": "<p>Use this text to share information about your brand with your customers.</p>"
+            "title": "Title",
+            "percent": 90,
+            "text": "<p>Give your customers useful information about your products.</p>"
+          }
+        },
+        "feature_cidkKh": {
+          "type": "feature",
+          "settings": {
+            "title": "Title",
+            "percent": 67,
+            "text": "<p>Give your customers useful information about your products.</p>"
+          }
+        },
+        "feature_nNQBGF": {
+          "type": "feature",
+          "settings": {
+            "title": "Title",
+            "percent": 96,
+            "text": "<p>Give your customers useful information about your products.</p>"
+          }
+        },
+        "feature_RgbAmG": {
+          "type": "feature",
+          "settings": {
+            "title": "Title",
+            "percent": 92,
+            "text": "<p>Give your customers useful information about your products.</p>"
           }
         }
       },
       "block_order": [
-        "toggle_wwfjU9",
-        "toggle_fmYTC9",
-        "toggle_xrWdey"
+        "feature_enUeNH",
+        "feature_Ny88aF",
+        "feature_eAG79j",
+        "feature_cidkKh",
+        "feature_nNQBGF",
+        "feature_RgbAmG"
       ],
-      "name": "SG-Feature #28",
+      "name": "SG-Feature #29",
       "settings": {
-        "layout": "content_images",
-        "layout_mobile": "images_content",
-        "layout_radius": 0,
-        "layout_border_thickness": 1,
-        "top_content_padding_horizontal": 40,
-        "top_content_padding_horizontal_mobile": 12,
-        "top_content_padding_vertical": 50,
-        "top_content_padding_vertical_mobile": 36,
-        "top_content_gap": 32,
-        "top_content_gap_mobile": 24,
-        "top_content_align": "left",
-        "top_content_align_mobile": "left",
-        "toggle_custom": false,
-        "toggle_font": "josefin_sans_n4",
-        "toggle_size": 40,
-        "toggle_size_mobile": 40,
-        "toggle_height": 130,
+        "body_gap": 32,
+        "body_gap_mobile": 32,
+        "body_vertical_align": "center",
+        "features_gap": 70,
+        "features_gap_mobile": 32,
+        "feature_align": "left",
+        "feature_align_mobile": "left",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 36,
+        "title_size_mobile": 26,
+        "title_height": 130,
+        "progress_height": 5,
+        "progress_height_mobile": 5,
+        "progress_border_thickness": 1,
+        "progress_mt": 16,
+        "progress_mt_mobile": 16,
         "text_custom": false,
         "text_font": "josefin_sans_n4",
-        "text_size": 13,
-        "text_size_mobile": 13,
+        "text_size": 15,
+        "text_size_mobile": 12,
         "text_height": 150,
-        "button": "LEARN MORE",
-        "button_url": "",
-        "button_custom": false,
-        "button_font": "josefin_sans_n4",
-        "button_size": 13,
-        "button_size_mobile": 13,
-        "button_height": 100,
-        "button_padding_vertical": 18,
-        "button_padding_vertical_mobile": 18,
-        "button_padding_horizontal": 24,
-        "button_padding_horizontal_mobile": 24,
-        "button_border_thickness": 1,
-        "button_style": "vertical_hover",
-        "scrolling_velocity": 80,
-        "scrolling_velocity_mobile": 80,
-        "scrolling_padding_vertical": 20,
-        "scrolling_padding_vertical_mobile": 20,
-        "scrolling_gap": 60,
-        "scrolling_gap_mobile": 30,
-        "reverse_direction": false,
-        "scrolling_text_custom": false,
-        "scrolling_text_font": "josefin_sans_n4",
-        "scrolling_text_size": 160,
-        "scrolling_text_size_mobile": 72,
-        "scrolling_text_height": 130,
-        "image_ratio_mobile": "square",
-        "layout_border_color": "#000000",
-        "toggle_color": "#EAEAEA",
-        "toggle_hover_color": "#000000",
-        "toggle_active_color": "#000000",
+        "text_mt": 20,
+        "text_mt_mobile": 20,
+        "media_type": "image",
+        "image": "shopify://shop_images/animated-image.png",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "media_radius": 0,
+        "media_border_thickness": 0,
+        "media_ratio": "square",
+        "media_ratio_mobile": "square",
+        "title_color": "#000000",
         "text_color": "#000000",
-        "button_color": "#000000",
-        "button_hover_color": "#FFFFFF",
-        "button_bg_color": "",
-        "button_bg_hover_color": "#000000",
-        "button_border_color": "#000000",
-        "button_border_hover_color": "#000000",
-        "scrolling_text_color": "#000000",
+        "progress_border_color": "#000000",
+        "progress_color": "#000000",
+        "media_border_color": "#000000",
         "background_color": "#FFFFFF",
         "background_gradient": "",
         "border_color": "#000000",
@@ -138,7 +143,7 @@
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
-        "content_width": 1600,
+        "content_width": 1200,
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
@@ -147,6 +152,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_MgzxPJ"
+    "mockup_KEYDFt"
   ]
 }
