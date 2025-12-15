@@ -11,17 +11,16 @@
   assign margin_horizontal = section.settings.margin_horizontal
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
-  assign full_width = section.settings.full_width
+  assign width = section.settings.width
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
-  assign section_radius = section.settings.section_radius  
+  assign section_radius = section.settings.section_radius
   assign background_style = section.settings.background_style
 
   assign layout = section.settings.layout
   assign layout_mobile = section.settings.layout_mobile
   assign layout_gap = section.settings.layout_gap
   assign layout_gap_mobile = section.settings.layout_gap_mobile  
-  assign table_width = section.settings.table_width
 
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
@@ -47,12 +46,16 @@
 
   assign table_radius = section.settings.table_radius
   assign table_border_thickness = section.settings.table_border_thickness
-  assign table_border_style = section.settings.table_border_style
   assign table_border_color = section.settings.table_border_color
+  assign table_border_active_color = section.settings.table_border_active_color
   assign table_bg_color = section.settings.table_bg_color
+  assign table_bg_active_color = section.settings.table_bg_active_color
   assign table_bg_opacity = section.settings.table_bg_opacity
+  assign column_mt = section.settings.column_mt
+  assign column_mt_mobile = section.settings.column_mt_mobile
+  assign table_width = section.settings.table_width
 
-  assign column_width_mobile = section.settings.column_width_mobile
+  assign reverse_content = section.settings.reverse_content
 
   assign column_heading_size = section.settings.column_heading_size
   assign column_heading_size_mobile = section.settings.column_heading_size_mobile
@@ -64,73 +67,28 @@
   assign column_heading_align = section.settings.column_heading_align
   assign column_heading_align_mobile = section.settings.column_heading_align_mobile
 
-  assign column_header_height = section.settings.column_header_height
-  assign column_header_height_mobile = section.settings.column_header_height_mobile
+  assign column_text_size = section.settings.column_text_size
+  assign column_text_size_mobile = section.settings.column_text_size_mobile
+  assign column_text_color = section.settings.column_text_color
+  assign column_active_text_color = section.settings.column_active_text_color
+  assign column_text_custom = section.settings.column_text_custom
+  assign column_text_font = section.settings.column_text_font
+  assign column_text_height = section.settings.column_text_height
+  assign column_text_align = section.settings.column_text_align
+  assign column_text_align_mobile = section.settings.column_text_align_mobile
+  assign column_text_mt = section.settings.column_text_mt
+  assign column_text_mt_mobile = section.settings.column_text_mt_mobile
 
-  assign row_height = section.settings.row_height
-  assign row_height_mobile = section.settings.row_height_mobile
-
-  assign first_row_heading = section.settings.first_row_heading
-  assign second_row_heading = section.settings.second_row_heading
-  assign third_row_heading = section.settings.third_row_heading
-  assign fourth_row_heading = section.settings.fourth_row_heading
-  assign fifth_row_heading = section.settings.fifth_row_heading
-
-  assign row_heading_size = section.settings.row_heading_size
-  assign row_heading_size_mobile = section.settings.row_heading_size_mobile
-  assign row_heading_color = section.settings.row_heading_color
-  assign row_heading_custom = section.settings.row_heading_custom
-  assign row_heading_font = section.settings.row_heading_font
-  assign row_heading_height = section.settings.row_heading_height
-  assign row_heading_align = section.settings.row_heading_align
-  assign row_heading_align_mobile = section.settings.row_heading_align_mobile
-
-  assign row_text_size = section.settings.row_text_size
-  assign row_text_size_mobile = section.settings.row_text_size_mobile
-  assign row_text_color = section.settings.row_text_color
-  assign row_active_text_color = section.settings.row_active_text_color
-  assign row_text_custom = section.settings.row_text_custom
-  assign row_text_font = section.settings.row_text_font
-  assign row_text_height = section.settings.row_text_height
-  assign row_text_align = section.settings.row_text_align
-  assign row_text_align_mobile = section.settings.row_text_align_mobile
-
-  assign row_text_horizontal_align = ""
-  if row_text_align == "center"
-    assign row_text_horizontal_align = "center"
-  elsif row_text_align == "right"
-    assign row_text_horizontal_align = "end"
-  else
-    assign row_text_horizontal_align = "start"
-  endif
-
-  assign row_text_horizontal_align_mobile = ""
-  if row_text_align_mobile == "center"
-    assign row_text_horizontal_align_mobile = "center"
-  elsif row_text_align_mobile == "right"
-    assign row_text_horizontal_align_mobile = "end"
-  else
-    assign row_text_horizontal_align_mobile = "start"
-  endif
-
-  assign value_icon_size = section.settings.value_icon_size
-  assign value_icon_size_mobile = section.settings.value_icon_size_mobile
-  assign value_cross_color = section.settings.value_cross_color
-  assign value_cross_active_color = section.settings.value_cross_active_color
-  assign value_check_color = section.settings.value_check_color
-  assign value_check_active_color = section.settings.value_check_active_color
-
-  assign loading_attribute = 'eager'
-  if lazy
-    assign loading_attribute = 'lazy'
-  endif
+  assign column_image_ratio = section.settings.column_image_ratio
+  assign column_image_ratio_mobile = section.settings.column_image_ratio_mobile
+  assign column_image_radius = section.settings.column_image_radius
+  assign column_image_border_thickness = section.settings.column_image_border_thickness
+  assign column_image_border_color = section.settings.column_image_border_color
 -%}
 
-{%- style -%}
-  
+{%- style -%}  
   {{ column_heading_font | font_face: font_display: 'swap' }}
-  {{ row_heading_font | font_face: font_display: 'swap' }}
-  {{ row_text_font | font_face: font_display: 'swap' }}
+  {{ column_text_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     position: relative;
@@ -160,6 +118,11 @@
     grid-template-columns: 1fr;
   }
 
+  .comparison-table-column-content-{{ section.id }} {
+    position: relative;
+    z-index: 2;
+  }
+
   .comparison-content-{{ section.id }} {
     display: flex;
     flex-direction: column;
@@ -169,41 +132,34 @@
   }
 
   .comparison-table-wrapper-{{ section.id }} {
-    grid-area: table;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    margin-left: -{{ padding_horizontal_mobile }}rem;
-    margin-right: -{{ padding_horizontal_mobile }}rem;
-    padding-left: {{ padding_horizontal_mobile }}rem;
-    padding-right: {{ padding_horizontal_mobile }}rem;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .comparison-table-{{ section.id }} { 
     display: flex;
-    max-width: fit-content;
-    margin: 0 auto;
-    flex-wrap: nowrap;  
-  }
-
-  .comparison-column-{{ section.id }}:first-child {
-    padding-left: 15px;
-    padding-bottom: 15px;
-    border-bottom-left-radius: {{ table_radius }}px;
-  }
-
-  .comparison-column-{{ section.id }}.active:nth-child(2) {
-    border-bottom-right-radius: {{ table_radius }}px;
-  }
-
-  .comparison-column-{{ section.id }}:not(:first-child) {
+    flex-direction: column;
+    gap: {{ column_mt_mobile }}px;
     position: relative;
+    padding-left: 0px !important;
+    border-left: {{ table_border_thickness }}px solid {{ table_border_color }};
+    border-right: {{ table_border_thickness }}px solid {{ table_border_color }};
+    padding-top: {{ column_mt_mobile }}px;
+    padding-bottom: {{ column_mt_mobile }}px;
   }
 
-  .comparison-column-{{ section.id }} {
-    width: {{ column_width_mobile }}px;
-    flex-shrink: 0;
+  .comparison-table-line-{{ section.id }} {
+    display: block !important;
+    width: {{ table_border_thickness }}px;
+    background-color: {{ table_border_color }};
+    height: 100%;
+    position: absolute;
+  }
+
+  .comparison-table-column-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+    padding: 20px 10px 20px 20px;  
+    z-index: 2; 
   }
 
   .comparison-column-heading-text-{{ section.id }} {
@@ -212,153 +168,52 @@
     color: {{ column_heading_color }};
     line-height: {{ column_heading_height }}%;
     text-transform: unset;
-    text-align: {{ column_heading_align_mobile }};
     display: block;
     width: 100%;
     font-weight: 700;
     word-break: break-word;
   }
 
-  .comparison-column-heading-image-{{ section.id }} {
-    flex-shrink: 0;
-    width: auto;
-    height: 100%;
-    overflow: hidden;
-    margin: 5px 5px;
+  .comparison-table-column-{{ section.id }}.active .comparison-column-heading-text-{{ section.id }} {
+    font-size: {{ column_heading_size_mobile | plus: 4 }}px;
+    color: {{ column_heading_active_color }} !important;
   }
 
-  .comparison-column-heading-image-{{ section.id }} img,
-  .comparison-column-heading-image-{{ section.id }} svg {
+  .comparison-column-text-{{ section.id }} {
+    margin: 0;
+    margin-top: {{ column_text_mt_mobile }}px;
+    font-size: {{ column_text_size_mobile }}px;
+    color: {{ column_text_color }};
+    line-height: {{ column_text_height }}%;
+    text-transform: unset;
     display: block;
-    height: 100%;
     width: 100%;
-    object-fit: contain;
+    word-break: break-word;
   }
 
-  .comparison-column-heading-image-{{ section.id }} svg {
-    background-color: #AFAFAF;
+  .comparison-table-column-{{ section.id }}.active .comparison-column-text-{{ section.id }} {
+    font-size: {{ column_text_size_mobile | plus: 2 }}px;
+    color: {{ column_active_text_color }} !important;
   }
 
-  .comparison-column-{{ section.id }}.active .comparison-column-heading-text-{{ section.id }} {
-    font-size: {{ column_heading_size_mobile | times: 1.2 }}px;
-     color: {{ column_heading_active_color }};
-  }
-
-  .comparison-row-{{ section.id }} {
-    height: {{ row_height_mobile }}px;
-    display: flex !important;
-    align-items: center;
-    justify-content: {{ row_text_horizontal_align_mobile }};
-    overflow: hidden;
+  .comparison-table-column-image-{{ section.id }} {
     position: relative;
     z-index: 2;
-    gap: 8px;
-    padding: 8px;
+    width: 22%;
+    border: {{ column_image_border_thickness }}px solid {{ column_image_border_color }};
+    border-radius: {{ column_image_radius }}px;
+    overflow: hidden;
   }
 
-  .comparison-column-heading-{{ section.id }} {
-    justify-content: end;
-  }
-
-  .comparison-row-{{ section.id }} {
-    border-top: {{ table_border_thickness }}px solid {{ table_border_color }};
-  }
-
-  .comparison-column-{{ section.id }}:first-child .comparison-row-{{ section.id }}:first-child {
-    border: 0px;
-  }
-
-  .comparison-row-{{ section.id }}:last-child {
-    border-bottom: {{ table_border_thickness }}px solid {{ table_border_color }};
-  }
-
-  .comparison-column-{{ section.id }}.active {   
-    overflow: hidden;   
-    background-color: {{ table_bg_color | hex_to_rgba: table_bg_opacity }};
-  }
-
-  .comparison-column-{{ section.id }}.active:first-child {
-    border-top-left-radius: {{ table_radius }}px;
-  }
-
-  .comparison-column-{{ section.id }}.active:nth-child(2) {
-    border-top-right-radius: {{ table_radius }}px;
-  }
-
-  .comparison-column-{{ section.id }} .comparison-row-{{ section.id }}:first-child {
-    border-top: 0px !important;
-  }
-
-  .comparison-row-heading-{{ section.id }} {
-    margin: 0;
-    font-size: {{ row_heading_size_mobile }}px;
-    color: {{ row_heading_color }};
-    line-height: {{ row_heading_height }}%;
-    text-transform: unset;
-    text-align: {{ row_heading_align_mobile }};
-    width: 100%;
-    word-break: break-word;
-  }
-
-  .comparison-value-{{ section.id }} {
-    margin: 0;
-    font-size: {{ row_text_size_mobile }}px;
-    color: {{ row_text_color }};
-    line-height: {{ row_text_height }}%;
-    text-transform: unset;
-    text-align: {{ row_text_align_mobile }};
-    display: block;
-    word-break: break-word;
-  }
-
-  .comparison-column-{{ section.id }}.active .comparison-value-{{ section.id }} {
-    color: {{ row_active_text_color }};
-  }
-
-  .comparison-value-icon-{{ section.id }} {
-    flex-shrink: 0;
-    width: {{ value_icon_size_mobile }}px !important;
-    height: {{ value_icon_size_mobile }}px !important;    
-  }
-
-  .comparison-value-icon-{{ section.id }} img,
-  .comparison-value-icon-{{ section.id }} svg {
-    display: block;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .comparison-value-check-{{ section.id }} path {
-    fill: {{ value_check_color }};
-  }
-
-  .comparison-column-{{ section.id }}.active .comparison-value-check-{{ section.id }} path {
-    fill: {{ value_check_active_color }};
-  }
-
-  .comparison-value-crosg-{{ section.id }} path {
-    fill: {{ value_cross_color }};
-  }
-
-  .comparison-column-{{ section.id }}.active .comparison-value-crosg-{{ section.id }} path {
-    fill: {{ value_cross_active_color }};
-  }
-
-  .comparison-sticker-{{ section.id }} {
-    position: absolute;   
-    z-index: 2;  
-  }
-
-  .comparison-sticker-{{ section.id }} img, 
-  .comparison-sticker-{{ section.id }} svg {
+  .comparison-table-column-image-{{ section.id }} img,
+  .comparison-table-column-image-{{ section.id }} svg {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .comparison-sticker-{{ section.id }} svg {
+  .comparison-table-column-image-{{ section.id }} svg {
     background-color: #AFAFAF;
   }
   
@@ -384,85 +239,55 @@
       gap: {{ layout_gap }}px;    
     }
 
-    .comparison-table-wrapper-{{ section.id }} {
-      overflow-x: visible;
-      margin-left: 0rem;
-      margin-right: 0rem;
-      padding-left: 0rem;
-      padding-right: 0rem;
-    }
-
     .comparison-table-{{ section.id }} { 
       max-width: 100%;
       margin: 0;
     }
 
+    .comparison-table-wrapper-{{ section.id }} {
+      gap: {{ column_mt }}px;
+      padding-top: {{ column_mt }}px;
+      padding-bottom: {{ column_mt }}px;
+    }
+
     .comparison-content-{{ section.id }} {
       justify-content: {{ content_vertical_align }};
       align-items: {{ content_horizontal_align }};
-    }
-
-    .comparison-column-{{ section.id }} {
-      width: auto !important;
-    }
-
-    .comparison-column-{{ section.id }}:first-child {
-      width: 30%;
-      flex-shrink: 0;
-    }
-
-    .comparison-column-{{ section.id }}:not(:first-child) {
-      flex: 1 0;
-    }
-
-    .comparison-column-{{ section.id }}:last-child {
-      padding-right: 0px;
-    }
+    }  
 
     .comparison-column-heading-text-{{ section.id }} {
       font-size: {{ column_heading_size }}px;
-      text-align: {{ column_heading_align }};
     }
 
-    .comparison-row-{{ section.id }} {
-      height: {{ row_height }}px;
-      padding: 15px;
+    .comparison-table-column-{{ section.id }}.active .comparison-column-heading-text-{{ section.id }} {
+      font-size: {{ column_heading_size | plus: 4 }}px;
     }
 
-    .comparison-row-heading-{{ section.id }} {
-      font-size: {{ row_heading_size }}px;
-      text-align: {{ row_heading_align }};
+    .comparison-column-text-{{ section.id }} {
+      margin-top: {{ column_text_mt }}px;
+      font-size: {{ column_text_size }}px;
     }
 
-    .comparison-row-{{ section.id }} {
-      justify-content: {{ row_text_horizontal_align }};
+    .comparison-table-column-{{ section.id }}.active .comparison-column-text-{{ section.id }} {
+      font-size: {{ column_text_size | plus: 2 }}px;
     }
-
-    .comparison-value-{{ section.id }} {
-      font-size: {{ row_text_size }}px;
-      text-align: {{ row_text_align }};
-    }
-
-    .comparison-value-icon-{{ section.id }} {
-      width: {{ value_icon_size }}px !important;
-      height: {{ value_icon_size }}px !important;    
-    }
-
-    .comparison-column-{{ section.id }}.active .comparison-column-heading-text-{{ section.id }} {
-      font-size: {{ column_heading_size | times: 1.2 }}px;
-    }
-
   }
   
 {%- endstyle -%}
 
-{% unless full_width %}
+{% if width == 'custom' %}
   <style>
     .section-{{ section.id }}-settings {
       max-width: {{ content_width }}px;
     }
   </style>
-{% endunless %}
+{% elsif width == 'page' %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: var(--page-width);
+    }
+  </style>
+{% endif %}
 
 {% if margin_horizontal_mobile > 0 %}
   <style>
@@ -501,22 +326,88 @@
   </style>
 {% endif %}
 
-{% if row_heading_custom %}
+{% if column_text_custom %}
   <style>
-    .comparison-row-heading-{{ section.id }} {
-      font-family: {{ row_heading_font.family }}, {{ row_heading_font.fallback_families }};
-      font-weight: {{ row_heading_font.weight }};
-      font-style: {{ row_heading_font.style }};
+    .comparison-column-text-{{ section.id }} {
+      font-family: {{ column_text_font.family }}, {{ column_text_font.fallback_families }};
+      font-weight: {{ column_text_font.weight }};
+      font-style: {{ column_text_font.style }};
     }
   </style>
 {% endif %}
 
-{% if row_text_custom %}
+{% if reverse_content %}
   <style>
-    .comparison-value-{{ section.id }} {
-      font-family: {{ row_text_font.family }}, {{ row_text_font.fallback_families }};
-      font-weight: {{ row_text_font.weight }};
-      font-style: {{ row_text_font.style }};
+    .comparison-table-column-{{ section.id }} {
+      flex-direction: row-reverse;
+      padding-left: 10px !important;
+      padding-right: 20px !important;
+    }
+
+    .comparison-table-wrapper-{{ section.id }} {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+  </style>
+{% endif %}
+
+{% if column_image_ratio_mobile == "portrait" %}
+  <style>
+    .comparison-table-column-image-{{ section.id }} {
+      aspect-ratio: 9.6/13;
+    }
+  </style>
+{% elsif column_image_ratio_mobile == "landscape" %}
+  <style>
+  .comparison-table-column-image-{{ section.id }} {
+    aspect-ratio: 12/8;
+  }
+  </style>
+{% elsif column_image_ratio_mobile == "square" %}
+  <style>
+    .comparison-table-column-image-{{ section.id }} {
+      aspect-ratio: 12/12;
+    }
+  </style>
+{% else %}
+  <style>
+    .comparison-table-column-image-{{ section.id }} {
+      aspect-ratio: auto;
+    }
+  </style>
+{% endif %}
+
+{% if column_image_ratio == "portrait" %}
+  <style>
+    @media(min-width: 1024px) {
+      .comparison-table-column-image-{{ section.id }} {
+        aspect-ratio: 9.6/13;
+      }
+    }
+    
+  </style>
+{% elsif column_image_ratio == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .comparison-table-column-image-{{ section.id }} {
+        aspect-ratio: 12/8;
+      }
+    }  
+  </style>
+{% elsif column_image_ratio == "square" %}
+  <style>
+    @media(min-width: 1024px) {
+      .comparison-table-column-image-{{ section.id }} {
+        aspect-ratio: 12/12;
+      }
+    }    
+  </style>
+{% else %}
+  <style>
+     @media(min-width: 1024px) {
+      .comparison-table-column-image-{{ section.id }} {
+        aspect-ratio: auto;
+      }
     }
   </style>
 {% endif %}
@@ -561,46 +452,6 @@
       }
     </style>
   {% endif %}  
-{% endif %}
-
-{% if column_width_mobile > 80 %}
-  <style>
-    @media(max-width: 1024px) {
-      .comparison-column-{{ section.id }}:last-child {
-        padding-right: 10px;
-      }  
-    } 
-  </style>
-{% endif %}
-
-{% if table_border_style == "dashed" %}
-  <style>
-    .comparison-row-{{ section.id }} {
-      border-top: {{ table_border_thickness }}px dashed {{ table_border_color }};
-    }
-
-    .comparison-column-{{ section.id }}:first-child .comparison-row-{{ section.id }}:first-child {
-      border: 0px;
-    }
-
-    .comparison-row-{{ section.id }}:last-child {
-      border-bottom: {{ table_border_thickness }}px dashed {{ table_border_color }};
-    }
-  </style>
-{% else %}
-  <style>
-    .comparison-row-{{ section.id }} {
-      border-top: {{ table_border_thickness }}px solid {{ table_border_color }};
-    }
-
-    .comparison-column-{{ section.id }}:first-child .comparison-row-{{ section.id }}:first-child {
-      border: 0px;
-    }
-
-    .comparison-row-{{ section.id }}:last-child {
-      border-bottom: {{ table_border_thickness }}px solid {{ table_border_color }};
-    }
-  </style>
 {% endif %}
 
 {% for block in section.blocks %}
@@ -700,104 +551,180 @@
             font-style: {{ block.settings.text_font.style }};
           }
         </style>          
+      {% endif %}  
+    
+    {% when 'column' %}
+      <style>
+        .comparison-table-column-{{ block.id }}:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;          
+          border-top-right-radius: {{ table_radius }}px;
+          border-bottom-right-radius: {{ table_radius }}px;
+          border: {{ table_border_thickness }}px solid {{ table_border_color }};
+          background-color: {{ table_bg_color }};
+          border-left: 0px !important;
+        }
+
+        .comparison-table-column-{{ block.id }}.visible:after {
+          width: {{ block.settings.column_progress }}%;
+          transition: width 0.6s ease-out 0s;
+        }
+
+        .comparison-table-column-{{ block.id }}.active:after {
+          background-color: {{ table_bg_active_color }};
+          border: {{ table_border_thickness }}px solid {{ table_border_active_color }};
+        }
+      </style>
+
+      {% if block.settings.column_progress == 100 %}
+        <style>
+          .comparison-table-column-{{ block.id }}.visible:after {
+            {% if reverse_content %}
+              width: 104%;
+            {% else %}
+              width: 102%;
+            {% endif %}
+            transition: width 0.6s ease-out 0s;
+          }
+        </style>        
       {% endif %}
 
-      {% when 'sticker' %}
-      <style>        
-        .comparison-sticker-{{ block.id }} {  
-          position: absolute;
-          z-index: 3;             
-          left: {{ block.settings.horizontal_position_mobile }}%;
-          top: {{ block.settings.vertical_position_mobile }}%;
-          transform: translate(-50%, -50%);
-          width: 100%;
-          max-width: {{ block.settings.sticker_width_mobile }}px;
-          display: {% if block.settings.show_mobile %} block {% else %} none {% endif %};
-        }
-
-        .comparison-sticker-wrap-{{ block.id }} {
-          width: 100%;
-          height: 100%;
-          transform: rotate({{ block.settings.rotate }}deg);
-        }
-
-        @media(min-width: 1024px) {
-          .comparison-sticker-{{ block.id }} {            
-            left: {{ block.settings.horizontal_position }}%;
-            top: {{ block.settings.vertical_position }}%;
-            max-width: {{ block.settings.sticker_width }}px;
-            display: block;
+      {% if reverse_content %}
+        <style>
+          .comparison-table-column-{{ block.id }}:after {
+            left: inherit;
+            right: 0;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-top-left-radius: {{ table_radius }}px;
+            border-bottom-left-radius: {{ table_radius }}px;
+            border-left: {{ table_border_thickness }}px solid {{ table_border_color }} !important;
+            border-right: 0px !important;
           }
-        }
-      </style>
-      
-    {% when 'rating' %}
-      <style>   
-        {{ block.settings.rating_font | font_face: font_display: 'swap' }}    
 
-        .comparison-rating-wrap-{{ block.id }} {
+          .comparison-column-heading-text-{{ section.id }} {
+            text-align: right;
+          }
+
+          .comparison-column-text-{{ section.id }} {
+            text-align: right;
+          }
+        </style>
+      {% endif %}
+
+    {% when 'button' %}
+      <style>
+        {{  block.settings.button_font | font_face: font_display: 'swap' }}
+
+        .comparison-button-{{ block.id }} {
           display: flex;
           align-items: center;
-          margin-top: {{ block.settings.rating_mt_mobile }}px;
-          gap: 5px;
-          justify-content: {{ content_horizontal_align_mobile }};
-        }
-
-        .comparison-rating-text-{{ block.id }} * {
+          justify-content: center;
+          max-width: fit-content;
+          gap: 10px;
+          width: 100%;
           margin: 0;
-          font-size: {{ block.settings.rating_size_mobile }}px;
-          color: {{ block.settings.rating_color }};
-          line-height: {{ block.settings.rating_height }}%;
+          margin-top: {{ block.settings.button_mt_mobile }}px;
+          font-size: {{ block.settings.button_size_mobile }}px;
+          color: {{ block.settings.button_color }};
+          line-height: {{ block.settings.button_height }}%;
+          text-align: center;
           text-transform: unset;
           text-decoration: none;
-          word-break: break-word;
-          text-align: {{ content_horizontal_align_mobile }};
+          padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
+          border-radius: {{ block.settings.button_radius }}px;
+          transition: all 0.3s ease 0s;
+          background-color: transparent;
+          border: 0px;
+          cursor: pointer;
+          font-weight: 700;
         }
 
-        .comparison-rating-text-{{ block.id }} a {
-          text-decoration: underline;
-          color: {{ block.settings.rating_color }};
-        }
-
-        .comparison-stars-{{ block.id }} {
+        .comparison-button-inner-{{ block.id }} {
+          margin: 0px;
           display: flex;
           align-items: center;
-          gap: {{ block.settings.stars_gap }}px;
-          max-width: fit-content;
+          justify-content: center;
+          gap: 10px;
+          text-decoration: none;
         }
 
-        .comparison-stars-{{ block.id }} svg,
-        .comparison-stars-{{ block.id }} img {
-          display: block;
-          width: {{ block.settings.stars_size_mobile }}px;
-          height: {{ block.settings.stars_size_mobile }}px;
-          object-fit: cover;
+        .comparison-button-{{ block.id }}:hover {
+          color: {{ block.settings.button_hover_color }};
+          transition: all 0.25s ease 0s;
         }
-        @media(min-width: 1024px) {          
-          .comparison-rating-wrap-{{ block.id }} {
-            justify-content: {{ content_horizontal_align }};
-            margin-top: {{ block.settings.rating_mt }}px;
-          }
 
-          .comparison-rating-text-{{ block.id }} * {
-            font-size: {{ block.settings.rating_size }}px;
-            text-align: {{ content_horizontal_align }};
-          }
+        .comparison-button-{{ block.id }} svg {
+          width: 14px;
+          height: 14px;
+        }
 
-          .comparison-stars-{{ block.id }} svg,
-          .comparison-stars-{{ block.id }} img {
-            width: {{ block.settings.stars_size }}px;
-            height: {{ block.settings.stars_size }}px;
+        .comparison-button-{{ block.id }} svg path {
+          fill: {{ block.settings.button_color }};
+          transition: all 0.25s ease 0s;
+        }
+
+        .comparison-button-{{ block.id }}:hover svg path {
+          fill: {{ block.settings.button_hover_color }};
+          transition: all 0.25s ease 0s;
+        }
+
+        @media (min-width: 1024px) {
+          .comparison-button-{{ block.id }} {
+            margin-top: {{ block.settings.button_mt }}px;
+            padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+            font-size: {{ block.settings.button_size }}px;
           }
         }
       </style>
 
-      {% if block.settings.rating_custom %}
+      {% if block.settings.button_custom %}
         <style>
-          .comparison-rating-text-{{ block.id }} {
-            font-family: {{ block.settings.rating_font.family }}, {{ block.settings.rating_font.fallback_families }};
-            font-weight: {{ block.settings.rating_font.weight }};
-            font-style: {{ block.settings.rating_font.style }};
+          .comparison-button-{{ block.id }} {
+            font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+            font-weight: {{ block.settings.button_font.weight }};
+            font-style: {{ block.settings.button_font.style }};
+          }
+        </style>
+      {% endif %}
+
+      {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
+        <style>
+          .comparison-button-{{ block.id }} {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_color }};
+          }
+      
+          .comparison-button-{{ block.id }}:hover {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_hover_color }};
+          }
+        </style>
+      {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
+        <style>          
+          .comparison-button-{{ block.id }} {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_color }};
+            border: {{  block.settings.button_border_thickness }}px solid {{  block.settings.button_border_color }};
+          }
+      
+          .comparison-button-{{ block.id }}:hover {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_hover_color }};
+            border: {{  block.settings.button_border_thickness }}px solid {{ block.settings.button_border_hover_color }};
+          }
+        </style>
+      {% elsif block.settings.button_style == "link" %}
+        <style>
+          .comparison-button-{{ block.id }} {
+            padding: 0px !important;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
           }
         </style>
       {% endif %}
@@ -807,26 +734,6 @@
 
 <div class="section-{{ section.id }} comparison-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>
     <div class="section-{{ section.id }}-settings">
-      {% for block in section.blocks %}
-        {% if block.type == 'sticker' %}
-          <div class="comparison-sticker-{{ block.id }} comparison-sticker-{{ section.id }}" data-translateY="{{ block.settings.vertical_position }}" data-translateY-mobile="{{ block.settings.vertical_position_mobile }}">           
-            <div class="comparison-sticker-wrap-{{ block.id }}">
-              {% if block.settings.sticker_image != blank %}        
-                {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                  {{ block.settings.sticker_image | image_url: width: 1000 | image_tag:
-                    loading: loading_attribute,
-                    width: block.settings.sticker_image.width,
-                    height: block.settings.sticker_image.height,
-                    sizes: sizes,
-                    widths: '750, 1070, 1500'
-                  }}             
-              {% else %}
-                {{ 'image' | placeholder_svg_tag }}
-              {% endif %}   
-            </div>          
-          </div>     
-        {% endif %} 
-      {% endfor %}   
       <div class="comparison-body-{{ section.id }}">
         <div class="comparison-content-{{ section.id }}">
           {% for block in section.blocks %}
@@ -843,315 +750,101 @@
                   <div class="comparison-text-{{ block.id }}">
                     {{ block.settings.text }}
                   </div>
-                {% endif %}    
-                
-              {% when 'rating' %}
-                {% if block.settings.stars_count != 0 %}
-                  <div class="comparison-rating-wrap-{{ block.id }}">               
-                    <div class="comparison-stars-{{ block.id }}">
-                      {% if block.settings.stars_icon != blank %}
-                        {% assign stars_count_round = block.settings.stars_count | round: 0 %}
-                        {% for item in (1..stars_count_round) %}
-                          <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ block.settings.stars_icon.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                        {% endfor %}
-                      {% else %}
-                        <!-- Star 1 -->
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {% if block.settings.stars_count == 0.5 %}<defs><linearGradient id="grad{{ block.id }}1"><stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" /><stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" /></linearGradient></defs>{% endif %}
-                          <rect width="32" height="32" fill="{% if block.settings.stars_count == 0.5 %}url(#grad{{ block.id }}1){% elsif block.settings.stars_count >= 1 %}{{ block.settings.stars_bg_color }}{% else %}{{ block.settings.stars_bg_half_color }}{% endif %}"/>
-                          <g clip-path="url(#clip0_25_4)"><path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/></g><defs><clipPath id="clip0_25_4"><rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/></clipPath></defs>
-                        </svg>
-
-                        <!-- Star 2 -->
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {% if block.settings.stars_count == 1.5 %}<defs><linearGradient id="grad{{ block.id }}2"><stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" /><stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" /></linearGradient></defs>{% endif %}
-                          <rect width="32" height="32" fill="{% if block.settings.stars_count == 1.5 %}url(#grad{{ block.id }}2){% elsif block.settings.stars_count >= 2 %}{{ block.settings.stars_bg_color }}{% else %}{{ block.settings.stars_bg_half_color }}{% endif %}"/>
-                          <g clip-path="url(#clip0_25_4)"><path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/></g><defs><clipPath id="clip0_25_4"><rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/></clipPath></defs>
-                        </svg>
-
-                        <!-- Star 3 -->
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {% if block.settings.stars_count == 2.5 %}<defs><linearGradient id="grad{{ block.id }}3"><stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" /><stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" /></linearGradient></defs>{% endif %}
-                          <rect width="32" height="32" fill="{% if block.settings.stars_count == 2.5 %}url(#grad{{ block.id }}3){% elsif block.settings.stars_count >= 3 %}{{ block.settings.stars_bg_color }}{% else %}{{ block.settings.stars_bg_half_color }}{% endif %}"/>
-                          <g clip-path="url(#clip0_25_4)"><path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/></g><defs><clipPath id="clip0_25_4"><rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/></clipPath></defs>
-                        </svg>
-
-                        <!-- Star 4 -->
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {% if block.settings.stars_count == 3.5 %}<defs><linearGradient id="grad{{ block.id }}4"><stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" /><stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" /></linearGradient></defs>{% endif %}
-                          <rect width="32" height="32" fill="{% if block.settings.stars_count == 3.5 %}url(#grad{{ block.id }}4){% elsif block.settings.stars_count >= 4 %}{{ block.settings.stars_bg_color }}{% else %}{{ block.settings.stars_bg_half_color }}{% endif %}"/>
-                          <g clip-path="url(#clip0_25_4)"><path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/></g><defs><clipPath id="clip0_25_4"><rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/></clipPath></defs>
-                        </svg>
-
-                        <!-- Star 5 -->
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {% if block.settings.stars_count == 4.5 %}<defs><linearGradient id="grad{{ block.id }}5"><stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" /><stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" /><stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" /></linearGradient></defs>{% endif %}
-                          <rect width="32" height="32" fill="{% if block.settings.stars_count == 4.5 %}url(#grad{{ block.id }}5){% elsif block.settings.stars_count >= 5 %}{{ block.settings.stars_bg_color }}{% else %}{{ block.settings.stars_bg_half_color }}{% endif %}"/>
-                          <g clip-path="url(#clip0_25_4)"><path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/></g><defs><clipPath id="clip0_25_4"><rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/></clipPath></defs>
+                {% endif %}  
+  
+              {% when 'button' %}  
+                {% if block.settings.button != blank %}   
+                  <{% if block.settings.url != blank %}a href="{% if block.settings.url != blank %}{{ block.settings.url }}{% endif %}"{% else %}div{% endif %} {% if block.settings.open_in_new_tab %}target="_blank"{% endif %} class="comparison-button-{{ block.id }}">
+                    <p class="comparison-button-inner-{{ block.id }}">
+                      {{ block.settings.button }}
+                      {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                        <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                          <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
                         </svg>
                       {% endif %}
-                    </div>  
-                    {% if block.settings.rating_text != blank %}
-                      <div class="comparison-rating-text-{{ block.id }}">{{ block.settings.rating_text }}</div>
-                    {% endif %}             
-                  </div>  
-                {% endif %}  
+                    </p>
+                  </{% if block.settings.url != blank %}a{% else %}div{% endif %}>    
+                {% endif %} 
+              
             {% endcase %}
           {% endfor %}
         </div>
         <div class="comparison-table-wrapper-{{ section.id }}">
-          <div class="comparison-table-{{ section.id }}">
-            <div class="comparison-column-{{ section.id }} active">
-              <div class="comparison-row-{{ section.id }}"></div>
-              {% if first_row_heading != blank %}
-                <div class="comparison-row-{{ section.id }}">
-                  <p class="comparison-row-heading-{{ section.id }}">{{ first_row_heading }}</p>
-                </div>
-              {% endif %}
-              {% if second_row_heading != blank %}
-                <div class="comparison-row-{{ section.id }}">
-                  <p class="comparison-row-heading-{{ section.id }}">{{ second_row_heading }}</p>
-                </div>
-              {% endif %}
-              {% if third_row_heading != blank %}
-                <div class="comparison-row-{{ section.id }}">
-                  <p class="comparison-row-heading-{{ section.id }}">{{ third_row_heading }}</p>
-                </div>
-              {% endif %}
-              {% if fourth_row_heading != blank %}
-                <div class="comparison-row-{{ section.id }}">
-                  <p class="comparison-row-heading-{{ section.id }}">{{ fourth_row_heading }}</p>
-                </div>
-              {% endif %}
-              {% if fifth_row_heading != blank %}
-                <div class="comparison-row-{{ section.id }}">
-                  <p class="comparison-row-heading-{{ section.id }}">{{ fifth_row_heading }}</p>
-                </div>
-              {% endif %}
-            </div>
-
-            {% assign first_column_found = false %}
-
-            {% for block in section.blocks %}
-              {% if block.type == "column" %}
-                <div class="comparison-column-{{ section.id }} comparison-column-{{ block.id }} {% unless first_column_found %}active{% assign first_column_found = true %}{% endunless %}">
-                  <div class="comparison-column-heading-{{ section.id }} comparison-row-{{ section.id }}">
-                    {% if block.settings.column_heading_image != blank %}
-                      <div class="comparison-column-heading-image-{{ section.id }}">
-                        <img src="{{ block.settings.column_heading_image | img_url: "300x300" }}" alt="{{ block.settings.column_heading_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                      </div>
-                    {% endif %}
-                    {% if block.settings.column_heading != blank %}
-                      <p class="comparison-column-heading-text-{{ section.id }}">{{ block.settings.column_heading }}</p>
-                    {% endif %}
-                  </div>
-                  {% if first_row_heading != blank %}
-                    <div class="comparison-row-{{ section.id }}">          
-                      {% if block.settings.first_row_icon_type != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }} {% if block.settings.first_row_icon_type == 'custom' and block.settings.first_row_custom_image != blank %}comparison-item-image-{{ section.id }}{% endif %}">
-                          {% if block.settings.first_row_icon_type == 'custom' and block.settings.first_row_custom_image != blank %}
-                            <img src="{{ block.settings.first_row_custom_image | image_url }}" alt="{{ block.settings.first_row_custom_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                          {% elsif block.settings.first_row_icon_type == 'default' %}
-                            {% if block.settings.first_row_icon == "check" %}
-                              <svg class="comparison-value-check-{{ section.id }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C5.40891 0 0 5.40891 0 12C0 18.5911 5.40891 24 12 24C18.5911 24 24 18.5911 24 12C24 5.40891 18.5911 0 12 0ZM10.5478 17.4581L5.29284 12.2032L7.28137 10.2147L10.6398 13.5731L17.382 7.44412L19.2743 9.52467L10.5478 17.4581Z" fill="#121212"/>
-                              </svg>
-                            {% elsif block.settings.first_row_icon == "cross" %}
-                               <svg class="comparison-value-crosg-{{ section.id }}" fill="#currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                            viewBox="0 0 512 512" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M488.042,235.1c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.957-43.89
-                                  c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.958-43.89c5.665-8.352,8.979-18.423,8.979-29.253
-                                  c0-28.808-23.437-52.245-52.245-52.245H0v323.92h164.042c66.465,0,118.53,53.234,118.53,121.195
-                                  c0,28.812,23.44,52.251,52.251,52.251c28.812,0,52.252-23.44,52.252-52.251c0-44.541-9.07-85.908-26.412-121.197h99.092
-                                  c28.808,0,52.245-23.437,52.245-52.245C512,260.601,502.442,244.414,488.042,235.1z M85.674,299.89H31.347V38.664h54.327V299.89z
-                                  M148.368,299.89h-31.347V38.664h31.347V299.89z M459.755,299.888H318.694v21.373l2.541,3.9
-                                  c22.566,34.643,34.493,78.652,34.493,127.271c0,11.526-9.378,20.904-20.905,20.904c-11.526,0-20.904-9.378-20.904-20.904
-                                  c0-40.834-15.341-79.086-43.196-107.711c-24.481-25.158-56.35-40.473-91.007-44.027V38.664h235.102
-                                  c11.523,0,20.898,9.375,20.898,20.898S426.34,80.46,414.817,80.46h-10.449v31.347h25.429c11.523,0,20.898,9.375,20.898,20.898
-                                  s-9.375,20.898-20.898,20.898h-25.429v31.347h40.407c11.523,0,20.898,9.375,20.898,20.898s-9.375,20.898-20.898,20.898h-40.407
-                                  v31.347h55.387c11.523,0,20.898,9.375,20.898,20.898S471.278,299.888,459.755,299.888z"/>
-                              </g>
-                            </g>
-                          </svg> 
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.first_row != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.first_row }}</p>
-                      {% endif %}
-                    </div>
+          {% for block in section.blocks %}
+            {% if block.type == 'column' %}
+              <div class="comparison-table-column-{{ section.id }} comparison-table-column-{{ block.id }} {% if block.settings.active_column %}active{% endif %}">
+                <div class="comparison-table-column-content-{{ section.id }}">
+                  {% if block.settings.column_heading != blank %}
+                    <p class="comparison-column-heading-text-{{ section.id }}">{{ block.settings.column_heading }}</p>
                   {% endif %}
-                  {% if second_row_heading != blank %}
-                    <div class="comparison-row-{{ section.id }}">
-                      {% if block.settings.second_row_icon_type != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }} {% if block.settings.second_row_icon_type == 'custom' and block.settings.second_row_custom_image != blank %}comparison-item-image-{{ section.id }}{% endif %}">
-                          {% if block.settings.second_row_icon_type == 'custom' and block.settings.second_row_custom_image != blank %}
-                            <img src="{{ block.settings.second_row_custom_image | image_url }}" alt="{{ block.settings.second_row_custom_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                          {% elsif block.settings.second_row_icon_type == 'default' %}
-                            {% if block.settings.second_row_icon == "check" %}
-                              <svg class="comparison-value-check-{{ section.id }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C5.40891 0 0 5.40891 0 12C0 18.5911 5.40891 24 12 24C18.5911 24 24 18.5911 24 12C24 5.40891 18.5911 0 12 0ZM10.5478 17.4581L5.29284 12.2032L7.28137 10.2147L10.6398 13.5731L17.382 7.44412L19.2743 9.52467L10.5478 17.4581Z" fill="#121212"/>
-                              </svg>
-                            {% elsif block.settings.second_row_icon == "cross" %}
-                               <svg class="comparison-value-crosg-{{ section.id }}" fill="#currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                            viewBox="0 0 512 512" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M488.042,235.1c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.957-43.89
-                                  c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.958-43.89c5.665-8.352,8.979-18.423,8.979-29.253
-                                  c0-28.808-23.437-52.245-52.245-52.245H0v323.92h164.042c66.465,0,118.53,53.234,118.53,121.195
-                                  c0,28.812,23.44,52.251,52.251,52.251c28.812,0,52.252-23.44,52.252-52.251c0-44.541-9.07-85.908-26.412-121.197h99.092
-                                  c28.808,0,52.245-23.437,52.245-52.245C512,260.601,502.442,244.414,488.042,235.1z M85.674,299.89H31.347V38.664h54.327V299.89z
-                                  M148.368,299.89h-31.347V38.664h31.347V299.89z M459.755,299.888H318.694v21.373l2.541,3.9
-                                  c22.566,34.643,34.493,78.652,34.493,127.271c0,11.526-9.378,20.904-20.905,20.904c-11.526,0-20.904-9.378-20.904-20.904
-                                  c0-40.834-15.341-79.086-43.196-107.711c-24.481-25.158-56.35-40.473-91.007-44.027V38.664h235.102
-                                  c11.523,0,20.898,9.375,20.898,20.898S426.34,80.46,414.817,80.46h-10.449v31.347h25.429c11.523,0,20.898,9.375,20.898,20.898
-                                  s-9.375,20.898-20.898,20.898h-25.429v31.347h40.407c11.523,0,20.898,9.375,20.898,20.898s-9.375,20.898-20.898,20.898h-40.407
-                                  v31.347h55.387c11.523,0,20.898,9.375,20.898,20.898S471.278,299.888,459.755,299.888z"/>
-                              </g>
-                            </g>
-                          </svg> 
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.second_row != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.second_row }}</p>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  {% if third_row_heading != blank %}
-                    <div class="comparison-row-{{ section.id }}">
-                      {% if block.settings.third_row_icon_type != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }} {% if block.settings.third_row_icon_type == 'custom' and block.settings.third_row_custom_image != blank %}comparison-item-image-{{ section.id }}{% endif %}">
-                          {% if block.settings.third_row_icon_type == 'custom' and block.settings.third_row_custom_image != blank %}
-                            <img src="{{ block.settings.third_row_custom_image | image_url }}" alt="{{ block.settings.third_row_custom_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                          {% elsif block.settings.third_row_icon_type == 'default' %}
-                           {% if block.settings.third_row_icon == "check" %}
-                              <svg class="comparison-value-check-{{ section.id }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C5.40891 0 0 5.40891 0 12C0 18.5911 5.40891 24 12 24C18.5911 24 24 18.5911 24 12C24 5.40891 18.5911 0 12 0ZM10.5478 17.4581L5.29284 12.2032L7.28137 10.2147L10.6398 13.5731L17.382 7.44412L19.2743 9.52467L10.5478 17.4581Z" fill="#121212"/>
-                              </svg>
-                            {% elsif block.settings.third_row_icon == "cross" %}
-                               <svg class="comparison-value-crosg-{{ section.id }}" fill="#currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                            viewBox="0 0 512 512" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M488.042,235.1c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.957-43.89
-                                  c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.958-43.89c5.665-8.352,8.979-18.423,8.979-29.253
-                                  c0-28.808-23.437-52.245-52.245-52.245H0v323.92h164.042c66.465,0,118.53,53.234,118.53,121.195
-                                  c0,28.812,23.44,52.251,52.251,52.251c28.812,0,52.252-23.44,52.252-52.251c0-44.541-9.07-85.908-26.412-121.197h99.092
-                                  c28.808,0,52.245-23.437,52.245-52.245C512,260.601,502.442,244.414,488.042,235.1z M85.674,299.89H31.347V38.664h54.327V299.89z
-                                  M148.368,299.89h-31.347V38.664h31.347V299.89z M459.755,299.888H318.694v21.373l2.541,3.9
-                                  c22.566,34.643,34.493,78.652,34.493,127.271c0,11.526-9.378,20.904-20.905,20.904c-11.526,0-20.904-9.378-20.904-20.904
-                                  c0-40.834-15.341-79.086-43.196-107.711c-24.481-25.158-56.35-40.473-91.007-44.027V38.664h235.102
-                                  c11.523,0,20.898,9.375,20.898,20.898S426.34,80.46,414.817,80.46h-10.449v31.347h25.429c11.523,0,20.898,9.375,20.898,20.898
-                                  s-9.375,20.898-20.898,20.898h-25.429v31.347h40.407c11.523,0,20.898,9.375,20.898,20.898s-9.375,20.898-20.898,20.898h-40.407
-                                  v31.347h55.387c11.523,0,20.898,9.375,20.898,20.898S471.278,299.888,459.755,299.888z"/>
-                              </g>
-                            </g>
-                          </svg> 
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.third_row != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.third_row }}</p>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  {% if fourth_row_heading != blank %}
-                    <div class="comparison-row-{{ section.id }}">
-                      {% if block.settings.fourth_row_icon_type != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }} {% if block.settings.fourth_row_icon_type == 'custom' and block.settings.fourth_row_custom_image != blank %}comparison-item-image-{{ section.id }}{% endif %}">
-                          {% if block.settings.fourth_row_icon_type == 'custom' and block.settings.fourth_row_custom_image != blank %}
-                            <img src="{{ block.settings.fourth_row_custom_image | image_url }}" alt="{{ block.settings.fourth_row_custom_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                          {% elsif block.settings.fourth_row_icon_type == 'default' %}
-                            {% if block.settings.fourth_row_icon == "check" %}
-                              <svg class="comparison-value-check-{{ section.id }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C5.40891 0 0 5.40891 0 12C0 18.5911 5.40891 24 12 24C18.5911 24 24 18.5911 24 12C24 5.40891 18.5911 0 12 0ZM10.5478 17.4581L5.29284 12.2032L7.28137 10.2147L10.6398 13.5731L17.382 7.44412L19.2743 9.52467L10.5478 17.4581Z" fill="#121212"/>
-                              </svg>
-                            {% elsif block.settings.fourth_row_icon == "cross" %}
-                               <svg class="comparison-value-crosg-{{ section.id }}" fill="#currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                            viewBox="0 0 512 512" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M488.042,235.1c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.957-43.89
-                                  c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.958-43.89c5.665-8.352,8.979-18.423,8.979-29.253
-                                  c0-28.808-23.437-52.245-52.245-52.245H0v323.92h164.042c66.465,0,118.53,53.234,118.53,121.195
-                                  c0,28.812,23.44,52.251,52.251,52.251c28.812,0,52.252-23.44,52.252-52.251c0-44.541-9.07-85.908-26.412-121.197h99.092
-                                  c28.808,0,52.245-23.437,52.245-52.245C512,260.601,502.442,244.414,488.042,235.1z M85.674,299.89H31.347V38.664h54.327V299.89z
-                                  M148.368,299.89h-31.347V38.664h31.347V299.89z M459.755,299.888H318.694v21.373l2.541,3.9
-                                  c22.566,34.643,34.493,78.652,34.493,127.271c0,11.526-9.378,20.904-20.905,20.904c-11.526,0-20.904-9.378-20.904-20.904
-                                  c0-40.834-15.341-79.086-43.196-107.711c-24.481-25.158-56.35-40.473-91.007-44.027V38.664h235.102
-                                  c11.523,0,20.898,9.375,20.898,20.898S426.34,80.46,414.817,80.46h-10.449v31.347h25.429c11.523,0,20.898,9.375,20.898,20.898
-                                  s-9.375,20.898-20.898,20.898h-25.429v31.347h40.407c11.523,0,20.898,9.375,20.898,20.898s-9.375,20.898-20.898,20.898h-40.407
-                                  v31.347h55.387c11.523,0,20.898,9.375,20.898,20.898S471.278,299.888,459.755,299.888z"/>
-                              </g>
-                            </g>
-                          </svg> 
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.fourth_row != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.fourth_row }}</p>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  {% if fifth_row_heading != blank %}
-                    <div class="comparison-row-{{ section.id }}">
-                      {% if block.settings.fifth_row_icon_type != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }} {% if block.settings.fifth_row_icon_type == 'custom' and block.settings.fifth_row_custom_image != blank %}comparison-item-image-{{ section.id }}{% endif %}">
-                          {% if block.settings.fifth_row_icon_type == 'custom' and block.settings.fifth_row_custom_image != blank %}
-                            <img src="{{ block.settings.fifth_row_custom_image | image_url }}" alt="{{ block.settings.fifth_row_custom_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                          {% elsif block.settings.fifth_row_icon_type == 'default' %}
-                          {% if block.settings.fifth_row_icon == "check" %}
-                              <svg class="comparison-value-check-{{ section.id }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C5.40891 0 0 5.40891 0 12C0 18.5911 5.40891 24 12 24C18.5911 24 24 18.5911 24 12C24 5.40891 18.5911 0 12 0ZM10.5478 17.4581L5.29284 12.2032L7.28137 10.2147L10.6398 13.5731L17.382 7.44412L19.2743 9.52467L10.5478 17.4581Z" fill="#121212"/>
-                              </svg>
-                            {% elsif block.settings.fifth_row_icon == "cross" %}
-                               <svg class="comparison-value-crosg-{{ section.id }}" fill="#currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                            viewBox="0 0 512 512" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M488.042,235.1c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.957-43.89
-                                  c5.665-8.352,8.979-18.423,8.979-29.253c0-18.389-9.558-34.577-23.958-43.89c5.665-8.352,8.979-18.423,8.979-29.253
-                                  c0-28.808-23.437-52.245-52.245-52.245H0v323.92h164.042c66.465,0,118.53,53.234,118.53,121.195
-                                  c0,28.812,23.44,52.251,52.251,52.251c28.812,0,52.252-23.44,52.252-52.251c0-44.541-9.07-85.908-26.412-121.197h99.092
-                                  c28.808,0,52.245-23.437,52.245-52.245C512,260.601,502.442,244.414,488.042,235.1z M85.674,299.89H31.347V38.664h54.327V299.89z
-                                  M148.368,299.89h-31.347V38.664h31.347V299.89z M459.755,299.888H318.694v21.373l2.541,3.9
-                                  c22.566,34.643,34.493,78.652,34.493,127.271c0,11.526-9.378,20.904-20.905,20.904c-11.526,0-20.904-9.378-20.904-20.904
-                                  c0-40.834-15.341-79.086-43.196-107.711c-24.481-25.158-56.35-40.473-91.007-44.027V38.664h235.102
-                                  c11.523,0,20.898,9.375,20.898,20.898S426.34,80.46,414.817,80.46h-10.449v31.347h25.429c11.523,0,20.898,9.375,20.898,20.898
-                                  s-9.375,20.898-20.898,20.898h-25.429v31.347h40.407c11.523,0,20.898,9.375,20.898,20.898s-9.375,20.898-20.898,20.898h-40.407
-                                  v31.347h55.387c11.523,0,20.898,9.375,20.898,20.898S471.278,299.888,459.755,299.888z"/>
-                              </g>
-                            </g>
-                          </svg> 
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.fifth_row != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.fifth_row }}</p>
-                      {% endif %}
-                    </div>
+                  {% if block.settings.column_text != blank %}
+                    <p class="comparison-column-text-{{ section.id }}">{{ block.settings.column_text }}</p>
                   {% endif %}
                 </div>
-              {% endif %}
-            {% endfor %}
-          </div>
+                <div class="comparison-table-column-image-{{ section.id }}">
+                  {% if block.settings.column_image != blank %}
+                    <img src="{{ block.settings.column_image | image_url }}" alt="{{ block.settings.column_image.alt }}">
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+          <div class="comparison-table-line-{{ section.id }}" style="top: 0%; left: 25%;"></div>
+          <div class="comparison-table-line-{{ section.id }}" style="top: 0%; left: 50%;"></div>
+          <div class="comparison-table-line-{{ section.id }}" style="top: 0%; left: 75%;"></div>
         </div>     
       </div>
     </div>
 </div>
 
+<script>
+function initComparisonTable25() {
+  const sections = document.querySelectorAll('.comparison-{{ section.id }}');
+  const observerOptions = {
+    root: null,
+    threshold: 0.2
+  };
+
+  const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+      const items = entry.target.querySelectorAll('.comparison-table-column-{{ section.id }}');
+      
+      if (entry.isIntersecting) {
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add('visible');
+          }, index * 100);
+        });
+      } else {
+        items.forEach(item => {
+          item.classList.remove('visible');
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initComparisonTable25);
+
+if (Shopify.designMode) {
+  document.addEventListener('shopify:section:unload', initComparisonTable25);
+  document.addEventListener('shopify:section:load', initComparisonTable25);
+}
+</script>
+
 {% schema %}
 {
-  "name": "SG-Comparison table #24",
+  "name": "SG-Comparison table #25",
   "settings": [
     {
       "type": "header",
@@ -1191,23 +884,13 @@
     },
     {
       "type": "range",
-      "id": "table_width",
-      "min": 35,
-      "max": 65,
-      "step": 1,
-      "unit": "%",
-      "label": "Table width",
-      "default": 60
-    },
-    {
-      "type": "range",
       "id": "layout_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 50
+      "default": 36
     },
     {
       "type": "range",
@@ -1217,7 +900,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 32
+      "default": 24
     },
     {
       "type": "header",
@@ -1261,13 +944,23 @@
     },
     {
       "type": "range",
+      "id": "table_width",
+      "min": 35,
+      "max": 65,
+      "step": 1,
+      "unit": "%",
+      "label": "Table width",
+      "default": 55
+    },
+    {
+      "type": "range",
       "id": "table_radius",
       "min": 0,
       "max": 30,
       "step": 1,
       "unit": "px",
       "label": "Roundness",
-      "default": 16
+      "default": 5
     },
     {
       "type": "range",
@@ -1280,73 +973,33 @@
       "default": 1
     },
     {
-      "type": "select",
-      "id": "table_border_style",
-      "label": "Border style",
-      "options": [
-        {
-          "label": "Solid",
-          "value": "solid"
-        },
-        {
-          "label": "Dashed",
-          "value": "dashed"
-        }
-      ]
-    },
-    {
       "type": "range",
-      "id": "column_width_mobile",
-      "min": 50,
-      "max": 200,
-      "step": 5,
-      "unit": "px",
-      "label": "Column width - mobile",
-      "default": 115
-    },
-    {
-      "type": "range",
-      "id": "column_header_height",
-      "min": 30,
-      "max": 150,
+      "id": "column_mt",
+      "min": 0,
+      "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Header height",
-      "default": 70
+      "label": "Margin top",
+      "default": 20
     },
     {
       "type": "range",
-      "id": "column_header_height_mobile",
-      "min": 30,
-      "max": 150,
+      "id": "column_mt_mobile",
+      "min": 0,
+      "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Header height - mobile",
-      "default": 70
+      "label": "Margin top - mobile",
+      "default": 20
     },
     {
-      "type": "range",
-      "id": "row_height",
-      "min": 30,
-      "max": 150,
-      "step": 2,
-      "unit": "px",
-      "label": "Row height",
-      "default": 70
-    },
-    {
-      "type": "range",
-      "id": "row_height_mobile",
-      "min": 30,
-      "max": 150,
-      "step": 2,
-      "unit": "px",
-      "label": "Row height - mobile",
-      "default": 70
+      "type": "checkbox",
+      "id": "reverse_content",
+      "label": "Reverse content order"
     },
     {
       "type": "header",
-      "content": "Table column heading"
+      "content": "Column heading"
     },
     {
       "type": "checkbox",
@@ -1382,6 +1035,12 @@
       "default": 16
     },
     {
+      "type": "checkbox",
+      "id": "column_heading_advanced",
+      "label": "Advanced settings",
+      "default": false
+    },
+    {
       "type": "range",
       "id": "column_heading_height",
       "min": 50,
@@ -1389,217 +1048,178 @@
       "step": 10,
       "unit": "%",
       "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "text_alignment",
-      "id": "column_heading_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "column_heading_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
+      "default": 130,
+      "visible_if": "{{ section.settings.column_heading_advanced }}"
     },
     {
       "type": "header",
-      "content": "Table row heading"
-    },
-    {
-      "type": "text",
-      "id": "first_row_heading",
-      "label": "First row heading",
-      "default": "Row heading"
-    },
-    {
-      "type": "text",
-      "id": "second_row_heading",
-      "label": "Second row heading",
-      "default": "Row heading"
-    },
-    {
-      "type": "text",
-      "id": "third_row_heading",
-      "label": "Third row heading",
-      "default": "Row heading"
-    },
-    {
-      "type": "text",
-      "id": "fourth_row_heading",
-      "label": "Fourth row heading",
-      "default": "Row heading"
-    },
-    {
-      "type": "text",
-      "id": "fifth_row_heading",
-      "label": "Fifth row heading",
-      "default": "Row heading"
+      "content": "Column text"
     },
     {
       "type": "checkbox",
-      "id": "row_heading_custom",
+      "id": "column_text_custom",
       "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "row_heading_font",
+      "id": "column_text_font",
       "label": "Font family",
       "default": "josefin_sans_n4",
-      "visible_if": "{{ section.settings.row_heading_custom }}"
+      "visible_if": "{{ section.settings.column_text_custom }}"
     },
     {
       "type": "range",
-      "id": "row_heading_size",
+      "id": "column_text_size",
       "min": 0,
       "max": 40,
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 14
+      "default": 12
     },
     {
       "type": "range",
-      "id": "row_heading_size_mobile",
+      "id": "column_text_size_mobile",
       "min": 0,
       "max": 40,
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 13
-    },
-    {
-      "type": "range",
-      "id": "row_heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "text_alignment",
-      "id": "row_heading_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "row_heading_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "header",
-      "content": "Row text"
+      "default": 12
     },
     {
       "type": "checkbox",
-      "id": "row_text_custom",
-      "label": "Use custom font",
+      "id": "column_text_advanced",
+      "label": "Advanced settings",
       "default": false
     },
     {
-      "type": "font_picker",
-      "id": "row_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4",
-      "visible_if": "{{ section.settings.row_text_custom }}"
-    },
-    {
       "type": "range",
-      "id": "row_text_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "row_text_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 13
-    },
-    {
-      "type": "range",
-      "id": "row_text_height",
+      "id": "column_text_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
       "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "text_alignment",
-      "id": "row_text_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "row_text_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "Row icon"
+      "default": 130,
+      "visible_if": "{{ section.settings.column_text_advanced }}"
     },
     {
       "type": "range",
-      "id": "value_icon_size",
-      "min": 20,
+      "id": "column_text_mt",
+      "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Size",
-      "default": 20
+      "label": "Margin top",
+      "default": 4,
+      "visible_if": "{{ section.settings.column_text_advanced }}"
     },
     {
       "type": "range",
-      "id": "value_icon_size_mobile",
-      "min": 20,
+      "id": "column_text_mt_mobile",
+      "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Size - mobile",
-      "default": 20
+      "label": "Margin top - mobile",
+      "default": 4,
+      "visible_if": "{{ section.settings.column_text_advanced }}"
     },
     {
       "type": "header",
-      "content": "Table colors"
+      "content": "Image"
+    },
+    {
+      "type": "range",
+      "id": "column_image_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "column_image_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "column_image_ratio",
+      "label": "Aspect ratio",
+      "default": "original",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "column_image_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "original",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Default column colors"
     },
     {
       "type": "color",
-      "label": "Column heading",
+      "label": "Heading",
       "id": "column_heading_color",
       "default": "#121212"
     },
     {
       "type": "color",
-      "label": "Row text",
-      "id": "row_text_color",
+      "label": "Text",
+      "id": "column_text_color",
       "default": "#121212"
     },
     {
       "type": "color",
-      "label": "Check icon",
-      "id": "value_check_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Cross icon",
-      "id": "value_cross_color",
-      "default": "#121212"
+      "label": "Background",
+      "id": "table_bg_color",
+      "default": "#F3F3F3"
     },
     {
       "type": "color",
@@ -1613,48 +1233,27 @@
     },
     {
       "type": "color",
-      "label": "Column heading",
+      "label": "Heading",
       "id": "column_heading_active_color",
       "default": "#121212"
     },
     {
       "type": "color",
-      "label": "Row heading",
-      "id": "row_heading_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Row text",
-      "id": "row_active_text_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Check icon",
-      "id": "value_check_active_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Cross icon",
-      "id": "value_cross_active_color",
+      "label": "Text",
+      "id": "column_active_text_color",
       "default": "#121212"
     },
     {
       "type": "color",
       "label": "Background",
-      "id": "table_bg_color",
-      "default": "#AFAFAF"
+      "id": "table_bg_active_color",
+      "default": "#FFFFFF"
     },
     {
-      "type": "range",
-      "id": "table_bg_opacity",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "label": "Background opacity",
-      "default": 0.1
+      "type": "color",
+      "label": "Border",
+      "id": "table_border_active_color",
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -1680,7 +1279,7 @@
       "type": "color",
       "label": "Background",
       "id": "background_color",
-      "default": "#ffffff",
+      "default": "#FFFFFF",
       "visible_if": "{{ section.settings.background_style == 'solid' }}"
     },
     {
@@ -1789,10 +1388,24 @@
       "content": "Section"
     },
     {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": false
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "page",
+      "options": [
+        {
+          "label": "Page",
+          "value": "page"
+        },
+        {
+          "label": "Full",
+          "value": "full"
+        },
+        {
+          "label": "Custom",
+          "value": "custom"
+        }
+      ]
     },
     {
       "type": "range",
@@ -1803,7 +1416,7 @@
       "unit": "px",
       "label": "Content width",
       "default": 1200,
-      "visible_if": "{{ section.settings.full_width == false }}"
+      "visible_if": "{{ section.settings.width == 'custom' }}"
     },
     {
       "type": "range",
@@ -1843,7 +1456,7 @@
           "type": "richtext",
           "id": "heading",
           "label": "Heading",
-          "default": "<h2>Comparison table #24</h2>"
+          "default": "<h2>Comparison table #25</h2>"
         },
         {
           "type": "checkbox",
@@ -1876,7 +1489,13 @@
           "step": 2,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 28
+          "default": 36
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_advanced",
+          "label": "Advanced settings",
+          "default": false
         },
         {
           "type": "range",
@@ -1886,7 +1505,8 @@
           "step": 10,
           "unit": "%",
           "label": "Line height",
-          "default": 130
+          "default": 130,
+          "visible_if": "{{ block.settings.heading_advanced }}"
         },
         {
           "type": "range",
@@ -1896,7 +1516,8 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 0
+          "default": 0,
+          "visible_if": "{{ block.settings.heading_advanced }}"
         },
         {
           "type": "range",
@@ -1906,7 +1527,8 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 0
+          "default": 0,
+          "visible_if": "{{ block.settings.heading_advanced }}"
         },
         {
           "type": "color",
@@ -1961,6 +1583,12 @@
           "default": 14
         },
         {
+          "type": "checkbox",
+          "id": "text_advanced",
+          "label": "Advanced settings",
+          "default": false
+        },
+        {
           "type": "range",
           "id": "text_height",
           "min": 50,
@@ -1968,7 +1596,8 @@
           "step": 10,
           "unit": "%",
           "label": "Line height",
-          "default": 150
+          "default": 150,
+          "visible_if": "{{ block.settings.text_advanced }}"
         },
         {
           "type": "range",
@@ -1978,7 +1607,8 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 20
+          "default": 20,
+          "visible_if": "{{ block.settings.text_advanced }}"
         },
         {
           "type": "range",
@@ -1988,7 +1618,8 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 20
+          "default": 20,
+          "visible_if": "{{ block.settings.text_advanced }}"
         },
         {
           "type": "color",
@@ -1999,508 +1630,192 @@
       ]
     },
     {
-      "type": "column",
-      "name": "Comparison column",
-      "limit": 4,
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
       "settings": [
         {
-          "type": "header",
-          "content": "Column header",
-          "info": "You can change the column header height in the table settings."
-        },
-        {
           "type": "text",
-          "id": "column_heading",
-          "label": "Heading",
-          "default": "Column heading"
+          "id": "button",
+          "label": "Button label",
+          "default": "Learn more"
         },
         {
-          "type": "image_picker",
-          "id": "column_heading_image",
-          "label": "Image"
-        },
-        {
-          "type": "header",
-          "content": "Row 1"
-        },
-        {
-          "type": "text",
-          "id": "first_row",
-          "label": "Value"
-        },
-        {
-          "type": "select",
-          "id": "first_row_icon_type",
-          "label": "Icon",
-          "default": "none",
-          "options": [
-            {
-              "label": "Default",
-              "value": "default"
-            },
-            {
-              "label": "Custom",
-              "value": "custom"
-            },
-            {
-              "label": "None",
-              "value": "none"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "first_row_icon",
-          "label": "Icon type",
-          "visible_if": "{{ block.settings.first_row_icon_type == 'default' }}",
-          "default": "check",
-          "options": [
-            {
-              "label": "Check",
-              "value": "check"
-            },
-            {
-              "label": "Cross",
-              "value": "cross"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "first_row_custom_image",
-          "label": "Custom image",
-          "visible_if": "{{ block.settings.first_row_icon_type == 'custom' }}"
-        },
-        {
-          "type": "header",
-          "content": "Row 2"
-        },
-        {
-          "type": "text",
-          "id": "second_row",
-          "label": "Value"
-        },
-        {
-          "type": "select",
-          "id": "second_row_icon_type",
-          "label": "Icon",
-          "default": "none",
-          "options": [
-            {
-              "label": "Default",
-              "value": "default"
-            },
-            {
-              "label": "Custom",
-              "value": "custom"
-            },
-            {
-              "label": "None",
-              "value": "none"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "second_row_icon",
-          "label": "Icon type",
-          "visible_if": "{{ block.settings.second_row_icon_type == 'default' }}",
-          "default": "check",
-          "options": [
-            {
-              "label": "Check",
-              "value": "check"
-            },
-            {
-              "label": "Cross",
-              "value": "cross"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "second_row_custom_image",
-          "label": "Custom image",
-          "visible_if": "{{ block.settings.second_row_icon_type == 'custom' }}"
-        },
-        {
-          "type": "header",
-          "content": "Row 3"
-        },
-        {
-          "type": "text",
-          "id": "third_row",
-          "label": "Value"
-        },
-        {
-          "type": "select",
-          "id": "third_row_icon_type",
-          "label": "Icon",
-          "default": "none",
-          "options": [
-            {
-              "label": "Default",
-              "value": "default"
-            },
-            {
-              "label": "Custom",
-              "value": "custom"
-            },
-            {
-              "label": "None",
-              "value": "none"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "third_row_icon",
-          "label": "Icon type",
-          "visible_if": "{{ block.settings.third_row_icon_type == 'default' }}",
-          "default": "check",
-          "options": [
-            {
-              "label": "Check",
-              "value": "check"
-            },
-            {
-              "label": "Cross",
-              "value": "cross"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "third_row_custom_image",
-          "label": "Custom image",
-          "visible_if": "{{ block.settings.third_row_icon_type == 'custom' }}"
-        },
-        {
-          "type": "header",
-          "content": "Row 4"
-        },
-        {
-          "type": "text",
-          "id": "fourth_row",
-          "label": "Value"
-        },
-        {
-          "type": "select",
-          "id": "fourth_row_icon_type",
-          "label": "Icon",
-          "default": "none",
-          "options": [
-            {
-              "label": "Default",
-              "value": "default"
-            },
-            {
-              "label": "Custom",
-              "value": "custom"
-            },
-            {
-              "label": "None",
-              "value": "none"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "fourth_row_icon",
-          "label": "Icon type",
-          "visible_if": "{{ block.settings.fourth_row_icon_type == 'default' }}",
-          "default": "check",
-          "options": [
-            {
-              "label": "Check",
-              "value": "check"
-            },
-            {
-              "label": "Cross",
-              "value": "cross"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "fourth_row_custom_image",
-          "label": "Custom image",
-          "visible_if": "{{ block.settings.fourth_row_icon_type == 'custom' }}"
-        },
-        {
-          "type": "header",
-          "content": "Row 5"
-        },
-        {
-          "type": "text",
-          "id": "fifth_row",
-          "label": "Value"
-        },
-        {
-          "type": "select",
-          "id": "fifth_row_icon_type",
-          "label": "Icon",
-          "default": "none",
-          "options": [
-            {
-              "label": "Default",
-              "value": "default"
-            },
-            {
-              "label": "Custom",
-              "value": "custom"
-            },
-            {
-              "label": "None",
-              "value": "none"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "fifth_row_icon",
-          "label": "Icon type",
-          "visible_if": "{{ block.settings.fifth_row_icon_type == 'default' }}",
-          "default": "check",
-          "options": [
-            {
-              "label": "Check",
-              "value": "check"
-            },
-            {
-              "label": "Cross",
-              "value": "cross"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "fifth_row_custom_image",
-          "label": "Custom image",
-          "visible_if": "{{ block.settings.fifth_row_icon_type == 'custom' }}"
-        }
-      ]
-    },
-    {
-      "type": "sticker",
-      "name": "Sticker",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "sticker_image",
-          "label": "Image"
+          "type": "url",
+          "id": "url",
+          "label": "Button link"
         },
         {
           "type": "checkbox",
-          "id": "show_mobile",
-          "label": "Show on mobile",
+          "id": "open_in_new_tab",
+          "label": "Open link in new tab",
           "default": false
         },
         {
-          "type": "range",
-          "id": "sticker_width",
-          "min": 0,
-          "max": 250,
-          "step": 5,
-          "unit": "px",
-          "label": "Size",
-          "default": 90
-        },
-        {
-          "type": "range",
-          "id": "sticker_width_mobile",
-          "min": 0,
-          "max": 250,
-          "step": 5,
-          "unit": "px",
-          "label": "Size - mobile",
-          "default": 65,
-          "visible_if": "{{ block.settings.show_mobile }}"
-        },
-        {
-          "type": "range",
-          "id": "rotate",
-          "min": -90,
-          "max": 90,
-          "step": 5,
-          "unit": "deg",
-          "label": "Rotate",
-          "default": -10
-        },
-        {
-          "type": "header",
-          "content": "Desktop position"
-        },
-        {
-          "type": "range",
-          "id": "vertical_position",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Vertical",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "horizontal_position",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Horizontal",
-          "default": 52
-        },
-        {
-          "type": "header",
-          "content": "Mobile position",
-          "visible_if": "{{ block.settings.show_mobile }}"
-        },
-        {
-          "type": "range",
-          "id": "vertical_position_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Vertical",
-          "default": 33,
-          "visible_if": "{{ block.settings.show_mobile }}"
-        },
-        {
-          "type": "range",
-          "id": "horizontal_position_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Horizontal",
-          "default": 24,
-          "visible_if": "{{ block.settings.show_mobile }}"
-        }
-      ]
-    },
-    {
-      "type": "rating",
-      "name": "Rating summary",
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "rating_text",
-          "label": "Text",
-          "default": "<p>Based on 3,250 reviews</p>"
+          "type": "select",
+          "id": "button_style",
+          "label": "Style",
+          "default": "outline",
+          "options": [
+            {
+              "label": "Link",
+              "value": "link"
+            },
+            {
+              "label": "Non-outline",
+              "value": "non_outline"
+            },
+            {
+              "label": "Non-outline & arrow",
+              "value": "non_outline_arrow"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Outline & arrow",
+              "value": "outline_arrow"
+            }
+          ]
         },
         {
           "type": "checkbox",
-          "id": "rating_custom",
+          "id": "button_custom",
           "label": "Use custom font",
           "default": false
         },
         {
           "type": "font_picker",
-          "id": "rating_font",
+          "id": "button_font",
           "label": "Font family",
           "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.rating_custom }}"
+          "visible_if": "{{ block.settings.button_custom }}"
         },
         {
           "type": "range",
-          "id": "rating_size",
+          "id": "button_size",
           "min": 0,
           "max": 40,
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 10
+          "default": 14
         },
         {
           "type": "range",
-          "id": "rating_size_mobile",
+          "id": "button_size_mobile",
           "min": 0,
           "max": 40,
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 10
+          "default": 14
+        },
+        {
+          "type": "checkbox",
+          "id": "button_advanced",
+          "label": "Advanced settings",
+          "default": false
         },
         {
           "type": "range",
-          "id": "rating_height",
+          "id": "button_height",
           "min": 50,
           "max": 200,
           "step": 10,
           "unit": "%",
           "label": "Line height",
-          "default": 150
+          "default": 100,
+          "visible_if": "{{ block.settings.button_advanced }}"
         },
         {
           "type": "range",
-          "id": "rating_mt",
+          "id": "button_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal",
+          "default": 32,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 32,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 16,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 16,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Roundness",
+          "default": 100,
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
+        },
+        {
+          "type": "range",
+          "id": "button_border_thickness",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border thickness",
+          "default": 1,
+          "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+        },
+        {
+          "type": "range",
+          "id": "button_mt",
           "min": 0,
           "max": 100,
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 40
+          "default": 20,
+          "visible_if": "{{ block.settings.button_advanced }}"
         },
         {
           "type": "range",
-          "id": "rating_mt_mobile",
+          "id": "button_mt_mobile",
           "min": 0,
           "max": 100,
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 24
-        },
-        {
-          "type": "header",
-          "content": "Stars"
-        },
-        {
-          "type": "image_picker",
-          "label": "Stars icon",
-          "id": "stars_icon",
-          "info": "Replaces the default stars icon"
-        },
-        {
-          "type": "range",
-          "id": "stars_count",
-          "min": 0,
-          "max": 5,
-          "step": 0.5,
-          "label": "Stars count",
-          "default": 4.5
-        },
-        {
-          "type": "range",
-          "id": "stars_size",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "px",
-          "label": "Size",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "stars_size_mobile",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "px",
-          "label": "Size - mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "stars_gap",
-          "min": 0,
-          "max": 5,
-          "step": 1,
-          "unit": "px",
-          "label": "Gap",
-          "default": 2
+          "default": 20,
+          "visible_if": "{{ block.settings.button_advanced }}"
         },
         {
           "type": "header",
@@ -2509,36 +1824,89 @@
         {
           "type": "color",
           "label": "Text",
-          "id": "rating_color",
+          "id": "button_color",
           "default": "#121212"
         },
         {
           "type": "color",
-          "label": "Star",
-          "id": "stars_color",
+          "label": "Text hover",
+          "id": "button_hover_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Background",
+          "id": "button_bg_color",
           "default": "#FFFFFF",
-          "visible_if": "{{ block.settings.stars_icon == blank }}"
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
           "type": "color",
-          "label": "Star background",
-          "id": "stars_bg_color",
-          "default": "#00B67A",
-          "visible_if": "{{ block.settings.stars_icon == blank }}"
+          "label": "Background hover",
+          "id": "button_bg_hover_color",
+          "default": "#121212",
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
           "type": "color",
-          "label": "Inactive star background",
-          "id": "stars_bg_half_color",
-          "default": "#DDDDDD",
-          "visible_if": "{{ block.settings.stars_icon == blank }}"
+          "label": "Border",
+          "id": "button_border_color",
+          "default": "#121212",
+          "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+        },
+        {
+          "type": "color",
+          "label": "Border hover",
+          "id": "button_border_hover_color",
+          "default": "#121212",
+          "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+        }
+      ]
+    },
+    {
+      "type": "column",
+      "name": "Comparison column",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "active_column",
+          "label": "Active column"
+        },
+        {
+          "type": "text",
+          "id": "column_heading",
+          "label": "Heading",
+          "default": "Column heading"
+        },
+        {
+          "type": "text",
+          "id": "column_text",
+          "label": "Text",
+          "default": "Column text"
+        },
+        {
+          "type": "image_picker",
+          "id": "column_image",
+          "label": "Image",
+          "info": "For best results, use images with the same aspect ratio."
+        },
+        {
+          "type": "range",
+          "id": "column_progress",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Progress",
+          "default": 80
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Comparison table #24",
+      "name": "SG-Comparison table #25",
       "blocks": [
         {
           "type": "heading"
@@ -2547,52 +1915,32 @@
           "type": "text"
         },
         {
-          "type": "rating"
+          "type": "button"
         },
         {
           "type": "column",
           "settings": {
-            "column_heading": "Our Brand",
-            "first_row_icon_type": "default",
-            "first_row_icon": "check",
-            "first_row": "",
-            "second_row_icon_type": "default",
-            "second_row_icon": "check",
-            "second_row": "",
-            "third_row_icon_type": "default",
-            "third_row_icon": "check",
-            "third_row": "",
-            "fourth_row_icon_type": "default",
-            "fourth_row_icon": "check",
-            "fourth_row": "",
-            "fifth_row_icon_type": "default",
-            "fifth_row_icon": "check",
-            "fifth_row": ""
+            "active_column": true,
+            "column_progress": 100
           }
         },
         {
           "type": "column",
           "settings": {
-            "column_heading": "Others",
-            "first_row_icon_type": "default",
-            "first_row_icon": "cross",
-            "first_row": "",
-            "second_row_icon_type": "default",
-            "second_row_icon": "cross",
-            "second_row": "",
-            "third_row_icon_type": "default",
-            "third_row_icon": "cross",
-            "third_row": "",
-            "fourth_row_icon_type": "default",
-            "fourth_row_icon": "cross",
-            "fourth_row": "",
-            "fifth_row_icon_type": "default",
-            "fifth_row_icon": "cross",
-            "fifth_row": ""
+            "column_progress": 30
           }
         },
         {
-          "type": "sticker"
+          "type": "column",
+          "settings": {
+            "column_progress": 15
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "column_progress": 5
+          }
         }
       ]
     }
