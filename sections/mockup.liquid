@@ -11,18 +11,6 @@
   assign background_gradient = section.settings.background_gradient
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
-  assign lazy = section.settings.lazy
-
-  assign layout_gap_mobile = section.settings.layout_gap_mobile
-  assign layout_gap = section.settings.layout_gap
-
-  assign image = section.settings.image
-  assign image_border_color = section.settings.image_border_color
-  assign image_border_thickness = section.settings.image_border_thickness
-  assign image_ratio = section.settings.image_ratio
-  assign image_ratio_mobile = section.settings.image_ratio_mobile
-  assign image_position_mobile = section.settings.image_position_mobile
-  assign image_position = section.settings.image_position
 
   assign heading = section.settings.heading
   assign heading_size = section.settings.heading_size
@@ -33,26 +21,15 @@
   assign heading_height = section.settings.heading_height
   assign heading_align = section.settings.heading_align
   assign heading_align_mobile = section.settings.heading_align_mobile
-  assign heading_padding_vertical = section.settings.heading_padding_vertical
-  assign heading_padding_vertical_mobile = section.settings.heading_padding_vertical_mobile
-  assign heading_padding_horizontal = section.settings.heading_padding_horizontal
-  assign heading_padding_horizontal_mobile = section.settings.heading_padding_horizontal_mobile
 
-  assign item_padding_vertical = section.settings.item_padding_vertical
-  assign item_padding_vertical_mobile = section.settings.item_padding_vertical_mobile
-  assign item_padding_horizontal = section.settings.item_padding_horizontal
-  assign item_padding_horizontal_mobile = section.settings.item_padding_horizontal_mobile
+  assign body_gap_mobile = section.settings.body_gap_mobile
+  assign body_gap = section.settings.body_gap
+  assign body_mt_mobile = section.settings.body_mt_mobile
+  assign body_mt = section.settings.body_mt
+
   assign item_border_color = section.settings.item_border_color
   assign item_border_thickness = section.settings.item_border_thickness
-  assign item_border_bottom_thickness = section.settings.item_border_bottom_thickness
-
-  assign number_size = section.settings.number_size
-  assign number_size_mobile = section.settings.number_size_mobile
-  assign number_color = section.settings.number_color
-  assign number_custom = section.settings.number_custom
-  assign number_font = section.settings.number_font
-  assign number_height = section.settings.number_height
-  assign number_hide = section.settings.number_hide
+  assign item_padding_bottom = section.settings.item_padding_bottom
 
   assign question_size = section.settings.question_size
   assign question_size_mobile = section.settings.question_size_mobile
@@ -61,39 +38,19 @@
   assign question_font = section.settings.question_font
   assign question_height = section.settings.question_height
 
-  assign content_padding_vertical = section.settings.content_padding_vertical
-  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
-  assign content_padding_horizontal = section.settings.content_padding_horizontal
-  assign content_padding_horizontal_mobile = section.settings.content_padding_horizontal_mobile
-
-  assign answer_width = section.settings.answer_width
   assign answer_size = section.settings.answer_size
   assign answer_size_mobile = section.settings.answer_size_mobile
   assign answer_color = section.settings.answer_color
   assign answer_custom = section.settings.answer_custom
   assign answer_font = section.settings.answer_font
   assign answer_height = section.settings.answer_height
-
-  assign items_position = ""
-  if image_position == "1"
-    assign items_position = "2"
-  else
-    assign items_position = "1"
-  endif
-
-  assign items_position_mobile = ""
-  if image_position_mobile == "1"
-    assign items_position_mobile = "2"
-  else
-    assign items_position_mobile = "1"
-  endif
+  assign answer_padding_top = section.settings.answer_padding_top
   
 -%}
 
 {%- style -%}
 
   {{  heading_font | font_face: font_display: 'swap' }}
-  {{  number_font | font_face: font_display: 'swap' }}
   {{  question_font | font_face: font_display: 'swap' }}
   {{  answer_font | font_face: font_display: 'swap' }}
   
@@ -112,42 +69,8 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .faq-body-{{ section.id }} {
-    display: flex;
-    gap: {{ layout_gap_mobile }}px;
-    flex-direction: column;
-  }
-
-  .faq-image-{{ section.id }} {
-    flex: 1 0;
-    border: {{ image_border_thickness }}px solid {{ image_border_color }};
-    order: {{ image_position_mobile }};
-  }
-
-  .faq-image-{{ section.id }} img,
-  .faq-image-{{ section.id }} svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .faq-image-{{ section.id }} svg {
-    background-color: #DADADA;
-  }
-
-  .faq-info-{{ section.id }} {
-    flex: 1 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    order: {{ items_position_mobile }};
-  }
-
   .faq-heading-{{ section.id }} {
     text-align: {{ heading_align_mobile }};
-    padding: {{ heading_padding_vertical_mobile }}px {{ heading_padding_horizontal_mobile }}px;
-    box-sizing: border-box;
   }
 
   .faq-heading-{{ section.id }} * {
@@ -158,128 +81,121 @@
     text-transform: unset;
   }
 
+  .faq-body-{{ section.id }} {
+    margin-top: {{ body_mt_mobile }}px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    align-items: start;
+    gap: {{ body_gap_mobile }}px;
+  }
+
+  .faq-left-{{ section.id }},
+  .faq-right-{{ section.id }} {
+    display: grid;
+    align-items: start;
+    gap: {{ body_gap_mobile }}px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   .faq-item-{{ section.id }} {
-    padding: {{ item_padding_vertical_mobile }}px {{ item_padding_horizontal_mobile }}px;
-    border-top: {{ item_border_thickness }}px solid {{ item_border_color }};
-    box-sizing: border-box;
-  }
-
-  .faq-button-{{ section.id }} {
-    background-color: transparent;
-    border: 0px;
-    box-shadow: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    cursor: pointer;
-    text-align: left;
     position: relative;
+    border-bottom: {{ item_border_thickness }}px solid {{ item_border_color }};
+    padding-bottom: {{ item_padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  .faq-item-{{ section.id }}.active .faq-button-{{ section.id }}:after {
-    position: absolute;
-    content: '';
-    width: calc(100% + {{ item_padding_horizontal_mobile | times: 2 }}px);
-    left: -{{ item_padding_horizontal_mobile }}px;
-    bottom: 0;
-    height: {{ item_border_bottom_thickness }}px;
-    background-color: {{ item_border_color }};
-  }
-
-  .faq-left-{{ section.id }} {
+  .faq-toggle-{{ section.id }} {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 12px;
   }
 
-  .faq-number-{{ section.id }} {
-    margin: 0;
-    font-size: {{ number_size_mobile }}px;
-    color: {{ number_color }};
-    line-height: {{ number_height }}%;
-    text-transform: unset;
+  .faq-plus-{{ section.id }} {
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    display: flex !important;
+    flex: 0 0 14px;
+    height: 14px;
+    position: relative;
+    transform: rotate(var(--rotate));
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-plus-l-{{ section.id }} {
+    display: block !important;
+    width: 2px;
+    height: 100%;
+    background-color: #000;
+    border-radius: 3px;
+    position: absolute;
+    transition: all 0.25s ease 0s;
+  }
+
+  .faq-plus-m-{{ section.id }} {
+    display: block !important;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    border-radius: 3px;
   }
 
   .faq-question-{{ section.id }} {
-    margin: 0;
+    margin: 0px;
     font-size: {{ question_size_mobile }}px;
     color: {{ question_color }};
     line-height: {{ question_height }}%;
     text-transform: unset;
   }
 
-  .faq-control-{{ section.id }} {
-    height: 13px;
-    width: 13px;
-    position: relative;
-    transition: transform .3s ease-in-out;
-    flex-shrink: 0;
-    display: block !important;
-  }
-
-  .faq-control-{{ section.id }}:before {
-    content: "";
-    width: 100%;
-    position: absolute;
-    top: 6px;
-    left: 0;
-    border-bottom: 1px solid black;
-  }
-
-  .faq-control-{{ section.id }}:after {
-    content: "";
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 6px;
-    border-right: 1px solid black;
-  }
-
-  .faq-item-{{ section.id }}.active .faq-control-{{ section.id }} {
-    transform: rotate(135deg);
-  }
-
-  .faq-content-{{ section.id }} {
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    box-sizing: border-box;
-    padding-left: {{ content_padding_horizontal_mobile }}px;
-    padding-right: {{ content_padding_horizontal_mobile }}px;
-  }
-
-  .faq-item-{{ section.id }}.active .faq-content-{{ section.id }} {
-    padding-top: {{ content_padding_vertical_mobile }}px;
-    padding-bottom: {{ content_padding_vertical_mobile }}px;
-  }
-
   .faq-answer-{{ section.id }} {
-    width: 100%;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
   }
 
   .faq-answer-{{ section.id }} * {
-    margin: 0;
+    margin: 0px;
     font-size: {{ answer_size_mobile }}px;
     color: {{ answer_color }};
     line-height: {{ answer_height }}%;
     text-transform: unset;
   }
 
-  @media(min-width: 768px) {
-     .faq-body-{{ section.id }} {
-       flex-direction: row;
-       gap: {{ layout_gap }}px;
-     }
+  .faq-answer-{{ section.id }} p {
+    min-height: 10px;
+  }
 
-     .faq-image-{{ section.id }} {
-       order: {{ image_position }};
-     }
+  .faq-answer-{{ section.id }} p:not(:first-child ) {
+    margin-top: 10px;
+  } 
 
-     .faq-info-{{ section.id }} {
-        order: {{ items_position }};
-      }
-   }
+  .faq-height-cal-{{ section.id }} {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: {{ answer_padding_top }}px;
+  }
+
+  .faq-height-cal-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ answer_size_mobile }}px;
+    color: {{ answer_color }};
+    line-height: {{ answer_height }}%;
+    text-transform: unset;
+  }
+
+  .faq-height-cal-{{ section.id }} p {
+    min-height: 10px;
+  }
+
+  .faq-height-cal-{{ section.id }} p:not(:first-child ) {
+    margin-top: 10px;
+  } 
   
   @media(min-width: 1024px) {
 
@@ -298,45 +214,36 @@
 
     .faq-heading-{{ section.id }} {
       text-align: {{ heading_align }};
-      padding: {{ heading_padding_vertical }}px {{ heading_padding_horizontal }}px;
     }
 
     .faq-heading-{{ section.id }} * {
       font-size: {{ heading_size }}px;
     }
 
+    .faq-body-{{ section.id }} {
+      margin-top: {{ body_mt }}px;
+      gap: {{ body_gap }}px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .faq-left-{{ section.id }},
+    .faq-right-{{ section.id }} {
+      gap: {{ body_gap }}px;
+    }
+
     .faq-item-{{ section.id }} {
-      padding: {{ item_padding_vertical }}px {{ item_padding_horizontal }}px;
-    }
-
-    .faq-item-{{ section.id }}.active .faq-button-{{ section.id }}:after {
-      width: calc(100% + {{ item_padding_horizontal | times: 2 }}px);
-      left: -{{ item_padding_horizontal }}px;
-    }
-
-    .faq-number-{{ section.id }} {
-      font-size: {{ number_size }}px;
+      padding-bottom: {{ item_padding_bottom }}px;
     }
 
     .faq-question-{{ section.id }} {
       font-size: {{ question_size }}px;
     }
 
-    .faq-content-{{ section.id }} {
-      padding-left: {{ content_padding_horizontal }}px;
-      padding-right: {{ content_padding_horizontal }}px;
+    .faq-answer-{{ section.id }} * {
+      font-size: {{ answer_size }}px;
     }
 
-    .faq-item-{{ section.id }}.active .faq-content-{{ section.id }} {
-      padding-top: {{ content_padding_vertical }}px;
-      padding-bottom: {{ content_padding_vertical }}px;
-    }
-  
-    .faq-answer-{{ section.id }} {
-      max-width: {{ answer_width }}px;
-    }
-  
-    .faq-answer-{{ section.id }} * {
+    .faq-height-cal-{{ section.id }} * {
       font-size: {{ answer_size }}px;
     }
   }
@@ -361,16 +268,6 @@
   </style>
 {% endif %}
 
-{% if number_custom %}
-  <style>
-    .faq-number-{{ section.id }} {
-      font-family: {{ number_font.family }}, {{ number_font.fallback_families }};
-      font-weight: {{ number_font.weight }};
-      font-style: {{ number_font.style }};
-    }
-  </style>
-{% endif %}
-
 {% if question_custom %}
   <style>
     .faq-question-{{ section.id }} {
@@ -391,297 +288,173 @@
   </style>
 {% endif %}
 
-{% if image_ratio_mobile == "portrait" %}
-  <style>
-    .faq-image-{{ section.id }} {
-     aspect-ratio: 9.6/14; 
-    }
-  </style>
-{% elsif image_ratio_mobile == "landscape" %}
-  <style>
-    .faq-image-{{ section.id }}{
-     aspect-ratio: 12/9; 
-    }
-  </style>
-{% elsif image_ratio_mobile == "square" %}
-  <style>
-    .faq-image-{{ section.id }} {
-     aspect-ratio: 12/12; 
-    }
-  </style>
-{% else%}
-  <style>
-    .faq-image-{{ section.id }} {
-     aspect-ratio: auto; 
-    }
-  </style>
-{% endif %}
-
-{% if image_ratio == "portrait" %}
-  <style>
-    @media(min-width: 1024px) {
-     .faq-image-{{ section.id }} {
-       aspect-ratio: 9.6/14; 
-      } 
-    }
-  </style>
-{% elsif image_ratio == "landscape" %}
-  <style>
-    @media(min-width: 1024px) {
-      .faq-image-{{ section.id }}{
-       aspect-ratio: 12/9; 
-      }
-    }
-  </style>
-{% elsif image_ratio == "square" %}
-  <style>
-    @media(min-width: 1024px) {
-      .faq-image-{{ section.id }} {
-       aspect-ratio: 12/12; 
-      }
-    }
-  </style>
-{% else%}
-  <style>
-    @media(min-width: 1024px) {
-      .faq-image-{{ section.id }} {
-       aspect-ratio: auto; 
-      }
-    }
-  </style>
-{% endif %}
-
-{% if item_border_bottom_thickness > 0 %}
-  <style>
-    .faq-item-{{ section.id }}.active .faq-button-{{ section.id }} {
-      padding-bottom: {{ item_padding_vertical_mobile }}px;
-    }
-
-    @media(min-width: 1024px) {
-      .faq-item-{{ section.id }}.active .faq-button-{{ section.id }} {
-        padding-bottom: {{ item_padding_vertical }}px;
-      }
-    }
-  </style>
-{% endif %}
-
 <div class="section-{{ section.id }} faq-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="faq-body-{{ section.id }}">
-        <div class="faq-image-{{ section.id }}">
-          {% if image != blank %}
-            <img src="{{ image | image_url }}" alt="{{ image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-          {% else %}
-            {{ 'collection-1' | placeholder_svg_tag }}
-          {% endif %}
+      {% if heading != blank %}
+        <div class="faq-heading-{{ section.id }}">
+          {{ heading }}
         </div>
-        <div class="faq-info-{{ section.id }}">
-          {% if heading != blank %}
-            <div class='faq-heading-{{ section.id }}'>
-              {{ heading }}
-            </div>
-          {% endif %}
+      {% endif %}
 
-          <div class="faq-items-{{ section.id }}">
-            {% for block in section.blocks %}
+      <div class="faq-body-{{ section.id }}">
+        {% assign block_count = section.blocks.size %}
+        {% assign half_block_count = block_count | times: 0.5 %}
+        {% assign half_block_count = half_block_count | round: 0 %}
+        <div class="faq-left-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% if forloop.index <= half_block_count %}
               <div class="faq-item-{{ section.id }}">
-                <button class="faq-button-{{ section.id }}">
-                  <div class="faq-left-{{ section.id }}">
-                    {% unless number_hide %}
-                      <p class="faq-number-{{ section.id }}">0{{ forloop.index }}</p>
-                    {% endunless %}
-                    <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
-                  </div>
-                  <div class="faq-control-{{ section.id }}"></div>
-                </button>
-                <div class="faq-content-{{ section.id }}">
-                  <div class="faq-answer-{{ section.id }}">
-                    {{ block.settings.answer }}
+                <div class="faq-toggle-{{ section.id }}">
+                  <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+                  <div class="faq-plus-{{ section.id }}">
+                    <div class="faq-plus-l-{{ section.id }}"></div>
+                    <div class="faq-plus-m-{{ section.id }}"></div>
                   </div>
                 </div>
+                <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
+                    {{ block.settings.answer }}
+                  </div>
+                <div class="faq-height-cal-{{ section.id }}">
+                  {{ block.settings.answer }}
+                </div>
               </div>
-            {% endfor %}
-          </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="faq-right-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% if forloop.index > half_block_count %}
+              <div class="faq-item-{{ section.id }}">
+                <div class="faq-toggle-{{ section.id }}">
+                  <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+                  <div class="faq-plus-{{ section.id }}">
+                    <div class="faq-plus-l-{{ section.id }}"></div>
+                    <div class="faq-plus-m-{{ section.id }}"></div>
+                  </div>
+                </div>
+                <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
+                    {{ block.settings.answer }}
+                  </div>
+                <div class="faq-height-cal-{{ section.id }}">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
 </div>
 
 <script>
-  function initFAQ6() {
-    if(document.querySelectorAll('.faq-item-{{ section.id }}')) {
-      document.querySelectorAll('.faq-item-{{ section.id }}').forEach(el => {
-        let button = el.querySelector('.faq-button-{{ section.id }}');
-        let content = el.querySelector('.faq-content-{{ section.id }}');
-        if(button) {
-          button.addEventListener('click', () => {
-            document.querySelectorAll('.faq-item-{{ section.id }}').forEach(element => {
-              let elementContent = element.querySelector('.faq-content-{{ section.id }}');
-              if(element !== el) {
-                element.classList.remove('active');
-                elementContent.style.maxHeight = 0 + "px";
-              }
-            });
-  
-            const isActive = el.classList.contains('active');
-  
-            if(isActive) {
-              el.classList.remove('active');
-              content.style.maxHeight = 0 + "px";
-            } else {
-              el.classList.add('active');
-              content.style.maxHeight = content.scrollHeight + "px";
-            }
-          })
-        }
-      })
+  function initFAQ7() {
+    const answerPaddingTop = {{ answer_padding_top }};
+    const answerPaddingBottom = 0;
+
+    const faqs = document.querySelectorAll(
+      '.faq-item-{{ section.id }}'
+    );
+    const buttons = document.querySelectorAll(
+      '.faq-toggle-{{ section.id }}'
+    );
+    const answers = document.querySelectorAll(
+      '.faq-answer-{{ section.id }}'
+    );
+    const answersHeightCalElements = document.querySelectorAll(
+      '.faq-height-cal-{{ section.id }}'
+    );
+    const icons = document.querySelectorAll(
+      '.faq-plus-{{ section.id }}'
+    );
+
+    let activeIndex = -1;
+
+    function openAnswer(index) {
+      const height = answersHeightCalElements[index].offsetHeight;
+
+      answers[index].style.display = 'block';
+      setTimeout(() => {
+        answers[index].style.paddingTop = `${answerPaddingTop}px`;
+        answers[index].style.paddingBottom = `${answerPaddingBottom}px`;
+        answers[index].style.height = `${height }px`;
+        icons[index].style.setProperty('--rotate', '180deg');
+        setTimeout(() => {
+          icons[index].querySelector('.faq-plus-l-{{ section.id }}').style.height = "0px";
+        }, 100);
+      });
     }
+    function closeAnswer(index) {
+      answers[index].style.paddingTop = 0;
+      answers[index].style.paddingBottom = 0;
+      answers[index].style.height = 0;
+      icons[index].style.setProperty('--rotate', '0deg');
+      setTimeout(() => {
+        icons[index].querySelector('.faq-plus-l-{{ section.id }}').style.height = "100%";
+      }, 100);
+
+      setTimeout(() => {
+        answers[index].style.display = 'none';
+      }, 300);
+    }
+    function toggleAnswer(index) {
+      if (answers[index].style.display === 'none') {
+        openAnswer(index);
+        activeIndex = index;
+      } else {
+        closeAnswer(index);
+        activeIndex = -1;
+      }
+    }
+    function closeAllAnswerBut(index) {
+      answers.forEach((answer, i) => {
+        if (i !== index) {
+          closeAnswer(i);
+        }
+      });
+    }
+
+    // When clicked, toggle the answer, animate the answer's height:
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        toggleAnswer(index);
+        closeAllAnswerBut(index);
+      });
+    });
+
+    // When the window is resized, debounce the answer's height:
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (activeIndex !== -1) {
+          const height = answersHeightCalElements[activeIndex].offsetHeight;
+          answers[activeIndex].style.height = `${height}px`;
+        }
+      }, 250);
+    });
   }
 
-  document.addEventListener('DOMContentLoaded', initFAQ6);
+  document.addEventListener('DOMContentLoaded', initFAQ7);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initFAQ6);
-     document.addEventListener('shopify:section:load', initFAQ6);
+     document.addEventListener('shopify:section:unload', initFAQ7);
+     document.addEventListener('shopify:section:load', initFAQ7);
   }
 </script>
 
 {% schema %}
 {
-  "name": "SG-FAQ #6",
+  "name": "SG-FAQ #7",
   "settings": [
     {
       "type": "header",
-      "content": "Layout Settings"
-    },
-    {
-      "type": "range",
-      "id": "layout_gap",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Layout Gap",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "layout_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Layout Gap - Mobile",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Image Settings"
-    },
-    {
-      "type": "image_picker",
-      "label": "Image",
-      "id": "image"
-    },
-    {
-      "type": "range",
-      "id": "image_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Image Border Thickness",
-      "default": 0
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Image Aspect Ratio",
-      "default": "square",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "image_ratio_mobile",
-      "label": "Image Aspect Ratio - Mobile",
-      "default": "portrait",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "image_position",
-      "label": "Image Position",
-      "default": "1",
-      "options": [
-        {
-          "label": "First",
-          "value": "1"
-        },
-        {
-          "label": "Second",
-          "value": "2"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "image_position_mobile",
-      "label": "Image Position - Mobile",
-      "default": "1",
-      "options": [
-        {
-          "label": "First",
-          "value": "1"
-        },
-        {
-          "label": "Second",
-          "value": "2"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Heading"
+      "content": "Heading Settings"
     },
     {
       "type": "richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "<p>HOW IT WORKS</p>"
+      "default": "<p>FAQ</p>"
     },
     {
       "type": "checkbox",
@@ -699,11 +472,11 @@
       "type": "range",
       "id": "heading_size",
       "min": 0,
-      "max": 100,
+      "max": 72,
       "step": 2,
       "unit": "px",
       "label": "Heading Size",
-      "default": 82
+      "default": 38
     },
     {
       "type": "range",
@@ -713,7 +486,7 @@
       "step": 2,
       "unit": "px",
       "label": "Heading Size - Mobile",
-      "default": 32
+      "default": 28
     },
     {
       "type": "range",
@@ -723,101 +496,77 @@
       "step": 10,
       "unit": "%",
       "label": "Heading Line Height",
-      "default": 150
+      "default": 130
     },
     {
       "type": "text_alignment",
       "id": "heading_align",
-      "label": "Heading Text Align"
+      "label": "Heading Text Align",
+      "default": "center"
     },
     {
       "type": "text_alignment",
       "id": "heading_align_mobile",
-      "label": "Heading Text Align - Mobile"
-    },
-    {
-      "type": "range",
-      "id": "heading_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading Padding Vertical",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "heading_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading Padding Vertical - Mobile",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "heading_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading Padding Horizontal",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "heading_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading Padding Horizontal - Mobile",
-      "default": 24
+      "label": "Heading Text Align - Mobile",
+      "default": "center"
     },
     {
       "type": "header",
-      "content": "FAQ Item Settings"
+      "content": "Body Settings"
     },
     {
       "type": "range",
-      "id": "item_padding_vertical",
+      "id": "body_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Item Padding Vertical",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "item_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Item Padding Vertical - Mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "item_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Item Padding Horizontal",
+      "label": "Body Gap",
       "default": 30
     },
     {
       "type": "range",
-      "id": "item_padding_horizontal_mobile",
+      "id": "body_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Item Padding Horizontal - Mobile",
-      "default": 30
+      "label": "Body Gap - Mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "body_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Margin Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "body_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Margin Top - Mobile",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Item Settings"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Padding Bottom",
+      "default": 24
     },
     {
       "type": "range",
@@ -826,69 +575,8 @@
       "max": 10,
       "step": 1,
       "unit": "px",
-      "label": "Item Border Top Thickness",
+      "label": "Item Border Thickness",
       "default": 1
-    },
-    {
-      "type": "range",
-      "id": "item_border_bottom_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Item Border Bottom Thickness",
-      "default": 1
-    },
-    {
-      "type": "header",
-      "content": "Number Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "number_custom",
-      "label": "Use Custom Font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "number_font",
-      "label": "Number Font Family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "number_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Number Size",
-      "default": 13
-    },
-    {
-      "type": "range",
-      "id": "number_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Number Size - Mobile",
-      "default": 13
-    },
-    {
-      "type": "range",
-      "id": "number_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Number Line Height",
-      "default": 150
-    },
-    {
-      "type": "checkbox",
-      "id": "number_hide",
-      "label": "Hide Number"
     },
     {
       "type": "header",
@@ -910,21 +598,21 @@
       "type": "range",
       "id": "question_size",
       "min": 0,
-      "max": 40,
-      "step": 1,
+      "max": 72,
+      "step": 2,
       "unit": "px",
       "label": "Question Size",
-      "default": 25
+      "default": 18
     },
     {
       "type": "range",
       "id": "question_size_mobile",
       "min": 0,
-      "max": 40,
-      "step": 1,
+      "max": 72,
+      "step": 2,
       "unit": "px",
       "label": "Question Size - Mobile",
-      "default": 15
+      "default": 18
     },
     {
       "type": "range",
@@ -934,65 +622,11 @@
       "step": 10,
       "unit": "%",
       "label": "Question Line Height",
-      "default": 150
-    },
-    {
-      "type": "header",
-      "content": "Item Content Settings"
-    },
-    {
-      "type": "range",
-      "id": "content_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Content Padding Vertical",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "content_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Content Padding Vertical - Mobile",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "content_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Content Padding Horizontal",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "content_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Content Padding Horizontal - Mobile",
-      "default": 30
+      "default": 130
     },
     {
       "type": "header",
       "content": "Answer Settings"
-    },
-    {
-      "type": "range",
-      "id": "answer_width",
-      "min": 300,
-      "max": 800,
-      "step": 5,
-      "unit": "px",
-      "label": "Answer Width - Desktop",
-      "default": 540
     },
     {
       "type": "checkbox",
@@ -1010,21 +644,21 @@
       "type": "range",
       "id": "answer_size",
       "min": 0,
-      "max": 40,
-      "step": 1,
+      "max": 72,
+      "step": 2,
       "unit": "px",
       "label": "Answer Size",
-      "default": 15
+      "default": 16
     },
     {
       "type": "range",
       "id": "answer_size_mobile",
       "min": 0,
-      "max": 40,
-      "step": 1,
+      "max": 72,
+      "step": 2,
       "unit": "px",
       "label": "Answer Size - Mobile",
-      "default": 15
+      "default": 16
     },
     {
       "type": "range",
@@ -1037,42 +671,14 @@
       "default": 150
     },
     {
-      "type": "header",
-      "content": "FAQ Item Colors"
-    },
-    {
-      "type": "color",
-      "label": "Item Border Color",
-      "id": "item_border_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Number Color",
-      "id": "number_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Question Color",
-      "id": "question_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Answer Color",
-      "id": "answer_color",
-      "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Image Colors"
-    },
-    {
-      "type": "color",
-      "label": "Image Border Color",
-      "id": "image_border_color",
-      "default": "#000000"
+      "type": "range",
+      "id": "answer_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Answer Padding Top",
+      "default": 16
     },
     {
       "type": "header",
@@ -1082,13 +688,30 @@
       "type": "color",
       "label": "Heading Color",
       "id": "heading_color",
-      "default": "#000000"
+      "default": "#837c5c"
+    },
+    {
+      "type": "color",
+      "label": "Item Border Color",
+      "id": "item_border_color",
+      "default": "#f0efe8"
+    },
+    {
+      "type": "color",
+      "label": "Question Color",
+      "id": "question_color",
+      "default": "#837c5c"
+    },
+    {
+      "type": "color",
+      "label": "Answer Color",
+      "id": "answer_color",
+      "default": "#837c5c"
     },
     {
       "type": "color",
       "label": "Section background",
-      "id": "background_color",
-      "default": "#FFFFFF"
+      "id": "background_color"
     },
     {
       "type": "color_background",
@@ -1137,7 +760,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -1147,7 +770,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -1157,7 +780,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 0
+      "default": 5
     },
     {
       "type": "range",
@@ -1167,7 +790,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 0
+      "default": 1.5
     },
     {
       "type": "header",
@@ -1177,7 +800,7 @@
       "type": "checkbox",
       "id": "full_width",
       "label": "Full Width",
-      "default": true
+      "default": false
     },
     {
       "type": "range",
@@ -1187,7 +810,7 @@
       "step": 10,
       "unit": "rem",
       "label": "Section content width",
-      "default": 120
+      "default": 140
     },
     {
       "type": "range",
@@ -1197,20 +820,13 @@
       "step": 1,
       "unit": "px",
       "label": "Border thickness",
-      "default": 1
-    },
-    {
-      "type": "checkbox",
-      "id": "lazy",
-      "label": "Lazy load",
-      "info": "Lazy load images for speed optimisation",
-      "default": true
+      "default": 0
     }
   ],
   "blocks": [
     {
       "type": "item",
-      "name": "FAQ Item",
+      "name": "Item",
       "settings": [
         {
           "type": "text",
@@ -1229,27 +845,41 @@
   ],
   "presets": [
     {
-      "name": "SG-FAQ #6",
+      "name": "SG-FAQ #7",
       "blocks": [
         {
           "type": "item",
           "settings": {
-            "question": "BREAKS DOWN FOOD",
-            "answer": "<p>Everything we eat is broken down by the digestive enzymes we produce in our salvia, pancreas and stomach, allowing nutrients to be efficiently absorbed into the bloodstream. The 17 digestive enzymes found in DEBLOAT+ are particularly beneficial for people suffering from IBS and other digestive issues. They help to break down specific food groups (e.g. carbs, starches, fats, etc.), supported by a trio of organic ingredients known for their anti-inflammatory properties: cinnamon, turmeric and ginger.</p>"
+            "question": "How Do I Charge The Lamps?",
+            "answer": "<p><strong>Inside the box you will receive a USB cable together with the lamp.<br><br>To charge the lamp you will simply need to plug the cable to the lamp and connect it with any charger adapter you already have at home.<br><br>You can use any type of adapter: for example of smartphone, computer etc.<br><br>No matter in which country you are based. Simply use the adapters you already have. </strong></p>"
           }
         },
         {
           "type": "item",
           "settings": {
-            "question": "REDUCES GAS",
-            "answer": "<p>Alpha galactosidase is 1 of the 17 digestive enzymes found in DEBLOAT+. It breaks down the oligosaccharides (a type of carbohydrate) found in beans and cruciferous vegetables such as broccoli and cabbage, known for causing excess gas and bloating. Cinnamon, turmeric and ginger also boast carminative benefits, meaning they break up gas in the gastrointestinal tract and stimulate antral contractions (the contractions which help food pass from one part of the gut to another).</p>"
+            "question": "How Do I Charge Multiple Lamps At Once?",
+            "answer": "<p><strong>You can charge multiple lamps using a USB multi-port socket or a multi-port charger. <br><br>You can find them on Amazon or any other specialized shop. <br><br>Upon request if you have ordered a MOQ we can provide a multi-port charger that will allow you to charge up to 10 lamps at once.</strong></p>"
           }
         },
         {
           "type": "item",
           "settings": {
-            "question": "IMPROVES GUT HEALTH",
-            "answer": "<p>Licorice root has been used for centuries in Ayurvedic medicine, where it is believed to pacify “altered pitta”, reduce heartburn and heal ulcers. In clinical trials, 51% of people reported a reduction in bloating, nausea, gas and abdominal fullness within 30 days of taking our key ingredient daily.</p>"
+            "question": "Light Intensity Of The Lamp Is Very Low, Is It Broken?",
+            "answer": "<p><strong>The lamp is not broken !<br><br>All our lamps are dimmable by touching the top or the base of the lamp depending on the model. <br><br>If you have a low intensity please touch the lamp at the top or at the base and hold the finger a few seconds until  light intensity will increase. <br><br>If you then touch again the lamp and hold, the light intensity will decrease.</strong></p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How Long Does The Shipping Take?",
+            "answer": "<p><strong>Shipping time is 4–9 business days (Monday–Friday) to United States.</strong></p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How Long For A Fully Charged Battery?",
+            "answer": "<p><strong>In order to have a fully charged battery our lamps require approximately 4-5 hours of charge.</strong></p>"
           }
         }
       ]
