@@ -12,7 +12,39 @@
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
 
-  assign heading = section.settings.heading
+  assign nav_row = section.settings.nav_row
+  assign nav_gap = section.settings.nav_gap
+  assign nav_gap_mobile = section.settings.nav_gap_mobile
+
+  assign button_size = section.settings.button_size
+  assign button_size_mobile = section.settings.button_size_mobile
+  assign button_color = section.settings.button_color
+  assign button_hover_color = section.settings.button_hover_color
+  assign button_custom = section.settings.button_custom
+  assign button_font = section.settings.button_font
+  assign button_height = section.settings.button_height
+  assign button_padding_vertical = section.settings.button_padding_vertical
+  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
+  assign button_padding_horizontal = section.settings.button_padding_horizontal
+  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
+  assign button_radius = section.settings.button_radius
+  assign button_border_thickness = section.settings.button_border_thickness
+  assign button_border_color = section.settings.button_border_color
+  assign button_border_hover_color = section.settings.button_border_hover_color
+  assign button_bg_color = section.settings.button_bg_color
+  assign button_bg_hover_color = section.settings.button_bg_hover_color
+
+  assign body_mt = section.settings.body_mt
+  assign body_mt_mobile = section.settings.body_mt_mobile
+  assign body_padding_vertical = section.settings.body_padding_vertical
+  assign body_padding_vertical_mobile = section.settings.body_padding_vertical_mobile
+  assign body_padding_horizontal = section.settings.body_padding_horizontal
+  assign body_padding_horizontal_mobile = section.settings.body_padding_horizontal_mobile
+  assign body_radius = section.settings.body_radius
+  assign body_border_thickness = section.settings.body_border_thickness
+  assign body_border_color = section.settings.body_border_color
+  assign body_bg_color = section.settings.body_bg_color
+
   assign heading_size = section.settings.heading_size
   assign heading_size_mobile = section.settings.heading_size_mobile
   assign heading_color = section.settings.heading_color
@@ -21,15 +53,16 @@
   assign heading_height = section.settings.heading_height
   assign heading_align = section.settings.heading_align
   assign heading_align_mobile = section.settings.heading_align_mobile
-
-  assign body_gap_mobile = section.settings.body_gap_mobile
-  assign body_gap = section.settings.body_gap
-  assign body_mt_mobile = section.settings.body_mt_mobile
-  assign body_mt = section.settings.body_mt
+  assign heading_mt_mobile = section.settings.heading_mt_mobile
+  assign heading_mt = section.settings.heading_mt
+  assign heading_mb_mobile = section.settings.heading_mb_mobile
+  assign heading_mb = section.settings.heading_mb
 
   assign item_border_color = section.settings.item_border_color
   assign item_border_thickness = section.settings.item_border_thickness
   assign item_padding_bottom = section.settings.item_padding_bottom
+  assign item_mt_mobile = section.settings.item_mt_mobile
+  assign item_mt = section.settings.item_mt
 
   assign question_size = section.settings.question_size
   assign question_size_mobile = section.settings.question_size_mobile
@@ -37,6 +70,13 @@
   assign question_custom = section.settings.question_custom
   assign question_font = section.settings.question_font
   assign question_height = section.settings.question_height
+
+  assign arrow_color = section.settings.arrow_color
+  assign arrow_hover_color = section.settings.arrow_hover_color
+  assign arrow_bg_color = section.settings.arrow_bg_color
+  assign arrow_bg_hover_color = section.settings.arrow_bg_hover_color
+  assign arrow_size = section.settings.arrow_size
+  assign arrow_size_mobile = section.settings.arrow_size_mobile
 
   assign answer_size = section.settings.answer_size
   assign answer_size_mobile = section.settings.answer_size_mobile
@@ -50,6 +90,7 @@
 
 {%- style -%}
 
+  {{  button_font | font_face: font_display: 'swap' }}
   {{  heading_font | font_face: font_display: 'swap' }}
   {{  question_font | font_face: font_display: 'swap' }}
   {{  answer_font | font_face: font_display: 'swap' }}
@@ -59,6 +100,7 @@
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    overflow: hidden;
   }
   
   .section-{{ section.id }}-settings {
@@ -69,36 +111,68 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .faq-heading-{{ section.id }} {
-    text-align: {{ heading_align_mobile }};
+  .faq-nav-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ nav_gap_mobile }}px;
   }
 
-  .faq-heading-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ heading_size_mobile }}px;
-    color: {{ heading_color }};
-    line-height: {{ heading_height }}%;
+  .faq-button-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: {{ button_size_mobile }}px;
+    color: {{ button_color }};
+    line-height: {{ button_height }}%;
+    text-align: center;
     text-transform: unset;
+    text-decoration: none;
+    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
+    border-radius: {{ button_radius }}px;
+    background-color: {{ button_bg_color }};
+    border: {{ button_border_thickness }}px solid {{ button_border_color }};
+    transition: all 0.25s ease 0s;
+    position: relative;
+    font-weight: 700;
+    z-index: 2;
+  }
+
+  .faq-button-{{ section.id }}:hover {
+    background-color: {{ button_bg_hover_color }};
+    border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
+    color: {{ button_hover_color }};
+    transition: all 0.25s ease 0s;
   }
 
   .faq-body-{{ section.id }} {
     margin-top: {{ body_mt_mobile }}px;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    align-items: start;
-    gap: {{ body_gap_mobile }}px;
+    padding: {{ body_padding_vertical_mobile }}px {{ body_padding_horizontal_mobile }}px;
+    border-radius: {{ body_radius }}px;
+    background-color: {{ body_bg_color }};
+    border: {{ body_border_thickness }}px solid {{ body_border_color }};
   }
 
-  .faq-left-{{ section.id }},
-  .faq-right-{{ section.id }} {
-    display: grid;
-    align-items: start;
-    gap: {{ body_gap_mobile }}px;
-    grid-template-columns: repeat(1, 1fr);
+  .faq-heading-{{ section.id }} {
+    display: block;
+    width: 100%;
+    text-align: {{ heading_align_mobile }};
+    margin: 0;
+    margin-bottom: {{ heading_mb_mobile }}px;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    font-weight: 700;
+  }
+
+  .faq-block-{{ section.id }}:not(:first-child) .faq-heading-{{ section.id }} {
+    margin-top: {{ heading_mt_mobile }}px;
   }
 
   .faq-item-{{ section.id }} {
     position: relative;
+    margin-top: {{ item_mt_mobile }}px;
     border-bottom: {{ item_border_thickness }}px solid {{ item_border_color }};
     padding-bottom: {{ item_padding_bottom | times: 0.75 | round: 0 }}px;
   }
@@ -111,34 +185,36 @@
     gap: 12px;
   }
 
-  .faq-plus-{{ section.id }} {
-    justify-content: center;
+  .faq-arrow-{{ section.id }} {
+    display: flex;
     align-items: center;
-    margin-right: 0;
-    display: flex !important;
-    flex: 0 0 14px;
-    height: 14px;
-    position: relative;
+    justify-content: center;
+    flex: 0 0 {{ arrow_size_mobile }}px;
+    height: {{ arrow_size_mobile }}px;
+    transition: all 0.3s ease 0s;
     transform: rotate(var(--rotate));
-    transition: all 0.25s ease 0s;
+    border-radius: 50%;
+    background-color: {{ arrow_bg_color }};
   }
 
-  .faq-plus-l-{{ section.id }} {
-    display: block !important;
-    width: 2px;
-    height: 100%;
-    background-color: #000;
-    border-radius: 3px;
-    position: absolute;
-    transition: all 0.25s ease 0s;
+  .faq-toggle-{{ section.id }}:hover .faq-arrow-{{ section.id }} {
+    background-color: {{ arrow_bg_hover_color }};
+    transition: all 0.3s ease 0s;
   }
 
-  .faq-plus-m-{{ section.id }} {
-    display: block !important;
-    width: 100%;
-    height: 2px;
-    background-color: #000;
-    border-radius: 3px;
+  .faq-arrow-{{ section.id }} svg {
+    width: {{ arrow_size_mobile | times: 0.4 | round: 0 }}px;
+    height: {{ arrow_size_mobile | times: 0.4 | round: 0 }}px;
+  }
+
+  .faq-arrow-{{ section.id }} svg path {
+    fill: {{ arrow_color }};
+    transition: all 0.3s ease 0s;
+  }
+
+  .faq-toggle-{{ section.id }}:hover .faq-arrow-{{ section.id }} svg path {
+    fill: {{ arrow_hover_color }};
+    transition: all 0.3s ease 0s;
   }
 
   .faq-question-{{ section.id }} {
@@ -147,10 +223,11 @@
     color: {{ question_color }};
     line-height: {{ question_height }}%;
     text-transform: unset;
+    font-weight: 700;
   }
 
   .faq-answer-{{ section.id }} {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     overflow: hidden;
   }
 
@@ -196,6 +273,12 @@
   .faq-height-cal-{{ section.id }} p:not(:first-child ) {
     margin-top: 10px;
   } 
+
+  @media(min-width: 768px) {
+    .faq-nav-{{ section.id }} {
+      grid-template-columns: repeat({{ nav_row | times: 0.5 | round: 0 }}, 1fr);
+    }
+  }
   
   @media(min-width: 1024px) {
 
@@ -212,26 +295,33 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .faq-heading-{{ section.id }} {
-      text-align: {{ heading_align }};
+    .faq-nav-{{ section.id }} {
+      grid-template-columns: repeat({{ nav_row }}, 1fr);
+      gap: {{ nav_gap }}px;
     }
 
-    .faq-heading-{{ section.id }} * {
-      font-size: {{ heading_size }}px;
+    .faq-button-{{ section.id }} {
+      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
+      font-size: {{ button_size }}px;
     }
 
     .faq-body-{{ section.id }} {
       margin-top: {{ body_mt }}px;
-      gap: {{ body_gap }}px;
-      grid-template-columns: repeat(2, 1fr);
+      padding: {{ body_padding_vertical }}px {{ body_padding_horizontal }}px;
+    }
+    
+    .faq-heading-{{ section.id }} {
+      margin-bottom: {{ heading_mb }}px;
+      text-align: {{ heading_align }};
+      font-size: {{ heading_size }}px;
     }
 
-    .faq-left-{{ section.id }},
-    .faq-right-{{ section.id }} {
-      gap: {{ body_gap }}px;
+    .faq-block-{{ section.id }}:not(:first-child) .faq-heading-{{ section.id }} {
+      margin-top: {{ heading_mt }}px;
     }
 
     .faq-item-{{ section.id }} {
+      margin-top: {{ item_mt }}px;
       padding-bottom: {{ item_padding_bottom }}px;
     }
 
@@ -241,6 +331,16 @@
 
     .faq-answer-{{ section.id }} * {
       font-size: {{ answer_size }}px;
+    }
+
+    .faq-arrow-{{ section.id }} {
+      flex: 0 0 {{ arrow_size }}px;
+      height: {{ arrow_size }}px;
+    }
+  
+    .faq-arrow-{{ section.id }} svg {
+      width: {{ arrow_size | times: 0.4 | round: 0 }}px;
+      height: {{ arrow_size | times: 0.4 | round: 0 }}px;
     }
 
     .faq-height-cal-{{ section.id }} * {
@@ -258,9 +358,19 @@
   </style>
 {% endunless %}
 
+{% if button_custom %}
+  <style>
+    .faq-button-{{ section.id }} {
+      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-weight: {{ button_font.weight }};
+      font-style: {{ button_font.style }};
+    }
+  </style>
+{% endif %}
+
 {% if heading_custom %}
   <style>
-    .faq-heading-{{ section.id }} * {
+    .faq-heading-{{ section.id }} {
       font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
       font-weight: {{ heading_font.weight }};
       font-style: {{ heading_font.style }};
@@ -290,25 +400,36 @@
 
 <div class="section-{{ section.id }} faq-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      {% if heading != blank %}
-        <div class="faq-heading-{{ section.id }}">
-          {{ heading }}
-        </div>
-      {% endif %}
+      <div class="faq-nav-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == "category" %}
+            <a href="#{{ block.id }}" class="faq-button-{{ section.id }}">{{ block.settings.heading }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
 
       <div class="faq-body-{{ section.id }}">
-        {% assign block_count = section.blocks.size %}
-        {% assign half_block_count = block_count | times: 0.5 %}
-        {% assign half_block_count = half_block_count | round: 0 %}
-        <div class="faq-left-{{ section.id }}">
-          {% for block in section.blocks %}
-            {% if forloop.index <= half_block_count %}
+        {% assign inside_item = false %}
+        {% for block in section.blocks %}
+          {% if block.type == "category" %}
+            {% if inside_item %}
+              </div>
+            {% endif %}
+
+            <div class="faq-block-{{ section.id }}" id="{{ block.id }}">
+              <div class="faq-heading-{{ section.id }}">{{ block.settings.heading }}</div>
+              {% assign inside_item = true %}
+            
+          {% elsif block.type == "item" %}
               <div class="faq-item-{{ section.id }}">
                 <div class="faq-toggle-{{ section.id }}">
                   <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
-                  <div class="faq-plus-{{ section.id }}">
-                    <div class="faq-plus-l-{{ section.id }}"></div>
-                    <div class="faq-plus-m-{{ section.id }}"></div>
+                  <div class="faq-arrow-{{ section.id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 143.000000 83.000000" preserveAspectRatio="xMidYMid meet">
+                      <g transform="translate(0.000000,83.000000) scale(0.100000,-0.100000)" fill="" stroke="none">
+                      <path d="M57 772 l-57 -57 360 -360 360 -360 357 357 358 358 -63 62 -62 63 -298 -298 -297 -297 -295 295 c-162 162 -297 295 -300 295 -3 0 -31 -26 -63 -58z"></path>
+                      </g>
+                    </svg>
                   </div>
                 </div>
                 <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
@@ -318,36 +439,34 @@
                   {{ block.settings.answer }}
                 </div>
               </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <div class="faq-right-{{ section.id }}">
-          {% for block in section.blocks %}
-            {% if forloop.index > half_block_count %}
-              <div class="faq-item-{{ section.id }}">
-                <div class="faq-toggle-{{ section.id }}">
-                  <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
-                  <div class="faq-plus-{{ section.id }}">
-                    <div class="faq-plus-l-{{ section.id }}"></div>
-                    <div class="faq-plus-m-{{ section.id }}"></div>
-                  </div>
-                </div>
-                <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
-                    {{ block.settings.answer }}
-                  </div>
-                <div class="faq-height-cal-{{ section.id }}">
-                  {{ block.settings.answer }}
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
+          {% endif %}
+        {% endfor %}
+        {% if inside_item %}
+          </div>
+        {% endif %}
       </div>
     </div>
 </div>
 
 <script>
-  function initFAQ7() {
+  function initFAQ8() {
+    const smoothScrollLinks = document.querySelectorAll('.faq-button-{{ section.id }}');
+
+    smoothScrollLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+  
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        const offsetTop = targetElement.offsetTop;
+  
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      });
+    });
+    
     const answerPaddingTop = {{ answer_padding_top }};
     const answerPaddingBottom = 0;
 
@@ -364,7 +483,7 @@
       '.faq-height-cal-{{ section.id }}'
     );
     const icons = document.querySelectorAll(
-      '.faq-plus-{{ section.id }}'
+      '.faq-arrow-{{ section.id }}'
     );
 
     let activeIndex = -1;
@@ -378,9 +497,6 @@
         answers[index].style.paddingBottom = `${answerPaddingBottom}px`;
         answers[index].style.height = `${height }px`;
         icons[index].style.setProperty('--rotate', '180deg');
-        setTimeout(() => {
-          icons[index].querySelector('.faq-plus-l-{{ section.id }}').style.height = "0px";
-        }, 100);
       });
     }
     function closeAnswer(index) {
@@ -388,9 +504,6 @@
       answers[index].style.paddingBottom = 0;
       answers[index].style.height = 0;
       icons[index].style.setProperty('--rotate', '0deg');
-      setTimeout(() => {
-        icons[index].querySelector('.faq-plus-l-{{ section.id }}').style.height = "100%";
-      }, 100);
 
       setTimeout(() => {
         answers[index].style.display = 'none';
@@ -417,7 +530,7 @@
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
         toggleAnswer(index);
-        closeAllAnswerBut(index);
+        // closeAllAnswerBut(index);
       });
     });
 
@@ -434,27 +547,244 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initFAQ7);
+  document.addEventListener('DOMContentLoaded', initFAQ8);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initFAQ7);
-     document.addEventListener('shopify:section:load', initFAQ7);
+     document.addEventListener('shopify:section:unload', initFAQ8);
+     document.addEventListener('shopify:section:load', initFAQ8);
   }
 </script>
 
 {% schema %}
 {
-  "name": "SG-FAQ #7",
+  "name": "SG-FAQ #8",
   "settings": [
     {
       "type": "header",
-      "content": "Heading Settings"
+      "content": "FAQ Navigation Settings"
     },
     {
-      "type": "richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "<p>FAQ</p>"
+      "type": "range",
+      "id": "nav_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Navigation Gap",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "nav_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Navigation Gap - Mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "nav_row",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Navigation Items per Row",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Navigation Button Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Button Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_size_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Size - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Button Line Height",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Vertical",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Vertical - Mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Horizontal",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Horizontal - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Roundness",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Border Thickness",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Body Settings"
+    },
+    {
+      "type": "range",
+      "id": "body_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Margin Top",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "body_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Margin Top - Mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "body_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Padding Vertical",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "body_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Padding Vertical - Mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "body_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Padding Horizontal",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "body_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Padding Horizontal - Mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "body_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Border Radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "body_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Body Border Thickness",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Category Heading Settings"
     },
     {
       "type": "checkbox",
@@ -476,7 +806,7 @@
       "step": 2,
       "unit": "px",
       "label": "Heading Size",
-      "default": 38
+      "default": 36
     },
     {
       "type": "range",
@@ -486,7 +816,7 @@
       "step": 2,
       "unit": "px",
       "label": "Heading Size - Mobile",
-      "default": 28
+      "default": 20
     },
     {
       "type": "range",
@@ -499,60 +829,54 @@
       "default": 130
     },
     {
+      "type": "range",
+      "id": "heading_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "heading_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Margin Top - Mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_mb",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Margin Bottom",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_mb_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Margin Bottom - Mobile",
+      "default": 24
+    },
+    {
       "type": "text_alignment",
       "id": "heading_align",
-      "label": "Heading Text Align",
-      "default": "center"
+      "label": "Heading Align"
     },
     {
       "type": "text_alignment",
       "id": "heading_align_mobile",
-      "label": "Heading Text Align - Mobile",
-      "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "Body Settings"
-    },
-    {
-      "type": "range",
-      "id": "body_gap",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Body Gap",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "body_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Body Gap - Mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "body_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Body Margin Top",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "body_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Body Margin Top - Mobile",
-      "default": 60
+      "label": "Heading Align - Mobile"
     },
     {
       "type": "header",
@@ -566,7 +890,7 @@
       "step": 2,
       "unit": "px",
       "label": "Item Padding Bottom",
-      "default": 24
+      "default": 12
     },
     {
       "type": "range",
@@ -577,6 +901,26 @@
       "unit": "px",
       "label": "Item Border Thickness",
       "default": 1
+    },
+    {
+      "type": "range",
+      "id": "item_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Margin Top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Margin Top - Mobile",
+      "default": 12
     },
     {
       "type": "header",
@@ -612,7 +956,7 @@
       "step": 2,
       "unit": "px",
       "label": "Question Size - Mobile",
-      "default": 18
+      "default": 14
     },
     {
       "type": "range",
@@ -623,6 +967,30 @@
       "unit": "%",
       "label": "Question Line Height",
       "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Arrow Settings"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Arrow Size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "arrow_size_mobile",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Arrow Size - Mobile",
+      "default": 28
     },
     {
       "type": "header",
@@ -658,7 +1026,7 @@
       "step": 2,
       "unit": "px",
       "label": "Answer Size - Mobile",
-      "default": 16
+      "default": 14
     },
     {
       "type": "range",
@@ -668,7 +1036,7 @@
       "step": 10,
       "unit": "%",
       "label": "Answer Line Height",
-      "default": 150
+      "default": 170
     },
     {
       "type": "range",
@@ -682,36 +1050,124 @@
     },
     {
       "type": "header",
-      "content": "Section Colors"
+      "content": "Navigation Button Colors"
     },
     {
       "type": "color",
-      "label": "Heading Color",
+      "label": "Button Text Color",
+      "id": "button_color",
+      "default": "#6c584c"
+    },
+    {
+      "type": "color",
+      "label": "Button Hover Text Color",
+      "id": "button_hover_color",
+      "default": "#F2F0ED"
+    },
+    {
+      "type": "color",
+      "label": "Button Background Color",
+      "id": "button_bg_color",
+      "default": "#F2F0ED"
+    },
+    {
+      "type": "color",
+      "label": "Button Background Hover Color",
+      "id": "button_bg_hover_color",
+      "default": "#6c584c"
+    },
+    {
+      "type": "color",
+      "label": "Button Border Color",
+      "id": "button_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Button Border Hover Color",
+      "id": "button_border_hover_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Body Colors"
+    },
+    {
+      "type": "color",
+      "label": "Body Background Color",
+      "id": "body_bg_color",
+      "default": "#F2F0ED"
+    },
+    {
+      "type": "color",
+      "label": "Body Border Color",
+      "id": "body_border_color",
+      "default": "#6c584c"
+    },
+    {
+      "type": "color",
+      "label": "Category Heading Color",
       "id": "heading_color",
-      "default": "#837c5c"
+      "default": "#6c584c"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Item Colors"
     },
     {
       "type": "color",
       "label": "Item Border Color",
       "id": "item_border_color",
-      "default": "#f0efe8"
+      "default": "#E5E7EB"
     },
     {
       "type": "color",
       "label": "Question Color",
       "id": "question_color",
-      "default": "#837c5c"
+      "default": "#6c584c"
     },
     {
       "type": "color",
       "label": "Answer Color",
       "id": "answer_color",
-      "default": "#837c5c"
+      "default": "#6c584c"
+    },
+    {
+      "type": "header",
+      "content": "Arrow Colors"
+    },
+    {
+      "type": "color",
+      "label": "Arrow Color",
+      "id": "arrow_color",
+      "default": "#6c584c"
+    },
+    {
+      "type": "color",
+      "label": "Arrow Hover Color",
+      "id": "arrow_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Arrow Background Color",
+      "id": "arrow_bg_color"
+    },
+    {
+      "type": "color",
+      "label": "Arrow Background Hover Color",
+      "id": "arrow_bg_hover_color",
+      "default": "#6c584c"
+    },
+    {
+      "type": "header",
+      "content": "Section Colors"
     },
     {
       "type": "color",
       "label": "Section background",
-      "id": "background_color"
+      "id": "background_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "color_background",
@@ -810,7 +1266,7 @@
       "step": 10,
       "unit": "rem",
       "label": "Section content width",
-      "default": 140
+      "default": 150
     },
     {
       "type": "range",
@@ -825,6 +1281,18 @@
   ],
   "blocks": [
     {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Category"
+        }
+      ]
+    },
+    {
       "type": "item",
       "name": "Item",
       "settings": [
@@ -832,55 +1300,95 @@
           "type": "text",
           "id": "question",
           "label": "Question",
-          "default": "Question"
+          "default": "Lorem ipsum dolor sit amet?"
         },
         {
           "type": "richtext",
           "id": "answer",
           "label": "Answer",
-          "default": "<p>Answer</p>"
+          "default": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Si habetis ulteriores quaestiones, quaeso, nostri auxilium clientibus contact.</p>"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-FAQ #7",
+      "name": "SG-FAQ #8",
       "blocks": [
         {
-          "type": "item",
+          "type": "category",
           "settings": {
-            "question": "How Do I Charge The Lamps?",
-            "answer": "<p><strong>Inside the box you will receive a USB cable together with the lamp.<br><br>To charge the lamp you will simply need to plug the cable to the lamp and connect it with any charger adapter you already have at home.<br><br>You can use any type of adapter: for example of smartphone, computer etc.<br><br>No matter in which country you are based. Simply use the adapters you already have. </strong></p>"
+            "heading": "PRODUCTS"
           }
         },
         {
-          "type": "item",
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "category",
           "settings": {
-            "question": "How Do I Charge Multiple Lamps At Once?",
-            "answer": "<p><strong>You can charge multiple lamps using a USB multi-port socket or a multi-port charger. <br><br>You can find them on Amazon or any other specialized shop. <br><br>Upon request if you have ordered a MOQ we can provide a multi-port charger that will allow you to charge up to 10 lamps at once.</strong></p>"
+            "heading": "SHIPPING"
           }
         },
         {
-          "type": "item",
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "category",
           "settings": {
-            "question": "Light Intensity Of The Lamp Is Very Low, Is It Broken?",
-            "answer": "<p><strong>The lamp is not broken !<br><br>All our lamps are dimmable by touching the top or the base of the lamp depending on the model. <br><br>If you have a low intensity please touch the lamp at the top or at the base and hold the finger a few seconds until  light intensity will increase. <br><br>If you then touch again the lamp and hold, the light intensity will decrease.</strong></p>"
+            "heading": "RETURNS & REFUNDS"
           }
         },
         {
-          "type": "item",
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "category",
           "settings": {
-            "question": "How Long Does The Shipping Take?",
-            "answer": "<p><strong>Shipping time is 4–9 business days (Monday–Friday) to United States.</strong></p>"
+            "heading": "ORDERS & PAYMENT"
           }
         },
         {
-          "type": "item",
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "category",
           "settings": {
-            "question": "How Long For A Fully Charged Battery?",
-            "answer": "<p><strong>In order to have a fully charged battery our lamps require approximately 4-5 hours of charge.</strong></p>"
+            "heading": "CONTACT US"
           }
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
         }
       ]
     }
