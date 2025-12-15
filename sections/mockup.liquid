@@ -26,6 +26,11 @@
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
   assign content_radius = section.settings.content_radius
+  assign content_border_thickness = section.settings.content_border_thickness
+  assign content_border_color = section.settings.content_border_color
+
+  assign total_width_adjustment = content_padding_horizontal | times: 2 | plus: 10 | plus: content_border_thickness | times: 2
+  assign total_width_adjustment_mobile = content_padding_horizontal_mobile | times: 2 | plus: 10 | plus: content_border_thickness | times: 2
 
   assign content_horizontal_align = ""
   if content_align == "center"
@@ -67,13 +72,23 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .countdown-body-{{ section.id }} {
+  .countdown-body-{{ section.id }} {   
     display: flex;
     flex-direction: column;
-    align-items: {{ content_horizontal_align_mobile }};
+    border-radius: {{ content_radius }}px;
     padding: {{ content_padding_vertical_mobile }}px {{ content_padding_horizontal_mobile }}px;
     background-color: {{ content_bg_color | hex_to_rgba: content_bg_opacity }};
+  
+  }
+
+  .countdown-body-wrap-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;  
     border-radius: {{ content_radius }}px;
+    border: {{ content_border_thickness }}px solid {{ content_border_color }};
+    padding: {{ content_padding_vertical_mobile | plus: 10 }}px {{ content_padding_horizontal_mobile | plus: 10 }}px;
   }
   
   @media(min-width: 1024px) {
@@ -94,9 +109,12 @@
     }
 
     .countdown-body-{{ section.id }} {
-      flex-direction: rows;
-      align-items: {{ content_horizontal_align }};
+      display: flex;     
       padding: {{ content_padding_vertical }}px {{ content_padding_horizontal }}px;
+    }
+    
+    .countdown-body-wrap-{{ section.id }} {    
+      padding: {{ content_padding_vertical | plus: 10 }}px {{ content_padding_horizontal | plus: 10}}px;
     }
   }
   
@@ -152,88 +170,12 @@
 
 {% for block in section.blocks %}
   {% case block.type %}    
-      {% when 'sub_heading' %}
-      <style>
-        {{ block.settings.sub_heading_font | font_face: font_display: 'swap' }}
-
-        .countdown-subheading-{{ block.id }} {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          justify-content: {{ content_horizontal_align_mobile }};
-          margin-top: {{ block.settings.sub_heading_mt_mobile }}px;
-          text-align: {{ content_align_mobile }};
-        }
-
-        .countdown-subheading-{{ block.id }} * {          
-          margin: 0;            
-          font-size: {{ block.settings.sub_heading_size_mobile }}px;
-          color: {{ block.settings.sub_heading_color }};
-          line-height: {{ block.settings.sub_heading_height }}%;
-          text-transform: unset;
-          text-decoration: none;
-          word-break: break-word;
-        }          
-
-        @media(min-width: 1024px) {
-          .countdown-subheading-{{ block.id }} {
-            justify-content: {{ content_horizontal_align }};
-            margin-top: {{ block.settings.sub_heading_mt }}px;
-            text-align: {{ content_align }};
-          }
-
-          .countdown-subheading-{{ block.id }} * {                
-            font-size: {{ block.settings.sub_heading_size }}px;
-          }  
-        }
-      </style>
-
-      {% if block.settings.sub_heading_custom %}
-        <style>
-          .countdown-subheading-{{ block.id }} * {
-            font-family: {{ block.settings.sub_heading_font.family }}, {{ block.settings.sub_heading_font.fallback_families }};
-            font-weight: {{ block.settings.sub_heading_font.weight }};
-            font-style: {{ block.settings.sub_heading_font.style }};
-          }
-        </style>
-      {% endif %}
-
-      {% if block.settings.use_circle %}
-        <style>          
-          .countdown-subheading-{{ block.id }}:before {
-            content: "";
-            flex-shrink: 0;
-            display: block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: {{ block.settings.sub_heading_circle_color }};
-          }
-        </style>
-      {% endif %}
-
-    {% if block.settings.background %}
-      <style>
-        .countdown-subheading-{{ block.id }} {
-          padding: {{ block.settings.sub_heading_padding_vertical_mobile }}px {{ block.settings.sub_heading_padding_horizontal_mobile }}px;
-          background-color: {{ block.settings.sub_heading_bg_color }};   
-          border: {{ block.settings.sub_heading_border_thickness }}px solid {{ block.settings.sub_heading_border_color }};
-          border-radius: {{ block.settings.sub_heading_radius }}px;
-        }
-
-        @media(min-width: 1024px) {
-          .countdown-subheading-{{ block.id }} {   
-            padding: {{ block.settings.sub_heading_padding_vertical }}px {{ block.settings.sub_heading_padding_horizontal }}px;
-          }
-        }
-      </style>
-    {% endif %}
-
      {% when 'button' %}  
       <style>
         {{  block.settings.button_font | font_face: font_display: 'swap' }}
 
         .contdown-button-wrapper-{{ block.id }} {
+          width: 100%;
           display: flex;
           justify-content: {{ content_horizontal_align_mobile }};
         }
@@ -367,6 +309,7 @@
         {{  block.settings.heading_font | font_face: font_display: 'swap' }}
 
         .countdown-heading-{{ block.id }} {
+          width: 100%;
           margin-top: {{ block.settings.heading_mt_mobile }}px;
           text-align: {{ content_align_mobile }};
         }
@@ -409,6 +352,7 @@
         {{  block.settings.text_font | font_face: font_display: 'swap' }}
 
         .countdown-text-{{ block.id }} {
+          width: 100%;
           margin-top: {{ block.settings.text_mt_mobile }}px;
           text-align: {{ content_align_mobile }};
           max-width: {{ block.settings.text_max_width_mobile }}%;
@@ -451,18 +395,72 @@
         </style>
       {% endif %}
 
+      
+      {% if content_align_mobile == 'right' %}
+        <style>
+          .countdown-text-{{ block.id }} {
+            margin-left: auto;         
+          }
+        </style>
+      {% elsif content_align_mobile == 'center' %}
+        <style>
+          .countdown-text-{{ block.id }} {
+            margin-left: auto;
+            margin-right: auto;           
+          }
+        </style>  
+      {% elsif content_align_mobile == 'left' %}
+        <style>
+          .countdown-text-{{ block.id }} {
+            margin-right: auto;          
+          }
+        </style>  
+      {% endif %}
+      
+      {% if content_align == 'right' %}
+        <style>
+          @media(min-width: 1024px) {
+            .countdown-text-{{ block.id }} {
+              margin-left: auto;
+              margin-right: 0;
+            }
+          }   
+        </style>
+      {% elsif content_align == 'center' %}
+        <style>
+          @media(min-width: 1024px) {
+            .countdown-text-{{ block.id }} {
+              margin-left: auto;
+              margin-right: auto;
+            }
+          } 
+        </style>  
+      {% elsif content_align == 'left' %}
+        <style>
+          @media(min-width: 1024px) {
+            .countdown-text-{{ block.id }} {
+              margin-right: auto;
+              margin-left: 0;
+            }
+          } 
+        </style>  
+      {% endif %}
+
     {% when 'timer' %}              
       <style>
-        {{  block.settings.heading_font | font_face: font_display: 'swap' }}
         {{  block.settings.number_font | font_face: font_display: 'swap' }}
-        {{  block.settings.completed_text_font | font_face: font_display: 'swap' }}
         {{  block.settings.timer_text_font | font_face: font_display: 'swap' }}
+        {{  block.settings.completed_text_font | font_face: font_display: 'swap' }}
         
         .countdown-{{ block.id }} {
           margin-top: {{ block.settings.timer_mt_mobile }}px;
+          padding: {{ block.settings.timer_padding_vertical_mobile }}px 0;
           display: flex;
-          align-items: center;
+          align-items: start;
+          justify-content: center;
           gap: {{ block.settings.timer_gap_mobile }}px;
+          background-color: {{ block.settings.timer_bg_color }};
+          width: calc(100% + {{ total_width_adjustment_mobile }}px);
           flex-wrap: wrap;
           min-width: none;
         }
@@ -482,17 +480,7 @@
           color: {{ block.settings.number_color }};
           line-height: {{ block.settings.number_height }}%;
           text-transform: unset;
-          font-weight: 700;
         }   
-        
-        .countdown-{{ block.id }} .line {
-          display: block !important;
-          width: {{ block.settings.timer_border_thickness }}px;
-          height: 30px;
-          margin-top: auto;
-          margin-bottom: auto;
-          background-color: {{ block.settings.timer_border_color }};
-        }
 
         .countdown-{{ block.id }} .time-block__text {
           margin-top: {{ block.settings.timer_text_mt_mobile }}px;
@@ -521,16 +509,14 @@
 
         @media (min-width: 1024px) {
           .countdown-{{ block.id }} {
+            width: calc(100% + {{ total_width_adjustment }}px);
             margin-top: {{ block.settings.timer_mt }}px;
+            padding: {{ block.settings.timer_padding_vertical }}px 0;
             gap: {{ block.settings.timer_gap }}px;         
           }
         
           .countdown-{{ block.id }} .time-block {
             min-width: {% if block.settings.number_size > 70 %}120px{% elsif block.settings.number_size > 40 %}90px{% else %}45px{% endif %}; 
-          }
-
-          .countdown-{{ block.id }} .line {
-            height: 70px;
           }
 
           .countdown-{{ block.id }} .time-block__num {
@@ -629,79 +615,90 @@
   {% endcase %}
 {% endfor %}
 
-<div class="section-{{ section.id }} countdown-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% elsif background_style == 'gradient' %} style="background-image: {{ background_gradient }};"{% endif %}>
+{% if background_style == 'image' %}
+  {% if background_image != blank %}
+    <style>    
+      .section-{{ section.id }} {
+        background-image: url('{{ background_image | image_url }}');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    </style>
+  {% endif %}
+{% endif %}
+
+
+<div class="section-{{ section.id }} countdown-{{ section.id }}"  {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% elsif background_style == 'gradient' %} style="background-image: {{ background_gradient }};"{% endif %}>
     <div class="section-{{ section.id }}-settings">
       <div class="countdown-body-{{ section.id }}">
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'sub_heading' %}  
-              {% if block.settings.sub_heading != blank %}
-                <div class="countdown-subheading-{{ block.id }}">{{ block.settings.sub_heading }}</div>
-              {% endif %}  
+        <div class="countdown-body-wrap-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'heading' %}
+                {% if block.settings.heading != blank %}
+                  <div class="countdown-heading-{{ block.id }}">{{ block.settings.heading }}</div>
+                {% endif %}
 
-            {% when 'heading' %}
-              {% if block.settings.heading != blank %}
-                <div class="countdown-heading-{{ block.id }}">{{ block.settings.heading }}</div>
-              {% endif %}
+              {% when 'text' %}
+                {% if block.settings.text != blank %}
+                  <div class="countdown-text-{{ block.id }}">{{ block.settings.text }}</div>
+                {% endif %}   
 
-            {% when 'text' %}
-              {% if block.settings.text != blank %}
-                <div class="countdown-text-{{ block.id }}">{{ block.settings.text }}</div>
-              {% endif %}   
-
-            {% when 'button' %}
-              {% if block.settings.button != blank %}    
-                <div class="contdown-button-wrapper-{{ block.id }}">
-                  <a href="{{ block.settings.url }}" {% if block.settings.new_page %}target="_blank"{% endif %} class="countdown-button-{{ block.id }}">
-                    <p class="countdown-button-inner-{{ block.id }}">
-                      {{ block.settings.button }}
-                      {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
-                        <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
-                          <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
-                          <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
-                        </svg>
-                      {% endif %}
-                    </p>
-                  </a>    
-                </div>            
-              {% endif %} 
-
-            {% when 'timer' %}             
-              <div class="countdown-{{ block.id }}">        
-                <div class="time-block">
-                  <span class="time-block__num js-timer-days">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.days_text }}</span>
-                  </div>              
-                </div>
-                <div class="line"></div>        
-                <div class="time-block">
-                  <span class="time-block__num js-timer-hours">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.hours_text }}</span>
-                  </div>              
-                </div>
-                <div class="line"></div>               
-                <div class="time-block">
-                  <span class="time-block__num js-timer-minutes">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.minutes_text }}</span>
-                  </div>                   
-                </div>
-                <div class="line"></div>               
-                <div class="time-block">
-                  <span class="time-block__num js-timer-seconds">00</span>
-                  <div class="time-block__text">
-                    <span class="time-block__unit">{{ block.settings.seconds_text }}</span>
+              {% when 'button' %}
+                {% if block.settings.button != blank %}    
+                  <div class="contdown-button-wrapper-{{ block.id }}">
+                    <a href="{{ block.settings.url }}" {% if block.settings.open_in_new_tab %}target="_blank"{% endif %} class="countdown-button-{{ block.id }}">
+                      <p class="countdown-button-inner-{{ block.id }}">
+                        {{ block.settings.button }}
+                        {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                          <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                            <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                          </svg>
+                        {% endif %}
+                      </p>
+                    </a>    
                   </div>            
+                {% endif %} 
+
+              {% when 'timer' %}             
+                <div class="countdown-{{ block.id }}">        
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-days">00</span>
+                    <div class="time-block__text" style="line-height: normal;">
+                      <span class="time-block__unit">{{ block.settings.days_text }}</span>
+                    </div>              
+                  </div>
+                  <div class="line time-block__num">:</div>        
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-hours">00</span>
+                    <div class="time-block__text" style="line-height: normal;">
+                      <span class="time-block__unit">{{ block.settings.hours_text }}</span>
+                    </div>              
+                  </div>
+                  <div class="line time-block__num">:</div>               
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-minutes">00</span>
+                    <div class="time-block__text" style="line-height: normal;">
+                      <span class="time-block__unit">{{ block.settings.minutes_text }}</span>
+                    </div>                   
+                  </div>
+                  <div class="line time-block__num">:</div>               
+                  <div class="time-block">
+                    <span class="time-block__num js-timer-seconds">00</span>
+                    <div class="time-block__text" style="line-height: normal;">
+                      <span class="time-block__unit">{{ block.settings.seconds_text }}</span>
+                    </div>            
+                  </div>
                 </div>
-              </div>
-              <div class="countdown-completed-text-{{ block.id }}">
-                {{ block.settings.completed_text }}
-              </div>                    
-          {% endcase %}
-        {% endfor %}
+                <div class="countdown-completed-text-{{ block.id }}">
+                  {{ block.settings.completed_text }}
+                </div>                    
+            {% endcase %}
+          {% endfor %}
+        </div>
       </div>
     </div>
 </div>
@@ -709,7 +706,7 @@
 {% for block in section.blocks %}
   {% if block.type == 'timer' %}
     <script>
-      function initCountDownTimer5() {    
+      function initCountDownTimer9() {    
         const offset = new Date().getTimezoneOffset();  
         function startTimer() {
           const second = 1000,
@@ -776,11 +773,11 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', initCountDownTimer5);
+      document.addEventListener('DOMContentLoaded', initCountDownTimer9);
 
       if (Shopify.designMode) {
-        document.addEventListener('shopify:section:unload', initCountDownTimer5);
-        document.addEventListener('shopify:section:load', initCountDownTimer5);
+        document.addEventListener('shopify:section:unload', initCountDownTimer9);
+        document.addEventListener('shopify:section:load', initCountDownTimer9);
       }
     </script>
   {% endif %}
@@ -788,33 +785,11 @@
 
 {% schema %}
 {
-  "name": "SG-Countdown timer #8",
+  "name": "SG-Countdown timer #9",
   "settings": [
     {
       "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "range",
-      "id": "content_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 24
-    },
-    {
-      "type": "text_alignment",
-      "id": "content_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "content_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
+      "content": "Content"
     },
     {
       "type": "checkbox",
@@ -830,7 +805,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal",
-      "default": 64,
+      "default": 20,
       "visible_if": "{{ section.settings.content_padding_advanced }}"
     },
     {
@@ -841,7 +816,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal - mobile",
-      "default": 20,
+      "default": 16,
       "visible_if": "{{ section.settings.content_padding_advanced }}"
     },
     {
@@ -852,7 +827,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical",
-      "default": 56,
+      "default": 20,
       "visible_if": "{{ section.settings.content_padding_advanced }}"
     },
     {
@@ -863,8 +838,40 @@
       "step": 2,
       "unit": "px",
       "label": "Padding vertical - mobile",
-      "default": 32,
+      "default": 16,
       "visible_if": "{{ section.settings.content_padding_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "content_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 3
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "center"
     },
     {
       "type": "header",
@@ -884,6 +891,12 @@
       "step": 0.1,
       "label": "Overlay opacity",
       "default": 0.7
+    },
+    {
+      "type": "color",
+      "label": "Content border",
+      "id": "content_border_color",
+      "default": "#F3F3F3"
     },
     {
       "type": "select",
@@ -987,7 +1000,7 @@
       "step": 4,
       "unit": "px",
       "label": "Top",
-      "default": 80
+      "default": 100
     },
     {
       "type": "range",
@@ -997,7 +1010,7 @@
       "step": 4,
       "unit": "px",
       "label": "Bottom",
-      "default": 80
+      "default": 100
     },
     {
       "type": "range",
@@ -1037,7 +1050,7 @@
       "step": 100,
       "unit": "px",
       "label": "Content width",
-      "default": 1200,
+      "default": 1000,
       "visible_if": "{{ section.settings.full_width == false }}"
     },
     {
@@ -1070,7 +1083,7 @@
           "type": "richtext",
           "id": "heading",
           "label": "Heading",
-          "default": "<h2>Countdown timer #8</h2>"
+          "default": "<p>Countdown timer #9</p>"
         },
         {
           "type": "checkbox",
@@ -1093,7 +1106,7 @@
           "step": 2,
           "unit": "px",
           "label": "Font size",
-          "default": 48
+          "default": 40
         },
         {
           "type": "range",
@@ -1103,7 +1116,7 @@
           "step": 2,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 40
+          "default": 36
         },
         {
           "type": "range",
@@ -1123,7 +1136,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 36
+          "default": 0
         },
         {
           "type": "range",
@@ -1133,7 +1146,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 20
+          "default": 0
         },
         {
           "type": "color",
@@ -1151,7 +1164,7 @@
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>This limited-time offer concludes when the timer reaches zero – secure your savings now!</p>"
+          "default": "<p>Grab premium quality at unbeatable prices. Don't miss out, offer ends when the timer hits zero! Sale will ends soon!</p>"
         },
         {
           "type": "checkbox",
@@ -1174,7 +1187,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 16
+          "default": 20
         },
         {
           "type": "range",
@@ -1184,7 +1197,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 14
+          "default": 18
         },
         {
           "type": "range",
@@ -1224,7 +1237,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 28
+          "default": 8
         },
         {
           "type": "range",
@@ -1234,206 +1247,13 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 16
+          "default": 8
         },
         {
           "type": "color",
           "label": "Color",
           "id": "text_color",
           "default": "#FFFFFF"
-        }
-      ]
-    },
-    {
-      "type": "sub_heading",
-      "name": "Subheading",
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "sub_heading",
-          "label": "Subheading",
-          "default": "<p>HALF OF THE STOCK IS ALREADY SOLD!</p>"
-        },
-        {
-          "type": "checkbox",
-          "id": "sub_heading_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "sub_heading_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.sub_heading_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 11
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 130
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top - mobile",
-          "default": 0
-        },
-        {
-          "type": "header",
-          "content": "Appearance"
-        },
-        {
-          "type": "checkbox",
-          "id": "use_circle",
-          "label": "Urgency dot",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "background",
-          "label": "Background",
-          "default": true
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_radius",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 100,
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 0,
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "header",
-          "content": "Padding",
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_padding_horizontal",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Horizontal",
-          "default": 16,
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_padding_horizontal_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Horizontal - mobile",
-          "default": 12,
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_padding_vertical",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Vertical",
-          "default": 8,
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "range",
-          "id": "sub_heading_padding_vertical_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Vertical - mobile",
-          "default": 6,
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "header",
-          "content": "Colors"
-        },
-        {
-          "type": "color",
-          "label": "Urgency dot",
-          "id": "sub_heading_circle_color",
-          "default": "#0CFF0C",
-          "visible_if": "{{ block.settings.use_circle }}"
-        },
-        {
-          "type": "color",
-          "label": "Text",
-          "id": "sub_heading_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Background",
-          "id": "sub_heading_bg_color",
-          "default": "#121212",
-          "visible_if": "{{ block.settings.background }}"
-        },
-        {
-          "type": "color",
-          "label": "Border",
-          "id": "sub_heading_border_color",
-          "default": "#F5F5F5",
-          "visible_if": "{{ block.settings.background }}"
         }
       ]
     },
@@ -1446,7 +1266,7 @@
           "type": "text",
           "id": "button",
           "label": "Button label",
-          "default": "View Discounted Items"
+          "default": "Shop now"
         },
         {
           "type": "url",
@@ -1455,8 +1275,9 @@
         },
         {
           "type": "checkbox",
-          "id": "new_page",
-          "label": "Open link in new tab"
+          "id": "open_in_new_tab",
+          "label": "Open link in new tab",
+          "default": false
         },
         {
           "type": "select",
@@ -1507,7 +1328,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 16
+          "default": 14
         },
         {
           "type": "range",
@@ -1517,7 +1338,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 16
+          "default": 14
         },
         {
           "type": "range",
@@ -1537,7 +1358,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding horizontal",
-          "default": 40,
+          "default": 32,
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -1603,7 +1424,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 64
+          "default": 24
         },
         {
           "type": "range",
@@ -1613,11 +1434,11 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 40
+          "default": 24
         },
         {
           "type": "header",
-          "content": "Button colors"
+          "content": "Colors"
         },
         {
           "type": "color",
@@ -1642,7 +1463,7 @@
           "type": "color",
           "label": "Background hover",
           "id": "button_bg_hover_color",
-          "default": "#F7F7F7",
+          "default": "#F3F3F3",
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -2361,7 +2182,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 36
+          "default": 20
         },
         {
           "type": "range",
@@ -2371,7 +2192,27 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 24
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "timer_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "timer_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 8
         },
         {
           "type": "range",
@@ -2381,7 +2222,7 @@
           "step": 2,
           "unit": "px",
           "label": "Gap",
-          "default": 24
+          "default": 16
         },
         {
           "type": "range",
@@ -2391,17 +2232,7 @@
           "step": 2,
           "unit": "px",
           "label": "Gap - mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "timer_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 2
+          "default": 8
         },
         {
           "type": "header",
@@ -2428,7 +2259,7 @@
           "step": 2,
           "unit": "px",
           "label": "Font size",
-          "default": 84
+          "default": 80
         },
         {
           "type": "range",
@@ -2475,7 +2306,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 14
+          "default": 12
         },
         {
           "type": "range",
@@ -2495,7 +2326,7 @@
           "step": 10,
           "unit": "%",
           "label": "Line height",
-          "default": 100
+          "default": 130
         },
         {
           "type": "range",
@@ -2505,7 +2336,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 8
+          "default": 0
         },
         {
           "type": "range",
@@ -2525,7 +2356,7 @@
           "type": "richtext",
           "id": "completed_text",
           "label": "Text",
-          "default": "<p>Completed</p>"
+          "default": "<p>This offer has expired.</p>"
         },
         {
           "type": "checkbox",
@@ -2544,7 +2375,7 @@
           "type": "range",
           "id": "completed_text_size",
           "min": 0,
-          "max": 48,
+          "max": 40,
           "step": 1,
           "unit": "px",
           "label": "Font size",
@@ -2554,11 +2385,11 @@
           "type": "range",
           "id": "completed_text_size_mobile",
           "min": 0,
-          "max": 48,
+          "max": 40,
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 20
+          "default": 18
         },
         {
           "type": "range",
@@ -2576,46 +2407,53 @@
         },
         {
           "type": "color",
+          "label": "Background",
+          "id": "timer_bg_color",
+          "default": "#F3F3F3"
+        },
+        {
+          "type": "color",
           "label": "Number",
           "id": "number_color",
-          "default": "#FFFFFF"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Text",
           "id": "timer_text_color",
-          "default": "#FFFFFF"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Completed text",
           "id": "completed_text_color",
           "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Border",
-          "id": "timer_border_color",
-          "default": "#AFAFAF"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Countdown timer #8",
+      "name": "SG-Countdown timer #9",
       "blocks": [
-        {
-          "type": "sub_heading"
-        },
         {
           "type": "heading"
         },
         {
-          "type": "text"
+          "type": "text",
+          "settings": {
+            "text": "<p>Get your offer before the sale ends in</p>"
+          }
         },
         {
           "type": "timer"
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text_mt": 20,
+            "text_mt_mobile": 20
+          }
         },
         {
           "type": "button"
