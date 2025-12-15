@@ -13,13 +13,60 @@
   assign background_gradient = section.settings.background_gradient
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
+  assign section_radius = section.settings.section_radius
+
+  assign bg_image = section.settings.bg_image
+
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align_mobile = section.settings.heading_align_mobile
+  assign heading_align = section.settings.heading_align
 
   assign body_gap_mobile = section.settings.body_gap_mobile
   assign body_gap = section.settings.body_gap
-  assign body_radius = section.settings.body_radius
+  assign body_mt_mobile = section.settings.body_mt_mobile
+  assign body_mt = section.settings.body_mt
 
-  assign faq_position = section.settings.faq_position
-  assign faq_position_mobile = section.settings.faq_position_mobile
+  assign toggles_gap_mobile = section.settings.toggles_gap_mobile
+  assign toggles_gap = section.settings.toggles_gap
+  assign toggles_horizontal_align = section.settings.toggles_horizontal_align
+
+  assign toggle_size = section.settings.toggle_size
+  assign toggle_size_mobile = section.settings.toggle_size_mobile
+  assign toggle_color = section.settings.toggle_color
+  assign toggle_hover_color = section.settings.toggle_hover_color
+  assign toggle_custom = section.settings.toggle_custom
+  assign toggle_font = section.settings.toggle_font
+  assign toggle_height = section.settings.toggle_height
+  assign toggle_padding_vertical = section.settings.toggle_padding_vertical
+  assign toggle_padding_vertical_mobile = section.settings.toggle_padding_vertical_mobile
+  assign toggle_padding_horizontal = section.settings.toggle_padding_horizontal
+  assign toggle_padding_horizontal_mobile = section.settings.toggle_padding_horizontal_mobile
+  assign toggle_bg_color = section.settings.toggle_bg_color
+  assign toggle_bg_hover_color = section.settings.toggle_bg_hover_color
+  assign toggle_bg_active_color = section.settings.toggle_bg_active_color
+  assign toggle_border_thickness = section.settings.toggle_border_thickness
+  assign toggle_border_color = section.settings.toggle_border_color
+  assign toggle_border_hover_color = section.settings.toggle_border_hover_color
+  assign toggle_border_active_color = section.settings.toggle_border_active_color
+  assign toggle_active_color = section.settings.toggle_active_color
+  assign toggle_radius = section.settings.toggle_radius
+  assign toggle_align_mobile = section.settings.toggle_align_mobile
+  assign toggle_align = section.settings.toggle_align
+
+  assign items_padding_vertical_mobile = section.settings.items_padding_vertical_mobile
+  assign items_padding_vertical = section.settings.items_padding_vertical
+  assign items_padding_horizontal_mobile = section.settings.items_padding_horizontal_mobile
+  assign items_padding_horizontal = section.settings.items_padding_horizontal
+  assign items_radius = section.settings.items_radius
+  assign items_border_thickness = section.settings.items_border_thickness
+  assign items_border_color = section.settings.items_border_color
+  assign items_bg_color = section.settings.items_bg_color
 
   assign item_padding_vertical_mobile = section.settings.item_padding_vertical_mobile
   assign item_padding_vertical = section.settings.item_padding_vertical
@@ -31,6 +78,7 @@
   assign item_shadow = section.settings.item_shadow
   assign item_bg_color = section.settings.item_bg_color
   assign item_mt = section.settings.item_mt
+  assign item_border_bottom = section.settings.item_border_bottom
 
   assign question_size = section.settings.question_size
   assign question_size_mobile = section.settings.question_size_mobile
@@ -57,16 +105,19 @@
 
 {%- style -%}
 
+  {{  heading_font | font_face: font_display: 'swap' }}
+  {{  toggle_font | font_face: font_display: 'swap' }}
   {{  question_font | font_face: font_display: 'swap' }}
   {{  answer_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
     margin-left: {{ margin_horizontal_mobile }}rem;
     margin-right: {{ margin_horizontal_mobile }}rem;
-    border-radius: {{ body_radius }}px;
-    border: {{ border_thickness }}px solid {{ border_color }};
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
     overflow: hidden;
   }
   
@@ -78,9 +129,82 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
+  .faq-heading-{{ section.id }} {
+    text-align: {{ heading_align_mobile }};
+  }
+
+  .faq-heading-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    transition: all 0.25s ease 0s;
+  }
+
   .faq-body-{{ section.id }} {
+    margin-top: {{ body_mt_mobile }}px;
     display: grid;
     gap: {{ body_gap_mobile }}px;
+    padding-bottom: {{ items_radius }}px;
+    align-items: start;
+  }
+
+  .faq-toggles-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ toggles_gap_mobile }}px;
+  }
+
+  .faq-tab-toggle-{{ section.id }} {
+    background-color: transparent;
+    background-color: {{ toggle_bg_color | hex_to_rgba: 0.3 }};
+    text-decoration: none;
+    padding: {{ toggle_padding_vertical_mobile }}px {{ toggle_padding_horizontal_mobile }}px;
+    border: 0px;
+    border: {{ toggle_border_thickness }}px solid {{ toggle_border_color }};
+    border-radius: {{ toggle_radius }}px;
+    transition: all 0.25s ease 0s;
+    box-sizing: border-box;
+    margin: 0px;
+    font-size: {{ toggle_size_mobile }}px;
+    color: {{ toggle_color }};
+    line-height: {{ toggle_height }}%;
+    text-transform: unset;
+    font-weight: 700;
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+    text-align: {{ toggle_align_mobile }};
+  }
+
+  .faq-tab-toggle-{{ section.id }}:hover {
+    transition: all 0.25s ease 0s;
+    background-color: {{ toggle_bg_hover_color }};
+    color: {{ toggle_hover_color }};
+    border-color: {{ toggle_border_hover_color }};
+  }
+
+  .faq-tab-toggle-{{ section.id }}.active {
+    transition: all 0.25s ease 0s;
+    color: {{ toggle_active_color }};
+    background-color: {{ toggle_bg_active_color }};
+    border-color: {{ toggle_border_active_color }};
+  }
+
+  .faq-tab-{{ section.id }} {
+    display: none;
+    padding: {{ items_padding_vertical_mobile }}px {{ items_padding_horizontal_mobile }}px;
+    border-radius: {{ items_radius }}px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border: {{ items_border_thickness }}px solid {{ items_border_color }};
+    background-color: {{ items_bg_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .faq-tab-{{ section.id }}.active {
+    display: block;
   }
 
   .faq-item-{{ section.id }} {
@@ -179,7 +303,15 @@
 
   .faq-height-cal-{{ section.id }} p:not(:first-child ) {
     margin-top: 10px;
-  } 
+  }
+
+  .faq-tabs-mobile-{{ section.id }} {
+    margin-top: -{{ items_radius }}px;
+  }
+
+  .faq-tabs-desktop-{{ section.id }} {
+    display: none !important;
+  }
   
   @media(min-width: 1024px) {
 
@@ -188,6 +320,7 @@
       margin-bottom: {{ margin_bottom }}px;
       margin-left: {{ margin_horizontal }}rem;
       margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
     }
     
     .section-{{ section.id }}-settings {
@@ -198,8 +331,35 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
+    .faq-heading-{{ section.id }} {
+      text-align: {{ heading_align }};
+    }
+  
+    .faq-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
     .faq-body-{{ section.id }} {
+      margin-top: {{ body_mt }}px;
       gap: {{ body_gap }}px;
+      padding: 0px;
+    }
+
+    .faq-toggles-{{ section.id }} {
+      grid-template-columns: 1fr;
+      gap: {{ toggles_gap }}px;
+    }
+
+    .faq-tab-toggle-{{ section.id }} {
+      text-align: {{ toggle_align }};
+      padding: {{ toggle_padding_vertical }}px {{ toggle_padding_horizontal }}px;
+      font-size: {{ toggle_size }}px;
+    }
+
+    .faq-tab-{{ section.id }} {
+      padding: {{ items_padding_vertical }}px {{ items_padding_horizontal }}px;
+      border-bottom-left-radius: {{ items_radius }}px;
+      border-bottom-right-radius: {{ items_radius }}px;
     }
 
     .faq-item-{{ section.id }} {
@@ -235,6 +395,14 @@
     .faq-height-cal-{{ section.id }} * {
       font-size: {{ answer_size }}px;
     }
+
+    .faq-tabs-desktop-{{ section.id }} {
+      display: block !important;
+    }
+
+    .faq-tabs-mobile-{{ section.id }} {
+      display: none !important;
+    }
   }
   
 {%- endstyle -%}
@@ -246,6 +414,53 @@
     }
   </style>
 {% endunless %}
+
+{% if margin_horizontal_mobile > 0 %}
+  <style>
+    .section-{{ section.id }} {
+      border-left: solid {{ border_color }} {{ border_thickness }}px;
+      border-right: solid {{ border_color }} {{ border_thickness }}px;
+    }
+    
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: 0px;
+        border-right: 0px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if margin_horizontal > 0 %}
+  <style>
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: solid {{ border_color }} {{ border_thickness }}px;
+        border-right: solid {{ border_color }} {{ border_thickness }}px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if heading_custom %}
+  <style>
+    .faq-heading-{{ section.id }} * {
+      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      font-weight: {{ heading_font.weight }};
+      font-style: {{ heading_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_custom %}
+  <style>
+    .faq-tab-toggle-{{ section.id }} {
+      font-family: {{ toggle_font.family }}, {{ toggle_font.fallback_families }};
+      font-weight: {{ toggle_font.weight }};
+      font-style: {{ toggle_font.style }};
+    }
+  </style>
+{% endif %}
 
 {% if question_custom %}
   <style>
@@ -267,347 +482,98 @@
   </style>
 {% endif %}
 
-{% if faq_position_mobile == "top" %}
+{% if item_shadow %}
   <style>
-    .faq-items-{{ section.id }} {
-      order: 1;
+    .faq-item-{{ section.id }} {
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 8px 0px;
     }
+  </style>
+{% endif %}
 
-    .faq-content-{{ section.id }} {
-      order: 2;
+{% if item_border_bottom %}
+  <style>
+    .faq-item-{{ section.id }} {
+      border-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
+    }
+  </style>
+{% endif %}
+
+{% if bg_image != blank %}
+  <style>
+    .section-{{ section.id }}-settings {
+      background-image: url('{{ bg_image | image_url }}');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+{% endif %}
+
+{% if toggles_horizontal_align == "start" %}
+  <style>
+    @media(min-width: 1024px) {
+      .faq-body-{{ section.id }} {
+        grid-template-columns: 30% 70%;
+      }
+      
+      .faq-toggles-{{ section.id }} {
+        order: 1;
+      }
+
+      .faq-tabs-{{ section.id }} {
+        order: 2;
+      }
     }
   </style>
 {% else %}
   <style>
-    .faq-items-{{ section.id }} {
-      order: 2;
-    }
-
-    .faq-content-{{ section.id }} {
-      order: 1;
-    }
-  </style>
-{% endif %}
-
-{% if faq_position == "left" %}
-  <style>
     @media(min-width: 1024px) {
       .faq-body-{{ section.id }} {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 70% 30%;
+      }
+      
+      .faq-toggles-{{ section.id }} {
+        order: 2;
       }
 
-      .faq-items-{{ section.id }} {
-        order: 1;
-      }
-  
-      .faq-content-{{ section.id }} {
-        order: 2;
-      }
-    }
-  </style>
-{% elsif faq_position == "right" %}
-  <style>
-    @media(min-width: 1024px) {
-      .faq-body-{{ section.id }} {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .faq-items-{{ section.id }} {
-        order: 2;
-      }
-  
-      .faq-content-{{ section.id }} {
-        order: 1;
-      }
-    }
-  </style>
-{% elsif faq_position == "top" %}
-  <style>
-    @media(min-width: 1024px) {
-      .faq-items-{{ section.id }} {
-        order: 1;
-      }
-  
-      .faq-content-{{ section.id }} {
-        order: 2;
-      }
-    }
-  </style>
-{% elsif faq_position == "bottom" %}
-  <style>
-    @media(min-width: 1024px) {
-
-      .faq-items-{{ section.id }} {
-        order: 2;
-      }
-  
-      .faq-content-{{ section.id }} {
+      .faq-tabs-{{ section.id }} {
         order: 1;
       }
     }
   </style>
 {% endif %}
-
-{% if item_shadow %}
-  <style>
-    .faq-item-{{ section.id }} {
-      box-shadow: rgba(18, 18, 23, 0.08) 0px 6px 4px -1px;
-    }
-  </style>
-{% endif %}
-
-{% for block in section.blocks %}
-  {% if block.type == "heading" %}
-    <style>
-      {{  block.settings.heading_font | font_face: font_display: 'swap' }}
-      
-      .faq-heading-{{ block.id }} {
-        text-align: {{ block.settings.heading_align_mobile }};
-        margin-top: {{ block.settings.heading_mt_mobile }}px;
-      }
-
-      .faq-heading-{{ block.id }} * {
-        margin: 0;
-        font-size: {{ block.settings.heading_size_mobile }}px;
-        color: {{ block.settings.heading_color }};
-        line-height: {{ block.settings.heading_height }}%;
-        text-transform: unset;
-      }
-
-      @media(min-width: 1024px) {
-        
-        .faq-heading-{{ block.id }} {
-          text-align: {{ block.settings.heading_align }};
-          margin-top: {{ block.settings.heading_mt }}px;
-        }
-  
-        .faq-heading-{{ block.id }} * {
-          font-size: {{ block.settings.heading_size }}px;
-        }
-      }
-    </style>
-
-    {% if block.settings.heading_custom %}
-      <style>
-        .faq-heading-{{ block.id }} {
-          font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-          font-weight: {{ block.settings.heading_font.weight }};
-          font-style: {{ block.settings.heading_font.style }};
-        }
-      </style>
-    {% endif %}
-
-  {% elsif block.type == "text" %}
-    <style>
-      {{  block.settings.text_font | font_face: font_display: 'swap' }}
-      
-      .faq-text-{{ block.id }} {
-        text-align: {{ block.settings.text_align_mobile }};
-        margin-top: {{ block.settings.text_mt_mobile }}px;
-      }
-
-      .faq-text-{{ block.id }} * {
-        margin: 0;
-        font-size: {{ block.settings.text_size_mobile }}px;
-        color: {{ block.settings.text_color }};
-        line-height: {{ block.settings.text_height }}%;
-        text-transform: unset;
-      }
-
-      @media(min-width: 1024px) {
-        
-        .faq-text-{{ block.id }} {
-          text-align: {{ block.settings.text_align }};
-          margin-top: {{ block.settings.text_mt }}px;
-        }
-  
-        .faq-text-{{ block.id }} * {
-          font-size: {{ block.settings.text_size }}px;
-        }
-      }
-    </style>
-
-    {% if block.settings.text_custom %}
-      <style>
-        .faq-text-{{ block.id }} {
-          font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
-          font-weight: {{ block.settings.text_font.weight }};
-          font-style: {{ block.settings.text_font.style }};
-        }
-      </style>
-    {% endif %}
-
-  {% elsif block.type == "button" %}
-
-  <style>
-    .faq-button-{{ block.id }} {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      max-width: {{ block.settings.button_width_mobile }}px;
-      margin: 0;
-      margin-top: {{ block.settings.button_mt_mobile }}px;
-      font-size: {{ block.settings.button_size_mobile }}px;
-      color: {{ block.settings.button_color }};
-      line-height: {{ block.settings.button_height }}%;
-      text-align: center;
-      text-transform: unset;
-      text-decoration: none;
-      padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
-      border-radius: {{ block.settings.button_radius }}px;
-      transition: all 0.25s ease 0s;
-      position: relative;
-      font-weight: 700;
-      z-index: 2;
-    }
-  
-    .faq-button-{{ block.id }}:hover {
-      color: {{ block.settings.button_hover_color }};
-      transition: all 0.25s ease 0s;
-    }
-  
-    .faq-button-{{ block.id }} svg {
-      width: 14px;
-      height: 14px;
-    }
-  
-    .faq-button-{{ block.id }} svg path {
-      fill: {{ block.settings.button_color }};
-      transition: all 0.25s ease 0s;
-    }
-  
-    .faq-button-{{ block.id }}:hover svg path {
-      fill: {{ block.settings.button_hover_color }};
-      transition: all 0.25s ease 0s;
-    }
-
-    @media(min-width: 1024px) {
-      .faq-button-{{ block.id }} {
-        margin-top: {{ block.settings.button_mt }}px;
-        max-width: {{ block.settings.button_width }}px;
-        padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
-        font-size: {{ block.settings.button_size }}px;
-      }
-    }
-  </style>
-
-  {% if block.settings.button_custom %}
-    <style>
-      .faq-button-{{ block.id }} {
-        font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
-        font-weight: {{ block.settings.button_font.weight }};
-        font-style: {{ block.settings.button_font.style }};
-      }
-    </style>
-  {% endif %}
-
-  {% if block.settings.button_align_mobile == "center" %}
-    <style>
-     .faq-button-{{ block.id }} {
-        margin-left: auto;
-        margin-right: auto;
-      } 
-    </style>
-  {% elsif block.settings.button_align_mobile == "right" %}
-    <style>
-     .faq-button-{{ block.id }} {
-        margin-left: auto;
-      } 
-    </style>
-  {% endif %}
-  
-  {% if block.settings.button_align == "center" %}
-    <style>
-      @media(min-width: 1024px) {
-       .faq-button-{{ block.id }} {
-          margin-left: auto !important;
-          margin-right: auto !important;
-        } 
-      }
-    </style>
-  {% elsif block.settings.button_align == "right" %}
-    <style>
-      @media(min-width: 1024px) {
-       .faq-button-{{ block.id }} {
-          margin-left: auto !important;
-          margin-right: 0px !important;
-        } 
-      }
-    </style>
-  {% else %}
-    <style>
-      @media(min-width: 1024px) {
-       .faq-button-{{ block.id }} {
-          margin-left: 0px !important;
-          margin-right: 0px !important;
-        } 
-      }
-    </style>
-  {% endif %}
-  
-  {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
-    <style>
-      .faq-button-{{ block.id }} {
-        background-color: {{ block.settings.button_bg_color }};
-      }
-  
-      .faq-button-{{ block.id }}:hover {
-        background-color: {{ block.settings.button_bg_hover_color }};
-      }
-    </style>
-  {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
-    <style>
-      .faq-button-{{ block.id }} {
-        background-color: {{ block.settings.button_bg_color }};
-        border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_color }};
-      }
-  
-      .faq-button-{{ block.id }}:hover {
-        background-color: {{ block.settings.button_bg_hover_color }};
-        border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_hover_color }};
-      }
-    </style>
-  {% endif %}
-    
-  {% endif %}
-  
-{% endfor %}
 
 <div class="section-{{ section.id }} faq-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
+      {% if heading != blank %}
+        <div class="faq-heading-{{ section.id }}">
+          {{ heading }}
+        </div>
+      {% endif %}
       <div class="faq-body-{{ section.id }}">
-        <div class="faq-content-{{ section.id }}">
+        <div class="faq-toggles-{{ section.id }}">
           {% for block in section.blocks %}
-            {% if block.type == "heading" %}
-              <div class="faq-heading-{{ block.id }}">
-                {{ block.settings.heading }}
-              </div>
-            {% endif %}
-            {% if block.type == "text" %}
-              <div class="faq-text-{{ block.id }}">
-                {{ block.settings.text }}
-              </div>
-            {% endif %}
-
-            {% if block.type == "button" %}
-              <a href="{{ block.settings.button_url }}" class="faq-button-{{ block.id }}">
-                {{ block.settings.button }}
-                {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
-                  <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
-                    <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
-                  </svg>
-                {% endif %}
-              </a>
+            {% if block.type == "tab" %}
+              <button class="faq-tab-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">{{ block.settings.tab_title }}</button>
             {% endif %}
           {% endfor %}
         </div>
-        <div class="faq-items-{{ section.id }}">
+        <div class="faq-tabs-{{ section.id }} faq-tabs-desktop-{{ section.id }}">
+          {% assign inside_item = false %}
           {% for block in section.blocks %}
-            {% if block.type == "item" %}
+            {% if block.type == "tab" %}
+
+              {% if inside_item %}
+                </div>
+              {% endif %}
+
+              <div class="faq-tab-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+                {% assign inside_item = true %}
+
+            {% elsif block.type == "item" %}
+
               <div class="faq-item-{{ section.id }}">
                 <div class="faq-toggle-{{ section.id }}">
                   <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
@@ -626,15 +592,87 @@
                   {{ block.settings.answer }}
                 </div>
               </div>
+              
             {% endif %}
           {% endfor %}
+
+          {% if inside_item %}
+            </div>
+          {% endif %}
         </div>
       </div>
+    </div>
+    <div class="faq-tabs-{{ section.id }} faq-tabs-mobile-{{ section.id }}">
+      {% assign inside_item = false %}
+      {% for block in section.blocks %}
+        {% if block.type == "tab" %}
+
+          {% if inside_item %}
+            </div>
+          {% endif %}
+
+          <div class="faq-tab-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+            {% assign inside_item = true %}
+
+        {% elsif block.type == "item" %}
+
+          <div class="faq-item-{{ section.id }}">
+            <div class="faq-toggle-{{ section.id }}">
+              <p class="faq-question-{{ section.id }}">{{ block.settings.question }}</p>
+              <div class="faq-arrow-{{ section.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 143.000000 83.000000" preserveAspectRatio="xMidYMid meet">
+                  <g transform="translate(0.000000,83.000000) scale(0.100000,-0.100000)" fill="" stroke="none">
+                  <path d="M57 772 l-57 -57 360 -360 360 -360 357 357 358 358 -63 62 -62 63 -298 -298 -297 -297 -295 295 c-162 162 -297 295 -300 295 -3 0 -31 -26 -63 -58z"></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="faq-answer-{{ section.id }}" style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;">
+                {{ block.settings.answer }}
+              </div>
+            <div class="faq-height-cal-{{ section.id }}">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+          
+        {% endif %}
+      {% endfor %}
+
+      {% if inside_item %}
+        </div>
+      {% endif %}
     </div>
 </div>
 
 <script>
-  function initFAQ9() {
+  function initFAQ10() {
+
+    let toggles = document.querySelectorAll('.faq-tab-toggle-{{ section.id }}');
+    let tabs = document.querySelectorAll('.faq-tab-{{ section.id }}');
+
+    if(toggles) {
+      toggles.forEach(el => {
+        el.addEventListener('click', () => {
+          toggles.forEach(element => {
+            element.classList.remove('active');
+          });
+
+          el.classList.add('active');
+
+          if(tabs) {
+            tabs.forEach(element => {
+              let dataId = element.getAttribute('data-id');
+
+              if(el.id == dataId) {
+                element.classList.add('active');
+              } else {
+                element.classList.remove('active');
+              }
+            })
+          }
+        })
+      })
+    }
     
     const answerPaddingTop = {{ answer_padding_top }};
     const answerPaddingBottom = 0;
@@ -700,7 +738,7 @@
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
         toggleAnswer(index);
-        // closeAllAnswerBut(index);
+        closeAllAnswerBut(index);
       });
     });
 
@@ -717,18 +755,81 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initFAQ9);
+  document.addEventListener('DOMContentLoaded', initFAQ10);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initFAQ9);
-     document.addEventListener('shopify:section:load', initFAQ9);
+     document.addEventListener('shopify:section:unload', initFAQ10);
+     document.addEventListener('shopify:section:load', initFAQ10);
   }
 </script>
 
 {% schema %}
 {
-  "name": "SG-FAQ #9",
+  "name": "SG-FAQ #10",
   "settings": [
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<h2>FAQ</h2>"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size - Mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Heading Line Height",
+      "default": 130
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_align",
+      "label": "Heading Align"
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_align_mobile",
+      "label": "Heading Align - Mobile",
+      "default": "center"
+    },
     {
       "type": "header",
       "content": "Body Settings"
@@ -741,7 +842,7 @@
       "step": 2,
       "unit": "px",
       "label": "Body Gap",
-      "default": 30
+      "default": 16
     },
     {
       "type": "range",
@@ -751,61 +852,249 @@
       "step": 2,
       "unit": "px",
       "label": "Body Gap - Mobile",
-      "default": 20
+      "default": 24
     },
     {
       "type": "range",
-      "id": "body_radius",
+      "id": "body_mt",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Body Roundness",
+      "label": "Body Margin Top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "body_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Body Margin Top - Mobile",
       "default": 40
     },
     {
       "type": "header",
-      "content": "FAQ Settings"
+      "content": "Toggles Settings"
+    },
+    {
+      "type": "range",
+      "id": "toggles_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggles Gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "toggles_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggles Gap - Mobile",
+      "default": 16
     },
     {
       "type": "select",
-      "id": "faq_position",
-      "label": "FAQ Position - Desktop",
-      "default": "right",
+      "id": "toggles_horizontal_align",
+      "label": "Toggles Horizontal Align - Desktop",
+      "default": "start",
       "options": [
         {
           "label": "Left",
-          "value": "left"
+          "value": "start"
         },
         {
           "label": "Right",
-          "value": "right"
-        },
-        {
-          "label": "Top",
-          "value": "top"
-        },
-        {
-          "label": "Bottom",
-          "value": "bottom"
+          "value": "end"
         }
       ]
     },
     {
-      "type": "select",
-      "id": "faq_position_mobile",
-      "label": "FAQ Position - Mobile",
-      "default": "top",
-      "options": [
-        {
-          "label": "Top",
-          "value": "top"
-        },
-        {
-          "label": "Bottom",
-          "value": "bottom"
-        }
-      ]
+      "type": "header",
+      "content": "Toggle Settings"
+    },
+    {
+      "type": "range",
+      "id": "toggle_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggle Padding Vertical",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "toggle_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggle Padding Vertical - Mobile",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "toggle_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggle Padding Horizontal",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "toggle_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggle Padding Horizontal - Mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "toggle_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Toggle Border Radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "toggle_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Toggle Border Thickness",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle_custom",
+      "label": "Use Custom Font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "toggle_font",
+      "label": "Toggle Font Family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "toggle_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Toggle Size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "toggle_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Toggle Size - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "toggle_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Toggle Line Height",
+      "default": 130
+    },
+    {
+      "type": "text_alignment",
+      "id": "toggle_align",
+      "label": "Toggle Text Align",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "toggle_align_mobile",
+      "label": "Toggle Text Align - Mobile",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Items Settings"
+    },
+    {
+      "type": "range",
+      "id": "items_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "FAQ Items Padding Vertical",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "items_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "FAQ Items Padding Vertical - Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "items_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "FAQ Items Padding Horizontal",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "items_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "FAQ Items Padding Horizontal - Mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "items_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "FAQ Items Border Radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "items_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "FAQ Items Border Thickness",
+      "default": 0
     },
     {
       "type": "header",
@@ -819,7 +1108,7 @@
       "step": 2,
       "unit": "px",
       "label": "Item Padding Vertical",
-      "default": 20
+      "default": 24
     },
     {
       "type": "range",
@@ -839,7 +1128,7 @@
       "step": 2,
       "unit": "px",
       "label": "Item Padding Horizontal",
-      "default": 20
+      "default": 0
     },
     {
       "type": "range",
@@ -849,7 +1138,7 @@
       "step": 2,
       "unit": "px",
       "label": "Item Padding Horizontal - Mobile",
-      "default": 20
+      "default": 0
     },
     {
       "type": "range",
@@ -869,7 +1158,7 @@
       "step": 2,
       "unit": "px",
       "label": "Item Border Radius",
-      "default": 10
+      "default": 0
     },
     {
       "type": "range",
@@ -879,13 +1168,19 @@
       "step": 1,
       "unit": "px",
       "label": "Item Border Thickness",
-      "default": 0
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "item_border_bottom",
+      "label": "Item Border Bottom Only",
+      "default": true
     },
     {
       "type": "checkbox",
       "id": "item_shadow",
       "label": "Item Box Shadow",
-      "default": true
+      "default": false
     },
     {
       "type": "header",
@@ -911,7 +1206,7 @@
       "step": 2,
       "unit": "px",
       "label": "Question Size",
-      "default": 18
+      "default": 20
     },
     {
       "type": "range",
@@ -931,7 +1226,7 @@
       "step": 10,
       "unit": "%",
       "label": "Question Line Height",
-      "default": 130
+      "default": 150
     },
     {
       "type": "header",
@@ -1021,7 +1316,81 @@
       "step": 2,
       "unit": "px",
       "label": "Answer Padding Top",
-      "default": 16
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Toggle Colors"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Text Color",
+      "id": "toggle_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Hover Text Color",
+      "id": "toggle_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Active Text Color",
+      "id": "toggle_active_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Background Color",
+      "id": "toggle_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Background Hover Color",
+      "id": "toggle_bg_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Background Active Color",
+      "id": "toggle_bg_active_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Border Color",
+      "id": "toggle_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Border Hover Color",
+      "id": "toggle_border_hover_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Toggle Border Active Color",
+      "id": "toggle_border_active_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Items Colors"
+    },
+    {
+      "type": "color",
+      "label": "Items Background Color",
+      "id": "items_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Items Border Color",
+      "id": "items_border_color",
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -1037,31 +1406,31 @@
       "type": "color",
       "label": "Item Border Color",
       "id": "item_border_color",
-      "default": "#000000"
+      "default": "#E7E7E8"
     },
     {
       "type": "color",
       "label": "Question Color",
       "id": "question_color",
-      "default": "#005C53"
+      "default": "#121212"
     },
     {
       "type": "color",
       "label": "Arrow Color",
       "id": "arrow_color",
-      "default": "#757575"
+      "default": "#121212"
     },
     {
       "type": "color",
       "label": "Arrow Border Color",
       "id": "arrow_border_color",
-      "default": "#6c584c"
+      "default": "#121212"
     },
     {
       "type": "color",
       "label": "Answer Color",
       "id": "answer_color",
-      "default": "#757575"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -1069,9 +1438,15 @@
     },
     {
       "type": "color",
+      "label": "Heading Color",
+      "id": "heading_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
       "label": "Section background",
       "id": "background_color",
-      "default": "#F0F3F4"
+      "default": "#333333"
     },
     {
       "type": "color_background",
@@ -1096,7 +1471,7 @@
       "step": 4,
       "unit": "px",
       "label": "Margin top",
-      "default": 16
+      "default": 0
     },
     {
       "type": "range",
@@ -1106,7 +1481,7 @@
       "step": 4,
       "unit": "px",
       "label": "Margin bottom",
-      "default": 16
+      "default": 0
     },
     {
       "type": "range",
@@ -1116,7 +1491,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Margin sides",
-      "default": 4
+      "default": 1
     },
     {
       "type": "range",
@@ -1126,7 +1501,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Margin sides mobile",
-      "default": 1.5
+      "default": 0
     },
     {
       "type": "header",
@@ -1140,7 +1515,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 60
+      "default": 64
     },
     {
       "type": "range",
@@ -1150,7 +1525,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 60
+      "default": 48
     },
     {
       "type": "range",
@@ -1160,7 +1535,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 6
+      "default": 8
     },
     {
       "type": "range",
@@ -1175,6 +1550,11 @@
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
     },
     {
       "type": "checkbox",
@@ -1201,459 +1581,28 @@
       "unit": "px",
       "label": "Border thickness",
       "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Roundness",
+      "default": 32
     }
   ],
   "blocks": [
     {
-      "type": "heading",
-      "name": "Heading",
+      "type": "tab",
+      "name": "FAQ Tab",
       "settings": [
-        {
-          "type": "richtext",
-          "id": "heading",
-          "label": "Heading",
-          "default": "<h2>Have Questions?<br>We Have Answers.</h2>"
-        },
-        {
-          "type": "checkbox",
-          "id": "heading_custom",
-          "label": "Use Custom Font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "heading_font",
-          "label": "Heading Font Family",
-          "default": "josefin_sans_n4"
-        },
-        {
-          "type": "range",
-          "id": "heading_size",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Heading Size",
-          "default": 48
-        },
-        {
-          "type": "range",
-          "id": "heading_size_mobile",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Heading Size - Mobile",
-          "default": 30
-        },
-        {
-          "type": "range",
-          "id": "heading_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Heading Line Height",
-          "default": 130
-        },
-        {
-          "type": "range",
-          "id": "heading_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Heading Margin Top",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "heading_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Heading Margin Top - Mobile",
-          "default": 0
-        },
-        {
-          "type": "text_alignment",
-          "id": "heading_align",
-          "label": "Heading Align"
-        },
-        {
-          "type": "text_alignment",
-          "id": "heading_align_mobile",
-          "label": "Heading Align - Mobile",
-          "default": "center"
-        },
-        {
-          "type": "color",
-          "id": "heading_color",
-          "label": "Heading Color",
-          "default": "#005C53"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "Text",
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text",
-          "default": "<p>Get quick solutions to your common lawn care concerns, from mowing to pest control. </p>"
-        },
-        {
-          "type": "checkbox",
-          "id": "text_custom",
-          "label": "Use Custom Font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "text_font",
-          "label": "Text Font Family",
-          "default": "josefin_sans_n4"
-        },
-        {
-          "type": "range",
-          "id": "text_size",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Text Size",
-          "default": 18
-        },
-        {
-          "type": "range",
-          "id": "text_size_mobile",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Text Size - Mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "text_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Text Line Height",
-          "default": 130
-        },
-        {
-          "type": "range",
-          "id": "text_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Text Margin Top",
-          "default": 20
-        },
-        {
-          "type": "range",
-          "id": "text_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Text Margin Top - Mobile",
-          "default": 20
-        },
-        {
-          "type": "text_alignment",
-          "id": "text_align",
-          "label": "Text Align"
-        },
-        {
-          "type": "text_alignment",
-          "id": "text_align_mobile",
-          "label": "Text Align - Mobile",
-          "default": "center"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text Color",
-          "default": "#757575"
-        }
-      ]
-    },
-    {
-      "type": "button",
-      "name": "Button",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Button"
-        },
         {
           "type": "text",
-          "id": "button",
-          "label": "Button Text",
-          "default": "Get it now"
-        },
-        {
-          "type": "url",
-          "id": "button_url",
-          "label": "Button URL"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_custom",
-          "label": "Use Custom Font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "button_font",
-          "label": "Button Font Family",
-          "default": "josefin_sans_n4"
-        },
-        {
-          "type": "range",
-          "id": "button_size",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Button Size",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_size_mobile",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Button Size - Mobile",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "button_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Button Line Height",
-          "default": 100
-        },
-        {
-          "type": "range",
-          "id": "button_width",
-          "min": 200,
-          "max": 700,
-          "step": 5,
-          "unit": "px",
-          "label": "Button Max-Width - Desktop",
-          "default": 200
-        },
-        {
-          "type": "range",
-          "id": "button_width_mobile",
-          "min": 200,
-          "max": 700,
-          "step": 5,
-          "unit": "px",
-          "label": "Button Max-Width - Mobile",
-          "default": 200
-        },
-        {
-          "type": "range",
-          "id": "button_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Margin Top",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Margin Top - Mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_padding_vertical",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Padding Vertical",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_padding_vertical_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Padding Vertical - Mobile",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "button_padding_horizontal",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Padding Horizontal",
-          "default": 24
-        },
-        {
-          "type": "range",
-          "id": "button_padding_horizontal_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Padding Horizontal - Mobile",
-          "default": 24
-        },
-        {
-          "type": "range",
-          "id": "button_radius",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Button Border Radius",
-          "default": 4
-        },
-        {
-          "type": "range",
-          "id": "button_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Button Border Thickness",
-          "default": 1
-        },
-        {
-          "type": "select",
-          "id": "button_align",
-          "label": "Button Align",
-          "default": "left",
-          "options": [
-            {
-              "label": "Left",
-              "value": "left"
-            },
-            {
-              "label": "Center",
-              "value": "center"
-            },
-            {
-              "label": "Right",
-              "value": "right"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "button_align_mobile",
-          "label": "Button Align - Mobile",
-          "default": "center",
-          "options": [
-            {
-              "label": "Left",
-              "value": "left"
-            },
-            {
-              "label": "Center",
-              "value": "center"
-            },
-            {
-              "label": "Right",
-              "value": "right"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "button_style",
-          "label": "Button Style",
-          "default": "non_outline",
-          "options": [
-            {
-              "label": "Link",
-              "value": "link"
-            },
-            {
-              "label": "Non-Outline",
-              "value": "non_outline"
-            },
-            {
-              "label": "Non-Outline & Arrow",
-              "value": "non_outline_arrow"
-            },
-            {
-              "label": "Outline",
-              "value": "outline"
-            },
-            {
-              "label": "Outline & Arrow",
-              "value": "outline_arrow"
-            }
-          ]
-        },
-        {
-          "type": "header",
-          "content": "Button Colors"
-        },
-        {
-          "type": "color",
-          "label": "Button Text Color",
-          "id": "button_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Button Hover Text Color",
-          "id": "button_hover_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "label": "Button Background Color",
-          "id": "button_bg_color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "label": "Button Background Hover Color",
-          "id": "button_bg_hover_color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "label": "Button Border Color",
-          "id": "button_border_color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "label": "Button Border Hover Color",
-          "id": "button_border_hover_color",
-          "default": "#000000"
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "Tab Title"
         }
       ]
     },
@@ -1665,26 +1614,41 @@
           "type": "text",
           "id": "question",
           "label": "Question",
-          "default": "Lorem ipsum dolor sit amet?"
+          "default": "Question"
         },
         {
           "type": "richtext",
           "id": "answer",
           "label": "Answer",
-          "default": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Si habetis ulteriores quaestiones, quaeso, nostri auxilium clientibus contact.</p>"
+          "default": "<p>Answer</p>"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-FAQ #9",
+      "name": "SG-FAQ #10",
       "blocks": [
         {
-          "type": "heading"
+          "type": "tab",
+          "settings": {
+            "tab_title": "Returns & Refunds"
+          }
         },
         {
-          "type": "text"
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Delivery"
+          }
         },
         {
           "type": "item"
@@ -1694,6 +1658,57 @@
         },
         {
           "type": "item"
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Order"
+          }
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Store"
+          }
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Technical"
+          }
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Partnerships"
+          }
         },
         {
           "type": "item"
