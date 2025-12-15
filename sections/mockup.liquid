@@ -1,272 +1,317 @@
-<section class="page-width section section-featured-box section-{{ section.id }}-padding" id="section-{{ section.id }}" id="eco-features">
-  <div class="flex-container">
-    <div class="flex-item feature-info-wrap">
-      <div class="feature-info">
-        <h2 class="fi-heading">{{section.settings.text}}</h2>
-        <h5 class="fi-subhead">{{section.settings.sub_text}}</h5>
-        <a href="{{section.settings.button_link}}" class="btn btn-outline">{{section.settings.button_title}}</a>
+<div class="section-{{ section.id }}-padding page-width">
+  <div class="sg-row-grid">
+    <div class="sg-col-grid-7">
+      <div class="sg-banner-content">
+        <h1 class="sg-title">{{section.settings.title}}</h1>
+        <div class="sg-desc">{{section.settings.desc}}</div>
+        <div class="sg-banner-flex">
+          <div class="sg-b-button">
+            <a class="sg-btn btn-outline" href="{{section.settings.linkurl}}">{{section.settings.linktitle}}</a>
+          </div>
+          <div class="sg-b-bold">
+            <b>{{section.settings.subdesc}}</b>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="flex-item feature-items-wrap">
-      <div class="flex-inner-container">
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'box' -%}
-            <div class="flex-inner-item">
-              <div class="featur-item">
-                <div class="fi-icon"> <img class="fi-img" src="{{ block.settings.box_image | img_url: 'master' }}"/> </div>
-                <div class="fi-desc"> {{ block.settings.box_title | escape }} </div>
-              </div>
-            </div>
-          {%- endcase -%}
-        {%- endfor -%}
-      </div>
-    </div>
-    <div class="flex-item tab-button">
-      <div class="feature-info-mob">
-      	 <a href="{{section.settings.button_link}}" class="btn btn-outline">{{section.settings.button_title}}</a>
+    <div class="sg-col-grid-5">
+      <div class="sg-banner__media">
+        <div class="sg-media--{{ section.settings.height }} color-{{ section.settings.color_scheme }} {% if section.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}"
+              {% if section.settings.height == 'adapt' and section.settings.image != blank %} style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;"{% endif %}
+              >
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image| image_url: width: section.settings.image.width | image_tag: loading: 'lazy', alt: section.settings.image.alt}}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
+{%-liquid
+  assign color1 = section.settings.wave_color_1 | remove: "#"
+  assign color2 = section.settings.wave_color_2 | remove: "#"
+  -%}
 <style>
 
-  .flex-container {display:flex}
-
-  .section-{{ section.id }}-padding {
+ .section-{{ section.id }}-padding {
     max-width: {{section.settings.section-width}}rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding: 0 5rem;
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
+ }
   
-  @media only screen and (min-width:1300px){
-  .section-featured-box .page-width{
-  }
+.media {
+  background-color:unset;
 }
-
-.flex-container {
-  display: flex;
-  gap: 20px; 
+  
+.banner-section {
+  padding-top: 60px;
+  position: relative;
+  padding-bottom: 80px;
 }
-
-.feature-info-wrap {
-  flex: 0 0 44%; /* to fit the text */
+.banner-section::after {
+  content: "";
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
 }
-
-.feature-items-wrap {
-  flex: 0 0 56%; /* to fit the boxes */
+.banner-section .banner-curves > img {
+  max-width: 100%;
+  width: 100%;
+  display: block;
 }
-
-.flex-inner-container {
+.banner-section .sg-row-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between; /* to distribute boxes evenly */
+  margin-left: -10px;
+  margin-right: -10px;
+  align-items: flex-start;
 }
-
-.flex-inner-item {
-  flex: 0 0 calc(33.333% - 20px); /* to fit 3 boxes in a row */
+.banner-section .sg-row-grid .sg-col-grid-7,
+.banner-section .sg-row-grid .sg-col-grid-5{
+  width:100%;
+  min-height:1px;
+  flex:0 0 auto;
+  position:relative;
+  padding-left:10px;
+  padding-right:10px;
 }
-
-
-.feature-info {
-	padding-right: 45px;
-}
-.feature-info .fi-heading {
-  font-weight: 800;
-  margin-bottom: 20px;
-  margin-top: 15px;
-}
-.feature-info .fi-subhead {
-  font-style: normal;
-  font-weight: normal;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-.btn.btn-outline {
-  padding: 18px 40px;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 600;
-  display: inline-block;
-}
-
-.featur-item {
-  text-align: center;
-  padding: 20px 10px 15px;
-  max-width: 164px;
-  margin: 0 auto 34px;
-}
-.fi-icon .fi-img {
-  max-width: 95px;
-  margin-bottom: 5px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.featur-item .fi-desc {
-  line-height: 24px;
-  font-weight: 500;
-}
-
-@media only screen and (max-width:1280px){
-  .feature-info {
-    padding-right: 20px;
+@media only screen and (min-width:768px){
+  .banner-section .sg-row-grid .sg-col-grid-5{
+    width:45%;
+  }
+  .banner-section .sg-row-grid .sg-col-grid-7{
+    width:55%;
   }
 }
-@media only screen and (min-width:1025px){
-  .tab-button{
-  	display:none !important;
+
+.banner-section .sg-global-media-settings {
+  background-color: transparent;
+  border: none;
+}
+.banner-section .sg-banner__media {
+  position: relative;
+  z-index: 1;
+}
+
+.sg-banner-content {
+  margin-bottom: 200px;
+}
+.banner-section .sg-title {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  margin-top: 0px;
+  margin-bottom: 16px;
+}
+.banner-section .sg-desc {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 30px;
+}
+.banner-section .sg-btn.btn-outline{
+  background-color:#ffffff;
+}
+.banner-section .sg-b-bold{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sg-banner-flex {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sg-banner-flex .sg-b-button {
+  margin-right: 28px;
+}
+
+@media only screen and (max-width:1499px){
+  .banner-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 }
 @media only screen and (max-width:1024px){
-
-  .feature-info-wrap,
-  .feature-items-wrap {
-    flex: 0 0 100%; 
+  .banner-section {
+    padding-top: 50px;
+    padding-bottom: 100px;
   }
-  .flex-container {
-    flex-direction: column; /* to move the text above and boxes below on smaller screens */
+  .banner-section .sg-title {
+    font-size: {{ section.settings.titlesize }}px;
+    line-height: 1.3;
   }
-  
-  .section-featured-box {
-  }
-  .f-main-grid > .grid__item:first-child,
-  .f-main-grid > .grid__item,
-  .f-main-grid > .grid__item:nth-child(2) {
-    flex: 0 0 100%; /* Flex basis set to fill the entire row */
-  }
-  .f-main-grid > .grid__item:nth-child(2) {
-    width: 100% !important;
-    max-width: 100%;
-  }
-  .feature-info .btn{
-    display:none;
-  }
-  .feature-info {
-    padding-right: 0px;
-  }
-  .section-featured-box .page-width {
-  }
-  .feature-info-mob{
-  	margin-top:40px;
-  }
-  .featur-item {
-    max-width: 200px;
-  }
-  .featur-item {
-    margin-left: 0;
+  .banner-section .sg-b-bold {
+    font-size: 18px;
   }
 }
-
-@media only screen and (max-width:575px){
-  .section-featured-box {
-  }
-    .flex-inner-item {
-    flex: 0 0 calc(50% - 20px); /* to fit 2 boxes in a row on smallest screens */
-  }
-  .feature-info .fi-heading {
+@media only screen and (max-width:767px){
+  .sg-banner-content {
     margin-bottom: 20px;
-    margin-top: 5px;
+    padding: 0px 30px;
   }
-  .featur-item {
-    margin: 0 auto 20px;
+  .banner-section {
+    padding-bottom: 60px;
   }
-  .feature-info-mob {
-    margin-top: 30px;
-    text-align: center;
+  .banner-section::after {
+    background-position: 70% 50%;
   }
-  .featur-item {
-    margin-left: auto;
+  .sg-banner__media .sg-media--adapt.media {
+  }
+  .sg-banner__media img {
+    object-fit: contain;
+  }
+  .sg-banner-flex {
+    align-items: self-start;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+  .banner-section .sg-desc {
+    line-height:1.3;
+    margin-bottom: 20px;
+    font-size:{{section.settings.descsize  | times: 0.75 | round: 0  }}px;
+  }
+  .banner-section .sg-b-bold {
+    margin-bottom: 20px;
+    font-size:{{section.settings.subdescsize  | times: 0.75 | round: 0  }}px;
+  }
+  .banner-section .sg-title {
+    font-size: {{ section.settings.titlesize  | times: 0.75 | round: 0  }}px;
+    line-height: 1.3;
   }
 }
-  
-  .btn.btn-outline{
-    font-size:{{section.settings.button-size}}px;
-    color: {{ section.settings.button-text }};
-    border:1px solid {{ section.settings.button-text }};
-    background-color:transparent;
+@media only screen and (max-width:479px){
+  .sg-banner-content {
+    padding: 0px 0px 0px 0px;
+  }
+}
+  .banner-section{
+    background-color: {{section.settings.section_bg_color}};
+  }
+  .banner-section:after {
+    background-image: url("data:image/svg+xml; utf8,<svg viewBox='0 0 1512 157' xmlns='http://www.w3.org/2000/svg'><path d='M716 88.9999C408.8 7.39994 109.333 65.6666 -2 105H-56L-32 1H1544V88.9999C1352 165 1100 191 716 88.9999Z' fill='%23{{color1}}' stroke='%23{{color1}}'/><path d='M 716 82 C 408.8 0.4 109.333 58.667 -2 98 L -56 98 L -32 -6 L 1544 -6 L 1544 82 C 1352 158 1100 184 716 82 Z' fill='%23{{color2}}' stroke='%23{{color2}}'/></svg>");
+    background-color: {{section.settings.wave_color_3}};
+  }
+  .banner-section .sg-title{
+    font-size:{{section.settings.titlesize }}px;
+    color: {{ section.settings.color_text }};
+  }
+  .banner-section .sg-desc{
+    font-size:{{section.settings.descsize}}px;
+    color: {{ section.settings.color_desc }};
+  }
+  .banner-section .sg-b-bold{
+    font-size:{{section.settings.subdescsize}}px;
+    color: {{ section.settings.color_subdesc }};
+  }
+  .sg-btn.btn-outline{
     border-radius:40px;
+    padding: 18px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+  	font-size:{{section.settings.button-size}}px;
+    color: {{ section.settings.button-text }};
     box-shadow: 5px 5px 0px 0px {{ section.settings.button-text }};
+    border:1px solid {{ section.settings.button-text }};
+    text-align:center;
     transition: box-shadow 0.3s ease-in-out;
   }
-  .btn.btn-outline:hover{
+  .sg-btn.btn-outline:hover{
     box-shadow: -5px -5px 0px 0px {{ section.settings.button-text }};
     transition: box-shadow 0.3s ease-in-out;
   }
-  .feature-info .fi-heading{
-    font-size:{{section.settings.titlesize}}px;
-    color: {{ section.settings.color_text }};
+  @media only screen and (max-width: 767px){
+
+    .banner-section .sg-desc {
+    line-height:1.3;
+    margin-bottom: 20px;
+    font-size:{{section.settings.descsize  | times: 0.75 | round: 0  }}px;
   }
-  .feature-info .fi-subhead{
-    line-height:1.5;
-    font-size:{{section.settings.titlesubhead}}px;
-    color: {{ section.settings.subhead-color }};
+
+
+    @media only screen and (max-width: 467px){
+
+    .sg-banner-flex .sg-b-button {
+      width:100%;
+      margin-right:0;
+    }
+
+      .sg-btn.btn-outline {
+        width:100%;
+      }
+    
+    .banner-section .sg-title {
+      font-size: {{ section.settings.titlesize  | times: 0.75 | round: 0  }}px;
+    }
+
+    .banner-section .sg-b-bold {
+      margin-bottom: 20px;
+      font-size:{{section.settings.subdescsize  | times: 0.75 | round: 0  }}px;
+    }
   }
-  .featur-item{
-    background-color:{{section.settings.box-bg-color}};
-    border:1px solid {{ section.settings.box-text-color }};
-    border-radius: 18px;
-    transition: box-shadow 0.3s ease-in-out;
-    box-shadow: 3px 4px 0px 0px {{ section.settings.box-text-color }};
-  }
-  .featur-item:hover{
-    transition: box-shadow 0.3s ease-in-out;
-    box-shadow: -3px -4px 0px 0px {{ section.settings.box-text-color }};
-  }
-  .featur-item .fi-desc{
-    font-size:{{section.settings.box-text}}px;
-    color: {{ section.settings.box-text-color }};
-  }
-  @media only screen and (max-width:575px){
-	.feature-info .fi-heading{
-      font-size:{{section.settings.titlesize_mob}}px;
+  @media only screen and (max-width: 1024px){
+    .banner-section .sg-b-bold {
     }
   }
 </style>
 
 {% schema %}
 {
-  "name": "SG-Eco Features",
+  "name": "SG-Eco Hero",
   "tag": "section",
+  "class": "banner-section",
   "settings": [
     {
-      "type": "text",
-      "id": "text",
-      "default": "Outstanding Quality backed by a number of reasons. Our product is....",
-      "label": "Title"
+      "type": "header",
+      "content": "Banner Style"
     },
     {
-      "type": "text",
-      "id": "sub_text",
-      "default": "Special offer to get a discount after testing one of our new products...",
-      "label": "Sub Title"
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
     },
     {
-      "type": "text",
-      "id": "button_title",
-      "default": "Get In Touch",
-      "label": "Button Title"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
+      "type": "select",
+      "id": "height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Original Image"
+        },
+        {
+          "value": "small",
+          "label": "small"
+        },
+        {
+          "value": "large",
+          "label": "large"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image Size"
     },
     {
       "type": "header",
-      "content": "Main Title Style"
+      "content": "Main Title Text & Style"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "This is your header, say something amazing!"
     },
     {
       "type": "range",
@@ -276,17 +321,7 @@
       "step": 1,
       "unit": "px",
       "label": "Title Font Size",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "titlesize_mob",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Title Font Size Mobile",
-      "default": 22
+      "default": 45
     },
     {
       "type": "color",
@@ -296,27 +331,70 @@
     },
     {
       "type": "header",
-      "content": "Main Sub Title Style"
+      "content": "Description Text & Style"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "Description",
+      "default": "Sub header goes right here folks, believe it or not"
     },
     {
       "type": "range",
-      "id": "titlesubhead",
+      "id": "descsize",
       "min": 0,
-      "max": 60,
+      "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Title Font Size",
-      "default": 16
+      "label": "Description Font Size",
+      "default": 30
     },
     {
       "type": "color",
-      "id": "subhead-color",
-      "label": "Sub Heading Color",
+      "id": "color_desc",
+      "label": "Description Text Color",
       "default": "#233E16"
     },
     {
       "type": "header",
-      "content": "Main Button Style"
+      "content": "Sub Description Text & Style"
+    },
+    {
+      "type": "text",
+      "id": "subdesc",
+      "label": "Sub Description",
+      "default": "100% sustainably made section"
+    },
+    {
+      "type": "range",
+      "id": "subdescsize",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "color_subdesc",
+      "label": "Description Text Color",
+      "default": "#233E16"
+    },
+    {
+      "type": "header",
+      "content": "Button Text & Style"
+    },
+    {
+      "type": "text",
+      "id": "linktitle",
+      "label": "Button Text",
+      "default": "Buy now"
+    },
+    {
+      "type": "url",
+      "id": "linkurl",
+      "label": "Button Url"
     },
     {
       "type": "range",
@@ -325,8 +403,8 @@
       "max": 60,
       "step": 1,
       "unit": "px",
-      "label": "Title Font Size",
-      "default": 16
+      "label": "Button Font Size",
+      "default": 20
     },
     {
       "type": "color",
@@ -342,53 +420,35 @@
     },
     {
       "type": "header",
-      "content": "box Style"
+      "content": "Wave Color Settings"
     },
     {
       "type": "color",
-      "id": "box-bg-color",
-      "label": "Box Background Color",
-      "default": "#fff"
-    },
-    {
-      "type": "range",
-      "id": "box-text",
-      "min": 0,
-      "max": 60,
-      "step": 1,
-      "unit": "px",
-      "label": "Text Size",
-      "default": 16
-    },
-    {
-      "type": "color",
-      "id": "box-text-color",
-      "label": "Text Color",
+      "id": "wave_color_1",
+      "label": "Line color",
       "default": "#233E16"
     },
     {
+      "type": "color",
+      "id": "wave_color_2",
+      "label": "Top color",
+      "default": "#CCEDBE"
+    },
+    {
+      "type": "color",
+      "id": "wave_color_3",
+      "label": "Bottom color",
+      "default": "#fff"
+    },
+    {
       "type": "header",
-      "content": "Section padding"
+      "content": "Section Background Color Settings"
     },
     {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding bottom",
-      "default": 36
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#9EC688"
     },
     {
       "type": "header",
@@ -405,57 +465,15 @@
       "default": 120
     }
   ],
-  "blocks": [
-    {
-      "type": "box",
-      "name": "Select Box",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "text",
-          "id": "box_title",
-          "label": "Box Title",
-          "default": "Kills 99% of all bacteria"
-        },
-        {
-          "type": "image_picker",
-          "id": "box_image",
-          "label": "Box Image"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "SG-Eco Features",
-      "blocks": [
-        {
-          "type": "box"
-        },
-        {
-          "type": "box"
-        },
-        {
-          "type": "box"
-        },
-        {
-          "type": "box"
-        },
-        {
-          "type": "box"
-        },
-        {
-          "type": "box"
-        }
-      ]
+      "name": "SG-Eco Hero"
     }
   ]
 }
 {% endschema %}
 
 {% stylesheet %}
-
-
 {% endstylesheet %}
 
 {% javascript %}
