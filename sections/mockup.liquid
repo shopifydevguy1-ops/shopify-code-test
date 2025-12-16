@@ -1,7 +1,4 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 {%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal
@@ -21,41 +18,46 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
-  assign slider_view = section.settings.slider_view
-  assign slider_view_mobile = section.settings.slider_view_mobile
-  assign slider_gap = section.settings.slider_gap
-  assign slider_gap_mobile = section.settings.slider_gap_mobile
+  assign items_row_mobile = section.settings.items_row_mobile
+  assign items_row = section.settings.items_row
+  assign items_gap_mobile = section.settings.items_gap_mobile
+  assign items_gap = section.settings.items_gap
 
-  assign card_radius = section.settings.card_radius
-  assign card_border_thickness = section.settings.card_border_thickness
-  assign card_border_color = section.settings.card_border_color
-  assign card_ratio = section.settings.card_ratio
-  assign card_ratio_mobile = section.settings.card_ratio_mobile
+  assign image_radius = section.settings.image_radius
+  assign image_border_thickness = section.settings.image_border_thickness
+  assign image_border_color = section.settings.image_border_color
+  assign image_ratio = section.settings.image_ratio
+  assign image_ratio_mobile = section.settings.image_ratio_mobile
 
-  assign button_text = section.settings.button_text
-  assign button_size = section.settings.button_size
-  assign button_size_mobile = section.settings.button_size_mobile
-  assign button_color = section.settings.button_color
-  assign button_hover_color = section.settings.button_hover_color
-  assign button_custom = section.settings.button_custom
-  assign button_font = section.settings.button_font
-  assign button_height = section.settings.button_height
-  assign button_radius = section.settings.button_radius
-  assign button_border_thickness = section.settings.button_border_thickness
-  assign button_border_color = section.settings.button_border_color
-  assign button_border_hover_color = section.settings.button_border_hover_color
-  assign button_bg_color = section.settings.button_bg_color
-  assign button_bg_hover_color = section.settings.button_bg_hover_color
-  assign button_color = section.settings.button_color
-  assign button_hover_color = section.settings.button_hover_color
-  assign button_show_mobile = section.settings.button_show_mobile
-  assign button_show_desktop = section.settings.button_show_desktop
+  assign modal_overlay = section.settings.modal_overlay
+  assign modal_bg_color = section.settings.modal_bg_color
+
+  assign close_size = section.settings.close_size
+  assign close_size_mobile = section.settings.close_size_mobile
+  assign close_icon_size = section.settings.close_icon_size
+  assign close_icon_size_mobile = section.settings.close_icon_size_mobile
+  assign close_radius = section.settings.close_radius
+  assign close_border_thickness = section.settings.close_border_thickness
+  assign close_bg_color = section.settings.close_bg_color
+  assign close_border_color = section.settings.close_border_color
+  assign close_icon_color = section.settings.close_icon_color
+
+  assign arrow_size_mobile = section.settings.arrow_size_mobile
+  assign arrow_size = section.settings.arrow_size
+  assign arrow_color = section.settings.arrow_color
+
+  assign pagination_size = section.settings.pagination_size
+  assign pagination_size_mobile = section.settings.pagination_size_mobile
+  assign pagination_color = section.settings.pagination_color
+  assign pagination_custom = section.settings.pagination_custom
+  assign pagination_font = section.settings.pagination_font
+  assign pagination_height = section.settings.pagination_height
   
 -%}
 
 {%- style -%}
 
-  {{  button_font | font_face: font_display: 'swap' }}
+  {{ pagination_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -76,76 +78,176 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .gallery-slider-{{ section.id }} {
-    padding: {{ card_border_thickness }}px 0px !important;
+  .gallery-items-{{ section.id }} {
+    display: grid;
+    gap: {{ items_gap_mobile }}px;
+    align-items: center;
+    grid-template-columns: repeat({{ items_row_mobile}}, 1fr);
   }
 
-  .gallery-slide-{{ section.id }} {
-    border-radius: {{ card_radius }}px;
-    outline: {{ card_border_thickness }}px solid {{ card_border_color }};
+
+  .gallery-item-{{ section.id }} {
+    border-radius: {{ image_radius }}px;
+    border: {{ image_border_thickness }}px solid {{ image_border_color }};
     overflow: hidden;
-    position: relative;
+    cursor: zoom-in;
   }
 
-  .gallery-slide-{{ section.id }} img,
-  .gallery-slide-{{ section.id }} svg,
-  .gallery-slide-{{ section.id }} video,
-  .gallery-slide-{{ section.id }} iframe {
+  .gallery-item-{{ section.id }} img,
+  .gallery-item-{{ section.id }} svg {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    box-shadow: none;
-    border: 0px;
   }
 
-  .gallery-slide-{{ section.id }} svg {
+  .gallery-item-{{ section.id }} svg {
     background-color: #AFAFAF;
   }
 
-  .gallery-btn-next-{{ section.id }} {
-    position: absolute !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    left: unset !important;
-    top: unset !important;
-    padding: 10px;
-    height: 100%;
-    width: 40px;
-    background-color: {{ button_bg_color }};
-    border: {{ button_border_thickness }}px solid {{ button_border_color }};
-    border-radius: {{ button_radius }}px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-right: 0px;
-    transition: all 0.25s ease 0s;
-    text-align: center;
+  .gallery-modal-{{ section.id }} {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    overflow-y: scroll;
+    pointer-events: none;
+    background: {{ modal_bg_color | hex_to_rgba: modal_overlay }};
+    padding: 10px;
+  }
+
+  .gallery-modal-{{ section.id }}.active {
+    opacity: 1;
+    z-index: 100;
+    pointer-events: all;
+    transition: all 250ms ease-in 0s;
+  }
+
+  .gallery-modal-inner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    max-height: 95vh;
+    height: 100%;
+  }
+
+  .gallery-modal-slider-{{ section.id }} {
+    height: 100%;
+  }
+
+  .gallery-modal-slider-{{ section.id }} .swiper-wrapper {
+    align-items: center !important;
+  }
+
+  .gallery-modal-slide-{{ section.id }} {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box !important;
+  }
+
+  .gallery-modal-close-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: {{ close_size_mobile }}px;
+    height: {{ close_size_mobile }}px;
+    top: 10px !important;
+    right: 10px !important;
+    padding: 6px;
+    background-color: transparent;
+    background-color: {{ close_bg_color | hex_to_rgba: 0.2 }};
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+    border-radius: {{ close_radius }}px;
+    border: 0px;
+    box-shadow: none;
+    border: {{ close_border_thickness }}px solid {{ close_border_color }};
     cursor: pointer;
-    z-index: 2;
-  }
-
-  .gallery-btn-next-{{ section.id }}:hover {
-    background-color: {{ button_bg_hover_color }};
-    border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .gallery-btn-next-{{ section.id }} span {
+    z-index: 99;
+    position: fixed;
     margin: 0px;
-    font-size: {{ button_size_mobile }}px;
-    color: {{ button_color }};
-    line-height: {{ button_height }}%;
-    text-transform: unset;
-    font-weight: 700;
-    transition: all 0.25s ease 0s;
-    transform: rotate(-90deg);
   }
 
-  .gallery-btn-next-{{ section.id }}:hover span {
-    color: {{ button_hover_color }};
+  .gallery-modal-close-{{ section.id }} svg {
+    width: {{ close_icon_size_mobile }}px;
+  }
+
+  .gallery-modal-close-{{ section.id }} svg path {
+    fill: {{ close_icon_color }};
+  }
+
+  .gallery-modal-prev-{{ section.id }},
+  .gallery-modal-next-{{ section.id }} {
+    position: absolute;
+    cursor: pointer;
+    z-index: 99;
+    top: 50%;
+    transform: translateY(-50%);
+    width: {{ arrow_size_mobile }}px;
+    opacity: 0.7;
     transition: all 0.25s ease 0s;
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+    padding: 5px;
+  }
+
+  .gallery-modal-prev-{{ section.id }}:hover,
+  .gallery-modal-next-{{ section.id }}:hover {
+    opacity: 1;
+    transition: all 0.25s ease 0s;
+  }
+
+  .gallery-modal-prev-{{ section.id }} svg,
+  .gallery-modal-next-{{ section.id }} svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .gallery-modal-prev-{{ section.id }} svg path,
+  .gallery-modal-next-{{ section.id }} svg path {
+    fill: {{ arrow_color }};
+  }
+
+  .gallery-modal-prev-{{ section.id }}.swiper-button-disabled,
+  .gallery-modal-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .gallery-modal-prev-{{ section.id }} {
+    left: 20px;
+  }
+
+  .gallery-modal-next-{{ section.id }} {
+    right: 20px;
+  }
+
+  .gallery-pagination-{{ section.id }} {
+    margin: 0px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: {{ pagination_size_mobile }}px;
+    color: {{ pagination_color }};
+    line-height: {{ pagination_height }}%;
+    text-transform: unset;
+  }
+
+  .gallery-modal-slide-{{ section.id }} img,
+  .gallery-modal-slide-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 94vh;
   }
   
   @media(min-width: 1024px) {
@@ -166,14 +268,35 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .gallery-btn-next-{{ section.id }} {
-      padding: 20px;
-      width: 60px;
+    .gallery-items-{{ section.id }} {
+      gap: {{ items_gap }}px;
+      grid-template-columns: repeat({{ items_row}}, 1fr);
     }
 
-    .gallery-btn-next-{{ section.id }} span {
-      font-size: {{ button_size }}px;
+    .gallery-modal-{{ section.id }} {
+      padding: 100px;
     }
+
+    .gallery-modal-close-{{ section.id }} {
+      width: {{ close_size }}px;
+      height: {{ close_size }}px;
+      top: 20px !important;
+      right: 20px !important;
+    }
+
+    .gallery-modal-close-{{ section.id }} svg {
+      width: {{ close_icon_size }}px;
+    }
+
+    .gallery-modal-prev-{{ section.id }},
+    .gallery-modal-next-{{ section.id }} {
+      width: {{ arrow_size }}px;
+    }
+
+    .gallery-pagination-{{ section.id }} {
+      font-size: {{ pagination_size }}px;
+    }
+
   }
   
 {%- endstyle -%}
@@ -213,62 +336,62 @@
   </style>
 {% endif %}
 
-{% if button_custom %}
-    <style>
-        .gallery-btn-next-{{ section.id }} span {
-            font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
-            font-weight: {{ button_font.weight }};
-            font-style: {{ button_font.style }};
-        }
-    </style>
+{% if pagination_custom %}
+  <style>
+    .gallery-pagination-{{ section.id }} {
+      font-family: {{ pagination_font.family }}, {{ pagination_font.fallback_families }};
+      font-weight: {{ pagination_font.weight }};
+      font-style: {{ pagination_font.style }};
+    }
+  </style>
 {% endif %}
 
-{% if card_ratio_mobile == "portrait" %}
+{% if image_ratio_mobile == "portrait" %}
   <style>
-    .gallery-slide-{{ section.id }} {
-     aspect-ratio: 9.6/12; 
+    .gallery-item-{{ section.id }} {
+     aspect-ratio: 9.6/14; 
     }
   </style>
-{% elsif card_ratio_mobile == "landscape" %}
+{% elsif image_ratio_mobile == "landscape" %}
   <style>
-    .gallery-slide-{{ section.id }}{
-     aspect-ratio: 12/9; 
+    .gallery-item-{{ section.id }}{
+     aspect-ratio: 12/10; 
     }
   </style>
-{% elsif card_ratio_mobile == "square" %}
+{% elsif image_ratio_mobile == "square" %}
   <style>
-    .gallery-slide-{{ section.id }} {
+    .gallery-item-{{ section.id }} {
      aspect-ratio: 12/12; 
     }
   </style>
 {% else %}
   <style>
-    .gallery-slide-{{ section.id }} {
+    .gallery-item-{{ section.id }} {
      aspect-ratio: auto; 
     }
   </style>
 {% endif %}
 
-{% if card_ratio == "portrait" %}
+{% if image_ratio == "portrait" %}
   <style>
     @media(min-width: 1024px) {
-     .gallery-slide-{{ section.id }} {
-       aspect-ratio: 9.6/12; 
+     .gallery-item-{{ section.id }} {
+       aspect-ratio: 9.6/14; 
       } 
     }
   </style>
-{% elsif card_ratio == "landscape" %}
+{% elsif image_ratio == "landscape" %}
   <style>
     @media(min-width: 1024px) {
-      .gallery-slide-{{ section.id }}{
-       aspect-ratio: 12/9; 
+      .gallery-item-{{ section.id }}{
+       aspect-ratio: 12/10; 
       }
     }
   </style>
-{% elsif card_ratio == "square" %}
+{% elsif image_ratio == "square" %}
   <style>
     @media(min-width: 1024px) {
-      .gallery-slide-{{ section.id }} {
+      .gallery-item-{{ section.id }} {
        aspect-ratio: 12/12; 
       }
     }
@@ -276,249 +399,217 @@
 {% else %}
   <style>
     @media(min-width: 1024px) {
-      .gallery-slide-{{ section.id }} {
+      .gallery-item-{{ section.id }} {
        aspect-ratio: auto; 
       }
     }
   </style>
 {% endif %}
 
-{% if button_show_mobile %}
-  <style>
-    .gallery-btn-next-{{ section.id }} {
-      display: flex;
-    }
-  </style>
-{% else %}
-  <style>
-    .gallery-btn-next-{{ section.id }} {
-      display: none;
-    }
-  </style>
-{% endif %}
-
-{% if button_show_desktop %}
-  <style>
-    @media(min-width: 1024px) {
-      .gallery-btn-next-{{ section.id }} {
-        display: flex;
-      }
-    }
-  </style>
-{% else %}
-  <style>
-    @media(min-width: 1024px) {
-      .gallery-btn-next-{{ section.id }} {
-        display: none;
-      }
-    }
-  </style>
-{% endif %}
-
-{% comment %} PREVIEW {% endcomment %}
-<style>
-  .gallery-slider-{{ section.id }}.preview .swiper-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-  }
-
-  .gallery-slider-{{ section.id }}.preview .gallery-slide-{{ section.id }} {
-    width: 100%;
-  }
-
-  .gallery-slider-{{ section.id }}.preview .gallery-slide-{{ section.id }}:not(:first-child) {
-    margin-left: {{ slider_gap_mobile }}px;
-  } 
-
-  @media(min-width: 1024px) {
-    .gallery-slider-{{ section.id }}.preview .gallery-slide-{{ section.id }}:not(:first-child) {
-      margin-left: {{ slider_gap }}px;
-    } 
-
-    .gallery-slider-{{ section.id }}.preview .gallery-slide-{{ section.id }} {
-      width: 25%;
-    }
-  }
-</style>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.js"></script>
 
 <div class="section-{{ section.id }} gallery-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="gallery-slider-{{ section.id }} swiper preview">
-        <div class="swiper-wrapper">
-          {% for block in section.blocks %}
-            <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="gallery-slide-{{ section.id }} swiper-slide">
-              {% if block.settings.media_type == "image" %}
-                {% if block.settings.image != blank %}
-                  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-                {% else %}
-                  {{ 'image' | placeholder_svg_tag }}
-                {% endif %}
-              {% else %}
-                {% assign video_id = block.settings.video.id | default: block.settings.video_url.id %}
-                {% assign loop = '&loop=1&playlist=' | append: video_id %}  
-                {%- if block.settings.video == null and block.settings.video_url != null -%}
-                  {%- if block.settings.video_url.type == 'youtube' -%}
-                    <iframe
-                      data-src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1{{ loop }}"
-                      allow="autoplay; encrypted-media"
-                      class="lazy"
-                      allowfullscreen
-                    ></iframe>
-                  {%- else -%}
-                    <iframe
-                      data-src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1{{ loop }}"
-                      allow="autoplay; encrypted-media"
-                      class="lazy"
-                      allowfullscreen
-                    ></iframe>
-                  {% endif %}
-                
-                {% else %}
-
-                  <video data-src="{{ block.settings.video.sources[1].url }}" loop autoplay muted playsinline preload="none" class="lazy"></video>
-                
-                {% endif %}
-              {% endif %}
-            </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
-          {% endfor %}
-        </div>
-        <button class="gallery-btn-next-{{ section.id }}">
-          <span>{{ button_text }}</span>
-        </button>
+      <div class="gallery-items-{{ section.id }}">
+        {% for block in section.blocks %}
+          <div class="gallery-item-{{ section.id }}">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<div class="gallery-modal-{{ section.id }}">
+  <div class="gallery-modal-inner-{{ section.id }}">
+    <div class="gallery-modal-slider-{{ section.id }} swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="gallery-modal-slide-{{ section.id }} swiper-slide">
+           {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="gallery-pagination-{{ section.id }}">
+    <span class="gallery-index-{{ section.id }}">1</span>/<span>{{ section.blocks.size }}</span>
+  </div>
+  <button class="gallery-modal-close-{{ section.id }}">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z" fill="white"></path></svg>
+  </button>
+  {% if section.blocks.size > 1 %}
+    
+    <button class="gallery-modal-prev-{{ section.id }}">
+      <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 50 15"><path class="target-next-{{ section.id }}" d="M50 5.38v4.25H15V15L0 7.5 15 0v5.38z"></path></svg>
+    </button>
+  
+    <button class="gallery-modal-next-{{ section.id }}">
+      <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 50 15"><path class="target-prev-{{ section.id }}" d="M0 9.63V5.38h35V0l15 7.5L35 15V9.63z"></path></svg>
+    </button>
+  
+  {% endif %}
+</div>
 
 <script>
-  function initScrollingProducts() {
+  function initGallery4() {
 
-    let lazyLoadInstance = new LazyLoad();
+    let index = document.querySelector('.gallery-index-{{ section.id }}');
 
-    window.addEventListener(
-      "LazyLoad::Initialized",
-      function (event) {
-        window.lazyLoadInstance = event.detail.instance;
-      },
-      false
-    );
-    
-    document.querySelector(".gallery-slider-{{ section.id }}").classList.remove('preview');
-    const slider = new Swiper(".gallery-slider-{{ section.id }}", {
-      speed: 300,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: '.gallery-btn-next-{{ section.id }}',
-      },
-      breakpoints: {
-        320: {
-          spaceBetween: {{ slider_gap_mobile }},
-          slidesPerView: {{ slider_view_mobile }}
+    const slider = new Swiper('.gallery-modal-slider-{{ section.id }}',{
+        speed:300,
+        navigation: {
+          nextEl: '.gallery-modal-next-{{ section.id }}',
+          prevEl: '.gallery-modal-prev-{{ section.id }}'
         },
-        768: {
-          spaceBetween: {{ slider_gap_mobile }},
-          slidesPerView: {{ slider_view | times: 0.5 | round: 0 }}
+        keyboard: {
+          enabled: true,
+          onlyInViewport: true,
         },
-        1024: {
-          spaceBetween: {{ slider_gap }},
-          slidesPerView: {{ slider_view }}
+        on: {
+          slideChange: function() {
+            var currentIndex = this.activeIndex;
+            currentIndex++;
+            index.innerText = currentIndex;
+          }
         }
+    });
+
+    const toggles = document.querySelectorAll('.gallery-item-{{ section.id }}');
+    const modal = document.querySelector('.gallery-modal-{{ section.id }}');
+    const close = document.querySelector('.gallery-modal-close-{{ section.id }}');
+    let activeSlideIndex = 0;
+    
+    toggles.forEach((el, index) => {
+        el.addEventListener('click', (e) => {
+          index.innerText = index;
+          slider.slideTo(index);
+          activeSlideIndex = index;
+          const activeSlide = slider.slides[activeSlideIndex];
+
+          setTimeout(() => {
+              document.body.style.overflow = 'hidden';
+              modal.classList.add('active');
+          }, 200); 
+        });
+    });
+    
+    close.addEventListener('click', () => {
+        document.body.style.overflow = '';
+        modal.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") {
+        document.body.style.overflow = '';
+        modal.classList.remove('active');
+      }
+    });
+    
+    document.addEventListener('click', (e) => {
+      if(e.target.parentNode.classList.contains('gallery-modal-prev-{{ section.id }}') && e.target.parentNode.classList.contains('gallery-modal-next-{{ section.id }}')) {
+        console.log(e.target);
+        document.body.style.overflow = '';
+        modal.classList.remove('active'); 
       }
     });
   }
-
-  document.addEventListener('DOMContentLoaded', initScrollingProducts);
+  
+  document.addEventListener('DOMContentLoaded', initGallery4);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initScrollingProducts);
-     document.addEventListener('shopify:section:load', initScrollingProducts);
+     document.addEventListener('shopify:section:unload', initGallery4);
+     document.addEventListener('shopify:section:load', initGallery4);
   }
 </script>
 
 {% schema %}
 {
-  "name": "SG-Gallery #2",
+  "name": "SG-Gallery #4",
   "settings": [
     {
       "type": "header",
-      "content": "Save settings for slider to show correct."
+      "content": "Save to display section correctly."
     },
     {
       "type": "header",
-      "content": "Slider Settings"
+      "content": "Items Settings"
     },
     {
       "type": "range",
-      "id": "slider_view",
+      "id": "items_row",
       "min": 1,
-      "max": 6,
+      "max": 7,
       "step": 1,
-      "label": "Slider Per View",
+      "label": "Items per Row",
       "default": 4
     },
     {
       "type": "range",
-      "id": "slider_view_mobile",
+      "id": "items_row_mobile",
       "min": 1,
       "max": 3,
-      "step": 0.1,
-      "label": "Slider Per View - Mobile",
-      "default": 1.5
+      "step": 1,
+      "label": "Items per Row - Mobile",
+      "default": 2
     },
     {
       "type": "range",
-      "id": "slider_gap",
+      "id": "items_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Slider Gap",
+      "label": "Items Gap",
       "default": 0
     },
     {
       "type": "range",
-      "id": "slider_gap_mobile",
+      "id": "items_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Slider Gap - Mobile",
-      "default": 0
+      "label": "Items Gap - Mobile",
+      "default": 8
     },
     {
       "type": "header",
-      "content": "Card Settings"
+      "content": "Image Settings"
     },
     {
       "type": "range",
-      "id": "card_radius",
+      "id": "image_radius",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Card Roundness",
+      "label": "Image Roundness",
       "default": 0
     },
     {
       "type": "range",
-      "id": "card_border_thickness",
+      "id": "image_border_thickness",
       "min": 0,
       "max": 10,
       "step": 1,
       "unit": "px",
-      "label": "Card Border Thickness",
-      "default": 1
+      "label": "Image Border Thickness",
+      "default": 0
     },
     {
       "type": "select",
-      "id": "card_ratio",
-      "label": "Card Aspect Ratio",
-      "default": "square",
+      "id": "image_ratio",
+      "label": "Image Aspect Ratio",
+      "default": "portrait",
       "options": [
         {
           "label": "Portrait",
@@ -540,9 +631,9 @@
     },
     {
       "type": "select",
-      "id": "card_ratio_mobile",
-      "label": "Card Aspect Ratio - Mobile",
-      "default": "square",
+      "id": "image_ratio_mobile",
+      "label": "Image Aspect Ratio - Mobile",
+      "default": "portrait",
       "options": [
         {
           "label": "Portrait",
@@ -564,137 +655,200 @@
     },
     {
       "type": "header",
-      "content": "Button Settings"
+      "content": "Modal Settings"
     },
     {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "SCROLL"
+      "type": "range",
+      "id": "modal_overlay",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Modal Overlay",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Modal Close Settings"
+    },
+    {
+      "type": "range",
+      "id": "close_size",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Modal Close Size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "close_icon_size_mobile",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Modal Close Icon Size - Mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "close_icon_size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Modal Close Icon Size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "close_size_mobile",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Modal Close Size - Mobile",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "close_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Modal Close Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "close_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Modal Close Border Thickness",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Modal Arrow Settings"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Modal Arrow Size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "arrow_size_mobile",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Modal Arrow Size - Mobile",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "Modal Pagination Settings"
     },
     {
       "type": "checkbox",
-      "id": "button_custom",
+      "id": "pagination_custom",
       "label": "Use Custom Font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "button_font",
-      "label": "Button Font Family",
+      "id": "pagination_font",
+      "label": "Modal Pagination Font Family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "button_size",
+      "id": "pagination_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 30,
+      "step": 1,
       "unit": "px",
-      "label": "Button Size",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "button_size_mobile",
-      "min": 0,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Size - Mobile",
+      "label": "Modal Pagination Size",
       "default": 14
     },
     {
       "type": "range",
-      "id": "button_height",
+      "id": "pagination_size_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Modal Pagination Size - Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "pagination_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
-      "label": "Button Line Height",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "button_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Roundness",
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "button_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Button Border Thickness",
-      "default": 1
-    },
-    {
-      "type": "checkbox",
-      "id": "button_show_desktop",
-      "label": "Button Show Desktop",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "button_show_mobile",
-      "label": "Button Show Mobile",
-      "default": true
+      "label": "Modal Pagination Line Height",
+      "default": 130
     },
     {
       "type": "header",
-      "content": "Card Colors"
+      "content": "Item Colors"
     },
     {
       "type": "color",
-      "label": "Card Border Color",
-      "id": "card_border_color",
+      "label": "Image Border Color",
+      "id": "image_border_color",
       "default": "#000000"
     },
     {
       "type": "header",
-      "content": "Button Colors"
+      "content": "Modal Colors"
     },
     {
       "type": "color",
-      "label": "Button Text Color",
-      "id": "button_color",
-      "default": "#000000"
+      "label": "Modal Background Color",
+      "id": "modal_bg_color",
+      "default": "#171717"
     },
     {
       "type": "color",
-      "label": "Button Text Hover Color",
-      "id": "button_hover_color",
+      "label": "Modal Close Background Color",
+      "id": "close_bg_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Button Background Color",
-      "id": "button_bg_color",
+      "label": "Modal Close Border Color",
+      "id": "close_border_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Button Background Hover Color",
-      "id": "button_bg_hover_color",
-      "default": "#000000"
+      "label": "Modal Close Icon Color",
+      "id": "close_icon_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Button Border Color",
-      "id": "button_border_color",
-      "default": "#000000"
+      "label": "Modal Arrow Icon Color",
+      "id": "arrow_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Button Border Hover Color",
-      "id": "button_border_hover_color",
-      "default": "#000000"
+      "label": "Modal Pagination Color",
+      "id": "pagination_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
@@ -773,7 +927,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -783,7 +937,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -803,7 +957,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 0
+      "default": 1.5
     },
     {
       "type": "header",
@@ -855,72 +1009,32 @@
   ],
   "blocks": [
     {
-      "type": "slide",
-      "name": "Slide",
+      "type": "item",
+      "name": "Item",
       "settings": [
-        {
-          "type": "select",
-          "id": "media_type",
-          "label": "Media Type",
-          "default": "image",
-          "options": [
-            {
-              "label": "Image",
-              "value": "image"
-            },
-            {
-              "label": "Video",
-              "value": "video"
-            }
-          ]
-        },
         {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
-        },
-        {
-          "type": "video",
-          "id": "video",
-          "label": "Video from Shopify"
-        },
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Video Embed from Url",
-          "accept": [
-            "youtube",
-            "vimeo"
-          ],
-          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-          "info": "Shows when no Shopify-hosted video is selected."
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "URL"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Gallery #2",
+      "name": "SG-Gallery #4",
       "blocks": [
         {
-          "type": "slide"
+          "type": "item"
         },
         {
-          "type": "slide"
+          "type": "item"
         },
         {
-          "type": "slide"
+          "type": "item"
         },
         {
-          "type": "slide"
-        },
-        {
-          "type": "slide"
+          "type": "item"
         }
       ]
     }
