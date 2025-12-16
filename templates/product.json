@@ -27,6 +27,12 @@
           "type": "price",
           "settings": {}
         },
+        "custom_liquid_ja6Kji": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div data-review-quote-slider-target></div>"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -60,6 +66,7 @@
         "vendor",
         "title",
         "price",
+        "custom_liquid_ja6Kji",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -99,10 +106,47 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "mockup_yGpMzr": {
+      "type": "mockup",
+      "blocks": {
+        "quote_amhqQd": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>This rug is such good quality and makes me so happy every time I look at it.__ I'm using this one for a top cover over__my__bedspread. It's a perfect__ match for__my__room and linen. I have another that I use as a throw__ for the lounge and a picnic rug! In LOVE.</p><p>- Barbara W.</p>"
+          }
+        },
+        "quote_Qj9FRy": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>The postage was incredibly quick and the quality and colours far exceeded what I thought. The pics don't do them justice. Truly unique rugs that I doubt will date anytime soon. I would recommend - beautiful rug and great customer service. </p><p>- Tanya E.</p>"
+          }
+        },
+        "quote_Vcj8yk": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>My husband argued with me saying we didn___t need a new blanket. Once we received this one, he quickly changed his tune. It___s cozy, soft and warm. I love the design and boho vibe it adds to our home. High quality product at an affordable price.</p><p>- Bebe H.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "quote_amhqQd",
+        "quote_Qj9FRy",
+        "quote_Vcj8yk"
+      ],
+      "name": "SG-Review Slider",
+      "settings": {
+        "example": "<div data-review-quote-slider-target></div>",
+        "pagination_color": "#db877b",
+        "bg_color": "#f4d9d5",
+        "text_color": "#d87e71",
+        "custom_classes": ""
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "mockup_yGpMzr"
   ]
 }
