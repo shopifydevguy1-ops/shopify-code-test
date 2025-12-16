@@ -16,79 +16,57 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
-  assign video = section.settings.video
-  assign video_position = section.settings.video_position
+  assign cards_per_view = section.settings.cards_per_view
+  assign cards_per_view_mobile = section.settings.cards_per_view_mobile
+  assign cards_gap = section.settings.cards_gap
+  assign cards_gap_mobile = section.settings.cards_gap_mobile
 
-  assign video_text = section.settings.video_text
-  assign video_text_size = section.settings.video_text_size
-  assign video_text_size_mobile = section.settings.video_text_size_mobile
-  assign video_text_custom = section.settings.video_text_custom
-  assign video_text_font = section.settings.video_text_font
-  assign video_text_height = section.settings.video_text_height
-  assign video_text_color = section.settings.video_text_color
-  assign video_text_align = section.settings.video_text_align
-  assign video_text_align_mobile = section.settings.video_text_align_mobile
+  assign card_padding_horizontal = section.settings.card_padding_horizontal
+  assign card_padding_horizontal_mobile = section.settings.card_padding_horizontal_mobile
+  assign card_padding_vertical = section.settings.card_padding_vertical
+  assign card_padding_vertical_mobile = section.settings.card_padding_vertical_mobile
+  assign card_radius = section.settings.card_radius
+  assign card_border_thickness = section.settings.card_border_thickness
+  assign card_border_color = section.settings.card_border_color
+  assign card_bg_color = section.settings.card_bg_color
+  assign card_border_hover_color = section.settings.card_border_hover_color
+  assign card_bg_hover_color = section.settings.card_bg_hover_color
+  assign card_align = section.settings.card_align
+  assign card_align_mobile = section.settings.card_align_mobile
+  assign card_use_shadow = section.settings.card_use_shadow
 
-  assign image = section.settings.image
-  assign image_padding_vertical = section.settings.image_padding_vertical
-  assign image_padding_vertical_mobile = section.settings.image_padding_vertical_mobile
-  assign image_padding_horizontal = section.settings.image_padding_horizontal
-  assign image_padding_horizontal_mobile = section.settings.image_padding_horizontal_mobile
-  assign image_bg_color = section.settings.image_bg_color
+  assign image_radius = section.settings.image_radius
   assign image_border_thickness = section.settings.image_border_thickness
   assign image_border_color = section.settings.image_border_color
-  assign image_radius = section.settings.image_radius
+  assign image_overlay = section.settings.image_overlay
+  assign image_overlay_color = section.settings.image_overlay_color
   assign image_ratio = section.settings.image_ratio
   assign image_ratio_mobile = section.settings.image_ratio_mobile
-  assign image_width = section.settings.image_width
-  assign image_width_mobile = section.settings.image_width_mobile
 
-  assign image_position = 2
+  assign title_size = section.settings.title_size
+  assign title_size_mobile = section.settings.title_size_mobile
+  assign title_color = section.settings.title_color
+  assign title_hover_color = section.settings.title_hover_color
+  assign title_custom = section.settings.title_custom
+  assign title_font = section.settings.title_font
+  assign title_height = section.settings.title_height
+  assign title_mt = section.settings.title_mt
+  assign title_mt_mobile = section.settings.title_mt_mobile
 
-  if video_position == 1
-    assign image_position = 2
-  else
-   assign image_position = 1
-  endif
-
-  assign image_text = section.settings.image_text
-  assign image_text_size = section.settings.image_text_size
-  assign image_text_size_mobile = section.settings.image_text_size_mobile
-  assign image_text_mt = section.settings.image_text_mt
-  assign image_text_mt_mobile = section.settings.image_text_mt_mobile
-  assign image_text_custom = section.settings.image_text_custom
-  assign image_text_font = section.settings.image_text_font
-  assign image_text_height = section.settings.image_text_height
-  assign image_text_color = section.settings.image_text_color
-  assign image_text_align = section.settings.image_text_align
-  assign image_text_align_mobile = section.settings.image_text_align_mobile
-  assign image_text_width_mobile = section.settings.image_text_width_mobile
-  assign image_text_width = section.settings.image_text_width
-
-  assign btn_play = section.settings.btn_play
-  assign btn_pause = section.settings.btn_pause
-  assign btn_size = section.settings.btn_size
-  assign btn_size_mobile = section.settings.btn_size_mobile
-  assign btn_custom = section.settings.btn_custom
-  assign btn_font = section.settings.btn_font
-  assign btn_height = section.settings.btn_height
-  assign btn_color = section.settings.btn_color
-
-  assign timer_size = section.settings.timer_size
-  assign timer_size_mobile = section.settings.timer_size_mobile
-  assign timer_custom = section.settings.timer_custom
-  assign timer_font = section.settings.timer_font
-  assign timer_height = section.settings.timer_height
-  assign timer_color = section.settings.timer_color
-  
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_color = section.settings.text_color
+  assign text_hover_color = section.settings.text_hover_color
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_height = section.settings.text_height
+  assign text_mt = section.settings.text_mt
+  assign text_mt_mobile = section.settings.text_mt_mobile
 -%}
 
 {%- style -%}
-
-  {{  video_text_font | font_face: font_display: 'swap' }}
-  {{  image_text_font | font_face: font_display: 'swap' }}
-  {{  btn_font | font_face: font_display: 'swap' }}
-  {{  timer_font | font_face: font_display: 'swap' }}
+  {{  title_font | font_face: font_display: 'swap' }}
+  {{  text_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -109,45 +87,40 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .gallery-body-{{ section.id }} {
+  .gallery-cards-{{ section.id }} {
     display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .gallery-video-{{ section.id }} {
-    position: relative;
-    aspect-ratio: 1/1;
-  }
-
-  .gallery-video-{{ section.id }} video,
-  .gallery-video-{{ section.id }} svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    box-shadow: none;
-    border: 0px;
-  }
-
-  .gallery-video-{{ section.id }} svg {
-    background-color: #ebebeb;
-  }
-
-  .gallery-image-wrapper-{{ section.id }} {
-    padding: {{ image_padding_vertical_mobile }}px {{ image_padding_horizontal_mobile }}px;
-    background-color: {{ image_bg_color }};
-    display: flex;
+    grid-template-columns: repeat({{ cards_per_view_mobile }}, 1fr);
+    gap: {{ cards_gap_mobile }}px;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  }
+
+  .gallery-card-{{ section.id }} {
+    padding: {{ card_padding_vertical_mobile }}px {{ card_padding_horizontal_mobile }}px;
+    border: {{ card_border_thickness }}px solid {{ card_border_color }};
+    border-radius: {{ card_radius }}px;
+    background-color: {{ card_bg_color }};
+    transition: all 0.25s ease 0s;
+    text-decoration: none;
   }
 
   .gallery-image-{{ section.id }} {
     width: 100%;
-    max-width: {{ image_width_mobile }}%;
-    overflow: hidden;
+    position: relative;
     border-radius: {{ image_radius }}px;
     border: {{ image_border_thickness }}px solid {{ image_border_color }};
+    overflow: hidden;
+  }
+
+  .gallery-image-{{ section.id }}::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.25s ease 0s;
+    background-color: {{ image_overlay_color | hex_to_rgba: image_overlay }};
   }
 
   .gallery-image-{{ section.id }} img,
@@ -159,83 +132,34 @@
   }
 
   .gallery-image-{{ section.id }} svg {
-    background-color: #FAFAFA;
+    background-color: #AFAFAF;
   }
 
-  .gallery-video-text-{{ section.id }} {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 2;
-    width: calc(100% - 40px);
-    text-align: {{ video_text_align_mobile }};
-  }
-
-  .gallery-video-text-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ video_text_size_mobile }}px;
-    line-height: {{ video_text_height }}%;
-    color: {{ video_text_color }};
+  .gallery-title-{{ section.id }} {
+    margin: 0;
+    margin-top: {{ title_mt_mobile }}px;
+    text-align: {{ card_align_mobile }};
+    font-size: {{ title_size_mobile }}px;
+    color: {{ title_color }};
+    line-height: {{ title_height }}%;
     text-transform: unset;
-    word-break: break-word;
+    text-decoration: none;
+    transition: all 0.25s ease 0s;
   }
 
-  .gallery-image-text-{{ section.id }} {
-    margin-top: {{ image_text_mt_mobile }}px;
-    max-width: {{ image_text_width_mobile }}px;
-    text-align: {{ image_text_align_mobile }};
+  .gallery-text-{{ section.id }} {
+    margin-top: {{ text_mt_mobile }}px;
+    text-align: {{ card_align_mobile }};
   }
 
-  .gallery-image-text-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ image_text_size_mobile }}px;
-    line-height: {{ image_text_height }}%;
-    color: {{ image_text_color }};
+  .gallery-text-{{ section.id }} * {
+    margin: 0; 
+    font-size: {{ text_size_mobile }}px;
+    color: {{ text_color }};
+    line-height: {{ text_height }}%;
     text-transform: unset;
-    word-break: break-word;
-  }
-
-  .gallery-controls-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    max-width: fit-content;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2;
-    gap: 10px;
-  }
-
-  .gallery-btn-{{ section.id }} {
-    background-color: transparent;
-    border: 0px;
-    padding: 0px;
-    margin: 0px;
-    font-size: {{ btn_size_mobile }}px;
-    line-height: {{ btn_height }}%;
-    color: {{ btn_color }};
-    text-transform: unset;
-    cursor: pointer;
-  }
-
-  .gallery-btn-{{ section.id }} .play {
-    display: none;
-  }
-
-  .gallery-btn-{{ section.id }}.active .play {
-    display: inline;
-  }
-
-  .gallery-btn-{{ section.id }}.active .pause {
-    display: none;
-  }
-
-  .gallery-timer-{{ section.id }} {
-    margin: 0px;
-    font-size: {{ timer_size_mobile }}px;
-    line-height: {{ timer_height }}%;
-    color: {{ timer_color }};
-    text-transform: unset;
+    text-decoration: none;
+    transition: all 0.25s ease 0s;
   }
   
   @media(min-width: 1024px) {
@@ -256,47 +180,49 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .gallery-body-{{ section.id }} {
-      grid-template-columns: 1fr 1fr;
+    .gallery-cards-{{ section.id }} {
+      grid-template-columns: repeat({{ cards_per_view }}, 1fr);
+      gap: {{ cards_gap }}px;
     }
 
-    .gallery-video-{{ section.id }} {
-      order: {{ video_position }};
+    .gallery-card-{{ section.id }} {
+      padding: {{ card_padding_vertical }}px {{ card_padding_horizontal }}px;
+    }
+    
+    .gallery-card-{{ section.id }}:hover .gallery-image-{{ section.id }}::after {
+      opacity: 1;
+      transition: all 0.25s ease 0s;
     }
 
-    .gallery-video-text-{{ section.id }} {
-      text-align: {{ video_text_align }};
+    .gallery-card-{{ section.id }}:hover {
+      background-color: {{ card_bg_hover_color }};
+      border: {{ card_border_thickness }}px solid {{ card_border_hover_color }};
+      transition: all 0.25s ease 0s;
     }
 
-    .gallery-video-text-{{ section.id }} * {
-      font-size: {{ video_text_size }}px;
+    .gallery-card-{{ section.id }}:hover .gallery-title-{{ section.id }} {
+      color: {{ title_hover_color }};
+      transition: all 0.25s ease 0s;
     }
 
-    .gallery-image-wrapper-{{ section.id }} {
-      padding: {{ image_padding_vertical }}px {{ image_padding_horizontal }}px;
-      order: {{ image_position }};
+    .gallery-card-{{ section.id }}:hover .gallery-text-{{ section.id }} * {
+      color: {{ text_hover_color }};
+      transition: all 0.25s ease 0s;
     }
 
-    .gallery-image-{{ section.id }} {
-      max-width: {{ image_width }}%;
+    .gallery-title-{{ section.id }} {
+      margin-top: {{ title_mt }}px;
+      text-align: {{ card_align }};
+      font-size: {{ title_size }}px;
     }
 
-    .gallery-image-text-{{ section.id }} {
-      margin-top: {{ image_text_mt }}px;
-      max-width: {{ image_text_width }}px;
-      text-align: {{ image_text_align }};
+    .gallery-text-{{ section.id }} {
+      margin-top: {{ text_mt }}px;
+      text-align: {{ card_align }};
     }
 
-    .gallery-image-text-{{ section.id }} * {
-      font-size: {{ image_text_size }}px;
-    }
-
-    .gallery-btn-{{ section.id }} {
-      font-size: {{ btn_size }}px;
-    }
-
-    .gallery-timer-{{ section.id }} {
-      font-size: {{ timer_size }}px;
+    .gallery-text-{{ section.id }} * {
+      font-size: {{ text_size }}px;
     }
   }
   
@@ -305,7 +231,7 @@
 {% unless full_width %}
   <style>
     .section-{{ section.id }}-settings {
-      max-width: {{ content_width }}rem;
+      max-width: {{ content_width }}px;
     }
   </style>
 {% endunless %}
@@ -337,68 +263,49 @@
   </style>
 {% endif %}
 
-{% if video_text_custom %}
+{% if title_custom %}
   <style>
-    .gallery-video-text-{{ section.id }} * {
-      font-family: {{ video_text_font.family }}, {{ video_text_font.fallback_families }};
-      font-weight: {{ video_text_font.weight }};
-      font-style: {{ video_text_font.style }};
+    .gallery-title-{{ section.id }} {
+      font-family: {{ title_font.family }}, {{ title_font.fallback_families }};
+      font-weight: {{ title_font.weight }};
+      font-style: {{ title_font.style }};
     }
   </style>
 {% endif %}
 
-{% if image_text_custom %}
+{% if text_custom %}
   <style>
-    .gallery-image-text-{{ section.id }} * {
-      font-family: {{ image_text_font.family }}, {{ image_text_font.fallback_families }};
-      font-weight: {{ image_text_font.weight }};
-      font-style: {{ image_text_font.style }};
+    .gallery-text-{{ section.id }} * {
+      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+      font-weight: {{ text_font.weight }};
+      font-style: {{ text_font.style }};
     }
   </style>
 {% endif %}
 
-{% if btn_custom %}
-  <style>
-    .gallery-btn-{{ section.id }} {
-      font-family: {{ btn_font.family }}, {{ btn_font.fallback_families }};
-      font-weight: {{ btn_font.weight }};
-      font-style: {{ btn_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if timer_custom %}
-  <style>
-    .gallery-timer-{{ section.id }} {
-      font-family: {{ timer_font.family }}, {{ timer_font.fallback_families }};
-      font-weight: {{ timer_font.weight }};
-      font-style: {{ timer_font.style }};
-    }
-  </style>
-{% endif %}
 
 {% if image_ratio_mobile == "portrait" %}
   <style>
     .gallery-image-{{ section.id }} {
-     aspect-ratio: 9.6/12; 
+     aspect-ratio: 9.6/14; 
     }
   </style>
 {% elsif image_ratio_mobile == "landscape" %}
   <style>
     .gallery-image-{{ section.id }}{
-     aspect-ratio: 12/6; 
+      aspect-ratio: 12/9; 
     }
   </style>
 {% elsif image_ratio_mobile == "square" %}
   <style>
     .gallery-image-{{ section.id }} {
-     aspect-ratio: 12/12; 
+      aspect-ratio: 12/12; 
     }
   </style>
 {% else %}
   <style>
     .gallery-image-{{ section.id }} {
-       aspect-ratio: auto; 
+      aspect-ratio: auto; 
     }
   </style>
 {% endif %}
@@ -407,7 +314,7 @@
   <style>
     @media(min-width: 1024px) {
      .gallery-image-{{ section.id }} {
-       aspect-ratio: 9.6/12; 
+        aspect-ratio: 9.6/14; 
       } 
     }
   </style>
@@ -415,7 +322,7 @@
   <style>
     @media(min-width: 1024px) {
       .gallery-image-{{ section.id }}{
-       aspect-ratio: 12/6; 
+        aspect-ratio: 12/9; 
       }
     }
   </style>
@@ -423,7 +330,7 @@
   <style>
     @media(min-width: 1024px) {
       .gallery-image-{{ section.id }} {
-       aspect-ratio: 12/12; 
+        aspect-ratio: 12/12; 
       }
     }
   </style>
@@ -431,273 +338,203 @@
   <style>
     @media(min-width: 1024px) {
       .gallery-image-{{ section.id }} {
-       aspect-ratio: auto; 
+        aspect-ratio: auto; 
       }
     }
   </style>
 {% endif %}
 
+{% for block in section.blocks %}
+  <style>
+    .gallery-card-{{ block.id }} {
+      transform: rotate({{ block.settings.rotate }}deg);
+    }
+
+    @media(min-width: 1024px) {      
+      .gallery-card-{{ block.id }}:hover {
+        transform: scale(1.05) rotate({{ block.settings.rotate }}deg);
+        z-index: 1;
+        transition: all 0.25s ease 0s;
+      }
+    }
+  </style>
+{% endfor %}
+
+{% if card_use_shadow %} 
+  <style>
+    .gallery-card-{{ section.id }} {
+      box-shadow: 0 2px 4px #0000001a, inset 0 0 1px -1px #0000001a;
+    }
+    
+    .gallery-card-{{ section.id }}:hover {
+      box-shadow: 0 12px 24px #0000000d, 0 2px 4px #0000001a, inset 0 0 1px -1px #0000001a;
+    }
+  </style>
+{% endif %}
+
+
 <div class="section-{{ section.id }} gallery-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="gallery-body-{{ section.id }}">
-        <div class="gallery-video-{{ section.id }}">
-          {% if video != blank %}
-            <video data-src="{{ video.sources[1].url }}" muted autoplay playsinline preload="none" loop class="lazy gallery-video-element-{{ section.id }}"></video>
-          {% else %}
-            {{ 'image' | placeholder_svg_tag }}
-          {% endif %}
-          {% if video_text != blank %}
-            <div class="gallery-video-text-{{ section.id }}">{{ video_text }}</div>
-          {% endif %}
-
-          <div class="gallery-controls-{{ section.id }}">
-            <p class="gallery-timer-{{ section.id }}">00:00:00</p>
-            <button class="gallery-btn-{{ section.id }}">
-              <span class="play">{{ btn_play }}</span>
-              <span class="pause">{{ btn_pause }}</span>
-            </button>
-          </div>
-        </div>
-        <div class="gallery-image-wrapper-{{ section.id }}">
-          <div class="gallery-image-{{ section.id }}">
-            {% if image != blank %}
-              <img src="{{ image | image_url }}" alt="{{ image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-            {% else %}
-              {{ 'image' | placeholder_svg_tag }}
+      <div class="gallery-cards-{{ section.id }}">
+        {% for block in section.blocks %}
+          <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="gallery-card-{{ section.id }} gallery-card-{{ block.id }}">
+            <div class="gallery-image-{{ section.id }}">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag }}
+              {% endif %}
+            </div>
+            {% if block.settings.title != blank %}
+              <h3 class="gallery-title-{{ section.id }}">{{ block.settings.title }}</h3>
             {% endif %}
-          </div>
-
-          {% if image_text != blank %}
-            <div class="gallery-image-text-{{ section.id }}">{{ image_text }}</div>
-          {% endif %}
-        </div>
+            {% if block.settings.text != blank %}
+              <div class="gallery-text-{{ section.id }}">{{ block.settings.text }}</div>
+            {% endif %}
+          </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
+        {% endfor %}
       </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
-
-<script>
-  function initGallery6() {
-
-    let btn = document.querySelector('.gallery-btn-{{ section.id }}');
-    let timer = document.querySelector('.gallery-timer-{{ section.id }}');
-    let video = document.querySelector('.gallery-video-element-{{ section.id }}');
-    let timerInterval;
-    
-    if (video) {
-      updateTimer();
-      timerInterval = setInterval(updateTimer, 1000);
-    }
-    
-    // Обработчик события клика на кнопку
-    if (btn) {
-      btn.addEventListener('click', () => {
-        if (btn.classList.contains('active')) {
-          if (video) {
-            video.play();
-          }
-        } else {
-          if (video) {
-            video.pause();
-          }
-        }
-    
-        btn.classList.toggle('active');
-      });
-    }
-    
-    function updateTimer() {
-      let hours = Math.floor(video.currentTime / 3600);
-      let minutes = Math.floor((video.currentTime % 3600) / 60);
-      let seconds = Math.floor(video.currentTime % 60);
-    
-      let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      timer.textContent = formattedTime;
-    }
-    
-    var lazyLoadInstance = new LazyLoad();
-
-    window.addEventListener(
-      "LazyLoad::Initialized",
-      function (event) {
-        window.lazyLoadInstance = event.detail.instance;
-      },
-      false
-    );
-  }
-
-  document.addEventListener('DOMContentLoaded', initGallery6);
-  
-  if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initGallery6);
-     document.addEventListener('shopify:section:load', initGallery6);
-  }
-</script>
-
 {% schema %}
 {
-  "name": "SG-Gallery #6",
+  "name": "SG-Gallery #7",
   "settings": [
     {
       "type": "header",
-      "content": "Video settings"
+      "content": "Cards settings"
     },
     {
-      "type": "video",
-      "id": "video",
-      "label": "Video"
+      "type": "range",
+      "id": "cards_per_view",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Cards per view",
+      "default": 3
     },
     {
       "type": "select",
-      "id": "video_position",
-      "label": "Video position - desktop",
+      "id": "cards_per_view_mobile",
+      "label": "Cards per view - mobile",
       "default": "1",
       "options": [
         {
-          "label": "Left",
+          "label": "1",
           "value": "1"
         },
         {
-          "label": "Right",
+          "label": "2",
           "value": "2"
         }
       ]
     },
     {
-      "type": "header",
-      "content": "Video text settings"
-    },
-    {
-      "type": "richtext",
-      "id": "video_text",
-      "label": "Text",
-      "default": "<p>Pair text with a video to focus on your chosen product or collection.</p>"
-    },
-    {
-      "type": "checkbox",
-      "id": "video_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "video_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
       "type": "range",
-      "id": "video_text_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "video_text_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "video_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "text_alignment",
-      "id": "video_text_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "video_text_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "header",
-      "content": "Image wrapper settings"
-    },
-    {
-      "type": "range",
-      "id": "image_padding_vertical",
+      "id": "cards_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Padding vertical",
-      "default": 40
+      "label": "Gap",
+      "default": 32
     },
     {
       "type": "range",
-      "id": "image_padding_vertical_mobile",
+      "id": "cards_gap_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Padding vertical - mobile",
-      "default": 40
+      "label": "Gap - mobile",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card settings"
     },
     {
       "type": "range",
-      "id": "image_padding_horizontal",
+      "id": "card_padding_horizontal",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal",
-      "default": 40
+      "default": 12
     },
     {
       "type": "range",
-      "id": "image_padding_horizontal_mobile",
+      "id": "card_padding_horizontal_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Padding horizontal - mobile",
-      "default": 40
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "card_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "text_alignment",
+      "id": "card_align",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "card_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_use_shadow",
+      "label": "Use shadow",
+      "default": true
     },
     {
       "type": "header",
       "content": "Image settings"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "range",
-      "id": "image_width",
-      "min": 40,
-      "max": 100,
-      "step": 2,
-      "unit": "%",
-      "label": "Width",
-      "default": 70
-    },
-    {
-      "type": "range",
-      "id": "image_width_mobile",
-      "min": 40,
-      "max": 100,
-      "step": 2,
-      "unit": "%",
-      "label": "Width - mobile",
-      "default": 70
     },
     {
       "type": "range",
@@ -717,13 +554,13 @@
       "step": 1,
       "unit": "px",
       "label": "Border thickness",
-      "default": 1
+      "default": 0
     },
     {
       "type": "select",
       "id": "image_ratio",
       "label": "Aspect ratio",
-      "default": "portrait",
+      "default": "landscape",
       "options": [
         {
           "label": "Portrait",
@@ -736,6 +573,10 @@
         {
           "label": "Landscape",
           "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
         }
       ]
     },
@@ -743,7 +584,7 @@
       "type": "select",
       "id": "image_ratio_mobile",
       "label": "Aspect ratio - mobile",
-      "default": "portrait",
+      "default": "landscape",
       "options": [
         {
           "label": "Portrait",
@@ -756,74 +597,127 @@
         {
           "label": "Landscape",
           "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
         }
       ]
     },
     {
-      "type": "header",
-      "content": "Image text settings"
+      "type": "range",
+      "id": "image_overlay",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay on hover",
+      "default": 0.2
     },
     {
-      "type": "richtext",
-      "id": "image_text",
-      "label": "Text",
-      "default": "<p>Write some content about your products, collections or brand. Use image to create an impactful layout.</p>"
+      "type": "header",
+      "content": "Title settings"
     },
     {
       "type": "checkbox",
-      "id": "image_text_custom",
+      "id": "title_custom",
       "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "image_text_font",
+      "id": "title_font",
       "label": "Font family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "image_text_width",
-      "min": 100,
-      "max": 700,
-      "step": 10,
-      "unit": "px",
-      "label": "Width",
-      "default": 260
-    },
-    {
-      "type": "range",
-      "id": "image_text_width_mobile",
-      "min": 100,
-      "max": 700,
-      "step": 10,
-      "unit": "px",
-      "label": "Width - mobile",
-      "default": 260
-    },
-    {
-      "type": "range",
-      "id": "image_text_size",
+      "id": "title_size",
       "min": 0,
       "max": 40,
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 12
+      "default": 20
     },
     {
       "type": "range",
-      "id": "image_text_size_mobile",
+      "id": "title_size_mobile",
       "min": 0,
       "max": 40,
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "title_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
       "default": 12
     },
     {
       "type": "range",
-      "id": "image_text_height",
+      "id": "title_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Text settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_height",
       "min": 50,
       "max": 200,
       "step": 10,
@@ -833,161 +727,75 @@
     },
     {
       "type": "range",
-      "id": "image_text_mt",
+      "id": "text_mt",
       "min": 0,
-      "max": 50,
+      "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 20
+      "default": 12
     },
     {
       "type": "range",
-      "id": "image_text_mt_mobile",
+      "id": "text_mt_mobile",
       "min": 0,
-      "max": 50,
+      "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 20
-    },
-    {
-      "type": "text_alignment",
-      "id": "image_text_align",
-      "label": "Alignment",
-      "default": "center"
-    },
-    {
-      "type": "text_alignment",
-      "id": "image_text_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
+      "default": 12
     },
     {
       "type": "header",
-      "content": "Button settings"
-    },
-    {
-      "type": "text",
-      "id": "btn_play",
-      "label": "Play text",
-      "default": "PLAY"
-    },
-    {
-      "type": "text",
-      "id": "btn_pause",
-      "label": "Pause text",
-      "default": "PAUSE"
-    },
-    {
-      "type": "checkbox",
-      "id": "btn_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "btn_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "btn_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "btn_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "btn_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "header",
-      "content": "Timer settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "timer_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "timer_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "timer_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "timer_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "timer_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "header",
-      "content": "Video colors"
+      "content": "Card colors"
     },
     {
       "type": "color",
-      "label": "Video text color",
-      "id": "video_text_color",
+      "label": "Background",
+      "id": "card_bg_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Button color",
-      "id": "btn_color",
+      "label": "Background hover",
+      "id": "card_bg_hover_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Timer color",
-      "id": "timer_color",
-      "default": "#FFFFFF"
+      "label": "Border",
+      "id": "card_border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Border hover",
+      "id": "card_border_hover_color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "label": "Title",
+      "id": "title_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Title hover",
+      "id": "title_hover_color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "label": "Text",
+      "id": "text_color",
+      "default": "#777777"
+    },
+    {
+      "type": "color",
+      "label": "Text hover",
+      "id": "text_hover_color",
+      "default": "#999999"
     },
     {
       "type": "header",
@@ -995,21 +803,15 @@
     },
     {
       "type": "color",
-      "label": "Image wrapper background",
-      "id": "image_bg_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Image border",
+      "label": "Border",
       "id": "image_border_color",
       "default": "#000000"
     },
     {
       "type": "color",
-      "label": "Image text",
-      "id": "image_text_color",
-      "default": "#000000"
+      "label": "Overlay",
+      "id": "image_overlay_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
@@ -1018,12 +820,14 @@
     {
       "type": "color",
       "label": "Section background",
-      "id": "background_color"
+      "id": "background_color",
+      "default": "#fafafa"
     },
     {
       "type": "color_background",
       "id": "background_gradient",
-      "label": "Section background gradient"
+      "label": "Section background gradient",
+      "info": "Remove gradient to replace with solid colors"
     },
     {
       "type": "color",
@@ -1087,7 +891,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -1097,7 +901,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -1107,7 +911,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 0
+      "default": 5
     },
     {
       "type": "range",
@@ -1117,7 +921,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 0
+      "default": 2.5
     },
     {
       "type": "header",
@@ -1127,17 +931,17 @@
       "type": "checkbox",
       "id": "full_width",
       "label": "Full width",
-      "default": true
+      "default": false
     },
     {
       "type": "range",
       "id": "content_width",
-      "min": 0,
-      "max": 400,
-      "step": 10,
-      "unit": "rem",
+      "min": 800,
+      "max": 2000,
+      "step": 100,
+      "unit": "px",
       "label": "Section content width",
-      "default": 120
+      "default": 1200
     },
     {
       "type": "range",
@@ -1167,9 +971,69 @@
       "default": true
     }
   ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Tell your story</p>"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": -30,
+          "max": 30,
+          "step": 2,
+          "unit": "deg",
+          "label": "Rotate",
+          "default": 0
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "SG-Gallery #6"
+      "name": "SG-Gallery #7",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "rotate": 6
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "rotate": -6
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "rotate": 4
+          }
+        }
+      ]
     }
   ]
 }
