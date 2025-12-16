@@ -34,43 +34,44 @@
         "padding_bottom": 36
       }
     },
-    "mockup_4KEt7h": {
+    "mockup_kH9yJm": {
       "type": "mockup",
       "blocks": {
-        "heading_8H66zG": {
+        "text_3hJ4Cb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tell your story</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_height": 150,
+            "text_mt": 20,
+            "text_mt_mobile": 20,
+            "text_color": "#FFFFFF"
+          }
+        },
+        "heading_chirbp": {
           "type": "heading",
           "settings": {
-            "heading": "<h1>Hero <strong>#36</strong></h1>",
+            "heading": "<h1>Hero <strong>#37</strong></h1>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_accent_font": "josefin_sans_n4",
-            "heading_size": 48,
-            "heading_size_mobile": 32,
+            "heading_size": 56,
+            "heading_size_mobile": 56,
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
             "heading_color": "#FFFFFF"
           }
         },
-        "text_3dBiGB": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Tell your story</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 15,
-            "text_size_mobile": 15,
-            "text_height": 150,
-            "text_mt": 28,
-            "text_mt_mobile": 16,
-            "text_color": "#FFFFFF"
-          }
-        },
-        "button_ggTtpi": {
+        "button_xfUEBK": {
           "type": "button",
           "settings": {
             "button": "Shop now",
             "button_url": "",
+            "button_style": "non_outline",
             "button_custom": false,
             "button_font": "josefin_sans_n4",
             "button_size": 14,
@@ -78,13 +79,12 @@
             "button_height": 100,
             "button_padding_vertical": 16,
             "button_padding_vertical_mobile": 16,
-            "button_padding_horizontal": 32,
-            "button_padding_horizontal_mobile": 32,
+            "button_padding_horizontal": 24,
+            "button_padding_horizontal_mobile": 24,
             "button_radius": 16,
             "button_border_thickness": 1,
-            "button_mt": 24,
-            "button_mt_mobile": 16,
-            "button_style": "non_outline",
+            "button_mt": 20,
+            "button_mt_mobile": 20,
             "button_color": "#121212",
             "button_hover_color": "#FFFFFF",
             "button_bg_color": "#FFFFFF",
@@ -92,37 +92,28 @@
             "button_border_color": "#121212",
             "button_border_hover_color": "#121212"
           }
-        },
-        "payment_re46mV": {
-          "type": "payment",
-          "settings": {
-            "payment_icon_size": 48,
-            "payment_icon_size_mobile": 40,
-            "payment_icon_mt": 32,
-            "payment_icon_mt_mobile": 24
-          }
         }
       },
       "block_order": [
-        "heading_8H66zG",
-        "text_3dBiGB",
-        "button_ggTtpi",
-        "payment_re46mV"
+        "text_3hJ4Cb",
+        "heading_chirbp",
+        "button_xfUEBK"
       ],
-      "name": "SG-Hero #36",
+      "name": "SG-Hero #37",
       "settings": {
-        "layout_height": "fixed_height",
+        "layout_height": "full_screen",
         "layout_fixed_height": 600,
         "layout_fixed_height_mobile": 560,
         "content_maxwidth": 55,
-        "content_align": "left",
-        "content_align_mobile": "left",
-        "content_vertical_align": "center",
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "content_vertical_align": "end",
         "content_vertical_align_mobile": "center",
         "layout_bg_type": "image",
-        "bg_image": "shopify://shop_images/eco-hero-image-full-width-without-text.png",
+        "first_bg_image": "shopify://shop_images/eco-hero-image-full-width-without-text.png",
+        "second_bg_image": "shopify://shop_images/need-full-screen.png",
         "bg_overlay": 0.2,
-        "text_shadow": false,
+        "text_shadow": true,
         "bg_overlay_color": "#121212",
         "background_color": "#FFFFFF",
         "background_gradient": "",
@@ -145,6 +136,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_4KEt7h"
+    "mockup_kH9yJm"
   ]
 }
