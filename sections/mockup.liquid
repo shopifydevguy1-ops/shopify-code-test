@@ -3,8 +3,6 @@
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
   assign padding_top = section.settings.padding_top
   assign padding_bottom = section.settings.padding_bottom
-  assign padding_top_mobile = section.settings.padding_top_mobile
-  assign padding_bottom_mobile = section.settings.padding_bottom_mobile
   assign border_color = section.settings.border_color
   assign border_thickness = section.settings.border_thickness
   assign margin_top = section.settings.margin_top
@@ -18,66 +16,79 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
-  assign content_horizontal_align_mobile = section.settings.content_horizontal_align_mobile
-  assign content_horizontal_align = section.settings.content_horizontal_align
+  assign video = section.settings.video
+  assign video_position = section.settings.video_position
 
-  assign text = section.settings.text
-  assign text_custom = section.settings.text_custom
-  assign text_font = section.settings.text_font
-  assign text_size = section.settings.text_size
-  assign text_size_mobile = section.settings.text_size_mobile
-  assign text_height = section.settings.text_height
-  assign text_color = section.settings.text_color
-  assign text_width = section.settings.text_width
-  assign text_width_mobile = section.settings.text_width_mobile
+  assign video_text = section.settings.video_text
+  assign video_text_size = section.settings.video_text_size
+  assign video_text_size_mobile = section.settings.video_text_size_mobile
+  assign video_text_custom = section.settings.video_text_custom
+  assign video_text_font = section.settings.video_text_font
+  assign video_text_height = section.settings.video_text_height
+  assign video_text_color = section.settings.video_text_color
+  assign video_text_align = section.settings.video_text_align
+  assign video_text_align_mobile = section.settings.video_text_align_mobile
 
-   assign text_align = ""
-  if content_horizontal_align == "start"
-    assign text_align = "left"
-  elsif content_horizontal_align == "center"
-    assign text_align = "center"
+  assign image = section.settings.image
+  assign image_padding_vertical = section.settings.image_padding_vertical
+  assign image_padding_vertical_mobile = section.settings.image_padding_vertical_mobile
+  assign image_padding_horizontal = section.settings.image_padding_horizontal
+  assign image_padding_horizontal_mobile = section.settings.image_padding_horizontal_mobile
+  assign image_bg_color = section.settings.image_bg_color
+  assign image_border_thickness = section.settings.image_border_thickness
+  assign image_border_color = section.settings.image_border_color
+  assign image_radius = section.settings.image_radius
+  assign image_ratio = section.settings.image_ratio
+  assign image_ratio_mobile = section.settings.image_ratio_mobile
+  assign image_width = section.settings.image_width
+  assign image_width_mobile = section.settings.image_width_mobile
+
+  assign image_position = 2
+
+  if video_position == 1
+    assign image_position = 2
   else
-    assign text_align = "right"
+   assign image_position = 1
   endif
 
-  assign text_align_mobile = ""
-  if content_horizontal_align_mobile == "start"
-    assign text_align_mobile = "left"
-  elsif content_horizontal_align_mobile == "center"
-    assign text_align_mobile = "center"
-  else
-    assign text_align_mobile = "right"
-  endif
+  assign image_text = section.settings.image_text
+  assign image_text_size = section.settings.image_text_size
+  assign image_text_size_mobile = section.settings.image_text_size_mobile
+  assign image_text_mt = section.settings.image_text_mt
+  assign image_text_mt_mobile = section.settings.image_text_mt_mobile
+  assign image_text_custom = section.settings.image_text_custom
+  assign image_text_font = section.settings.image_text_font
+  assign image_text_height = section.settings.image_text_height
+  assign image_text_color = section.settings.image_text_color
+  assign image_text_align = section.settings.image_text_align
+  assign image_text_align_mobile = section.settings.image_text_align_mobile
+  assign image_text_width_mobile = section.settings.image_text_width_mobile
+  assign image_text_width = section.settings.image_text_width
 
-  assign button = section.settings.button
-  assign button_url = section.settings.button_url
-  assign button_size = section.settings.button_size
-  assign button_size_mobile = section.settings.button_size_mobile
-  assign button_color = section.settings.button_color
-  assign button_hover_color = section.settings.button_hover_color
-  assign button_custom = section.settings.button_custom
-  assign button_font = section.settings.button_font
-  assign button_height = section.settings.button_height
-  assign button_mt = section.settings.button_mt
-  assign button_mt_mobile = section.settings.button_mt_mobile
-  assign button_padding_vertical = section.settings.button_padding_vertical
-  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
-  assign button_padding_horizontal = section.settings.button_padding_horizontal
-  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
-  assign button_radius = section.settings.button_radius
-  assign button_border_thickness = section.settings.button_border_thickness
-  assign button_border_color = section.settings.button_border_color
-  assign button_border_hover_color = section.settings.button_border_hover_color
-  assign button_bg_color = section.settings.button_bg_color
-  assign button_bg_hover_color = section.settings.button_bg_hover_color
-  assign button_style = section.settings.button_style
+  assign btn_play = section.settings.btn_play
+  assign btn_pause = section.settings.btn_pause
+  assign btn_size = section.settings.btn_size
+  assign btn_size_mobile = section.settings.btn_size_mobile
+  assign btn_custom = section.settings.btn_custom
+  assign btn_font = section.settings.btn_font
+  assign btn_height = section.settings.btn_height
+  assign btn_color = section.settings.btn_color
+
+  assign timer_size = section.settings.timer_size
+  assign timer_size_mobile = section.settings.timer_size_mobile
+  assign timer_custom = section.settings.timer_custom
+  assign timer_font = section.settings.timer_font
+  assign timer_height = section.settings.timer_height
+  assign timer_color = section.settings.timer_color
   
 -%}
 
 {%- style -%}
 
-  {{  text_font | font_face: font_display: 'swap' }}
-  {{  button_font | font_face: font_display: 'swap' }}
+  {{  video_text_font | font_face: font_display: 'swap' }}
+  {{  image_text_font | font_face: font_display: 'swap' }}
+  {{  btn_font | font_face: font_display: 'swap' }}
+  {{  timer_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -92,92 +103,24 @@
   
   .section-{{ section.id }}-settings {
     margin: 0 auto;
-    padding-top: {{ padding_top_mobile }}px;
-    padding-bottom: {{ padding_bottom_mobile }}px;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .gallery-body-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-video-{{ section.id }} {
     position: relative;
+    aspect-ratio: 1/1;
   }
 
-  .gallery-content-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    align-items: {{ content_horizontal_align_mobile }};
-    position: relative;
-    z-index: 2;
-  }
-
-  .gallery-text-{{ section.id }} {
-    max-width: {{ text_width_mobile }}%;
-    text-align: {{ text_align_mobile }};
-  }
-
-  .gallery-text-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ text_size_mobile }}px;
-    color: {{ text_color }};
-    line-height: {{ text_height }}%;
-    text-transform: unset;
-  }
-
-  .gallery-button-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    max-width: fit-content;
-    margin: 0;
-    margin-top: {{ button_mt_mobile }}px;
-    font-size: {{ button_size_mobile }}px;
-    color: {{ button_color }};
-    line-height: {{ button_height }}%;
-    text-align: center;
-    text-transform: unset;
-    text-decoration: none;
-    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
-    border-radius: {{ button_radius }}px;
-    transition: all 0.25s ease 0s;
-    position: relative;
-    font-weight: 700;
-    z-index: 2;
-    box-sizing: border-box;
-  }
-
-  .gallery-button-{{ section.id }} svg {
-    background: transparent;
-    width: 14px;
-    height: 14px;
-  }
-
-  .gallery-button-{{ section.id }} svg path {
-    fill: {{ button_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .gallery-button-{{ section.id }}:hover {
-    color: {{ button_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .gallery-button-{{ section.id }}:hover svg path {
-    fill: {{ button_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .gallery-item-{{ section.id }} {
-    position: absolute;
-    z-index: 1;
-  }
-
-  .gallery-item-{{ section.id }}.desktop {
-    display: none;
-  }
-
-  .gallery-item-{{ section.id }} img,
-  .gallery-item-{{ section.id }} svg,
-  .gallery-item-{{ section.id }} video,
-  .gallery-item-{{ section.id }} iframe {
+  .gallery-video-{{ section.id }} video,
+  .gallery-video-{{ section.id }} svg {
     display: block;
     width: 100%;
     height: 100%;
@@ -186,8 +129,113 @@
     border: 0px;
   }
 
-  .gallery-item-{{ section.id }} svg {
-    background-color: #AFAFAF;
+  .gallery-video-{{ section.id }} svg {
+    background-color: #ebebeb;
+  }
+
+  .gallery-image-wrapper-{{ section.id }} {
+    padding: {{ image_padding_vertical_mobile }}px {{ image_padding_horizontal_mobile }}px;
+    background-color: {{ image_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .gallery-image-{{ section.id }} {
+    width: 100%;
+    max-width: {{ image_width_mobile }}%;
+    overflow: hidden;
+    border-radius: {{ image_radius }}px;
+    border: {{ image_border_thickness }}px solid {{ image_border_color }};
+  }
+
+  .gallery-image-{{ section.id }} img,
+  .gallery-image-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-image-{{ section.id }} svg {
+    background-color: #FAFAFA;
+  }
+
+  .gallery-video-text-{{ section.id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+    width: calc(100% - 40px);
+    text-align: {{ video_text_align_mobile }};
+  }
+
+  .gallery-video-text-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ video_text_size_mobile }}px;
+    line-height: {{ video_text_height }}%;
+    color: {{ video_text_color }};
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .gallery-image-text-{{ section.id }} {
+    margin-top: {{ image_text_mt_mobile }}px;
+    max-width: {{ image_text_width_mobile }}px;
+    text-align: {{ image_text_align_mobile }};
+  }
+
+  .gallery-image-text-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ image_text_size_mobile }}px;
+    line-height: {{ image_text_height }}%;
+    color: {{ image_text_color }};
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .gallery-controls-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    gap: 10px;
+  }
+
+  .gallery-btn-{{ section.id }} {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    font-size: {{ btn_size_mobile }}px;
+    line-height: {{ btn_height }}%;
+    color: {{ btn_color }};
+    text-transform: unset;
+    cursor: pointer;
+  }
+
+  .gallery-btn-{{ section.id }} .play {
+    display: none;
+  }
+
+  .gallery-btn-{{ section.id }}.active .play {
+    display: inline;
+  }
+
+  .gallery-btn-{{ section.id }}.active .pause {
+    display: none;
+  }
+
+  .gallery-timer-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ timer_size_mobile }}px;
+    line-height: {{ timer_height }}%;
+    color: {{ timer_color }};
+    text-transform: unset;
   }
   
   @media(min-width: 1024px) {
@@ -208,27 +256,47 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .gallery-content-{{ section.id }} {
-      align-items: {{ content_horizontal_align }};
+    .gallery-body-{{ section.id }} {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .gallery-text-{{ section.id }} {
-      max-width: {{ text_width }}%;
-      text-align: {{ text_align }};
+    .gallery-video-{{ section.id }} {
+      order: {{ video_position }};
     }
 
-    .gallery-text-{{ section.id }} * {
-      font-size: {{ text_size }}px;
+    .gallery-video-text-{{ section.id }} {
+      text-align: {{ video_text_align }};
     }
 
-    .gallery-button-{{ section.id }} {
-      margin-top: {{ button_mt }}px;
-      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
-      font-size: {{ button_size }}px;
+    .gallery-video-text-{{ section.id }} * {
+      font-size: {{ video_text_size }}px;
     }
 
-    .gallery-item-{{ section.id }}.desktop {
-      display: block;
+    .gallery-image-wrapper-{{ section.id }} {
+      padding: {{ image_padding_vertical }}px {{ image_padding_horizontal }}px;
+      order: {{ image_position }};
+    }
+
+    .gallery-image-{{ section.id }} {
+      max-width: {{ image_width }}%;
+    }
+
+    .gallery-image-text-{{ section.id }} {
+      margin-top: {{ image_text_mt }}px;
+      max-width: {{ image_text_width }}px;
+      text-align: {{ image_text_align }};
+    }
+
+    .gallery-image-text-{{ section.id }} * {
+      font-size: {{ image_text_size }}px;
+    }
+
+    .gallery-btn-{{ section.id }} {
+      font-size: {{ btn_size }}px;
+    }
+
+    .gallery-timer-{{ section.id }} {
+      font-size: {{ timer_size }}px;
     }
   }
   
@@ -269,210 +337,186 @@
   </style>
 {% endif %}
 
-{% if text_custom %}
+{% if video_text_custom %}
   <style>
-    .gallery-text-{{ section.id }} * {
-      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
-      font-weight: {{ text_font.weight }};
-      font-style: {{ text_font.style }};
+    .gallery-video-text-{{ section.id }} * {
+      font-family: {{ video_text_font.family }}, {{ video_text_font.fallback_families }};
+      font-weight: {{ video_text_font.weight }};
+      font-style: {{ video_text_font.style }};
     }
   </style>
 {% endif %}
 
-{% if button_custom %}
+{% if image_text_custom %}
   <style>
-    .gallery-button-{{ section.id }} {
-      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
-      font-weight: {{ button_font.weight }};
-      font-style: {{ button_font.style }};
+    .gallery-image-text-{{ section.id }} * {
+      font-family: {{ image_text_font.family }}, {{ image_text_font.fallback_families }};
+      font-weight: {{ image_text_font.weight }};
+      font-style: {{ image_text_font.style }};
     }
   </style>
 {% endif %}
 
-{% if button_style == "non_outline" or button_style == "non_outline_arrow" %}
+{% if btn_custom %}
   <style>
-    .gallery-button-{{ section.id }} {
-      background-color: {{ button_bg_color }};
-    }
-
-    .gallery-button-{{ section.id }}:hover {
-      background-color: {{ button_bg_hover_color }};
-    }
-  </style>
-{% elsif button_style == "outline" or button_style == "outline_arrow" %}
-  <style>
-    .gallery-button-{{ section.id }} {
-      background-color: {{ button_bg_color }};
-      border: {{ button_border_thickness }}px solid {{ button_border_color }};
-    }
-
-    .gallery-button-{{ section.id }}:hover {
-      background-color: {{ button_bg_hover_color }};
-      border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
-    }
-  </style>
-{% elsif button_style == "link" %}
-  <style>
-    .gallery-button-{{ section.id }} {
-      padding: 0px !important;
-      max-width: fit-content !important;
-      text-decoration: underline !important;
+    .gallery-btn-{{ section.id }} {
+      font-family: {{ btn_font.family }}, {{ btn_font.fallback_families }};
+      font-weight: {{ btn_font.weight }};
+      font-style: {{ btn_font.style }};
     }
   </style>
 {% endif %}
 
-{% for block in section.blocks %}
+{% if timer_custom %}
   <style>
-    .gallery-item-{{ block.id }} {
-      width: {{ block.settings.item_width_mobile }}px;
-      left: {{ block.settings.horizontal_position_mobile }}%;
-      top: {{ block.settings.vertical_position_mobile }}%;
-      transform: translate(-{{ block.settings.horizontal_position_mobile }}%, -{{ block.settings.vertical_position_mobile}}%);
-      border-radius: {{ block.settings.item_radius }}px;
-      border: {{ block.settings.item_border_thickness }}px solid {{ block.settings.item_border_color }};
-      overflow: hidden;
+    .gallery-timer-{{ section.id }} {
+      font-family: {{ timer_font.family }}, {{ timer_font.fallback_families }};
+      font-weight: {{ timer_font.weight }};
+      font-style: {{ timer_font.style }};
     }
+  </style>
+{% endif %}
 
+{% if image_ratio_mobile == "portrait" %}
+  <style>
+    .gallery-image-{{ section.id }} {
+     aspect-ratio: 9.6/12; 
+    }
+  </style>
+{% elsif image_ratio_mobile == "landscape" %}
+  <style>
+    .gallery-image-{{ section.id }}{
+     aspect-ratio: 12/6; 
+    }
+  </style>
+{% elsif image_ratio_mobile == "square" %}
+  <style>
+    .gallery-image-{{ section.id }} {
+     aspect-ratio: 12/12; 
+    }
+  </style>
+{% else %}
+  <style>
+    .gallery-image-{{ section.id }} {
+       aspect-ratio: auto; 
+    }
+  </style>
+{% endif %}
+
+{% if image_ratio == "portrait" %}
+  <style>
     @media(min-width: 1024px) {
-      .gallery-item-{{ block.id }} {
-        width:  {{ block.settings.item_width }}px;
-        left: {{ block.settings.horizontal_position }}%;
-        top: {{ block.settings.vertical_position }}%;
-        transform: translate(-{{ block.settings.horizontal_position }}%, -{{ block.settings.vertical_position}}%);
+     .gallery-image-{{ section.id }} {
+       aspect-ratio: 9.6/12; 
+      } 
+    }
+  </style>
+{% elsif image_ratio == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .gallery-image-{{ section.id }}{
+       aspect-ratio: 12/6; 
       }
     }
   </style>
-
-  {% if block.settings.item_ratio_mobile == "portrait" %}
-    <style>
-      .gallery-item-{{ block.id }} {
-       aspect-ratio: 9.6/11; 
-      }
-    </style>
-  {% elsif block.settings.item_ratio_mobile == "landscape" %}
-    <style>
-      .gallery-item-{{ block.id }}{
-       aspect-ratio: 12/10; 
-      }
-    </style>
-  {% elsif block.settings.item_ratio_mobile == "square" %}
-    <style>
-      .gallery-item-{{ block.id }} {
+{% elsif image_ratio == "square" %}
+  <style>
+    @media(min-width: 1024px) {
+      .gallery-image-{{ section.id }} {
        aspect-ratio: 12/12; 
       }
-    </style>
-  {% else %}
-    <style>
-      .gallery-item-{{ block.id }} {
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .gallery-image-{{ section.id }} {
        aspect-ratio: auto; 
       }
-    </style>
-  {% endif %}
-  
-  {% if block.settings.item_ratio == "portrait" %}
-    <style>
-      @media(min-width: 1024px) {
-       .gallery-item-{{ block.id }} {
-         aspect-ratio: 9.6/11; 
-        } 
-      }
-    </style>
-  {% elsif block.settings.item_ratio == "landscape" %}
-    <style>
-      @media(min-width: 1024px) {
-        .gallery-item-{{ block.id }}{
-         aspect-ratio: 12/10; 
-        }
-      }
-    </style>
-  {% elsif block.settings.item_ratio == "square" %}
-    <style>
-      @media(min-width: 1024px) {
-        .gallery-item-{{ block.id }} {
-         aspect-ratio: 12/12; 
-        }
-      }
-    </style>
-  {% else %}
-    <style>
-      @media(min-width: 1024px) {
-        .gallery-item-{{ block.id }} {
-         aspect-ratio: auto; 
-        }
-      }
-    </style>
-  {% endif %}
-  
-{% endfor %}
-
+    }
+  </style>
+{% endif %}
 
 <div class="section-{{ section.id }} gallery-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="gallery-content-{{ section.id }}">
-        {% if text != blank %}
-          <div class="gallery-text-{{ section.id }}">
-            {{ text }}
-          </div>
-        {% endif %}
+      <div class="gallery-body-{{ section.id }}">
+        <div class="gallery-video-{{ section.id }}">
+          {% if video != blank %}
+            <video data-src="{{ video.sources[1].url }}" muted autoplay playsinline preload="none" loop class="lazy gallery-video-element-{{ section.id }}"></video>
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}
+          {% if video_text != blank %}
+            <div class="gallery-video-text-{{ section.id }}">{{ video_text }}</div>
+          {% endif %}
 
-        {% if button != blank %}
-          <a href="{{ button_url }}" class="gallery-button-{{ section.id }}">
-            <span>{{ button }}</span>
-            {% if button_style == "non_outline_arrow" or button_style == "outline_arrow" %}
-              <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
-                <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
-              </svg>
-            {% endif %}
-          </a>
-        {% endif %}
-      </div>
-      {% for block in section.blocks %}
-        <div class="gallery-item-{{ block.id }} gallery-item-{{ section.id }} {% if block.settings.hide_mobile %}desktop{% endif %}">
-          {% if block.settings.media_type == "image" %}
-            {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if forloop.first %}{% if lazy %}loading="lazy"{% endif %}{% endif %}>
+          <div class="gallery-controls-{{ section.id }}">
+            <p class="gallery-timer-{{ section.id }}">00:00:00</p>
+            <button class="gallery-btn-{{ section.id }}">
+              <span class="play">{{ btn_play }}</span>
+              <span class="pause">{{ btn_pause }}</span>
+            </button>
+          </div>
+        </div>
+        <div class="gallery-image-wrapper-{{ section.id }}">
+          <div class="gallery-image-{{ section.id }}">
+            {% if image != blank %}
+              <img src="{{ image | image_url }}" alt="{{ image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
             {% else %}
               {{ 'image' | placeholder_svg_tag }}
             {% endif %}
-          {% else %}
-            {% assign video_id = block.settings.video.id | default: block.settings.video_url.id %}
-            {% assign loop = '&loop=1&playlist=' | append: video_id %}  
-            {%- if block.settings.video == null and block.settings.video_url != null -%}
-              {%- if block.settings.video_url.type == 'youtube' -%}
-                <iframe
-                  data-src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1&controls=0&showinfo=0{{ loop }}"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="lazy"
-                ></iframe>
-              {%- else -%}
-                <iframe
-                  data-src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1&controls=0&showinfo=0{{ loop }}"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="lazy"
-                ></iframe>
-              {% endif %}
-            
-            {% else %}
+          </div>
 
-              <video data-src="{{ block.settings.video.sources[1].url }}" loop autoplay muted playsinline preload="none" class="lazy"></video>
-
-            
-            {% endif %}
+          {% if image_text != blank %}
+            <div class="gallery-image-text-{{ section.id }}">{{ image_text }}</div>
           {% endif %}
         </div>
-      {% endfor %}
+      </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
 
 <script>
-  function initGallery5() {
-    let lazyLoadInstance = new LazyLoad();
+  function initGallery6() {
+
+    let btn = document.querySelector('.gallery-btn-{{ section.id }}');
+    let timer = document.querySelector('.gallery-timer-{{ section.id }}');
+    let video = document.querySelector('.gallery-video-element-{{ section.id }}');
+    let timerInterval;
+    
+    if (video) {
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // Обработчик события клика на кнопку
+    if (btn) {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) {
+          if (video) {
+            video.play();
+          }
+        } else {
+          if (video) {
+            video.pause();
+          }
+        }
+    
+        btn.classList.toggle('active');
+      });
+    }
+    
+    function updateTimer() {
+      let hours = Math.floor(video.currentTime / 3600);
+      let minutes = Math.floor((video.currentTime % 3600) / 60);
+      let seconds = Math.floor(video.currentTime % 60);
+    
+      let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      timer.textContent = formattedTime;
+    }
+    
+    var lazyLoadInstance = new LazyLoad();
 
     window.addEventListener(
       "LazyLoad::Initialized",
@@ -483,353 +527,498 @@
     );
   }
 
-  document.addEventListener('DOMContentLoaded', initGallery5);
+  document.addEventListener('DOMContentLoaded', initGallery6);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initGallery5);
-     document.addEventListener('shopify:section:load', initGallery5);
+     document.addEventListener('shopify:section:unload', initGallery6);
+     document.addEventListener('shopify:section:load', initGallery6);
   }
-  
 </script>
 
 {% schema %}
 {
-  "name": "SG-Gallery #5",
+  "name": "SG-Gallery #6",
   "settings": [
     {
       "type": "header",
-      "content": "Content Settings"
+      "content": "Video settings"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
     },
     {
       "type": "select",
-      "id": "content_horizontal_align",
-      "label": "Content Horizontal Align",
-      "default": "center",
+      "id": "video_position",
+      "label": "Video position - desktop",
+      "default": "1",
       "options": [
         {
           "label": "Left",
-          "value": "start"
-        },
-        {
-          "label": "Center",
-          "value": "center"
+          "value": "1"
         },
         {
           "label": "Right",
-          "value": "end"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "content_horizontal_align_mobile",
-      "label": "Content Horizontal Align - Mobile",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "start"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "end"
+          "value": "2"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Text Settings"
+      "content": "Video text settings"
     },
     {
       "type": "richtext",
-      "id": "text",
+      "id": "video_text",
       "label": "Text",
-      "default": "<p><strong>we’re all about creating elevated, effective, </strong><em>self care essentials </em><strong>that are</strong><em> easy to habit stack</em><strong> into your busy schedule.</strong></p>"
+      "default": "<p>Pair text with a video to focus on your chosen product or collection.</p>"
     },
     {
       "type": "checkbox",
-      "id": "text_custom",
-      "label": "Use Custom Font",
+      "id": "video_text_custom",
+      "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "text_font",
-      "label": "Text Font Family",
+      "id": "video_text_font",
+      "label": "Font family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "text_size",
+      "id": "video_text_size",
       "min": 0,
-      "max": 72,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "video_text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "video_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 150
+    },
+    {
+      "type": "text_alignment",
+      "id": "video_text_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "video_text_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "header",
+      "content": "Image wrapper settings"
+    },
+    {
+      "type": "range",
+      "id": "image_padding_vertical",
+      "min": 0,
+      "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Text Size",
+      "label": "Padding vertical",
       "default": 40
     },
     {
       "type": "range",
-      "id": "text_size_mobile",
+      "id": "image_padding_vertical_mobile",
       "min": 0,
-      "max": 72,
+      "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Text Size - Mobile",
-      "default": 24
+      "label": "Padding vertical - mobile",
+      "default": 40
     },
     {
       "type": "range",
-      "id": "text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Text Line Height",
-      "default": 150
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "min": 30,
+      "id": "image_padding_horizontal",
+      "min": 0,
       "max": 100,
       "step": 2,
-      "unit": "%",
-      "label": "Text Width",
-      "default": 80
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 40
     },
     {
       "type": "range",
-      "id": "text_width_mobile",
-      "min": 30,
+      "id": "image_padding_horizontal_mobile",
+      "min": 0,
       "max": 100,
       "step": 2,
-      "unit": "%",
-      "label": "Text Width - Mobile",
-      "default": 90
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 40
     },
     {
       "type": "header",
-      "content": "Button Settings"
+      "content": "Image settings"
     },
     {
-      "type": "text",
-      "id": "button",
-      "label": "Button Text",
-      "default": "SHOP NOW"
-    },
-    {
-      "type": "url",
-      "id": "button_url",
-      "label": "Button URL"
-    },
-    {
-      "type": "checkbox",
-      "id": "button_custom",
-      "label": "Use Custom Font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "button_font",
-      "label": "Button Font Family",
-      "default": "josefin_sans_n4"
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
     },
     {
       "type": "range",
-      "id": "button_size",
-      "min": 0,
-      "max": 30,
-      "step": 1,
-      "unit": "px",
-      "label": "Button Size",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "button_size_mobile",
-      "min": 0,
-      "max": 30,
-      "step": 1,
-      "unit": "px",
-      "label": "Button Size - Mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "button_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
+      "id": "image_width",
+      "min": 40,
+      "max": 100,
+      "step": 2,
       "unit": "%",
-      "label": "Button Line Height",
-      "default": 100
+      "label": "Width",
+      "default": 70
     },
     {
       "type": "range",
-      "id": "button_mt",
+      "id": "image_width_mobile",
+      "min": 40,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Width - mobile",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Button Margin Top",
-      "default": 36
+      "label": "Roundness",
+      "default": 0
     },
     {
       "type": "range",
-      "id": "button_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Margin Top - Mobile",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "button_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Vertical",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Vertical - Mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Horizontal",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "button_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Padding Horizontal - Mobile",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "button_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Button Roundness",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "button_border_thickness",
+      "id": "image_border_thickness",
       "min": 0,
       "max": 10,
       "step": 1,
       "unit": "px",
-      "label": "Button Border Thickness",
+      "label": "Border thickness",
       "default": 1
     },
     {
       "type": "select",
-      "id": "button_style",
-      "label": "Button Style",
-      "default": "link",
+      "id": "image_ratio",
+      "label": "Aspect ratio",
+      "default": "portrait",
       "options": [
         {
-          "label": "Link",
-          "value": "link"
+          "label": "Portrait",
+          "value": "portrait"
         },
         {
-          "label": "Non-Outline",
-          "value": "non_outline"
+          "label": "Square",
+          "value": "square"
         },
         {
-          "label": "Non-Outline & Arrow",
-          "value": "non_outline_arrow"
+          "label": "Landscape",
+          "value": "landscape"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "portrait",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
         },
         {
-          "label": "Outline",
-          "value": "outline"
+          "label": "Square",
+          "value": "square"
         },
         {
-          "label": "Outline & Arrow",
-          "value": "outline_arrow"
+          "label": "Landscape",
+          "value": "landscape"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Button Colors"
+      "content": "Image text settings"
     },
     {
-      "type": "color",
-      "label": "Button Text Color",
-      "id": "button_color",
-      "default": "#000000"
+      "type": "richtext",
+      "id": "image_text",
+      "label": "Text",
+      "default": "<p>Write some content about your products, collections or brand. Use image to create an impactful layout.</p>"
     },
     {
-      "type": "color",
-      "label": "Button Hover Text Color",
-      "id": "button_hover_color",
-      "default": "#555555"
+      "type": "checkbox",
+      "id": "image_text_custom",
+      "label": "Use custom font",
+      "default": false
     },
     {
-      "type": "color",
-      "label": "Button Background Color",
-      "id": "button_bg_color"
+      "type": "font_picker",
+      "id": "image_text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
     },
     {
-      "type": "color",
-      "label": "Button Background Hover Color",
-      "id": "button_bg_hover_color"
+      "type": "range",
+      "id": "image_text_width",
+      "min": 100,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Width",
+      "default": 260
     },
     {
-      "type": "color",
-      "label": "Button Border Color",
-      "id": "button_border_color",
-      "default": "#000000"
+      "type": "range",
+      "id": "image_text_width_mobile",
+      "min": 100,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Width - mobile",
+      "default": 260
     },
     {
-      "type": "color",
-      "label": "Button Border Hover Color",
-      "id": "button_border_hover_color",
-      "default": "#555555"
+      "type": "range",
+      "id": "image_text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "image_text_mt",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_text_mt_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 20
+    },
+    {
+      "type": "text_alignment",
+      "id": "image_text_align",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "image_text_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "center"
     },
     {
       "type": "header",
-      "content": "Section Colors"
+      "content": "Button settings"
+    },
+    {
+      "type": "text",
+      "id": "btn_play",
+      "label": "Play text",
+      "default": "PLAY"
+    },
+    {
+      "type": "text",
+      "id": "btn_pause",
+      "label": "Pause text",
+      "default": "PAUSE"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "btn_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "btn_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "btn_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "btn_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Timer settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "timer_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "timer_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "timer_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "timer_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "timer_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Video colors"
     },
     {
       "type": "color",
-      "label": "Text Color",
-      "id": "text_color",
+      "label": "Video text color",
+      "id": "video_text_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Button color",
+      "id": "btn_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Timer color",
+      "id": "timer_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Image colors"
+    },
+    {
+      "type": "color",
+      "label": "Image wrapper background",
+      "id": "image_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Image border",
+      "id": "image_border_color",
       "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Image text",
+      "id": "image_text_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
     },
     {
       "type": "color",
       "label": "Section background",
-      "id": "background_color",
-      "default": "#FFFFFF"
+      "id": "background_color"
     },
     {
       "type": "color_background",
@@ -894,41 +1083,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 400,
+      "max": 100,
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 300
-    },
-    {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "min": 0,
-      "max": 400,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding top - Mobile",
-      "default": 192
+      "default": 0
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 400,
+      "max": 100,
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 300
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "min": 0,
-      "max": 400,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding bottom - Mobile",
-      "default": 192
+      "default": 0
     },
     {
       "type": "range",
@@ -938,7 +1107,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 5
+      "default": 0
     },
     {
       "type": "range",
@@ -948,17 +1117,17 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 1.5
+      "default": 0
     },
     {
       "type": "header",
-      "content": "Section Settings"
+      "content": "Section settings"
     },
     {
       "type": "checkbox",
       "id": "full_width",
-      "label": "Full Width",
-      "default": false
+      "label": "Full width",
+      "default": true
     },
     {
       "type": "range",
@@ -987,7 +1156,7 @@
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Section Roundness",
+      "label": "Section roundness",
       "default": 0
     },
     {
@@ -998,260 +1167,9 @@
       "default": true
     }
   ],
-  "blocks": [
-    {
-      "type": "item",
-      "name": "Item",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Item position"
-        },
-        {
-          "type": "range",
-          "id": "vertical_position",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Vertical Position - Desktop",
-          "default": 50
-        },
-        {
-          "type": "range",
-          "id": "vertical_position_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Vertical Position - Mobile",
-          "default": 50
-        },
-        {
-          "type": "range",
-          "id": "horizontal_position",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Horizontal Position",
-          "default": 50
-        },
-        {
-          "type": "range",
-          "id": "horizontal_position_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Horizontal Position - Mobile",
-          "default": 50
-        },
-        {
-          "type": "header",
-          "content": "Item Settings"
-        },
-        {
-          "type": "range",
-          "id": "item_width",
-          "min": 40,
-          "max": 400,
-          "step": 4,
-          "unit": "px",
-          "label": "Item Width",
-          "default": 176
-        },
-        {
-          "type": "range",
-          "id": "item_width_mobile",
-          "min": 40,
-          "max": 400,
-          "step": 4,
-          "unit": "px",
-          "label": "Item Width - Mobile",
-          "default": 120
-        },
-        {
-          "type": "range",
-          "id": "item_radius",
-          "min": 0,
-          "max": 200,
-          "step": 2,
-          "unit": "px",
-          "label": "Item Roundness",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "item_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Item Border Thickness",
-          "default": 0
-        },
-        {
-          "type": "color",
-          "id": "item_border_color",
-          "label": "Item Border Color",
-          "default": "#000000"
-        },
-        {
-          "type": "select",
-          "id": "item_ratio",
-          "label": "Item Aspect Ratio",
-          "default": "portrait",
-          "options": [
-            {
-              "label": "Portrait",
-              "value": "portrait"
-            },
-            {
-              "label": "Square",
-              "value": "square"
-            },
-            {
-              "label": "Landscape",
-              "value": "landscape"
-            },
-            {
-              "label": "Original",
-              "value": "original"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "item_ratio_mobile",
-          "label": "Item Aspect Ratio - Mobile",
-          "default": "portrait",
-          "options": [
-            {
-              "label": "Portrait",
-              "value": "portrait"
-            },
-            {
-              "label": "Square",
-              "value": "square"
-            },
-            {
-              "label": "Landscape",
-              "value": "landscape"
-            },
-            {
-              "label": "Original",
-              "value": "original"
-            }
-          ]
-        },
-        {
-          "type": "checkbox",
-          "id": "hide_mobile",
-          "label": "Hide on Mobile"
-        },
-        {
-          "type": "header",
-          "content": "Item Content Settings"
-        },
-        {
-          "type": "select",
-          "id": "media_type",
-          "label": "Media Type",
-          "default": "image",
-          "options": [
-            {
-              "label": "Image",
-              "value": "image"
-            },
-            {
-              "label": "Video",
-              "value": "video"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "video",
-          "id": "video",
-          "label": "Video from Shopify"
-        },
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Video Embed from Url",
-          "accept": [
-            "youtube",
-            "vimeo"
-          ],
-          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-          "info": "Shows when no Shopify-hosted video is selected."
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "SG-Gallery #5",
-      "blocks": [
-        {
-          "type": "item",
-          "settings": {
-            "vertical_position": 10,
-            "vertical_position_mobile": 7,
-            "horizontal_position": 25,
-            "horizontal_position_mobile": 16
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "vertical_position": 14,
-            "vertical_position_mobile": 5,
-            "horizontal_position": 60,
-            "horizontal_position_mobile": 83,
-            "item_width": 140
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "vertical_position": 58,
-            "vertical_position_mobile": 95,
-            "horizontal_position": 2,
-            "horizontal_position_mobile": 7
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "vertical_position": 35,
-            "vertical_position_mobile": 83,
-            "horizontal_position": 95,
-            "horizontal_position_mobile": 93
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "vertical_position": 88,
-            "horizontal_position": 30,
-            "hide_mobile": true
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "vertical_position": 84,
-            "horizontal_position": 82,
-            "hide_mobile": true
-          }
-        }
-      ]
+      "name": "SG-Gallery #6"
     }
   ]
 }
