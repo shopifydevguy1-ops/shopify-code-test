@@ -1,3 +1,8 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
 {%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
@@ -16,10 +21,16 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
+  assign gradient_start = section.settings.gradient_start
+  assign gradient_end = section.settings.gradient_end
+
   assign layout = section.settings.layout
   assign layout_mobile = section.settings.layout_mobile
+  assign layout_height = section.settings.layout_height
+  assign layout_fixed_height = section.settings.layout_fixed_height
   assign layout_gap = section.settings.layout_gap
   assign layout_gap_mobile = section.settings.layout_gap_mobile
+  assign animate_bg = section.settings.animate_bg
 
   assign image = section.settings.image
   assign image_width = section.settings.image_width
@@ -27,7 +38,6 @@
   assign image_border_thickness = section.settings.image_border_thickness
   assign image_border_color = section.settings.image_border_color
   assign image_ratio_mobile = section.settings.image_ratio_mobile
-  assign image_ratio = section.settings.image_ratio
 
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
@@ -53,35 +63,15 @@
 
   assign features_mt = section.settings.features_mt
   assign features_mt_mobile = section.settings.features_mt_mobile
-  assign features_gap = section.settings.features_gap
-  assign features_gap_mobile = section.settings.features_gap_mobile
 
   assign feature_gap = section.settings.feature_gap
   assign feature_gap_mobile = section.settings.feature_gap_mobile
+  assign feature_mt = section.settings.feature_mt
+  assign feature_mt_mobile = section.settings.feature_mt_mobile
 
   assign feature_icon_size = section.settings.feature_icon_size
   assign feature_icon_color = section.settings.feature_icon_color
   assign feature_icon_size_mobile = section.settings.feature_icon_size_mobile
-  assign feature_align = section.settings.feature_align
-  assign feature_align_mobile = section.settings.feature_align_mobile
-
-    assign feature_horizontal_align = ""
-  if feature_align == "center"
-    assign feature_horizontal_align = "center"
-  elsif feature_align == "right"
-    assign feature_horizontal_align = "end"
-  else
-    assign feature_horizontal_align = "start"
-  endif
-
-  assign feature_horizontal_align_mobile = ""
-  if feature_align_mobile == "center"
-    assign feature_horizontal_align_mobile = "center"
-  elsif feature_align_mobile == "right"
-    assign feature_horizontal_align_mobile = "end"
-  else
-    assign feature_horizontal_align_mobile = "start"
-  endif
 
   assign feature_text_custom = section.settings.feature_text_custom
   assign feature_text_font = section.settings.feature_text_font
@@ -89,44 +79,6 @@
   assign feature_text_size_mobile = section.settings.feature_text_size_mobile
   assign feature_text_color = section.settings.feature_text_color
   assign feature_text_height = section.settings.feature_text_height
-  
-  assign bullet_border_style = section.settings.bullet_border_style
-  assign bullet_border_thickness = section.settings.bullet_border_thickness
-  assign bullet_border_color = section.settings.bullet_border_color
-  assign bullets_mt = section.settings.bullets_mt
-  assign bullets_mt_mobile = section.settings.bullets_mt_mobile
-
-  assign icon_size = section.settings.icon_size
-  assign icon_size_mobile = section.settings.icon_size_mobile
-  assign icon_color = section.settings.icon_color
-  assign icon_bg_color = section.settings.icon_bg_color
-
-  assign bullet_text_custom = section.settings.bullet_text_custom
-  assign bullet_text_font = section.settings.bullet_text_font
-  assign bullet_text_size = section.settings.bullet_text_size
-  assign bullet_text_size_mobile = section.settings.bullet_text_size_mobile
-  assign bullet_text_height = section.settings.bullet_text_height
-  assign bullet_text_color = section.settings.bullet_text_color
-  assign bullet_align = section.settings.bullet_align
-  assign bullet_align_mobile = section.settings.bullet_align_mobile
-
-  assign bullet_horizontal_align = ""
-  if bullet_align == "center"
-    assign bullet_horizontal_align = "center"
-  elsif bullet_align == "right"
-    assign bullet_horizontal_align = "end"
-  else
-    assign bullet_horizontal_align = "start"
-  endif
-
-  assign bullet_horizontal_align_mobile = ""
-  if bullet_align_mobile == "center"
-    assign bullet_horizontal_align_mobile = "center"
-  elsif bullet_align_mobile == "right"
-    assign bullet_horizontal_align_mobile = "end"
-  else
-    assign bullet_horizontal_align_mobile = "start"
-  endif
 
   assign loading_attribute = 'eager'
   if lazy
@@ -136,7 +88,6 @@
 
 {%- style -%}
   {{ feature_text_font | font_face: font_display: 'swap' }}
-  {{ bullet_text_font | font_face: font_display: 'swap' }}
 
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
@@ -161,10 +112,15 @@
   .hero-body-{{ section.id }} {
     position: relative;
     display: grid;
-    align-items: center;
     grid-template-columns: 1fr;
     gap: {{ layout_gap_mobile }}px;
     height: 100%;
+  }
+
+  .hero-heading-slider-{{ section.id }} {
+    min-height: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
   }
 
   .hero-content-{{ section.id }} {
@@ -174,8 +130,6 @@
     position: relative;
     justify-content: {{ content_vertical_align }};
     align-items: {{ content_horizontal_align_mobile }};   
-    overflow: hidden;
-    height: 100%;
   }
 
   .hero-image-{{ section.id }} {
@@ -183,6 +137,8 @@
     border: {{ image_border_thickness }}px solid {{ image_border_color }};
     border-radius: {{ image_radius }}px;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-image-{{ section.id }} img,
@@ -196,26 +152,31 @@
   .hero-image-{{ section.id }} svg {
     background-color: #AFAFAF;
   }
+
+  .hero-features-{{ section.id }} {
+    margin-top: {{ features_mt_mobile }}px;
+  }
   
    .hero-feature-{{ section.id }} {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: {{ feature_gap_mobile }}px;
     text-decoration: none;
+    position: relative;
+    z-index: 1;
   }
 
-  .hero-feature-{{ section.id }}.first {
-    margin-top: {{ features_mt_mobile }}px
+  .hero-feature-{{ section.id }}:not(:first-child) {
+    margin-top: {{ feature_mt_mobile }}px;
   }
 
   .hero-feature-text-{{ section.id }} {
     margin: 0;
-    text-align: {{ feature_align }};
     font-size: {{ feature_text_size_mobile }}px;
     color: {{ feature_text_color }};
     line-height: {{ feature_text_height }}%;
     text-transform: unset;
+    font-weight: 700;
   }
 
   
@@ -237,8 +198,8 @@
 
   .hero-feature-icon-{{ section.id }} svg path {
     fill: {{ feature_icon_color }};
-  }  
-  
+  }
+
   .hero-feature-icon-{{ section.id }} svg circle {
     fill: {{ feature_icon_color }};
   }
@@ -249,104 +210,18 @@
     stroke: {{ feature_icon_color }};
   }
 
-
-   .hero-review-{{ section.id }} {
-    display: flex;
-    gap: 10px;
-  }
-
-  .hero-review-content-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    row-gap: 4px;
-    justify-content: center;
-  }
-
-  .hero-stars-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    max-width: fit-content;
-  }
-
-  .hero-stars-wrapper-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    {% if content_align_mobile == 'right' %}
-      justify-content: {{ content_horizontal_align_mobile }};
-    {% else %}
-      justify-content: start;
-    {% endif %}
-    gap: 10px;
-  }
   
-  .hero-authors-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: row-reverse;
-  }
-
-  .hero-author-image-{{ section.id }} img,
-  .hero-author-image-{{ section.id }} svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero-features-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: {{ feature_horizontal_align_mobile }};
-    margin-top: {{ features_mt_mobile }}px;
-    gap: {{ features_gap_mobile }}px;
-  }
-
-  .hero-bullets-{{ section.id }} {
-    margin-top: {{ bullets_mt_mobile }}px;
-    width: 100%;
-  }
-
-  .hero-bullet-{{ section.id }} {
-    padding: 20px 0;
-    border-bottom: {{ bullet_border_thickness }}px {{ bullet_border_style }} {{ bullet_border_color }};
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    justify-content: {{ bullet_horizontal_align_mobile }};
-  }
-
-  .hero-bullet-icon-{{ section.id }} svg {
-    display: block;
-    width: {{ icon_size_mobile }}px;
-    height: {{ icon_size_mobile }}px;
-    object-fit: cover;
-    margin-top: 3px;
-  }
-
-  .hero-bullet-icon-{{ section.id }} svg circle,
-  .hero-bullet-icon-{{ section.id }} svg path {
-    fill: {{ icon_bg_color }};
-  }
-
-  .hero-bullet-icon-{{ section.id }} svg polygon {
-    fill: {{ icon_color }};
-  }
-
-  .hero-bullet-text-{{ section.id }} {
-    text-align: {{ bullet_align_mobile }};
-  }
-  
-  .hero-bullet-text-{{ section.id }} * {
-    margin: 0px;
-    font-size: {{ bullet_text_size_mobile }}px;
-    line-height: {{ bullet_text_height }}%;
-    color: {{ bullet_text_color }};
-    text-transform: unset;
-    word-break: break-word;
+  .hero-content-{{ section.id }}:after {
+    content: "";
+    position: absolute;
+    filter: blur(45px);
+    z-index: 0;
+    width: 60vmax;
+    height: 60vmax;
+    bottom: -15%;
+    right: -20%;
+    will-change: transform, opacity, border-radius;
+    background: radial-gradient(ellipse at center, {{ gradient_start }} 15%, {{ gradient_end }} 75%);
   }
 
   @media(min-width: 1024px) {
@@ -367,57 +242,41 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
+    .hero-stars-wrapper-{{ section.id }} {
+      {% if content_align == 'right' %}
+        justify-content: {{ content_horizontal_align }};
+      {% else %}
+        justify-content: start;
+      {% endif %}
+    }  
+
     .hero-content-{{ section.id }} {
       align-items: {{ content_horizontal_align }};
     }
 
-    .hero-body-{{ section.id }} {
+    .hero-body-{{ section.id }} {      
       gap: {{ layout_gap }}px;
     }
 
-    .hero-feature-{{ section.id }} {
-      gap: {{ feature_gap }}px;
+    .hero-features-{{ section.id }} {
+      margin-top: {{ features_mt }}px;
     }
 
-    .hero-feature-{{ section.id }}.first {
-      margin-top: {{ features_mt }}px
+     .hero-feature-{{ section.id }}:not(:first-child) {
+      margin-top: {{ feature_mt }}px;
+     }
+
+    .hero-feature-{{ section.id }} {
+      gap: {{ feature_gap }}px;     
     }
     
     .hero-feature-text-{{ section.id }} {
-      text-align: {{ feature_align }};
       font-size: {{ feature_text_size }}px;
     }
     
     .hero-feature-icon-{{ section.id }} {
       height: {{ feature_icon_size }}px;
       width: {{ feature_icon_size }}px;
-    }
-
-    .hero-features-{{ section.id }} {    
-      justify-content: {{ feature_horizontal_align }};
-      margin-top: {{ features_mt }}px;
-      gap: {{ features_gap }}px;
-    }
-
-    .hero-bullets-{{ section.id }} {
-      margin-top: {{ bullets_mt }}px;
-    }
-
-    .hero-bullet-{{ section.id }} {   
-      justify-content: {{ bullet_horizontal_align }};
-    }
-
-    .hero-bullet-icon-{{ section.id }} svg {   
-      width: {{ icon_size }}px;
-      height: {{ icon_size }}px;     
-    }
-
-    .hero-bullet-text-{{ section.id }} {
-      text-align: {{ bullet_align }};
-    }
-    
-    .hero-bullet-text-{{ section.id }} * {
-      font-size: {{ bullet_text_size }}px;
     }
   }
   
@@ -468,61 +327,31 @@
   </style>
 {% endif %}
 
-{% if bullet_text_custom %}
+{% if layout_height == "full_screen" %}
   <style>
-    .hero-bullet-text-{{ section.id }} * {
-      font-family: {{ bullet_text_font.family }}, {{ bullet_text_font.fallback_families }};
-      font-weight: {{ bullet_text_font.weight }};
-      font-style: {{ bullet_text_font.style }};
-    }
-  </style>
-{% endif %}
 
-{% if bullet_align_mobile == 'right' %}
-  <style>
-    .hero-bullet-{{ section.id }} {
-      flex-direction: row-reverse;
+    .hero-{{ section.id }} {
+      height: 100%;
     }
-  </style>
-{% elsif bullet_align_mobile == 'center' %}
-  <style>
-    .hero-bullet-{{ section.id }} {
-      flex-direction: column;
-      align-items: center;
-    }
-  </style>
-{% elsif bullet_align_mobile == 'left' %}
-  <style>
-    .hero-bullet-{{ section.id }} {
-      flex-direction: row;
-    }
-  </style>
-{% endif %}
 
-{% if bullet_align == 'right' %}
-  <style>
-    @media(min-width: 1024px) {
-      .hero-bullet-{{ section.id }} {
-        flex-direction: row-reverse;
+    @media(min-width: 1024px) {      
+
+      .hero-{{ section.id }} {
+        height: 95vh;
       }
-    }    
+    }
   </style>
-{% elsif bullet_align == 'center' %}
-  <style>
+{% elsif layout_height == 'fixed_height' %}  
+  <style>      
+    .hero-{{ section.id }} {
+      height: 100%;
+    }
+
     @media(min-width: 1024px) {
-      .hero-bullet-{{ section.id }} {
-        flex-direction: column;
-        align-items: center;
+      .hero-{{ section.id }} {
+        height: {{ layout_fixed_height }}px;
       }
-    }   
-  </style>
-{% elsif bullet_align == 'left' %}
-  <style>
-    @media(min-width: 1024px) {
-      .hero-bullet-{{ section.id }} {
-        flex-direction: row;
-      }
-    }    
+    }
   </style>
 {% endif %}
 
@@ -548,6 +377,7 @@
   <style>
     @media(min-width: 1024px) {
       .hero-body-{{ section.id }} {
+        grid-template-columns: auto {{ image_width }}%;
         grid-template-areas: "content image";    
       }
     }    
@@ -556,27 +386,10 @@
   <style>
     @media(min-width: 1024px) {
       .hero-body-{{ section.id }} {
+        grid-template-columns: {{ image_width }}% auto;
         grid-template-areas: "image content";   
       }
     }   
-  </style>
-{% endif %}
-
-{% if layout == 'content_image' %}
-  <style>
-    @media(min-width: 1024px) {
-      .hero-body-{{ section.id }} {
-        grid-template-columns: auto {{ image_width }}%;
-      }
-    }
-  </style>
-{% elsif layout == 'image_content' %}
-  <style>
-    @media(min-width: 1024px) {
-      .hero-body-{{ section.id }} {
-        grid-template-columns: {{ image_width }}% auto;
-      }
-    }
   </style>
 {% endif %}
 
@@ -606,28 +419,28 @@
   </style>
 {% endif %}
 
-{% if image_ratio == "portrait" %}
+{% if image_ratio_mobile == "portrait" %}
   <style>
     @media(min-width: 1024px) {
      .hero-image-{{ section.id }} {
-       aspect-ratio: 9.6/12; 
+       aspect-ratio: auto; 
+      } 
+    }
+  </style>
+{% elsif image_ratio_mobile == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .hero-image-{{ section.id }}{
+       aspect-ratio: auto; 
       }
     }
   </style>
-{% elsif image_ratio == "landscape" %}
+{% elsif image_ratio_mobile == "square" %}
   <style>
     @media(min-width: 1024px) {
-   .hero-image-{{ section.id }}{
-     aspect-ratio: 12/9; 
-    }
-    }
-  </style>
-{% elsif image_ratio == "square" %}
-  <style>
-    @media(min-width: 1024px) {
-        .hero-image-{{ section.id }} {
-     aspect-ratio: 12/12; 
-    }
+      .hero-image-{{ section.id }} {
+       aspect-ratio: auto; 
+      }
     }
   </style>
 {% else %}
@@ -635,6 +448,42 @@
     @media(min-width: 1024px) {
       .hero-image-{{ section.id }} {
        aspect-ratio: auto; 
+      }
+    }
+  </style>
+{% endif %}
+
+{% if animate_bg %}
+  <style>
+    .hero-content-{{ section.id }}:after {
+      animation: progress{{ section.id | replace: '-', '' }} 28s infinite ease-in-out alternate;
+    }
+
+    @keyframes progress{{ section.id | replace: '-', '' }} {
+      0% {
+        transform: translate(-5vmin, 10vmin) rotate(45deg) scale(.6);
+        border-radius: 60% 40% 50% 50% / 40% 60% 70% 30%;
+        opacity: .55;
+      }
+      25% {
+        transform: translate(25vmin, -20vmin) rotate(-120deg) scale(1.2);
+        border-radius: 30% 70% 50% 50% / 70% 30% 60% 40%;
+        opacity: .7;
+      }
+      50% {
+        transform: translate(-30vmin, 25vmin) rotate(200deg) scale(.75);
+        border-radius: 70% 30% 60% 40% / 50% 70% 30% 50%;
+        opacity: .6;
+      }
+      75% {
+        transform: translate(15vmin, -10vmin) rotate(-290deg) scale(1.1);
+        border-radius: 50% 50% 30% 70% / 30% 60% 40% 70%;
+        opacity: .65;
+      }   
+      100% {
+        transform: translate(-5vmin, 10vmin) rotate(405deg) scale(.6);
+        border-radius: 60% 40% 50% 50% / 40% 60% 70% 30%;
+        opacity: .55;
       }
     }
   </style>
@@ -649,6 +498,8 @@
         .hero-heading-{{ block.id }} {
           margin-top: {{ block.settings.heading_mt_mobile }}px;
           text-align: {{ content_horizontal_align_mobile }};
+          position: relative;
+          z-index: 1;
         }
       
         .hero-heading-{{ block.id }} * {
@@ -661,8 +512,24 @@
           font-weight: 700;
         }
 
-        .hero-heading-{{ block.id }} * strong {
-          text-decoration: underline {{ block.settings.heading_border_color }};
+        .hero-heading-slider-wrapper-{{ section.id }} {
+          display: grid !important;
+          height: calc({{ block.settings.heading_size_mobile }}px * {{ block.settings.heading_height | times: 1.0 | divided_by: 100 | plus: 0.1 }});
+        }
+
+        .hero-heading-{{ section.id }}.swiper-slide {
+          opacity: 0;
+          transition: all 0.5s ease 0s;
+        }
+
+        .hero-heading-{{ section.id }}.swiper-slide-active {
+          opacity: 1;
+          transition: all 0.5s ease 0s;
+        }
+
+        .hero-heading-{{ section.id }}.swiper-slide {
+          font-style: italic;
+          color: {{ block.settings.heading_accent_color }};
         }
 
         @media(min-width: 1024px) {
@@ -674,6 +541,10 @@
         
           .hero-heading-{{ block.id }} * {
             font-size: {{ block.settings.heading_size }}px;
+          }
+
+          .hero-heading-slider-wrapper-{{ section.id }} {
+            height: calc({{ block.settings.heading_size }}px * {{ block.settings.heading_height | times: 1.0 | divided_by: 100 | plus: 0.1 }});
           }
         }          
       </style>
@@ -696,7 +567,7 @@
           margin-top: {{ block.settings.text_mt_mobile }}px;
           text-align: {{ content_horizontal_align_mobile }};
           position: relative;
-          z-index: 2;
+          z-index: 1;
         }
       
         .hero-text-{{ block.id }} * {
@@ -757,6 +628,8 @@
           margin-top: {{ block.settings.button_mt_mobile }}px;
           cursor: pointer;
           font-weight: 700;
+          position: relative;
+          z-index: 1;
         }
 
         .hero-button-inner-{{ block.id }} {
@@ -852,7 +725,8 @@
             box-shadow: none !important;
           }
         </style>
-      {% endif %}     
+      {% endif %}   
+
     {% when 'feature' %}    
       {% if block.settings.hide_mobile %}
         <style>
@@ -864,7 +738,7 @@
         </style>
       {% endif %}
 
-      {% if feature_align_mobile == 'right' %}
+      {% if content_align_mobile == 'right' %}
         <style>
           .hero-feature-{{ section.id }} {
             flex-direction: row-reverse;
@@ -878,7 +752,7 @@
         </style>
       {% endif %}
   
-      {% if feature_align == 'right' %}
+      {% if content_align == 'right' %}
         <style>
           @media(min-width: 1024px) {
             .hero-feature-{{ section.id }} {
@@ -895,162 +769,6 @@
            }     
         </style>
       {% endif %}
-
-    {% when 'review' %}     
-
-      {%-liquid
-          assign review_horizontal_align = ""
-          if block.settings.review_align == "center"
-            assign review_horizontal_align = "center"
-          elsif block.settings.review_align == "right"
-            assign review_horizontal_align = "end"
-          else
-            assign review_horizontal_align = "start"
-          endif
-        
-          assign review_horizontal_align_mobile = ""
-          if block.settings.review_align_mobile == "center"
-            assign review_horizontal_align_mobile = "center"
-          elsif block.settings.review_align_mobile == "right"
-            assign review_horizontal_align_mobile = "end"
-          else
-            assign review_horizontal_align_mobile = "start"
-          endif
-      %}
-      <style>
-        {{  block.settings.review_font | font_face: font_display: 'swap' }}
-        
-        .hero-review-{{ block.id }} {
-          width: 100%;
-          justify-content: {{ review_horizontal_align_mobile }};
-          margin-top: {{ block.settings.review_mt_mobile }}px;
-        }      
-
-        .hero-author-image-{{ block.id }} {
-          border: {{ block.settings.image_border_thickness }}px solid {{ block.settings.image_border_color }};
-          border-radius: {{ block.settings.image_radius }}px;
-          overflow: hidden;
-          width: {{ block.settings.image_size_mobile }}px;
-          height: {{ block.settings.image_size_mobile }}px;
-          background-color: {{ background_color }};
-        }
-
-        .hero-author-image-{{ block.id }}:not(:first-child) {
-          margin-right: -{{ block.settings.image_size_mobile | times: 0.2 }}px;
-        }
-       
-        .hero-stars-count-{{ block.id }} {
-          word-wrap: break-word;
-          margin: 0;
-          font-size: {{ block.settings.review_size_mobile }}px;
-          color: {{ block.settings.review_color }};
-          line-height: {{ block.settings.review_height }}%;
-          text-align: {{ block.settings.review_align_mobile }};
-          text-transform: unset;
-          font-weight: 400;
-        }
-
-        .hero-stars-count-{{ block.id }} {
-          margin-top: 0;
-          color: {{ block.settings.count_color }};
-        }
-
-        .hero-stars-{{ block.id }} svg,
-        .hero-stars-{{ block.id }} img {
-          display: block;
-          width: {{ block.settings.stars_size_mobile }}px;
-          height: {{ block.settings.stars_size_mobile }}px;
-          object-fit: cover;
-        }
-
-        @media (min-width: 1024px) {
-          .hero-review-{{ block.id }} {
-            justify-content: {{ review_horizontal_align }};
-            margin-top: {{ block.settings.review_mt }}px;
-            text-align: {{ block.settings.review_align }};
-          }
-
-          
-          .hero-author-image-{{ block.id }} {
-            width: {{ block.settings.image_size }}px;
-            height: {{ block.settings.image_size }}px;
-          }
-
-          .hero-author-image-{{ block.id }}:not(:first-child) {
-            margin-right: -{{ block.settings.image_size | times: 0.2 }}px;
-          }
-
-          .hero-stars-count-{{ block.id }} {
-            font-size: {{ block.settings.review_size }}px;
-            text-align: {{ block.settings.review_align }};
-          }
-
-          .hero-stars-{{ block.id }} svg,
-          .hero-stars-{{ block.id }} img {
-            width: {{ block.settings.stars_size }}px;
-            height: {{ block.settings.stars_size }}px;
-          }
-        }
-      </style>
-
-      {% if block.settings.review_custom %}
-        <style>
-          .hero-stars-count-{{ block.id }} {
-            font-family: {{ block.settings.review_font.family }}, {{ block.settings.review_font.fallback_families }};
-            font-weight: {{ block.settings.review_font.weight }};
-            font-style: {{ block.settings.review_font.style }};
-          }
-        </style>
-      {% endif %}  
-
-      {% if block.settings.review_align_mobile == 'right' %}
-        <style>
-          .hero-authors-{{ section.id }} {
-            order: 2;
-          }
-
-          .hero-review-content-{{ section.id }} {
-            order: 1;
-          }
-        </style>
-      {% else %}
-        <style>
-          .hero-authors-{{ section.id }} {
-            order: 1;
-          }
-
-          .hero-review-content-{{ section.id }} {
-            order: 2;
-          }
-        </style>
-      {% endif %}
-      
-      {% if block.settings.review_align == 'right' %}
-        <style>
-          @media(min-width: 1024px) {
-            .hero-authors-{{ section.id }} {
-              order: 2;
-            }
-
-            .hero-review-content-{{ section.id }} {
-              order: 1;
-            }
-          }   
-        </style>
-      {% else %}
-        <style>
-          @media(min-width: 1024px) {
-            .hero-authors-{{ section.id }} {
-              order: 1;
-            }
-
-            .hero-review-content-{{ section.id }} {
-              order: 2;
-            }
-          }   
-        </style>
-      {% endif %}
-
   {% endcase %}
 {% endfor %}
 
@@ -1199,9 +917,20 @@
           {% for block in section.blocks %}
             {% case block.type %}
               {% when 'heading'%}
-                {% if block.settings.heading != blank %}
+                {% if block.settings.heading_up != blank or block.settings.heading_down != blank or block.settings.heading_center != blank %}
                   <div class="hero-heading-{{ block.id }}">
-                    {{ block.settings.heading }}
+                    {{ block.settings.heading_up }}
+                    {% assign headings = block.settings.heading_center | strip | split: ',' %}
+                    <div class="hero-heading-slider-wrapper-{{ section.id }}">
+                      <div class="hero-heading-slider-{{ section.id }} swiper">
+                        <div class="swiper-wrapper">
+                          {% for heading in headings %}
+                            <div class="hero-heading-{{ section.id }} swiper-slide">{{ heading }}</div>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>                                      
+                    {{ block.settings.heading_down }}
                   </div>
                 {% endif %}
               {% when 'text' %}
@@ -1225,212 +954,7 @@
                     </p>
                   </a>     
                 {% endif %}
-              {% when 'review' %}
-                {% if block.settings.stars_text != blank %}
-                  <div class="hero-review-{{ section.id }} hero-review-{{ block.id }}">
-                    <div class="hero-authors-{{ section.id }}">
-                      {% if block.settings.first_image != blank %}
-                        <div class="hero-author-image-{{ section.id }} hero-author-image-{{ block.id }}">                       
-                          {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                            {{ block.settings.first_image | image_url: width: 360 | image_tag:
-                              loading: loading_attribute,
-                              sizes: sizes,
-                              widths: '165, 360, 535, 750, 1070, 1500'
-                            }} 
-                        </div>
-                      {% endif %}
-                      {% if block.settings.second_image != blank %}
-                        <div class="hero-author-image-{{ section.id }} hero-author-image-{{ block.id }}">
-                          {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                            {{ block.settings.second_image | image_url: width: 360 | image_tag:
-                              loading: loading_attribute,
-                              sizes: sizes,
-                              widths: '165, 360, 535, 750, 1070, 1500'
-                            }} 
-                        </div>
-                      {% endif %}
-                      {% if block.settings.third_image != blank %}
-                        <div class="hero-author-image-{{ section.id }} hero-author-image-{{ block.id }}">
-                          {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                            {{ block.settings.third_image | image_url: width: 360 | image_tag:
-                              loading: loading_attribute,
-                              sizes: sizes,
-                              widths: '165, 360, 535, 750, 1070, 1500'
-                            }} 
-                        </div>
-                      {% endif %}
-                      {% if block.settings.fourth_image != blank %}
-                        <div class="hero-author-image-{{ section.id }} hero-author-image-{{ block.id }}">                        
-                          {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                            {{ block.settings.fourth_image | image_url: width: 360 | image_tag:
-                              loading: loading_attribute,
-                              sizes: sizes,
-                              widths: '165, 360, 535, 750, 1070, 1500'
-                            }} 
-                        </div>
-                      {% endif %}
-                    </div>
-                    <div class="hero-review-content-{{ section.id }}"> 
-                      {% if block.settings.stars_count != 0 %}
-                        <div class="hero-stars-wrapper-{{ section.id }}">                       
-                          <div class="hero-stars-{{ section.id }} hero-stars-{{ block.id }}">
-                            {% if block.settings.stars_icon != blank %}
-                              {% assign stars_count_round = block.settings.stars_count | round: 0 %}
-                              {% for item in (1..stars_count_round) %}
-                                <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ stars_icon.alt }}">
-                              {% endfor %}
-                            {% else %}
-                              {% if block.settings.stars_count > 0 %}
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  {% if block.settings.stars_count == 0.5 %}
-                                    <defs>
-                                      <linearGradient id="grad{{ block.id }}1">
-                                        <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                        <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                      </linearGradient>
-                                    </defs>
-                                  {% endif %}
-                                  <rect width="32" height="32" fill="{% if block.settings.stars_count == 0.5 %}url(#grad{{ block.id }}1){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                                  <g clip-path="url(#clip0_25_4)">
-                                  <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_25_4">
-                                  <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                                  </clipPath>
-                                  </defs>
-                                </svg>
-                              {% endif %}
-                              {% if block.settings.stars_count > 1 %}
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  {% if block.settings.stars_count == 1.5 %}
-                                    <defs>
-                                      <linearGradient id="grad{{ block.id }}2">
-                                        <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                        <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                      </linearGradient>
-                                    </defs>
-                                  {% endif %}
-                                  <rect width="32" height="32" fill="{% if block.settings.stars_count == 1.5 %}url(#grad{{ block.id }}2){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                                  <g clip-path="url(#clip0_25_4)">
-                                  <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_25_4">
-                                  <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                                  </clipPath>
-                                  </defs>
-                                </svg>
-                              {% endif %}
-                              {% if block.settings.stars_count > 2 %}
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  {% if block.settings.stars_count == 2.5 %}
-                                    <defs>
-                                      <linearGradient id="grad{{ block.id }}3">
-                                        <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                        <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                      </linearGradient>
-                                    </defs>
-                                  {% endif %}
-                                  <rect width="32" height="32" fill="{% if block.settings.stars_count == 2.5 %}url(#grad{{ block.id }}3){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                                  <g clip-path="url(#clip0_25_4)">
-                                  <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_25_4">
-                                  <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                                  </clipPath>
-                                  </defs>
-                                </svg>
-                              {% endif %}
-                              {% if block.settings.stars_count > 3 %}
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  {% if block.settings.stars_count == 3.5 %}
-                                    <defs>
-                                      <linearGradient id="grad{{ block.id }}4">
-                                        <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                        <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                      </linearGradient>
-                                    </defs>
-                                  {% endif %}
-                                  <rect width="32" height="32" fill="{% if block.settings.stars_count == 3.5 %}url(#grad{{ block.id }}4){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                                  <g clip-path="url(#clip0_25_4)">
-                                  <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_25_4">
-                                  <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                                  </clipPath>
-                                  </defs>
-                                </svg>
-                              {% endif %}
-                              {% if block.settings.stars_count > 4 %}
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  {% if block.settings.stars_count == 4.5 %}
-                                    <defs>
-                                      <linearGradient id="grad{{ block.id }}5">
-                                        <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                        <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                        <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                      </linearGradient>
-                                    </defs>
-                                  {% endif %}
-                                  <rect width="32" height="32" fill="{% if block.settings.stars_count == 4.5 %}url(#grad{{ block.id }}5){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                                  <g clip-path="url(#clip0_25_4)">
-                                  <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_25_4">
-                                  <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                                  </clipPath>
-                                  </defs>
-                                </svg>
-                              {% endif %}
-                            {% endif %}
-                          </div>
-                          {% if block.settings.stars_text %}
-                            <p class="hero-stars-count-{{ section.id }} hero-stars-count-{{ block.id }}">{{ block.settings.stars_text }}</p>
-                          {% endif %}
-                        </div>
-                      {% endif %}                     
-                    </div>                                        
-                  </div>  
-                {% endif %}
 
-              {% when 'bullet' %}
-                {% assign next_index = forloop.index0 | plus: 1 %}
-                {% assign next_block = section.blocks[next_index] %}
-
-                {% unless feature_open %}
-                  <div class="hero-bullets-{{ section.id }}">
-                {% endunless %} 
-              
-                <div class="hero-bullet-{{ section.id }}">
-                  <div class="hero-bullet-icon-{{ section.id }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13.69"></circle><path d="m15,29.54C6.98,29.54.46,23.02.46,15S6.98.46,15,.46s14.54,6.52,14.54,14.54-6.52,14.54-14.54,14.54Zm0-27.37C7.92,2.17,2.17,7.92,2.17,15s5.76,12.83,12.83,12.83,12.83-5.76,12.83-12.83S22.07,2.17,15,2.17Z" style="stroke-width:0px;"></path><polygon points="13.04 20.07 8.45 15.47 9.66 14.26 13.04 17.65 20.15 10.53 21.36 11.74 13.04 20.07" style="stroke-width:0px;"></polygon></svg>
-                  </div>
-                  {% if block.settings.text != blank %}
-                    <div class="hero-bullet-text-{{ section.id }}">{{ block.settings.text }}</div>
-                  {% endif %}
-                </div>
-                    
-                {% assign feature_open = true %}
-
-                {% if next_block.type != "bullet" %}
-                  </div>
-                  {% assign feature_open = false %}
-                {% endif %}
-                
-              
               {% when 'feature' %}   
                 {% assign next_index = forloop.index0 | plus: 1 %}
                 {% assign next_block = section.blocks[next_index] %}
@@ -1438,20 +962,20 @@
                 {% unless feature_open %}
                   <div class="hero-features-{{ section.id }}">
                 {% endunless %} 
-
+              
                 <div class="hero-feature-{{ block.id }} hero-feature-{{ section.id }}">             
                   {% if block.settings.custom_icon != blank or block.settings.icon != "none" %}
                     <div class="hero-feature-icon-{{ section.id }}">
-                      {% if block.settings.custom_icon != blank %}                       
+                      {% if block.settings.custom_icon != blank %}                      
                         {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                          {{ block.settings.custom_icon | image_url: width: 700 | image_tag:
+                          {{ block.settings.custom_icon | image_url: width: 2000 | image_tag:
                             loading: loading_attribute,
                             sizes: sizes,
-                            widths: '165, 360, 535, 750, 1070, 1500'
-                          }}    
+                            widths: '750, 1070, 1500, 1780, 2000, 3000, 3840'
+                          }}   
                       {% else %}
                         {% case block.settings.icon %}
-                         {% when 'wallet_2' %}
+                          {% when 'wallet_2' %}
                             {{ wallet_2 }}
                           {% when 'target' %}
                             {{ target }}
@@ -1528,7 +1052,7 @@
                   {% if block.settings.text != blank %}
                     <p class="hero-feature-text-{{ section.id }}">{{ block.settings.text }}</p>  
                   {% endif %}                    
-                </div> 
+                </div>  
 
                 {% assign feature_open = true %}
 
@@ -1536,18 +1060,17 @@
                   </div>
                   {% assign feature_open = false %}
                 {% endif %}
-                
             {% endcase %}
           {% endfor %}          
         </div>
         <div class="hero-image-{{ section.id }}">
-          {% if image != blank %}           
+          {% if image != blank %}
             {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-              {{ image | image_url: width: 2000 | image_tag:
+              {{ image | image_url: width: 1500 | image_tag:
                 loading: loading_attribute,
                 sizes: sizes,
-                widths: '750, 1070, 1500, 1780, 2000, 3000, 3840'
-              }}    
+                widths: '750, 1070, 1500'
+              }}     
           {% else %}
             {{ 'image' | placeholder_svg_tag }}
           {% endif %}
@@ -1556,9 +1079,34 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  function initHero39() {
+    const slider = new Swiper(`.hero-heading-slider-{{ section.id }}`, {
+      speed: 1000,
+      allowTouchMove: false,
+      slidesPerView: 1,
+      loop: true,
+      direction: "vertical",
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initHero39);
+
+  if (Shopify.designMode) {
+    document.addEventListener('shopify:section:unload', initHero39);
+    document.addEventListener('shopify:section:load', initHero39);
+  }
+</script>
+
 {% schema %}
 {
-  "name": "SG-Hero #38",
+  "name": "SG-Hero #39",
   "settings": [
     {
       "type": "header",
@@ -1568,7 +1116,7 @@
       "type": "select",
       "id": "layout",
       "label": "Image position",
-      "default": "content_image",
+      "default": "image_content",
       "options": [
         {
           "label": "Left",
@@ -1597,6 +1145,37 @@
       ]
     },
     {
+      "type": "select",
+      "id": "layout_height",
+      "label": "Height",
+      "default": "full_screen",
+      "options": [
+        {
+          "label": "Full screen",
+          "value": "full_screen"
+        },
+        {
+          "label": "Fixed height",
+          "value": "fixed_height"
+        },
+        {
+          "label": "Auto",
+          "value": "auto"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "layout_fixed_height",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed height",
+      "default": 600,
+      "visible_if": "{{ section.settings.layout_height == 'fixed_height' }}"
+    },
+    {
       "type": "range",
       "id": "image_width",
       "min": 30,
@@ -1614,7 +1193,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 40
+      "default": 60
     },
     {
       "type": "range",
@@ -1624,7 +1203,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 20
+      "default": 32
     },
     {
       "type": "header",
@@ -1633,13 +1212,13 @@
     {
       "type": "text_alignment",
       "id": "content_align",
-      "label": "Alignment",
-      "default": "center"
+      "label": "Alignment"
     },
     {
       "type": "text_alignment",
       "id": "content_align_mobile",
-      "label": "Alignment - mobile"
+      "label": "Alignment - mobile",
+      "default": "center"
     },
     {
       "type": "select",
@@ -1672,33 +1251,9 @@
     },
     {
       "type": "select",
-      "id": "image_ratio",
-      "label": "Aspect ratio",
-      "default": "portrait",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Auto",
-          "value": "auto"
-        }
-      ]
-    },
-    {
-      "type": "select",
       "id": "image_ratio_mobile",
       "label": "Aspect ratio - mobile",
-      "default": "portrait",
+      "default": "square",
       "options": [
         {
           "label": "Portrait",
@@ -1713,8 +1268,8 @@
           "value": "landscape"
         },
         {
-          "label": "Auto",
-          "value": "auto"
+          "label": "Original",
+          "value": "original"
         }
       ]
     },
@@ -1726,7 +1281,7 @@
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 12
+      "default": 0
     },
     {
       "type": "range",
@@ -1740,161 +1295,6 @@
     },
     {
       "type": "header",
-      "content": "Bullet points"
-    },
-    {
-      "type": "checkbox",
-      "id": "bullet_advanced",
-      "label": "Advanced bullet points settings",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "bullet_border_style",
-      "label": "Border style",
-      "default": "dashed",
-      "options": [
-        {
-          "label": "Solid",
-          "value": "solid"
-        },
-        {
-          "label": "Dashed",
-          "value": "dashed"
-        },
-        {
-          "label": "Dotted",
-          "value": "dotted"
-        }
-      ],
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "bullet_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 1,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "bullets_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 20,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "bullets_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 8,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "text_alignment",
-      "id": "bullet_align",
-      "label": "Alignment",
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "text_alignment",
-      "id": "bullet_align_mobile",
-      "label": "Alignment - mobile",
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "header",
-      "content": "Bullet point icon",
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "icon_size",
-      "min": 10,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Size",
-      "default": 18,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "icon_size_mobile",
-      "min": 10,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Size - mobile",
-      "default": 18,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "header",
-      "content": "Bullet point text",
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "bullet_text_custom",
-      "label": "Use custom font",
-      "default": false,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "font_picker",
-      "id": "bullet_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4",
-      "visible_if": "{{ section.settings.bullet_text_custom and section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "bullet_text_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 15,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "bullet_text_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 14,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "bullet_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 150,
-      "visible_if": "{{ section.settings.bullet_advanced }}"
-    },
-    {
-      "type": "header",
       "content": "Features"
     },
     {
@@ -1905,35 +1305,13 @@
     },
     {
       "type": "range",
-      "id": "features_gap",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap",
-      "default": 20,
-      "visible_if": "{{ section.settings.features_advanced }}"
-    },
-    {
-      "type": "range",
-      "id": "features_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap - mobile",
-      "default": 12,
-      "visible_if": "{{ section.settings.features_advanced }}"
-    },
-    {
-      "type": "range",
       "id": "features_mt",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 12,
+      "default": 30,
       "visible_if": "{{ section.settings.features_advanced }}"
     },
     {
@@ -1944,21 +1322,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 12,
-      "visible_if": "{{ section.settings.features_advanced }}"
-    },
-    {
-      "type": "text_alignment",
-      "id": "feature_align",
-      "label": "Alignment",
-      "default": "center",
-      "visible_if": "{{ section.settings.features_advanced }}"
-    },
-    {
-      "type": "text_alignment",
-      "id": "feature_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center",
+      "default": 30,
       "visible_if": "{{ section.settings.features_advanced }}"
     },
     {
@@ -1974,7 +1338,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 6,
+      "default": 10,
       "visible_if": "{{ section.settings.features_advanced }}"
     },
     {
@@ -1985,7 +1349,29 @@
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 6,
+      "default": 10,
+      "visible_if": "{{ section.settings.features_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "feature_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 10,
+      "visible_if": "{{ section.settings.features_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "feature_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 10,
       "visible_if": "{{ section.settings.features_advanced }}"
     },
     {
@@ -1996,18 +1382,18 @@
     {
       "type": "range",
       "id": "feature_icon_size",
-      "min": 10,
+      "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Size",
-      "default": 26,
+      "default": 20,
       "visible_if": "{{ section.settings.features_advanced }}"
     },
     {
       "type": "range",
       "id": "feature_icon_size_mobile",
-      "min": 10,
+      "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
@@ -2053,7 +1439,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 14,
+      "default": 12,
       "visible_if": "{{ section.settings.features_advanced }}"
     },
     {
@@ -2085,35 +1471,6 @@
     },
     {
       "type": "header",
-      "content": "Bullet point colors"
-    },
-    {
-      "type": "color",
-      "label": "Border",
-      "id": "bullet_border_color",
-      "default": "#AFAFAF",
-      "visible_if": "{{ section.settings.bullet_border_thickness >= 1 }}"
-    },
-    {
-      "type": "color",
-      "label": "Text",
-      "id": "bullet_text_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Icon",
-      "id": "icon_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Icon background",
-      "id": "icon_bg_color",
-      "default": "#121212"
-    },
-    {
-      "type": "header",
       "content": "Image colors",
       "visible_if": "{{ section.settings.image_border_thickness >= 1 }}"
     },
@@ -2127,6 +1484,24 @@
     {
       "type": "header",
       "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "label": "Gradient color 1",
+      "id": "gradient_start",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Gradient color 2",
+      "id": "gradient_end",
+      "default": "#121212"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_bg",
+      "label": "Animate background",
+      "default": true
     },
     {
       "type": "color",
@@ -2291,9 +1666,21 @@
       "settings": [
         {
           "type": "richtext",
-          "id": "heading",
-          "label": "Heading",
-          "default": "<h1>Hero #38</h1>"
+          "id": "heading_up",
+          "label": "Line 1",
+          "default": "<h1>Line 1</h1>"
+        },
+        {
+          "type": "text",
+          "id": "heading_center",
+          "label": "Line 2",
+          "info": "Please enter the values, separated by commas.",
+          "default": "Line 2, Line 2, Line 2"
+        },
+        {
+          "type": "richtext",
+          "id": "heading_down",
+          "label": "Line 3"
         },
         {
           "type": "checkbox",
@@ -2363,6 +1750,13 @@
           "label": "Color",
           "id": "heading_color",
           "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Accent color",
+          "id": "heading_accent_color",
+          "default": "#707070",
+          "info": "Use strong for accent color"
         }
       ]
     },
@@ -2374,7 +1768,7 @@
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Use this text to share information about your brand with your customers.</p>"
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
         },
         {
           "type": "checkbox",
@@ -2397,7 +1791,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 18
+          "default": 16
         },
         {
           "type": "range",
@@ -2407,7 +1801,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 16
+          "default": 14
         },
         {
           "type": "range",
@@ -2427,7 +1821,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 16
+          "default": 28
         },
         {
           "type": "range",
@@ -2437,7 +1831,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 12
+          "default": 16
         },
         {
           "type": "color",
@@ -2471,7 +1865,7 @@
           "type": "select",
           "id": "button_style",
           "label": "Style",
-          "default": "outline_arrow",
+          "default": "outline",
           "options": [
             {
               "label": "Link",
@@ -2516,7 +1910,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 20
+          "default": 14
         },
         {
           "type": "range",
@@ -2526,7 +1920,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 18
+          "default": 14
         },
         {
           "type": "range",
@@ -2546,7 +1940,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding horizontal",
-          "default": 32,
+          "default": 36,
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -2557,7 +1951,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding horizontal - mobile",
-          "default": 32,
+          "default": 36,
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -2568,7 +1962,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding vertical",
-          "default": 16,
+          "default": 18,
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -2579,7 +1973,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding vertical - mobile",
-          "default": 16,
+          "default": 18,
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -2612,7 +2006,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 16
+          "default": 30
         },
         {
           "type": "range",
@@ -2622,7 +2016,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 16
+          "default": 30
         },
         {
           "type": "header",
@@ -2651,7 +2045,7 @@
           "type": "color",
           "label": "Background hover",
           "id": "button_bg_hover_color",
-          "default": "#FFFFFF",
+          "default": "transparent",
           "visible_if": "{{ block.settings.button_style != 'link' }}"
         },
         {
@@ -2671,254 +2065,6 @@
       ]
     },
     {
-      "type": "review",
-      "limit": 1,
-      "name": "Stars rating",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Layout"
-        },
-        {
-          "type": "range",
-          "id": "review_mt",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top",
-          "default": 24
-        },
-        {
-          "type": "range",
-          "id": "review_mt_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Margin top - mobile",
-          "default": 16
-        },
-        {
-          "type": "header",
-          "content": "Images"
-        },
-        {
-          "type": "image_picker",
-          "label": "First image",
-          "id": "first_image"
-        },
-        {
-          "type": "image_picker",
-          "label": "Second image",
-          "id": "second_image"
-        },
-        {
-          "type": "image_picker",
-          "label": "Third image",
-          "id": "third_image"
-        },
-        {
-          "type": "image_picker",
-          "label": "Fourth image",
-          "id": "fourth_image"
-        },
-        {
-          "type": "range",
-          "id": "image_size",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Size",
-          "default": 40
-        },
-        {
-          "type": "range",
-          "id": "image_size_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Size - mobile",
-          "default": 40
-        },
-        {
-          "type": "range",
-          "id": "image_radius",
-          "min": 0,
-          "max": 50,
-          "step": 2,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 50
-        },
-        {
-          "type": "range",
-          "id": "image_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 2
-        },
-        {
-          "type": "header",
-          "content": "Stars"
-        },
-        {
-          "type": "range",
-          "id": "stars_count",
-          "min": 0,
-          "max": 5,
-          "step": 0.5,
-          "label": "Star rating",
-          "default": 5,
-          "info": "Set 0 to hide stars"
-        },
-        {
-          "type": "image_picker",
-          "label": "Stars icon",
-          "id": "stars_icon",
-          "info": "Replaces the default stars icon"
-        },
-        {
-          "type": "range",
-          "id": "stars_size",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Size",
-          "default": 18
-        },
-        {
-          "type": "range",
-          "id": "stars_size_mobile",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px",
-          "label": "Size - mobile",
-          "default": 16
-        },
-        {
-          "type": "text_alignment",
-          "id": "review_align",
-          "label": "Alignment"
-        },
-        {
-          "type": "text_alignment",
-          "id": "review_align_mobile",
-          "label": "Alignment - mobile"
-        },
-        {
-          "type": "header",
-          "content": "Text"
-        },
-        {
-          "type": "text",
-          "id": "stars_text",
-          "label": "Text",
-          "default": "Excellent 4.9"
-        },
-        {
-          "type": "checkbox",
-          "id": "review_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "review_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4",
-          "visible_if": "{{ block.settings.review_custom }}"
-        },
-        {
-          "type": "range",
-          "id": "review_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "review_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "review_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 130
-        },
-        {
-          "type": "header",
-          "content": "Colors"
-        },
-        {
-          "type": "color",
-          "label": "Text",
-          "id": "review_color",
-          "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Star icon",
-          "id": "stars_color",
-          "default": "#FFFFFF",
-          "visible_if": "{{ block.settings.stars_icon == blank }}"
-        },
-        {
-          "type": "color",
-          "label": "Star background",
-          "id": "stars_bg_color",
-          "default": "#00B67A",
-          "visible_if": "{{ block.settings.stars_icon == blank }}"
-        },
-        {
-          "type": "color",
-          "label": "Inactive star background",
-          "id": "stars_bg_half_color",
-          "default": "#DDDDDD",
-          "visible_if": "{{ block.settings.stars_icon == blank }}"
-        },
-        {
-          "type": "color",
-          "label": "Image border",
-          "id": "image_border_color",
-          "default": "#FFFFFF",
-          "visible_if": "{{ block.settings.image_border_thickness >= 1 }}"
-        }
-      ]
-    },
-    {
-      "type": "bullet",
-      "name": "Bullet point",
-      "settings": [
-        {
-          "type": "richtext",
-          "label": "Text",
-          "id": "text",
-          "default": "<p>Provide an in-depth description of a key feature</p>"
-        }
-      ]
-    },
-    {
       "type": "feature",
       "name": "Feature",
       "settings": [
@@ -2926,7 +2072,7 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
-          "default": "bolt",
+          "default": "pin_tack",
           "options": [
             {
               "label": "None",
@@ -3125,7 +2271,7 @@
   ],
   "presets": [
     {
-      "name": "SG-Hero #38",
+      "name": "SG-Hero #39",
       "blocks": [
         {
           "type": "heading"
@@ -3135,18 +2281,6 @@
         },
         {
           "type": "button"
-        },
-        {
-          "type": "review"
-        },
-        {
-          "type": "bullet"
-        },
-        {
-          "type": "bullet"
-        },
-        {
-          "type": "bullet"
         },
         {
           "type": "feature"
