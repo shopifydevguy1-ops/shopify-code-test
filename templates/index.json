@@ -15,7 +15,7 @@
         "heading_Frp6hp": {
           "type": "heading",
           "settings": {
-            "heading": "FEATURE #54",
+            "heading": "FLIP CARDS #1",
             "heading_size": "h1"
           }
         }
@@ -23,7 +23,6 @@
       "block_order": [
         "heading_Frp6hp"
       ],
-      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -34,131 +33,102 @@
         "padding_bottom": 36
       }
     },
-    "mockup_W47NQY": {
+    "mockup_QYwgUV": {
       "type": "mockup",
       "blocks": {
-        "heading_zhGjAr": {
-          "type": "heading",
-          "settings": {
-            "heading": "FLIP CARDS #2"
-          }
-        },
-        "card_YxbLaz": {
+        "card_epBCGd": {
           "type": "card",
           "settings": {
             "title": "Title",
-            "text": "<p>Tell your story</p>",
-            "found_text": "<p>FOUND IN:</p>",
-            "products": []
+            "subtitle": "Subtitle",
+            "text": "<p>Tell your story</p>"
           }
         },
-        "card_3qUfrx": {
+        "card_i9G3Jk": {
           "type": "card",
           "settings": {
             "title": "Title",
-            "text": "<p>Tell your story</p>",
-            "found_text": "<p>FOUND IN:</p>",
-            "products": []
+            "subtitle": "Subtitle",
+            "text": "<p>Tell your story</p>"
           }
         },
-        "card_J7HnHg": {
+        "card_9iJrVq": {
           "type": "card",
           "settings": {
             "title": "Title",
-            "text": "<p>Tell your story</p>",
-            "found_text": "<p>FOUND IN:</p>",
-            "products": []
+            "subtitle": "Subtitle",
+            "text": "<p>Tell your story</p>"
           }
         },
-        "card_Wcmii3": {
+        "card_7cTJLr": {
           "type": "card",
           "settings": {
             "title": "Title",
-            "text": "<p>Tell your story</p>",
-            "found_text": "<p>FOUND IN:</p>",
-            "products": []
-          }
-        },
-        "card_3eCQRw": {
-          "type": "card",
-          "settings": {
-            "title": "Title",
-            "text": "<p>Tell your story</p>",
-            "found_text": "<p>FOUND IN:</p>",
-            "products": []
+            "subtitle": "Subtitle",
+            "text": "<p>Tell your story</p>"
           }
         }
       },
       "block_order": [
-        "heading_zhGjAr",
-        "card_YxbLaz",
-        "card_3qUfrx",
-        "card_J7HnHg",
-        "card_Wcmii3",
-        "card_3eCQRw"
+        "card_epBCGd",
+        "card_i9G3Jk",
+        "card_9iJrVq",
+        "card_7cTJLr"
       ],
-      "name": "SG-Flip cards #2",
+      "name": "SG-Flip cards",
       "settings": {
-        "cards_per_row": 3,
+        "cards_per_row": 4,
+        "layout_mobile": "slider",
         "cards_per_row_mobile": "2",
-        "cards_gap": 60,
+        "cards_gap": 30,
         "cards_gap_mobile": 16,
-        "card_radius": 24,
+        "card_radius": 10,
         "card_border_thickness": 0,
-        "card_shadow": "fourth",
-        "heading_custom": false,
-        "heading_font": "josefin_sans_n4",
-        "heading_size": 100,
-        "heading_size_mobile": 52,
-        "heading_height": 150,
-        "heading_align": "left",
-        "heading_align_mobile": "left",
-        "heading_vertical_align": "start",
-        "heading_vertical_align_mobile": "start",
-        "image_overlay": 0.2,
-        "image_ratio": "portrait",
-        "image_ratio_mobile": "portrait",
-        "title_custom": false,
-        "title_font": "josefin_sans_n4",
-        "title_size": 24,
-        "title_size_mobile": 20,
-        "title_height": 130,
+        "card_shadow": "first",
+        "image_ratio": "landscape",
+        "image_ratio_mobile": "landscape",
+        "image_zoom": true,
+        "padding_advanced": false,
+        "card_content_padding_horizontal": 20,
+        "card_content_padding_horizontal_mobile": 16,
+        "card_content_padding_vertical": 20,
+        "card_content_padding_vertical_mobile": 16,
         "card_content_align": "center",
         "card_content_align_mobile": "center",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 18,
+        "title_size_mobile": 15,
+        "title_height": 130,
+        "subtitle_custom": false,
+        "subtitle_font": "josefin_sans_n4",
+        "subtitle_size": 15,
+        "subtitle_size_mobile": 14,
+        "subtitle_height": 130,
+        "subtitle_mt": 12,
+        "subtitle_mt_mobile": 10,
+        "icon_size": 16,
+        "icon_size_mobile": 16,
         "text_custom": false,
         "text_font": "josefin_sans_n4",
         "text_size": 14,
         "text_size_mobile": 14,
         "text_height": 150,
-        "card_back_content_align": "left",
-        "card_back_content_align_mobile": "left",
-        "text_mt": 20,
-        "text_mt_mobile": 20,
-        "icon_size": 20,
-        "icon_size_mobile": 16,
-        "icon_border_thickness": 1,
-        "close_icon_size": 20,
-        "close_icon_size_mobile": 16,
-        "close_border_thickness": 1,
-        "heading_color": "#121212",
-        "title_back_color": "#121212",
-        "title_color": "#FFFFFF",
+        "text_mt": 28,
+        "text_mt_mobile": 16,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "title_color": "#121212",
+        "subtitle_color": "#121212",
         "text_color": "#121212",
-        "link_color": "#121212",
-        "link_hover_color": "#121212",
+        "card_content_bg_color": "#FFFFFF",
         "card_content_bg_back_color": "#FFFFFF",
         "card_border_color": "#121212",
-        "image_overlay_color": "#000000",
         "card_shadow_color": "#000000",
-        "icon_color": "#FFFFFF",
-        "icon_bg_color": "transparent",
-        "icon_border_color": "#FFFFFF",
-        "close_icon_color": "#121212",
-        "close_icon_hover_color": "#FFFFFF",
-        "close_icon_bg_color": "#FFFFFF",
-        "close_icon_bg_hover_color": "#121212",
-        "close_border_color": "#121212",
-        "close_border_hover_color": "#121212",
+        "icon_color": "#121212",
+        "icon_hover_color": "#121212",
+        "icon_bg_color": "#FFFFFF",
+        "icon_bg_hover_color": "#FFFFFF",
         "background_style": "solid",
         "background_color": "#FFFFFF",
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
@@ -181,6 +151,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_W47NQY"
+    "mockup_QYwgUV"
   ]
 }
