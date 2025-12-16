@@ -15,7 +15,7 @@
         "heading_Frp6hp": {
           "type": "heading",
           "settings": {
-            "heading": "GALLERY #6",
+            "heading": "GALLERY #7",
             "heading_size": "h1"
           }
         }
@@ -33,74 +33,102 @@
         "padding_bottom": 36
       }
     },
-    "mockup_wx3F8U": {
+    "mockup_Nn4wX6": {
       "type": "mockup",
-      "name": "SG-Gallery #6",
+      "blocks": {
+        "card_Hn66eP": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/animated-image.png",
+            "title": "Title",
+            "text": "<p>Tell your story</p>",
+            "url": "",
+            "rotate": 6
+          }
+        },
+        "card_FbDjbY": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/feature-image-without-text.png",
+            "title": "Title",
+            "text": "<p>Tell your story</p>",
+            "url": "",
+            "rotate": -6
+          }
+        },
+        "card_mBxF4p": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/feature-image_7ecbc37b-3ace-46b0-b8e7-030ad5430d1b.png",
+            "title": "Title",
+            "text": "<p>Tell your story</p>",
+            "url": "",
+            "rotate": 4
+          }
+        }
+      },
+      "block_order": [
+        "card_Hn66eP",
+        "card_FbDjbY",
+        "card_mBxF4p"
+      ],
+      "name": "SG-Gallery #7",
       "settings": {
-        "video": "shopify://files/videos/vecteezy_abstract-video-of-shooting-lights_9271696.mp4",
-        "video_position": "1",
-        "video_text": "<p>Pair text with a video to focus on your chosen product or collection.</p>",
-        "video_text_custom": false,
-        "video_text_font": "josefin_sans_n4",
-        "video_text_size": 12,
-        "video_text_size_mobile": 12,
-        "video_text_height": 150,
-        "video_text_align": "left",
-        "video_text_align_mobile": "left",
-        "image_padding_vertical": 40,
-        "image_padding_vertical_mobile": 40,
-        "image_padding_horizontal": 40,
-        "image_padding_horizontal_mobile": 40,
-        "image": "shopify://shop_images/animated-image.png",
-        "image_width": 70,
-        "image_width_mobile": 70,
+        "cards_per_view": 3,
+        "cards_per_view_mobile": "1",
+        "cards_gap": 32,
+        "cards_gap_mobile": 16,
+        "card_padding_horizontal": 12,
+        "card_padding_horizontal_mobile": 12,
+        "card_padding_vertical": 12,
+        "card_padding_vertical_mobile": 12,
+        "card_radius": 4,
+        "card_border_thickness": 0,
+        "card_align": "center",
+        "card_align_mobile": "center",
+        "card_use_shadow": true,
         "image_radius": 0,
-        "image_border_thickness": 1,
-        "image_ratio": "portrait",
-        "image_ratio_mobile": "portrait",
-        "image_text": "<p>Write some content about your products, collections or brand. Use image to create an impactful layout.</p>",
-        "image_text_custom": false,
-        "image_text_font": "josefin_sans_n4",
-        "image_text_width": 260,
-        "image_text_width_mobile": 260,
-        "image_text_size": 12,
-        "image_text_size_mobile": 12,
-        "image_text_height": 150,
-        "image_text_mt": 20,
-        "image_text_mt_mobile": 20,
-        "image_text_align": "center",
-        "image_text_align_mobile": "center",
-        "btn_play": "PLAY",
-        "btn_pause": "PAUSE",
-        "btn_custom": false,
-        "btn_font": "josefin_sans_n4",
-        "btn_size": 14,
-        "btn_size_mobile": 14,
-        "btn_height": 130,
-        "timer_custom": false,
-        "timer_font": "josefin_sans_n4",
-        "timer_size": 14,
-        "timer_size_mobile": 14,
-        "timer_height": 130,
-        "video_text_color": "#FFFFFF",
-        "btn_color": "#FFFFFF",
-        "timer_color": "#FFFFFF",
-        "image_bg_color": "#FFFFFF",
+        "image_border_thickness": 0,
+        "image_ratio": "landscape",
+        "image_ratio_mobile": "landscape",
+        "image_overlay": 0.2,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 20,
+        "title_size_mobile": 20,
+        "title_height": 130,
+        "title_mt": 12,
+        "title_mt_mobile": 12,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 16,
+        "text_height": 150,
+        "text_mt": 12,
+        "text_mt_mobile": 12,
+        "card_bg_color": "#FFFFFF",
+        "card_bg_hover_color": "#FFFFFF",
+        "card_border_color": "#000000",
+        "card_border_hover_color": "#222222",
+        "title_color": "#000000",
+        "title_hover_color": "#222222",
+        "text_color": "#777777",
+        "text_hover_color": "#999999",
         "image_border_color": "#000000",
-        "image_text_color": "#000000",
-        "background_color": "",
+        "image_overlay_color": "#FFFFFF",
+        "background_color": "#fafafa",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "padding_horizontal": 0,
-        "padding_horizontal_mobile": 0,
-        "full_width": true,
-        "content_width": 120,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 2.5,
+        "full_width": false,
+        "content_width": 1200,
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
@@ -109,6 +137,6 @@
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_wx3F8U"
+    "mockup_Nn4wX6"
   ]
 }
