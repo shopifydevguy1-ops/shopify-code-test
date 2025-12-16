@@ -16,37 +16,53 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
-  assign cards_per_view = section.settings.cards_per_view
-  assign cards_per_view_mobile = section.settings.cards_per_view_mobile
   assign cards_gap = section.settings.cards_gap
   assign cards_gap_mobile = section.settings.cards_gap_mobile
 
-  assign card_padding_horizontal = section.settings.card_padding_horizontal
-  assign card_padding_horizontal_mobile = section.settings.card_padding_horizontal_mobile
-  assign card_padding_vertical = section.settings.card_padding_vertical
-  assign card_padding_vertical_mobile = section.settings.card_padding_vertical_mobile
   assign card_radius = section.settings.card_radius
   assign card_border_thickness = section.settings.card_border_thickness
   assign card_border_color = section.settings.card_border_color
-  assign card_bg_color = section.settings.card_bg_color
-  assign card_border_hover_color = section.settings.card_border_hover_color
-  assign card_bg_hover_color = section.settings.card_bg_hover_color
-  assign card_align = section.settings.card_align
-  assign card_align_mobile = section.settings.card_align_mobile
-  assign card_use_shadow = section.settings.card_use_shadow
+  assign card_ratio = section.settings.card_ratio
+  assign card_ratio_mobile = section.settings.card_ratio_mobile
 
-  assign image_radius = section.settings.image_radius
-  assign image_border_thickness = section.settings.image_border_thickness
-  assign image_border_color = section.settings.image_border_color
-  assign image_overlay = section.settings.image_overlay
   assign image_overlay_color = section.settings.image_overlay_color
-  assign image_ratio = section.settings.image_ratio
-  assign image_ratio_mobile = section.settings.image_ratio_mobile
+  assign image_overlay = section.settings.image_overlay
+
+  assign content_padding_horizontal = section.settings.content_padding_horizontal
+  assign content_padding_horizontal_mobile = section.settings.content_padding_horizontal_mobile
+  assign content_padding_vertical = section.settings.content_padding_vertical
+  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
+  assign content_align = section.settings.content_align
+  assign content_align_mobile = section.settings.content_align_mobile
+
+  assign content_horizontal_align = ""
+  if content_align == "center"
+    assign content_horizontal_align = "center"
+  elsif content_align == "right"
+    assign content_horizontal_align = "end"
+  else
+    assign content_horizontal_align = "start"
+  endif
+
+  assign content_horizontal_align_mobile = ""
+  if content_align_mobile == "center"
+    assign content_horizontal_align_mobile = "center"
+  elsif content_align_mobile == "right"
+    assign content_horizontal_align_mobile = "end"
+  else
+    assign content_horizontal_align_mobile = "start"
+  endif
+
+  assign sub_title_size = section.settings.sub_title_size
+  assign sub_title_size_mobile = section.settings.sub_title_size_mobile
+  assign sub_title_color = section.settings.sub_title_color
+  assign sub_title_custom = section.settings.sub_title_custom
+  assign sub_title_font = section.settings.sub_title_font
+  assign sub_title_height = section.settings.sub_title_height
 
   assign title_size = section.settings.title_size
   assign title_size_mobile = section.settings.title_size_mobile
   assign title_color = section.settings.title_color
-  assign title_hover_color = section.settings.title_hover_color
   assign title_custom = section.settings.title_custom
   assign title_font = section.settings.title_font
   assign title_height = section.settings.title_height
@@ -56,18 +72,38 @@
   assign text_size = section.settings.text_size
   assign text_size_mobile = section.settings.text_size_mobile
   assign text_color = section.settings.text_color
-  assign text_hover_color = section.settings.text_hover_color
   assign text_custom = section.settings.text_custom
   assign text_font = section.settings.text_font
   assign text_height = section.settings.text_height
-  assign text_mt = section.settings.text_mt
-  assign text_mt_mobile = section.settings.text_mt_mobile
+
+  assign button_size = section.settings.button_size
+  assign button_size_mobile = section.settings.button_size_mobile
+  assign button_color = section.settings.button_color
+  assign button_hover_color = section.settings.button_hover_color
+  assign button_custom = section.settings.button_custom
+  assign button_font = section.settings.button_font
+  assign button_height = section.settings.button_height
+  assign button_padding_vertical = section.settings.button_padding_vertical
+  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
+  assign button_padding_horizontal = section.settings.button_padding_horizontal
+  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
+  assign button_radius = section.settings.button_radius
+  assign button_border_thickness = section.settings.button_border_thickness
+  assign button_border_color = section.settings.button_border_color
+  assign button_border_hover_color = section.settings.button_border_hover_color
+  assign button_bg_color = section.settings.button_bg_color
+  assign button_bg_hover_color = section.settings.button_bg_hover_color
+  assign button_style = section.settings.button_style
+  assign button_mt = section.settings.button_mt
+  assign button_mt_mobile = section.settings.button_mt_mobile
 -%}
 
 {%- style -%}
+  {{  sub_title_font | font_face: font_display: 'swap' }}
   {{  title_font | font_face: font_display: 'swap' }}
   {{  text_font | font_face: font_display: 'swap' }}
-  
+  {{  button_font | font_face: font_display: 'swap' }}
+
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
@@ -87,40 +123,25 @@
     padding-right: {{ padding_horizontal_mobile }}rem;
   }
 
-  .gallery-cards-{{ section.id }} {
+  .gallery-body-{{ section.id }} {
     display: grid;
-    grid-template-columns: repeat({{ cards_per_view_mobile }}, 1fr);
+    grid-template-columns: 1fr;
     gap: {{ cards_gap_mobile }}px;
-    align-items: center;
   }
 
   .gallery-card-{{ section.id }} {
-    padding: {{ card_padding_vertical_mobile }}px {{ card_padding_horizontal_mobile }}px;
+    position: relative;
     border: {{ card_border_thickness }}px solid {{ card_border_color }};
     border-radius: {{ card_radius }}px;
-    background-color: {{ card_bg_color }};
-    transition: all 0.25s ease 0s;
-    text-decoration: none;
-  }
-
-  .gallery-image-{{ section.id }} {
-    width: 100%;
-    position: relative;
-    border-radius: {{ image_radius }}px;
-    border: {{ image_border_thickness }}px solid {{ image_border_color }};
     overflow: hidden;
   }
 
-  .gallery-image-{{ section.id }}::after {
-    content: '';
+  .gallery-image-{{ section.id }} {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transition: all 0.25s ease 0s;
-    background-color: {{ image_overlay_color | hex_to_rgba: image_overlay }};
   }
 
   .gallery-image-{{ section.id }} img,
@@ -135,30 +156,132 @@
     background-color: #AFAFAF;
   }
 
+  .gallery-image-{{ section.id }}::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ image_overlay_color | hex_to_rgba: image_overlay }};
+    opacity: 0;
+    transition: all 0.5s ease 0s;
+  }
+
+  .gallery-card-{{ section.id }}:hover .gallery-image-{{ section.id }}::after {
+    opacity: 1;
+    transition: all 0.5s ease 0s;
+  }
+
+  .gallery-card-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    gap: 10px;
+    position: relative;
+    height: 100%;
+    padding: {{ content_padding_vertical_mobile }}px {{ content_padding_horizontal_mobile }}px;
+    z-index: 2;
+  }
+
+  .gallery-card-content-{{ section.id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-subtitle-{{ section.id }} {
+    text-align: {{ content_align_mobile }};
+  }
+
+  .gallery-subtitle-{{ section.id }} * {
+    margin: 0;  
+    font-size: {{ sub_title_size_mobile }}px;
+    line-height: {{ sub_title_height }}%;
+    color: {{ sub_title_color }};
+    text-transform: unset;
+    word-break: break-word;
+  }
+
   .gallery-title-{{ section.id }} {
     margin: 0;
     margin-top: {{ title_mt_mobile }}px;
-    text-align: {{ card_align_mobile }};
+    text-align: {{ content_align_mobile }};
     font-size: {{ title_size_mobile }}px;
-    color: {{ title_color }};
     line-height: {{ title_height }}%;
+    color: {{ title_color }};
     text-transform: unset;
-    text-decoration: none;
-    transition: all 0.25s ease 0s;
+    word-break: break-word;
+  }
+  
+  .gallery-bottom-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ content_horizontal_align_mobile }};
   }
 
   .gallery-text-{{ section.id }} {
-    margin-top: {{ text_mt_mobile }}px;
-    text-align: {{ card_align_mobile }};
+    text-align: {{ content_align_mobile }};
   }
 
   .gallery-text-{{ section.id }} * {
-    margin: 0; 
+    margin: 0;  
     font-size: {{ text_size_mobile }}px;
-    color: {{ text_color }};
     line-height: {{ text_height }}%;
+    color: {{ text_color }};
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .gallery-button-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: fit-content;
+    margin: 0;
+    margin-top: {{ button_mt_mobile }}px;
+    font-size: {{ button_size_mobile }}px;
+    color: {{ button_color }};
+    line-height: {{ button_height }}%;
+    text-align: center;
     text-transform: unset;
     text-decoration: none;
+    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
+    border-radius: {{ button_radius }}px;
+    transition: all 0.25s ease 0s;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .gallery-button-inner-{{ section.id }} {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .gallery-button-{{ section.id }}:hover {
+    color: {{ button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .gallery-button-{{ section.id }} svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gallery-button-{{ section.id }} svg path {
+    fill: {{ button_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .gallery-button-{{ section.id }}:hover svg path {
+    fill: {{ button_hover_color }};
     transition: all 0.25s ease 0s;
   }
   
@@ -180,49 +303,51 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .gallery-cards-{{ section.id }} {
-      grid-template-columns: repeat({{ cards_per_view }}, 1fr);
+    .gallery-body-{{ section.id }} {
+      grid-template-columns: repeat(2, 1fr);
       gap: {{ cards_gap }}px;
+      align-items: center;
     }
 
     .gallery-card-{{ section.id }} {
-      padding: {{ card_padding_vertical }}px {{ card_padding_horizontal }}px;
-    }
-    
-    .gallery-card-{{ section.id }}:hover .gallery-image-{{ section.id }}::after {
-      opacity: 1;
-      transition: all 0.25s ease 0s;
+      overflow: hidden;
     }
 
-    .gallery-card-{{ section.id }}:hover {
-      background-color: {{ card_bg_hover_color }};
-      border: {{ card_border_thickness }}px solid {{ card_border_hover_color }};
-      transition: all 0.25s ease 0s;
+    .gallery-card-content-{{ section.id }} {
+      overflow: hidden;
+      padding: {{ content_padding_vertical }}px {{ content_padding_horizontal }}px;
     }
 
-    .gallery-card-{{ section.id }}:hover .gallery-title-{{ section.id }} {
-      color: {{ title_hover_color }};
-      transition: all 0.25s ease 0s;
+    .gallery-subtitle-{{ section.id }} {
+      text-align: {{ content_align }};
     }
 
-    .gallery-card-{{ section.id }}:hover .gallery-text-{{ section.id }} * {
-      color: {{ text_hover_color }};
-      transition: all 0.25s ease 0s;
+    .gallery-subtitle-{{ section.id }} * {
+      font-size: {{ sub_title_size }}px;
     }
 
     .gallery-title-{{ section.id }} {
       margin-top: {{ title_mt }}px;
-      text-align: {{ card_align }};
+      text-align: {{ content_align }};
       font-size: {{ title_size }}px;
     }
 
+    .gallery-bottom-{{ section.id }} {
+      align-items: {{ content_horizontal_align }};
+    }
+    
     .gallery-text-{{ section.id }} {
-      margin-top: {{ text_mt }}px;
-      text-align: {{ card_align }};
+      text-align: {{ content_align }};
     }
 
     .gallery-text-{{ section.id }} * {
       font-size: {{ text_size }}px;
+    }
+
+    .gallery-button-{{ section.id }} {
+      margin-top: {{ button_mt }}px;
+      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
+      font-size: {{ button_size }}px;
     }
   }
   
@@ -263,6 +388,16 @@
   </style>
 {% endif %}
 
+{% if sub_title_custom %}
+  <style>
+    .gallery-subtitle-{{ section.id }} {
+      font-family: {{ sub_title_font.family }}, {{ sub_title_font.fallback_families }};
+      font-weight: {{ sub_title_font.weight }};
+      font-style: {{ sub_title_font.style }};
+    }
+  </style>
+{% endif %}
+
 {% if title_custom %}
   <style>
     .gallery-title-{{ section.id }} {
@@ -275,7 +410,7 @@
 
 {% if text_custom %}
   <style>
-    .gallery-text-{{ section.id }} * {
+    .gallery-text-{{ section.id }} {
       font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
       font-weight: {{ text_font.weight }};
       font-style: {{ text_font.style }};
@@ -283,152 +418,179 @@
   </style>
 {% endif %}
 
-
-{% if image_ratio_mobile == "portrait" %}
+{% if button_custom %}
   <style>
-    .gallery-image-{{ section.id }} {
-     aspect-ratio: 9.6/14; 
-    }
-  </style>
-{% elsif image_ratio_mobile == "landscape" %}
-  <style>
-    .gallery-image-{{ section.id }}{
-      aspect-ratio: 12/9; 
-    }
-  </style>
-{% elsif image_ratio_mobile == "square" %}
-  <style>
-    .gallery-image-{{ section.id }} {
-      aspect-ratio: 12/12; 
-    }
-  </style>
-{% else %}
-  <style>
-    .gallery-image-{{ section.id }} {
-      aspect-ratio: auto; 
+    .gallery-button-{{ section.id }} {
+      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-weight: {{ button_font.weight }};
+      font-style: {{ button_font.style }};
     }
   </style>
 {% endif %}
 
-{% if image_ratio == "portrait" %}
+
+{% if card_ratio_mobile == "portrait" %}
   <style>
-    @media(min-width: 1024px) {
-     .gallery-image-{{ section.id }} {
-        aspect-ratio: 9.6/14; 
-      } 
+    .gallery-card-{{ section.id }} {
+      aspect-ratio: 9.6/13;
     }
   </style>
-{% elsif image_ratio == "landscape" %}
+{% elsif card_ratio_mobile == "landscape" %}
   <style>
-    @media(min-width: 1024px) {
-      .gallery-image-{{ section.id }}{
-        aspect-ratio: 12/9; 
-      }
-    }
+  .gallery-card-{{ section.id }} {
+    aspect-ratio: 12/8;
+  }
   </style>
-{% elsif image_ratio == "square" %}
+{% elsif card_ratio_mobile == "square" %}
   <style>
-    @media(min-width: 1024px) {
-      .gallery-image-{{ section.id }} {
-        aspect-ratio: 12/12; 
-      }
+    .gallery-card-{{ section.id }} {
+      aspect-ratio: 12/12;
     }
   </style>
 {% else %}
   <style>
+    .gallery-card-{{ section.id }} {
+      aspect-ratio: auto;
+    }
+  </style>
+{% endif %}
+
+{% if card_ratio == "portrait" %}
+  <style>
     @media(min-width: 1024px) {
-      .gallery-image-{{ section.id }} {
-        aspect-ratio: auto; 
+      .gallery-card-{{ section.id }} {
+        aspect-ratio: 9.6/13;
       }
+    }
+    
+  </style>
+{% elsif card_ratio == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .gallery-card-{{ section.id }} {
+        aspect-ratio: 12/8;
+      }
+    }  
+  </style>
+{% elsif card_ratio == "square" %}
+  <style>
+    @media(min-width: 1024px) {
+      .gallery-card-{{ section.id }} {
+        aspect-ratio: 12/12;
+      }
+    }    
+  </style>
+{% else %}
+  <style>
+     @media(min-width: 1024px) {
+      .gallery-card-{{ section.id }} {
+        aspect-ratio: auto;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if button_style == "non_outline" or button_style == "non_outline_arrow" %}
+  <style>
+    .gallery-button-{{ section.id }} {
+      background-color: {{ button_bg_color }};
+    }
+
+    .gallery-button-{{ section.id }}:hover {
+      background-color: {{ button_bg_hover_color }};
+    }
+  </style>
+{% elsif button_style == "outline" or button_style == "outline_arrow" %}
+  <style>
+    .gallery-button-{{ section.id }} {
+      background-color: {{ button_bg_color }};
+      border: {{ button_border_thickness }}px solid {{ button_border_color }};
+    }
+
+    .gallery-button-{{ section.id }}:hover {
+      background-color: {{ button_bg_hover_color }};
+      border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
+    }
+  </style>
+{% elsif button_style == "link" %}
+  <style>
+    .gallery-button-{{ section.id }} {
+      padding: 0px !important;
     }
   </style>
 {% endif %}
 
 {% for block in section.blocks %}
   <style>
-    .gallery-card-{{ block.id }} {
-      transform: rotate({{ block.settings.rotate }}deg);
+    .gallery-card-wrapper-{{ block.id }} {
+      padding: {{ block.settings.card_padding_mobile }}px;
     }
 
-    @media(min-width: 1024px) {      
-      .gallery-card-{{ block.id }}:hover {
-        transform: scale(1.05) rotate({{ block.settings.rotate }}deg);
-        z-index: 1;
-        transition: all 0.25s ease 0s;
+    @media(min-width: 1024px) {
+      .gallery-card-wrapper-{{ block.id }} {
+        padding: {{ block.settings.card_padding }}px;
       }
     }
   </style>
 {% endfor %}
 
-{% if card_use_shadow %} 
-  <style>
-    .gallery-card-{{ section.id }} {
-      box-shadow: 0 2px 4px #0000001a, inset 0 0 1px -1px #0000001a;
-    }
-    
-    .gallery-card-{{ section.id }}:hover {
-      box-shadow: 0 12px 24px #0000000d, 0 2px 4px #0000001a, inset 0 0 1px -1px #0000001a;
-    }
-  </style>
-{% endif %}
-
-
 <div class="section-{{ section.id }} gallery-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="gallery-cards-{{ section.id }}">
+      <div class="gallery-body-{{ section.id }}">
         {% for block in section.blocks %}
-          <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="gallery-card-{{ section.id }} gallery-card-{{ block.id }}">
-            <div class="gallery-image-{{ section.id }}">
-              {% if block.settings.image != blank %}
-                <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
-              {% else %}
-                {{ 'image' | placeholder_svg_tag }}
-              {% endif %}
+          <div class="gallery-card-wrapper-{{ section.id }} gallery-card-wrapper-{{ block.id }}">
+            <div class="gallery-card-{{ section.id }}">
+              <div class="gallery-image-{{ section.id }}">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag }}
+                {% endif %}                   
+              </div>
+              <div class="gallery-card-content-{{ section.id }}">
+                <div class="gallery-top-{{ section.id }}">
+                  {% if block.settings.sub_title != blank %}
+                    <div class="gallery-subtitle-{{ section.id }}">{{ block.settings.sub_title }}</div>
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                    <h3 class="gallery-title-{{ section.id }}">{{ block.settings.title }}</h3>
+                  {% endif %}
+                </div>
+                <div class="gallery-bottom-{{ section.id }}">
+                  {% if block.settings.text != blank %}
+                    <div class="gallery-text-{{ section.id }}">{{ block.settings.text }}</div>                  
+                  {% endif %}
+                  {% if block.settings.button != blank %}
+                    <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="gallery-button-{{ section.id }}">
+                      <p class="gallery-button-inner-{{ section.id }}">
+                      {{ block.settings.button }}
+                        {% if button_style == "non_outline_arrow" or button_style == "outline_arrow" %}
+                          <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                            <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                          </svg>
+                        {% endif %}
+                      </p>
+                    </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
+                  {% endif %}
+                </div>
+              </div>              
             </div>
-            {% if block.settings.title != blank %}
-              <h3 class="gallery-title-{{ section.id }}">{{ block.settings.title }}</h3>
-            {% endif %}
-            {% if block.settings.text != blank %}
-              <div class="gallery-text-{{ section.id }}">{{ block.settings.text }}</div>
-            {% endif %}
-          </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
+          </div>
         {% endfor %}
       </div>
     </div>
 </div>
 
+
 {% schema %}
 {
-  "name": "SG-Gallery #7",
+  "name": "SG-Gallery #8",
   "settings": [
     {
       "type": "header",
-      "content": "Cards settings"
-    },
-    {
-      "type": "range",
-      "id": "cards_per_view",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "label": "Cards per view",
-      "default": 3
-    },
-    {
-      "type": "select",
-      "id": "cards_per_view_mobile",
-      "label": "Cards per view - mobile",
-      "default": "1",
-      "options": [
-        {
-          "label": "1",
-          "value": "1"
-        },
-        {
-          "label": "2",
-          "value": "2"
-        }
-      ]
+      "content": "Layout settings"
     },
     {
       "type": "range",
@@ -438,7 +600,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 32
+      "default": 0
     },
     {
       "type": "range",
@@ -448,51 +610,11 @@
       "step": 2,
       "unit": "px",
       "label": "Gap - mobile",
-      "default": 16
+      "default": 0
     },
     {
       "type": "header",
       "content": "Card settings"
-    },
-    {
-      "type": "range",
-      "id": "card_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "card_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "card_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "card_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical - mobile",
-      "default": 12
     },
     {
       "type": "range",
@@ -502,7 +624,7 @@
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 4
+      "default": 0
     },
     {
       "type": "range",
@@ -515,22 +637,52 @@
       "default": 0
     },
     {
-      "type": "text_alignment",
-      "id": "card_align",
-      "label": "Alignment",
-      "default": "center"
+      "type": "select",
+      "id": "card_ratio",
+      "label": "Aspect ratio",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
     },
     {
-      "type": "text_alignment",
-      "id": "card_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
-    },
-    {
-      "type": "checkbox",
-      "id": "card_use_shadow",
-      "label": "Use shadow",
-      "default": true
+      "type": "select",
+      "id": "card_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
     },
     {
       "type": "header",
@@ -538,80 +690,112 @@
     },
     {
       "type": "range",
-      "id": "image_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "image_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 0
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Aspect ratio",
-      "default": "landscape",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "image_ratio_mobile",
-      "label": "Aspect ratio - mobile",
-      "default": "landscape",
-      "options": [
-        {
-          "label": "Portrait",
-          "value": "portrait"
-        },
-        {
-          "label": "Square",
-          "value": "square"
-        },
-        {
-          "label": "Landscape",
-          "value": "landscape"
-        },
-        {
-          "label": "Original",
-          "value": "original"
-        }
-      ]
-    },
-    {
-      "type": "range",
       "id": "image_overlay",
       "min": 0,
       "max": 1,
       "step": 0.1,
-      "label": "Overlay on hover",
-      "default": 0.2
+      "label": "Overlay",
+      "default": 0.3
+    },
+    {
+      "type": "header",
+      "content": "Content settings"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 24
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "header",
+      "content": "Caption settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "sub_title_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "sub_title_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "sub_title_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "sub_title_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
     },
     {
       "type": "header",
@@ -637,7 +821,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 20
+      "default": 24
     },
     {
       "type": "range",
@@ -647,7 +831,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 20
+      "default": 24
     },
     {
       "type": "range",
@@ -667,7 +851,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 12
+      "default": 16
     },
     {
       "type": "range",
@@ -677,7 +861,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 12
+      "default": 16
     },
     {
       "type": "header",
@@ -703,7 +887,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 16
+      "default": 14
     },
     {
       "type": "range",
@@ -713,7 +897,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 16
+      "default": 14
     },
     {
       "type": "range",
@@ -726,40 +910,162 @@
       "default": 150
     },
     {
+      "type": "header",
+      "content": "Button settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
       "type": "range",
-      "id": "text_mt",
+      "id": "button_size",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_size_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "button_mt",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 12
+      "default": 32
     },
     {
       "type": "range",
-      "id": "text_mt_mobile",
+      "id": "button_mt_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 12
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "outline",
+      "options": [
+        {
+          "label": "Link",
+          "value": "link"
+        },
+        {
+          "label": "Non-outline",
+          "value": "non_outline"
+        },
+        {
+          "label": "Non-outline & arrow",
+          "value": "non_outline_arrow"
+        },
+        {
+          "label": "Outline",
+          "value": "outline"
+        },
+        {
+          "label": "Outline & arrow",
+          "value": "outline_arrow"
+        }
+      ]
     },
     {
       "type": "header",
       "content": "Card colors"
-    },
-    {
-      "type": "color",
-      "label": "Background",
-      "id": "card_bg_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Background hover",
-      "id": "card_bg_hover_color",
-      "default": "#FFFFFF"
     },
     {
       "type": "color",
@@ -769,48 +1075,66 @@
     },
     {
       "type": "color",
-      "label": "Border hover",
-      "id": "card_border_hover_color",
-      "default": "#222222"
+      "label": "Image overlay",
+      "id": "image_overlay_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Caption",
+      "id": "sub_title_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "label": "Title",
       "id": "title_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Title hover",
-      "id": "title_hover_color",
-      "default": "#222222"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "label": "Text",
       "id": "text_color",
-      "default": "#777777"
-    },
-    {
-      "type": "color",
-      "label": "Text hover",
-      "id": "text_hover_color",
-      "default": "#999999"
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
-      "content": "Image colors"
+      "content": "Button colors"
     },
     {
       "type": "color",
-      "label": "Border",
-      "id": "image_border_color",
+      "label": "Text",
+      "id": "button_color",
       "default": "#000000"
     },
     {
       "type": "color",
-      "label": "Overlay",
-      "id": "image_overlay_color",
+      "label": "Hover text",
+      "id": "button_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Background",
+      "id": "button_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Background hover",
+      "id": "button_bg_hover_color",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "label": "Button border",
+      "id": "button_border_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Border hover",
+      "id": "button_border_hover_color",
       "default": "#FFFFFF"
     },
     {
@@ -821,7 +1145,7 @@
       "type": "color",
       "label": "Section background",
       "id": "background_color",
-      "default": "#fafafa"
+      "default": "#FFFFFF"
     },
     {
       "type": "color_background",
@@ -891,7 +1215,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -901,7 +1225,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -911,7 +1235,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 5
+      "default": 0
     },
     {
       "type": "range",
@@ -921,7 +1245,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 2.5
+      "default": 0
     },
     {
       "type": "header",
@@ -931,7 +1255,7 @@
       "type": "checkbox",
       "id": "full_width",
       "label": "Full width",
-      "default": false
+      "default": true
     },
     {
       "type": "range",
@@ -982,6 +1306,12 @@
           "label": "Image"
         },
         {
+          "type": "richtext",
+          "id": "sub_title",
+          "label": "Caption",
+          "default": "<p>Tell your story</p>"
+        },
+        {
           "type": "text",
           "id": "title",
           "label": "Title",
@@ -991,7 +1321,14 @@
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Tell your story</p>"
+          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button label",
+          "info": "Leave the label blank to hide the button.",
+          "default": "Learn more"
         },
         {
           "type": "url",
@@ -1000,37 +1337,39 @@
         },
         {
           "type": "range",
-          "id": "rotate",
-          "min": -30,
-          "max": 30,
+          "id": "card_padding",
+          "min": 0,
+          "max": 100,
           "step": 2,
-          "unit": "deg",
-          "label": "Rotate",
-          "default": 0
+          "unit": "px",
+          "label": "Padding",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "card_padding_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding - mobile",
+          "default": 30
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Gallery #7",
+      "name": "SG-Gallery #8",
       "blocks": [
         {
-          "type": "card",
-          "settings": {
-            "rotate": 6
-          }
+          "type": "card"
         },
         {
           "type": "card",
           "settings": {
-            "rotate": -6
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "rotate": 4
+            "card_padding": 0,
+            "card_padding_mobile": 0
           }
         }
       ]
