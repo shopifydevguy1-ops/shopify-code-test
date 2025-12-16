@@ -15,26 +15,28 @@
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
+  
+  assign hero_height = section.settings.hero_height
+  assign hero_fixed_height = section.settings.hero_fixed_height
 
-  assign layout_height = section.settings.layout_height
-  assign layout_fixed_height = section.settings.layout_fixed_height
-  assign layout_fixed_height_mobile = section.settings.layout_fixed_height_mobile
-  assign layout_padding_horizontal = section.settings.layout_padding_horizontal
-  assign layout_padding_horizontal_mobile = section.settings.layout_padding_horizontal_mobile
-  assign layout_padding_vertical = section.settings.layout_padding_vertical
-  assign layout_padding_vertical_mobile = section.settings.layout_padding_vertical_mobile
-  assign layout_radius = section.settings.layout_radius
+  assign layout = section.settings.layout
+  assign layout_mobile = section.settings.layout_mobile
+  assign layout_gap = section.settings.layout_gap
+  assign layout_gap_mobile = section.settings.layout_gap_mobile
 
-  assign bg_image = section.settings.bg_image
-  assign bg_image_mobile = section.settings.bg_image_mobile
-  assign bg_image_overlay_color = section.settings.bg_image_overlay_color
-  assign bg_image_overlay = section.settings.bg_image_overlay
+  assign media_type = section.settings.media_type
+  assign image = section.settings.image
+  assign video = section.settings.video
+  assign video_url = section.settings.video_url
+  assign media_ratio_mobile = section.settings.media_ratio_mobile
 
-  assign content_max_width = section.settings.content_max_width
+  assign content_padding_horizontal = section.settings.content_padding_horizontal
+  assign content_padding_horizontal_mobile = section.settings.content_padding_horizontal_mobile
+  assign content_padding_vertical = section.settings.content_padding_vertical
+  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
   assign content_vertical_align = section.settings.content_vertical_align
-  assign content_vertical_align_mobile = section.settings.content_vertical_align_mobile
 
   assign content_horizontal_align = ""
   if content_align == "center"
@@ -54,45 +56,16 @@
     assign content_horizontal_align_mobile = "start"
   endif
 
-  assign features_gap = section.settings.features_gap
-  assign features_gap_mobile = section.settings.features_gap_mobile
-  assign features_mt = section.settings.features_mt
-  assign features_mt_mobile = section.settings.features_mt_mobile
-
-  assign feature_padding_horizontal = section.settings.feature_padding_horizontal
-  assign feature_padding_horizontal_mobile = section.settings.feature_padding_horizontal_mobile
-  assign feature_padding_vertical = section.settings.feature_padding_vertical
-  assign feature_padding_vertical_mobile = section.settings.feature_padding_vertical_mobile
-  assign feature_border_thickness = section.settings.feature_border_thickness
-  assign feature_border_color = section.settings.feature_border_color
-  assign feature_radius = section.settings.feature_radius
-  assign feature_bg_color = section.settings.feature_bg_color
-  assign feature_align = section.settings.feature_align
-  assign feature_align_mobile = section.settings.feature_align_mobile
-  assign feature_shadow = section.settings.feature_shadow
-
-  assign feature_title_custom = section.settings.feature_title_custom
-  assign feature_title_font = section.settings.feature_title_font
-  assign feature_title_size = section.settings.feature_title_size
-  assign feature_title_size_mobile = section.settings.feature_title_size_mobile
-  assign feature_title_color = section.settings.feature_title_color
-  assign feature_title_height = section.settings.feature_title_height
-
-  assign feature_text_custom = section.settings.feature_text_custom
-  assign feature_text_font = section.settings.feature_text_font
-  assign feature_text_size = section.settings.feature_text_size
-  assign feature_text_size_mobile = section.settings.feature_text_size_mobile
-  assign feature_text_color = section.settings.feature_text_color
-  assign feature_text_height = section.settings.feature_text_height
-  assign feature_text_mt = section.settings.feature_text_mt
-  assign feature_text_mt_mobile = section.settings.feature_text_mt_mobile
+  assign lazy_load_setting = 'lazy'
+  unless lazy
+    assign lazy_load_setting = 'eiger'
+  endunless
 -%}
 
 {%- style -%}
-  {{ feature_title_font | font_face: font_display: 'swap' }}
-  {{ feature_text_font | font_face: font_display: 'swap' }}
-
+  
   .section-{{ section.id }} {
+    position: relative;
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
@@ -100,7 +73,7 @@
     margin-left: {{ margin_horizontal_mobile }}rem;
     margin-right: {{ margin_horizontal_mobile }}rem;
     border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
-    overflow: hidden; 
+    overflow: hidden;
   }
   
   .section-{{ section.id }}-settings {
@@ -109,129 +82,45 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+    position: relative;
+    z-index: 1;
   }
 
-  .hero-layout-{{ section.id }} {
-    position: relative;
-    padding: {{ layout_padding_vertical_mobile }}px {{ layout_padding_horizontal_mobile }}px;
-    border-radius: {{ layout_radius }}px;
+  .hero-body-{{ section.id }} {
+    display: grid;
+    gap: {{ layout_gap_mobile }}px;
+  }
+
+  .hero-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ content_vertical_align }};
+    align-items: {{ content_horizontal_align_mobile }};
+    padding: {{ content_padding_vertical_mobile }}px {{ content_padding_horizontal_mobile }}px;
+    grid-area: content;
+  }
+
+
+  .hero-media-{{ section.id }} {
+    grid-area: media;
     overflow: hidden;
   }
 
-  .hero-bg-image-{{ section.id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }  
-
-  .hero-bg-image-{{ section.id }}::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: {{ bg_image_overlay_color | hex_to_rgba: bg_image_overlay }};
-  }
-  
-  .hero-bg-image-{{ section.id }} img,
-  .hero-bg-image-{{ section.id }} svg  {
+  .hero-media-{{ section.id }} img,
+  .hero-media-{{ section.id }} svg,
+  .hero-media-{{ section.id }} video,
+  .hero-media-{{ section.id }} iframe {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border: 0;
+  }
+
+  .hero-media-{{ section.id }} svg {
+    background-color: #AFAFAF;
   }
   
-  .hero-bg-desktop-{{ section.id }} {
-    display: none !important;
-  }
-
-  .hero-content-{{ section.id }} {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: {{ content_horizontal_align_mobile }};
-    justify-content: {{ content_vertical_align_mobile }};
-  }
-  
-  .hero-review-{{ section.id }} {
-    display: flex;
-    justify-content: {{ content_horizontal_align_mobile }};
-    gap: 16px;
-  }
-
-  .hero-review-content-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    align-items: {{ content_horizontal_align_mobile }};
-    row-gap: 4px;
-  }
-
-  
-  .hero-stars-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    max-width: fit-content;
-  }
-
-  .hero-stars-wrapper-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .hero-features-{{ section.id }} {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: {{ features_gap_mobile }}px;
-    position: relative;
-    z-index: 2;
-    padding: 0;
-    margin-top: {{ features_mt_mobile }}px;
-  }
-
-  .hero-feature-{{ section.id }} {
-    width: calc(50% - {{ features_gap_mobile }}px);
-    padding: {{ feature_padding_vertical_mobile }}px {{ feature_padding_horizontal_mobile }}px;
-    border-radius: {{ feature_radius }}px;
-    border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
-    background-color: {{ feature_bg_color }};
-  }
-
-  .hero-feature-title-{{ section.id }} {
-    margin: 0;  
-    text-align: {{ feature_align_mobile }};
-    font-size: {{ feature_title_size_mobile }}px;
-    line-height: {{ feature_title_height }}%;
-    color: {{ feature_title_color }};
-    text-transform: unset;
-    text-decoration: none;
-    word-break: break-word;
-    font-weight: 700;
-  }
-
-  .hero-feature-text-{{ section.id }} {
-    margin: 0;  
-    margin-top: {{ feature_text_mt_mobile }}px;
-    text-align: {{ feature_align_mobile }};
-    font-size: {{ feature_text_size_mobile }}px;
-    line-height: {{ feature_text_height }}%;
-    color: {{ feature_text_color }};
-    text-transform: unset;
-    text-decoration: none;
-    word-break: break-word;
-  }
-
   @media(min-width: 1024px) {
 
     .section-{{ section.id }} {
@@ -250,59 +139,19 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .hero-layout-{{ section.id }} {
-      padding: {{ layout_padding_vertical }}px {{ layout_padding_horizontal }}px;
+    .hero-body-{{ section.id }} {
+      gap: {{ layout_gap }}px;
     }
 
     .hero-content-{{ section.id }} {
-      max-width: {{ content_max_width }}%;
-      align-items: {{ content_horizontal_align }};
       justify-content: {{ content_vertical_align }};
-    }
-
-    .hero-review-{{ section.id }} {
-      justify-content: {{ content_horizontal_align }};
-    }
-
-    .hero-review-content-{{ section.id }} {
       align-items: {{ content_horizontal_align }};
-    }
+      padding: {{ content_padding_vertical }}px {{ content_padding_horizontal }}px;
+    }  
 
-    .hero-buttons-{{ section.id }} {
-      justify-content: {{ content_horizontal_align }};
+    .hero-media-{{ section.id }} {
+      aspect-ratio: auto !important;
     }
-
-    .hero-bg-desktop-{{ section.id }} {
-      display: block !important; 
-    }
-
-    .hero-bg-mobile-{{ section.id }} {
-      display: none !important;
-    }
-
-    .hero-features-{{ section.id }} {
-      flex-wrap: wrap;
-      padding: {{ layout_padding_vertical }}px {{ layout_padding_horizontal }}px;
-      gap: {{ features_gap }}px;
-      margin-top: {{ features_mt }}px;
-    }
-
-    .hero-feature-{{ section.id }} {
-      width: calc(25% - {{ features_gap }}px);
-      padding: {{ feature_padding_vertical }}px {{ feature_padding_horizontal }}px;
-    }
-
-    .hero-feature-title-{{ section.id }} {
-      text-align: {{ feature_align }};
-      font-size: {{ feature_title_size }}px;
-    }
-
-    .hero-feature-text-{{ section.id }} {
-      margin-top: {{ feature_text_mt }}px;
-      text-align: {{ feature_align }};
-      font-size: {{ feature_text_size }}px;
-    }
-
   }
   
 {%- endstyle -%}
@@ -342,116 +191,126 @@
   </style>
 {% endif %}
 
-{% if feature_title_custom %}
+{% if hero_height == "full_screen" %}
   <style>
-    .hero-feature-title-{{ section.id }} {
-      font-family: {{ feature_title_font.family }}, {{ feature_title_font.fallback_families }};
-      font-weight: {{ feature_title_font.weight }};
-      font-style: {{ feature_title_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if feature_text_custom %}
-  <style>
-    .hero-feature-text-{{ section.id }} {
-      font-family: {{ feature_text_font.family }}, {{ feature_text_font.fallback_families }};
-      font-weight: {{ feature_text_font.weight }};
-      font-style: {{ feature_text_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if layout_height == "full_screen" %}
-  <style>
-    .section-{{ section.id }}-settings {
-      height: 100%;
-    }
-
-    .hero-layout-{{ section.id }} {
-      height: 95vh;
-    }
 
     @media(min-width: 1024px) {      
       .section-{{ section.id }}-settings {
         height: 100%;
       }
 
-      .hero-layout-{{ section.id }} {
+      .hero-{{ section.id }} {
         height: 95vh;
+      }
+
+      .hero-media-{{ section.id }} img,
+      .hero-media-{{ section.id }} svg,
+      .hero-media-{{ section.id }} video,
+      .hero-media-{{ section.id }} iframe {
+        max-height: calc(95vh - {{ padding_top }}px - {{ padding_bottom }}px);
       }
     }
   </style>
-{% elsif layout_height == 'fixed_height' %}  
+{% elsif hero_height == 'fixed_height' %}  
   <style>      
-    .section-{{ section.id }}-settings {
-      height: 100%;
-    }
-
-    .hero-layout-{{ section.id }} {
-      height: {{ layout_fixed_height_mobile }}px;
-    }
-
     @media(min-width: 1024px) {
       .section-{{ section.id }}-settings {
         height: 100%;
       }
 
-      .hero-layout-{{ section.id }} {
-        height: {{ layout_fixed_height }}px;
+      .hero-{{ section.id }} {
+        height: {{ hero_fixed_height }}px;
+      }
+
+      .hero-media-{{ section.id }} img,
+      .hero-media-{{ section.id }} svg,
+      .hero-media-{{ section.id }} video,
+      .hero-media-{{ section.id }} iframe {
+        max-height: calc({{ hero_fixed_height }}px - {{ padding_top }}px - {{ padding_bottom }}px);
       }
     }
   </style>
 {% endif %}
 
-{% if feature_shadow %}
+{% if layout_mobile == "media_content" %}
   <style>
-    .hero-feature-{{ section.id }} {
-      box-shadow: 0 0 #0000, 0 0 #0000, 0 0 10px 0 rgba(0, 0, 0, .1);
+    .hero-body-{{ section.id }} {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "media" 
+        "content"; 
+      height: 100%;
     }
   </style>
+{% else %} 
+  {% if layout_mobile == "content_media" %}
+    <style>
+      .hero-body-{{ section.id }} {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+          "content" 
+          "media";    
+        height: 100%;
+      }
+    </style>
+  {% endif %}  
 {% endif %}
 
-{% if content_align_mobile == "center" %}
+{% if layout == "media_content" %}
   <style>
-    .hero-content-{{ section.id }} {
-      margin-left: auto;
-      margin-right: auto;
+    @media (min-width: 1024px) {
+      .hero-body-{{ section.id }} {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "media content";
+      }
+
+      .hero-media-{{ section.id }} {
+        webkit-clip-path: polygon(0 0, 100% 0%, 91% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0%, 91% 100%, 0% 100%);
+      }
     }
   </style>
-{% elsif content_align_mobile == "right" %}
-  <style>
-    .hero-content-{{ section.id }} {
-      margin-left: auto;
-    }
-  </style>
+{% else %}  
+  {% if layout == "content_media" %}
+    <style>
+      @media (min-width: 1024px) {
+        .hero-body-{{ section.id }} {
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: "content media";
+        }
+
+        .hero-media-{{ section.id }} {
+          -webkit-clip-path: polygon(9% 0, 100% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(9% 0, 100% 0%, 100% 100%, 0% 100%);
+        }
+      }
+    </style>
+  {% endif %}  
 {% endif %}
 
-{% if content_align == "center" %}
+
+{% if media_ratio_mobile == "portrait" %}
   <style>
-    @media(min-width: 1024px) {
-      .hero-content-{{ section.id }} {
-        margin-left: auto;
-        margin-right: auto;
-      } 
+    .hero-media-{{ section.id }} {
+      aspect-ratio: 9.6/13;
     }
   </style>
-{% elsif content_align == "right" %}
+{% elsif media_ratio_mobile == "landscape" %}
   <style>
-    @media(min-width: 1024px) {
-      .hero-content-{{ section.id }} {
-        margin-left: auto;
-        margin-right: 0px;
-      } 
+  .hero-media-{{ section.id }} {
+    aspect-ratio: 12/8;
+  }
+  </style>
+{% elsif media_ratio_mobile == "square" %}
+  <style>
+    .hero-media-{{ section.id }} {
+      aspect-ratio: 12/12;
     }
   </style>
 {% else %}
   <style>
-    @media(min-width: 1024px) {
-      .hero-content-{{ section.id }} {
-        margin-left: 0px;
-        margin-right: 0px;
-      } 
+    .hero-media-{{ section.id }} {
+      aspect-ratio: auto;
     }
   </style>
 {% endif %}
@@ -462,25 +321,14 @@
       <style>
         {{  block.settings.review_font | font_face: font_display: 'swap' }}
 
-        .hero-review-content-{{ section.id }} {
+        .hero-review-{{ block.id }} {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background-color: {{ block.settings.review_bg_color |  hex_to_rgba: block.settings.review_bg_opacity }};
+          padding: {{ block.settings.review_padding_vertical_mobile }}px {{ block.settings.review_padding_horizontal_mobile }}px;
+          border-radius: {{ block.settings.review_radius }}px;
           margin-top: {{ block.settings.review_mt_mobile }}px;
-        }
-
-        .hero-author-image-{{ block.id }} {
-          border: {{ block.settings.image_border_thickness }}px solid {{ block.settings.image_border_color }};
-          border-radius: {{ block.settings.image_radius }}px;
-          overflow: hidden;
-          width: {{ block.settings.image_size_mobile }}px;
-          height: {{ block.settings.image_size_mobile }}px;
-          background-color: {{ background_color }};
-        }
-
-        .hero-author-image-{{ block.id }}:not(:first-child) {
-          margin-left: -{{ block.settings.image_size_mobile | times: 0.3 }}px;
-        }
-
-        .hero-review-text-{{ block.id }} {
-          text-align: {{ block.settings.review_align_mobile }};
         }
 
         .hero-review-text-{{ block.id }} * {
@@ -488,17 +336,16 @@
           margin: 0;
           font-size: {{ block.settings.review_size_mobile }}px;
           color: {{ block.settings.review_color }};
-          line-height: {{ block.settings.review_height }}%;         
+          line-height: {{ block.settings.review_height }}%;
+          text-align: center;
           text-transform: unset;
         }
 
-        .hero-review-text-{{ block.id }} * strong {
-          font-weight: 400;
-          color: {{ block.settings.review_accent_color }}
-        }
-
-        .hero-stars-count-{{ block.id }} {
-          color: {{ block.settings.count_color }};
+        .hero-stars-{{ block.id }} {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+          max-width: fit-content;
         }
 
         .hero-stars-{{ block.id }} svg,
@@ -510,17 +357,9 @@
         }
 
         @media (min-width: 1024px) {
-          .hero-review-content-{{ section.id }} {
+          .hero-review-{{ block.id }} {
             margin-top: {{ block.settings.review_mt }}px;
-          }
-          
-          .hero-author-image-{{ block.id }} {
-            width: {{ block.settings.image_size }}px;
-            height: {{ block.settings.image_size }}px;
-          }
-
-          .hero-author-image-{{ block.id }}:not(:first-child) {
-            margin-left: -{{ block.settings.image_size | times: 0.3 }}px;
+            padding: {{ block.settings.review_padding_vertical }}px {{ block.settings.review_padding_horizontal }}px;
           }
 
           .hero-review-text-{{ block.id }} * {
@@ -537,7 +376,7 @@
 
       {% if block.settings.review_custom %}
         <style>
-          .hero-review-text-{{ block.id }} * {
+          .hero-review-text-{{ block.id }} {
             font-family: {{ block.settings.review_font.family }}, {{ block.settings.review_font.fallback_families }};
             font-weight: {{ block.settings.review_font.weight }};
             font-style: {{ block.settings.review_font.style }};
@@ -551,7 +390,9 @@
 
         .hero-heading-{{ block.id }} {
           margin-top: {{ block.settings.heading_mt_mobile }}px;
-          text-align: {{ content_horizontal_align_mobile }};
+          text-align: {{ content_align_mobile }};
+          position: relative;
+          z-index: 2;
         }
       
         .hero-heading-{{ block.id }} * {
@@ -564,15 +405,11 @@
           font-weight: 700;
         }
 
-        .hero-heading-{{ block.id }} * strong {
-          color: {{ block.settings.heading_accent_color }}
-        }
-
         @media(min-width: 1024px) {
           
           .hero-heading-{{ block.id }} {
             margin-top: {{ block.settings.heading_mt }}px;
-            text-align: {{ content_horizontal_align }};
+            text-align: {{ content_align }};
           }
         
           .hero-heading-{{ block.id }} * {
@@ -590,18 +427,20 @@
           }
         </style>
       {% endif %}
+    
 
-    {% when 'text' %}   
-      <style>
+
+    {% when 'text' %}
+      <style>        
         {{  block.settings.text_font | font_face: font_display: 'swap' }}
-        
+
         .hero-text-{{ block.id }} {
           margin-top: {{ block.settings.text_mt_mobile }}px;
-          text-align: {{ content_horizontal_align_mobile }};
+          text-align: {{ content_align_mobile }};
         }
-      
+
         .hero-text-{{ block.id }} * {
-          margin: 0;
+          margin: 0;          
           font-size: {{ block.settings.text_size_mobile }}px;
           color: {{ block.settings.text_color }};
           line-height: {{ block.settings.text_height }}%;
@@ -612,13 +451,12 @@
           
           .hero-text-{{ block.id }} {
             margin-top: {{ block.settings.text_mt }}px;
-            text-align: {{  content_horizontal_align }};
-          }
-      
-          .hero-text-{{ block.id }} * {
+            text-align: {{  content_align }};
+          }         
+          
+          .hero-text-{{ block.id }} * {       
             font-size: {{ block.settings.text_size }}px;
           }
-          
         }
       </style>
 
@@ -631,8 +469,7 @@
           }
         </style>          
       {% endif %}  
-
-    {% when 'button' %}  
+    {% when 'button' %}
       <style>
         {{  block.settings.button_font | font_face: font_display: 'swap' }}
 
@@ -698,16 +535,6 @@
         }
       </style>
 
-      {% if block.settings.use_shadow %}
-        <style>
-          .hero-button-{{ block.id }}:hover {
-            -webkit-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
-            -moz-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
-            box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
-          }
-        </style>
-      {% endif %}  
-
       {% if block.settings.button_custom %}
         <style>
           .hero-button-{{ block.id }} {
@@ -753,175 +580,166 @@
             box-shadow: none !important;
           }
         </style>
-      {% endif %}        
+      {% endif %}            
   {% endcase %}
 {% endfor %}
 
+
 <div class="section-{{ section.id }} hero-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      <div class="hero-layout-{{ section.id }}">
-        <div class="hero-bg-image-{{ section.id }}">
-          {% if bg_image != blank %}
-            <img src="{{ bg_image | image_url }}" alt="{{ bg_image.alt }}" {% if lazy %}loading="lazy"{% endif %} {% if bg_image_mobile != blank %}class="hero-bg-desktop-{{ section.id }}"{% endif %}>
-            {% if bg_image_mobile != blank %}
-              <img src="{{ bg_image_mobile | image_url }}" alt="{{ bg_image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} class="hero-bg-mobile-{{ section.id }}">
-            {% endif %}
-          {% else %}
-            {{ 'image' | placeholder_svg_tag }}
-          {% endif %}
-        </div>
+      <div class="hero-body-{{ section.id }}">
         <div class="hero-content-{{ section.id }}">
           {% for block in section.blocks %}
             {% case block.type %}
-              {% when 'review' %}                                     
-                <div class="hero-review-content-{{ section.id }}">                  
+              {% when 'review' %}
+                <div class="hero-review-{{ block.id }}">
                   {% if block.settings.stars_count != 0 %}
-                    <div class="hero-stars-wrapper-{{ section.id }}">                       
-                      <div class="hero-stars-{{ section.id }} hero-stars-{{ block.id }}">
-                        {% if block.settings.stars_icon != blank %}
-                          {% assign stars_count_round = block.settings.stars_count | round: 0 %}
-                          {% for item in (1..stars_count_round) %}
-                            <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ stars_icon.alt }}">
-                          {% endfor %}
-                        {% else %}
-                          {% if block.settings.stars_count > 0 %}
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              {% if block.settings.stars_count == 0.5 %}
-                                <defs>
-                                  <linearGradient id="grad{{ section.id }}1">
-                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                  </linearGradient>
-                                </defs>
-                              {% endif %}
-                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 0.5 %}url(#grad{{ section.id }}1){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                              <g clip-path="url(#clip0_25_4)">
-                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                              </g>
+                    <div class="hero-stars-{{ block.id }}">
+                      {% if block.settings.stars_icon != blank %}
+                        {% assign stars_count_round = block.settings.stars_count | round: 0 %}
+                        {% for item in (1..stars_count_round) %}
+                          <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ block.settings.stars_icon.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                        {% endfor %}
+                      {% else %}
+                        {% if block.settings.stars_count > 0 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 0.5 %}
                               <defs>
-                              <clipPath id="clip0_25_4">
-                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                              </clipPath>
+                                <linearGradient id="grad{{ section.id }}31">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                </linearGradient>
                               </defs>
-                            </svg>
-                          {% endif %}
-                          {% if block.settings.stars_count > 1 %}
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              {% if block.settings.stars_count == 1.5 %}
-                                <defs>
-                                  <linearGradient id="grad{{ section.id }}2">
-                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                  </linearGradient>
-                                </defs>
-                              {% endif %}
-                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 1.5 %}url(#grad{{ section.id }}2){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                              <g clip-path="url(#clip0_25_4)">
-                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                              </g>
-                              <defs>
-                              <clipPath id="clip0_25_4">
-                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                              </clipPath>
-                              </defs>
-                            </svg>
-                          {% endif %}
-                          {% if block.settings.stars_count > 2 %}
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              {% if block.settings.stars_count == 2.5 %}
-                                <defs>
-                                  <linearGradient id="grad{{ section.id }}3">
-                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                  </linearGradient>
-                                </defs>
-                              {% endif %}
-                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 2.5 %}url(#grad{{ section.id }}3){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                              <g clip-path="url(#clip0_25_4)">
-                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                              </g>
-                              <defs>
-                              <clipPath id="clip0_25_4">
-                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                              </clipPath>
-                              </defs>
-                            </svg>
-                          {% endif %}
-                          {% if block.settings.stars_count > 3 %}
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              {% if block.settings.stars_count == 3.5 %}
-                                <defs>
-                                  <linearGradient id="grad{{ section.id }}4">
-                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                  </linearGradient>
-                                </defs>
-                              {% endif %}
-                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 3.5 %}url(#grad{{ section.id }}4){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                              <g clip-path="url(#clip0_25_4)">
-                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                              </g>
-                              <defs>
-                              <clipPath id="clip0_25_4">
-                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                              </clipPath>
-                              </defs>
-                            </svg>
-                          {% endif %}
-                          {% if block.settings.stars_count > 4 %}
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              {% if block.settings.stars_count == 4.5 %}
-                                <defs>
-                                  <linearGradient id="grad{{ section.id }}5">
-                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
-                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
-                                  </linearGradient>
-                                </defs>
-                              {% endif %}
-                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 4.5 %}url(#grad{{ section.id }}5){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
-                              <g clip-path="url(#clip0_25_4)">
-                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
-                              </g>
-                              <defs>
-                              <clipPath id="clip0_25_4">
-                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
-                              </clipPath>
-                              </defs>
-                            </svg>
-                          {% endif %}
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 0.5 %}url(#grad{{ section.id }}31){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
                         {% endif %}
-                      </div>
-                      {% if block.settings.stars_text %}
-                        <div class="hero-review-text-{{ section.id }} hero-review-text-{{ block.id }}">{{ block.settings.stars_text }}</div>
+                        {% if block.settings.stars_count > 1 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 1.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}32">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 1.5 %}url(#grad{{ section.id }}32){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}
+                        {% if block.settings.stars_count > 2 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 2.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}33">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 2.5 %}url(#grad{{ section.id }}33){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}
+                        {% if block.settings.stars_count > 3 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 3.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}44">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 3.5 %}url(#grad{{ section.id }}44){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}
+                        {% if block.settings.stars_count > 4 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 4.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}55">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 4.5 %}url(#grad{{ section.id }}55){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}                        
                       {% endif %}
                     </div>
-                  {% endif %}                   
-                </div>                                      
-              {% when 'heading'%}
+                  {% endif %}
+                  {% if block.settings.review != blank %}
+                    <div class="hero-review-text-{{ block.id }}">{{ block.settings.review }}</div>
+                  {% endif %}
+                </div>
+              {% when 'heading' %}  
                 {% if block.settings.heading != blank %}
                   <div class="hero-heading-{{ block.id }}">
                     {{ block.settings.heading }}
                   </div>
                 {% endif %}
-              {% when 'text' %}
+  
+              {% when 'text' %}  
                 {% if block.settings.text != blank %}
                   <div class="hero-text-{{ block.id }}">
                     {{ block.settings.text }}
                   </div>
                 {% endif %}  
-              {% when 'button' %}
-                {% if block.settings.button != blank %}                 
-                  <a href="{{ block.settings.url }}" class="hero-button-{{ block.id }}">
+  
+              {% when 'button' %}  
+                {% if block.settings.button != blank %}   
+                  <{% if block.settings.url != blank %}a href="{% if block.settings.url != blank %}{{ block.settings.url }}{% endif %}"{% else %}div{% endif %} class="hero-button-{{ block.id }}">
                     <p class="hero-button-inner-{{ block.id }}">
                       {{ block.settings.button }}
                       {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
@@ -932,40 +750,92 @@
                         </svg>
                       {% endif %}
                     </p>
-                  </a>     
-                {% endif %}              
+                  </{% if block.settings.url != blank %}a{% else %}div{% endif %}>    
+                {% endif %}                 
             {% endcase %}
           {% endfor %}
         </div>
-      </div>
-      <div class="hero-features-{{ section.id }}">
-        {% for block in section.blocks %}
-          {% if block.type == 'feature' %}
-            <div class="hero-feature-{{ section.id }}">
-              {% if block.settings.title != blank %}
-                <p class="hero-feature-title-{{ section.id }}">{{ block.settings.title }}</p>
-              {% endif %}
-              {% if block.settings.text != blank %}
-                <p class="hero-feature-text-{{ section.id }}">{{ block.settings.text }}</p>
-              {% endif %}
-            </div>
+        <div class="hero-media-{{ section.id }}">
+          {% if media_type == 'video' %}           
+            {% assign video_id = video.id | default: video_url.id %}
+            {% assign loop = '&loop=1&playlist=' | append: video_id %}
+            {%- if video == null and video_url != null -%}
+            {%- if video_url.type == 'youtube' -%}
+            <iframe
+              data-src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0{{ loop }}"             
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="lazy"
+            ></iframe>
+            {%- else -%}
+            <iframe
+              data-src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0{{ loop }}"             
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="lazy"
+            ></iframe>
+            {% endif %}
+            {% else %}
+              {% assign placeholder_video = 'https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4' %}
+              <video data-src="{% if video != blank %}{{ video.sources[1].url }}{% else %}{{ placeholder_video }}{% endif %}" muted playsinline autoplay loop preload="none" preload="none" loop class="lazy"></video>
+            {% endif %}         
+          {% elsif media_type == 'image' %}            
+            {% if image != blank %}
+              {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
+              {{ image | image_url: width: 1500 | image_tag:
+                loading: lazy_load_setting,
+                width: image.width,
+                height: image.height,
+                sizes: sizes,
+                widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+              }}    
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}        
           {% endif %}
-        {% endfor %}
+        </div>
       </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+
+<script>
+  function initHero30() {
+    let lazyLoadInstance = new LazyLoad();
+
+    window.addEventListener(
+      "LazyLoad::Initialized",
+      function (event) {
+        window.lazyLoadInstance = event.detail.instance;
+      },
+      false
+    );
+  }
+
+  document.addEventListener('DOMContentLoaded', initHero30);
+
+  if (Shopify.designMode) {
+    document.addEventListener('shopify:section:unload', initHero30);
+    document.addEventListener('shopify:section:load', initHero30);
+  }
+</script>
+
 {% schema %}
 {
-  "name": "SG-Hero #29",
+  "name": "SG-Hero #30",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "⚠️ Save to display section correctly"
+    },
     {
       "type": "header",
       "content": "Layout"
     },
     {
       "type": "select",
-      "id": "layout_height",
+      "id": "hero_height",
       "label": "Height",
       "default": "fixed_height",
       "options": [
@@ -985,27 +855,73 @@
     },
     {
       "type": "range",
-      "id": "layout_fixed_height",
+      "id": "hero_fixed_height",
       "min": 200,
       "max": 1000,
       "step": 10,
       "unit": "px",
-      "label": "Fixed height",
-      "default": 600
+      "label": "Fixed height - desktop",
+      "default": 700
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "media_content",
+      "options": [
+        {
+          "label": "Content - media",
+          "value": "content_media"
+        },
+        {
+          "label": "Media - content",
+          "value": "media_content"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Layout - mobile",
+      "default": "media_content",
+      "options": [
+        {
+          "label": "Content - media",
+          "value": "content_media"
+        },
+        {
+          "label": "Media - content",
+          "value": "media_content"
+        }
+      ]
     },
     {
       "type": "range",
-      "id": "layout_fixed_height_mobile",
-      "min": 200,
-      "max": 1000,
-      "step": 10,
+      "id": "layout_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
       "unit": "px",
-      "label": "Fixed height - mobile",
-      "default": 460
+      "label": "Gap",
+      "default": 0
     },
     {
       "type": "range",
-      "id": "layout_padding_horizontal",
+      "id": "layout_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
       "min": 0,
       "max": 100,
       "step": 2,
@@ -1015,7 +931,7 @@
     },
     {
       "type": "range",
-      "id": "layout_padding_horizontal_mobile",
+      "id": "content_padding_horizontal_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
@@ -1025,85 +941,39 @@
     },
     {
       "type": "range",
-      "id": "layout_padding_vertical",
+      "id": "content_padding_vertical",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Padding vertical",
-      "default": 20
+      "default": 32
     },
     {
       "type": "range",
-      "id": "layout_padding_vertical_mobile",
+      "id": "content_padding_vertical_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Padding vertical - mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "layout_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 20
-    },
-    {
-      "type": "header",
-      "content": "Background"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image_mobile",
-      "label": "Image - mobile (optional)"
-    },
-    {
-      "type": "range",
-      "id": "bg_image_overlay",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "label": "Overlay",
-      "default": 0.2
-    },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "range",
-      "id": "content_max_width",
-      "min": 10,
-      "max": 100,
-      "step": 2,
-      "unit": "%",
-      "label": "Max width - desktop",
       "default": 40
     },
     {
       "type": "text_alignment",
       "id": "content_align",
-      "label": "Alignment"
+      "label": "Alignment horizontal"
     },
     {
       "type": "text_alignment",
       "id": "content_align_mobile",
-      "label": "Alignment - mobile"
+      "label": "Alignment horizontal - mobile",
+      "default": "center"
     },
     {
       "type": "select",
       "id": "content_vertical_align",
-      "label": "Vertical align",
+      "label": "Vertical align - desktop",
       "default": "center",
       "options": [
         {
@@ -1119,300 +989,74 @@
           "value": "end"
         }
       ]
+    },
+    {
+      "type": "header",
+      "content": "Media"
     },
     {
       "type": "select",
-      "id": "content_vertical_align_mobile",
-      "label": "Vertical align - mobile",
-      "default": "center",
+      "id": "media_type",
+      "label": "Type",
+      "default": "video",
       "options": [
         {
-          "label": "Top",
-          "value": "start"
+          "label": "Image",
+          "value": "image"
         },
         {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Bottom",
-          "value": "end"
+          "label": "Video",
+          "value": "video"
         }
       ]
     },
     {
-      "type": "header",
-      "content": "Features"
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
     },
     {
-      "type": "range",
-      "id": "features_gap",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap",
-      "default": 16
+      "type": "video",
+      "id": "video",
+      "label": "Video from Shopify"
     },
     {
-      "type": "range",
-      "id": "features_gap_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap - mobile",
-      "default": 12
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video embed from URL",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "info": "Youtube, Vimeo. Shows when no Shopify-hosted video is selected."
     },
     {
-      "type": "range",
-      "id": "features_mt",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": -100
-    },
-    {
-      "type": "range",
-      "id": "features_mt_mobile",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": -72
-    },
-    {
-      "type": "header",
-      "content": "Feature"
-    },
-    {
-      "type": "range",
-      "id": "feature_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "feature_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding horizontal - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "feature_padding_vertical",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "feature_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Padding vertical - mobile",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "feature_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Roundness",
-      "default": 10
-    },
-    {
-      "type": "range",
-      "id": "feature_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 0
-    },
-    {
-      "type": "text_alignment",
-      "id": "feature_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "feature_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "checkbox",
-      "id": "feature_shadow",
-      "label": "Use shadow",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Feature title"
-    },
-    {
-      "type": "checkbox",
-      "id": "feature_title_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "feature_title_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "feature_title_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "feature_title_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "feature_title_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 130
-    },
-    {
-      "type": "header",
-      "content": "Feature text"
-    },
-    {
-      "type": "checkbox",
-      "id": "feature_text_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "feature_text_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4"
-    },
-    {
-      "type": "range",
-      "id": "feature_text_size",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "feature_text_size_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "feature_text_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "range",
-      "id": "feature_text_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "feature_text_mt_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin top - mobile",
-      "default": 8
-    },
-    {
-      "type": "header",
-      "content": "Feature colors"
-    },
-    {
-      "type": "color",
-      "label": "Title",
-      "id": "feature_title_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Text",
-      "id": "feature_text_color",
-      "default": "#707070"
-    },
-    {
-      "type": "color",
-      "label": "Background",
-      "id": "feature_bg_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Border",
-      "id": "feature_border_color",
-      "default": "#121212"
+      "type": "select",
+      "id": "media_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "square",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
     },
     {
       "type": "header",
       "content": "Section colors"
-    },
-    {
-      "type": "color",
-      "label": "Overlay",
-      "id": "bg_image_overlay_color",
-      "default": "#121212"
     },
     {
       "type": "color",
@@ -1488,7 +1132,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -1498,7 +1142,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -1508,7 +1152,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 5
+      "default": 0
     },
     {
       "type": "range",
@@ -1518,7 +1162,7 @@
       "step": 0.5,
       "unit": "rem",
       "label": "Padding sides mobile",
-      "default": 1.5
+      "default": 0
     },
     {
       "type": "header",
@@ -1564,8 +1208,7 @@
       "type": "checkbox",
       "id": "lazy",
       "label": "Lazy load",
-      "info": "Lazy load images for speed optimisation",
-      "default": false
+      "info": "Lazy load images for speed optimisation"
     }
   ],
   "blocks": [
@@ -1576,95 +1219,66 @@
       "settings": [
         {
           "type": "header",
-          "content": "Stars settings"
+          "content": "Layout"
         },
         {
           "type": "range",
-          "id": "stars_count",
+          "id": "review_padding_horizontal",
           "min": 0,
-          "max": 5,
-          "step": 0.5,
-          "label": "Stars count",
-          "default": 5
-        },
-        {
-          "type": "image_picker",
-          "label": "Stars icon",
-          "id": "stars_icon",
-          "info": "Replaces the default stars icon"
-        },
-        {
-          "type": "range",
-          "id": "stars_size",
-          "min": 10,
-          "max": 50,
+          "max": 100,
           "step": 2,
           "unit": "px",
-          "label": "Size",
-          "default": 18
-        },
-        {
-          "type": "range",
-          "id": "stars_size_mobile",
-          "min": 10,
-          "max": 50,
-          "step": 2,
-          "unit": "px",
-          "label": "Size - mobile",
-          "default": 16
-        },
-        {
-          "type": "header",
-          "content": "Text settings"
-        },
-        {
-          "type": "richtext",
-          "id": "stars_text",
-          "label": "Text",
-          "info": "Use bold formatting to apply the accent color",
-          "default": "<p><strong>150,000+</strong> Happy Customers</p>"
-        },
-        {
-          "type": "checkbox",
-          "id": "review_custom",
-          "label": "Use custom font",
-          "default": false
-        },
-        {
-          "type": "font_picker",
-          "id": "review_font",
-          "label": "Font family",
-          "default": "josefin_sans_n4"
-        },
-        {
-          "type": "range",
-          "id": "review_size",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size",
-          "default": 15
-        },
-        {
-          "type": "range",
-          "id": "review_size_mobile",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "label": "Font size - mobile",
+          "label": "Padding horizontal",
           "default": 12
         },
         {
           "type": "range",
-          "id": "review_height",
-          "min": 50,
-          "max": 200,
-          "step": 10,
-          "unit": "%",
-          "label": "Line height",
-          "default": 130
+          "id": "review_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "review_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "review_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "review_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Roundness",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "review_bg_opacity",
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "label": "Background opacity",
+          "default": 0.5
         },
         {
           "type": "range",
@@ -1688,40 +1302,126 @@
         },
         {
           "type": "header",
-          "content": "Text colors"
+          "content": "Stars"
+        },
+        {
+          "type": "range",
+          "id": "stars_count",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "label": "Stars count",
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "label": "Stars icon",
+          "id": "stars_icon",
+          "info": "Replaces the default stars icon"
+        },
+        {
+          "type": "range",
+          "id": "stars_size",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Size",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "stars_size_mobile",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Size - mobile",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "review",
+          "label": "Text",
+          "default": "<p>Excellent <strong>4.6</strong> | 100,000+ Customers</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "review_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "review_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "review_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "review_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 130
+        },
+        {
+          "type": "header",
+          "content": "Colors"
         },
         {
           "type": "color",
-          "label": "Primary",
+          "label": "Text",
           "id": "review_color",
           "default": "#121212"
         },
         {
           "type": "color",
-          "label": "Accent",
-          "id": "review_accent_color",
-          "info": "Use bold formatting to apply the accent color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "header",
-          "content": "Default stars colors"
+          "label": "Background",
+          "id": "review_bg_color",
+          "default": "#F3F3F3"
         },
         {
           "type": "color",
-          "label": "Star icon",
+          "label": "Default stars",
           "id": "stars_color",
           "default": "#FFFFFF"
         },
         {
           "type": "color",
-          "label": "Background",
+          "label": "Default stars background",
           "id": "stars_bg_color",
           "default": "#00B67A"
         },
         {
           "type": "color",
-          "label": "Half star background",
+          "label": "Default half star background",
           "id": "stars_bg_half_color",
           "default": "#DDDDDD"
         }
@@ -1735,9 +1435,8 @@
         {
           "type": "richtext",
           "id": "heading",
-          "label": "Text",
-          "info": "Use bold formatting to apply the accent color",
-          "default": "<h1>Hero <strong>#29</strong></h1>"
+          "label": "Heading",
+          "default": "<h1>Hero #30</h1>"
         },
         {
           "type": "checkbox",
@@ -1789,7 +1488,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 20
+          "default": 16
         },
         {
           "type": "range",
@@ -1802,33 +1501,23 @@
           "default": 16
         },
         {
-          "type": "header",
-          "content": "Colors"
-        },
-        {
           "type": "color",
-          "label": "Primary",
+          "label": "Color",
           "id": "heading_color",
           "default": "#121212"
-        },
-        {
-          "type": "color",
-          "label": "Accent",
-          "id": "heading_accent_color",
-          "default": "#FFFFFF",
-          "info": "Use bold formatting to apply the accent color"
         }
       ]
     },
     {
       "type": "text",
+      "limit": 1,
       "name": "Text",
       "settings": [
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Use this text to share information about your brand with your customers.</p>"
+          "default": "<p>Add optional text</p>"
         },
         {
           "type": "checkbox",
@@ -1860,7 +1549,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 15
+          "default": 14
         },
         {
           "type": "range",
@@ -1880,7 +1569,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 20
+          "default": 16
         },
         {
           "type": "range",
@@ -1903,13 +1592,12 @@
     {
       "type": "button",
       "name": "Button",
-      "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "button",
           "label": "Button label",
-          "default": "Learn more"
+          "default": "Shop now"
         },
         {
           "type": "url",
@@ -1932,7 +1620,7 @@
           "type": "range",
           "id": "button_size",
           "min": 0,
-          "max": 30,
+          "max": 40,
           "step": 1,
           "unit": "px",
           "label": "Font size",
@@ -1942,7 +1630,7 @@
           "type": "range",
           "id": "button_size_mobile",
           "min": 0,
-          "max": 30,
+          "max": 40,
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
@@ -1986,7 +1674,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding vertical",
-          "default": 18
+          "default": 16
         },
         {
           "type": "range",
@@ -1996,7 +1684,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding vertical - mobile",
-          "default": 18
+          "default": 16
         },
         {
           "type": "range",
@@ -2006,7 +1694,7 @@
           "step": 2,
           "unit": "px",
           "label": "Roundness",
-          "default": 8
+          "default": 0
         },
         {
           "type": "range",
@@ -2026,7 +1714,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 32
+          "default": 24
         },
         {
           "type": "range",
@@ -2107,30 +1795,11 @@
           "default": "#121212"
         }
       ]
-    },
-    {
-      "type": "feature",
-      "name": "Feature",
-      "limit": 5,
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Title"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Text"
-        }
-      ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Hero #29",
+      "name": "SG-Hero #30",
       "blocks": [
         {
           "type": "review"
@@ -2143,18 +1812,6 @@
         },
         {
           "type": "button"
-        },
-        {
-          "type": "feature"
-        },
-        {
-          "type": "feature"
-        },
-        {
-          "type": "feature"
-        },
-        {
-          "type": "feature"
         }
       ]
     }
