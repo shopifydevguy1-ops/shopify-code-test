@@ -16,25 +16,25 @@
   assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
 
-  assign hero_height = section.settings.hero_height
-  assign hero_fixed_height = section.settings.hero_fixed_height
-  assign hero_fixed_height_mobile = section.settings.hero_fixed_height_mobile
-  assign hero_bg_type = section.settings.hero_bg_type
-  assign hero_bg_overlay = section.settings.hero_bg_overlay
-  assign hero_bg_overlay_color = section.settings.hero_bg_overlay_color
+  assign layout_height = section.settings.layout_height
+  assign layout_fixed_height = section.settings.layout_fixed_height
+  assign layout_fixed_height_mobile = section.settings.layout_fixed_height_mobile
+  assign layout_padding_horizontal = section.settings.layout_padding_horizontal
+  assign layout_padding_horizontal_mobile = section.settings.layout_padding_horizontal_mobile
+  assign layout_padding_vertical = section.settings.layout_padding_vertical
+  assign layout_padding_vertical_mobile = section.settings.layout_padding_vertical_mobile
+  assign layout_radius = section.settings.layout_radius
 
   assign bg_image = section.settings.bg_image
-  assign bg_video = section.settings.bg_video
-  assign bg_video_url = section.settings.bg_video_url
+  assign bg_image_mobile = section.settings.bg_image_mobile
+  assign bg_image_overlay_color = section.settings.bg_image_overlay_color
+  assign bg_image_overlay = section.settings.bg_image_overlay
 
-  assign layout = section.settings.layout
-  assign layout_mobile = section.settings.layout_mobile
-  assign layout_gap = section.settings.layout_gap
-  assign layout_gap_mobile = section.settings.layout_gap_mobile  
-
+  assign content_max_width = section.settings.content_max_width
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
   assign content_vertical_align = section.settings.content_vertical_align
+  assign content_vertical_align_mobile = section.settings.content_vertical_align_mobile
 
   assign content_horizontal_align = ""
   if content_align == "center"
@@ -53,10 +53,45 @@
   else
     assign content_horizontal_align_mobile = "start"
   endif
+
+  assign features_gap = section.settings.features_gap
+  assign features_gap_mobile = section.settings.features_gap_mobile
+  assign features_mt = section.settings.features_mt
+  assign features_mt_mobile = section.settings.features_mt_mobile
+
+  assign feature_padding_horizontal = section.settings.feature_padding_horizontal
+  assign feature_padding_horizontal_mobile = section.settings.feature_padding_horizontal_mobile
+  assign feature_padding_vertical = section.settings.feature_padding_vertical
+  assign feature_padding_vertical_mobile = section.settings.feature_padding_vertical_mobile
+  assign feature_border_thickness = section.settings.feature_border_thickness
+  assign feature_border_color = section.settings.feature_border_color
+  assign feature_radius = section.settings.feature_radius
+  assign feature_bg_color = section.settings.feature_bg_color
+  assign feature_align = section.settings.feature_align
+  assign feature_align_mobile = section.settings.feature_align_mobile
+  assign feature_shadow = section.settings.feature_shadow
+
+  assign feature_title_custom = section.settings.feature_title_custom
+  assign feature_title_font = section.settings.feature_title_font
+  assign feature_title_size = section.settings.feature_title_size
+  assign feature_title_size_mobile = section.settings.feature_title_size_mobile
+  assign feature_title_color = section.settings.feature_title_color
+  assign feature_title_height = section.settings.feature_title_height
+
+  assign feature_text_custom = section.settings.feature_text_custom
+  assign feature_text_font = section.settings.feature_text_font
+  assign feature_text_size = section.settings.feature_text_size
+  assign feature_text_size_mobile = section.settings.feature_text_size_mobile
+  assign feature_text_color = section.settings.feature_text_color
+  assign feature_text_height = section.settings.feature_text_height
+  assign feature_text_mt = section.settings.feature_text_mt
+  assign feature_text_mt_mobile = section.settings.feature_text_mt_mobile
 -%}
 
 {%- style -%}
-  
+  {{ feature_title_font | font_face: font_display: 'swap' }}
+  {{ feature_text_font | font_face: font_display: 'swap' }}
+
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
@@ -65,7 +100,7 @@
     margin-left: {{ margin_horizontal_mobile }}rem;
     margin-right: {{ margin_horizontal_mobile }}rem;
     border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
-    overflow: hidden;
+    overflow: hidden; 
   }
   
   .section-{{ section.id }}-settings {
@@ -74,61 +109,129 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
-    position: relative;
-    height: 100%;
   }
 
-  .hero-bg-{{ section.id }} {
+  .hero-layout-{{ section.id }} {
+    position: relative;
+    padding: {{ layout_padding_vertical_mobile }}px {{ layout_padding_horizontal_mobile }}px;
+    border-radius: {{ layout_radius }}px;
+    overflow: hidden;
+  }
+
+  .hero-bg-image-{{ section.id }} {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-  }
+  }  
 
-  .hero-bg-{{ section.id }} img,
-  .hero-bg-{{ section.id }} svg,
-  .hero-bg-{{ section.id }} video,
-  .hero-bg-{{ section.id }} iframe{
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 0px;
-    box-shadow: none;
-  }
-
-  .hero-bg-{{ section.id }} svg {
-    background-color: #AFAFAF;
-  }
-
-  .hero-bg-{{ section.id }}:after {
-    content: '';
+  .hero-bg-image-{{ section.id }}::after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: {{ hero_bg_overlay_color | hex_to_rgba: hero_bg_overlay }};
+    z-index: 1;
+    background-color: {{ bg_image_overlay_color | hex_to_rgba: bg_image_overlay }};
   }
-
-  .hero-body-{{ section.id }} {
-    position: relative;
-    z-index: 2;
-    display: flex;
+  
+  .hero-bg-image-{{ section.id }} img,
+  .hero-bg-image-{{ section.id }} svg  {
+    display: block;
+    width: 100%;
     height: 100%;
-    align-items: center;
-    gap: {{ layout_gap_mobile }}px;
+    object-fit: cover;
+  }
+  
+  .hero-bg-desktop-{{ section.id }} {
+    display: none !important;
   }
 
   .hero-content-{{ section.id }} {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: {{ content_vertical_align }};
     align-items: {{ content_horizontal_align_mobile }};
+    justify-content: {{ content_vertical_align_mobile }};
   }
   
+  .hero-review-{{ section.id }} {
+    display: flex;
+    justify-content: {{ content_horizontal_align_mobile }};
+    gap: 16px;
+  }
+
+  .hero-review-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ content_horizontal_align_mobile }};
+    row-gap: 4px;
+  }
+
+  
+  .hero-stars-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    max-width: fit-content;
+  }
+
+  .hero-stars-wrapper-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-features-{{ section.id }} {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: {{ features_gap_mobile }}px;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    margin-top: {{ features_mt_mobile }}px;
+  }
+
+  .hero-feature-{{ section.id }} {
+    width: calc(50% - {{ features_gap_mobile }}px);
+    padding: {{ feature_padding_vertical_mobile }}px {{ feature_padding_horizontal_mobile }}px;
+    border-radius: {{ feature_radius }}px;
+    border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
+    background-color: {{ feature_bg_color }};
+  }
+
+  .hero-feature-title-{{ section.id }} {
+    margin: 0;  
+    text-align: {{ feature_align_mobile }};
+    font-size: {{ feature_title_size_mobile }}px;
+    line-height: {{ feature_title_height }}%;
+    color: {{ feature_title_color }};
+    text-transform: unset;
+    text-decoration: none;
+    word-break: break-word;
+    font-weight: 700;
+  }
+
+  .hero-feature-text-{{ section.id }} {
+    margin: 0;  
+    margin-top: {{ feature_text_mt_mobile }}px;
+    text-align: {{ feature_align_mobile }};
+    font-size: {{ feature_text_size_mobile }}px;
+    line-height: {{ feature_text_height }}%;
+    color: {{ feature_text_color }};
+    text-transform: unset;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
   @media(min-width: 1024px) {
 
     .section-{{ section.id }} {
@@ -147,14 +250,57 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .hero-body-{{ section.id }} {
-      justify-content: space-between;
-      gap: {{ layout_gap }}px;
+    .hero-layout-{{ section.id }} {
+      padding: {{ layout_padding_vertical }}px {{ layout_padding_horizontal }}px;
     }
 
     .hero-content-{{ section.id }} {
-      justify-content: {{ content_vertical_align }};
+      max-width: {{ content_max_width }}%;
       align-items: {{ content_horizontal_align }};
+      justify-content: {{ content_vertical_align }};
+    }
+
+    .hero-review-{{ section.id }} {
+      justify-content: {{ content_horizontal_align }};
+    }
+
+    .hero-review-content-{{ section.id }} {
+      align-items: {{ content_horizontal_align }};
+    }
+
+    .hero-buttons-{{ section.id }} {
+      justify-content: {{ content_horizontal_align }};
+    }
+
+    .hero-bg-desktop-{{ section.id }} {
+      display: block !important; 
+    }
+
+    .hero-bg-mobile-{{ section.id }} {
+      display: none !important;
+    }
+
+    .hero-features-{{ section.id }} {
+      flex-wrap: wrap;
+      padding: {{ layout_padding_vertical }}px {{ layout_padding_horizontal }}px;
+      gap: {{ features_gap }}px;
+      margin-top: {{ features_mt }}px;
+    }
+
+    .hero-feature-{{ section.id }} {
+      width: calc(25% - {{ features_gap }}px);
+      padding: {{ feature_padding_vertical }}px {{ feature_padding_horizontal }}px;
+    }
+
+    .hero-feature-title-{{ section.id }} {
+      text-align: {{ feature_align }};
+      font-size: {{ feature_title_size }}px;
+    }
+
+    .hero-feature-text-{{ section.id }} {
+      margin-top: {{ feature_text_mt }}px;
+      text-align: {{ feature_align }};
+      font-size: {{ feature_text_size }}px;
     }
 
   }
@@ -196,106 +342,248 @@
   </style>
 {% endif %}
 
-{% if hero_height == "full_screen" %}
+{% if feature_title_custom %}
   <style>
-    .hero-{{ section.id }} {
+    .hero-feature-title-{{ section.id }} {
+      font-family: {{ feature_title_font.family }}, {{ feature_title_font.fallback_families }};
+      font-weight: {{ feature_title_font.weight }};
+      font-style: {{ feature_title_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if feature_text_custom %}
+  <style>
+    .hero-feature-text-{{ section.id }} {
+      font-family: {{ feature_text_font.family }}, {{ feature_text_font.fallback_families }};
+      font-weight: {{ feature_text_font.weight }};
+      font-style: {{ feature_text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if layout_height == "full_screen" %}
+  <style>
+    .section-{{ section.id }}-settings {
+      height: 100%;
+    }
+
+    .hero-layout-{{ section.id }} {
       height: 95vh;
     }
+
     @media(min-width: 1024px) {      
-      .hero-{{ section.id }} {
+      .section-{{ section.id }}-settings {
+        height: 100%;
+      }
+
+      .hero-layout-{{ section.id }} {
         height: 95vh;
       }
     }
   </style>
-{% elsif hero_height == 'fixed_height' %}  
+{% elsif layout_height == 'fixed_height' %}  
   <style>      
-    .hero-{{ section.id }} {
-      height: {{ hero_fixed_height_mobile }}px;
+    .section-{{ section.id }}-settings {
+      height: 100%;
     }
-    
+
+    .hero-layout-{{ section.id }} {
+      height: {{ layout_fixed_height_mobile }}px;
+    }
+
     @media(min-width: 1024px) {
+      .section-{{ section.id }}-settings {
+        height: 100%;
+      }
 
-      .hero-{{ section.id }} {
-        height: {{ hero_fixed_height }}px;
+      .hero-layout-{{ section.id }} {
+        height: {{ layout_fixed_height }}px;
       }
     }
   </style>
 {% endif %}
 
-{% if layout_mobile == "video_content" %}
+{% if feature_shadow %}
   <style>
-    .hero-body-{{ section.id }} {
-      flex-direction: column-reverse;
+    .hero-feature-{{ section.id }} {
+      box-shadow: 0 0 #0000, 0 0 #0000, 0 0 10px 0 rgba(0, 0, 0, .1);
     }
   </style>
-{% else %} 
-  {% if layout_mobile == "content_video" %}
-    <style>
-      .hero-body-{{ section.id }} {
-        flex-direction: column;   
-      }
-    </style>
-  {% endif %}  
 {% endif %}
 
-{% if layout == "video_content" %}
+{% if content_align_mobile == "center" %}
   <style>
-    @media (min-width: 1024px) {
-      .hero-body-{{ section.id }} {
-        flex-direction: row-reverse;
-      }
+    .hero-content-{{ section.id }} {
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
-{% else %}  
-  {% if layout == "content_video" %}
-    <style>
-      @media (min-width: 1024px) {
-        .hero-body-{{ section.id }} {
-          flex-direction: row;
-        }
-      }
-    </style>
-  {% endif %}  
+{% elsif content_align_mobile == "right" %}
+  <style>
+    .hero-content-{{ section.id }} {
+      margin-left: auto;
+    }
+  </style>
+{% endif %}
+
+{% if content_align == "center" %}
+  <style>
+    @media(min-width: 1024px) {
+      .hero-content-{{ section.id }} {
+        margin-left: auto;
+        margin-right: auto;
+      } 
+    }
+  </style>
+{% elsif content_align == "right" %}
+  <style>
+    @media(min-width: 1024px) {
+      .hero-content-{{ section.id }} {
+        margin-left: auto;
+        margin-right: 0px;
+      } 
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .hero-content-{{ section.id }} {
+        margin-left: 0px;
+        margin-right: 0px;
+      } 
+    }
+  </style>
 {% endif %}
 
 {% for block in section.blocks %}
   {% case block.type %}
-    {% when 'heading' %}
+    {% when 'review' %}
       <style>
-        {{ block.settings.heading_font | font_face: font_display: 'swap' }} 
+        {{  block.settings.review_font | font_face: font_display: 'swap' }}
 
-        .hero-heading-{{ section.id }} {
-          margin-top: {{ block.settings.heading_mt_mobile }}px;
-          text-align: {{ content_align_mobile }};
-          width: 100%;
+        .hero-review-content-{{ section.id }} {
+          margin-top: {{ block.settings.review_mt_mobile }}px;
         }
 
-        .hero-heading-{{ section.id }} * {
-          margin: 0; 
+        .hero-author-image-{{ block.id }} {
+          border: {{ block.settings.image_border_thickness }}px solid {{ block.settings.image_border_color }};
+          border-radius: {{ block.settings.image_radius }}px;
+          overflow: hidden;
+          width: {{ block.settings.image_size_mobile }}px;
+          height: {{ block.settings.image_size_mobile }}px;
+          background-color: {{ background_color }};
+        }
+
+        .hero-author-image-{{ block.id }}:not(:first-child) {
+          margin-left: -{{ block.settings.image_size_mobile | times: 0.3 }}px;
+        }
+
+        .hero-review-text-{{ block.id }} {
+          text-align: {{ block.settings.review_align_mobile }};
+        }
+
+        .hero-review-text-{{ block.id }} * {
+          word-wrap: break-word;
+          margin: 0;
+          font-size: {{ block.settings.review_size_mobile }}px;
+          color: {{ block.settings.review_color }};
+          line-height: {{ block.settings.review_height }}%;         
+          text-transform: unset;
+        }
+
+        .hero-review-text-{{ block.id }} * strong {
+          font-weight: 400;
+          color: {{ block.settings.review_accent_color }}
+        }
+
+        .hero-stars-count-{{ block.id }} {
+          color: {{ block.settings.count_color }};
+        }
+
+        .hero-stars-{{ block.id }} svg,
+        .hero-stars-{{ block.id }} img {
+          display: block;
+          width: {{ block.settings.stars_size_mobile }}px;
+          height: {{ block.settings.stars_size_mobile }}px;
+          object-fit: cover;
+        }
+
+        @media (min-width: 1024px) {
+          .hero-review-content-{{ section.id }} {
+            margin-top: {{ block.settings.review_mt }}px;
+          }
+          
+          .hero-author-image-{{ block.id }} {
+            width: {{ block.settings.image_size }}px;
+            height: {{ block.settings.image_size }}px;
+          }
+
+          .hero-author-image-{{ block.id }}:not(:first-child) {
+            margin-left: -{{ block.settings.image_size | times: 0.3 }}px;
+          }
+
+          .hero-review-text-{{ block.id }} * {
+            font-size: {{ block.settings.review_size }}px;
+          }
+
+          .hero-stars-{{ block.id }} svg,
+          .hero-stars-{{ block.id }} img {
+            width: {{ block.settings.stars_size }}px;
+            height: {{ block.settings.stars_size }}px;
+          }
+        }
+      </style>
+
+      {% if block.settings.review_custom %}
+        <style>
+          .hero-review-text-{{ block.id }} * {
+            font-family: {{ block.settings.review_font.family }}, {{ block.settings.review_font.fallback_families }};
+            font-weight: {{ block.settings.review_font.weight }};
+            font-style: {{ block.settings.review_font.style }};
+          }
+        </style>
+      {% endif %}  
+
+    {% when 'heading' %}  
+      <style>
+        {{  block.settings.heading_font | font_face: font_display: 'swap' }}
+
+        .hero-heading-{{ block.id }} {
+          margin-top: {{ block.settings.heading_mt_mobile }}px;
+          text-align: {{ content_horizontal_align_mobile }};
+        }
+      
+        .hero-heading-{{ block.id }} * {
+          margin: 0;
           font-size: {{ block.settings.heading_size_mobile }}px;
           color: {{ block.settings.heading_color }};
           line-height: {{ block.settings.heading_height }}%;
           text-transform: unset;
-          text-decoration: none;
           word-break: break-word;
+          font-weight: 700;
+        }
+
+        .hero-heading-{{ block.id }} * strong {
+          color: {{ block.settings.heading_accent_color }}
         }
 
         @media(min-width: 1024px) {
           
-          .hero-heading-{{ section.id }} {
+          .hero-heading-{{ block.id }} {
             margin-top: {{ block.settings.heading_mt }}px;
-            text-align: {{ content_align }};
+            text-align: {{ content_horizontal_align }};
           }
-
-          .hero-heading-{{ section.id }} * {    
+        
+          .hero-heading-{{ block.id }} * {
             font-size: {{ block.settings.heading_size }}px;
           }
-        }
+        }          
       </style>
-      
+        
       {% if block.settings.heading_custom %}
         <style>
-          .hero-heading-{{ section.id }} * {
+          .hero-heading-{{ block.id }} * {
             font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
             font-weight: {{ block.settings.heading_font.weight }};
             font-style: {{ block.settings.heading_font.style }};
@@ -303,55 +591,52 @@
         </style>
       {% endif %}
 
-    {% when 'text' %}
-
+    {% when 'text' %}   
       <style>
-        {{ block.settings.text_font | font_face: font_display: 'swap' }}   
-
-        .hero-text-{{ section.id }} {
-          text-align: {{ content_align_mobile }};
+        {{  block.settings.text_font | font_face: font_display: 'swap' }}
+        
+        .hero-text-{{ block.id }} {
           margin-top: {{ block.settings.text_mt_mobile }}px;
-          width: 100%;
+          text-align: {{ content_horizontal_align_mobile }};
         }
-
-        .hero-text-{{ section.id }} * {
-          margin: 0;  
+      
+        .hero-text-{{ block.id }} * {
+          margin: 0;
           font-size: {{ block.settings.text_size_mobile }}px;
           color: {{ block.settings.text_color }};
           line-height: {{ block.settings.text_height }}%;
           text-transform: unset;
-          text-decoration: none;
-          word-break: break-word;
         }
-        
-        @media(min-width: 1024px) {
-          .hero-text-{{ section.id }} {
-            text-align: {{ content_align }};
-            margin-top: {{ block.settings.text_mt }}px;
-          }
 
-          .hero-text-{{ section.id }} * { 
+        @media(min-width: 1024px) {
+          
+          .hero-text-{{ block.id }} {
+            margin-top: {{ block.settings.text_mt }}px;
+            text-align: {{  content_horizontal_align }};
+          }
+      
+          .hero-text-{{ block.id }} * {
             font-size: {{ block.settings.text_size }}px;
           }
+          
         }
       </style>
 
       {% if block.settings.text_custom %}
         <style>
-          .hero-text-{{ section.id }} * {
+          .hero-text-{{ block.id }} * {
             font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
             font-weight: {{ block.settings.text_font.weight }};
             font-style: {{ block.settings.text_font.style }};
           }
-        </style>
-      {% endif %}
+        </style>          
+      {% endif %}  
 
-    {% when 'button' %}
+    {% when 'button' %}  
       <style>
+        {{  block.settings.button_font | font_face: font_display: 'swap' }}
 
-        {{ block.settings.button_font | font_face: font_display: 'swap' }} 
-        
-         .hero-button-{{ section.id }} {
+        .hero-button-{{ block.id }} {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -368,341 +653,321 @@
           text-decoration: none;
           padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
           border-radius: {{ block.settings.button_radius }}px;
-          transition: all 0.25s ease 0s;
+          transition: all 0.3s ease 0s;
           background-color: transparent;
           border: 0px;
           cursor: pointer;
           font-weight: 700;
         }
 
-        .hero-button-inner-{{ section.id }} {
+        .hero-button-inner-{{ block.id }} {
           margin: 0px;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
+          text-decoration: none;
         }
 
-        .hero-button-{{ section.id }}:hover {
+        .hero-button-{{ block.id }}:hover {
           color: {{ block.settings.button_hover_color }};
           transition: all 0.25s ease 0s;
         }
 
-        .hero-button-{{ section.id }} svg {
+        .hero-button-{{ block.id }} svg {
           width: 14px;
           height: 14px;
         }
 
-        .hero-button-{{ section.id }} svg path {
+        .hero-button-{{ block.id }} svg path {
           fill: {{ block.settings.button_color }};
           transition: all 0.25s ease 0s;
         }
 
-        .hero-button-{{ section.id }}:hover svg path {
+        .hero-button-{{ block.id }}:hover svg path {
           fill: {{ block.settings.button_hover_color }};
           transition: all 0.25s ease 0s;
         }
 
-        @media(min-width: 1024px) {        
-          .hero-button-{{ section.id }} {
-            display: flex !important;
+        @media (min-width: 1024px) {
+          .hero-button-{{ block.id }} {
             margin-top: {{ block.settings.button_mt }}px;
             padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
             font-size: {{ block.settings.button_size }}px;
           }
         }
       </style>
-    
+
+      {% if block.settings.use_shadow %}
+        <style>
+          .hero-button-{{ block.id }}:hover {
+            -webkit-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
+            -moz-box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
+            box-shadow: 0px 0px 8px 2px {{ block.settings.button_bg_color }};
+          }
+        </style>
+      {% endif %}  
+
       {% if block.settings.button_custom %}
         <style>
-          .hero-button-{{ section.id }} {
+          .hero-button-{{ block.id }} {
             font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
             font-weight: {{ block.settings.button_font.weight }};
             font-style: {{ block.settings.button_font.style }};
           }
         </style>
-      {% endif %} 
-  
+      {% endif %}
+
       {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
         <style>
-          .hero-button-{{ section.id }} {
-            background-color: {{ block.settings.button_bg_color }};
+          .hero-button-{{ block.id }} {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_color }};
           }
-  
-          .hero-button-{{ section.id }}:hover {
-            background-color: {{ block.settings.button_bg_hover_color }};
+      
+          .hero-button-{{ block.id }}:hover {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_hover_color }};
           }
         </style>
       {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
-        <style>
-          .hero-button-{{ section.id }} {
-            background-color: {{ block.settings.button_bg_color }};
-            border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_color }};
+        <style>          
+          .hero-button-{{ block.id }} {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_color }};
+            border: {{  block.settings.button_border_thickness }}px solid {{  block.settings.button_border_color }};
           }
-  
-          .hero-button-{{ section.id }}:hover {
-            background-color: {{ block.settings.button_bg_hover_color }};
-            border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_hover_color }};
+      
+          .hero-button-{{ block.id }}:hover {
+            transition: all 0.3s ease 0s;
+            background-color: {{  block.settings.button_bg_hover_color }};
+            border: {{  block.settings.button_border_thickness }}px solid {{ block.settings. button_border_hover_color }};
           }
         </style>
       {% elsif block.settings.button_style == "link" %}
         <style>
-          .hero-button-{{ section.id }} {
+          .hero-button-{{ block.id }} {
             padding: 0px !important;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
           }
         </style>
-      {% endif %}
-
-    {% when 'video' %} 
-      <style>
-        .hero-video-{{ section.id }} {
-          border-radius: {{ block.settings.video_radius }}px;
-          border: {{ block.settings.video_border_thickness }}px solid {{ block.settings.video_border_color }};
-          max-width: {{ block.settings.video_width_mobile }}%;
-          width: 100%;
-          overflow: hidden;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .hero-video-{{ section.id }} video,
-        .hero-video-{{ section.id }} iframe {
-          border: none;
-          display: block;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border: 0px;
-        }
-
-        @media(min-width: 1024px) {
-          .hero-video-{{ section.id }} {
-            display: block !important;
-            margin: 0px;
-            max-width: {{ block.settings.video_width }}%;
-          }
-
-          .hero-content-{{ section.id }} {
-            flex: 0 1 50%;
-          }
-        }
-      </style> 
-      
-      {% if block.settings.video_ratio_mobile == "portrait" %}
-        <style>
-          .hero-video-{{ section.id }} {
-            aspect-ratio: 9.6/15;
-          }
-        </style>
-      {% elsif block.settings.video_ratio_mobile == "landscape" %}
-        <style>
-        .hero-video-{{ section.id }} {
-          aspect-ratio: 12/8;
-        }
-        </style>
-      {% elsif block.settings.video_ratio_mobile == "square" %}
-        <style>
-          .hero-video-{{ section.id }} {
-            aspect-ratio: 12/12;
-          }
-        </style>
-      {% else %}
-        <style>
-          .hero-video-{{ section.id }} {
-            aspect-ratio: auto;
-          }
-        </style>
-      {% endif %}
-
-      {% if block.settings.video_ratio == "portrait" %}
-        <style>
-          @media(min-width: 1024px) {
-            .hero-video-{{ section.id }} {
-              aspect-ratio: 9.6/15;
-            }
-          }
-        </style>
-      {% elsif block.settings.video_ratio == "landscape" %}
-        <style>
-          @media(min-width: 1024px) {
-            .hero-video-{{ section.id }} {
-              aspect-ratio: 12/8;
-            }
-          }
-        </style>
-      {% elsif block.settings.video_ratio == "square" %}
-        <style>
-          @media(min-width: 1024px) {
-            .hero-video-{{ section.id }} {
-              aspect-ratio: 12/12;
-            }
-          }
-        </style>
-      {% else %}
-        <style>
-          @media(min-width: 1024px) {
-            .hero-video-{{ section.id }} {
-              aspect-ratio: auto;
-            }
-          }
-        </style>
-      {% endif %}
-
-      {% if block.settings.show_mobile %}
-        <style>
-           .hero-video-{{ section.id }} {
-              display: block;
-           }
-        </style>
-      {% else %}
-        <style>
-           .hero-video-{{ section.id }} {
-              display: none;
-           }
-        </style>
-      {% endif %}
-
+      {% endif %}        
   {% endcase %}
 {% endfor %}
 
 <div class="section-{{ section.id }} hero-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
     <div class="section-{{ section.id }}-settings">
-      {% if hero_bg_type != 'color' %}
-        <div class="hero-bg-{{ section.id }}">
-          {% if hero_bg_type == 'video' %}
-            {% assign video_id = bg_video_url.id %}
-            {% assign loop = '&loop=1&playlist=' | append: video_id %}
-            {%- if bg_video_url != null -%}
-              {%- if bg_video_url.type == 'youtube' -%}
-                <iframe
-                  {% if lazy %}data-{% endif %}src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0{{ loop }}"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="lazy"
-                ></iframe>
-              {%- else -%}
-                <iframe
-                  {% if lazy %}data-{% endif %}src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0{{ loop }}"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="lazy"
-                ></iframe>
-              {% endif %}
-            {% else %}
-              {% assign placeholder_video = 'https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4' %}
-              <video {% if lazy %}data-{% endif %}src="{% if bg_video.sources[1].url != blank %}{{ bg_video.sources[1].url }}{% else %}{{ placeholder_video }}{% endif %}" muted autoplay playsinline preload="none" loop class="lazy"></video>
+      <div class="hero-layout-{{ section.id }}">
+        <div class="hero-bg-image-{{ section.id }}">
+          {% if bg_image != blank %}
+            <img src="{{ bg_image | image_url }}" alt="{{ bg_image.alt }}" {% if lazy %}loading="lazy"{% endif %} {% if bg_image_mobile != blank %}class="hero-bg-desktop-{{ section.id }}"{% endif %}>
+            {% if bg_image_mobile != blank %}
+              <img src="{{ bg_image_mobile | image_url }}" alt="{{ bg_image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} class="hero-bg-mobile-{{ section.id }}">
             {% endif %}
-          {% elsif hero_bg_type == 'image' %}  
-            {% if bg_image != blank %}
-              <img src="{{ bg_image | image_url }}" alt="{{ bg_image.alt }}">
-            {% else %}
-              {{ 'image' | placeholder_svg_tag }}
-            {% endif %}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
           {% endif %}
         </div>
-      {% endif %} 
-      <div class="hero-body-{{ section.id }}">
         <div class="hero-content-{{ section.id }}">
           {% for block in section.blocks %}
-            {% if block.type == 'heading' %}
-              {% if block.settings.heading != blank %}
-                <div class="hero-heading-{{ section.id }}">{{ block.settings.heading }}</div>
-              {% endif %}
-              
-            {% elsif block.type == "text" %}
-              {% if block.settings.text != blank %}
-                <div class="hero-text-{{ section.id }}">{{ block.settings.text }}</div>
-              {% endif %}
-              
-            {% elsif block.type == 'button' %}
-              <{% if block.settings.button_url != blank %}a href={{ block.settings.button_url }}{% else %}div{% endif %} class="hero-button-{{ section.id }}">
-                <p class="hero-button-inner-{{ section.id }}">
-                  {{  block.settings.button }}
-                  {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
-                    <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
-                      <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
-                    </svg>
-                  {% endif %}
-                </p>
-              </{% if block.settings.button_url != blank %}a{% else %}div{% endif %}>    
-              
-            {% endif %}                  
-          {% endfor %}  
-        </div>   
-        {% for block in section.blocks %}
-            {% if block.type == 'video' %}
-              <div class="hero-video-{{ section.id }}">
-                
-                {% assign video_id = block.settings.video_url.id %}
-                {% assign loop = '&loop=1&playlist=' | append: video_id %}
-                {%- if block.settings.video_url != null -%}
-                  {%- if block.settings.video_url.type == 'youtube' -%}
-                    <iframe
-                      {% if lazy %}data-{% endif %}src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&autoplay=1&controls=0&showinfo=0{{ loop }}"                    
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                      class="lazy"
-                    ></iframe>
-                    {%- else -%}
-                    <iframe
-                      {% if lazy %}data-{% endif %}src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=1&controls=0&showinfo=0{{ loop }}"  
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                      class="lazy"
-                    ></iframe>
-                  {% endif %}
-                {% else %}
-                  {% assign placeholder_video = 'https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4' %}
-                  <video {% if lazy %}data-{% endif %}src="{% if block.settings.video != blank %}{{ block.settings.video.sources[1].url }}{% else %}{{ placeholder_video }}{% endif %}" autoplay muted playsinline preload="none" loop class="lazy"></video>
+            {% case block.type %}
+              {% when 'review' %}                                     
+                <div class="hero-review-content-{{ section.id }}">                  
+                  {% if block.settings.stars_count != 0 %}
+                    <div class="hero-stars-wrapper-{{ section.id }}">                       
+                      <div class="hero-stars-{{ section.id }} hero-stars-{{ block.id }}">
+                        {% if block.settings.stars_icon != blank %}
+                          {% assign stars_count_round = block.settings.stars_count | round: 0 %}
+                          {% for item in (1..stars_count_round) %}
+                            <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ stars_icon.alt }}">
+                          {% endfor %}
+                        {% else %}
+                          {% if block.settings.stars_count > 0 %}
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              {% if block.settings.stars_count == 0.5 %}
+                                <defs>
+                                  <linearGradient id="grad{{ section.id }}1">
+                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  </linearGradient>
+                                </defs>
+                              {% endif %}
+                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 0.5 %}url(#grad{{ section.id }}1){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                              <g clip-path="url(#clip0_25_4)">
+                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_25_4">
+                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          {% endif %}
+                          {% if block.settings.stars_count > 1 %}
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              {% if block.settings.stars_count == 1.5 %}
+                                <defs>
+                                  <linearGradient id="grad{{ section.id }}2">
+                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  </linearGradient>
+                                </defs>
+                              {% endif %}
+                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 1.5 %}url(#grad{{ section.id }}2){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                              <g clip-path="url(#clip0_25_4)">
+                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_25_4">
+                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          {% endif %}
+                          {% if block.settings.stars_count > 2 %}
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              {% if block.settings.stars_count == 2.5 %}
+                                <defs>
+                                  <linearGradient id="grad{{ section.id }}3">
+                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  </linearGradient>
+                                </defs>
+                              {% endif %}
+                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 2.5 %}url(#grad{{ section.id }}3){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                              <g clip-path="url(#clip0_25_4)">
+                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_25_4">
+                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          {% endif %}
+                          {% if block.settings.stars_count > 3 %}
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              {% if block.settings.stars_count == 3.5 %}
+                                <defs>
+                                  <linearGradient id="grad{{ section.id }}4">
+                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  </linearGradient>
+                                </defs>
+                              {% endif %}
+                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 3.5 %}url(#grad{{ section.id }}4){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                              <g clip-path="url(#clip0_25_4)">
+                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_25_4">
+                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          {% endif %}
+                          {% if block.settings.stars_count > 4 %}
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              {% if block.settings.stars_count == 4.5 %}
+                                <defs>
+                                  <linearGradient id="grad{{ section.id }}5">
+                                    <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                    <stop offset="50%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                    <stop offset="100%" stop-color="{{ block.settings.stars_bg_half_color }}" />
+                                  </linearGradient>
+                                </defs>
+                              {% endif %}
+                              <rect width="32" height="32" fill="{% if block.settings.stars_count == 4.5 %}url(#grad{{ section.id }}5){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                              <g clip-path="url(#clip0_25_4)">
+                              <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_25_4">
+                              <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                      {% if block.settings.stars_text %}
+                        <div class="hero-review-text-{{ section.id }} hero-review-text-{{ block.id }}">{{ block.settings.stars_text }}</div>
+                      {% endif %}
+                    </div>
+                  {% endif %}                   
+                </div>                                      
+              {% when 'heading'%}
+                {% if block.settings.heading != blank %}
+                  <div class="hero-heading-{{ block.id }}">
+                    {{ block.settings.heading }}
+                  </div>
+                {% endif %}
+              {% when 'text' %}
+                {% if block.settings.text != blank %}
+                  <div class="hero-text-{{ block.id }}">
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}  
+              {% when 'button' %}
+                {% if block.settings.button != blank %}                 
+                  <a href="{{ block.settings.url }}" class="hero-button-{{ block.id }}">
+                    <p class="hero-button-inner-{{ block.id }}">
+                      {{ block.settings.button }}
+                      {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                        <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                          <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                        </svg>
+                      {% endif %}
+                    </p>
+                  </a>     
                 {% endif %}              
-              </div>  
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="hero-features-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="hero-feature-{{ section.id }}">
+              {% if block.settings.title != blank %}
+                <p class="hero-feature-title-{{ section.id }}">{{ block.settings.title }}</p>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <p class="hero-feature-text-{{ section.id }}">{{ block.settings.text }}</p>
+              {% endif %}
+            </div>
           {% endif %}
         {% endfor %}
       </div>
     </div>
 </div>
 
-{% if lazy %}
-  <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
-{% endif %}
-
-<script>
-  function initHero28() {
-   {% if lazy %}
-    let lazyLoadInstance = new LazyLoad();
-    window.addEventListener(
-      "LazyLoad::Initialized",
-      function (event) {
-        window.lazyLoadInstance = event.detail.instance;
-      },
-      false
-    );
-    {% endif %}
-  }
-
-  document.addEventListener('DOMContentLoaded', initHero28);
-
-  if (Shopify.designMode) {
-    document.addEventListener('shopify:section:unload', initHero28);
-    document.addEventListener('shopify:section:load', initHero28);
-  }
-</script>
-
 {% schema %}
 {
-  "name": "SG-Hero #28",
+  "name": "SG-Hero #29",
   "settings": [
     {
       "type": "header",
-      "content": "Height"
+      "content": "Layout"
     },
     {
       "type": "select",
-      "id": "hero_height",
+      "id": "layout_height",
       "label": "Height",
-      "default": "full_screen",
+      "default": "fixed_height",
       "options": [
         {
           "label": "Full screen",
@@ -720,7 +985,7 @@
     },
     {
       "type": "range",
-      "id": "hero_fixed_height",
+      "id": "layout_fixed_height",
       "min": 200,
       "max": 1000,
       "step": 10,
@@ -730,7 +995,7 @@
     },
     {
       "type": "range",
-      "id": "hero_fixed_height_mobile",
+      "id": "layout_fixed_height_mobile",
       "min": 200,
       "max": 1000,
       "step": 10,
@@ -739,84 +1004,58 @@
       "default": 460
     },
     {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "layout",
-      "label": "Video placement",
-      "default": "content_video",
-      "options": [
-        {
-          "label": "Align video left",
-          "value": "video_content"
-        },
-        {
-          "label": "Align video right",
-          "value": "content_video"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "layout_mobile",
-      "label": "Video placement - mobile",
-      "default": "content_video",
-      "options": [
-        {
-          "label": "Text on top",
-          "value": "content_video"
-        },
-        {
-          "label": "Video on top",
-          "value": "video_content"
-        }
-      ]
-    },
-    {
       "type": "range",
-      "id": "layout_gap",
+      "id": "layout_padding_horizontal",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Gap",
-      "default": 32
+      "label": "Padding horizontal",
+      "default": 50
     },
     {
       "type": "range",
-      "id": "layout_gap_mobile",
+      "id": "layout_padding_horizontal_mobile",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Gap - mobile",
-      "default": 32
+      "label": "Padding horizontal - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "layout_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "layout_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "layout_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 20
     },
     {
       "type": "header",
       "content": "Background"
-    },
-    {
-      "type": "select",
-      "id": "hero_bg_type",
-      "label": "Background type",
-      "default": "image",
-      "options": [
-        {
-          "label": "Image",
-          "value": "image"
-        },
-        {
-          "label": "Video",
-          "value": "video"
-        },
-        {
-          "label": "Color",
-          "value": "color"
-        }
-      ]
     },
     {
       "type": "image_picker",
@@ -824,23 +1063,13 @@
       "label": "Image"
     },
     {
-      "type": "video",
-      "id": "bg_video",
-      "label": "Video from Shopify"
-    },
-    {
-      "type": "video_url",
-      "id": "bg_video_url",
-      "label": "Video embed from URL",
-      "accept": [
-        "youtube",
-        "vimeo"
-      ],
-      "info": "Youtube or Vimeo. Shows when no Shopify-hosted video is selected."
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Image - mobile (optional)"
     },
     {
       "type": "range",
-      "id": "hero_bg_overlay",
+      "id": "bg_image_overlay",
       "min": 0,
       "max": 1,
       "step": 0.1,
@@ -852,21 +1081,49 @@
       "content": "Content"
     },
     {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Max width - desktop",
+      "default": 40
+    },
+    {
       "type": "text_alignment",
       "id": "content_align",
-      "label": "Horizontal alignment",
-      "default": "center"
+      "label": "Alignment"
     },
     {
       "type": "text_alignment",
       "id": "content_align_mobile",
-      "label": "Horizontal alignment - mobile",
-      "default": "center"
+      "label": "Alignment - mobile"
     },
     {
       "type": "select",
       "id": "content_vertical_align",
-      "label": "Vertical alignment - desktop",
+      "label": "Vertical align",
+      "default": "center",
+      "options": [
+        {
+          "label": "Top",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Bottom",
+          "value": "end"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_align_mobile",
+      "label": "Vertical align - mobile",
       "default": "center",
       "options": [
         {
@@ -885,7 +1142,277 @@
     },
     {
       "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "range",
+      "id": "features_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "features_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "features_mt",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": -100
+    },
+    {
+      "type": "range",
+      "id": "features_mt_mobile",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": -72
+    },
+    {
+      "type": "header",
+      "content": "Feature"
+    },
+    {
+      "type": "range",
+      "id": "feature_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feature_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "feature_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feature_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "feature_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "feature_border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "text_alignment",
+      "id": "feature_align",
+      "label": "Alignment"
+    },
+    {
+      "type": "text_alignment",
+      "id": "feature_align_mobile",
+      "label": "Alignment - mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_shadow",
+      "label": "Use shadow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Feature title"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_title_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "feature_title_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "feature_title_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Feature text"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_text_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "feature_text_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "feature_text_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "feature_text_mt",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "feature_text_mt_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Feature colors"
+    },
+    {
+      "type": "color",
+      "label": "Title",
+      "id": "feature_title_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Text",
+      "id": "feature_text_color",
+      "default": "#707070"
+    },
+    {
+      "type": "color",
+      "label": "Background",
+      "id": "feature_bg_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "feature_border_color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
       "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "label": "Overlay",
+      "id": "bg_image_overlay_color",
+      "default": "#121212"
     },
     {
       "type": "color",
@@ -898,12 +1425,6 @@
       "id": "background_gradient",
       "label": "Section background gradient",
       "info": "Remove gradient to replace with solid colors"
-    },
-    {
-      "type": "color",
-      "label": "Overlay",
-      "id": "hero_bg_overlay_color",
-      "default": "#121212"
     },
     {
       "type": "color",
@@ -1049,15 +1570,174 @@
   ],
   "blocks": [
     {
-      "type": "heading",
-      "name": "Heading",
+      "type": "review",
       "limit": 1,
+      "name": "Stars rating",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Stars settings"
+        },
+        {
+          "type": "range",
+          "id": "stars_count",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "label": "Stars count",
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "label": "Stars icon",
+          "id": "stars_icon",
+          "info": "Replaces the default stars icon"
+        },
+        {
+          "type": "range",
+          "id": "stars_size",
+          "min": 10,
+          "max": 50,
+          "step": 2,
+          "unit": "px",
+          "label": "Size",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "stars_size_mobile",
+          "min": 10,
+          "max": 50,
+          "step": 2,
+          "unit": "px",
+          "label": "Size - mobile",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "richtext",
+          "id": "stars_text",
+          "label": "Text",
+          "info": "Use bold formatting to apply the accent color",
+          "default": "<p><strong>150,000+</strong> Happy Customers</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "review_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "review_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "review_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "review_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 130
+        },
+        {
+          "type": "range",
+          "id": "review_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "review_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Text colors"
+        },
+        {
+          "type": "color",
+          "label": "Primary",
+          "id": "review_color",
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Accent",
+          "id": "review_accent_color",
+          "info": "Use bold formatting to apply the accent color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Default stars colors"
+        },
+        {
+          "type": "color",
+          "label": "Star icon",
+          "id": "stars_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Background",
+          "id": "stars_bg_color",
+          "default": "#00B67A"
+        },
+        {
+          "type": "color",
+          "label": "Half star background",
+          "id": "stars_bg_half_color",
+          "default": "#DDDDDD"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "limit": 1,
+      "name": "Heading",
       "settings": [
         {
           "type": "richtext",
           "id": "heading",
-          "label": "Heading",
-          "default": "<h2>Hero #28</h2>"
+          "label": "Text",
+          "info": "Use bold formatting to apply the accent color",
+          "default": "<h1>Hero <strong>#29</strong></h1>"
         },
         {
           "type": "checkbox",
@@ -1109,7 +1789,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 0
+          "default": 20
         },
         {
           "type": "range",
@@ -1119,26 +1799,36 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 0
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Colors"
         },
         {
           "type": "color",
-          "label": "Color",
+          "label": "Primary",
           "id": "heading_color",
-          "default": "#FFFFFF"
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "label": "Accent",
+          "id": "heading_accent_color",
+          "default": "#FFFFFF",
+          "info": "Use bold formatting to apply the accent color"
         }
       ]
     },
     {
       "type": "text",
-      "limit": 1,
       "name": "Text",
       "settings": [
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Share details about your brand with customers. Introduce products, make announcements, or greet visitors to your store.</p>"
+          "default": "<p>Use this text to share information about your brand with your customers.</p>"
         },
         {
           "type": "checkbox",
@@ -1170,7 +1860,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 16
+          "default": 15
         },
         {
           "type": "range",
@@ -1190,7 +1880,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 16
+          "default": 20
         },
         {
           "type": "range",
@@ -1200,13 +1890,13 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top - mobile",
-          "default": 8
+          "default": 16
         },
         {
           "type": "color",
           "label": "Color",
           "id": "text_color",
-          "default": "#FFFFFF"
+          "default": "#121212"
         }
       ]
     },
@@ -1219,11 +1909,11 @@
           "type": "text",
           "id": "button",
           "label": "Button label",
-          "default": "SHOP NOW"
+          "default": "Learn more"
         },
         {
           "type": "url",
-          "id": "button_url",
+          "id": "url",
           "label": "Button link"
         },
         {
@@ -1246,7 +1936,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size",
-          "default": 16
+          "default": 15
         },
         {
           "type": "range",
@@ -1256,7 +1946,7 @@
           "step": 1,
           "unit": "px",
           "label": "Font size - mobile",
-          "default": 16
+          "default": 15
         },
         {
           "type": "range",
@@ -1267,6 +1957,26 @@
           "unit": "%",
           "label": "Line height",
           "default": 100
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 32
         },
         {
           "type": "range",
@@ -1286,27 +1996,7 @@
           "step": 2,
           "unit": "px",
           "label": "Padding vertical - mobile",
-          "default": 16
-        },
-        {
-          "type": "range",
-          "id": "button_padding_horizontal",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding horizontal",
-          "default": 64
-        },
-        {
-          "type": "range",
-          "id": "button_padding_horizontal_mobile",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding horizontal - mobile",
-          "default": 40
+          "default": 18
         },
         {
           "type": "range",
@@ -1316,7 +2006,7 @@
           "step": 2,
           "unit": "px",
           "label": "Roundness",
-          "default": 100
+          "default": 8
         },
         {
           "type": "range",
@@ -1326,7 +2016,7 @@
           "step": 1,
           "unit": "px",
           "label": "Border thickness",
-          "default": 0
+          "default": 1
         },
         {
           "type": "range",
@@ -1336,7 +2026,7 @@
           "step": 2,
           "unit": "px",
           "label": "Margin top",
-          "default": 24
+          "default": 32
         },
         {
           "type": "range",
@@ -1352,7 +2042,7 @@
           "type": "select",
           "id": "button_style",
           "label": "Button style",
-          "default": "non_outline",
+          "default": "outline",
           "options": [
             {
               "label": "Link",
@@ -1378,31 +2068,31 @@
         },
         {
           "type": "header",
-          "content": "Colors"
+          "content": "Button colors"
         },
         {
           "type": "color",
           "label": "Text",
           "id": "button_color",
-          "default": "#121212"
+          "default": "#FFFFFF"
         },
         {
           "type": "color",
           "label": "Hover text",
           "id": "button_hover_color",
-          "default": "#FFFFFF"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Background",
           "id": "button_bg_color",
-          "default": "#FFFFFF"
+          "default": "#121212"
         },
         {
           "type": "color",
           "label": "Background hover",
           "id": "button_bg_hover_color",
-          "default": "#121212"
+          "default": "#FFFFFF"
         },
         {
           "type": "color",
@@ -1419,136 +2109,32 @@
       ]
     },
     {
-      "type": "video",
-      "name": "Video",
-      "limit": 1,
+      "type": "feature",
+      "name": "Feature",
+      "limit": 5,
       "settings": [
         {
-          "type": "checkbox",
-          "id": "show_mobile",
-          "label": "Show on mobile",
-          "default": true
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
         },
         {
-          "type": "video",
-          "id": "video",
-          "label": "Video from Shopify"
-        },
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Video embed from URL",
-          "accept": [
-            "youtube",
-            "vimeo"
-          ],
-          "info": "Youtube or Vimeo. Shows when no Shopify-hosted video is selected."
-        },
-        {
-          "type": "range",
-          "id": "video_width",
-          "min": 10,
-          "max": 50,
-          "step": 2,
-          "unit": "%",
-          "label": "Width",
-          "default": 30
-        },
-        {
-          "type": "range",
-          "id": "video_width_mobile",
-          "min": 30,
-          "max": 100,
-          "step": 2,
-          "unit": "%",
-          "label": "Width - mobile",
-          "default": 80
-        },
-        {
-          "type": "range",
-          "id": "video_radius",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Roundness",
-          "default": 8
-        },
-        {
-          "type": "range",
-          "id": "video_border_thickness",
-          "min": 0,
-          "max": 10,
-          "step": 1,
-          "unit": "px",
-          "label": "Border thickness",
-          "default": 1
-        },
-        {
-          "type": "paragraph",
-          "content": "Aspect ratio does not work with fixed section height. Height must be 'Auto'."
-        },
-        {
-          "type": "select",
-          "id": "video_ratio",
-          "label": "Aspect ratio",
-          "default": "portrait",
-          "options": [
-            {
-              "label": "Portrait",
-              "value": "portrait"
-            },
-            {
-              "label": "Square",
-              "value": "square"
-            },
-            {
-              "label": "Landscape",
-              "value": "landscape"
-            },
-            {
-              "label": "Original",
-              "value": "original"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "video_ratio_mobile",
-          "label": "Aspect ratio - mobile",
-          "default": "portrait",
-          "options": [
-            {
-              "label": "Portrait",
-              "value": "portrait"
-            },
-            {
-              "label": "Square",
-              "value": "square"
-            },
-            {
-              "label": "Landscape",
-              "value": "landscape"
-            },
-            {
-              "label": "Original",
-              "value": "original"
-            }
-          ]
-        },
-        {
-          "type": "color",
-          "label": "Border",
-          "id": "video_border_color",
-          "default": "#121212"
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Text"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Hero #28",
+      "name": "SG-Hero #29",
       "blocks": [
+        {
+          "type": "review"
+        },
         {
           "type": "heading"
         },
@@ -1559,7 +2145,16 @@
           "type": "button"
         },
         {
-          "type": "video"
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
         }
       ]
     }
