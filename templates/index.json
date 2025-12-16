@@ -23,6 +23,7 @@
       "block_order": [
         "heading_Frp6hp"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -33,70 +34,94 @@
         "padding_bottom": 36
       }
     },
-    "mockup_T64VQB": {
+    "mockup_HEjVHE": {
       "type": "mockup",
       "blocks": {
-        "block_DU7ACG": {
-          "type": "block",
+        "slide_MgUazK": {
+          "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/featured-product-without-text.png",
-            "url": "",
-            "title": "NECKLACE"
-          }
-        },
-        "block_nw6Cqy": {
-          "type": "block",
-          "settings": {
-            "url": "",
-            "title": "NECKLACE"
-          }
-        },
-        "block_FgXVcy": {
-          "type": "block",
-          "settings": {
-            "url": "",
-            "title": "NECKLACE"
-          }
-        },
-        "block_UcPt6g": {
-          "type": "block",
-          "settings": {
-            "url": "",
-            "title": "NECKLACE"
-          }
-        },
-        "block_xF47jU": {
-          "type": "block",
-          "settings": {
-            "url": "",
-            "title": "NECKLACE"
-          }
-        },
-        "block_iCRbyR": {
-          "type": "block",
-          "settings": {
-            "url": "",
-            "title": "NECKLACE"
+            "image": "shopify://shop_images/eco-hero-image-full-width-without-text.png"
           }
         }
       },
       "block_order": [
-        "block_DU7ACG",
-        "block_nw6Cqy",
-        "block_FgXVcy",
-        "block_UcPt6g",
-        "block_xF47jU",
-        "block_iCRbyR"
+        "slide_MgUazK"
       ],
-      "name": "SG-Image Grid",
+      "name": "SG-Hero #1",
       "settings": {
-        "max_height": "370",
-        "font_thickness": "300"
+        "fixed_height": "adapt_first",
+        "hero_fixed_height": 760,
+        "hero_fixed_height_mobile": 600,
+        "vertical_alignment": "center",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment": "center",
+        "horizontal_alignment_mobile": "center",
+        "interval": 5,
+        "image_radius": 0,
+        "image_overlay": 0.3,
+        "title": "<h1>HERO #1</h1>",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 72,
+        "title_size_mobile": 36,
+        "title_height": 130,
+        "subtitle": "<p>Super Packable. Versatile. And All-Day (And Night) Adventure Ready.</p>",
+        "subtitle_custom": false,
+        "subtitle_font": "josefin_sans_n4",
+        "subtitle_size": 16,
+        "subtitle_size_mobile": 16,
+        "subtitle_height": 150,
+        "subtitle_mt": 20,
+        "buttons_mt": 32,
+        "buttons_gap": 16,
+        "button": "Shop this",
+        "button_url": "shopify://collections/all",
+        "second_button": "Shop all",
+        "second_button_url": "shopify://collections/all",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 16,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 32,
+        "button_padding_horizontal_mobile": 32,
+        "button_radius": 0,
+        "button_border_thickness": 0,
+        "button_color": "#121212",
+        "button_hover_color": "#FFFFFF",
+        "button_bg_color": "#FFFFFF",
+        "button_bg_hover_color": "#121212",
+        "button_border_color": "#121212",
+        "button_border_hover_color": "#121212",
+        "second_button_color": "#121212",
+        "second_button_hover_color": "#FFFFFF",
+        "second_button_bg_color": "#FFFFFF",
+        "second_button_bg_hover_color": "#121212",
+        "second_button_border_color": "#121212",
+        "second_button_border_hover_color": "#121212",
+        "title_color": "#FFFFFF",
+        "subtitle_color": "#FFFFFF",
+        "image_overlay_color": "#121212",
+        "background_color": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 1200,
+        "section_radius": 0,
+        "lazy_load": false
       }
     }
   },
   "order": [
     "rich_text_E7gF9H",
-    "mockup_T64VQB"
+    "mockup_HEjVHE"
   ]
 }
