@@ -22,6 +22,8 @@
   assign section_radius = section.settings.section_radius
   assign background_style = section.settings.background_style
 
+  assign layout_mobile = section.settings.layout_mobile
+
   assign cards_per_row = section.settings.cards_per_row
   assign cards_per_row_mobile = section.settings.cards_per_row_mobile
   assign cards_gap = section.settings.cards_gap
@@ -35,14 +37,16 @@
 
   assign image_ratio = section.settings.image_ratio
   assign image_ratio_mobile = section.settings.image_ratio_mobile
-  assign image_overlay_color = section.settings.image_overlay_color
-  assign image_overlay = section.settings.image_overlay
+  assign image_zoom = section.settings.image_zoom
 
+  assign card_content_padding_vertical = section.settings.card_content_padding_vertical
+  assign card_content_padding_vertical_mobile = section.settings.card_content_padding_vertical_mobile
+  assign card_content_padding_horizontal = section.settings.card_content_padding_horizontal
+  assign card_content_padding_horizontal_mobile = section.settings.card_content_padding_horizontal_mobile
+  assign card_content_bg_color = section.settings.card_content_bg_color
   assign card_content_bg_back_color = section.settings.card_content_bg_back_color
   assign card_content_align = section.settings.card_content_align
   assign card_content_align_mobile = section.settings.card_content_align_mobile
-  assign card_back_content_align = section.settings.card_back_content_align
-  assign card_back_content_align_mobile = section.settings.card_back_content_align_mobile
 
   assign title_custom = section.settings.title_custom
   assign title_font = section.settings.title_font
@@ -50,7 +54,15 @@
   assign title_size_mobile = section.settings.title_size_mobile
   assign title_height = section.settings.title_height
   assign title_color = section.settings.title_color
-  assign title_back_color = section.settings.title_back_color
+
+  assign subtitle_custom = section.settings.subtitle_custom
+  assign subtitle_font = section.settings.subtitle_font
+  assign subtitle_size = section.settings.subtitle_size
+  assign subtitle_size_mobile = section.settings.subtitle_size_mobile
+  assign subtitle_height = section.settings.subtitle_height
+  assign subtitle_color = section.settings.subtitle_color
+  assign subtitle_mt = section.settings.subtitle_mt
+  assign subtitle_mt_mobile = section.settings.subtitle_mt_mobile
 
   assign icon_size = section.settings.icon_size
   assign icon_size_mobile = section.settings.icon_size_mobile
@@ -58,8 +70,6 @@
   assign icon_hover_color = section.settings.icon_hover_color
   assign icon_bg_color = section.settings.icon_bg_color
   assign icon_bg_hover_color = section.settings.icon_bg_hover_color
-  assign icon_border_thickness = section.settings.icon_border_thickness
-  assign icon_border_color = section.settings.icon_border_color
 
   assign text_custom = section.settings.text_custom
   assign text_font = section.settings.text_font
@@ -69,36 +79,13 @@
   assign text_color = section.settings.text_color
   assign text_mt = section.settings.text_mt
   assign text_mt_mobile = section.settings.text_mt_mobile  
-  assign link_color = section.settings.link_color
-  assign link_hover_color = section.settings.link_hover_color
-
-  assign heading_custom = section.settings.heading_custom
-  assign heading_font = section.settings.heading_font
-  assign heading_size = section.settings.heading_size
-  assign heading_size_mobile = section.settings.heading_size_mobile
-  assign heading_height = section.settings.heading_height
-  assign heading_color = section.settings.heading_color
-  assign heading_align_mobile = section.settings.heading_align_mobile
-  assign heading_align = section.settings.heading_align
-  assign heading_vertical_align = section.settings.heading_vertical_align
-  assign heading_vertical_align_mobile = section.settings.heading_vertical_align_mobile
-
-  assign icon_size = section.settings.icon_size
-  assign icon_size_mobile = section.settings.icon_size_mobile
-  assign close_icon_size = section.settings.close_icon_size
-  assign close_icon_size_mobile = section.settings.close_icon_size_mobile
-  assign close_icon_bg_color = section.settings.close_icon_bg_color
-  assign close_icon_color = section.settings.close_icon_color
-  assign close_icon_bg_hover_color = section.settings.close_icon_bg_hover_color
-  assign close_icon_hover_color = section.settings.close_icon_hover_color
-  assign close_border_thickness = section.settings.close_border_thickness
-  assign close_border_color = section.settings.close_border_color
-  assign close_border_hover_color = section.settings.close_border_hover_color
+  assign text_align = section.settings.text_align
+  assign text_align_mobile = section.settings.text_align_mobile
 -%}
 
 {%- style -%}
-  {{  heading_font | font_face: font_display: 'swap' }}
   {{  title_font | font_face: font_display: 'swap' }}
+  {{  subtitle_font | font_face: font_display: 'swap' }}
   {{  text_font | font_face: font_display: 'swap' }}
 
   .section-{{ section.id }} {
@@ -131,7 +118,6 @@
   }
 
   .flip-body-{{ section.id }} {
-    display: grid;
     grid-template-columns: repeat({{ cards_per_row_mobile }}, 1fr);
     gap: {{ cards_gap_mobile }}px;
     height: 100%;
@@ -140,16 +126,6 @@
   .flip-image-{{ section.id }} {
     position: relative;
     overflow: hidden;
-  }
-
-  .flip-image-{{ section.id }}:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: {{ image_overlay_color | hex_to_rgba: image_overlay }};
   }
 
   .flip-image-{{ section.id }} img,
@@ -168,9 +144,7 @@
   .flip-card-wrapper-{{ section.id }} {
     position: relative;
     transform-style: preserve-3d;
-    transition-duration: .8s;
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition: transform 0.6s ease;
     height: 100%;
     will-change: transform;
   }
@@ -180,10 +154,7 @@
   }
 
   .flip-card-{{ section.id }} {
-    perspective: 1000px;
-    transition-duration: .8s;
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition: transform 0.25s ease;
     height: 100%;
   }
 
@@ -214,8 +185,6 @@
     -webkit-box-sizing: border-box !important;
     box-sizing: border-box !important;
     z-index: 1 !important;
-    overflow-y: scroll !important;
-    scrollbar-width: none;
   }
 
   .flip-card-front-{{ section.id }},
@@ -226,7 +195,7 @@
   }
 
   .flip-card-front-{{ section.id}} {
-    background-color: {{ card_content_bg_back_color }};
+    background-color: {{ card_content_bg_color }};
   }  
 
   .flip-card-back-{{ section.id}} {
@@ -234,20 +203,15 @@
   }
   
   .flip-card-back-{{ section.id }} {
-    padding: 30px !important;
+    padding: 30px;
   }
 
   .flip-card-content-{{ section.id }} {       
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 45%;
-    transform: translate(-50%);    
     flex: 1 1 0;
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    align-items: center;
+    justify-content: center;
+    padding: {{ card_content_padding_vertical_mobile }}px {{ card_content_padding_horizontal_mobile }}px;   
   }
 
   .flip-title-{{ section.id }} {
@@ -261,24 +225,25 @@
     font-weight: 700;
   }
 
-  .flip-card-front-{{ section.id }} .flip-title-{{ section.id }} {
+  .flip-subtitle-{{ section.id }} {
+    margin: 0px;  
+    margin-top: {{ subtitle_mt_mobile }}px;
+    text-align: {{ card_content_align_mobile }};
+    font-size: {{ subtitle_size_mobile }}px;
+    line-height: {{ subtitle_height }}%;
+    color: {{ subtitle_color }};
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 400;
+  }
+
+  .flip-icon-{{ section.id }} {
     position: absolute;
     z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0 30px !important;
-    width: 100% !important;
-  }
-
-  .flip-title-back-{{ section.id }} {
-    color: {{ title_back_color }};
-  }
-
-  .flip-icon-{{ section.id }} {   
-    padding: {{ icon_size_mobile | times: 0.6 }}px;
+    top: 15px;
+    right: 15px;
+    padding: {{ icon_size_mobile | times: 0.5 }}px;
     background-color: {{ icon_bg_color }};
-    border: {{ icon_border_thickness }}px solid {{ icon_border_color }};
     transition: all 0.25s ease 0s;
     border-radius: 50%;
     flex-shrink: 0;
@@ -308,7 +273,7 @@
 
   .flip-text-{{ section.id }} {
     margin-top: {{ text_mt_mobile }}px;
-    text-align: {{ card_back_content_align_mobile }};
+    text-align: {{ text_align_mobile }};
   }
 
   .flip-text-{{ section.id }} * {
@@ -319,144 +284,6 @@
     text-transform: unset;
     word-break: break-word;
     font-weight: 400;
-  }
-
-  .flip-text-{{ section.id }} a {
-    color: {{ link_color }};
-    text-decoration: underline;
-    transition: all 0.25s ease 0s;
-  }
-
-  .flip-text-{{ section.id }} a:hover {
-    color: {{ link_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .flip-card-heading-wrap-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    justify-content: {{ heading_vertical_align_mobile }};
-  }
-
-  .flip-card-heading-{{ section.id }} {
-    margin: 0px; 
-    text-align: {{ heading_align_mobile }};
-    font-size: {{ heading_size_mobile }}px;
-    line-height: {{ heading_height }}%;
-    color: {{ heading_color }};
-    text-transform: unset;
-    word-break: break-word;
-    font-weight: 400;
-    width: 100%;
-  }
-
-  
-  .flip-modal-{{ section.id }} {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    display: flex;
-    z-index: -1;
-    opacity: 0;
-    pointer-events: none;
-    align-items: center;
-    justify-content: center;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(15px);
-    background-color: #00000029;   
-    transition: all 0.25s ease 0s;
-  }
-  
-  .flip-modal-{{ section.id }}.active {
-    opacity: 1;
-    z-index: 9999;
-    pointer-events: all;
-    transition: all 0.25s ease 0s;
-  }
-
-  .flip-modal-inner-{{ section.id }} {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none; 
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: all 0.25s ease 0s;
-    padding: 20px;
-  }
-
-  .flip-modal-content-{{ section.id }} {
-    max-width: fit-content;
-    position: relative;
-    display: none;
-    background-color: {{ card_content_bg_back_color }};     
-    border: {{ card_border_thickness }}px solid {{ card_border_color }};
-    border-radius: {{ card_radius }}px;
-    padding: 30px;   
-    padding-bottom: {{ icon_size_mobile | plus: 40 }}px important;
-    max-width: 400px;
-    width: 100%;
-  }
-
-  .flip-modal-content-{{ section.id }}.active {
-    display: block;
-  }
-
-  .flip-modal-inner-{{ section.id }}.active {
-    transition: all 0.25s ease 0s;
-    opacity: 1;
-  }
-
-  .flip-close-modal-{{ section.id }} {
-    padding: 0;
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: none;
-    border: 0px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 2;
-    padding: {{ close_icon_size_mobile | times: 0.6 }}px;
-    background-color: {{ close_icon_bg_color }};
-    border: {{ close_border_thickness }}px solid {{ close_border_color }};
-    overflow: hidden;
-    transition: all 0.25s ease 0s;
-  }
-
-
-  .flip-close-modal-{{ section.id }}:hover {
-    border: {{ close_border_thickness }}px solid {{ close_border_hover_color }};
-    background-color: {{ close_icon_bg_hover_color }};
-    transition: all 0.25s ease 0s;
-  }
-
-  .flip-close-modal-{{ section.id }} svg {
-    position: relative;
-    z-index: 2;
-    display: block;
-    width: {{ close_icon_size_mobile }}px;
-    height: {{ close_icon_size_mobile }}px;
-    transition: all 0.25s ease 0s;
-  }
-
-  .flip-close-modal-{{ section.id }} svg path {
-    fill: {{ close_icon_color }};   
-    transition: all 0.25s ease 0s;
-  }
-
-  .flip-close-modal-{{ section.id }}:hover svg path {
-    fill: {{ close_icon_hover_color }}; 
-    transition: all 0.25s ease 0s;
   }
 
   @media(min-width: 1024px) {
@@ -482,14 +309,33 @@
       gap: {{ cards_gap }}px;
     }
 
+    .flip-card-content-{{ section.id }} {
+      padding: {{ card_content_padding_vertical }}px {{ card_content_padding_horizontal }}px;   
+    }
+
+    .flip-card-{{ section.id }}:hover {
+      transform: scale(1.02);
+    }
+    
+    .flip-card-wrapper-{{ section.id }}:hover {
+      transform: scale(1.03);
+    }
+
     .flip-title-{{ section.id }} {     
       text-align: {{ card_content_align }};
       font-size: {{ title_size }}px;     
     }
 
-    .flip-icon-{{ section.id }} {  
-      padding: {{ icon_size | times: 0.6 }}px;
+    .flip-subtitle-{{ section.id }} {  
+      margin-top: {{ subtitle_mt }}px;  
+      text-align: {{ card_content_align }};
+      font-size: {{ subtitle_size }}px;    
     }
+
+    .flip-icon-{{ section.id }} {  
+      padding: {{ icon_size | times: 0.5 }}px;
+    }
+
     
     .flip-icon-{{ section.id }} svg {      
       width: {{ icon_size }}px;
@@ -498,33 +344,11 @@
 
     .flip-text-{{ section.id }} {
       margin-top: {{ text_mt }}px;
-      text-align: {{ card_back_content_align }};
+      text-align: {{ text_align }};
     }
 
     .flip-text-{{ section.id }} * {
       font-size: {{ text_size }}px;    
-    }
-
-    .flip-card-heading-wrap-{{ section.id }} {
-      justify-content: {{ heading_vertical_align }};
-    }
-
-    .flip-card-heading-{{ section.id }} {
-      text-align: {{ heading_align }};
-      font-size: {{ heading_size }}px;   
-    }
-
-    .flip-modal-content-{{ section.id }} {   
-      padding-bottom: {{ icon_size | plus: 40 }}px !important;
-    }
-    
-    .flip-close-modal-{{ section.id }} {
-      padding: {{ close_icon_size | times: 0.6 }}px;
-    }
-
-    .flip-close-modal-{{ section.id }} svg {
-      width: {{ close_icon_size }}px;
-      height: {{ close_icon_size }}px;
     }
   }
   
@@ -575,6 +399,16 @@
   </style>
 {% endif %}
 
+{% if subtitle_custom %}
+  <style>
+    .flip-subtitle-{{ section.id }} {
+      font-family: {{ subtitle_font.family }}, {{ subtitle_font.fallback_families }};
+      font-weight: {{ subtitle_font.weight }};
+      font-style: {{ subtitle_font.style }};
+    }
+  </style>
+{% endif %}
+
 {% if text_custom %}
   <style>
     .flip-text-{{ section.id }} * {
@@ -585,42 +419,28 @@
   </style>
 {% endif %}
 
-{% if heading_custom %}
-  <style>
-    .flip-card-heading-{{ section.id }} {
-      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-      font-weight: {{ heading_font.weight }};
-      font-style: {{ heading_font.style }};
-    }
-  </style>
-{% endif %}
-
 
 {% if image_ratio_mobile == "portrait" %}
   <style>
-    .flip-image-{{ section.id }},
-    .flip-modal-content-{{ section.id }} {
+    .flip-image-{{ section.id }} {
       aspect-ratio: 9.6/13;
     }
   </style>
 {% elsif image_ratio_mobile == "landscape" %}
   <style>
-  .flip-image-{{ section.id }},
-  .flip-modal-content-{{ section.id }} {
+  .flip-image-{{ section.id }} {
     aspect-ratio: 12/8;
   }
   </style>
 {% elsif image_ratio_mobile == "square" %}
   <style>
-    .flip-image-{{ section.id }},
-    .flip-modal-content-{{ section.id }} {
+    .flip-image-{{ section.id }} {
       aspect-ratio: 12/12;
     }
   </style>
 {% else %}
   <style>
-    .flip-image-{{ section.id }},
-    .flip-modal-content-{{ section.id }} {
+    .flip-image-{{ section.id }} {
       aspect-ratio: auto;
     }
   </style>
@@ -629,8 +449,7 @@
 {% if image_ratio == "portrait" %}
   <style>
     @media(min-width: 1024px) {
-      .flip-image-{{ section.id }},
-      .flip-modal-content-{{ section.id }} {
+      .flip-image-{{ section.id }} {
         aspect-ratio: 9.6/13;
       }
     }
@@ -639,8 +458,7 @@
 {% elsif image_ratio == "landscape" %}
   <style>
     @media(min-width: 1024px) {
-      .flip-image-{{ section.id }},
-      .flip-modal-content-{{ section.id }} {
+      .flip-image-{{ section.id }} {
         aspect-ratio: 12/8;
       }
     }  
@@ -648,8 +466,7 @@
 {% elsif image_ratio == "square" %}
   <style>
     @media(min-width: 1024px) {
-      .flip-image-{{ section.id }},
-      .flip-modal-content-{{ section.id }} {
+      .flip-image-{{ section.id }} {
         aspect-ratio: 12/12;
       }
     }    
@@ -657,10 +474,18 @@
 {% else %}
   <style>
      @media(min-width: 1024px) {
-      .flip-image-{{ section.id }},
-      .flip-modal-content-{{ section.id }} {
+      .flip-image-{{ section.id }} {
         aspect-ratio: auto;
       }
+    }
+  </style>
+{% endif %}
+
+{% if image_zoom %}
+  <style>
+    .flip-card-front-{{ section.id }}:hover .flip-image-{{ section.id }} img,
+    .flip-card-front-{{ section.id }}:hover .flip-image-{{ section.id }} svg {
+      transform: scale(1.06);
     }
   </style>
 {% endif %}
@@ -702,228 +527,247 @@
   </style>
 {% endif %}
 
+{% if layout_mobile == 'slider' %}
+  <style>
+    .flip-body-{{ section.id }} {
+      display: none !important;
+    }
+
+    .flip-slider-{{ section.id }} {
+      display: flex !important;
+    }
+
+    @media(min-width: 1024px) {
+      .flip-body-{{ section.id }} {
+        display: grid !important;
+      }
+
+      .flip-slider-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    .flip-body-{{ section.id }} {
+      display: grid !important;
+    }
+
+    .flip-slider-{{ section.id }} {
+      display: none !important;
+    }
+  </style>
+{% endif %}
+
 <div class="section-{{ section.id }} flip-{{ section.id }}" {% if background_style == 'solid' %}style="background-color:{{ background_color }};"{% else %} style="background-image: {{ background_gradient }};"{% endif %}>
     <div class="section-{{ section.id }}-settings">      
       <div class="flip-body-{{ section.id }}">
         {% for block in section.blocks %}
           {% case block.type %}
             {% when 'card' %}             
-              <div class="flip-card-{{ section.id }}" id="{{ block.id }}">
+              <div class="flip-card-{{ section.id }}">
                 <div class="flip-card-wrapper-{{ section.id }}">
                   <div class="flip-card-front-{{ section.id }}">                  
                     <div class="flip-image-{{ section.id }}">    
-                      {% if block.settings.image != blank %}                        
-                         {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
-                          {{ block.settings.image | image_url: width: 750 | image_tag:
-                            loading: lazy_load_setting,
-                            width: block.settings.image.width,
-                            height: block.settings.image.height,
-                            sizes: sizes,
-                            widths: '750, 1070'
-                          }}              
+                      {% if block.settings.image != blank %}
+                        <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>            
                       {% else %}
                         {{ 'image' | placeholder_svg_tag }}
-                      {% endif %}                       
-                    </div>
-                    {% if block.settings.title != blank %}                     
-                      <h3 class="flip-title-{{ section.id }}">{{ block.settings.title }}</h3>                      
-                    {% endif %}
-                    <div class="flip-card-content-{{ section.id }}">                    
+                      {% endif %}        
                       <div class="flip-icon-{{ section.id }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                           <path fill-rule="evenodd" clip-rule="evenodd" d="M8.31201 17.062V0.812012H9.56201V17.062H8.31201Z" fill="black"></path>
                           <path fill-rule="evenodd" clip-rule="evenodd" d="M0.812013 8.31201H17.062V9.56201H0.812013V8.31201Z" fill="black"></path>
                         </svg>
-                      </div>                                          
+                      </div>                    
+                    </div>
+                    <div class="flip-card-content-{{ section.id }}">
+                      <div class="flip-card-content-wrapper">
+                        {% if block.settings.title != blank %}                     
+                          <h3 class="flip-title-{{ section.id }}">{{ block.settings.title }}</h3>                      
+                        {% endif %}
+                        {% if block.settings.subtitle != blank %}                     
+                          <h3 class="flip-subtitle-{{ section.id }}">{{ block.settings.subtitle }}</h3>                       
+                        {% endif %}
+                      </div>                     
                     </div>                    
                   </div>                  
-                  <div class="flip-card-back-{{ section.id }}">    
-                    {% if block.settings.title != blank %}                     
-                      <h3 class="flip-title-{{ section.id }} flip-title-back-{{ section.id }}">{{ block.settings.title }}</h3>                      
-                    {% endif %}     
+                  <div class="flip-card-back-{{ section.id }}">       
+                    <div class="flip-icon-{{ section.id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.31201 17.062V0.812012H9.56201V17.062H8.31201Z" fill="black"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.812013 8.31201H17.062V9.56201H0.812013V8.31201Z" fill="black"></path>
+                      </svg>
+                    </div>    
                     {% if block.settings.text != blank %}                     
-                      <div class="flip-text-{{ section.id }}">{{ block.settings.text }}</div>                     
+                      <h3 class="flip-text-{{ section.id }}">{{ block.settings.text }}</h3>                     
                     {% endif %}
-                    {% if block.settings.found_text != blank %}
-                      <div class="flip-text-{{ section.id }}" style="margin-bottom: 8px !important;">{{ block.settings.found_text }}</div>    
-                    {% endif %}
-                    {% for product in block.settings.products %}
-                      <div class="flip-text-{{ section.id }}" style="margin-top: 0 !important;">
-                        <a href="{{ product.url }}">{{ product.title }}</a>  
-                      </div>  
-                    {% endfor %}
                   </div>  
                 </div>                                  
-              </div>    
-            {% when 'heading' %}
-              {% if block.settings.heading != blank %}
-                <div class="flip-card-heading-wrap-{{ section.id }}">
-                  <p class="flip-card-heading-{{ section.id }}">{{ block.settings.heading }}</p>
-                </div>      
-              {% endif %}                 
+              </div>                           
             {% else %}              
           {% endcase %}
         {% endfor %}      
       </div>     
-    </div>
-</div>
-
-<div class="flip-modal-{{ section.id }}">
-  <div class="flip-modal-inner-{{ section.id }}">
-    {% for block in section.blocks %}
-      {% if block.type == 'card' %}
-        <div class="flip-modal-content-{{ section.id }}" data-id="{{ block.id }}">
-          {% if block.settings.title != blank %}                     
-            <h3 class="flip-title-{{ section.id }} flip-title-back-{{ section.id }}">{{ block.settings.title }}</h3>                      
-          {% endif %}     
-          {% if block.settings.text != blank %}                     
-            <div class="flip-text-{{ section.id }}">{{ block.settings.text }}</div>                     
-          {% endif %}
-          {% if block.settings.found_text != blank %}
-            <div class="flip-text-{{ section.id }}" style="margin-bottom: 8px !important;">{{ block.settings.found_text }}</div>    
-          {% endif %}
-          {% for product in block.settings.products %}
-            <div class="flip-text-{{ section.id }}" style="margin-top: 0 !important;">
-              <a href="{{ product.url }}">{{ product.title }}</a>  
-            </div>  
-          {% endfor %}
-          <button class="flip-close-modal-{{ section.id }}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-              d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z"
-              fill="white"></path>
-            </svg>        
-          </button>
+      {% if layout_mobile == 'slider' %}
+        <div class="flip-slider-{{ section.id }} swiper" style="padding-top: 30px !important; padding-bottom: 30px !important;">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'card' %}                  
+                  <div class="flip-card-{{ section.id }} swiper-slide">
+                    <div class="flip-card-wrapper-{{ section.id }}">
+                      <div class="flip-card-front-{{ section.id }}">                  
+                        <div class="flip-image-{{ section.id }}">    
+                          {% if block.settings.image != blank %}
+                            <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>            
+                          {% else %}
+                            {{ 'image' | placeholder_svg_tag }}
+                          {% endif %}        
+                          <div class="flip-icon-{{ section.id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.31201 17.062V0.812012H9.56201V17.062H8.31201Z" fill="black"></path>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.812013 8.31201H17.062V9.56201H0.812013V8.31201Z" fill="black"></path>
+                        </svg>
+                          </div>                    
+                        </div>
+                        <div class="flip-card-content-{{ section.id }}">
+                          <div class="flip-card-content-wrapper">
+                            {% if block.settings.title != blank %}                     
+                              <h3 class="flip-title-{{ section.id }}">{{ block.settings.title }}</h3>                      
+                            {% endif %}
+                            {% if block.settings.subtitle != blank %}                     
+                              <h3 class="flip-subtitle-{{ section.id }}">{{ block.settings.subtitle }}</h3>                       
+                            {% endif %}
+                          </div>                     
+                        </div>                    
+                      </div>                  
+                      <div class="flip-card-back-{{ section.id }}">       
+                        <div class="flip-icon-{{ section.id }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.31201 17.062V0.812012H9.56201V17.062H8.31201Z" fill="black"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.812013 8.31201H17.062V9.56201H0.812013V8.31201Z" fill="black"></path>
+                          </svg>
+                        </div>    
+                        {% if block.settings.text != blank %}                     
+                          <h3 class="flip-text-{{ section.id }}">{{ block.settings.text }}</h3>                     
+                        {% endif %}
+                      </div>  
+                    </div>                                  
+                  </div>                           
+                {% else %}              
+              {% endcase %}
+            {% endfor %}    
+          </div>
         </div>
       {% endif %}
-    {% endfor %}   
-  </div>
+    </div>
 </div>
+<style>
+  @media( width < 800px ){
+    .flip-text-{{ section.id }} {
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      overflow: hidden;    
+    }    
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
   const eventHandlers{{ section.id | replace: '-', '' }} = {};
 
-  function handleCardFlip{{ section.id | replace: '-', '' }}(e) {
-    const card = e.currentTarget.querySelector('.flip-card-wrapper-{{ section.id }}');
-    card.classList.toggle('fliped');
-  }
-
   function handleCardClick{{ section.id | replace: '-', '' }}(e) {
+    console.log('click');
     const card = e.currentTarget.querySelector('.flip-card-wrapper-{{ section.id }}');
-    if (card) {
-        card.classList.toggle('fliped');
+    if (card.classList.contains('fliped')) {
+      card.classList.remove('fliped');
+    } else {
+      card.classList.add('fliped');
     }
   }
 
   function initFlipCards{{ section.id | replace: '-', '' }}() {
-    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+    {% if layout_mobile == 'slider' %}
+      new Swiper(`.flip-slider-{{ section.id }}`, {
+        speed: 300,
+        spaceBetween: 15,
+        slidesPerView: 1.5,
+      });
+    {% endif %}
+
     const wrapperCards = document.querySelectorAll('.flip-card-{{ section.id }}');
-
     wrapperCards.forEach(card => {
-        if (!isMobile) {
-          card.addEventListener('mouseenter', handleCardFlip{{ section.id | replace: '-', '' }});
-          card.addEventListener('mouseleave', handleCardFlip{{ section.id | replace: '-', '' }});
-        }
-    });
+      card.addEventListener('click', handleCardClick{{ section.id | replace: '-', '' }});
 
-    if (!eventHandlers{{ section.id | replace: '-', '' }}.cards) {
+      if (!eventHandlers{{ section.id | replace: '-', '' }}.cards) {
         eventHandlers{{ section.id | replace: '-', '' }}.cards = [];
-    }
-    eventHandlers{{ section.id | replace: '-', '' }}.cards = Array.from(wrapperCards).map(card => {
-        return { 
-            element: card, 
-            handler: isMobile ? handleCardClick{{ section.id | replace: '-', '' }} : handleCardFlip{{ section.id | replace: '-', '' }},
-            eventType: isMobile ? 'click' : 'mouseenter'
-        };
-    });
-
-    const tabs = document.querySelectorAll('.flip-card-{{ section.id }}');
-    const modal = document.querySelector('.flip-modal-{{ section.id }}');
-    const modalInner = document.querySelector('.flip-modal-inner-{{ section.id }}');
-    const modalText = document.querySelectorAll('.flip-modal-content-{{ section.id }}');
-    const closeModal = document.querySelectorAll('.flip-close-modal-{{ section.id }}');
-
-    if(tabs) {
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {              
-          if(modalText) {
-            document.body.style.overflow = 'hidden';     
-            if(modal) {
-              modal.classList.add('active');
-              setTimeout(() => {
-                modalInner.classList.add('active');
-              }, 200)
-            } else {              
-              modalInner.classList.remove('active');             
-              setTimeout(() => {
-                modal.classList.remove('active');      
-              }, 200)        
-            }
-            modalText.forEach(e => {
-              if(tab.id === e.getAttribute('data-id')) {
-                e.classList.add('active');
-              } else {
-                setTimeout(() => {
-                  e.classList.remove('active')  
-                }, 200)               
-              }
-            })
-          }
-        })
-      })
-    }
-
-    if(closeModal) {
-      closeModal.forEach((i) => {
-        i.addEventListener("click", () => {
-          document.body.style.overflow = '';   
-          if(modal) {     
-            modalInner.classList.remove('active');             
-            setTimeout(() => {
-              modal.classList.remove('active');      
-            }, 200)            
-          }
-          modalText.forEach(e => {          
-            setTimeout(() => {
-              e.classList.remove('active')  
-            }, 200)      
-          })
-        })
-      })
-      
-    }
-
-    document.addEventListener('click', function(e) {
-      if (e.target == modal) {
-        document.body.style.overflow = '';   
-        modalInner.classList.remove('active');             
-        setTimeout(() => {
-          modal.classList.remove('active');      
-        }, 200)
       }
+      eventHandlers{{ section.id | replace: '-', '' }}.cards.push({ element: card, handler: handleCardClick{{ section.id | replace: '-', '' }} });
     });
+
+    if (window.innerWidth > 1024) {
+      const cards = document.querySelectorAll('.flip-card-{{ section.id }}');
+      cards.forEach((el) => {
+        const width = el.clientWidth;
+        const height = el.clientHeight;
+
+        const mouseMoveHandler = (e) => {
+          const xVal = e.layerX;
+          const yVal = e.layerY;
+          const yRotation = 15 * ((xVal - width / 2) / width);
+          const xRotation = -15 * ((yVal - height / 2) / height);
+          el.style.transform = `perspective(500px) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+        };
+
+        const mouseOutHandler = () => {
+          el.style.transform = 'perspective(500px) rotateX(0) rotateY(0)';
+        };
+
+        el.addEventListener('mousemove', mouseMoveHandler);
+        el.addEventListener('mouseout', mouseOutHandler);
+        el.addEventListener('mousedown', mouseOutHandler); 
+        el.addEventListener('mouseup', mouseOutHandler);  
+
+        if (!eventHandlers{{ section.id | replace: '-', '' }}.mouse) {
+          eventHandlers{{ section.id | replace: '-', '' }}.mouse = [];
+        }
+        eventHandlers{{ section.id | replace: '-', '' }}.mouse.push({
+          element: el,
+          handlers: {
+            mousemove: mouseMoveHandler,
+            mouseout: mouseOutHandler,
+            mousedown: mouseOutHandler,
+            mouseup: mouseOutHandler,
+          }
+        });
+      });
+    }
   }
 
   function destroyFlipCards{{ section.id | replace: '-', '' }}() {
     if (eventHandlers{{ section.id | replace: '-', '' }}.cards) {
-        eventHandlers{{ section.id | replace: '-', '' }}.cards.forEach(({ element, handler, eventType }) => {
-            if (element && handler) {
-                element.removeEventListener(eventType, handler);
-                if (eventType === 'mouseenter') {
-                    element.removeEventListener('mouseleave', handler);
-                }
-            }
-        });
-        eventHandlers{{ section.id | replace: '-', '' }}.cards = [];
+      eventHandlers{{ section.id | replace: '-', '' }}.cards.forEach(({ element, handler }) => {
+        element.removeEventListener('click', handler);
+      });
+      eventHandlers{{ section.id | replace: '-', '' }}.cards = [];
+    }
+
+    if (eventHandlers{{ section.id | replace: '-', '' }}.mouse) {
+      eventHandlers{{ section.id | replace: '-', '' }}.mouse.forEach(({ element, handlers }) => {
+        element.removeEventListener('mousemove', handlers.mousemove);
+        element.removeEventListener('mouseout', handlers.mouseout);
+        element.removeEventListener('mousedown', handlers.mousedown);
+        element.removeEventListener('mouseup', handlers.mouseup);
+      });
+      eventHandlers{{ section.id | replace: '-', '' }}.mouse = [];
     }
   }
 
   document.addEventListener('DOMContentLoaded', initFlipCards{{ section.id | replace: '-', '' }});
-  window.addEventListener('resize', () => {
-    destroyFlipCards{{ section.id | replace: '-', '' }}();
-    initFlipCards{{ section.id | replace: '-', '' }}();
-  });
-
+  
   if (Shopify.designMode) {
     document.addEventListener('shopify:section:load', initFlipCards{{ section.id | replace: '-', '' }});
     document.addEventListener('shopify:section:unload', destroyFlipCards{{ section.id | replace: '-', '' }});
@@ -932,7 +776,7 @@
 
 {% schema %}
 {
-  "name": "SG-Flip cards #2",
+  "name": "SG-Flip cards",
   "settings": [
     {
       "type": "header",
@@ -945,13 +789,30 @@
       "max": 6,
       "step": 1,
       "label": "Cards per row",
-      "default": 3
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Layout - mobile",
+      "default": "slider",
+      "options": [
+        {
+          "label": "Grid",
+          "value": "grid"
+        },
+        {
+          "label": "Slider",
+          "value": "slider"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "cards_per_row_mobile",
       "label": "Cards per row - mobile",
       "default": "2",
+      "visible_if": "{{ section.settings.layout_mobile == 'grid' }}",
       "options": [
         {
           "label": "1",
@@ -971,7 +832,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 60
+      "default": 30
     },
     {
       "type": "range",
@@ -995,7 +856,7 @@
       "step": 2,
       "unit": "px",
       "label": "Roundness",
-      "default": 24
+      "default": 10
     },
     {
       "type": "range",
@@ -1011,7 +872,7 @@
       "type": "select",
       "id": "card_shadow",
       "label": "Card shadow",
-      "default": "fourth",
+      "default": "first",
       "options": [
         {
           "label": "None",
@@ -1037,119 +898,13 @@
     },
     {
       "type": "header",
-      "content": "Heading"
-    },
-    {
-      "type": "checkbox",
-      "id": "heading_custom",
-      "label": "Use custom font",
-      "default": false
-    },
-    {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Font family",
-      "default": "josefin_sans_n4",
-      "visible_if": "{{ section.settings.heading_custom }}"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "min": 0,
-      "max": 120,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "min": 0,
-      "max": 120,
-      "step": 2,
-      "unit": "px",
-      "label": "Font size - mobile",
-      "default": 52
-    },
-    {
-      "type": "range",
-      "id": "heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Line height",
-      "default": 150
-    },
-    {
-      "type": "text_alignment",
-      "id": "heading_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "heading_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
-      "type": "select",
-      "id": "heading_vertical_align",
-      "label": "Position",
-      "default": "start",
-      "options": [
-        {
-          "label": "Top",
-          "value": "start"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Bottom",
-          "value": "end"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "heading_vertical_align_mobile",
-      "label": "Position - mobile",
-      "default": "start",
-      "options": [
-        {
-          "label": "Top",
-          "value": "start"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Bottom",
-          "value": "end"
-        }
-      ]
-    },
-    {
-      "type": "header",
       "content": "Image"
-    },
-    {
-      "type": "range",
-      "id": "image_overlay",
-      "label": "Overlay",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "default": 0.2
     },
     {
       "type": "select",
       "id": "image_ratio",
       "label": "Aspect ratio",
-      "default": "portrait",
+      "default": "landscape",
       "options": [
         {
           "label": "Portrait",
@@ -1173,7 +928,7 @@
       "type": "select",
       "id": "image_ratio_mobile",
       "label": "Aspect ratio - mobile",
-      "default": "portrait",
+      "default": "landscape",
       "options": [
         {
           "label": "Portrait",
@@ -1192,6 +947,78 @@
           "value": "original"
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "image_zoom",
+      "label": "Enable image zoom on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_advanced",
+      "label": "Advanced padding settings",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "card_content_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 20,
+      "visible_if": "{{ section.settings.padding_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "card_content_padding_horizontal_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 16,
+      "visible_if": "{{ section.settings.padding_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "card_content_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 20,
+      "visible_if": "{{ section.settings.padding_advanced }}"
+    },
+    {
+      "type": "range",
+      "id": "card_content_padding_vertical_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 16,
+      "visible_if": "{{ section.settings.padding_advanced }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "card_content_align",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "card_content_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "center"
     },
     {
       "type": "header",
@@ -1218,7 +1045,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 24
+      "default": 18
     },
     {
       "type": "range",
@@ -1228,7 +1055,7 @@
       "step": 1,
       "unit": "px",
       "label": "Font size - mobile",
-      "default": 20
+      "default": 15
     },
     {
       "type": "range",
@@ -1241,16 +1068,95 @@
       "default": 130
     },
     {
-      "type": "text_alignment",
-      "id": "card_content_align",
-      "label": "Alignment",
-      "default": "center"
+      "type": "header",
+      "content": "Subtitle"
     },
     {
-      "type": "text_alignment",
-      "id": "card_content_align_mobile",
-      "label": "Alignment - mobile",
-      "default": "center"
+      "type": "checkbox",
+      "id": "subtitle_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "subtitle_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4",
+      "visible_if": "{{ section.settings.subtitle_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subtitle_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "subtitle_mt",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subtitle_mt_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Size - mobile",
+      "default": 16
     },
     {
       "type": "header",
@@ -1300,16 +1206,6 @@
       "default": 150
     },
     {
-      "type": "text_alignment",
-      "id": "card_back_content_align",
-      "label": "Alignment"
-    },
-    {
-      "type": "text_alignment",
-      "id": "card_back_content_align_mobile",
-      "label": "Alignment - mobile"
-    },
-    {
       "type": "range",
       "id": "text_mt",
       "min": 0,
@@ -1317,7 +1213,7 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top",
-      "default": 20
+      "default": 28
     },
     {
       "type": "range",
@@ -1327,101 +1223,35 @@
       "step": 2,
       "unit": "px",
       "label": "Margin top - mobile",
-      "default": 20
-    },
-    {
-      "type": "header",
-      "content": "Plus icon"
-    },
-    {
-      "type": "range",
-      "id": "icon_size",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Size",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "icon_size_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Size - mobile",
       "default": 16
     },
     {
-      "type": "range",
-      "id": "icon_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 1
+      "type": "text_alignment",
+      "id": "text_align",
+      "label": "Alignment",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_align_mobile",
+      "label": "Alignment - mobile",
+      "default": "left"
     },
     {
       "type": "header",
-      "content": "Close icon"
-    },
-    {
-      "type": "range",
-      "id": "close_icon_size",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Size",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "close_icon_size_mobile",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "label": "Size - mobile",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "close_border_thickness",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "label": "Border thickness",
-      "default": 1
-    },
-    {
-      "type": "header",
-      "content": "Heading colors"
-    },
-    {
-      "type": "color",
-      "label": "Heading",
-      "id": "heading_color",
-      "default": "#121212"
-    },
-    {
-      "type": "header",
-      "content": "Card colors"
+      "content": "Slide colors"
     },
     {
       "type": "color",
       "label": "Title",
-      "id": "title_back_color",
+      "id": "title_color",
       "default": "#121212"
     },
     {
       "type": "color",
-      "label": "Title (front side)",
-      "id": "title_color",
-      "default": "#FFFFFF"
+      "label": "Subtitle",
+      "id": "subtitle_color",
+      "default": "#121212"
     },
     {
       "type": "color",
@@ -1431,19 +1261,13 @@
     },
     {
       "type": "color",
-      "label": "Link",
-      "id": "link_color",
-      "default": "#121212"
+      "label": "Front background",
+      "id": "card_content_bg_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Link hover",
-      "id": "link_hover_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Background",
+      "label": "Back background",
       "id": "card_content_bg_back_color",
       "default": "#FFFFFF"
     },
@@ -1456,78 +1280,38 @@
     },
     {
       "type": "color",
-      "label": "Image overlay",
-      "id": "image_overlay_color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Card shadow",
+      "label": "Shadow",
       "id": "card_shadow_color",
       "default": "#000000",
       "visible_if": "{{ section.settings.card_shadow != 'none' }}"
     },
     {
       "type": "header",
-      "content": "Plus icon colors"
+      "content": "Icon colors"
     },
     {
       "type": "color",
       "label": "Icon",
       "id": "icon_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Background",
-      "id": "icon_bg_color",
-      "default": "transparent"
-    },
-    {
-      "type": "color",
-      "label": "Border",
-      "id": "icon_border_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "header",
-      "content": "Close icon colors"
-    },
-    {
-      "type": "color",
-      "label": "Icon",
-      "id": "close_icon_color",
       "default": "#121212"
     },
     {
       "type": "color",
       "label": "Icon hover",
-      "id": "close_icon_hover_color",
-      "default": "#FFFFFF"
+      "id": "icon_hover_color",
+      "default": "#121212"
     },
     {
       "type": "color",
       "label": "Background",
-      "id": "close_icon_bg_color",
+      "id": "icon_bg_color",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
       "label": "Background hover",
-      "id": "close_icon_bg_hover_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Border",
-      "id": "close_border_color",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "label": "Border hover",
-      "id": "close_border_hover_color",
-      "default": "#121212"
+      "id": "icon_bg_hover_color",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
@@ -1723,47 +1507,24 @@
           "default": "Title"
         },
         {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Subtitle"
+        },
+        {
           "type": "richtext",
           "id": "text",
           "label": "Text",
           "default": "<p>Tell your story</p>"
-        },
-        {
-          "type": "richtext",
-          "id": "found_text",
-          "label": "Products heading",
-          "default": "<p>FOUND IN:</p>"
-        },
-        {
-          "type": "product_list",
-          "id": "products",
-          "label": "Products"
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "name": "Heading",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Index"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SG-Flip cards #2",
+      "name": "SG-Flip cards",
       "blocks": [
-        {
-          "type": "heading"
-        },
-        {
-          "type": "card"
-        },
         {
           "type": "card"
         },
