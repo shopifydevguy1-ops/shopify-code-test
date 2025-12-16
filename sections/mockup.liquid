@@ -1,8 +1,3 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
-
 {%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
@@ -16,29 +11,32 @@
   assign margin_horizontal = section.settings.margin_horizontal
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
+  assign background_image = section.settings.background_image
+  assign background_image_mobile = section.settings.background_image_mobile
+  assign background_overlay = section.settings.background_overlay
+  assign background_overlay_color = section.settings.background_overlay_color
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
   assign section_radius = section.settings.section_radius
-
+  
   assign hero_height = section.settings.hero_height
   assign hero_fixed_height = section.settings.hero_fixed_height
 
-  assign body_position = section.settings.body_position
-  assign body_position_mobile = section.settings.body_position_mobile
+  assign body_layout = section.settings.body_layout
+  assign body_layout_mobile = section.settings.body_layout_mobile
   assign body_gap = section.settings.body_gap
   assign body_gap_mobile = section.settings.body_gap_mobile
 
-  assign content_padding_horizontal = section.settings.content_padding_horizontal
-  assign content_padding_horizontal_mobile = section.settings.content_padding_horizontal_mobile
-  assign content_padding_vertical = section.settings.content_padding_vertical
-  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
-  assign content_radius = section.settings.content_radius
-  assign content_bg = section.settings.content_bg
-  
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign image_radius = section.settings.image_radius
+  assign image_width = section.settings.image_width
+  assign image_ratio_mobile = section.settings.image_ratio_mobile    
+
   assign content_align = section.settings.content_align
   assign content_align_mobile = section.settings.content_align_mobile
   assign content_vertical_align = section.settings.content_vertical_align
-
 
   assign content_horizontal_align = ""
   if content_align == "center"
@@ -57,41 +55,12 @@
   else
     assign content_horizontal_align_mobile = "start"
   endif
-
-  assign video = section.settings.video
-  assign video_url = section.settings.video_url
-  assign video_autoplay = section.settings.video_autoplay
-  assign video_width = section.settings.video_width
-  assign video_ratio_mobile = section.settings.video_ratio_mobile    
-
-  assign video_button_play_text = section.settings.video_button_play_text
-  assign video_button_pause_text = section.settings.video_button_pause_text
-  assign video_button_text_custom = section.settings.video_button_text_custom
-  assign video_button_text_font = section.settings.video_button_text_font
-  assign video_button_text_size = section.settings.video_button_text_size
-  assign video_button_text_size_mobile = section.settings.video_button_text_size_mobile
-  assign video_button_text_height = section.settings.video_button_text_height
-  assign video_button_text_color = section.settings.video_button_text_color
-  assign video_button_text_color_hover = section.settings.video_button_text_color_hover
-  assign video_button_border_color = section.settings.video_button_border_color
-  assign video_button_border_color_hover = section.settings.video_button_border_color_hover
-  assign video_button_shadow_color = section.settings.video_button_shadow_color
-  assign video_button_bg_color = section.settings.video_button_bg_color
-  assign video_button_bg_color_hover = section.settings.video_button_bg_color_hover    
-  assign video_button_border_thickness = section.settings.video_button_border_thickness
-  assign video_button_radius = section.settings.video_button_radius
-  assign video_button_padding_horizontal = section.settings.video_button_padding_horizontal
-  assign video_button_padding_horizontal_mobile = section.settings.video_button_padding_horizontal_mobile
-  assign video_button_padding_vertical = section.settings.video_button_padding_vertical
-  assign video_button_padding_vertical_mobile = section.settings.video_button_padding_vertical_mobile
-  assign use_play_shadow = section.settings.use_play_shadow
-
 -%}
 
 {%- style -%}
-  {{  video_button_text_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
+    position: relative;
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
@@ -108,6 +77,19 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-{{ section.id }}::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ background_overlay_color |  hex_to_rgba: background_overlay }};
+    z-index: 0;
   }
 
   .hero-body-{{ section.id }} {
@@ -122,91 +104,29 @@
     align-items: {{ content_horizontal_align_mobile }};
     background-color: {{ content_bg }};
     border-radius: {{ content_radius }}px;
-    padding: {{ content_padding_vertical_mobile }}px {{ content_padding_horizontal_mobile }}px;
     grid-area: content;
   }
-  
-  .hero-video-{{ section.id }} {
-    position: relative;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: {{ content_radius }}px;
+
+  .hero-image-{{ section.id }} {
+    grid-area: image;
+    border-radius: {{ image_radius }}px;    
     overflow: hidden;
-    transition: all 0.25s ease 0s;
-    box-sizing: border-box !important;
-    grid-area: video;
   }
 
-  .hero-video-{{ section.id }} video,
-  .hero-video-{{ section.id }} iframe {
-    display: block;
+  .hero-image-{{ section.id }} img,
+  .hero-image-{{ section.id }} svg {
+    display: block;    
     width: 100%;
     height: 100%;
     object-fit: cover;
-    margin: 0;
-    border: 0;
-    box-shadow: 0;
   }
 
-  .hero-video-button-{{ section.id }} {
-    position: absolute;
-    display: flex;
-    bottom: 20px;
-    left: 20px;
-    z-index: 2;
-    background-color: {{ video_button_bg_color }};
-    padding: {{ video_button_padding_vertical_mobile }}px {{ video_button_padding_horizontal_mobile }}px;
-    border: {{ video_button_border_thickness }}px solid {{ video_button_border_color }}; 
-    border-radius: {{ video_button_radius}}px;     
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }    
-
-  .hero-video-button-{{ section.id }} * {
-    word-wrap: break-word;
-    margin: 0;
-    font-size: {{ video_button_text_size_mobile }}px;
-    line-height: {{ video_button_text_height }}%;
-    color: {{ video_button_text_color }};
-    text-transform: unset;
-    transition: all 0.25s ease;
+  .hero-image-{{ section.id }} svg {
+    background-color: #AFAFAF;    
   }
 
-   .hero-video-button-{{ section.id }} svg {
-     flex: 0 0 14px;
-   }
-
-  .hero-video-button-{{ section.id }} path {
-    fill: {{ video_button_text_color }};    
-    transition: all 0.25s ease;  
-  }   
-
-  .hero-video-button-{{ section.id }} svg:nth-child(1) {
-    display: none;
-  }
-
-  .hero-video-button-{{ section.id }}.active svg:nth-child(1) {
-    display: block;
-  }
-
-  .hero-video-button-{{ section.id }}.active svg:nth-child(2) {
-    display: none;
-  }
-
-  .hero-video-button-{{ section.id }}:hover {
-    transition: all 0.25s ease;
-    border: {{ video_button_border_thickness }}px solid {{ video_button_border_color_hover }}; 
-    background-color: {{ video_button_bg_color_hover }};    
-  }
-
-  .hero-video-button-{{ section.id }}:hover span {
-    color: {{ video_button_text_color_hover }};      
-  }
-
-  .hero-video-button-{{ section.id }}:hover path {
-    fill: {{ video_button_text_color_hover }};      
+  .hero-image-desktop-{{ section.id }} {
+    display: none !important;
   }
   
   @media(min-width: 1024px) {
@@ -229,32 +149,24 @@
 
     .hero-body-{{ section.id }} {
       gap: {{ body_gap }}px;
-      width: auto;
     }
 
     .hero-content-{{ section.id }} {
       justify-content: {{ content_vertical_align }};
       align-items: {{ content_horizontal_align }};
-      padding: {{content_padding_vertical}}px {{ content_padding_horizontal}}px;      
-    }
+    }  
 
-    .hero-video-button-{{ section.id }} {
-      padding: {{ video_button_padding_vertical }}px {{ video_button_padding_horizontal }}px;
-    }    
-
-    .hero-video-button-{{ section.id }} {
-      bottom: 20px;
-      left: 20px;
-      padding: {{ video_button_padding_vertical }}px {{ video_button_padding_horizontal }}px;
-    }
-
-    .hero-video-button-{{ section.id }} *  {
-      font-size: {{ video_button_text_size }}px;
-    }
-
-    .hero-video-{{ section.id }} {
+    .hero-image-{{ section.id }} {
       aspect-ratio: auto !important;
-    }      
+    } 
+
+    .hero-image-mobile-{{ section.id }} {
+      display: none !important;
+    }
+
+    .hero-image-desktop-{{ section.id }} {
+      display: block !important;
+    }
   }
   
 {%- endstyle -%}
@@ -294,97 +206,45 @@
   </style>
 {% endif %}
 
-{% if video_ratio_mobile == "portrait" %}
+{% if background_image_mobile != blank %}
   <style>
-    .hero-video-{{ section.id }} {
-      aspect-ratio: 9.6/13;
+    .hero-{{ section.id }} {
+      background-image: url("{{ background_image_mobile |  image_url  }}");
+      background-size: cover;
+      background-repeat: no-repeat;
     }
   </style>
-{% elsif video_ratio_mobile == "landscape" %}
+{% elsif background_image != blank %}  
   <style>
-  .hero-video-{{ section.id }} {
-    aspect-ratio: 12/8;
-  }
+    .hero-{{ section.id }} {
+      background-image: url("{{ background_image |  image_url  }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }    
   </style>
-{% elsif video_ratio_mobile == "square" %}
-  <style>
-    .hero-video-{{ section.id }} {
-      aspect-ratio: 12/12;
-    }
-  </style>
-{% else %}
-  <style>
-    .hero-video-{{ section.id }} {
-      aspect-ratio: auto;
-    }
-  </style>
-{% endif %} 
-
-{% if body_position_mobile == "video_text" %}
-  <style>
-    .hero-body-{{ section.id }} {
-      grid-template-columns: 1fr;
-      grid-template-areas: 
-        "video" 
-        "content"; 
-      height: 100%;
-    }
-  </style>
-{% else %} 
-  {% if body_position_mobile == "text_video" %}
-    <style>
-      .hero-body-{{ section.id }} {
-        grid-template-columns: 1fr;
-        grid-template-areas: 
-          "content" 
-          "video";    
-        height: 100%;
-      }
-    </style>
-  {% endif %}  
 {% endif %}
 
-{% if body_position == "video_text" %}
+{% if background_image != blank %}
   <style>
     @media (min-width: 1024px) {
-      .hero-body-{{ section.id }} {
-        grid-template-columns: {{ video_width}}% 1fr;
-        grid-template-areas: "video content";
+      .hero-{{ section.id }} {
+        background-image: url("{{ background_image |  image_url  }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }  
+    }    
+  </style>
+{% elsif background_image_mobile != blank %}
+  <style>  
+    @media (min-width: 1024px) {
+      .hero-{{ section.id }} {
+        background-image: url("{{ background_image_mobile |  image_url  }}");
+        background-size: cover;
+        background-repeat: no-repeat;
       }
     }
   </style>
-{% else %}  
-  {% if body_position == "text_video" %}
-    <style>
-      @media (min-width: 1024px) {
-        .hero-body-{{ section.id }} {
-          grid-template-columns: 1fr {{ video_width}}%;
-          grid-template-areas: "content video";
-        }
-      }
-    </style>
-  {% endif %}  
 {% endif %}
-
-{% if video_button_text_custom %}
-  <style>
-    .hero-video-button-{{ section.id }} * {
-      font-family: {{ video_button_text_font.family }}, {{ video_button_text_font.fallback_families }};
-      font-weight: {{ video_button_text_font.weight }};
-      font-style: {{ video_button_text_font.style }};
-    }
-  </style>
-{% endif %} 
-
-{% if use_play_shadow %}
-  <style>
-    .hero-video-button-{{ section.id }}:hover {
-      -webkit-box-shadow: 0px 0px 20px 0px {{ video_button_shadow_color | hex_to_rgba: 0.4 }};
-      -moz-box-shadow: 0px 0px 20px 0px {{ video_button_shadow_color | hex_to_rgba: 0.4 }};
-      box-shadow: 0px 0px 20px 0px {{ video_button_shadow_color | hex_to_rgba: 0.4 }};  
-    }
-  </style>
-{% endif %}  
 
 {% if hero_height == "adapt_first" %}
   <style>
@@ -398,8 +258,8 @@
         height: 95vh;
       }
 
-      .hero-video-{{ section.id }} video,
-      .hero-video-{{ section.id }} iframe {
+      .hero-image-{{ section.id }} img,
+      .hero-image-{{ section.id }} svg {
         max-height: calc(95vh - {{ padding_top }}px - {{ padding_bottom }}px);
       }
     }
@@ -415,10 +275,82 @@
         height: {{ hero_fixed_height }}px;
       }
 
-      .hero-video-{{ section.id }} video,
-      .hero-video-{{ section.id }} iframe {
+      .hero-image-{{ section.id }} video,
+      .hero-image-{{ section.id }} iframe {
         max-height: calc({{ hero_fixed_height }}px - {{ padding_top }}px - {{ padding_bottom }}px);
       }
+    }
+  </style>
+{% endif %}
+
+{% if body_layout_mobile == "image_text" %}
+  <style>
+    .hero-body-{{ section.id }} {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "image" 
+        "content"; 
+      height: 100%;
+    }
+  </style>
+{% else %} 
+  {% if body_layout_mobile == "text_image" %}
+    <style>
+      .hero-body-{{ section.id }} {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+          "content" 
+          "image";    
+        height: 100%;
+      }
+    </style>
+  {% endif %}  
+{% endif %}
+
+{% if body_layout == "image_text" %}
+  <style>
+    @media (min-width: 1024px) {
+      .hero-body-{{ section.id }} {
+        grid-template-columns: {{ image_width }}% 1fr;
+        grid-template-areas: "image content";
+      }
+    }
+  </style>
+{% else %}  
+  {% if body_layout == "text_image" %}
+    <style>
+      @media (min-width: 1024px) {
+        .hero-body-{{ section.id }} {
+          grid-template-columns: 1fr {{ image_width }}%;
+          grid-template-areas: "content image";
+        }
+      }
+    </style>
+  {% endif %}  
+{% endif %}
+
+{% if image_ratio_mobile == "portrait" %}
+  <style>
+    .hero-image-{{ section.id }} {
+      aspect-ratio: 9.6/13;
+    }
+  </style>
+{% elsif image_ratio_mobile == "landscape" %}
+  <style>
+  .hero-image-{{ section.id }} {
+    aspect-ratio: 12/8;
+  }
+  </style>
+{% elsif image_ratio_mobile == "square" %}
+  <style>
+    .hero-image-{{ section.id }} {
+      aspect-ratio: 12/12;
+    }
+  </style>
+{% else %}
+  <style>
+    .hero-image-{{ section.id }} {
+      aspect-ratio: auto;
     }
   </style>
 {% endif %}
@@ -431,25 +363,21 @@
 
         .hero-review-{{ block.id }} {
           display: flex;
-          flex-direction: column;
-          align-items: {{ content_horizontal_align_mobile }};
+          align-items: center;
           gap: 10px;
+          background-color: {{ block.settings.review_bg_color |  hex_to_rgba: block.settings.review_bg_opacity }};
+          padding: {{ block.settings.review_padding_vertical_mobile }}px {{ block.settings.review_padding_horizontal_mobile }}px;
+          border-radius: {{ block.settings.review_radius }}px;
           margin-top: {{ block.settings.review_mt_mobile }}px;
         }
 
-        .hero-raiting-{{ block.id }} {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .hero-review-text-{{ block.id }} {
+        .hero-review-text-{{ block.id }} * {
           word-wrap: break-word;
           margin: 0;
           font-size: {{ block.settings.review_size_mobile }}px;
           color: {{ block.settings.review_color }};
           line-height: {{ block.settings.review_height }}%;
-          text-align: {{ block.settings.review_align_mobile }}
+          text-align: center;
           text-transform: unset;
         }
 
@@ -470,12 +398,11 @@
 
         @media (min-width: 1024px) {
           .hero-review-{{ block.id }} {
-            flex-direction: row;
-            align-items: center;
             margin-top: {{ block.settings.review_mt }}px;
+            padding: {{ block.settings.review_padding_vertical }}px {{ block.settings.review_padding_horizontal }}px;
           }
 
-          .hero-review-text-{{ block.id }} {
+          .hero-review-text-{{ block.id }} * {
             font-size: {{ block.settings.review_size }}px;
           }
 
@@ -503,7 +430,7 @@
 
         .hero-heading-{{ block.id }} {
           margin-top: {{ block.settings.heading_mt_mobile }}px;
-          text-align: {{ content_horizontal_align_mobile }};
+          text-align: {{ content_align_mobile }};
           position: relative;
           z-index: 2;
         }
@@ -520,7 +447,7 @@
           
           .hero-heading-{{ block.id }} {
             margin-top: {{ block.settings.heading_mt }}px;
-            text-align: {{ content_horizontal_align }};
+            text-align: {{ content_align }};
           }
         
           .hero-heading-{{ block.id }} * {
@@ -538,20 +465,19 @@
           }
         </style>
       {% endif %}
+    
 
-    {% when 'text' %}   
+
+    {% when 'text' %}
       <style>
         {{  block.settings.text_font | font_face: font_display: 'swap' }}
-        
         .hero-text-{{ block.id }} {
           margin-top: {{ block.settings.text_mt_mobile }}px;
-          text-align: {{ content_horizontal_align_mobile }};
-          position: relative;
-          z-index: 2;
+          text-align: {{ content_align_mobile }};
         }
-      
+
         .hero-text-{{ block.id }} * {
-          margin: 0;
+          margin: 0;          
           font-size: {{ block.settings.text_size_mobile }}px;
           color: {{ block.settings.text_color }};
           line-height: {{ block.settings.text_height }}%;
@@ -562,13 +488,12 @@
           
           .hero-text-{{ block.id }} {
             margin-top: {{ block.settings.text_mt }}px;
-            text-align: {{  content_horizontal_align }};
-          }
-      
-          .hero-text-{{ block.id }} * {
+            text-align: {{  content_align }};
+          }         
+          
+          .hero-text-{{ block.id }} * {       
             font-size: {{ block.settings.text_size }}px;
           }
-          
         }
       </style>
 
@@ -581,8 +506,7 @@
           }
         </style>          
       {% endif %}  
-
-    {% when 'button' %}  
+    {% when 'button' %}
       <style>
         {{  block.settings.button_font | font_face: font_display: 'swap' }}
 
@@ -648,16 +572,6 @@
         }
       </style>
 
-      {% if block.settings.use_shadow %}
-        <style>
-          .hero-button-{{ block.id }}:hover {
-            -webkit-box-shadow: 0px 0px 20px 0px {{ block.settings.button_bg_color | hex_to_rgba: 0.7 }};
-            -moz-box-shadow: 0px 0px 20px 0px {{ block.settings.button_bg_color | hex_to_rgba: 0.7 }};
-            box-shadow: 0px 0px 20px 0px {{ block.settings.button_bg_color | hex_to_rgba: 0.7 }};
-          }
-        </style>
-      {% endif %}  
-
       {% if block.settings.button_custom %}
         <style>
           .hero-button-{{ block.id }} {
@@ -705,70 +619,82 @@
         </style>
       {% endif %}   
 
-    {% when 'tag' %}    
-      <style>
-        {{  block.settings.text_font | font_face: font_display: 'swap' }}
-        .hero-tag-{{ block.id }} {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: {{ block.settings.item_gap_mobile }}px;
-          text-decoration: none;
-          margin-top: {{ block.settings.item_mt_mobile }}px;
-        }
-
-        .hero-tag-text-{{ block.id }} {
-          margin: 0;
-          font-size: {{ block.settings.text_size_mobile }}px;
-          color: {{ block.settings.text_color }};
-          line-height: {{ block.settings.text_height }}%;
-          text-transform: unset;
-        }
-
-        .hero-tag-icon-{{ block.id }} {
-          height: {{ block.settings.icon_size_mobile }}px;
-          width: {{ block.settings.icon_size_mobile }}px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .hero-tag-icon-{{ block.id }}} img,
-        .hero-tag-icon-{{ block.id }} svg {
-          display: block;
-          width: 100%;
-          height: 100%;
-          object-fit: content;
-        }
-
-        .hero-tag-icon-{{ block.id }} svg path {
-          fill: {{ block.settings.icon_color }};
-        }  
-        @media (min-width: 1024px) {
-          .hero-tag-{{ block.id }} {
-            gap: {{ block.settings.item_gap }}px;
-            margin-top: {{ block.settings.item_mt }}px;
-          }
-
-          .hero-tag-icon-{{ block.id }} {
-            height: {{ block.settings.icon_size }}px;
-            width: {{ block.settings.icon_size }}px;
-          }
-
-          .hero-tag-text-{{ block.id }} {
-            font-size: {{ block.settings.text_size }}px;
-          }
-        }
-      </style>
-      {% if block.settings.text_custom %}
+      {% when 'feature' %}    
         <style>
-          .hero-tag-text-{{ block.id }} {
-            font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
-            font-weight: {{ block.settings.text_font.weight }};
-            font-style: {{ block.settings.text_font.style }};
+          {{  block.settings.text_font | font_face: font_display: 'swap' }}
+
+          .hero-feature-{{ block.id }} {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: {{ block.settings.feature_gap_mobile }}px;
+            text-decoration: none;
+            margin-top: {{ block.settings.feature_mt_mobile }}px;
+          }
+  
+          .hero-feature-text-{{ block.id }} {
+            margin: 0;
+            font-size: {{ block.settings.text_size_mobile }}px;
+            color: {{ block.settings.text_color }};
+            line-height: {{ block.settings.text_height }}%;
+            text-transform: unset;
+          }
+  
+          .hero-feature-icon-{{ block.id }} {
+            height: {{ block.settings.icon_size_mobile }}px;
+            width: {{ block.settings.icon_size_mobile }}px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+  
+          .hero-feature-icon-{{ block.id }} img,
+          .hero-feature-icon-{{ block.id }} svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: content;
+          }
+  
+          .hero-feature-icon-{{ block.id }} svg path {
+            fill: {{ block.settings.icon_color }};
+          }  
+          @media (min-width: 1024px) {
+            .hero-feature-{{ block.id }} {
+              display: flex;
+              gap: {{ block.settings.feature_gap }}px;
+              margin-top: {{ block.settings.feature_mt }}px;
+            }
+  
+            .hero-feature-icon-{{ block.id }} {
+              height: {{ block.settings.icon_size }}px;
+              width: {{ block.settings.icon_size }}px;
+            }
+  
+            .hero-feature-text-{{ block.id }} {
+              font-size: {{ block.settings.text_size }}px;
+            }
           }
         </style>
-      {% endif %}
+        {% if block.settings.text_custom %}
+          <style>
+            .hero-feature-text-{{ block.id }} {
+              font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+              font-weight: {{ block.settings.text_font.weight }};
+              font-style: {{ block.settings.text_font.style }};
+            }
+          </style>
+        {% endif %}
+
+        {% if block.settings.hide_mobile %}
+          <style>
+            @media (max-width: 1024px) {
+              .hero-feature-{{ block.id }} {
+                display: none;
+              }
+            }
+          </style>
+        {% endif %}        
   {% endcase %}
 {% endfor %}
 
@@ -780,104 +706,154 @@
           {% for block in section.blocks %}
             {% case block.type %}
               {% when 'review' %}
-                {% if block.settings.review != blank %}
-                  <div class="hero-review-{{ block.id }}">
-                    {% if block.settings.stars_count != 0 %}
-                      <div class="hero-stars-{{ block.id }}">
-                        {% if block.settings.stars_icon != blank %}
-                          {% assign stars_count_round = block.settings.stars_count | round: 0 %}
-                          {% for item in (1..stars_count_round) %}
-                            <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ stars_icon.alt }}">
-                          {% endfor %}
-                        {% else %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
-                            {% if block.settings.stars_count > 0 and block.settings.stars_count < 1  %}
+                <div class="hero-review-{{ block.id }}">
+                  {% if block.settings.stars_count != 0 %}
+                    <div class="hero-stars-{{ block.id }}">
+                      {% if block.settings.stars_icon != blank %}
+                        {% assign stars_count_round = block.settings.stars_count | round: 0 %}
+                        {% for item in (1..stars_count_round) %}
+                          <img src="{{ block.settings.stars_icon | image_url }}" alt="{{ block.settings.stars_icon.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+                        {% endfor %}
+                      {% else %}
+                        {% if block.settings.stars_count > 0 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 0.5 %}
                               <defs>
-                                <linearGradient id="grad{{ section.id }}6">
-                                  <stop offset="0%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="transparent" />
-                                  <stop offset="100%" stop-color="transparent" />
+                                <linearGradient id="grad{{ section.id }}31">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="#DDDDDD" />
+                                  <stop offset="100%" stop-color="#DDDDDD" />
                                 </linearGradient>
                               </defs>
                             {% endif %}
-                            <path {% if block.settings.stars_count > 0 and block.settings.stars_count < 1 %}stroke="{{ block.settings.stars_color }}"{% endif %} d="M10 0L12.9389 5.95492L19.5106 6.90983L14.7553 11.5451L15.8779 18.0902L10 15L4.12215 18.0902L5.24472 11.5451L0.489435 6.90983L7.06107 5.95492L10 0Z" fill="{% if block.settings.stars_count > 0 and block.settings.stars_count < 1 %}url(#grad{{ block.id }}6){% elsif block.settings.stars_count > 0.5 %}{{ block.settings.stars_color }}{% endif %}"></path>
-                          </svg>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
-                            {% if block.settings.stars_count > 1 and block.settings.stars_count < 2  %}
-                              <defs>
-                                <linearGradient id="grad{{ section.id }}7">
-                                  <stop offset="0%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="transparent" />
-                                  <stop offset="100%" stop-color="transparent" />
-                                </linearGradient>
-                              </defs>
-                            {% endif %}
-                            <path {% if block.settings.stars_count > 1 and block.settings.stars_count < 2 %}stroke="{{ block.settings.stars_color }}"{% endif %} d="M10 0L12.9389 5.95492L19.5106 6.90983L14.7553 11.5451L15.8779 18.0902L10 15L4.12215 18.0902L5.24472 11.5451L0.489435 6.90983L7.06107 5.95492L10 0Z" fill="{% if block.settings.stars_count > 1 and block.settings.stars_count < 2 %}url(#grad{{ block.id }}7){% elsif block.settings.stars_count > 1.5 %}{{ block.settings.stars_color }}{% endif %}"></path>
-                          </svg>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
-                            {% if block.settings.stars_count > 2 and block.settings.stars_count < 3  %}
-                              <defs>
-                                <linearGradient id="grad{{ section.id }}8">
-                                  <stop offset="0%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="transparent" />
-                                  <stop offset="100%" stop-color="transparent" />
-                                </linearGradient>
-                              </defs>
-                            {% endif %}
-                            <path {% if block.settings.stars_count > 2 and block.settings.stars_count < 3 %}stroke="{{ block.settings.stars_color }}"{% endif %} d="M10 0L12.9389 5.95492L19.5106 6.90983L14.7553 11.5451L15.8779 18.0902L10 15L4.12215 18.0902L5.24472 11.5451L0.489435 6.90983L7.06107 5.95492L10 0Z" fill="{% if block.settings.stars_count > 2 and block.settings.stars_count < 3 %}url(#grad{{ block.id }}8){% elsif block.settings.stars_count > 2.5 %}{{ block.settings.stars_color }}{% endif %}"></path>
-                          </svg>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
-                            {% if block.settings.stars_count > 3 and block.settings.stars_count < 4  %}
-                              <defs>
-                                <linearGradient id="grad{{ section.id }}9">
-                                  <stop offset="0%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="transparent" />
-                                  <stop offset="100%" stop-color="transparent" />
-                                </linearGradient>
-                              </defs>
-                            {% endif %}
-                            <path {% if block.settings.stars_count > 3 and block.settings.stars_count < 4  %}stroke="{{ block.settings.stars_color }}"{% endif %} d="M10 0L12.9389 5.95492L19.5106 6.90983L14.7553 11.5451L15.8779 18.0902L10 15L4.12215 18.0902L5.24472 11.5451L0.489435 6.90983L7.06107 5.95492L10 0Z" fill="{% if block.settings.stars_count > 3 and block.settings.stars_count < 4  %}url(#grad{{ block.id }}9){% elsif block.settings.stars_count > 3.5 %}{{ block.settings.stars_color }}{% endif %}"></path>
-                          </svg>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
-                            {% if block.settings.stars_count > 4 and block.settings.stars_count < 5  %}
-                              <defs>
-                                <linearGradient id="grad{{ section.id }}10">
-                                  <stop offset="0%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="{{ block.settings.stars_color }}" />
-                                  <stop offset="50%" stop-color="transparent" />
-                                  <stop offset="100%" stop-color="transparent" />
-                                </linearGradient>
-                              </defs>
-                            {% endif %}
-                            <path {% if block.settings.stars_count > 4 and block.settings.stars_count < 5  %}stroke="{{ block.settings.stars_color }}"{% endif %} d="M10 0L12.9389 5.95492L19.5106 6.90983L14.7553 11.5451L15.8779 18.0902L10 15L4.12215 18.0902L5.24472 11.5451L0.489435 6.90983L7.06107 5.95492L10 0Z" fill="{% if block.settings.stars_count > 4 and block.settings.stars_count < 5  %}url(#grad{{ block.id }}10){% elsif block.settings.stars_count > 4.5 %}{{ block.settings.stars_color }}{% endif %}"></path>
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 0.5 %}url(#grad{{ section.id }}31){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
                           </svg>
                         {% endif %}
-                      </div>
-                    {% endif %}
-                    {%if block.settings.review %}
-                      <p class="hero-review-text-{{ block.id }}">{{ block.settings.review }}</p>
-                    {% endif %}            
-                  </div>  
-                {% endif %}
-              {% when 'heading'%}
+                        {% if block.settings.stars_count > 1 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 1.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}32">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="#DDDDDD" />
+                                  <stop offset="100%" stop-color="#DDDDDD" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 1.5 %}url(#grad{{ section.id }}32){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}
+                        {% if block.settings.stars_count > 2 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 2.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}33">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="#DDDDDD" />
+                                  <stop offset="100%" stop-color="#DDDDDD" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 2.5 %}url(#grad{{ section.id }}33){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}
+                        {% if block.settings.stars_count > 3 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 3.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}44">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="#DDDDDD" />
+                                  <stop offset="100%" stop-color="#DDDDDD" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 3.5 %}url(#grad{{ section.id }}44){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}
+                        {% if block.settings.stars_count > 4 %}
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if block.settings.stars_count == 4.5 %}
+                              <defs>
+                                <linearGradient id="grad{{ section.id }}55">
+                                  <stop offset="0%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="{{ block.settings.stars_bg_color }}" />
+                                  <stop offset="50%" stop-color="#DDDDDD" />
+                                  <stop offset="100%" stop-color="#DDDDDD" />
+                                </linearGradient>
+                              </defs>
+                            {% endif %}
+                            <rect width="32" height="32" fill="{% if block.settings.stars_count == 4.5 %}url(#grad{{ section.id }}55){% else %}{{ block.settings.stars_bg_color }}{% endif %}"/>
+                            <g clip-path="url(#clip0_25_4)">
+                            <path d="M9.20283 27L16.001 21.807L22.7972 27L20.2018 18.596L27 13.403H18.5984L16.001 5L13.4037 13.403H5L11.7982 18.596L9.20283 27Z" fill="{{ block.settings.stars_color }}"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_25_4">
+                            <rect width="22" height="22" fill="{{ block.settings.stars_color }}" transform="translate(5 5)"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        {% endif %}                        
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.review != blank %}
+                    <div class="hero-review-text-{{ block.id }}">{{ block.settings.review }}</div>
+                  {% endif %}
+                </div>
+              {% when 'heading' %}  
                 {% if block.settings.heading != blank %}
                   <div class="hero-heading-{{ block.id }}">
                     {{ block.settings.heading }}
                   </div>
                 {% endif %}
-              {% when 'text' %}
+  
+              {% when 'text' %}  
                 {% if block.settings.text != blank %}
                   <div class="hero-text-{{ block.id }}">
                     {{ block.settings.text }}
                   </div>
                 {% endif %}  
-              {% when 'button' %}
-                {% if block.settings.button != blank %}                 
-                  <a href="{{ block.settings.url }}" class="hero-button-{{ block.id }}">
+  
+              {% when 'button' %}  
+                {% if block.settings.button != blank %}   
+                  <{% if block.settings.url != blank %}a href="{% if block.settings.url != blank %}{{ block.settings.url }}{% endif %}"{% else %}div{% endif %} class="hero-button-{{ block.id }}">
                     <p class="hero-button-inner-{{ block.id }}">
                       {{ block.settings.button }}
                       {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
@@ -888,12 +864,13 @@
                         </svg>
                       {% endif %}
                     </p>
-                  </a>     
-                {% endif %}
-              {% when 'tag' %}  
-                <div class="hero-tag-{{ block.id }}"> 
+                  </{% if block.settings.url != blank %}a{% else %}div{% endif %}>    
+                {% endif %} 
+  
+              {% when 'feature' %}    
+                <div class="hero-feature-{{ block.id }}"> 
                   {% if block.settings.custom_icon != blank or block.settings.icon != "none" %}
-                    <div class="hero-tag-icon-{{ block.id }}">
+                    <div class="hero-feature-icon-{{ block.id }}">
                       {% if block.settings.custom_icon != blank %}
                         <img src="{{ block.settings.custom_icon | image_url }}" alt="{{ block.settings.custom_icon.alt }}">
                       {% else %}
@@ -956,187 +933,982 @@
                       {% endif %}
                     </div>
                   {% endif %}
-                  {% if block.settings.tag != blank %}
-                    <p class="hero-tag-text-{{ block.id }}">{{ block.settings.tag }}</p>  
+                  {% if block.settings.text != blank %}
+                    <p class="hero-feature-text-{{ block.id }}">{{ block.settings.text }}</p>  
                   {% endif %}                    
-                </div>   
+                </div> 
+                
             {% endcase %}
           {% endfor %}
         </div>
-        <div class="hero-video-{{ section.id }}">      
-          <button class="hero-video-button-{{ section.id }} {% if video_autoplay %}active{% endif %}">              
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" class="tw-duration-150 tw-fill-cool-black group-active:tw-fill-medium-red group-hover:tw-fill-medium-red group-aria-disabled:tw-fill-cool-black group-aria-disabled:tw-opacity-50 tw-min-w-[14px] tw-min-h-[14px]">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.54998 1.44668C4.54998 1.25338 4.39328 1.09668 4.19998 1.09668C4.00668 1.09668 3.84998 1.25338 3.84998 1.44668L3.84998 12.6467C3.84998 12.84 4.00668 12.9967 4.19998 12.9967C4.39328 12.9967 4.54998 12.84 4.54998 12.6467L4.54998 1.44668ZM9.44998 1.44668C9.44998 1.25338 9.29328 1.09668 9.09998 1.09668C8.90668 1.09668 8.74998 1.25338 8.74998 1.44668L8.74998 12.6467C8.74998 12.84 8.90668 12.9967 9.09998 12.9967C9.29328 12.9967 9.44998 12.84 9.44998 12.6467L9.44998 1.44668Z"></path>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" class="tw-duration-150 tw-fill-cool-black group-active:tw-fill-medium-red group-aria-disabled:tw-opacity-50 group-hover:tw-fill-medium-red">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2796 7.00001L2.10039 1.26298L2.10039 12.737L11.2796 7.00001ZM2.47139 0.66938C2.00516 0.377984 1.40039 0.713173 1.40039 1.26298V12.737C1.40039 13.2868 2.00515 13.622 2.47139 13.3306L11.6506 7.5936C12.0893 7.31944 12.0893 6.68057 11.6506 6.40641L2.47139 0.66938Z"></path>
-            </svg>
-            <span class="hero-video-button-text-{{ section.id }}">{% if video_autoplay %}{{ video_button_pause_text }}{% else %}{{ video_button_play_text }}{% endif %}</span>
-          </button>       
-          {% assign video_id = video.id | default: video_url.id %}
-          {% assign loop = '&loop=1&playlist=' | append: video_id %}
-          {%- if video == null and video_url != null -%}
-          {%- if video_url.type == 'youtube' -%}
-            <iframe
-                data-src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay={% if video_autoplay %}1{% else %}0{% endif %}&controls=0&showinfo=0{{ loop }}"
-                data-src1="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=1&controls=0&showinfo=0{{ loop }}"
-                data-src2="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=0&controls=0&showinfo=0{{ loop }}"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                class="lazy"
-            ></iframe>
-            {%- else -%}
-            <iframe
-                data-src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay={% if video_autoplay %}1{% else %}0{% endif %}&controls=0&showinfo=0{{ loop }}"
-                data-src1="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=1&controls=0&showinfo=0{{ loop }}"
-                data-src2="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&mute=1&muted=1&autoplay=0&controls=0&showinfo=0{{ loop }}"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                class="lazy"
-            ></iframe>
-            {% endif %}
+        <div class="hero-image-{{ section.id }}">
+          {% if image != blank %}
+            <img src="{{ image | image_url }}" alt="{{ image.alt }}" {% if lazy %}loading="lazy"{% endif %} {% if image_mobile != blank %}class="hero-image-desktop-{{ section.id }}"{% endif %}>
           {% else %}
-              <video data-src="{{ video.sources[1].url }}" muted playsinline {% if video_autoplay %}autoplay{% endif %} preload="none" loop class="lazy"></video>
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}
+          {% if image_mobile != blank %}
+              <img src="{{ image_mobile | image_url }}" alt="{{ image_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} class="hero-image-mobile-{{ section.id }}">
           {% endif %}
         </div>
       </div>
     </div>
 </div>
 
-                            
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-  function initHero15() {
-    let lazyLoadInstance = new LazyLoad();
-    window.addEventListener(
-      "LazyLoad::Initialized",
-      function (event) {
-        window.lazyLoadInstance = event.detail.instance;
-      },
-      false
-    );
-
-    const videoButton = document.querySelector('.hero-video-button-{{ section.id }}');
-    const videoText = document.querySelector('.hero-video-button-text-{{ section.id }}');
-    const video = document.querySelector('.hero-video-{{ section.id }} video');
-    const iframe = document.querySelector('.hero-video-{{ section.id }} iframe');
-
-
-    videoButton.addEventListener('click', function () {
-      if(videoButton.classList.contains('active')) {
-        if(video) {
-          video.pause();
-        }
-        if(iframe) {
-          iframe.src = iframe.getAttribute('data-src2');
-        } 
-        if(videoText) {
-          videoText.innerText = '{{ video_button_play_text }}';
-        }
-      } else {
-        if(video) {
-          video.play();
-        }
-        if(iframe) {
-          iframe.src = iframe.getAttribute('data-src1');
-        }      
-        if(videoText) {
-          videoText.innerText = '{{ video_button_pause_text }}';
-        }
-      }  
-      videoButton.classList.toggle('active'); 
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', initHero15);
-
-  if (Shopify.designMode) {
-    document.addEventListener('shopify:section:unload', initHero15);
-    document.addEventListener('shopify:section:load', initHero15);
-  }
-</script>
-
-
-
 {% schema %}
-  {
-    "name": "SG- Hero #15",
-    "settings": [
+{
+  "name": "SG-Hero #16",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout settings"
+    },
+    {
+      "type": "select",
+      "id": "hero_height",
+      "label": "Height",
+      "default": "auto",
+      "options": [
         {
-          "type": "paragraph",
-          "content":"Save to display section correctly"
+          "label": "Adapt to first",
+          "value": "adapt_first"
         },
+        {
+          "label": "Fixed height",
+          "value": "fixed_height"
+        },
+        {
+          "label": "Auto",
+          "value": "auto"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "hero_fixed_height",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed height",
+      "default": 600
+    },
+    {
+      "type": "select",
+      "id": "body_layout",
+      "label": "Image placement",
+      "default": "text_image",
+      "options": [
+        {
+          "label": "Align image right",
+          "value": "text_image"
+        },
+        {
+          "label": "Align image left",
+          "value": "image_text"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "body_layout_mobile",
+      "label": "Image placement - mobile",
+      "default": "image_text",
+      "options": [
+        {
+          "label": "Text on top",
+          "value": "text_image"
+        },
+        {
+          "label": "Image on top",
+          "value": "image_text"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "body_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "body_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Content settings"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align",
+      "label": "Horizontal alignment",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_align_mobile",
+      "label": "Horizontal alignment - mobile",
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_align",
+      "label": "Vertical alignment - desktop",
+      "default": "center",
+      "options": [
+        {
+          "label": "Top",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Bottom",
+          "value": "end"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image - mobile"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "%",
+      "label": "Width - desktop",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "landscape",
+      "options": [
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Original",
+          "value": "original"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 16
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - mobile"
+    },
+    {
+      "type": "range",
+      "id": "background_overlay",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "label": "Section background",
+      "id": "background_color",
+      "default": "#D3E7F9"
+    },
+    {
+      "type": "color",
+      "label": "Section background overlay",
+      "id": "background_overlay_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Section background gradient",
+      "info": "Remove gradient to replace with solid colors"
+    },
+    {
+      "type": "color",
+      "label": "Border",
+      "id": "border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section margin (outside)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin sides",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Margin sides mobile",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section padding (inside)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding sides",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Padding sides mobile",
+      "default": 1.5
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 800,
+      "max": 2000,
+      "step": 100,
+      "unit": "px",
+      "label": "Section content width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Section roundness",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy",
+      "label": "Lazy load",
+      "info": "Lazy load images for speed optimisation"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "limit": 1,
+      "name": "Review",
+      "settings": [
         {
           "type": "header",
           "content": "Layout settings"
         },
         {
-          "type": "select",
-          "id": "hero_height",
-          "label": "Height",
-          "default": "adapt_first",
-          "options": [
-            {
-              "label": "Adapt to first",
-              "value": "adapt_first"
-            },
-            {
-              "label": "Fixed height",
-              "value": "fixed_height"
-            },
-            {
-              "label": "Auto",
-              "value": "auto"
-            }
-          ]
-        },
-        {
           "type": "range",
-          "id": "hero_fixed_height",
-          "min": 200,
-          "max": 1000,
-          "step": 10,
+          "id": "review_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
           "unit": "px",
-          "label": "Fixed height",
-          "default": 600
-        },
-        {
-          "type": "select",
-          "id": "body_position",
-          "label": "Desktop video placement",
-          "default": "text_video",
-          "options": [
-            {
-              "label": "Left",
-              "value": "video_text"
-            },
-            {
-              "label": "Right",
-              "value": "text_video"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "body_position_mobile",
-          "label": "Mobile video placement",
-          "default": "video_text",
-          "options": [
-            {
-              "label": "Top",
-              "value": "video_text"
-            },
-            {
-              "label": "Bottom",
-              "value": "text_video"
-            }
-          ]
+          "label": "Padding horizontal",
+          "default": 14
         },
         {
           "type": "range",
-          "id": "body_gap",
+          "id": "review_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "review_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "review_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "review_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Roundness",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "review_bg_opacity",
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "label": "Background opacity",
+          "default": 0.4
+        },
+        {
+          "type": "range",
+          "id": "review_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "review_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Stars settings"
+        },
+        {
+          "type": "range",
+          "id": "stars_count",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "label": "Stars count",
+          "default": 4.5
+        },
+        {
+          "type": "image_picker",
+          "label": "Stars icon",
+          "id": "stars_icon",
+          "info": "Replaces the default stars icon"
+        },
+        {
+          "type": "range",
+          "id": "stars_size",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "label": "Size",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "stars_size_mobile",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "label": "Size - mobile",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "richtext",
+          "id": "review",
+          "label": "Text",
+          "default": "<p>Excellent <strong>4.6</strong> | 100,000+ Customers</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "review_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "review_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "review_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "review_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 130
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "label": "Text",
+          "id": "review_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Default stars",
+          "id": "stars_color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "label": "Default stars background",
+          "id": "stars_bg_color",
+          "default": "#00B67A"
+        },
+        {
+          "type": "color",
+          "label": "Background",
+          "id": "review_bg_color",
+          "default": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "limit": 1,
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<h1>Heading</h1>"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "heading_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Font size",
+          "default": 56
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "min": 0,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "heading_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 130
+        },
+        {
+          "type": "range",
+          "id": "heading_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "heading_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 24
+        },
+        {
+          "type": "color",
+          "label": "Color",
+          "id": "heading_color",
+          "default": "#005800"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "limit": 1,
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Add text content about your brand that makes a statement</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "text_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "text_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 150
+        },
+        {
+          "type": "range",
+          "id": "text_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 10
+        },
+        {
+          "type": "color",
+          "label": "Color",
+          "id": "text_color",
+          "default": "#000000"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button label",
+          "default": "SHOP OUR SALE"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "button_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "button_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal",
+          "default": 62
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 62
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 26
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 26
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Roundness",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "button_border_thickness",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border thickness",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "button_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 36
+        },
+        {
+          "type": "range",
+          "id": "button_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 24
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "non_outline_arrow",
+          "options": [
+            {
+              "label": "Link",
+              "value": "link"
+            },
+            {
+              "label": "Non-outline",
+              "value": "non_outline"
+            },
+            {
+              "label": "Non-outline & arrow",
+              "value": "non_outline_arrow"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Outline & arrow",
+              "value": "outline_arrow"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Button colors"
+        },
+        {
+          "type": "color",
+          "label": "Text",
+          "id": "button_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Hover text",
+          "id": "button_hover_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Background",
+          "id": "button_bg_color",
+          "default": "#ffe658"
+        },
+        {
+          "type": "color",
+          "label": "Background hover",
+          "id": "button_bg_hover_color",
+          "default": "#fff89c"
+        },
+        {
+          "type": "color",
+          "label": "Button border",
+          "id": "button_border_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Border hover",
+          "id": "button_border_hover_color",
+          "default": "#000000"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Layout settings"
+        },
+        {
+          "type": "range",
+          "id": "feature_gap",
           "min": 0,
           "max": 100,
           "step": 2,
@@ -1146,7 +1918,7 @@
         },
         {
           "type": "range",
-          "id": "body_gap_mobile",
+          "id": "feature_gap_mobile",
           "min": 0,
           "max": 100,
           "step": 2,
@@ -1156,1302 +1928,301 @@
         },
         {
           "type": "range",
-          "id": "content_radius",
+          "id": "feature_mt",
           "min": 0,
           "max": 100,
           "step": 2,
           "unit": "px",
-          "label": "Roundness",
-          "default": 12
+          "label": "Margin top",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "feature_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 14
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_mobile",
+          "label": "Hide on mobile"
         },
         {
           "type": "header",
-          "content": "Content settings"
+          "content": "Icon settings"
         },
         {
-          "type": "text_alignment",
-          "id": "content_align",
-          "label": "Horizontal alignment",
-          "default": "left"
-        },
-        {
-          "type": "text_alignment",
-          "id": "content_align_mobile",
-          "label": "Horizontal alignment - mobile",
-          "default": "center"
-        },
-          {
           "type": "select",
-          "id": "content_vertical_align",
-          "label": "Vertical alignment - desktop",
-          "default": "center",
+          "id": "icon",
+          "label": "Icon",
           "options": [
             {
-              "label": "Top",
-              "value": "start"
+              "value": "atc",
+              "label": "Add to cart",
+              "group": "Shop"
             },
             {
-              "label": "Center",
-              "value": "center"
+              "value": "gift",
+              "label": "Gift",
+              "group": "Shop"
             },
             {
-              "label": "Bottom",
-              "value": "end"
+              "value": "heart",
+              "label": "Heart",
+              "group": "Shop"
+            },
+            {
+              "value": "bi-ecology",
+              "label": "Ecology",
+              "group": "Shop"
+            },
+            {
+              "value": "plant",
+              "label": "Plant",
+              "group": "Shop"
+            },
+            {
+              "value": "shop",
+              "label": "Shop",
+              "group": "Shop"
+            },
+            {
+              "value": "pin",
+              "label": "Geo pin",
+              "group": "Shop"
+            },
+            {
+              "value": "megaphone",
+              "label": "Megaphone",
+              "group": "Communication"
+            },
+            {
+              "value": "chat",
+              "label": "Chat",
+              "group": "Communication"
+            },
+            {
+              "value": "chat-dots",
+              "label": "Chat w. dots",
+              "group": "Communication"
+            },
+            {
+              "value": "people",
+              "label": "Real people support",
+              "group": "Communication"
+            },
+            {
+              "value": "email",
+              "label": "Email",
+              "group": "Communication"
+            },
+            {
+              "value": "globe",
+              "label": "Globe",
+              "group": "Communication"
+            },
+            {
+              "value": "newsletter",
+              "label": "Newsletter",
+              "group": "Communication"
+            },
+            {
+              "value": "love",
+              "label": "Love",
+              "group": "Communication"
+            },
+            {
+              "value": "phone",
+              "label": "Phone",
+              "group": "Communication"
+            },
+            {
+              "value": "share",
+              "label": "Share",
+              "group": "Communication"
+            },
+            {
+              "value": "box",
+              "label": "Box",
+              "group": "Delivery"
+            },
+            {
+              "value": "worldwide",
+              "label": "Worldwide",
+              "group": "Delivery"
+            },
+            {
+              "value": "truck",
+              "label": "Truck",
+              "group": "Delivery"
+            },
+            {
+              "value": "airplane",
+              "label": "Airplane",
+              "group": "Delivery"
+            },
+            {
+              "value": "return_arrow",
+              "label": "Return purchase",
+              "group": "Delivery"
+            },
+            {
+              "value": "time",
+              "label": "Time",
+              "group": "Delivery"
+            },
+            {
+              "value": "payment",
+              "label": "Secure payment",
+              "group": "Security"
+            },
+            {
+              "value": "mobile",
+              "label": "Lock",
+              "group": "Security"
+            },
+            {
+              "value": "shield",
+              "label": "Shield",
+              "group": "Security"
+            },
+            {
+              "value": "none",
+              "label": "None"
             }
           ]
         },
         {
-        "type": "range",
-        "id": "content_padding_vertical",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 28
-      },
-      {
-        "type": "range",
-        "id": "content_padding_vertical_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 28
-      },
-      {
-        "type": "range",
-        "id": "content_padding_horizontal",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 100
-      },
-      {
-        "type": "range",
-        "id": "content_padding_horizontal_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 20
-      },   
-      {
-        "type": "header",
-        "content": "Video settings"
-      },
-      {
-        "type": "video",
-        "id": "video",
-        "label": "Modal video from Shopify"
-      },
-      {
-        "type": "video_url",
-        "id": "video_url",
-        "label": "Modal video embed from URL",
-        "accept": [
-          "youtube",
-          "vimeo"
-        ],
-        "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "info": "Youtube or Vimeo. Shows when no Shopify-hosted video is selected."
-      },  
-      {
-        "type": "range",
-        "id": "video_width",
-        "min": 20,
-        "max": 60,
-        "step": 2,
-        "unit": "%",
-        "label": "Width - desktop",
-        "default": 40
-      },
-      {
-        "type": "select",
-        "id": "video_ratio_mobile",
-        "label": "Aspect ratio - mobile",
-        "default": "square",
-        "options": [
-          {
-            "label": "Portrait",
-            "value": "portrait"
-          },
-          {
-            "label": "Square",
-            "value": "square"
-          },
-          {
-            "label": "Landscape",
-            "value": "landscape"
-          },
-          {
-            "label": "Original",
-            "value": "original"
+          "type": "image_picker",
+          "label": "Custom icon",
+          "id": "custom_icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Size",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "icon_size_mobile",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Size - mobile",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "label": "Text",
+          "id": "text",
+          "default": "Feature text"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "text_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_size_mobile",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "text_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 100
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "label": "Default icon",
+          "id": "icon_color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "label": "Text",
+          "id": "text_color",
+          "default": "#000000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SG-Hero #16",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_mt": 30,
+            "feature_mt_mobile": 20
           }
-        ]
-      },
-      {
-        "type": "checkbox",
-        "id": "video_autoplay",
-        "label": "Autoplay",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Video button settings"
-      },
-      {
-        "type": "text",
-        "id": "video_button_play_text",
-        "label": "Play button text",
-        "default": "Play"
-      },
-      {
-        "type": "text",
-        "id": "video_button_pause_text",
-        "label": "Pause button text",
-        "default": "Pause"
-      },
-      {
-        "type": "checkbox",
-        "id": "video_button_text_custom",
-        "label": "Use custom font",
-        "default": false
-      },
-      {
-        "type": "font_picker",
-        "id": "video_button_text_font",
-        "label": "Font family",
-        "default": "josefin_sans_n4"
-      },
-      {
-        "type": "range",
-        "id": "video_button_text_size",
-        "min": 0,
-        "max": 32,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "video_button_text_size_mobile",
-        "min": 0,
-        "max": 32,
-        "step": 1,
-        "unit": "px",
-        "label": "Font size - mobile",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "video_button_text_height",
-        "min": 50,
-        "max": 200,
-        "step": 10,
-        "unit": "%",
-        "label": "Line height",
-        "default": 100
-      },
-      {
-        "type": "range",
-        "id": "video_button_padding_vertical",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical",
-        "default": 8
-      },
-      {
-        "type": "range",
-        "id": "video_button_padding_vertical_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding vertical - mobile",
-        "default": 8
-      },
-      {
-        "type": "range",
-        "id": "video_button_padding_horizontal",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal",
-        "default": 16
-      },
-      {
-        "type": "range",
-        "id": "video_button_padding_horizontal_mobile",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Padding horizontal - mobile",
-        "default": 16
-      },
-      {
-        "type": "range",
-        "id": "video_button_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Roundness",
-        "default": 100
-      },
-      {
-        "type": "range",
-        "id": "video_button_border_thickness",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "Border thickness",
-        "default": 1
-      },
-      {
-        "type": "checkbox",
-        "id": "use_play_shadow",
-        "label": "Use hover shadow",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Content colors"
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "content_bg",
-        "default": "#F3F3F3"
-      },
-      {
-        "type": "header",
-        "content": "Video button colors"
-      },
-      {
-        "type": "color",
-        "label": "Text",
-        "id": "video_button_text_color",
-        "default": "#000000"
-      },
-      {
-        "type": "color",
-        "label": "Text hover",
-        "id": "video_button_text_color_hover",
-        "default": "#F93822"
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "video_button_bg_color",
-        "default": "#FFFFFF"
-      },      
-      {
-        "type": "color",
-        "label": "Border",
-        "id": "video_button_border_color",
-        "default": "#000000"
-      },
-      {
-        "type": "color",
-        "label": "Border hover",
-        "id": "video_button_border_color_hover",
-        "default": "#F93822"
-      },
-      {
-        "type": "color",
-        "label": "Shadow",
-        "id": "video_button_shadow_color",
-        "default": "#F93822"
-      },
-      {
-        "type": "header",
-        "content": "Section colors"
-      },
-      {
-        "type": "color",
-        "label": "Section background",
-        "id": "background_color",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "color_background",
-        "id": "background_gradient",
-        "label": "Section background gradient"
-      },
-      {
-        "type": "color",
-        "label": "Border",
-        "id": "border_color",
-        "default": "#000000"
-      },
-      {
-        "type": "header",
-        "content": "Section margin (outside)"
-      },
-      {
-        "type": "range",
-        "id": "margin_top",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Margin top",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "margin_bottom",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Margin bottom",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "margin_horizontal",
-        "min": 0,
-        "max": 30,
-        "step": 1,
-        "unit": "rem",
-        "label": "Margin sides",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "margin_horizontal_mobile",
-        "min": 0,
-        "max": 15,
-        "step": 0.5,
-        "unit": "rem",
-        "label": "Margin sides mobile",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "Section padding (inside)"
-      },
-      {
-        "type": "range",
-        "id": "padding_top",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Padding top",
-        "default": 12
-      },
-      {
-         "type": "range",
-         "id": "padding_bottom",
-         "min": 0,
-         "max": 100,
-         "step": 4,
-         "unit": "px",
-         "label": "Padding bottom",
-         "default": 12
-      },
-      {
-        "type": "range",
-        "id": "padding_horizontal",
-        "min": 0,
-        "max": 30,
-        "step": 1,
-        "unit": "rem",
-        "label": "Padding sides",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "padding_horizontal_mobile",
-        "min": 0,
-        "max": 15,
-        "step": 0.5,
-        "unit": "rem",
-        "label": "Padding sides mobile",
-        "default": 1.5
-      },
-      {
-        "type": "header",
-        "content": "Section settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "full_width",
-        "label": "Full width",
-        "default": true
-      },
-      {
-        "type": "range",
-        "id": "content_width",
-        "min": 800,
-        "max": 2000,
-        "step": 100,
-        "unit": "px",
-        "label": "Section content width",
-        "default": 1200
-      },
-      {
-        "type": "range",
-        "id": "border_thickness",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "px",
-        "label": "Border thickness",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "section_radius",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-        "unit": "px",
-        "label": "Section roundness",
-        "default": 0
-      },
-      {
-        "type": "checkbox",
-        "id": "lazy",
-        "label": "Lazy load",
-        "info": "Lazy load images for speed optimisation",
-        "default": true
-      }
-    ],
-    "blocks": [
-      {
-        "type": "review",
-        "limit": 1,
-        "name": "SG-Review",
-        "settings": [
-          {
-            "type": "header",
-            "content": "Stars settings"
-          },
-          {
-            "type": "range",
-            "id": "stars_count",
-            "min": 0,
-            "max": 5,
-            "step": 0.5,
-            "label": "Stars count",
-            "default": 5
-          },
-          {
-            "type": "image_picker",
-            "label": "Stars icon",
-            "id": "stars_icon",
-            "info": "Replaces the default stars icon"
-          },
-          {
-            "type": "range",
-            "id": "stars_size",
-            "min": 10,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Size",
-            "default": 14
-          },
-          {
-            "type": "range",
-            "id": "stars_size_mobile",
-            "min": 10,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Size - mobile",
-            "default": 14
-          },    
-          {
-            "type": "header",
-            "content": "Review settings"
-          },
-          {
-            "type": "text",
-            "id": "review",
-            "label": "Text",
-            "default": "Trusted by 100,000+ customers"
-          },
-          {
-            "type": "checkbox",
-            "id": "review_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "review_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4"
-          },
-          {
-            "type": "range",
-            "id": "review_size",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size",
-            "default": 18
-          },
-          {
-            "type": "range",
-            "id": "review_size_mobile",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 14
-          },
-          {
-            "type": "range",
-            "id": "review_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 130
-          },  
-          {
-            "type": "range",
-            "id": "review_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 0
-          },
-          {
-            "type": "range",
-            "id": "review_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 0
-          },        
-          {
-            "type": "header",
-            "content": "Colors"
-          },      
-          {
-            "type": "color",
-            "label": "Stars",
-            "id": "stars_color",
-            "default": "#F93822"
-          }, 
-          {
-            "type": "color",
-            "label": "Text",
-            "id": "review_color",
-            "default": "#000000"
-          }     
-        ]
-      },
-      {            
-        "type": "heading",
-        "limit": 1,
-        "name": "SG-Heading",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "heading",
-            "label": "Text",
-            "default": "<h1>Heading</h1>"
-          },
-          {
-            "type": "checkbox",
-            "id": "heading_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "heading_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4"
-          },
-          {
-            "type": "range",
-            "id": "heading_size",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size",
-            "default": 60
-          },
-          {
-            "type": "range",
-            "id": "heading_size_mobile",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 32
-          },
-          {
-            "type": "range",
-            "id": "heading_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 130
-          },
-          {
-            "type": "range",
-            "id": "heading_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "heading_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 8
-          },
-          {
-            "type": "color",
-            "label": "Text color",
-            "id": "heading_color",
-            "default": "#000000"
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "limit": 1,
-        "name": "SG-Text",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "text",
-            "label": "Text",
-            "default": "<p>Add text content about your brand that makes a statement</p>"
-          },
-          {
-            "type": "checkbox",
-            "id": "text_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "text_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4"
-          },
-          {
-            "type": "range",
-            "id": "text_size",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "text_size_mobile",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "text_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 150
-          },
-          {
-            "type": "range",
-            "id": "text_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "text_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 8
-          },
-          {
-            "type": "color",
-            "label": "Text color",
-            "id": "text_color",
-            "default": "#000000"
-          }
-        ]
-      },      
-      {
-        "type": "button",
-        "limit": 1,
-        "name": "SG-Button",
-        "settings": [
-          {
-            "type": "text",
-            "id": "button",
-            "label": "Button label",
-            "default": "Shop Now",
-            "info": "Leave the label blank to hide the button."
-          },
-          {
-            "type": "url",
-            "id": "url",
-            "label": "URL"
-          },
-          {
-            "type": "checkbox",
-            "id": "button_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "button_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4"
-          },
-          {
-            "type": "range",
-            "id": "button_size",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "px",
-            "label": "Font size",
-            "default": 14
-          },
-          {
-            "type": "range",
-            "id": "button_size_mobile",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 14
-          },
-          {
-            "type": "range",
-            "id": "button_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 100
-          },
-          {
-            "type": "range",
-            "id": "button_padding_vertical",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding vertical",
-            "default": 16
-          },
-          {
-            "type": "range",
-            "id": "button_padding_vertical_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding vertical - mobile",
-            "default": 16
-          },
-          {
-            "type": "range",
-            "id": "button_padding_horizontal",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding horizontal",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "button_padding_horizontal_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Padding horizontal - mobile",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "button_radius",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Roundness",
-            "default": 100
-          },
-          {
-            "type": "range",
-            "id": "button_border_thickness",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "unit": "px",
-            "label": "Border thickness",
-            "default": 1
-          },
-          {
-            "type": "range",
-            "id": "button_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 40
-          },
-          {
-            "type": "range",
-            "id": "button_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 20
-          },
-          {
-            "type": "select",
-            "id": "button_style",
-            "label": "Button style",
-            "default": "outline",
-            "options": [
-              {
-                "label": "Link",
-                "value": "link"
-              },
-              {
-                "label": "Non-outline",
-                "value": "non_outline"
-              },
-              {
-                "label": "Non-outline & arrow",
-                "value": "non_outline_arrow"
-              },
-              {
-                "label": "Outline",
-                "value": "outline"
-              },
-              {
-                "label": "Outline & arrow",
-                "value": "outline_arrow"
-              }
-            ]
-          },
-          {
-            "type": "checkbox",
-            "id": "use_shadow",
-            "label": "Use hover shadow"
-          },
-          {
-            "type": "header",
-            "content": "Button colors"
-          },
-          {
-            "type": "color",
-            "label": "Text",
-            "id": "button_color",
-            "default": "#FFFFFF"
-          },
-          {
-            "type": "color",
-            "label": "Hover text",
-            "id": "button_hover_color",
-            "default": "#FFFFFF"
-          },
-          {
-            "type": "color",
-            "label": "Background",
-            "id": "button_bg_color",
-            "default": "#F93822"
-          },
-          {
-            "type": "color",
-            "label": "Background hover",
-            "id": "button_bg_hover_color",
-            "default": "#F93822"
-          },
-          {
-            "type": "color",
-            "label": "Button border",
-            "id": "button_border_color",
-            "default": "#F93822"
-          },
-          {
-            "type": "color",
-            "label": "Border hover",
-            "id": "button_border_hover_color",
-            "default": "#F93822"
-          }
-        ]
-      },
-      {
-        "type": "tag",
-        "name": "SG-Tag",
-        "settings": [
-          {
-            "type": "header",
-            "content": "Layout settings"
-          },
-          {
-            "type": "range",
-            "id": "item_mt",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "item_mt_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Margin top - mobile",
-            "default": 20
-          },
-          {
-            "type": "range",
-            "id": "item_gap",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Gap",
-            "default": 8
-          },
-          {
-            "type": "range",
-            "id": "item_gap_mobile",
-            "min": 0,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Gap - mobile",
-            "default": 8
-          },           
-          {
-            "type": "header",
-            "content": "Icon settings"
-          },
-          {
-            "type": "select",
-            "id": "icon",
-            "label": "Icon",
-            "options": [
-              {
-                "value": "atc",
-                "label": "Add to cart",
-                "group": "Shop"
-              },
-              {
-                "value": "gift",
-                "label": "Gift",
-                "group": "Shop"
-              },
-              {
-                "value": "heart",
-                "label": "Heart",
-                "group": "Shop"
-              },
-              {
-                "value": "bi-ecology",
-                "label": "Ecology",
-                "group": "Shop"
-              },
-              {
-                "value": "plant",
-                "label": "Plant",
-                "group": "Shop"
-              },
-              {
-                "value": "shop",
-                "label": "Shop",
-                "group": "Shop"
-              },
-              {
-                "value": "pin",
-                "label": "Geo pin",
-                "group": "Shop"
-              },
-              {
-                "value": "megaphone",
-                "label": "Megaphone",
-                "group": "Communication"
-              },
-              {
-                "value": "chat",
-                "label": "Chat",
-                "group": "Communication"
-              },
-              {
-                "value": "chat-dots",
-                "label": "Chat w. dots",
-                "group": "Communication"
-              },
-              {
-                "value": "people",
-                "label": "Real people support",
-                "group": "Communication"
-              },
-              {
-                "value": "email",
-                "label": "Email",
-                "group": "Communication"
-              },
-              {
-                "value": "globe",
-                "label": "Globe",
-                "group": "Communication"
-              },
-              {
-                "value": "newsletter",
-                "label": "Newsletter",
-                "group": "Communication"
-              },
-              {
-                "value": "love",
-                "label": "Love",
-                "group": "Communication"
-              },
-              {
-                "value": "phone",
-                "label": "Phone",
-                "group": "Communication"
-              },
-              {
-                "value": "share",
-                "label": "Share",
-                "group": "Communication"
-              },
-              {
-                "value": "box",
-                "label": "Box",
-                "group": "Delivery"
-              },
-              {
-                "value": "worldwide",
-                "label": "Worldwide",
-                "group": "Delivery"
-              },
-              {
-                "value": "truck",
-                "label": "Truck",
-                "group": "Delivery"
-              },
-              {
-                "value": "airplane",
-                "label": "Airplane",
-                "group": "Delivery"
-              },
-              {
-                "value": "return_arrow",
-                "label": "Return purchase",
-                "group": "Delivery"
-              },
-              {
-                "value": "time",
-                "label": "Time",
-                "group": "Delivery"
-              },
-              {
-                "value": "payment",
-                "label": "Secure payment",
-                "group": "Security"
-              },
-              {
-                "value": "mobile",
-                "label": "Lock",
-                "group": "Security"
-              },
-              {
-                "value": "shield",
-                "label": "Shield",
-                "group": "Security"
-              },
-              {
-                "value": "none",
-                "label": "None"
-              }
-            ]
-          },
-          {
-            "type": "image_picker",
-            "label": "Custom icon",
-            "id": "custom_icon"
-          },
-          {
-            "type": "range",
-            "id": "icon_size",
-            "min": 10,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Icon size",
-            "default": 18
-          },
-          {
-            "type": "range",
-            "id": "icon_size_mobile",
-            "min": 10,
-            "max": 100,
-            "step": 2,
-            "unit": "px",
-            "label": "Icon size - mobile",
-            "default": 18
-          },      
-          {
-            "type": "header",
-            "content": "Text settings"
-          },
-          {
-            "type": "text",
-            "label": "Text",
-            "id": "tag",
-            "default": "Tag"            
-          },  
-          {
-            "type": "checkbox",
-            "id": "text_custom",
-            "label": "Use custom font",
-            "default": false
-          },
-          {
-            "type": "font_picker",
-            "id": "text_font",
-            "label": "Font family",
-            "default": "josefin_sans_n4"
-          },
-          {
-            "type": "range",
-            "id": "text_size",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size",
-            "default": 16
-          },
-          {
-            "type": "range",
-            "id": "text_size_mobile",
-            "min": 0,
-            "max": 72,
-            "step": 2,
-            "unit": "px",
-            "label": "Font size - mobile",
-            "default": 14
-          },
-          {
-            "type": "range",
-            "id": "text_height",
-            "min": 50,
-            "max": 200,
-            "step": 10,
-            "unit": "%",
-            "label": "Line height",
-            "default": 130
-          },
-          {
-            "type": "header",
-            "content": "Colors"
-          },
-          {
-            "type": "color",
-            "label": "Default icon",
-            "id": "icon_color",
-            "default": "#000000"
-          },
-          {
-            "type": "color",
-            "label": "Text",
-            "id": "text_color",
-            "default": "#000000"
-          }, 
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "SG- Hero #15",
-        "blocks": [
-          {
-            "type": "review"
-          },
-          {
-            "type": "heading"
-          },
-          {
-            "type": "text"
-          },
-          {
-            "type": "button"
-          },
-          {
-            "type": "tag"
-          }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}
