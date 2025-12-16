@@ -7,71 +7,115 @@
   assign border_thickness = section.settings.border_thickness
   assign margin_top = section.settings.margin_top
   assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign margin_horizontal = section.settings.margin_horizontal
   assign background_color = section.settings.background_color
   assign background_gradient = section.settings.background_gradient
   assign full_width = section.settings.full_width
   assign content_width = section.settings.content_width
   assign lazy = section.settings.lazy
+  assign section_radius = section.settings.section_radius
 
-  assign heading = section.settings.heading
-  assign heading_size = section.settings.heading_size
-  assign heading_size_mobile = section.settings.heading_size_mobile
-  assign heading_color = section.settings.heading_color
-  assign heading_custom = section.settings.heading_custom
-  assign heading_font = section.settings.heading_font
-  assign heading_height = section.settings.heading_height
-  assign heading_align = section.settings.heading_align
-  assign heading_align_mobile = section.settings.heading_align_mobile
+  assign show_type = section.settings.show_type
 
-  assign items_gap = section.settings.items_gap
-  assign items_gap_mobile = section.settings.items_gap_mobile
-  assign items_mt = section.settings.items_mt
+  assign transparent = section.settings.transparent
 
-  assign row_height = section.settings.row_height
-  assign row_height_mobile = section.settings.row_height_mobile
+  assign body_gap_mobile = section.settings.body_gap_mobile
+  assign body_gap = section.settings.body_gap
 
-  assign block_padding_vertical = section.settings.block_padding_vertical
-  assign block_padding_vertical_mobile = section.settings.block_padding_vertical_mobile
-  assign block_padding_horizontal = section.settings.block_padding_horizontal
-  assign block_padding_horizontal_mobile = section.settings.block_padding_horizontal_mobile
-  assign block_radius = section.settings.block_radius
-  assign block_border_thickness = section.settings.block_border_thickness
-  assign block_overlay = section.settings.block_overlay
+  assign menu = section.settings.menu
+  assign mobile_menu = section.settings.mobile_menu
+  assign mobile_menu_divider_color = section.settings.mobile_menu_divider_color
 
-  assign title_color = section.settings.title_color
-  assign title_custom = section.settings.title_custom
-  assign title_font = section.settings.title_font
-  assign title_height = section.settings.title_height
-  assign title_mt = section.settings.title_mt
+  assign submenu_radius = section.settings.submenu_radius
+  assign submenu_padding_vertical = section.settings.submenu_padding_vertical
+  assign submenu_padding_horizontal = section.settings.submenu_padding_horizontal
+  assign submenu_link_hover_color = section.settings.submenu_link_hover_color
+  assign submenu_link_color = section.settings.submenu_link_color
+  assign submenu_link_bg_hover_color = section.settings.submenu_link_bg_hover_color
 
-  assign text_size = section.settings.text_size
-  assign text_size_mobile = section.settings.text_size_mobile
-  assign text_color = section.settings.text_color
-  assign text_custom = section.settings.text_custom
-  assign text_font = section.settings.text_font
-  assign text_height = section.settings.text_height
+  assign list_gap_mobile = section.settings.list_gap_mobile
+  assign list_gap = section.settings.list_gap
 
-  assign arrow_color = section.settings.arrow_color
-  assign arrow_size_mobile = section.settings.arrow_size_mobile
-  assign arrow_size = section.settings.arrow_size
+  assign link_size = section.settings.link_size
+  assign link_size_mobile = section.settings.link_size_mobile
+  assign link_color = section.settings.link_color
+  assign link_hover_color = section.settings.link_hover_color
+  assign link_hero_color = section.settings.link_hero_color
+  assign link_hover_hero_color = section.settings.link_hover_hero_color
+  assign link_custom = section.settings.link_custom
+  assign link_font = section.settings.link_font
+  assign link_height = section.settings.link_height
 
-  assign action_size_mobile = section.settings.action_size_mobile
-  assign action_size = section.settings.action_size
-  assign action_bg_color = section.settings.action_bg_color
-  assign action_arrow_color = section.settings.action_arrow_color
+  assign menu_icon_size_mobile = section.settings.menu_icon_size_mobile
+
+  assign logo = section.settings.logo
+  assign second_logo = section.settings.second_logo
+  assign logo_mobile = section.settings.logo_mobile
+  assign second_logo_mobile = section.settings.second_logo_mobile
+  assign logo_position = section.settings.logo_position
+  assign logo_width = section.settings.logo_width
+  assign logo_width_mobile = section.settings.logo_width_mobile
+
+  assign name_size = section.settings.name_size
+  assign name_size_mobile = section.settings.name_size_mobile
+  assign name_color = section.settings.name_color
+  assign name_hover_color = section.settings.name_hover_color
+  assign name_hero_color = section.settings.name_hero_color
+  assign name_hover_hero_color = section.settings.name_hover_hero_color
+  assign name_custom = section.settings.name_custom
+  assign name_font = section.settings.name_font
+  assign name_height = section.settings.name_height
+
+  assign use_search = section.settings.use_search
+  assign search_text = section.settings.search_text
+  assign search_menu_mobile = section.settings.search_menu_mobile
+
+  assign use_cart = section.settings.use_cart
+  assign cart_text = section.settings.cart_text
+
+  assign use_account = section.settings.use_account
+  assign account_text = section.settings.account_text
+  assign account_menu_mobile = section.settings.account_menu_mobile
+
+  assign right_size = section.settings.right_size
+  assign right_size_mobile = section.settings.right_size_mobile
+  assign right_color = section.settings.right_color
+  assign right_color_mobile = section.settings.right_color_mobile
+  assign right_hero_color_mobile = section.settings.right_hero_color_mobile
+  assign right_custom = section.settings.right_custom
+  assign right_font = section.settings.right_font
+  assign right_height = section.settings.right_height
+  assign right_bg_color = section.settings.right_bg_color
+
+  assign right_icon_size_mobile = section.settings.right_icon_size_mobile
+  assign right_icon_size = section.settings.right_icon_size
+  assign right_icon_color = section.settings.right_icon_color
+  assign right_icon_hover_color = section.settings.right_icon_hover_color
+  assign right_icon_hero_color = section.settings.right_icon_hero_color
+  assign right_icon_hero_hover_color = section.settings.right_icon_hero_hover_color
+
+  assign use_payments = section.settings.use_payments
+
+  assign count_bg_color = section.settings.count_bg_color
+  assign count_color = section.settings.count_color
+  
 -%}
 
 {%- style -%}
 
-  {{  heading_font | font_face: font_display: 'swap' }}
-  {{  title_font | font_face: font_display: 'swap' }}
-  {{  text_font | font_face: font_display: 'swap' }}
+  {{ link_font | font_face: font_display: 'swap' }}
+  {{ name_font | font_face: font_display: 'swap' }}
+  {{ right_font | font_face: font_display: 'swap' }}
   
   .section-{{ section.id }} {
     border-top: solid {{ border_color }} {{ border_thickness }}px;
     border-bottom: solid {{ border_color }} {{ border_thickness }}px;
     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: {{ margin_horizontal_mobile }}rem;
+    margin-right: {{ margin_horizontal_mobile }}rem;
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
   }
   
   .section-{{ section.id }}-settings {
@@ -80,147 +124,591 @@
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+    position: relative;
   }
 
-  .grid-heading-{{ section.id }} {
-    text-align: {{ heading_align_mobile }};
+  .header-{{ section.id }}.transparent {
+    background-color: transparent !important;
+    background-image: none !important;
+    position: absolute;
+    width: calc(100% - {{margin_horizontal_mobile | times: 2 }}rem);
+    top: 0;
+    left: 0;
+    z-index: 999;
   }
 
-  .grid-heading-{{ section.id }} * {
-    margin: 0;
-    font-size: {{ heading_size_mobile }}px;
-    color: {{ heading_color }};
-    line-height: {{ heading_height }}%;
-    text-transform: unset;
+  .header-{{ section.id }}.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - {{margin_horizontal_mobile | times: 2 }}rem);
+    z-index: 999;
   }
 
-  .grid-items-{{ section.id }} {
-    margin-top: {{ items_mt | times: 0.75 | round: 0 }}px;
+  .header-{{ section.id }}.onscroll {
+    background-color:{{ background_color }} !important;
+    transition: all 0.25s ease;
+  }
+
+  .header-{{ section.id }}.scroll {
+    transform: translateY(-150%) ;
+    transition: all 0.25s ease;
+  }
+
+  .header-{{ section.id }}.scroll.active {
+    transform: translateY(0) ;
+    transition: all 0.25s ease;
+  }
+
+  .header-{{ section.id }}.open {
+    background-color:{{ background_color }} !important;
+    transition: all 0.25s ease;
+  }
+
+  .header-body-{{ section.id }} {
     display: grid;
-    align-items: start;
-    grid: auto-flow dense {{ row_height_mobile }}px / repeat(1,minmax(0,1fr));
-    row-gap: {{ items_gap_mobile }}px;
+    grid-template-columns: 1fr {{ logo_width_mobile }}px 1fr;
+    align-items: center;
+    gap: {{ body_gap_mobile }}px;
   }
 
-  .grid-item-{{ section.id }} {
-    height: 100%;
-    width: 100%;
+  .header-menu-list-{{ section.id }} {
+    padding: 0px;
+    margin: 0px;
+    display: none;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  
+
+  .header-menu-mobile-{{ section.id }} .header-menu-list-{{ section.id }} {
     display: flex;
     flex-direction: column;
-    padding: {{ block_padding_vertical_mobile }}px {{ block_padding_horizontal_mobile }}px;
-    border-radius: {{ block_radius }}px;
+      }
+  
+
+  .header-menu-item-{{ section.id }} {
+    line-height: 100%;
+    cursor: pointer;
     position: relative;
-    overflow: hidden;
+    box-sizing: border-box;
+    padding-bottom: 3px;
+   justify-content: center;
+  }
+
+  .header-submenu-{{ section.id }} .header-menu-item-{{ section.id }} {
+    text-align: left; 
+  }
+
+  .header-menu-link-{{ section.id }} {
+    font-size: {{ link_size_mobile }}px;
+    color: {{ link_color }};
+    line-height: {{ link_height }}%;
+    text-transform: unset;
     text-decoration: none;
-  }
-
-  .grid-media-{{ section.id }} {
-    flex: 1 0 auto;
-    border-radius: {{ block_radius }}px;
-  }
-
-  .grid-media-{{ section.id }}:after {
-    position: absolute;
-    content: '';
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0, {{ block_overlay }});
-    border-radius: {{ block_radius }}px;
-  }
-
-  .grid-media-{{ section.id }} img,
-  .grid-media-{{ section.id }} > svg,
-  .grid-media-{{ section.id }} iframe,
-  .grid-media-{{ section.id }} video {
-    display: block;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    box-shadow: none;
-    border: 0px;
-    border-radius: {{ block_radius }}px;
-  }
-
-  .grid-content-{{ section.id }} {
-    flex: 1 0 auto;
+    font-weight: 700;
+    transition: all 0.25s ease;
     position: relative;
-    z-index: 2;
-    display: flex;
-    gap: 20px;
-    transform: translateX(-{{ block_padding_horizontal_mobile | plus: arrow_size_mobile }}px);
-    transition: all 0.35s ease 0s;
+    z-index: 3;
+    justify-content: center;
+    text-align: center; 
   }
 
-  .grid-item-{{ section.id }}:hover .grid-content-{{ section.id }} {
-    transform: translateX(0px);
-    transition: all 0.35s ease 0s;
+  .header-{{ section.id }}:not(.onscroll).transparent .header-menu-link-{{ section.id }} {
+    color: {{ link_hero_color }};
   }
 
-  .grid-content-{{ section.id }} svg {
-    flex: 0 0 {{ arrow_size_mobile }}px;
-    height: {{ arrow_size_mobile }}px;
-    transform: rotate(180deg);
-    opacity: 0;
-    transition: all 0.35s ease 0s;
+  .header-{{ section.id }}.open.transparent .header-menu-link-{{ section.id }} {
+    color: {{ link_color }};
+    transition: all 0.25s ease;
   }
 
-  .grid-item-{{ section.id }}:hover .grid-content-{{ section.id }} svg {
-    opacity: 1;
-    transition: all 0.35s ease 0s;
+  .header-submenu-{{ section.id }} .header-menu-link-{{ section.id }} {
+    color: {{ submenu_link_color }} !important;
+    font-weight: 400;
+    /* margin: auto; */
   }
 
-  .grid-item-heading-{{ section.id }} {
-    margin: 0px;
-    margin-top: {{ title_mt | times: 0.75 | round: 0 }}px;
-    color: {{ title_color }};
-    line-height: {{ title_height }}%;
-    text-transform: unset;
-    word-break: break-word;
+  .header-submenu-{{ section.id }} .header-menu-item-icon-{{ section.id }} svg path {
+    fill: {{ submenu_link_color }} !important;
   }
 
-  .grid-item-subheading-{{ section.id }} {
-    margin: 0px;
-    font-size: {{ text_size_mobile }}px;
-    color: {{ text_color }};
-    line-height: {{ text_height }}%;
-    text-transform: unset;
-    word-break: break-word;
+  .header-submenu-{{ section.id }} .header-menu-item-{{ section.id }}:hover > .header-menu-link-{{ section.id }} {
+    color: {{ submenu_link_hover_color }} !important;
   }
 
-  .grid-action-{{ section.id }} {
+  .header-menu-item-parent-{{ section.id }} {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+    max-width: fit-content;
+    flex-basis: 0;
+    width: max-content;
+  }
+
+  .header-menu-item-icon-{{ section.id }} {
+    display: block;
+    flex: 0 0 8px;
+    width: 8px;
+    transition: all 0.25s ease 0s;
+    color: {{ link_color }};
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-menu-list-{{ section.id }} > .header-menu-item-{{ section.id }} > .header-menu-item-icon-{{ section.id }} {
+    color: {{ link_hero_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent.open .header-menu-item-icon-{{ section.id }} {
+    color: {{ link_color }} !important;
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-menu-list-{{ section.id }} > .header-menu-item-{{ section.id }}:hover > .header-menu-item-icon-{{ section.id }} svg path {
+    fill: {{ link_hover_color }} !important;
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-menu-item-icon-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-submenu-{{ section.id }} {
     position: absolute;
-    z-index: 2;
-    border-radius: 50%;
-    width: {{ action_size_mobile }}px;
-    height: {{ action_size_mobile }}px;
-    bottom: {{ block_padding_vertical_mobile | plus: 15 }}px;
-    right: {{ block_padding_horizontal_mobile | plus: 15 }}px;
-    background-color: {{ action_bg_color }};
+    z-index: 3;
+    top: 100%;
+    left: 0;
+    padding: calc({{ submenu_padding_vertical }}px + {{ padding_bottom }}px) {{ submenu_padding_horizontal }}px {{ submenu_padding_vertical }}px {{ submenu_padding_horizontal }}px;
+    border-radius: {{ submenu_radius }}px;
+    background-color: {{ background_color }};
+    transform: translateY(30px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease 0s;
+    list-style: none;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
   }
 
-  .grid-action-{{ section.id }} svg {
-    width: 14px;
-    height: 14px;
+  .header-submenu-{{ section.id }} .header-submenu-{{ section.id }} {
+    padding-top: {{ submenu_padding_vertical }}px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
+    top: 0;
+    left: calc(100%);
   }
 
-  .grid-action-{{ section.id }}.active .grid-pause-{{ section.id }},
-  .grid-action-{{ section.id }} .grid-play-{{ section.id }} {
+  .header-menu-burder-{{ section.id }} {
+    display: block;
+    width: {{ menu_icon_size_mobile }}px;
+    position: relative;
+    z-index: 3;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+    height: 18px;
+  }
+
+  .header-menu-burger-icon-{{ section.id }} {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: {{ link_color }};
+    transition: transform .4s ease; 
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-menu-burger-icon-{{ section.id }} {
+    background: {{ link_hero_color }};
+  }
+
+  .header-{{ section.id }}.open .header-menu-burger-icon-{{ section.id }} {
+    transform: rotate(45deg);
+    transition-delay: .22s;
+    background: {{ link_color }} !important;
+  }
+
+  .header-menu-burger-icon-{{ section.id }}::before,
+  .header-menu-burger-icon-{{ section.id }}::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background-color: inherit;
+    background: {{ link_color }};
+  }
+
+  .header-menu-burger-icon-{{ section.id }}::before {
+    top: -7px;
+    transition: top .25s ease .27s, opacity .25s ease, width .25s ease;
+  }
+
+  .header-{{ section.id }}.open .header-menu-burger-icon-{{ section.id }}::before {
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    transition: top .2s ease, opacity .2s ease .22s, width .1s ease;
+    background: {{ link_color }};
+  }
+
+  .header-menu-burger-icon-{{ section.id }}::after {
+    bottom: -7px;
+    transition: bottom .25s ease .27s, transform .25s ease, width .25s ease;
+  }
+
+  .header-{{ section.id }}.open .header-menu-burger-icon-{{ section.id }}::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    width: 100%;
+    transition: bottom .2s ease, transform .2s ease .22s, width .1s ease;
+    background: {{ link_color }} !important;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-menu-burger-icon-{{ section.id }}::before,
+  .header-{{ section.id }}:not(.onscroll).transparent .header-menu-burger-icon-{{ section.id }}::after{
+    background: {{ link_hero_color }};
+  }
+
+  .header-logo-{{ section.id }} {
+    width: 100%;
+    max-width: {{ logo_width_mobile }}px;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+  }
+
+  .header-logo-image-{{ section.id }} img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-logo-image-desktop-{{ section.id }} {
     display: none;
   }
 
-  .grid-action-{{ section.id }}.active .grid-play-{{ section.id }} {
-    display: block;
+  .header-logo-text-{{ section.id }} {
+    margin: 0;
+    font-size: {{ name_size_mobile }}px;
+    color: {{ name_color }};
+    line-height: {{ name_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.25s ease;
   }
 
-  .grid-action-{{ section.id }} svg path {
-    fill: {{ action_arrow_color }};
+  .header-{{ section.id }}:not(.onscroll).transparent .header-logo-text-{{ section.id }} {
+    color: {{ name_hero_color }};
+  }
+
+  .header-{{ section.id }}.open.transparent .header-logo-text-{{ section.id }} {
+    color: {{ name_color }};
+    transition: all 0.25s ease;
+  }
+
+  .header-{{ section.id }} .header-logo-first-{{ section.id }} {
+    display: block !important;
+  }
+
+  .header-{{ section.id }} .header-logo-second-{{ section.id }} {
+    display: none !important;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-logo-first-{{ section.id }} {
+    display: none !important;
+  }
+
+  .header-{{ section.id }}.open.transparent .header-logo-first-{{ section.id }} {
+    display: block !important;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-logo-second-{{ section.id }} {
+    display: block !important;
+  }
+
+  .header-{{ section.id }}.open.transparent .header-logo-second-{{ section.id }} {
+    display: none !important;
+  }
+
+  .header-right-{{ section.id }} {
+    order: 3;
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+  }
+
+  .header-right-icon-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+    text-decoration: none;
+    color: {{ right_icon_color }};
+    transition: all 0.25s ease 0s;
+    position: relative;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-right-icon-{{ section.id }} {
+    color: {{ right_icon_hero_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-right-icon-{{ section.id }}:hover {
+     color: {{ right_icon_hero_hover_color }};
+     transition: all 0.25s ease 0s;
+  }
+
+   .header-{{ section.id }}:not(.onscroll).transparent .header-right-icon-{{ section.id }}:hover svg path {
+     fill: {{ right_icon_hero_hover_color }};
+     transition: all 0.25s ease 0s;
+  }
+
+  .header-{{ section.id }}.open.transparent .header-right-icon-{{ section.id }} {
+    color: {{ right_icon_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-right-icon-{{ section.id }}:hover {
+    color: {{ right_icon_hero_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-right-icon-{{ section.id }}:hover svg path {
+    stroke: {{ right_icon_hero_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-right-icon-{{ section.id }}:hover {
+    color: {{ right_icon_hover_color }} !important;
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-right-icon-{{ section.id }} svg {
+    display: block;
+    width: {{ right_icon_size_mobile }}px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-right-text-{{ section.id }} {
+    min-width: max-content;
+    margin: 0;
+    font-size: {{ right_size_mobile }}px;
+    color: {{ right_color_mobile }};
+    line-height: {{ right_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-{{ section.id }}:not(.onscroll).transparent .header-right-text-{{ section.id }} {
+    color: {{ right_hero_color_mobile }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-{{ section.id }}.open.transparent .header-right-text-{{ section.id }} {
+    color: {{ right_color_mobile }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-menu-mobile-{{ section.id }} {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease 0s;
+    z-index: 0; 
+  }
+
+  .header-{{ section.id }}.open .header-menu-mobile-{{ section.id }} {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 99; 
+  }
+
+  .header-menu-mobile-inner-{{ section.id }} {
+    background-color: {{ background_color }};
+    max-width: 80%;
+    height: 100%;
+    padding: 30px 14px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .header-mobile-menu-item-parent-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-menu-mobile-{{ section.id }} .header-menu-item-{{ section.id }} {
+    max-width: 100%;
+    width: 100%;
+    justify-content: space-between;
+    position: static;
+    padding: {{ list_gap_mobile }}px 0px;
+    border-bottom: 1px solid {{ mobile_menu_divider_color }};
+    align-items: center; 
+  }
+
+  .header-menu-mobile-{{ section.id }} .header-menu-item-{{ section.id }}:first-child {
+    border-top: 1px solid {{ mobile_menu_divider_color }};
+  }
+
+  .header-menu-mobile-{{ section.id }} .header-menu-item-icon-{{ section.id }} {
+    flex: 0 0 10px;
+    width: 10px;
+    transform: rotate(-90deg);
+  }
+
+  .header-menu-mobile-submenu-{{ section.id }} {
+    position: absolute;
+    background-color: {{ background_color }};
+    z-index: 4;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;   
+    transition: all 0.25s ease 0s;
+    transform
+   }
+
+  .header-menu-mobile-submenu-child-{{ section.id }} {
+    transform: translateX(-110%);
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-mobile-menu-item-parent-{{ section.id }}.active > .header-menu-mobile-submenu-child-{{ section.id }} {
+    transform: translateX(0%);
+    transition: all 0.25s ease 0s;
+  }
+
+  .header-menu-mobile-inner-{{ section.id }} {
+     transform: translateX(-110%);
+      transition: all 0.25s ease 0s;
+  }
+
+   .header-{{ section.id }}.open .header-menu-mobile-inner-{{ section.id }} {
+      transform: translateX(0%);
+      transition: all 0.25s ease 0.25s;
+   }
+
+  .header-menu-mobile-submenu-heading-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    border-top: 1px solid {{ mobile_menu_divider_color }};
+    padding: 0px;
+    padding: {{ list_gap_mobile }}px 0px;
+    box-shadow: none;
+    font-size: {{ link_size_mobile }}px;
+    color: {{ link_color }};
+    line-height: {{ link_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-family: "Montserrat";
+    font-weight: 700;
+}
+  
+
+  .header-menu-mobile-submenu-heading-{{ section.id }} .header-menu-item-icon-{{ section.id }} {
+    transform: rotate(90deg);
+  }
+
+  .header-mobile-submenu-list-{{ section.id }} {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    list-style: none;
+  }
+
+  .header-payments-{{ section.id }} {
+    margin: 0px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0px;
+    padding-top: 10px;
+    border-top: 1px solid {{ mobile_menu_divider_color }};
+  }
+
+  .header-payment-{{ section.id }} {
+    flex: 0 1 38px;
+    list-style: none;
+  }
+
+  .header-payment-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-mobile-menu-bottom-{{ section.id }} {
+    padding-top: 12px;
+    border-top: 1px solid {{ mobile_menu_divider_color }};
+  }
+
+  .header-mobile-menu-bottom-{{ section.id }} .header-menu-item-{{ section.id }} {
+    border: 0px;
+    margin: 0px;
+    padding: 8px 0px;
+  }
+
+  .header-mobile-menu-bottom-{{ section.id }} .header-menu-item-{{ section.id }}:first-child {
+    border: 0px;
+  }
+
+  .header-logo-desktop-{{ section.id }} {
+    display: none;
+  }
+
+  .header-{{ section.id }} .cart-count-bubble {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: {{ count_bg_color }};
+    color: {{ count_color }};
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    top: -6px;
+    right: -6px;
+    left: unset;
+    bottom: unset;
   }
   
   @media(min-width: 1024px) {
@@ -228,6 +716,9 @@
     .section-{{ section.id }} {
       margin-top: {{ margin_top }}px;
       margin-bottom: {{ margin_bottom }}px;
+      margin-left: {{ margin_horizontal }}rem;
+      margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
     }
     
     .section-{{ section.id }}-settings {
@@ -238,51 +729,187 @@
       padding-right: {{ padding_horizontal }}rem;
     }
 
-    .grid-heading-{{ section.id }} {
-      text-align: {{ heading_align }};
+    .header-{{ section.id }}.transparent {
+      width: calc(100% - {{ margin_horizontal | times: 2 }}rem);
+    }
+  
+    .header-{{ section.id }}.fixed {
+      width: calc(100% - {{ margin_horizontal | times: 2 }}rem);
     }
 
-    .grid-heading-{{ section.id }} * {
-      font-size: {{ heading_size }}px;
+    .header-body-{{ section.id }} {
+      gap: {{ body_gap }}px;
     }
 
-    .grid-items-{{ section.id }} {
-      margin-top: {{ items_mt }}px;
-      gap: {{ items_gap }}px;
-      --calculated-row-height: max(150px, min(100vw / 5, {{ row_height }}px));
-      grid: auto-flow dense var(--calculated-row-height) / repeat(4,minmax(0,1fr));
+    .header-menu-burder-{{ section.id }} {
+      display: none;
     }
 
-    .grid-item-{{ section.id }} {
+    .header-menu-list-{{ section.id }} {
+      display: flex;
+      gap: {{ list_gap }}px;
+    }
+
+    .header-menu-link-{{ section.id }} {
+      font-size: {{ link_size }}px;
+      transition: all 0.25s ease;
+    }
+
+    .header-menu-item-{{ section.id }}:hover > .header-menu-link-{{ section.id }} {
+      transition: all 0.25s ease;
+      color: {{ link_hover_color }};
+    }
+
+    .header-menu-item-{{ section.id }}::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 0px;
+      height: 2px;
+      background-color: {{ link_hover_color }};
+      transition: all 0.25s ease 0s;
+    }
+
+    .header-{{ section.id }}:not(.onscroll).transparent .header-menu-item-{{ section.id }}::after {
+      background-color:  {{ link_hover_hero_color }};
+    }
+  
+    .header-menu-item-{{ section.id }}:hover::after {
+      width: 100%;
+      transition: all 0.25s ease 0s;
+    }
+
+    .header-submenu-{{ section.id }} .header-menu-item-{{ section.id }} {
+      min-width: max-content;
+      padding: 8px 12px;
+      transition: all 0.25s ease 0s;
       justify-content: space-between;
-      flex-direction: row;
-      grid-template-columns: repeat(2, 1fr);
-      padding: {{ block_padding_vertical }}px {{ block_padding_horizontal }}px;
     }
 
-    .grid-content-{{ section.id }} {
-      transform: translateX(-{{ block_padding_horizontal | plus: arrow_size }}px);
+    .header-submenu-{{ section.id }} .header-menu-item-parent-{{ section.id }} {
+      max-width: 100%;
+      width: 100%;
     }
 
-    .grid-content-{{ section.id }} svg {
-      flex: 0 0 {{ arrow_size }}px;
-      height: {{ arrow_size }}px;
+    .header-submenu-{{ section.id }} .header-menu-item-{{ section.id }}:hover {
+      background-color: {{ submenu_link_bg_hover_color }};
+      transition: all 0.25s ease 0s;
     }
 
-    .grid-item-heading-{{ section.id }} {
-      margin-top: {{ title_mt }}px;
+    .header-submenu-{{ section.id }} .header-menu-item-{{ section.id }}::after {
+      display: none;
     }
 
-    .grid-item-subheading-{{ section.id }} {
-      font-size: {{ text_size }}px;
+    .header-{{ section.id }}:not(.onscroll).transparent .header-menu-item-{{ section.id }}:hover > .header-menu-link-{{ section.id }}{
+      color: {{ link_hover_hero_color }};
     }
 
-    .grid-action-{{ section.id }} {
-      bottom: {{ block_padding_vertical | plus: 10 }}px;
-      right: {{ block_padding_horizontal | plus: 10  }}px;
-      width: {{ action_size }}px;
-      height: {{ action_size }}px;
+    .header-{{ section.id }}:not(.onscroll).transparent .header-menu-list-{{ section.id }} > .header-menu-item-{{ section.id }}:hover > .header-menu-item-icon-{{ section.id }} {
+      color: {{ link_hover_hero_color }} !important;
     }
+
+    .header-menu-item-parent-{{ section.id }}:hover > .header-menu-item-icon-{{ section.id }} {
+      transform: rotate(180deg);      
+      transition: all 0.25s ease 0s;
+    }
+
+     .header-menu-item-parent-{{ section.id }}:hover > .header-menu-item-icon-{{ section.id }} svg path {
+      fill: {{ submenu_link_hover_color }} !important;   
+      transition: all 0.25s ease 0s;
+    }
+
+   
+
+    .header-menu-item-parent-{{ section.id }}:hover > .header-submenu-{{ section.id }} {
+      transform: translateY(0);
+      transition: all 0.25s ease 0s;
+      opacity: 1;
+      pointer-events: all;
+      width: max-content;
+      z-index: 4;
+    }
+
+    .header-logo-{{ section.id }} {
+      max-width: {{ logo_width }}px;
+    }
+
+    .header-logo-image-desktop-{{ section.id }} {
+      display: block;
+    }
+
+    .header-logo-image-mobile-{{ section.id }} {
+      display: none;
+    }
+
+    .header-logo-text-{{ section.id }} {
+      font-size: {{ name_size }}px;
+      transition: all 0.25s ease;
+    }
+
+    .header-logo-text-{{ section.id }}:hover {
+      transition: all 0.25s ease;
+      color: {{ name_hover_color }};
+    }
+
+    .header-{{ section.id }}:not(.onscroll).transparent .header-logo-text-{{ section.id }}:hover {
+      color: {{ name_hover_hero_color }}!important;
+    }
+
+    .header-right-icon-{{ section.id }} svg {
+      width: {{ right_icon_size }}px;
+    }
+
+    .header-right-text-{{ section.id }} {
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 150%;
+      left: 50%;
+      border-radius: .25rem;
+      background: {{ right_bg_color }};
+      padding: 4px 12px;
+      transition: all 0.25s ease 0s;
+      color: {{ right_color }};
+      font-size: {{ right_size }}px;
+    }
+
+    .header-{{ section.id }}:not(.onscroll).transparent .header-right-text-{{ section.id }} {
+      color: {{ right_color }};
+    }
+
+    .header-right-text-{{ section.id }}::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: {{ right_bg_color }};
+      position: absolute;
+      left: calc(50% - 5px);
+      top: -3px;
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+
+    .header-right-icon-{{ section.id }}:hover .header-right-text-{{ section.id }} {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(-50%, 0px);
+      transition: all 0.25s ease 0s;
+    }
+
+    .header-menu-mobile-{{ section.id }} {
+      display: none;
+    }
+
+    .header-logo-desktop-{{ section.id }} {
+      display: block;
+    }
+
+    .header-logo-mobile-{{ section.id }} {
+      display: none;
+    }
+    
   }
   
 {%- endstyle -%}
@@ -290,655 +917,1068 @@
 {% unless full_width %}
   <style>
     .section-{{ section.id }}-settings {
-      max-width: {{ content_width }}rem;
+      max-width: {{ content_width }}px;
     }
   </style>
 {% endunless %}
 
-{% if heading_custom %}
+{% if margin_horizontal_mobile > 0 %}
   <style>
-    .grid-heading-{{ section.id }} * {
-      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-      font-weight: {{ heading_font.weight }};
-      font-style: {{ heading_font.style }};
+    .section-{{ section.id }} {
+      border-left: solid {{ border_color }} {{ border_thickness }}px;
+      border-right: solid {{ border_color }} {{ border_thickness }}px;
     }
-  </style>
-{% endif %}
-
-{% if title_custom %}
-  <style>
-    .grid-item-heading-{{ section.id }} {
-      font-family: {{ title_font.family }}, {{ title_font.fallback_families }};
-      font-weight: {{ title_font.weight }};
-      font-style: {{ title_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% if text_custom %}
-  <style>
-    .grid-item-subheading-{{ section.id }} {
-      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
-      font-weight: {{ text_font.weight }};
-      font-style: {{ text_font.style }};
-    }
-  </style>
-{% endif %}
-
-{% for block in section.blocks %}
-  <style>
-    .grid-item-{{ block.id }} {
-      border: {{ block_border_thickness }}px solid {{ block.settings.block_border_color }};
-      background-color: {{ block.settings.block_bg_color }};
-      grid-area: span min(2, {{ block.settings.row_width }}) / span min(2,{{ block.settings.column_width }});
-    }
-
-    .grid-item-{{ block.id }} .grid-item-heading-{{ section.id }} {
-      font-size: {{ block.settings.title_size_mobile }}px;
-    }
-
-    {% if block.settings.override_colors %}
-    .grid-item-{{ block.id }} .grid-item-heading-{{section.id}}, .grid-item-{{ block.id }} .grid-item-subheading-{{section.id}}, .grid-item-{{ block.id }} .grid-content-{{section.id}} svg path  {
-      color: {{block.settings.block_text_color}};
-      fill: {{block.settings.block_text_color}};
-    }
-    {% endif %}
-
-    {% if block.settings.remove_overlay %}
-      .grid-item-{{ block.id }} .grid-media-{{ section.id }}:after {
-        background-color: rgba(0,0,0,0);
-      }
-    {% endif %}
     
-    .grid-item-{{ block.id }} .grid-content-{{ section.id }} {
-      align-items: {{ block.settings.align_content_mobile }};
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: 0px;
+        border-right: 0px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if margin_horizontal > 0 %}
+  <style>
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: solid {{ border_color }} {{ border_thickness }}px;
+        border-right: solid {{ border_color }} {{ border_thickness }}px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if link_custom %}
+  <style>
+    .header-menu-link-{{ section.id }},
+    .header-menu-mobile-submenu-heading-{{ section.id }}{
+      font-family: {{ link_font.family }}, {{ link_font.fallback_families }};
+      font-weight: {{ link_font.weight }};
+      font-style: {{ link_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if name_custom %}
+  <style>
+    .header-logo-text-{{ section.id }} {
+      font-family: {{ name_font.family }}, {{ name_font.fallback_families }};
+      font-weight: {{ name_font.weight }};
+      font-style: {{ name_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if right_custom %}
+  <style>
+    .header-right-text-{{ section.id }} {
+      font-family: {{ right_font.family }}, {{ right_font.fallback_families }};
+      font-weight: {{ right_font.weight }};
+      font-style: {{ right_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if search_menu_mobile %}
+  <style>
+    .header-right-{{ section.id }} .header-right-icon-search-{{ section.id }} {
+      display: none;
     }
 
     @media(min-width: 1024px) {
-      .grid-item-{{ block.id }} {
-        grid-area: span {{ block.settings.row_width }} / span {{ block.settings.column_width }};
-      }
-
-      .grid-item-{{ block.id }} .grid-content-{{ section.id }} {
-        align-items: {{ block.settings.align_content }};
-      }
-      
-      .grid-item-{{ block.id }} .grid-item-heading-{{ section.id }} {
-        font-size: {{ block.settings.title_size }}px;
+      .header-right-{{ section.id }} .header-right-icon-search-{{ section.id }} {
+        display: flex;
       }
     }
   </style>
+{% endif %}
 
-  {% unless block.settings.media_row %}
-    <style>
-      .grid-item-{{ block.id }} {
+{% if account_menu_mobile %}
+  <style>
+    .header-right-{{ section.id }} .header-right-icon-account-{{ section.id }} {
+      display: none;
+    }
+
+    @media(min-width: 1024px) {
+      .header-right-{{ section.id }} .header-right-icon-account-{{ section.id }} {
         display: flex;
-        justify-content: end;
-        flex-direction: column;
       }
-     .grid-item-{{ block.id }} .grid-media-{{ section.id }} {
-        position: absolute;
-        left: -0.5%;
-        right: 0;
-        top: -0.5%;
-        bottom: 0;
-        width: 101%;
-        height: 101%;
-      }
-      .grid-item-{{ block.id }} .grid-action-{{ section.id }} {
-        bottom: {{ block_padding_vertical_mobile }}px;
-        right: {{ block_padding_horizontal_mobile }}px;
-      }
-      @media(min-width: 1024px) {
-        .grid-item-{{ block.id }} .grid-action-{{ section.id }} {
-          bottom: {{ block_padding_vertical }}px;
-          right: {{ block_padding_horizontal }}px;
-        }
-      }
-    </style>
-  {% endunless %}
-  {% if block.settings.media_row %}
-     <style>
-      .grid-item-{{ block.id }} .grid-media-{{ section.id }} {
-        max-height: 250px;
-      }
-      @media(min-width: 1024px) {
-        .grid-item-{{ block.id }} .grid-media-{{ section.id }} {
-          max-height: 100%;
-        }
-        .grid-item-{{ block.id }} .grid-content-{{ section.id }} {
-          max-width: 50%;
-        }
-      }
-     </style>
-  {% endif %}
-{% endfor %}
+    }
+  </style>
+{% endif %}
 
-<div class="section-{{ section.id }} grid-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings">
-      {% if heading != blank %}
-        <div class="grid-heading-{{ section.id }}">{{ heading }}</div>
-      {% endif %}
+{% if logo_position == "center" %}
+  <style>
+    @media(min-width: 1024px) {
+
+      .header-body-{{ section.id }} {
+        grid-template-columns: 1fr {{ logo_width }}px 1fr;
+      }
       
-      <div class="grid-items-{{ section.id }}">
-        {% for block in section.blocks %}
-          <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="grid-item-{{ section.id }} grid-item-{{ block.id }}">
-            <div class="grid-content-{{ section.id }}">
-              <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="{{ arrow_color }}" fill-rule="evenodd" clip-rule="evenodd" d="M4,12l8,8,1.41-1.41L7.83,13H20V11H7.83l5.59-5.59L12,4Z"></path></svg>
-              <div class="grid-text-{{ section.id }}">
-                {% if block.settings.sub_heading != blank %}
-                  <p class="grid-item-subheading-{{ section.id }}">{{ block.settings.sub_heading }}</p>
+      .header-menu-{{ section.id }} {
+        order: 1;
+      }
+
+      .header-logo-{{ section.id }} {
+        order: 2;
+        text-align: center;
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+
+      .header-body-{{ section.id }} {
+        grid-template-columns: {{ logo_width }}px 1fr auto;
+      }
+      
+      .header-menu-{{ section.id }} {
+        order: 2;
+      }
+
+      .header-logo-{{ section.id }} {
+        order: 1;
+        text-align: left;
+      }
+    }
+  </style>
+{% endif %}
+
+{% comment %} FOR FREE THEMES{% endcomment %}
+{%- if settings.cart_type == "drawer" -%}
+  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+  {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+{% comment %} FOR FREE THEMES{% endcomment %}
+
+<div class="section-{{ section.id }} header-{{ section.id }} {% if transparent %}transparent{% endif %} {% if show_type == "always" %}fixed{% elsif show_type == "scroll_up" %}scroll active fixed{% else %}top{% endif %}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
+      <div class="header-body-{{ section.id }}">
+        <div class="header-menu-{{ section.id }}">
+          {% if menu != blank %}
+            <button class="header-menu-burder-{{ section.id }}">
+              <span class="header-menu-burger-icon-{{ section.id }}"></span>
+            </button>
+            <ul class="header-menu-list-{{ section.id }}">
+              {% for link in menu.links %}
+                <li class="header-menu-item-{{ section.id }} {% if link.links.size > 0 %}header-menu-item-parent-{{ section.id }}{% endif %}">
+                  <a href="{{ link.url }}" class="header-menu-link-{{ section.id }}">{{ link.title }}</a>
+                  {% if link.links.size > 0 %}
+                    <span class="header-menu-item-icon-{{ section.id }}">
+                      <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                      </svg>
+                    </span>
+
+                  <ul class="header-submenu-{{ section.id }}">
+                    {% for child_link in link.links %}
+                      <li class="header-menu-item-{{ section.id }} {% if child_link.links.size > 0 %}header-menu-item-parent-{{ section.id }}{% endif %}">
+                        <a href="{{ child_link.url }}" class="header-menu-link-{{ section.id }}">{{ child_link.title }}</a>
+                        {% if child_link.links.size > 0 %}
+                          <span class="header-menu-item-icon-{{ section.id }}">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                              <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                            </svg>
+                          </span>
+
+                          <ul class="header-submenu-{{ section.id }}">
+                            {% for child_child_link in child_link.links %}
+                              <li class="header-menu-item-{{ section.id }}">
+                                <a href="{{ child_child_link.url }}" class="header-menu-link-{{ section.id }}">{{ child_child_link.title }}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+
+          <div class="header-menu-mobile-{{ section.id }}">
+            <div class="header-menu-mobile-inner-{{ section.id }}">
+              <ul class="header-menu-list-{{ section.id }}">
+                {% for link in menu.links %}
+                  <li class="header-menu-item-{{ section.id }} {% if link.links.size > 0 %}header-mobile-menu-item-parent-{{ section.id }}{% endif %}">
+                    <a href="{{ link.url }}" class="header-menu-link-{{ section.id }}">{{ link.title }}</a>
+                    {% if link.links.size > 0 %}
+                      <span class="header-menu-item-icon-{{ section.id }}">
+                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                          <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                        </svg>
+                      </span>
+                      <div class="header-menu-mobile-submenu-{{ section.id }} header-menu-mobile-submenu-child-{{ section.id }}">
+                        <button class="header-menu-mobile-submenu-heading-{{ section.id }}">
+                          <span class="header-menu-item-icon-{{ section.id }}">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                              <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                            </svg>
+                          </span>
+                          {{ link.title }}
+                        </button>
+                        <ul class="header-mobile-submenu-list-{{ section.id }}">
+                          {% for child_link in link.links %}
+                            <li class="header-menu-item-{{ section.id }} {% if child_link.links.size > 0 %}header-mobile-menu-item-parent-{{ section.id }}{% endif %}">
+                              <a href="{{ child_link.url }}" class="header-menu-link-{{ section.id }}">{{ child_link.title }}</a>
+                              {% if child_link.links.size > 0 %}
+                                <span class="header-menu-item-icon-{{ section.id }}">
+                                  <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                                  </svg>
+                                </span>
+                                <div class="header-menu-mobile-submenu-{{ section.id }} header-menu-mobile-submenu-child-{{ section.id }}">
+                                  <button class="header-menu-mobile-submenu-heading-{{ section.id }}">
+                                    <span class="header-menu-item-icon-{{ section.id }}">
+                                      <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                                      </svg>
+                                    </span>
+                                    {{ child_link.title }}
+                                  </button>
+                                  <ul class="header-mobile-submenu-list-{{ section.id }}">
+                                    {% for child_child_link in child_link.links %}
+                                       <li class="header-menu-item-{{ section.id }}">
+                                         <a href="{{ child_child_link.url }}" class="header-menu-link-{{ section.id }}">{{ child_child_link.title }}</a>
+                                       </li>
+                                    {% endfor %}
+                                  </ul>
+                                </div>
+                              {% endif %}
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+                {% if use_search and search_menu_mobile %}
+                  <li class="header-menu-item-{{ section.id }}">
+                    <a href="{{ routes.search_url }}" class="header-menu-link-{{ section.id }}">{{ search_text }}</a>
+                  </li>
                 {% endif %}
-                {% if block.settings.heading != blank %}
-                  <p class="grid-item-heading-{{ section.id }}">{{ block.settings.heading }}</p>
+                {% if use_account and account_menu_mobile %}
+                  <li class="header-menu-item-{{ section.id }}">
+                    <a href="{{ routes.account_url }}" class="header-menu-link-{{ section.id }}">{{ account_text }}</a>
+                  </li>
+                {% endif %}
+              </ul>
+              <div class="header-mobile-menu-bottom-{{ section.id }}">
+                {% if mobile_menu != blank %}
+                  <ul class="header-menu-list-{{ section.id }}">
+                    {% for link in mobile_menu.links %}
+                      <li class="header-menu-item-{{ section.id }}">
+                        <a href="{{ link.url }}" class="header-menu-link-{{ section.id }}">{{ link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                {% if use_payments %}
+                  <ul class="header-payments-{{ section.id }}">
+                    {%- for type in shop.enabled_payment_types -%}
+                      <li class="header-payment-{{ section.id }}">
+                        {{ type | payment_type_svg_tag }}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
                 {% endif %}
               </div>
             </div>
-            <div class="grid-media-{{ section.id }}">
-              {% if block.settings.bg_type == "image" %}
-                {% if block.settings.image != blank %}
-                  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}lazy="loading"{% endif %}>
-                {% else %}
-                  {{ 'image' | placeholder_svg_tag }}
+          </div>
+          {% endif %}
+        </div>
+        
+        <div class="header-logo-{{ section.id }}">
+          {% if logo != blank %}
+            <a href="{{ shop.url }}" class="header-logo-image-{{ section.id }} {% if logo_mobile != blank %}header-logo-desktop-{{ section.id }}{% endif %}">
+              <img src="{{ logo | image_url }}" alt="{{ logo.alt }}" {% if lazy %}loading="lazy"{% endif %} {% if second_logo != blank %}class="header-logo-first-{{ section.id }}"{% endif %}>
+              {% if second_logo != blank %}
+                <img src="{{ second_logo | image_url }}" alt="{{ second_logo.alt }}" {% if lazy %}loading="lazy"{% endif %} class="header-logo-second-{{ section.id }}">
+              {% endif %}
+            </a>
+            {% if logo_mobile != blank %}
+              <a href="{{ shop.url }}" class="header-logo-image-{{ section.id }} header-logo-mobile-{{ section.id }}">
+                <img src="{{ logo_mobile | image_url }}" alt="{{ logo_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} {% if second_logo_mobile != blank %}class="header-logo-first-{{ section.id }}"{% endif %}>
+                {% if second_logo_mobile != blank %}
+                  <img src="{{ second_logo_mobile | image_url }}" alt="{{ second_logo_mobile.alt }}" {% if lazy %}loading="lazy"{% endif %} class="header-logo-second-{{ section.id }}">
                 {% endif %}
-              {% elsif block.settings.bg_type == "video" %}
-                {% assign video_id =  block.settings.video.id | default: block.settings.video_url.id %}
-                {% assign loop = '&loop=1&playlist=' | append: video_id %} 
-                {%- if block.settings.video == null and block.settings.video_url != null -%}
-                    
-                    {%- if block.settings.video_url.type == 'youtube' -%}
-                      <iframe
-                        data-src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1&mute=1{{ loop }}"
-                        class="js-youtube"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        title="Fixed Video"
-                        class="lazy"
-                      ></iframe>
-                    {%- else -%}
-                      <iframe
-                        data-src="https://player.vimeo.com/video/{{ video_id }}?enablejsapi=1&autoplay=1&mute=1{{ loop }}"
-                        class="js-vimeo"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        title="Fixed Video"
-                        class="lazy"
-                      ></iframe>
-                    {% endif %}
-                  
-                  {% else %}
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{{ shop.url }}" class="header-logo-text-{{ section.id }}">{{ shop.name }}</a>
+          {% endif %}
+        </div>
 
-                    <video data-src="{{ block.settings.video.sources[1].url }}" muted autoplay playsinline preload="none" loop class="lazy"></video>
-                      
-                  {% endif %}
-                {% endif %}
-                {% if block.settings.bg_type == "video" %}
-                  <div class="grid-action-{{ section.id }}">
-                    <svg class="grid-pause-{{ section.id }}" width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"><title>Pause</title><path d="M0 0H4V14H0V0Z" fill="currentColor"></path><path d="M8 0H12V14H8V0Z" fill="currentColor"></path></svg>
-                    <svg class="grid-play-{{ section.id }}" width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"><title>Play</title><path d="M12 7L0 14L6.1196e-07 0L12 7Z" fill="currentColor"></path></svg>
+        <div class="header-right-{{ section.id }}">
+          {% if use_search %}
+            <a href="{{ routes.search_url }}" class="header-right-icon-{{ section.id }} header-right-icon-search-{{ section.id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.5 -0.5 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" height="16" width="16"><path d="m10.558125 10.575000000000001 1.925 1.925m-0.555625 -5.261875c0 2.6168750000000003 -2.114375 4.738125 -4.721875 4.738125 -2.6081250000000002 0 -4.7225 -2.12125 -4.7225 -4.7375C2.483125 4.6206249999999995 4.5975 2.5 7.205 2.5c2.6081250000000002 0 4.7225 2.12125 4.7225 4.738125" stroke-width="1"></path></svg>
+              {% if search_text != blank %}
+                <div class="header-right-text-{{ section.id }}">
+                  {{ search_text }}
+                </div>
+              {% endif %}
+            </a>
+          {% endif %}
+
+          {%- if shop.customer_accounts_enabled -%}
+            {% if use_account %}
+              <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-right-icon-{{ section.id }} header-right-icon-account-{{ section.id }}">
+                <span class="header-account-icon-{{ section.id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.5 -0.5 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" height="16" width="16"><path d="M5.625 4.6875a1.875 1.875 0 1 0 3.75 0 1.875 1.875 0 1 0 -3.75 0" stroke-width="1"></path><path d="M12.1875 12.8125c-0.296875 -5.833125 -9.078125 -5.833125 -9.375 0" stroke-width="1"></path></svg>
+               </span>
+                {% if account_text != blank %}
+                  <div class="header-right-text-{{ section.id }}">
+                    {{ account_text }}
                   </div>
                 {% endif %}
-              </div>
-          </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
-        {% endfor %}
+              </a>
+            {% endif %}
+          {% endif %}
+
+          {% if use_cart %}
+            <a href="{{ routes.cart_url }}" class="header-right-icon-{{ section.id }}">
+              <span class="header-cart-icon-{{ section.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.5 -0.5 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" height="16" width="16"><path d="M10.3125 13.125a0.9375 0.9375 0 1 0 0 -1.875 0.9375 0.9375 0 0 0 0 1.875m-5 0a0.9375 0.9375 0 1 0 0 -1.875 0.9375 0.9375 0 0 0 0 1.875M2.31875 3.375h9.508750000000001c0.86125 0 1.4831250000000002 0.79375 1.2468750000000002 1.5925l-1.03375 3.5C11.881250000000001 9.004999999999999 11.3725 9.375 10.79375 9.375H5.07c-0.579375 0 -1.08875 -0.370625 -1.2475 -0.9075zm0 0L1.875 1.875" stroke-width="1"></path></svg>
+              </span>
+              {% if cart_text != blank %}
+                <div class="header-right-text-{{ section.id }}">
+                  {{ cart_text }}
+                </div>
+              {% endif %}
+              {%- if cart != empty -%}
+                <div class="cart-count-bubble">
+                  {%- if cart.item_count < 100 -%}
+                    <span aria-hidden="true">{{ cart.item_count }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </a>
+          {% endif %}
+        </div>
       </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
-
 <script>
-  function initGridPro() {
+  function initHeader2() {
+    let header = document.querySelector('.header-{{ section.id }}');
+    let menuMobile = document.querySelector('.header-menu-mobile-{{ section.id }}');
 
-    let lazyLoadInstance = new LazyLoad();
+    let mobileSubMenu = document.querySelectorAll('.header-menu-mobile-submenu-{{ section.id }}');
+      if (header) {
+        if (!header.classList.contains('top')) {
+          if (window.scrollY > 0) {
+              header.classList.add('onscroll');
+          }
+      
+          let lastScrollTop = window.scrollY;
+      
+          document.addEventListener('scroll', () => {
+              const currentScrollTop = window.scrollY;
+              const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      
+              if (currentScrollTop <= 0) {
+                  header.classList.add('active');
+                  header.classList.remove('onscroll');
+                  return;
+              }
+      
+              if (currentScrollTop >= maxScroll) {
+                  header.classList.remove('active');
+                  return;
+              }
+      
+              if (currentScrollTop !== lastScrollTop) {
+                  if (header.classList.contains('scroll')) {
+                      if (currentScrollTop > lastScrollTop) {
+                          header.classList.remove('active');
+                      } else {
+                          header.classList.add('active');
+                      }
+                  }
+      
+                  if (header.classList.contains('transparent')) {
+                      if (currentScrollTop === 0) {
+                          header.classList.remove('onscroll');
+                      } else {
+                          header.classList.add('onscroll');
+                      }
+                  }
+      
+                  lastScrollTop = currentScrollTop;
+              }
+          });
+      }
 
-    window.addEventListener(
-      "LazyLoad::Initialized",
-      function (event) {
-        window.lazyLoadInstance = event.detail.instance;
-      },
-      false
-    );
-    
-    let items = document.querySelectorAll('.grid-item-{{ section.id }}');
-    items.forEach(el => {
-      let btn = el.querySelector('.grid-action-{{ section.id }}');
-      let video = el.querySelector('video');
-      let frame = el.querySelector('iframe');
-      if(btn) {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          btn.classList.toggle('active');
-          if(btn.classList.contains('active')){
-            if(video) {
-              video.pause();
+        let burger_icon = header.querySelector('.header-menu-burder-{{ section.id }}');
+        if(burger_icon) {
+          burger_icon.addEventListener('click', () => {
+            header.classList.toggle('open');
+            if(header.classList.contains('open')) {
+              document.body.style.overflowY = 'hidden';
+            } else {
+              if(mobileMenuItem) {
+                mobileMenuItem.forEach(el => {
+                  el.classList.remove('active');
+                })
+              }
+              document.body.style.overflowY = 'scroll';
             }
-            if(frame) {
-              frame.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-            } 
-          } else {
-           if(video) {
-              video.play();
+          })
+        }
+
+        if(menuMobile) {
+          menuMobile.style.height = `calc(100dvh - ${header.offsetHeight}px`;
+        }
+
+        document.addEventListener('click', (e) => {
+          if(e.target == menuMobile) {
+            document.body.style.overflowY = 'scroll';
+            header.classList.remove('open');
+            if(mobileMenuItem) {
+              mobileMenuItem.forEach(el => {
+                el.classList.remove('active');
+              })
             }
-            if(frame) {
-              frame.contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
-            } 
           }
         })
+
+        if (mobileSubMenu) {  
+          mobileSubMenu.forEach(el => {  
+            let parentItem = el.closest('.header-mobile-menu-item-parent-{{ section.id }}');  
+            let heading = el.querySelector('.header-menu-mobile-submenu-heading-{{ section.id }}');  
+            
+            if (parentItem) {  
+              parentItem.addEventListener('click', () => {  
+                parentItem.classList.add('active');  
+              });  
+            }  
+        
+            if (heading) {  
+              heading.addEventListener('click', (event) => {  
+                event.stopPropagation();
+                parentItem.classList.remove('active');  
+              });  
+            }  
+          });  
+        }  
       }
-    })
   }
-  
-  document.addEventListener('DOMContentLoaded', initGridPro);
+
+  document.addEventListener('DOMContentLoaded', initHeader2);
   
   if (Shopify.designMode) {
-     document.addEventListener('shopify:section:unload', initGridPro);
-     document.addEventListener('shopify:section:load', initGridPro);
+     document.addEventListener('shopify:section:unload', initHeader2);
+     document.addEventListener('shopify:section:load', initHeader2);
   }
 </script>
 
 {% schema %}
 {
-  "name": "SG-Grid Pro",
+  "name": "SG-Header #2",
   "settings": [
     {
       "type": "header",
-      "content": "Heading"
+      "content": "Header"
     },
     {
-      "type": "richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "<h2>Grid Pro</h2>"
+      "type": "select",
+      "id": "show_type",
+      "label": "Reveal menu",
+      "default": "always",
+      "options": [
+        {
+          "label": "Scroll up",
+          "value": "scroll_up"
+        },
+        {
+          "label": "Always/sticky",
+          "value": "always"
+        },
+        {
+          "label": "Only top",
+          "value": "top"
+        }
+      ]
     },
     {
       "type": "checkbox",
-      "id": "heading_custom",
-      "label": "Use Custom Font",
+      "id": "transparent",
+      "label": "Transparent background",
       "default": false
     },
     {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Heading Font Family",
-      "default": "josefin_sans_n4"
+      "type": "header",
+      "content": "Layout"
     },
     {
       "type": "range",
-      "id": "heading_size",
+      "id": "body_gap",
       "min": 0,
-      "max": 72,
+      "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Heading Size",
-      "default": 40
+      "label": "Logo spacing",
+      "default": 32
     },
     {
       "type": "range",
-      "id": "heading_size_mobile",
+      "id": "body_gap_mobile",
       "min": 0,
-      "max": 72,
+      "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Heading Size - Mobile",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "heading_height",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "unit": "%",
-      "label": "Heading Line Height",
-      "default": 150
-    },
-    {
-      "type": "select",
-      "id": "heading_align",
-      "label": "Heading Text Align",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "heading_align_mobile",
-      "label": "Heading Text Align - Mobile",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
+      "label": "Logo spacing - mobile",
+      "default": 12
     },
     {
       "type": "header",
-      "content": "Grid Layout Settings"
+      "content": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Additional mobile menu (optional)",
+      "info": "Located at the bottom of the menu drawer and displays only top-level menu items."
+    },
+    {
+      "type": "header",
+      "content": "Menu list"
     },
     {
       "type": "range",
-      "id": "items_gap",
+      "id": "list_gap",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
       "label": "Gap",
-      "default": 20
+      "default": 32
     },
     {
       "type": "range",
-      "id": "items_gap_mobile",
+      "id": "list_gap_mobile",
       "min": 0,
-      "max": 100,
+      "max": 50,
       "step": 2,
       "unit": "px",
-      "label": "Gap - Mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "items_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Margin Top",
-      "default": 16
+      "label": "Gap - mobile",
+      "default": 12
     },
     {
       "type": "header",
-      "content": "Row Max-Height",
-      "info": "Define the height of a single row, from which the grid is dinamically created."
+      "content": "Menu link"
+    },
+    {
+      "type": "checkbox",
+      "id": "link_custom",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "link_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "row_height",
-      "min": 150,
-      "max": 400,
-      "step": 10,
-      "unit": "px",
-      "label": "Desktop Row Max-Height",
-      "default": 300
-    },
-    {
-      "type": "range",
-      "id": "row_height_mobile",
-      "min": 120,
-      "max": 260,
-      "step": 10,
-      "unit": "px",
-      "label": "Mobile Row Height",
-      "default": 200
-    },
-    {
-      "type": "header",
-      "content": "Grid Block Settings"
-    },
-    {
-      "type": "range",
-      "id": "block_padding_vertical",
+      "id": "link_size",
       "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Padding Vertical",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "block_padding_vertical_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Padding Vertical - Mobile",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "block_padding_horizontal",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Padding Horizontal",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "block_padding_horizontal_mobile",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Padding Horizontal - Mobile",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "block_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Border Radius",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "block_border_thickness",
-      "min": 0,
-      "max": 10,
+      "max": 40,
       "step": 1,
       "unit": "px",
-      "label": "Block Border Thickness",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Submenu"
+    },
+    {
+      "type": "range",
+      "id": "submenu_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "submenu_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "submenu_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
       "default": 0
     },
     {
+      "type": "header",
+      "content": "Burger menu icon"
+    },
+    {
       "type": "range",
-      "id": "block_overlay",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
+      "id": "menu_icon_size_mobile",
+      "min": 10,
+      "max": 100,
+      "step": 2,
       "unit": "px",
-      "label": "Block Overlay",
-      "default": 0.2
+      "label": "Size - mobile",
+      "default": 22
     },
     {
       "type": "header",
-      "content": "Grid Block Heading"
+      "content": "Payment icons"
     },
     {
       "type": "checkbox",
-      "id": "title_custom",
-      "label": "Use Custom Font",
+      "id": "use_payments",
+      "label": "Use payment icons",
+      "info": "Shows at the bottom of menu drawer on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Logo",
+      "info": "Leave blank to display shop name instead of logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_logo",
+      "label": "Second logo",
+      "info": "Use for transparent header"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_mobile",
+      "label": "Logo - mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_logo_mobile",
+      "label": "Second logo - mobile",
+      "info": "Use for transparent header"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Width",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Width - mobile",
+      "default": 140
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Position - desktop",
+      "default": "left",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Shop name"
+    },
+    {
+      "type": "checkbox",
+      "id": "name_custom",
+      "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "title_font",
-      "label": "Block Heading Font Family",
+      "id": "name_font",
+      "label": "Font family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "title_height",
+      "id": "name_size",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "name_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "name_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
-      "label": "Block Heading Line Height",
-      "default": 130
-    },
-    {
-      "type": "range",
-      "id": "title_mt",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Heading Margin Top",
-      "default": 4
+      "label": "Line height",
+      "default": 100
     },
     {
       "type": "header",
-      "content": "Grid Block Subheading"
+      "content": "Search"
     },
     {
       "type": "checkbox",
-      "id": "text_custom",
-      "label": "Use Custom Font",
+      "id": "use_search",
+      "label": "Use search",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_text",
+      "label": "Text",
+      "default": "Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "search_menu_mobile",
+      "label": "Move search link to burger menu (mobile)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Account"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_account",
+      "label": "Use account",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "account_text",
+      "label": "Text",
+      "default": "Account"
+    },
+    {
+      "type": "checkbox",
+      "id": "account_menu_mobile",
+      "label": "Move account link to burger menu (mobile)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_cart",
+      "label": "Use cart",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cart_text",
+      "label": "Text",
+      "default": "Cart"
+    },
+    {
+      "type": "header",
+      "content": "Right link"
+    },
+    {
+      "type": "checkbox",
+      "id": "right_custom",
+      "label": "Use custom font",
       "default": false
     },
     {
       "type": "font_picker",
-      "id": "text_font",
-      "label": "Block Subheading Font Family",
+      "id": "right_font",
+      "label": "Font family",
       "default": "josefin_sans_n4"
     },
     {
       "type": "range",
-      "id": "text_size",
+      "id": "right_size",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
-      "label": "Block Subheading Size",
-      "default": 16
+      "label": "Font size",
+      "default": 13
     },
     {
       "type": "range",
-      "id": "text_size_mobile",
+      "id": "right_size_mobile",
       "min": 0,
-      "max": 72,
-      "step": 2,
+      "max": 40,
+      "step": 1,
       "unit": "px",
-      "label": "Block Subheading Size - Mobile",
-      "default": 16
+      "label": "Font size - mobile",
+      "default": 10
     },
     {
       "type": "range",
-      "id": "text_height",
+      "id": "right_height",
       "min": 50,
       "max": 200,
       "step": 10,
       "unit": "%",
-      "label": "Block Subheading Line Height",
+      "label": "Line height",
       "default": 130
     },
     {
       "type": "header",
-      "content": "Grid Block Content Arrow Settings"
+      "content": "Right icon"
     },
     {
       "type": "range",
-      "id": "arrow_size_mobile",
-      "min": 10,
+      "id": "right_icon_size",
+      "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Block Arrow Size - Mobile",
-      "default": 48
+      "label": "Size",
+      "default": 22
     },
     {
       "type": "range",
-      "id": "arrow_size",
-      "min": 10,
+      "id": "right_icon_size_mobile",
+      "min": 0,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Block Arrow Size",
-      "default": 48
+      "label": "Size - mobile",
+      "default": 20
     },
     {
       "type": "header",
-      "content": "Grid Block Action Settings"
+      "content": "Menu colors"
     },
     {
-      "type": "range",
-      "id": "action_size_mobile",
-      "min": 10,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Action Size - Mobile",
-      "default": 60
+      "type": "color",
+      "label": "Link",
+      "id": "link_color",
+      "default": "#121212"
     },
     {
-      "type": "range",
-      "id": "action_size",
-      "min": 10,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Block Action Size",
-      "default": 60
+      "type": "color",
+      "label": "Link hover",
+      "id": "link_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Link over hero",
+      "id": "link_hero_color",
+      "default": "#FFFFFF",
+      "info": "For transparent background"
+    },
+    {
+      "type": "color",
+      "label": "Link hover over hero",
+      "id": "link_hover_hero_color",
+      "default": "#FFFFFF",
+      "info": "For transparent background"
+    },
+    {
+      "type": "color",
+      "label": "Submenu link",
+      "id": "submenu_link_color",
+      "default": "#707070"
+    },
+    {
+      "type": "color",
+      "label": "Submenu link hover",
+      "id": "submenu_link_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Submenu link background hover",
+      "id": "submenu_link_bg_hover_color",
+      "default": "#F3F3F3"
+    },
+    {
+      "type": "color",
+      "label": "Mobile menu divider",
+      "id": "mobile_menu_divider_color",
+      "default": "#E6E6E6"
     },
     {
       "type": "header",
-      "content": "Grid Block Colors"
+      "content": "Shop name colors"
     },
     {
       "type": "color",
-      "label": "Block Heading Color",
-      "id": "title_color",
+      "label": "Text",
+      "id": "name_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Text hover",
+      "id": "name_hover_color",
+      "default": "#AFAFAF"
+    },
+    {
+      "type": "color",
+      "label": "Text over hero",
+      "id": "name_hero_color",
+      "info": "For transparent background",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
-      "label": "Block Subheading Color",
-      "id": "text_color",
+      "label": "Text hover over hero",
+      "id": "name_hover_hero_color",
+      "info": "For transparent background",
       "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Block Content Arrow Color",
-      "id": "arrow_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Block Action Background Color",
-      "id": "action_bg_color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Block Action Arrow Color",
-      "id": "action_arrow_color",
-      "default": "#000000"
     },
     {
       "type": "header",
-      "content": "Section Colors"
+      "content": "Right links colors"
     },
     {
       "type": "color",
-      "label": "Heading Color",
-      "id": "heading_color",
-      "default": "#000000"
+      "label": "Icon",
+      "id": "right_icon_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Icon hover",
+      "id": "right_icon_hover_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Icon over hero",
+      "id": "right_icon_hero_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Icon over hover hero",
+      "id": "right_icon_hero_hover_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Text",
+      "id": "right_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Text background",
+      "id": "right_bg_color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Text - mobile",
+      "id": "right_color_mobile",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "label": "Text over hero - mobile",
+      "id": "right_hero_color_mobile",
+      "info": "For transparent background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Cart count colors"
+    },
+    {
+      "type": "color",
+      "label": "Number",
+      "id": "count_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Background",
+      "id": "count_bg_color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
     },
     {
       "type": "color",
@@ -955,7 +1995,7 @@
       "type": "color",
       "label": "Border",
       "id": "border_color",
-      "default": "#000000"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -982,6 +2022,26 @@
       "default": 0
     },
     {
+      "type": "range",
+      "id": "margin_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin sides",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Margin sides mobile",
+      "default": 0
+    },
+    {
       "type": "header",
       "content": "Section padding (inside)"
     },
@@ -993,7 +2053,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 36
+      "default": 20
     },
     {
       "type": "range",
@@ -1003,7 +2063,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 20
     },
     {
       "type": "range",
@@ -1013,7 +2073,7 @@
       "step": 1,
       "unit": "rem",
       "label": "Padding sides",
-      "default": 5
+      "default": 2
     },
     {
       "type": "range",
@@ -1027,23 +2087,23 @@
     },
     {
       "type": "header",
-      "content": "Section Settings"
+      "content": "Section"
     },
     {
       "type": "checkbox",
       "id": "full_width",
-      "label": "Full Width",
+      "label": "Full width",
       "default": false
     },
     {
       "type": "range",
       "id": "content_width",
-      "min": 0,
-      "max": 400,
-      "step": 10,
-      "unit": "rem",
+      "min": 800,
+      "max": 2000,
+      "step": 100,
+      "unit": "px",
       "label": "Section content width",
-      "default": 160
+      "default": 1400
     },
     {
       "type": "range",
@@ -1056,251 +2116,26 @@
       "default": 0
     },
     {
+      "type": "range",
+      "id": "section_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Section roundness",
+      "default": 0
+    },
+    {
       "type": "checkbox",
       "id": "lazy",
       "label": "Lazy load",
       "info": "Lazy load images for speed optimisation",
-      "default": true
-    }
-  ],
-  "blocks": [
-    {
-      "type": "item",
-      "name": "Grid Item",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Layout Settings",
-          "info": "Only for Desktop"
-        },
-        {
-          "type": "range",
-          "id": "column_width",
-          "min": 1,
-          "max": 4,
-          "step": 1,
-          "label": "Column",
-          "default": 2
-        },
-        {
-          "type": "range",
-          "id": "row_width",
-          "min": 1,
-          "max": 3,
-          "step": 1,
-          "label": "Row",
-          "default": 2
-        },
-        {
-          "type": "header",
-          "content": "Content Settings"
-        },
-        {
-          "type": "select",
-          "id": "bg_type",
-          "label": "Background Type",
-          "default": "image",
-          "options": [
-            {
-              "label": "Image",
-              "value": "image"
-            },
-            {
-              "label": "Video",
-              "value": "video"
-            },
-            {
-              "label": "Background",
-              "value": "background"
-            }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "label": "Background Image",
-          "id": "image"
-        },
-        {
-          "type": "video",
-          "id": "video",
-          "label": "Background Video from Shopify"
-        },
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Background Video Embed from Url",
-          "accept": [
-            "youtube",
-            "vimeo"
-          ],
-          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-          "info": "Shows when no Shopify-hosted video is selected."
-        },
-        {
-          "type": "checkbox",
-          "label": "Media in Row",
-          "id": "media_row",
-          "default": false
-        },
-        {
-          "type": "select",
-          "id": "align_content",
-          "label": "Vertical Align Content",
-          "default": "end",
-          "options": [
-            {
-              "label": "Top",
-              "value": "start"
-            },
-            {
-              "label": "Center",
-              "value": "center"
-            },
-            {
-              "label": "Bottom",
-              "value": "end"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "align_content_mobile",
-          "label": "Vertical Align Content - Mobile",
-          "default": "end",
-          "options": [
-            {
-              "label": "Top",
-              "value": "start"
-            },
-            {
-              "label": "Center",
-              "value": "center"
-            },
-            {
-              "label": "Bottom",
-              "value": "end"
-            }
-          ]
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "URL"
-        },
-        {
-          "type": "header",
-          "content": "Subheading Settings"
-        },
-        {
-          "type": "text",
-          "id": "sub_heading",
-          "label": "Subheading",
-          "default": "Subheading"
-        },
-        {
-          "type": "header",
-          "content": "Heading Settings"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Heading"
-        },
-        {
-          "type": "range",
-          "id": "title_size",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Heading Size",
-          "default": 36
-        },
-        {
-          "type": "range",
-          "id": "title_size_mobile",
-          "min": 0,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "label": "Heading Size - Mobile",
-          "default": 24
-        },
-        {
-          "type": "header",
-          "content": "Grid Block Colors"
-        },
-        {
-          "type": "color",
-          "label": "Block Background Color",
-          "id": "block_bg_color",
-          "default": "#F3F3F3"
-        },
-        {
-          "type": "color",
-          "label": "Block Border Color",
-          "id": "block_border_color",
-          "default": "#000000"
-        },
-        {
-          "type": "checkbox",
-          "id": "override_colors",
-          "label": "Override text colors in section settings",
-          "default": false
-        },
-        {
-          "type": "color",
-          "label": "Block Text Colors",
-          "id": "block_text_color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "header",
-          "content": "Overlay"
-        },
-        {
-          "type": "checkbox",
-          "id": "remove_overlay",
-          "label": "Remove background overlay",
-          "default": false
-        }
-      ]
+      "default": false
     }
   ],
   "presets": [
     {
-      "name": "SG-Grid Pro",
-      "blocks": [
-        {
-          "type": "item",
-          "settings": {
-            "column_width": 3,
-            "row_width": 3
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "column_width": 1,
-            "row_width": 3
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "column_width": 4,
-            "bg_type": "video",
-            "media_row": true
-          }
-        },
-        {
-          "type": "item"
-        },
-        {
-          "type": "item"
-        }
-      ]
+      "name": "SG-Header #2"
     }
   ]
 }
